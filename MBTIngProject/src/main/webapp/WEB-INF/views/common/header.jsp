@@ -151,7 +151,7 @@
 				                 
 					                <td><img id="profile" src="${sessionScope.profile}" ></td>
 					                <td> <a href="">마이페이지</a></td>
-					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8082/mbting/logout.me">로그아웃</a> </td>
+					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a> </td>
 				               	   </tr>
 			               	</table>
 	               	 	</c:otherwise>
