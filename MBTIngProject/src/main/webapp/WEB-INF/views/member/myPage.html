@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    /*프로필 내용 스타일*/
+    #profileTable{
+        margin: auto;
+        width: 600px;
+    }
+
+    #passreset{
+        float: right;
+    }
+
+    /*프로필 이미지 박스 스타일*/
+    #profile {
+        width : 80px;
+        height: 100px;
+    }
+
+    #profile-img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU");
+        background-size: cover;
+        background-position: center;
+    }
+
+    /*마이페이지 메뉴바 스타일*/
+    #menuLine{
+        margin: auto;
+        margin-top: 20px;
+        border: 1px solid pink;
+        width: 800px;
+    }
+    #mymenu{
+        margin: auto;
+    }
+
+    .emptymenu{
+        width: 150px;
+    }
+    #mymenu tr td {
+        border-top: 5px solid white; 
+    }
+
+    #myInfo:hover{
+        border-top: 5px solid pink;
+    }
+    #myMbting:hover{
+        border-top: 5px solid pink;
+    }
+    #myReview:hover{
+        border-top: 5px solid pink;
+    }
+
+    /*마이페이지 폰트 스타일*/
+    #profileName{
+        font-weight: bold;
+        font-size: 15px;
+    }
+    
+
+</style>
+</head>
+<body>
+
+    <div>
+        <table id="profileTable" border="px">
+
+            <tr>
+                <td rowspan="4" id="profile">
+                    <div id="profile-img">
+                        
+                    </div>
+                </td>
+                <td style="font-weight: bold; font-size: 20px; text-align: center; width: 100px;">아이디</td>
+                <td></td>
+                <td id="passreset"><button>비밀번호 초기화</button></td>
+            </tr>
+            <tr>
+            
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;">0</td>
+                <td style="text-align: center;">10</td>
+               
+            </tr>
+            <tr>
+                <td style="font-weight: bold; text-align: center;">매칭상태</td>
+                <td style="font-weight: bold; text-align: center;">매칭신청자</td>
+                <td style="font-weight: bold; text-align: center;">매칭코인</td>
+                
+            </tr>
+            <tr>
+                <td id="profileName" style="text-align: center;">이름</td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
+
+        
+        <div id="menuLine">
+        </div>
+        <table id="mymenu">
+            <tr>
+                <td class="emptymenu"></td>
+                <td id="myInfo">내 정보</td>
+                <td class="emptymenu"></td>
+                <td id="myMbting">내 매칭</td>
+                <td class="emptymenu"></td>
+                <td id="myReview">내 후기</td>
+                <td class="emptymenu"></td>
+            </tr>
+        </table>
+        
+
+        <div>   
+            
+        </div>  
+        
+
+    </div>
+    
+
+    
+</body>
+</html> 
