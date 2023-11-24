@@ -24,9 +24,7 @@ public class MemberController {
 
 	@Autowired	
 	private MemberService memberService; 
-	
-	@Autowired	
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+
 	
 	//1. 로그인 기능을 위한 method.
 	@PostMapping("/login.me")
