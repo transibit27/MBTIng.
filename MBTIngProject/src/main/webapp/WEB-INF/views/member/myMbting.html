@@ -7,9 +7,6 @@
 
     <script src="https://kit.fontawesome.com/22698b3d17.js" crossorigin="anonymous"></script>
 <style>
-  
-    div{}
-
 
     /*
     ////////////////////
@@ -20,12 +17,12 @@
     /*슬라이더*/
     .profile-menu-title{
         margin: auto;
-        width: 600px;
+        width: 800px;
     }
     .slider{
         margin: auto;
-        width: 635px;
-        height: 200px;
+        width: 800px;
+        height: 210px;
         display: flex;
         flex-direction: row;
         justify-content:  space-around;
@@ -35,9 +32,9 @@
 
     .slider-button{
         margin: auto;
-        margin-top: 5px;
+        margin-top: 10px;
         margin-bottom: 5px;
-        width: 600px;
+        width: 720px;
         text-align: center;
     }
     .slider-button button{
@@ -62,7 +59,7 @@
 
     .profile-wrap{
         
-        height: 190px;
+        height: 200px;
         width: 120px;
         /*
         부모 요소에 display: flex를 추가해주면 자식 요소들의 정렬을 제어 가능해짐
@@ -99,7 +96,7 @@
     .profile-img-box {
     background-color: white;
     width: 100%;
-    height: 100px;
+    height: 110px;
 
     /* 아이템을 수평, 수직 가운데 정렬하는 코드 */
     display: flex;
@@ -131,8 +128,7 @@
     */
     .shortMenu-wrap{
     margin: auto;
-    margin-top: 30px;
-    width: 600px;
+    width: 800px;
     box-sizing: border-box;
     /*
     부모 요소에 display: flex를 추가해주면 자식 요소들의 정렬을 제어 가능해짐
@@ -152,8 +148,8 @@
     .shortMenu{
         border: 1px solid lightgray;
         box-sizing: border-box;
-        height: 260px;
-        width: 180px;
+        height: 400px;
+        width: 250px;
         /*
         부모 요소에 display: flex를 추가해주면 자식 요소들의 정렬을 제어 가능해짐
         */
@@ -166,6 +162,7 @@
     }
 
     .icon-box{
+        margin-top: 10px;
         width: 100%;
         height: 35%;
         box-sizing: border-box;
@@ -190,23 +187,28 @@
     }
 
     .shortMenu-title{
+        margin-top: 20px;
         width: 100%;
         height: 25px;
         text-align: center;
         line-height: 25px;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 20px;
     }
 
     .shortMenu-content{
-        margin-bottom:3px;
-        width: 100%;
-        font-size: 14px;
-        height: 105px;
+        width: 90%;
+        margin: auto;
+        font-size: 15px;
+        height: 150px;
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
+    }
+
+    .shortMenu-button{
+        margin-bottom: 20px;
     }
 
 
@@ -306,7 +308,7 @@
         <div class="shortMenu">
             
             <div class="icon-box">
-                <i class="fa-regular fa-circle-user fa-5x" style="color: #ffd1dc;"></i>
+                <i class="fa-regular fa-circle-user fa-8x" style="color: #ffd1dc;"></i>
             </div> 
     
             <div class="shortMenu-info">
@@ -318,7 +320,7 @@
                     내용
                     <br>
                 </div>
-                <div>
+                <div class="shortMenu-button">
                     <button>정보 수정</button>
                 </div> 
             </div>
@@ -329,7 +331,7 @@
         <div class="shortMenu">
             
             <div class="icon-box">
-                <i class="fa-regular fa-comments fa-5x" style="color: #ffd1dc;"></i>
+                <i class="fa-regular fa-comments fa-8x" style="color: #ffd1dc;"></i>
             </div> 
     
             <div class="shortMenu-info">
@@ -338,10 +340,11 @@
                 </div> 
 
                 <div class="shortMenu-content">
-          
+                    xx 님이 <br>
+                    대화를 기다리고 있어요!
                 </div>
             
-                <div>
+                <div class="shortMenu-button">
                     <button>내용 확인</button>
                 </div> 
             </div>
@@ -352,7 +355,7 @@
         <div class="shortMenu">
             
             <div class="icon-box">
-                <i class="fa-regular fa-credit-card fa-5x" style="color: #ffd1dc;"></i>
+                <i class="fa-regular fa-credit-card fa-8x" style="color: #ffd1dc;"></i>
             </div> 
     
             <div class="shortMenu-info">
@@ -362,7 +365,7 @@
                 <div class="shortMenu-content">
                     내용
                 </div>
-                <div>
+                <div class="shortMenu-button">
                     <button>확인하기</button>
                 </div> 
             </div>
