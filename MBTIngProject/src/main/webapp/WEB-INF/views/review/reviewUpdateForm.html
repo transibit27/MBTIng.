@@ -19,6 +19,22 @@
             width: 100%;
             margin: auto;
         }
+        .reviewbanner {
+            width: 1200px;
+            height: 150px;
+            margin: auto;
+            background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center center;
+            background-size: cover;
+        }
+        .reviewbanner-text {
+            width: 1200px;
+            height: 150px;
+            text-align: center;
+            line-height: 150px;
+            color: white;
+            font-size: xx-large;
+        }
         form {
             width: 1200px;
             margin: auto;
@@ -31,7 +47,7 @@
         .writereview-title input {
             width: 250px;
             border: none;
-            border-bottom: 2px solid black;
+            border-bottom: 2px solid pink;
         }
         .writereview-content {
             font-size: large;
@@ -40,6 +56,8 @@
         .writereview-content textarea {
             width: 100%;
             height: 500px;
+            border-radius: 5px;
+            border: 2px solid pink;
             resize: none;
         }
         .writereview-photo {
@@ -54,27 +72,37 @@
         }
         .reviewphoto-table-thumbnail td {
             border: 2px solid pink;
+            width: 250px;
+            height: 250px;
         }
         .reviewphoto-table-photos td {
-            border: 2px dotted pink;            
+            border: 2px dotted pink;
+            width: 250px;
+            height: 250px;                    
+        }
+        .reviewphoto-table-photos-button td {
+            width: 250px;
+            height: 250px;            
         }
         .reviewphoto-table-photos-button button {
             width: 30px;
-        }
-        .writereview-content button {
-            width: 90px;
-        }
-        td {
-            width: 250px;
-            height: 250px;           
-        }
-        button {
             height: 30px;
             border: none;
             border-radius: 5px;
             background-color: pink;
         }
-        button:hover {
+        .reviewphoto-table-photos-button button:hover {
+            border: 1px solid pink;
+            background-color: white;
+        }
+        .reviewupdate-button button {
+            width: 90px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: pink;
+        }
+        .reviewupdate-button button:hover {
             border: 1px solid pink;
             background-color: white;
         }
@@ -82,6 +110,18 @@
 </head>
 <body>
     <div class="outer">
+
+        <br>
+
+        <div class="reviewbanner" align="center">
+            <div class="reviewbanner-text">
+                <p>만남후기</p>
+            </div>
+
+        </div>
+
+        <br>
+
         <form>
 
             <br>
@@ -146,8 +186,9 @@
 
             <br>
 
-            <div class="writereview-content" align="right">
+            <div class="reviewupdate-button" align="right">
                 <button type="submit">수정하기</button>
+                <button>수정취소</button>
             </div>
         </form>
 
