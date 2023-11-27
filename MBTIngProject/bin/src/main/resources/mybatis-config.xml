@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		 <setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<!-- vo 클래스 추가 시 등록해 주세요! -->
+	<typeAliases>
+		<typeAlias type="com.kh.mbting.member.model.vo.Member" alias="member"/>	
+	</typeAliases>
+	
+	<!-- 메퍼 파일 추가 시 등록해 주세요! -->
+	<mappers>
+		<mapper resource="/mappers/member-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
+	</mappers>
+  
+</configuration>
