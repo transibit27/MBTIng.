@@ -180,7 +180,7 @@
 		#Content1BigText {
 			font-size: 70px;
 			margin-top: 570px;
-			margin-left: 410px;
+			margin-left: 380px;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
@@ -209,13 +209,13 @@
 			height: 450px;
 			width : 600px;
 			top : 100px;
-			left : 410px;
+			left : 380px;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingResult.png") ;
 			background-size: cover;
 			position: absolute;
 			z-index: 1;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
-			filter: blur(3px);
+			/*filter: blur(3px);*/
 		}
 
 		#testImg:hover, #testResultImg:hover{
@@ -232,7 +232,7 @@
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingTest.png") ;
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
-			filter: blur(3px);
+			/*filter: blur(3px);*/
 		}
 
 			/*--------------------------오늘의 엠비팅 -----------------------------*/
@@ -327,6 +327,9 @@
 			transform: rotateY(180deg);
 			}
 
+			#Content1BigText label {
+				color : rgb(255, 0, 221);
+			}
 </style>	
 </head>
 
@@ -341,10 +344,10 @@
 		<div class="wrap">
 			<div id="content">
 				<div id="content_1">
-					<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
+				<!--<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
 											  설문조사를 통한 통계 기반 맞춤형 추천 서비스 <br>
-											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>
-					<div id="Content1BigText">나의 연애 MBTI TEST 하기 <br>
+											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>-->	
+					<div id="Content1BigText">나의 연애 <label>MBTI TEST </label> 하기 <br>
 						<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p> </div>
 						<div id="arrow">
 						<img src="https://cdn-icons-png.flaticon.com/128/60/60934.png"> 
