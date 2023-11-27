@@ -5,15 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 <style>
-    /*프로필 내용 스타일*/
-    #profileTable{
+    /*프로필 헤더 스타일*/
+    #profile-header{
         margin: auto;
         width: 600px;
+       
+        display: flex;
     }
 
-    #passreset{
-        float: right;
+    .empty-space-w{
+        width: 50px;
     }
+    .empty-space-h{
+        height: 35px;
+    }
+
+    /* 비밀번호 초기화 버튼 */
+    #reset-pass{
+        margin-left: auto;
+        margin-top: 20px;
+        width: 100px;
+        height: 25px;
+        font-size: 10px;
+    }
+
+    #profile-table{
+        width: 550px;
+    }
+
 
     /*프로필 이미지 박스 스타일*/
     #profile {
@@ -42,7 +61,7 @@
     }
 
     .emptymenu{
-        width: 150px;
+        width: 80px;
     }
     #mymenu tr td {
         border-top: 5px solid white; 
@@ -63,6 +82,18 @@
         font-weight: bold;
         font-size: 15px;
     }
+
+    #profile-stat-value{
+        font-size: 12px;
+        text-align: center;
+        color: gray;
+    }
+
+    #profile-stat{
+        font-size: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
     
 
 </style>
@@ -70,38 +101,55 @@
 <body>
 
     <div>
-        <table id="profileTable" border="px">
-
-            <tr>
-                <td rowspan="4" id="profile">
-                    <div id="profile-img">
-                        
-                    </div>
-                </td>
-                <td style="font-weight: bold; font-size: 20px; text-align: center; width: 100px;">아이디</td>
-                <td></td>
-                <td id="passreset"><button>비밀번호 초기화</button></td>
-            </tr>
-            <tr>
-            
-                <td style="text-align: center;"></td>
-                <td style="text-align: center;">0</td>
-                <td style="text-align: center;">10</td>
-               
-            </tr>
-            <tr>
-                <td style="font-weight: bold; text-align: center;">매칭상태</td>
-                <td style="font-weight: bold; text-align: center;">매칭신청자</td>
-                <td style="font-weight: bold; text-align: center;">매칭코인</td>
-                
-            </tr>
-            <tr>
-                <td id="profileName" style="text-align: center;">이름</td>
-                <td></td>
-                <td></td>
-            </tr>
-
-        </table>
+        <div id="profile-header">
+            <table id="profile-table">
+                <tr>
+                    <td colspan="6" style="font-weight: bold; font-size: 18px; width: 100px; height: 50px;">mokoko@gmail.com</td>
+                </tr>
+                <tr class="empty-space-h">
+                    <td rowspan="4" id="profile">
+                        <div id="profile-img"></div>
+                    </td>
+                    <td class="empty-space-w"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="empty-space-w"></td>
+                </tr>
+                <tr id="profile-stat-value">
+                    <td></td>
+                    <td>수락대기</td>
+                    <td>0</td>
+                    <td>10</td>
+                    <td></td>
+                   
+                </tr>
+                <tr id="profile-stat">
+                    <td></td>
+                    <td>매칭상태</td>
+                    <td>매칭신청자</td>
+                    <td>매칭코인</td>
+                    <td></td>
+                </tr>
+                <tr class="empty-space-h">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td id="profileName">모코코</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+    
+            </table>
+            <button id="reset-pass" style="float: right;">비밀번호 초기화</button>
+        </div>
 
         
         <div id="menuLine">
