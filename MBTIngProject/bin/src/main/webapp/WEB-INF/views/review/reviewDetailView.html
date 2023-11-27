@@ -19,9 +19,36 @@
             width: 100%;
             margin: auto;
         }
+        .reviewbanner {
+            width: 1200px;
+            height: 150px;
+            margin: auto;
+            background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center center;
+            background-size: cover;
+        }
+        .reviewbanner-text {
+            width: 1200px;
+            height: 150px;
+            text-align: center;
+            line-height: 150px;
+            color: white;
+            font-size: xx-large;
+        }
         .reviewdetail-top-button {
             width: 1200px;
             margin: auto;
+        }
+        .reviewdetail-top-button button {
+            width: 65px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: pink;
+        }
+        .reviewdetail-top-button button:hover {
+            border: 1px solid pink;
+            background-color: white;            
         }
         .reviewdetail-area {
             width: 1200px;
@@ -29,7 +56,7 @@
         }
         .reviewdetail-table {
             width: 300px;
-            border-bottom: 2px solid black;
+            border-bottom: 2px solid pink;
             font-family: 'Single Day', cursive;
             font-size:large;
             font-weight: bold;
@@ -54,21 +81,59 @@
             width: 1200px;
             margin: auto;            
         }
-        button {
+        .reviewdetail-bottom-button button {
             width: 65px;
             height: 30px;
             border: none;
             border-radius: 5px;
-            background-color: pink;            
+            background-color: pink;
         }
-        button:hover {
+        .reviewdetail-bottom-button button:hover {
             border: 1px solid pink;
             background-color: white;            
+        }
+        .move-page {
+            width: 1200px;
+            margin: auto;
+        }
+        .move-page-table {
+            width: 1200px;
+        }
+        .move-page-table tr {
+            height: 40px;
+        }
+        .move-page-table tr:hover {
+            color: pink;
+        }
+        .move-page-table td {
+            padding-left: 10px;
+            
+        }
+        .move-page-info {
+            width: 150px;
+        }
+        .move-page-title {
+            width: 850px;
+        }
+        .move-page-date {
+            width: 200px;;
         }
     </style>
 </head>
 <body>
     <div class="outer">
+
+        <br>
+
+        <div class="reviewbanner" align="center">
+            <div class="reviewbanner-text">
+                <p>만남후기</p>
+            </div>
+
+        </div>
+
+        <br>
+
         <div class="reviewdetail-top-button" align="right">
             <button>목록</button>
         </div>
@@ -102,6 +167,35 @@
         <div class="reviewdetail-bottom-button" align="right">
             <button>수정</button>
             <button>삭제</button>
+        </div>
+
+        <br><br><br>
+
+        <div class="move-page" align="center">
+            <table class="move-page-table">
+                <tr>
+                    <td class="move-page-info">
+                        ▲ 이전글
+                    </td>
+                    <td class="move-page-title">
+                        제목
+                    </td>
+                    <td class="move-page-date">
+                        작성 연도. 월. 일.
+                    </td>
+                </tr>
+                <tr style="border-top: 1px dotted pink;">
+                    <td class="move-page-info">
+                        ▼ 다음글
+                    </td>
+                    <td class="move-page-title">
+                        제목
+                    </td>
+                    <td class="move-page-date">
+                        작성 연도. 월. 일.
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <br>

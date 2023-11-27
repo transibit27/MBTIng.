@@ -19,6 +19,22 @@
             width: 100%;
             margin: auto;
         }
+        .reviewbanner {
+            width: 1200px;
+            height: 150px;
+            margin: auto;
+            background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-position: center center;
+            background-size: cover;
+        }
+        .reviewbanner-text {
+            width: 1200px;
+            height: 150px;
+            text-align: center;
+            line-height: 150px;
+            color: white;
+            font-size: xx-large;
+        }
         .bestreviewlist {
             width: 1200px;
             margin: auto;
@@ -53,7 +69,15 @@
             margin: auto;
         }
         .reviewlistbutton button {
-            width: 65px;       
+            width: 65px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: pink;
+        }
+        .reviewlistbutton button:hover {
+            border: 1px solid pink;
+            background-color: white;
         }
         .reviewlistbutton select {
             height: 30px;
@@ -65,8 +89,6 @@
             width: 1200px;
             margin: auto;
             padding-top: 20px;
-            border: 2px dotted pink;
-            border-radius: 10px;
             font-family: 'Single Day', cursive;
         }
         .tablereviewlist {
@@ -92,18 +114,39 @@
         }
         .paging-area button {
             width: 35px;
-        }
-        .paging-area button[disabled]:hover {
-            border: none;
-            background-color: pink;
-        }
-        button {
             height: 30px;
             border: none;
             border-radius: 5px;
             background-color: pink;
         }
-        button:hover {
+        .paging-area button:hover {
+            border: 1px solid pink;
+            background-color: white;
+        }
+        .paging-area button[disabled]:hover {
+            border: none;
+            background-color: pink;
+
+        }
+        .search-area {
+            width: 1200px;
+            margin: auto;
+        }
+        .search-inputarea {
+            width: 300px;
+            height: 30px;
+            padding-left: 10px;
+            border-radius: 5px;
+            border: 1px solid pink;
+        }
+        .search-button {
+            width: 45px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: pink;
+        }
+        .search-button:hover {
             border: 1px solid pink;
             background-color: white;
         }
@@ -111,6 +154,18 @@
 </head>
 <body>
     <div class="outer">
+
+        <br>
+
+        <div class="reviewbanner" align="center">
+            <div class="reviewbanner-text">
+                <p>만남후기</p>
+            </div>
+
+        </div>
+
+        <br>
+
         <div class="bestreviewlist" align="center">
         <p class="bestreviewlistbanner">이달의 베스트 후기</p>
             <table class="tablebestreviewlist">
@@ -352,6 +407,13 @@
             <button type="button">&gt;</button>
         </div>
         
+        <br>
+
+        <div class="search-area" align="center">
+            <input type="text" class="search-inputarea" placeholder="제목 키워드를 입력해주세요.">
+            <button type="submit" class="search-button">검색</button>
+        </div>
+
         <br>
 
     </div>
