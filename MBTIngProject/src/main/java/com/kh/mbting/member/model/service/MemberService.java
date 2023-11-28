@@ -10,7 +10,7 @@ public interface MemberService {
 	Member loginMember(Member m);
 	
 	//회원가입 후 정보를 DB로 입력해줄 method
-	Member insertMember(Member m);
+	int insertMember(Member m);
 	
 	//kakao연결Token을 얻어오기 위한 method
 	String getKakaoAccessToken(String code);

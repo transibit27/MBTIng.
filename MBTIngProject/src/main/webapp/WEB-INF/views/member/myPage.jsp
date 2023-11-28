@@ -180,11 +180,17 @@
 	        <table id="mymenu">
 	            <tr>
 	                <td class="emptymenu"></td>
-	                <td id="myInfo">내 정보</td>
+	                <td id="myInfo">
+	                	내 정보
+	                </td>
 	                <td class="emptymenu"></td>
-	                <td id="myMbting">내 상태</td>
+	                <td id="myMbting">
+	                	내 상태
+	                </td>
 	                <td class="emptymenu"></td>
-	                <td id="myReview">내 후기</td>
+	                <td id="myReview">
+	                내 후기
+	                </td>
 	                <td class="emptymenu"></td>
 	            </tr>
 	        </table>
@@ -199,6 +205,18 @@
 	    </div>
     
     </div>
+    
+    <script>
+    	$(function(){
+    		$("#myInfo").click(function(){
+    			
+    			#("myInfo").css()
+    		})
+    		
+    		
+    	});
+    
+    </script>
     
 </body>
 </html> 

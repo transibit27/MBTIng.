@@ -171,7 +171,7 @@
 		
 		#content {
 			margin-top: 0px;
-			background-color: honeydew
+			background-color: pink;
 		}
 		#content_1 {
 			display : inline-block;

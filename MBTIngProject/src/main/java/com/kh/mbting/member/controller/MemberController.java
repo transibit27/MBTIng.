@@ -29,25 +29,28 @@ public class MemberController {
 
 	//1. 로그인 기능을 위한 method.
 	@PostMapping("/login.me")
-	public String loginMember(Member m, Model model, HttpSession session) {
+	public String loginMember(Member m, 
+							   Model model,
+							   HttpSession session) {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
+		
+		System.out.println(m.getUserPwd());
 		System.out.println(loginMember);
+		System.out.println(loginMember.getUserPwd());
 		
-		if(loginMember == null) {
-			//로그인 실패
-			
-			 model.addAttribute("errorMsg" , "로그인에 실패했습니다.");
-			 return "common/errorPage";
-			
-		
-		}else {
-			
-			//로그인을 성공했을 경우
+		if(loginMember != null && 
+				bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
+						
+			session.setAttribute("alertMsg", "로그인 성공");
 			session.setAttribute("loginMember", loginMember);
 			return "redirect:/";
-		
+						
+		} else {
+					
+			 model.addAttribute("errorMsg" , "로그인에 실패했습니다.");
+			 return "common/errorPage";
 		}
 	}
 	
@@ -70,11 +73,29 @@ public class MemberController {
 	
 	//4. 회원가입에서 자신의 정보를 입력한 것에 대한 처리를 해줄 method
 	@RequestMapping("insert.me")
-	public void insertMember(Member m, HttpSession session) {
+	public String insertMember(Member m, HttpSession session,
+								Model model) {
 		
-		Member loginMember = memberService.insertMember(m);
+		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
-		session.setAttribute("loginMember", loginMember);
+		m.setUserPwd(encPwd);
+		
+		int result = memberService.insertMember(m);
+		
+		if(result>0) {
+			
+			session.setAttribute("alertMsg", "회원가입이 완료되었습니다.");
+				
+			return "redirect:/";
+			
+		} else {
+			
+			model.addAttribute("errorMsg", "회원가입에 실패했습니다.");
+			
+			return "common/errorPage";
+		}
+		
+	
 		
 	}
 
@@ -85,8 +106,6 @@ public class MemberController {
 		String access_Token = memberService.getKakaoAccessToken(code);
 								
 		 HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-		 System.out.println("login Controller : " + userInfo);
-		
 		
 		 if (userInfo.get("email") != null) {
 		       

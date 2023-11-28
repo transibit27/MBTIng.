@@ -27,7 +27,17 @@
 	  SELECT *
 	  	FROM MEMBER 
 	   WHERE EMAIL  	= #{email}
-	  	 AND USER_PWD 	= #{userPwd}
 	  	 AND STATUS 	= 'Y'
 	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO MEMBER (USER_NO, EMAIL, USER_PWD, USER_NAME, AGE, GENDER, PHONE)
+           	 VALUES (UNO_SEQ.NEXTVAL,
+           	 		 #{email},
+           	 		 #{userPwd},
+           	 		 #{userName},
+           	 		 #{age},
+           	 		 #{gender},
+           	 		 #{phone})	
+	</insert>
 </mapper>
