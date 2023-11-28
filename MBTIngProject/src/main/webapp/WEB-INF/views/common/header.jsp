@@ -28,8 +28,20 @@
 	
 	
 	<!-- swiper.js 라이브러리추가 (cdn) -->
-	    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-	    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+	
+	<!-- alert창 관련 스타일용 라이브러리 추가  -->
+
+	<!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 	    
 	<!-- 글씨체 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -107,6 +119,16 @@
 
 
 <body>
+
+	<!-- 알람문구 출력용 코드 ( session.alertMsg )-->
+	
+	<c:if test="${ not empty sessionScope.alertMsg }">
+		<script>
+			alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
+		</script>
+		
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
 
     <div id="header">
         <div id="header_1">

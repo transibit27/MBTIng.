@@ -40,8 +40,9 @@ public class MemberServiceImpl implements MemberService {
 
 	//회원가입 후 회원의 정보를 처리해줄 method
 	@Override
-	public Member insertMember(Member m) {
-		return null;
+	public int insertMember(Member m) {
+		
+		return memberDao.insertMember(sqlSession, m);
 	}
 
 	//카카오로 로그인을 했을 경우, 카카오에 접속할 수 있는 Token을 얻어오기 위한 method

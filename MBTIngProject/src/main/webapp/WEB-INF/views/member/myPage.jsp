@@ -84,15 +84,13 @@
         border-top: 5px solid white; 
     }
 
-    #myInfo:hover{
+    #myInfo:hover, #myMbting:hover, #myReview:hover{
+        cursor: pointer;
         border-top: 5px solid pink;
+        
     }
-    #myMbting:hover{
-        border-top: 5px solid pink;
-    }
-    #myReview:hover{
-        border-top: 5px solid pink;
-    }
+    
+    
 
     /*마이페이지 폰트 스타일*/
     #profileName{
@@ -180,25 +178,48 @@
 	        <table id="mymenu">
 	            <tr>
 	                <td class="emptymenu"></td>
-	                <td id="myInfo">내 정보</td>
+	                <td class="myMenus" id="myInfo">
+	                	내 정보
+	                </td>
 	                <td class="emptymenu"></td>
-	                <td id="myMbting">내 상태</td>
+	                <td class="myMenus" id="myMbting">
+	                	내 상태
+	                </td>
 	                <td class="emptymenu"></td>
-	                <td id="myReview">내 후기</td>
+	                <td class="myMenus" id="myReview">
+	                    내 후기
+	                </td>
 	                <td class="emptymenu"></td>
 	            </tr>
 	        </table>
 	        
-	
-	        <div class="my-bottom">   
-				<!-- 하단 메뉴 import 부분 --> 
-				<jsp:include page="./myMbting.jsp"></jsp:include>
-				           
-	        </div>  
-	
+	        <!-- 하단 페이지 전환용 Script -->
+		    <script>
+		    
+		    	$(function(){
+		    		
+		    		$("#myInfo").click(function(){
+		    			
+		    			$(location).attr("href", "myProfile.me")
+		    		})
+		    		$("#myMbting").click(function(){
+		    			
+		    			$(location).attr("href", "myPage.me")
+		    		})
+		    		$("#myReview").click(function(){
+
+		    			$(location).attr("href", "myReview.me")
+		    		})
+		    		
+		    	});
+		    
+		    </script>
+
 	    </div>
     
     </div>
+    
+    
     
 </body>
 </html> 

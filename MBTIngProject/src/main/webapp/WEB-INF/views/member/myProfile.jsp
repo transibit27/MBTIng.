@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,6 +68,16 @@
 </style>
 </head>
 <body>
+
+	<div>
+
+	</div>
+	<script>
+	    let i = document.getElementById("myProfile");
+
+        i.style.cssText = "border-top : 5px solid pink"
+	    
+    </script>
 
 	<div id="profile-outer">
 

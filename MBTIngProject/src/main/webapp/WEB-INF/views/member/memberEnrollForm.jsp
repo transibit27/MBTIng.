@@ -117,17 +117,7 @@
         border: 1px solid pink; 
     }
 
-    #M:hover{
-        border: 1px solid skyblue;
-        background-color: skyblue;
-        color: white;
-    }
 
-    #F:hover{
-        border: 1px solid plum;
-        background-color: plum;
-        color: white;
-    }
     
     .login-a, #kakao-enroll, .enroll-logo>img{
     	cursor:pointer;    	
@@ -139,7 +129,7 @@
 
     <div class="enroll-outer">
         
-        <form action="" method="post" id="enrollForm">
+        <form action="insert.me" method="post" id="enrollForm">
 
             <div class="enroll-border">
 
@@ -178,15 +168,39 @@
 
                     <div class="enroll-gender">
                         <button type="button" id="M">남성</button> <button type="button" id="F">여성</button>
+                        <input type="hidden" value="" id="gender" name="gender">
                     </div>
 
                     <div style="width: 300px; margin: auto; margin-top: 15px; margin-bottom: 15px;">
                         매칭 서비스를 이용하기 위해서는 회원 가입 후 MBTI 시물레이션 게임을 진행하셔야 합니다.
                     </div>
                                 
-                    <button type="submit" disabled>가입</button>
+                    <button type="submit">가입</button>
                 
                 </div>
+                
+                <!-- 회원가입 입력 내용 처리를 위한 스크립트 -->
+                <script>
+                	$(function(){
+                		
+                		$("#M").click(function(){
+                			$(this).css("background-color", "skyblue");
+                			$(this).css("color", "white");
+                			$("#F").css("background-color", "white");
+                			$("#F").css("color", "gray");
+                			$("#gender").val("M");
+                		})
+                		
+                		$("#F").click(function(){
+                			$(this).css("background-color", "plum");
+                			$(this).css("color", "white");
+                			$("#M").css("background-color", "white");
+                			$("#M").css("color", "gray");
+                			$("#gender").val("F");
+                		})
+                	})
+                
+                </script>
 
             </div>
             

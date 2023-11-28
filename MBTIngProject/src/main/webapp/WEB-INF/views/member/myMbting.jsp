@@ -7,7 +7,15 @@
     <title>Document</title>
 
     <script src="https://kit.fontawesome.com/22698b3d17.js" crossorigin="anonymous"></script>
+
 <style>
+
+	.my-content{
+		width:100%;
+		margin: auto;
+		margin-top : 50px;
+		margin-bottom : 50px;
+	}
 
     /*
     ////////////////////
@@ -205,11 +213,20 @@
         margin-bottom: 20px;
     }
 
-
-
 </style>
 </head>
 <body>
+
+	<div>
+		<jsp:include page="./myPage.jsp"></jsp:include>
+	</div>
+
+    <script>
+	    let i = document.getElementById("myMbting");
+
+        i.style.cssText = "border-top : 5px solid pink"
+	    
+    </script>
 
 	<div class="my-content">
 	    <div class="profile-menu-title">

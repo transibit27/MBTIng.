@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +13,10 @@
     
 
     .profile-menu-title, .ptlist-wrap{
-        width: 1000px;
+        width: 800px;
         margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
     }
     
     /*
@@ -30,7 +34,6 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 30px;
     list-style-type: none;
     }
 
@@ -48,7 +51,8 @@
         display: flex;
         align-items: center;
         padding: 10px;
-        height: 90px;
+        padding-top: 25px;
+        height: 100px;
         border-radius: 5px;
         background-color: #fff;
         box-shadow: 0 1px 4px 2px rgb(0 0 0 / 10%);
@@ -108,8 +112,19 @@
 </head>
 <body>
 
+	<div>
+		<jsp:include page="./myPage.jsp"></jsp:include>
+	</div>
+
+    <script>
+	    let i = document.getElementById("myReview");
+
+        i.style.cssText = "border-top : 5px solid pink"
+	    
+    </script>
+
     <div class="profile-menu-title">
-        <h3>내 후기</h3>
+        <h5>내 후기</h5>
     </div>
 
 
