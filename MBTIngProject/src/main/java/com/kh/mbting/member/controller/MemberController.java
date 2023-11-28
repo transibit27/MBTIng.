@@ -112,13 +112,23 @@ public class MemberController {
 	}
 	
 	//6. 마이페이지 진입용 method
-
+	//a 마이페이지 - 메인
 	@RequestMapping("myPage.me")
 	public String myPage() {
-
 		
-		return "member/myPage";
-
+		return "member/myMbting";
+	}
+	//b 마이페이지 - 프로필
+	@RequestMapping("myProfile.me")
+	public String myProfile() {
+		
+		return "member/myProfile";
+	}
+	//c 마이페이지 - 내후기
+	@RequestMapping("myReview.me")
+	public String myReview() {
+		
+		return "member/myReview";
 	}
 
 }
