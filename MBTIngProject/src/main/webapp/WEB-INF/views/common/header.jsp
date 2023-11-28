@@ -56,8 +56,8 @@
             height:100%;
             float:left;
         }
-        #header_1_left {width:30%; position:relative;}
-        #header_1_center {width:40%;}
+        #header_1_left {width:20%; position:relative;}
+        #header_1_center {width:50%;}
         #header_1_right {width:30%;}
 
         #header_1_left>img {height:100px; position:absolute; margin:auto; top:30px; bottom:0px; right:0px; left:0px;}
