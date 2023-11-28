@@ -10,7 +10,7 @@ import com.kh.mbting.member.model.vo.Member;
 public class MemberDao {
 
 	public Member loginMember(SqlSession sqlSession , Member m ) {
-		
+	
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 		
 	}

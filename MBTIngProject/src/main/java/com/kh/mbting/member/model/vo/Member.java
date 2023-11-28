@@ -12,8 +12,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Member {
-
-
 	private String userNo;			//	USER_NO	NUMBER
 	private String email; 			//	EMAIL	VARCHAR2(30 BYTE)
 	private String userPwd;			//	USER_PWD	VARCHAR2(30 BYTE)
@@ -31,5 +29,4 @@ public class Member {
 	private int matchCoin;			//	MATCH_COIN	NUMBER
 	private String status;			//	STATUS	CHAR(1 BYTE)
 	private int number;				//	ROOM_NO	NUMBER
-
 }

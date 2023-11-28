@@ -33,7 +33,9 @@ public class MemberServiceImpl implements MemberService {
 	//login한 회원의 정보를 처리해줄 method
 	@Override
 	public Member loginMember(Member m) {		
-		return memberDao.loginMember(sqlSession, m); 
+	
+		return memberDao.loginMember(sqlSession, m);
+	
 	}
 
 	//회원가입 후 회원의 정보를 처리해줄 method

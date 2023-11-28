@@ -139,7 +139,7 @@
                		
 	               		<c:when test="${not empty sessionScope.loginMember}">
 	               			
-		               		<label>${sessionScope.loginMember.memberName}님 환영합니다</label> &nbsp;&nbsp;
+		               		<label>${sessionScope.loginMember.userName}님 환영합니다</label> &nbsp;&nbsp;
 		                    <a href="myPage.me">마이페이지</a>
 		                    <a href="logout.me">로그아웃</a>
 	               		</c:when>
@@ -177,10 +177,10 @@
                 <form action="login.me" method="post">
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <label for="userId" class="mr-sm-2">ID : </label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="memberId"> <br>
+                        <label for="" class="mr-sm-2">ID : </label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="email"> <br>
                         <label for="userPwd" class="mr-sm-2">Password : </label>
-                        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="memberPwd">
+                        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="userPwd">
                     	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me"><img style="display : block; margin : auto;" src="${pageContext.request.contextPath}/resources/images/kakaoLoginSmall.png"></a>
                     </div>
                            
