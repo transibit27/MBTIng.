@@ -60,7 +60,7 @@
         #header_1_center {width:50%;}
         #header_1_right {width:30%;}
 
-        #header_1_left>img {height:100px; position:absolute; margin:auto; top:30px; bottom:0px; right:0px; left:0px;}
+        #header_1_left img {height:100px; position:absolute; margin:auto; top:30px; bottom:0px; right:0px; left:0px;}
         #header_1_right {text-align:center; line-height:35px; font-size:12px; text-indent:35px; font-family: 'Sunflower', sans-serif;}
         #header_1_right>a {margin:5px;}
         #header_1_right>a:hover {cursor:pointer; color: pink;}
@@ -69,7 +69,6 @@
         #header_1_center>ul>li {float:left; width:14%; height:100%; line-height:55px; text-align:center;}
         #header_1_center>ul>li a {text-decoration:none; color:black; font-size:17px; font-weight:900; font-family: 'Sunflower', sans-serif;}
         #header_1_center>ul>li a:hover {color : pink; font-size:20px;}
-        #header_1_center {}
 
         #header a {text-decoration:none; color:black; }
 
@@ -112,11 +111,13 @@
     <div id="header">
         <div id="header_1">
             <div id="header_1_left">
-               <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
+            	<a href="http://localhost:8081/mbting/">
+	               <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
+              	</a>
             </div>
             <div id="header_1_center">	 
 	             <ul>
-	                <li><a href="">HOME</a></li>
+	                <li><a href="http://localhost:8081/mbting/">HOME</a></li>
 	                <li><a href="">INTRODUCE</a></li>
 	                <li><a href="">이용안내</a></li>
 	                <li><a href="">만남후기</a></li>
@@ -139,7 +140,7 @@
 	               		<c:when test="${not empty sessionScope.loginMember}">
 	               			
 		               		<label>${sessionScope.loginMember.memberName}님 환영합니다</label> &nbsp;&nbsp;
-		                    <a href="">마이페이지</a>
+		                    <a href="myPage.me">마이페이지</a>
 		                    <a href="logout.me">로그아웃</a>
 	               		</c:when>
                		
@@ -150,7 +151,7 @@
 				                   	<td><label>${sessionScope.nickname}님 환영합니다</label> &nbsp;&nbsp; </td>
 				                 
 					                <td><img id="profile" src="${sessionScope.profile}" ></td>
-					                <td> <a href="myPage2.me">마이페이지</a></td>
+					                <td> <a href="myPage.me">마이페이지</a></td>
 					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a> </td>
 				               	   </tr>
 			               	</table>

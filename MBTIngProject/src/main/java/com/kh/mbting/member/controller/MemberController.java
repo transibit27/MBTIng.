@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
@@ -99,10 +98,10 @@ public class MemberController {
 	}
 	
 	//6. 마이페이지 진입용 method
-	@RequestMapping("myPage2.me")
-	public void myPage() {
+	@RequestMapping("myPage.me")
+	public String myPage() {
 		
-		System.out.println("잘오나?");
+		return "member/myPage";
 
 	}
 

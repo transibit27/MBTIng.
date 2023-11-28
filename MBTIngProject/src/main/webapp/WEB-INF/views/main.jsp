@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,7 +171,7 @@
 		
 		#content {
 			margin-top: 0px;
-			background-color: rgb(255, 162, 178);
+			background-color: honeydew
 		}
 		#content_1 {
 			display : inline-block;
@@ -338,8 +339,6 @@
 
 		<!-- 메뉴바 header -->
 		<jsp:include page="common/header.jsp"/>
-
-		
 
 		<div class="wrap">
 			<div id="content">
