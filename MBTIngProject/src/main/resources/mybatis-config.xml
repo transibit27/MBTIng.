@@ -11,12 +11,14 @@
 	<!-- vo 클래스 추가 시 등록해 주세요! -->
 	<typeAliases>
 		<typeAlias type="com.kh.mbting.member.model.vo.Member" alias="member"/>	
+		<typeAlias type="com.kh.mbting.chatting.model.vo.Chatting" alias="chatting"/>	
 	</typeAliases>
 	
 	<!-- 메퍼 파일 추가 시 등록해 주세요! -->
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/board-mapper.xml"/>
+		<mapper resource="/mappers/chatting-mapper.xml"/>
 	</mappers>
   
 </configuration>

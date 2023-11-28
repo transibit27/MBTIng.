@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="chattingMapper">
+
+	<resultMap id="chattingResultSet" type="chatting">
+ 		<result column="CHAT_NO"  			property="chatNo"></result>
+		<result column="ROOM_NO"  			property="roomNo"></result>
+		<result column="MESSAGE"  			property="message"></result>
+		<result column="SENDER_NO"  		property="senderNo"></result>
+		<result column="SEND_TIME"  		property="sendTime"></result>
+		<result column="RECIVER_NO"  		property="reciverNo"></result>
+	</resultMap>
+	
+	<select id="chattingList" resultMap="chattingResultSet" parameterType="_int">
+		SELECT chat_no, room_no, message, sender_no, send_time, reciver_no
+		  from chat 
+		 where room_no = 1
+	</select>
+</mapper>

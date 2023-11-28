@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,19 +58,6 @@
     top  : 300px;
 }
 
-#chatTable {
-    width : 100%;
-    height : 90px;
-    border-right: 1px solid black;
-    background-color: rgb(220, 177, 221);
-    border-radius: ;
-}
-
-#chatDiv {
-    width : 50%;
-    overflow-y: scroll;
-    max-height : 700px;
-}
 
 #profileText {
     margin-top: 10px;
@@ -78,19 +67,23 @@
     width : 50%;
 }
 /*---------------------------chatting--------------------------------*/
-.groupIn {
-  line-height: 28px;
-  width: auto;
-  
+
+
+#chatDiv {
+    width: 650px;
+    height: 100%;
+    border-left: 1px solid #ffffff;
+    border-right: 1px solid #ffffff;
+    background-color: #ffcece;
+    overflow:auto;
 }
 
-.groupOut {
-    text-align: right;
-    width: auto;
-}
-
-.input {
-  height: 60px;
+.otherChat {
+    border : 1px solid red;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    width :100%;
+    /*
+  height: 50px;
   line-height: 28px;
   margin : 20px;
   border: 2px solid transparent;
@@ -103,26 +96,60 @@
   width: 300px;
   padding: 0 1rem;
   font-family: 'IBM Plex Sans KR', sans-serif;
+  line-height: 28px;
+  */
 }
 
-.output {
+.myChat {
+    border : 1px solid black;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    width :100%;
+    /*
+  width : 100%;
+  border: 1px solid black;
   height: 60px;
-  line-height: 28px;
+  line-height: 55px;
   padding: 0 1rem;
   margin : 20px;
   border: 2px solid transparent;
   border-radius: 8px;
-  outline: none;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(207, 207, 207);
   color: #0d0c22;
   box-shadow: 0 0 5px rgb(233, 255, 231), 0 0 0 10px #f5f5f5eb;
-  margin-right:20px;
-  width: 300px;
+  margin-left: 240px;
   font-family: 'IBM Plex Sans KR', sans-serif;
+  text-align: left;
+  */
 }
 
-#chatTable td{
-    width :100%;
+.message {
+    width: 100%;
+    display: inline-block;
+    align-items: flex-end;
+    color: black;
+}
+
+.Right {
+    text-align: right;
+}
+
+.Left {
+    text-align: left;
+}
+.text {
+  display: inline-block;
+  max-width: 500px;
+  border: 1px solid black;
+  height: 60px;
+  line-height: 55px;
+  padding: 0 1rem;
+  margin : 20px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: rgb(207, 207, 207);
+  color: #0d0c22;
+  box-shadow: 0 0 5px rgb(233, 255, 231), 0 0 0 10px #f5f5f5eb;
+  font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 #chatInputTable {
@@ -202,224 +229,42 @@ label {
  transform: translateY(0);
 }
 
-/*--------------------------------------------íë¡í ì´ë¯¸ì§------------------------------------*/
-.card {
-  padding: 20px;
-  width: 300px;
-  min-height: 500px;
-  border-radius: 20px;
-  background: #e8e8e8;
-  box-shadow: 5px 5px 6px #dadada,
-             -5px -5px 6px #f6f6f6;
-  transition: 0.4s;
-  border: 2px solid gray;
-}
-
-.card-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #2e54a7;
-  margin: 15px 0 0 10px;
-}
-
-.card-image {
-  min-height: 170px;
-  background-color: #ffc2c2;
-  border-radius: 15px;
-  box-shadow: inset 8px 8px 10px #ffdfdf,
-              inset -8px -8px 10px #fdf1f1;
-  width: 400px;
-
-}
-
-.card-body {
-  margin: 13px 0 0 10px;
-  color: rgb(31, 31, 31);
-  font-size: 15px;
-}
-
-.footer {
-  float: right;
-  margin: 28px 0 0 18px;
-  font-size: 13px;
-  color: #636363;
-}
-
-.by-name {
-  font-weight: 700;
-}
-
-.footer a {
-    text-decoration: none;
-    color : red;
-    font-weight: 900;
-}
-
-#like {
-    display: block;
-}
+/*----------------------------사용자 화면 --------------------------*/
+  .card-image > img{
+        border: 1px solid black;
+        width : 200px;
+        height: 200px;
+  }
 </style>
 </head>
 <body>
 <div id="all">
     <div class="wrap">
         <div class="wrapPC">
-        <div id="profileDiv">
-            <div><button onclick="disconnect();">채팅 종료하기</button></div>
-            <div class="card">
-                <div class="card-image">
-                    <img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize">
-                </div>
-                <p class="card-title">임나나</p>
-                <p class="card-body">
-                우와 제 이야기군요 내가 모지 아하하 아하하 아하하 <br>
-                어하 아하하 더미데이터 아하하아하하
-                <br>아하하아하하아하하
-                </p>
-                <p  class="footer"><a href=>임나나</a></p>
-              </div>
-             
-        </div>
+            <div id="profileDiv">
+                <div><button onclick="disconnect();">채팅 종료하기</button></div>
+                    <div class="card-image">
+                    
+                    </div>
+            </div>
 
-        <div id="chatDiv">
-            <table id="chatTable">
-           		 
-                <tr>
-                    <td>
-                        ---------------------------------2023년 11우러 27일----------------------------------
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <!--  <div class="groupIn">
-                            <input type="search" class="input" id="inpu" value="ㅋㅋㅋ아하 그렇군요">
-                        </div>-->
-                        <div id="message_wrap1"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요 ">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요" >
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
-                        </div>
-                    </td>
-                </tr>
-            </table>   
-                         
-    </div>
-</div>
+            <div id="chatDiv">
+                        <c:forEach var="chat" items="${requestScope.chattingList}" >
+	                         <c:choose>
+			                         <c:when test="${sessionScope.loginMember.userNo eq chat.senderNo}">
+			                            <div class="message Right">
+			                                <p class="text">${chat.message}</p>
+			                            </div>
+			                     	 </c:when>
+			                     	 <c:otherwise>
+				                     	 <div class="message Left">
+				                                <p class="text">${chat.message}</p>
+				                         </div>
+			                     	 </c:otherwise>
+		                     </c:choose>
+                        </c:forEach>
+            </div>
+        </div>
  
 <div id="chatInputTable" >
     <table>
@@ -462,7 +307,7 @@ label {
 		
 		socket.onmessage = function(e) {
 		
-			let div = $("<div>" + e.data + "</div>");
+			let div = $("<div>" + e.data + "</div");
 			console.log(div);
 			
 			$("#message_wrap1").append(div);
@@ -475,7 +320,7 @@ label {
 		let text = $("#text").val();
 		//console.log(text);
 		
-		if(text.trim() !== "" ) {
+		if(text.trim() !== "") {
 				//입력한 메세지가 있을 경우에만 전송하겠다는 뜻. 
 				//websocket 객체의 send 메소드를 호출
 				

@@ -85,7 +85,7 @@ public class MemberController {
 		String access_Token = memberService.getKakaoAccessToken(code);
 								
 		 HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-		 System.out.println("login Controller : " + userInfo);
+		 //System.out.println("login Controller : " + userInfo);
 		
 		
 		 if (userInfo.get("email") != null) {
