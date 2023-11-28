@@ -38,6 +38,12 @@
 		</interceptor>
 	</interceptors>
 	
+	<beans:bean class="com.kh.mbting.chatting.server.WebSocketServer"
+				id="chatServer" />
+				
+	<websocket:handlers>
+		<websocket:mapping path="chat.do" handler="chatServer"/>
+	</websocket:handlers>
 	
 	<!-- 추가적으로 websocket 관련 설정 태그 -->
 	<!-- 사용자가 어느 주소로 요청할 때 어느 웹소켓서버로 요청을 보내버릴건지 맵핑

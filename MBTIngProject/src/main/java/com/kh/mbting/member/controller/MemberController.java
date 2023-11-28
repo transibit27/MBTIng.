@@ -34,6 +34,7 @@ public class MemberController {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
+		System.out.println(loginMember);
 		
 		if(loginMember == null) {
 			//로그인 실패
@@ -99,7 +100,7 @@ public class MemberController {
 	}
 	
 	//6. 마이페이지 진입용 method
-	@RequestMapping("myPage2.me")
+	@GetMapping("myPage.me")
 	public void myPage() {
 		
 		System.out.println("잘오나?");

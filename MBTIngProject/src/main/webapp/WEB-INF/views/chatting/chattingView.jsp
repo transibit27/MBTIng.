@@ -1,12 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=\, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
+    	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     
 <style>
 #all {
@@ -57,7 +60,8 @@
     width : 100%;
     height : 90px;
     border-right: 1px solid black;
-    background-color: antiquewhite;
+    background-color: rgb(220, 177, 221);
+    border-radius: ;
 }
 
 #chatDiv {
@@ -198,7 +202,7 @@ label {
  transform: translateY(0);
 }
 
-/*--------------------------------------------프로필 이미지------------------------------------*/
+/*--------------------------------------------íë¡í ì´ë¯¸ì§------------------------------------*/
 .card {
   padding: 20px;
   width: 300px;
@@ -261,150 +265,154 @@ label {
     <div class="wrap">
         <div class="wrapPC">
         <div id="profileDiv">
+            <div><button onclick="disconnect();">채팅 종료하기</button></div>
             <div class="card">
                 <div class="card-image">
                     <img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize">
                 </div>
                 <p class="card-title">임나나</p>
                 <p class="card-body">
-                  저는 현재 댄서로 활동하고 있습니다. <br>
-                  좋아하는 사람과 함께 하면 운동과 모든 일을 하는 것을 다 좋아해요 ! 
+                우와 제 이야기군요 내가 모지 아하하 아하하 아하하 <br>
+                어하 아하하 더미데이터 아하하아하하
+                <br>아하하아하하아하하
                 </p>
-                <p  class="footer"><a href=>차단하기</a></p>
+                <p  class="footer"><a href=>임나나</a></p>
               </div>
              
         </div>
 
         <div id="chatDiv">
             <table id="chatTable">
+           		 
                 <tr>
                     <td>
-                        ---------------------------------2023년 11월 27일----------------------------------
+                        ---------------------------------2023년 11우러 27일----------------------------------
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div class="groupIn">
-                            <input type="search" class="input"  placeholder="안녕하세요 ㅎㅎ">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupOut">
-                            <input type="search" class="output" placeholder="!! 안녕하세요! ">
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="groupIn">
-                            <input type="search" class="input" placeholder="카페 좋아하시나 봐요 프로필 보니까 ㅋㅋㅋ">
-                        </div>
+                        <!--  <div class="groupIn">
+                            <input type="search" class="input" id="inpu" value="ㅋㅋㅋ아하 그렇군요">
+                        </div>-->
+                        <div id="message_wrap1"></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="아 ㅋㅋㅋ 맞아요 제가 빵을 좋아해서 빵순이라.. ">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요 ">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="어 혹시 그럼 다음에 종로에있는 소하염전 가실래요? 거기 빵 진짜 맛있는데 ㅋㅋㅋ ">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="헐 저 거기 알아요 소금빵 맛집이잖아요 거기 카라멜 소금빵 진짜 맛있는데">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="우와 아시는구나 ㅋㅋㅋㅋ 언제 갈까요!">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="음,,, 저는 이번주 주말 ㅎㅎ? 출근 해야 돼서 ㅠㅠ ">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="좋아요 그럼 일요일에 3시까지 종로3가역 4번 출구에서 봬요 ">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="알겠습니당. ㅎㅎ 일요일에 봬요!">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="네 출근 화팅!!">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="아 더미데이터 귀찮아" >
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="아 더미데이터 귀찮아">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="아 더미데이터 귀찮아">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요" >
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="아 더미데이터 귀찮아">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="아 더미데이터 귀찮아">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupIn">
-                            <input type="search" class="input" placeholder="아 더미데이터 귀찮아">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="groupOut">
-                            <input type="search" class="output" placeholder="아 더미데이터 귀찮아">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="groupIn">
+                            <input type="search" class="input" placeholder="ㅋㅋㅋ아하 그렇군요">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="groupOut">
+                            <input type="search" class="output" placeholder="ㅋㅋㅋ아하 그렇군요">
                         </div>
                     </td>
                 </tr>
@@ -414,21 +422,79 @@ label {
 </div>
  
 <div id="chatInputTable" >
-  <form>
     <table>
         <tr style="height: 120px;">
             <td></td>
             <td style="border: 1px solid black;">
                 <div class="grow-wrap">
-                    <textarea name="text" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value" placeholder="메시지를 입력하세요"></textarea>
+                    <textarea name="text" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value" placeholder="메시지를 입력해주세요."></textarea>
                 </div>
-                <div align="right"><button type="submit" id="submitButton">전송하기</button></div>
+                <div align="right"><button type="submit" id="submitButton" onclick="send();">전송하기</button></div>
             </td>
         </tr>
     </table>
-  </form>
 </div>
 </div>
-            
+         
+  <script>
+    let socket;
+	//연결 실행 시 실행될 함수
+
+	$(function(){
+		let url = "ws://localhost:8081/mbting/chat.do";
+			
+		socket = new WebSocket(url);
+		
+		//연결 성공 시 실행할 함수 onopen 
+		socket.onopen = function() {
+			console.log("서버와 연결 되었습니다.");
+		};
+		
+		//연결 종료 시 실행할 함수 onclose
+		socket.onclose = function() {
+			console.log("서버와 연결이 종료");
+		};
+		
+		//연결 오류 발생 시 실행할 함수
+		socket.onerror = function() {
+			console.log("서버 오류남");
+		};
+		
+		socket.onmessage = function(e) {
+		
+			let div = $("<div>" + e.data + "</div>");
+			console.log(div);
+			
+			$("#message_wrap1").append(div);
+		};
+
+	});
+
+	//메시지를 전송하는 함수
+	function send() {
+		let text = $("#text").val();
+		//console.log(text);
+		
+		if(text.trim() !== "" ) {
+				//입력한 메세지가 있을 경우에만 전송하겠다는 뜻. 
+				//websocket 객체의 send 메소드를 호출
+				
+				socket.send(text); //socket으로 메시지 전송
+				$("#text").val("");//초기화 효과
+			}
+
+	};
+	
+	
+	//연결 종료 시 실행될 함수 
+	function disconnect() {
+		socket.close();
+        location.href="http://localhost:8081/mbting";
+	};
+	
+	
+	</script>   
+
+
 </body>
 </html>

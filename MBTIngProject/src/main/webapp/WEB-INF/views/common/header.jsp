@@ -9,7 +9,7 @@
     <title>Document</title>
     
 	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
    
     <!-- 부트스트랩에서 제공하고 있는 스타일 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -139,7 +139,7 @@
 	               		<c:when test="${not empty sessionScope.loginMember}">
 	               			
 		               		<label>${sessionScope.loginMember.memberName}님 환영합니다</label> &nbsp;&nbsp;
-		                    <a href="">마이페이지</a>
+		                    <a href="myPage.me">마이페이지</a>
 		                    <a href="logout.me">로그아웃</a>
 	               		</c:when>
                		
@@ -150,7 +150,7 @@
 				                   	<td><label>${sessionScope.nickname}님 환영합니다</label> &nbsp;&nbsp; </td>
 				                 
 					                <td><img id="profile" src="${sessionScope.profile}" ></td>
-					                <td> <a href="myPage2.me">마이페이지</a></td>
+					                <td> <a href="myPage.me">마이페이지</a></td>
 					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a> </td>
 				               	   </tr>
 			               	</table>

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -14,7 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
-
 
 <style>
 	* {
@@ -377,7 +377,7 @@
 										   </div>
 									   </div>
 								   </div>
-								   <div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
+								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do'">채팅하기</button></div>
 								</div>
 							</div>
 							   </td>
