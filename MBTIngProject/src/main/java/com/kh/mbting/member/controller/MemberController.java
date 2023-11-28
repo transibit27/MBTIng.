@@ -97,6 +97,14 @@ public class MemberController {
 		 }
 		return "main";
 	}
+	
+	//6. 마이페이지 진입용 method
+	@RequestMapping("myPage2.me")
+	public void myPage() {
+		
+		System.out.println("잘오나?");
+
+	}
 
 }
 

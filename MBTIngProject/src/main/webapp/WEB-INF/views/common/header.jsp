@@ -150,7 +150,7 @@
 				                   	<td><label>${sessionScope.nickname}님 환영합니다</label> &nbsp;&nbsp; </td>
 				                 
 					                <td><img id="profile" src="${sessionScope.profile}" ></td>
-					                <td> <a href="myPage.me">마이페이지</a></td>
+					                <td> <a href="myPage2.me">마이페이지</a></td>
 					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a> </td>
 				               	   </tr>
 			               	</table>
