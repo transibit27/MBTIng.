@@ -7,6 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
+    
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
    
     <!-- 부트스트랩에서 제공하고 있는 스타일 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -16,9 +19,6 @@
 	<!-- 부트스트랩때문에 연결함 -->
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-	
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js">
 	
 	<!-- Popper JS -->
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -112,7 +112,7 @@
     <div id="header">
         <div id="header_1">
             <div id="header_1_left">
-               <img id="loggo" src="${pageContext.request.contextPath}/resources/images/loggo.jpg" alt=""> 
+               <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
             </div>
             <div id="header_1_center">	 
 	             <ul>
@@ -150,7 +150,7 @@
 				                   	<td><label>${sessionScope.nickname}님 환영합니다</label> &nbsp;&nbsp; </td>
 				                 
 					                <td><img id="profile" src="${sessionScope.profile}" ></td>
-					                <td> <a href="">마이페이지</a></td>
+					                <td> <a href="myPage.me">마이페이지</a></td>
 					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a> </td>
 				               	   </tr>
 			               	</table>
