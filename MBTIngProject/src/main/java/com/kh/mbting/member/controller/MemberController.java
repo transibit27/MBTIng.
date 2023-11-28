@@ -36,10 +36,6 @@ public class MemberController {
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
 		
-		System.out.println(m.getUserPwd());
-		System.out.println(loginMember);
-		System.out.println(loginMember.getUserPwd());
-		
 		if(loginMember != null && 
 				bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
 						
@@ -94,9 +90,7 @@ public class MemberController {
 			
 			return "common/errorPage";
 		}
-		
-	
-		
+			
 	}
 
 	//5. 카카오 로그인을 시도했을 경우 실행될 method
