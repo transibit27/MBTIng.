@@ -6,13 +6,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 <style>
+	.my-outer{
+		width: 100%;
+        margin: auto;
+        
+    }
+    .my-header{
+        border-bottom: 1px solid lightgrey;
+    }
+
     /*프로필 헤더 스타일*/
     #profile-header{
         margin: auto;
-        width: 600px;
+        margin-top: 50px;
+        width: 800px;
        
         display: flex;
+    }
+    
+    .my-bottom{
+    	padding: 50px;
     }
 
     .empty-space-w{
@@ -96,86 +111,94 @@
         text-align: center;
         font-weight: bold;
     }
-    
-
 </style>
 </head>
 <body>
 
-    <div>
-        <div id="profile-header">
-            <table id="profile-table">
-                <tr>
-                    <td colspan="6" style="font-weight: bold; font-size: 18px; width: 100px; height: 50px;">mokoko@gmail.com</td>
-                </tr>
-                <tr class="empty-space-h">
-                    <td rowspan="4" id="profile">
-                        <div id="profile-img"></div>
-                    </td>
-                    <td class="empty-space-w"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="empty-space-w"></td>
-                </tr>
-                <tr id="profile-stat-value">
-                    <td></td>
-                    <td>수락대기</td>
-                    <td>0</td>
-                    <td>10</td>
-                    <td></td>
-                   
-                </tr>
-                <tr id="profile-stat">
-                    <td></td>
-                    <td>매칭상태</td>
-                    <td>매칭신청자</td>
-                    <td>매칭코인</td>
-                    <td></td>
-                </tr>
-                <tr class="empty-space-h">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td id="profileName">모코코</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+	<div class="my-outer">
+	
+		<div class="my-header">
+			<!-- 메뉴바 import 부분 -->
+			<jsp:include page="../common/header.jsp"></jsp:include>
+		
+        </div>
+	
+	    <div>
+	        <div id="profile-header">
+	            <table id="profile-table">
+	                <tr>
+	                    <td colspan="6" style="font-weight: bold; font-size: 18px; width: 100px; height: 50px;">mokoko@gmail.com</td>
+	                </tr>
+	                <tr class="empty-space-h">
+	                    <td rowspan="4" id="profile">
+	                        <div id="profile-img"></div>
+	                    </td>
+	                    <td class="empty-space-w"></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td class="empty-space-w"></td>
+	                </tr>
+	                <tr id="profile-stat-value">
+	                    <td></td>
+	                    <td>수락대기</td>
+	                    <td>0</td>
+	                    <td>10</td>
+	                    <td></td>
+	                   
+	                </tr>
+	                <tr id="profile-stat">
+	                    <td></td>
+	                    <td>매칭상태</td>
+	                    <td>매칭신청자</td>
+	                    <td>매칭코인</td>
+	                    <td></td>
+	                </tr>
+	                <tr class="empty-space-h">
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                </tr>
+	                <tr>
+	                    <td id="profileName">모코코</td>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                    <td></td>
+	                </tr>
+	    
+	            </table>
+	            <button id="reset-pass" style="float: right;">비밀번호 초기화</button>
+	        </div>
+	
+	        
+	        <div id="menuLine">
+	        </div>
+	        <table id="mymenu">
+	            <tr>
+	                <td class="emptymenu"></td>
+	                <td id="myInfo">내 정보</td>
+	                <td class="emptymenu"></td>
+	                <td id="myMbting">내 상태</td>
+	                <td class="emptymenu"></td>
+	                <td id="myReview">내 후기</td>
+	                <td class="emptymenu"></td>
+	            </tr>
+	        </table>
+	        
+	
+	        <div class="my-bottom">   
+				<!-- 하단 메뉴 import 부분 --> 
+				<jsp:include page="./myMbting.jsp"></jsp:include>
+				           
+	        </div>  
+	
+	    </div>
     
-            </table>
-            <button id="reset-pass" style="float: right;">비밀번호 초기화</button>
-        </div>
-
-        
-        <div id="menuLine">
-        </div>
-        <table id="mymenu">
-            <tr>
-                <td class="emptymenu"></td>
-                <td id="myInfo">내 정보</td>
-                <td class="emptymenu"></td>
-                <td id="myMbting">내 상태</td>
-                <td class="emptymenu"></td>
-                <td id="myReview">내 후기</td>
-                <td class="emptymenu"></td>
-            </tr>
-        </table>
-        
-
-        <div>   
-			<!-- 하단 메뉴 import 부분 -->            
-        </div>  
-
     </div>
-    
-
     
 </body>
 </html> 
