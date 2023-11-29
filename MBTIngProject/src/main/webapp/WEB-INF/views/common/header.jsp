@@ -143,7 +143,7 @@
 	                <li><a href="">INTRODUCE</a></li>
 	                <li><a href="">이용안내</a></li>
 	                <li><a href="">만남후기</a></li>
-	                <li><a href="">연애테스트</a></li>
+	                <li><a href="mbtiTest.mb">연애테스트</a></li>
 	                <li><a href="">고객센터</a></li>
 	            	<li><a href="">신청하기(매칭)</a></li>
 	            </ul>    	
