@@ -100,7 +100,7 @@
                 내용
                 <br>
 
-                <textarea id="content" name="boardContent" required>{ requestScope.b.boardContent }</textarea>
+                <textarea id="content" name="boardContent" required>${ requestScope.b.boardContent }</textarea>
             </div>
 
             <br>
