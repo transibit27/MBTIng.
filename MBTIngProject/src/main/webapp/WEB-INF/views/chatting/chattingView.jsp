@@ -14,125 +14,60 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     
 <style>
-#all {
+.wrap {
+    width : 1300px;
+    height : 900px;
     margin: auto;
-    width : 1200px;
-    height : 700px;
-    font-family: 'Sunflower', sans-serif;
+    border: double 3px rgb(255, 149, 166);
+    border-radius: 20px;
+    font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .wrapPC {
     width : 1200px;
     height : 700px;
     display: inline-block;
     display: flex;
-    font-family: 'Sunflower', sans-serif;
 }
 
-
 #profileDiv {
-    display: flex;
-    border: 1px solid black;
-    width: 600px;
+    width: 400px;
     height: 900px;
+    margin-left: 50px;
+    background-color: #ffcece;
+}
+
+#profileDiv table {
+    width: 100%;
+    height: 100%;
+}
+
+#profileDiv table td{
+    text-align: center;
 }
 
 #profileDiv img {
-    height: 400px;
-    width : 400px;
-
-    
-}
-#profileDiv div {
-    width : 400px;
-    margin: auto;
-}
-
-#mPro {
-    position : relative;
-    left: 100px;
-}
-
-#yPro {
-    position : absolute;
-    left : 400px;
-    top  : 300px;
+    height: 300px;
+    width : 300px; 
+    border-radius: 200px; 
 }
 
 
-#profileText {
-    margin-top: 10px;
-}
-
-#chatInputTable td{
-    width : 50%;
-}
 /*---------------------------chatting--------------------------------*/
 
-
 #chatDiv {
-    width: 650px;
-    height: 100%;
+    width: 670px;
+    height: 80%;
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
-    background-color: #ffcece;
+
     overflow:auto;
-}
-
-.otherChat {
-    border : 1px solid red;
-    font-family: 'IBM Plex Sans KR', sans-serif;
-    width :100%;
-    /*
-  height: 50px;
-  line-height: 28px;
-  margin : 20px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  outline: none;
-  background-color: rgb(248, 230, 248);
-  color: #0d0c22;
-  box-shadow: 0 0 5px rgb(233, 255, 231), 0 0 0 10px #f5f5f5eb;
-  margin-left: 20px;
-  width: 300px;
-  padding: 0 1rem;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  line-height: 28px;
-  */
-}
-
-.myChat {
-    border : 1px solid black;
-    font-family: 'IBM Plex Sans KR', sans-serif;
-    width :100%;
-    /*
-  width : 100%;
-  border: 1px solid black;
-  height: 60px;
-  line-height: 55px;
-  padding: 0 1rem;
-  margin : 20px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background-color: rgb(207, 207, 207);
-  color: #0d0c22;
-  box-shadow: 0 0 5px rgb(233, 255, 231), 0 0 0 10px #f5f5f5eb;
-  margin-left: 240px;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  text-align: left;
-  */
-}
-
-.message {
-    width: 100%;
-    display: inline-block;
-    align-items: flex-end;
-    color: black;
+    margin-top: 100px;
+    margin-left: 100px;
 }
 
 .Right {
     text-align: right;
 }
-
 .Left {
     text-align: left;
 }
@@ -152,39 +87,28 @@
   font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-#chatInputTable {
-    display: block;
-    width : 1200px;
+.message {
+    width: 100%;
+    display: inline-block;
+    align-items: flex-end;
+    color: black;
+}
+
+#chatInput {
+    width: 670px;
     height: 200px;
-    display: fiex;
+    margin-left: 540px;
 }
 
-.grow-wrap {
-  display: grid;
-}
-.grow-wrap::after {
-  content: attr(data-replicated-value) " ";
-  white-space: pre-wrap;
-  visibility: hidden;
-}
-.grow-wrap > textarea {
-  resize: none;
-  overflow: hidden;
-  width : 572px;
-  height: 130px;
-}
-.grow-wrap > textarea,
-.grow-wrap::after {
-  border: 1px solid black;
-  padding: 0.5rem;
-  font: inherit;
-  grid-area: 1 / 1 / 2 / 2;
+#chatInput > table {
+    width: 100%;
+    height: 90%;;
 }
 
-label {
-  display: block;
+#chatInput textarea {
+    resize: none;
 }
-
+/*-------------------------전송버튼 css---------------------------------*/
 #submitButton {
  align-items: center;
  background-color: #ffd8d8;
@@ -238,14 +162,50 @@ label {
 </style>
 </head>
 <body>
-<div id="all">
+
+<jsp:include page="../common/header.jsp"/>
+<br><br><br><br>
     <div class="wrap">
         <div class="wrapPC">
             <div id="profileDiv">
-                <div><button onclick="disconnect();">채팅 종료하기</button></div>
-                    <div class="card-image">
-                    
-                    </div>
+               
+                 <table > 
+                    <tr>
+                        <td colspan="3" style="height: 300px; padding-top: 100px; "><img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize"> </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="height: 10px;"><p style="font-size: 60px;">임유나</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="height: 10px;" ><p style="font-size : 30px;">intj</p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="height: 10px;"><p>클라이밍 좋아해요 ㅎㅎ 운동! </p></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">유나에 대한 후기 남기기</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
+                        <td><div><button id="submitButton" onclick="">신고하기</button></div></td>
+                        <td> <div><button id="submitButton" onclick="disconnect();">채팅 종료</button></div></td>
+                    </tr>
+                 </table>
             </div>
 
             <div id="chatDiv">
@@ -263,23 +223,22 @@ label {
 			                     	 </c:otherwise>
 		                     </c:choose>
                         </c:forEach>
-            </div>
+             </div>
         </div>
- 
-<div id="chatInputTable" >
-    <table>
-        <tr style="height: 120px;">
-            <td></td>
-            <td style="border: 1px solid black;">
-                <div class="grow-wrap">
-                    <textarea name="text" id="text" onInput="this.parentNode.dataset.replicatedValue = this.value" placeholder="메시지를 입력해주세요."></textarea>
-                </div>
-                <div align="right"><button type="submit" id="submitButton" onclick="send();">전송하기</button></div>
-            </td>
-        </tr>
-    </table>
-</div>
-</div>
+        <div id="chatInput" >
+            <table>
+                <tr>
+                    <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img>></td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요"></textarea>
+                    </td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%; ">전송</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
          
   <script>
     let socket;
