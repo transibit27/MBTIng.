@@ -48,6 +48,7 @@
         margin-top: 20px;   
         margin-bottom: 20px;
         width: 100%;
+        height: 15px;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -70,6 +71,7 @@
         height: 40px;
         margin: 5px;
         box-sizing: border-box;
+        font-size: 12px;
     }
 
     .enroll-group button {
@@ -148,7 +150,7 @@
                     
                 <div class="andLine">
                     <div class="line"></div>
-                    <div style="width: 70px; text-align: center;"> 또는 </div> 
+                    <div style="width: 70px; text-align: center; line-height: 15px;"> 또는 </div> 
                     <div class="line"></div>
                 </div>
 
