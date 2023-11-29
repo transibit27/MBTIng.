@@ -155,7 +155,7 @@
 
         </div>
         <div class="reviewdetail-bottom-button" align="right">
-            <c:if test="${ not empty sessionScope.loginUser and sessionScope.loginUser.userId eq requestScope.b.boardWriter }">
+            <c:if test="${ not empty sessionScope.loginUser and sessionScope.loginUser.userNo eq requestScope.b.boardWriter }">
                 <button onclick="postFormSubmit(1);">수정</button>
                 <button onclick="postFormSubmint(2);">삭제</button>
                 <form id="postForm" action="" method="post">

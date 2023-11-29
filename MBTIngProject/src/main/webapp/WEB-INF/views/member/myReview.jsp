@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,28 +86,6 @@
     ///////////
     */
 
-    .paging-area {
-        width: 800px;
-        margin: auto;
-    }
-    .paging-area button {
-        width: 35px;
-    }
-    .paging-area button[disabled]:hover {
-        border: none;
-        background-color: pink;
-    }
-
-    .paging-area>button {
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: pink;
-    }
-    .paging-area>button:hover {
-        border: 1px solid pink;
-        background-color: white;
-    }
 
 </style>
 </head>
@@ -130,136 +109,70 @@
 
     <div class="ptlist-wrap">
         <ul class="ptlist">
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-    
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-    
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-
-            <li>                
-                <div>
-                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
-                    <div>
-                        <p class="pt_title">커플후기
-                        </p>
-                        <p class="pt_info">
-                            g*********	
-                        </p>                                                     
-                    </div>
-                    <p class="b_info"><span><b>138</b>명 읽음</span></p>
-                </div>                
-            </li>
-    
+        
+        	<c:forEach var="b" items="${ requestScope.list }">
+			    <li>                
+	                <div>
+	                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
+	                    <div>
+	                        <p class="pt_title">${b.boardTitle}
+	                        </p>
+	                        <p class="pt_info">
+	                            ${b.userNo}
+	                        </p>                                                     
+	                    </div>
+	                    <p class="b_info"><span><b>${b.views}</b>명 읽음</span></p>
+	                </div>                
+	            </li>
+           	</c:forEach>
+           
         </ul>
-
-        <div class="paging-area" align="center">
-            <button type="button">&lt;</button>
-            <button type="button">11</button>
-            <button type="button" disabled>12</button>
-            <button type="button">13</button>
-            <button type="button">14</button>
-            <button type="button">15</button>
-            <button type="button">16</button>
-            <button type="button">17</button>
-            <button type="button">18</button>
-            <button type="button">19</button>
-            <button type="button">20</button>
-            <button type="button">&gt;</button>
-        </div>
-
     </div>
+
+	<!-- 페이징 바 -->
+    <div id="pagingArea">
+	    <ul class="pagination">
+	    
+	   	<c:choose>
+			<c:when test="${ requestScope.pi.currentPage eq 1 }">
+		    	<li class="page-item disabled">
+		    		<a class="page-link" href="#">Previous</a>
+		    	</li>
+		   	</c:when>
+		   	
+		   	<c:otherwise>
+		    	<li class="page-item">
+		    		<a class="page-link" href="myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage - 1 }">Previous</a>
+		    	</li>
+		   	</c:otherwise>
+	     </c:choose>
+	        
+	     <c:forEach var="p" begin="${ requestScope.pi.startPage }" 
+	     					  end="${ requestScope.pi.endPage }"
+	     					 step="1">
+			<li class="page-item">
+				<a class="page-link" href="myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ p }">${ p }</a>
+			</li>
+	     </c:forEach>
+	        
+	    <c:choose>
+			<c:when test="${ requestScope.pi.currentPage eq requestScope.pi.maxPage }">
+				<li class="page-item disabled">
+					<a class="page-link" href="#">Next</a>
+				</li>
+			</c:when>
+			<c:otherwise>
+				<li class="page-item">
+					<a class="page-link" href="myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage + 1 }">Next</a>
+				</li>
+			</c:otherwise>
+	   	</c:choose>
+	    
+	    </ul>
+           
+	</div>
+
+
     
 
     

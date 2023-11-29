@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.member.model.service.MemberService;
@@ -127,8 +128,7 @@ public class MemberController {
 	}
 	//b 마이페이지 - 프로필
 	@RequestMapping("myProfile.me")
-	public String myProfile(HttpSession session,
-								 Member m) {
+	public String myProfile() {
 	
 		return "member/myProfile";
 	}
@@ -170,33 +170,32 @@ public class MemberController {
 	}
 	
 	//c 마이페이지 - 내후기
-	@RequestMapping("myReview.me")
+	@RequestMapping(value="myReview.me")
 	public String myReview() {
 		
 		return "member/myReview";
 	}
 	//c-마이페이지 - 내후기 리스트 수 조회 
-	/*
 	@GetMapping(value="myList.me")
 	public ModelAndView selectList(
+			@RequestParam(value = "uno") String userNo,
 			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 			ModelAndView mv) {
 		
-		int listCount = boardService.selectListCount();
+		int listCount = memberService.selectListCount(userNo);
 		
 		int pageLimit = 5;
-		int boardLimit = 5;
+		int boardLimit = 8;
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, 
 						currentPage, pageLimit, boardLimit);
 		
-		 ArrayList<Board> list = boardService.selectList(pi);
+		ArrayList<Board> list = memberService.selectList(pi, userNo);
 		
 		mv.addObject("list", list)
 		  .addObject("pi", pi)
-		  .setViewName("board/boardListView");
-		  
+		  .setViewName("member/myReview");
+	
 		return mv;
 	}
-	*/
 }

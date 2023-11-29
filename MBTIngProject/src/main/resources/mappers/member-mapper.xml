@@ -22,6 +22,20 @@
  	<result column="ROOM_NO" 	 	property="number"></result>
  </resultMap>
  
+ <resultMap id="boardResultSet" type="board">
+ 	<result column="BOARD_NO" property="boardNo"></result>
+ 	<result column="BOARD_TITLE" property="boardTitle"></result>
+ 	<result column="BOARD_CONTENT" property="boardContent"></result>
+ 	<result column="VIEWS" property="views"></result>
+ 	<result column="ENROLL_DATE" property="enrollDate"></result>
+ 	<result column="MODIFY_DATE" property="modifyDate"></result>
+ 	<result column="STATUS" property="status"></result>
+ 	<result column="USER_NO" property="userNo"></result>
+ 	<result column="MATCH_NO" property="matchNo"></result>
+ </resultMap>
+ 
+ 
+ 
 	<!-- 로그인용 쿼리문(로그인한 회원정보 담고 있음) -->
 	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
 	  SELECT *
@@ -57,6 +71,23 @@
         FROM MATCHING
   	   WHERE RECEIVER_NO = #{userNo}
   	     AND MATCH_STAT = 'Y'
+	</select>
+	
+	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+	  	  FROM BOARD
+	 	 WHERE USER_NO = #{userNo}
+	 	   AND STATUS = 'Y'
+	</select>
+	
+	<!-- 내 후기 게시글 조회용 쿼리문 -->
+	<select id="selectList" resultMap="boardResultSet">
+        SELECT *
+		  FROM BOARD
+		 WHERE STATUS = 'Y'
+           AND USER_NO = #{userNo}
+		 ORDER BY BOARD_NO DESC
 	</select>
 	
 </mapper>

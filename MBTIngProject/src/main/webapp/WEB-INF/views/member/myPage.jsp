@@ -257,7 +257,7 @@
 		    		})
 		    		$("#myReview").click(function(){
 
-		    			$(location).attr("href", "myReview.me")
+		    			$(location).attr("href", "myList.me?uno=${sessionScope.loginMember.userNo}")
 		    		})
 		    		
 		    	});

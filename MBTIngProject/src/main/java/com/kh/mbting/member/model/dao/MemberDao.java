@@ -1,9 +1,14 @@
 package com.kh.mbting.member.model.dao;
 
+import java.util.ArrayList;
+
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.member.model.vo.Member;
 
 
@@ -27,6 +32,18 @@ public class MemberDao {
 
 	public int proposerList(SqlSessionTemplate sqlSession, String userNo) {
 		return sqlSession.selectOne("memberMapper.proposerList", userNo);
+	}
+
+	public int selectListCount(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.selectListCount", userNo);
+	}
+
+	public ArrayList<Board> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String userNo) {
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("memberMapper.selectList", userNo, rowBounds);
 	}
 }
 

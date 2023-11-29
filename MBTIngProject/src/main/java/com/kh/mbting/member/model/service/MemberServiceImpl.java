@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.member.model.dao.MemberDao;
 import com.kh.mbting.member.model.vo.Member;
 
@@ -172,6 +175,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int proposerList(String userNo) {
 		return memberDao.proposerList(sqlSession, userNo);
+	}
+
+	// 마이페이지 - 내 후기 게시글 총 갯수 확인용 메소드
+	@Override
+	public int selectListCount(String userNo) {
+		return memberDao.selectListCount(sqlSession, userNo);
+	}
+
+	// 마이페이지 - 내 후기 조회용 메소드
+	@Override
+	public ArrayList<Board> selectList(PageInfo pi, String userNo) {
+		return memberDao.selectList(sqlSession, pi, userNo);
 	}
 }
 

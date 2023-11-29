@@ -1,7 +1,10 @@
 package com.kh.mbting.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.member.model.vo.Member;
 
 public interface MemberService {
@@ -23,5 +26,11 @@ public interface MemberService {
 
 	// 내게 매칭을 신청한 대상자 수 확인 용 method
 	int proposerList(String userNo);
+
+	// 내 후기 게시글 숫자 확인용 method
+	int selectListCount(String userNo);
+
+	// 내 후기 게시글 조회용 method
+	ArrayList<Board> selectList(PageInfo pi, String userNo);
 }
 
