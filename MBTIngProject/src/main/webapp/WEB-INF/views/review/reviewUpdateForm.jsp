@@ -58,41 +58,7 @@
             border: 2px solid pink;
             resize: none;
         }
-        .writereview-photo {
-            font-size:x-small;
-            text-align: center;
-        }
-        .writereview-photo img {
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
-            background-color: lightgray;
-        }
-        .reviewphoto-table-thumbnail td {
-            border: 2px solid pink;
-            width: 250px;
-            height: 250px;
-        }
-        .reviewphoto-table-photos td {
-            border: 2px dotted pink;
-            width: 250px;
-            height: 250px;                    
-        }
-        .reviewphoto-table-photos-button td {
-            width: 250px;
-            height: 250px;            
-        }
-        .reviewphoto-table-photos-button button {
-            width: 30px;
-            height: 30px;
-            border: none;
-            border-radius: 5px;
-            background-color: pink;
-        }
-        .reviewphoto-table-photos-button button:hover {
-            border: 1px solid pink;
-            background-color: white;
-        }
+        /* 사진 변경 스타일 작성할 곳 */
         .reviewupdate-button button {
             width: 90px;
             height: 30px;
@@ -141,7 +107,7 @@
 
             <div class="writereview-photo" align="left">
                 
-                <!-- 사진 첨부 기능 작성할 곳 -->
+                <!-- 사진 변경 기능 작성할 곳 -->
 
             </div>
 

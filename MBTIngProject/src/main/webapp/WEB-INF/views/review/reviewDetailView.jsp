@@ -66,10 +66,12 @@
             font-size: xx-large;
             font-weight: bold;
         }
+        /* 썸네일 이미지 스타일 작성할 곳 */
         .reviewdetail-content p {
             height: 500px;        
             white-space: pre-wrap;
         }
+        /* 나머지 이미지 스타일 작성할 곳 */
         .reviewdetail-like {
             font-family: 'Single Day', cursive;
             font-size: x-large;
@@ -93,28 +95,6 @@
         .move-page {
             width: 1200px;
             margin: auto;
-        }
-        .move-page-table {
-            width: 1200px;
-        }
-        .move-page-table tr {
-            height: 40px;
-        }
-        .move-page-table tr:hover {
-            color: pink;
-        }
-        .move-page-table td {
-            padding-left: 10px;
-            
-        }
-        .move-page-info {
-            width: 150px;
-        }
-        .move-page-title {
-            width: 850px;
-        }
-        .move-page-date {
-            width: 200px;;
         }
     </style>
 </head>
@@ -152,17 +132,22 @@
 
             <div class="reviewdetail-content">
 
-                <!-- 썸네일 사진 불러오는 기능 작성할 곳 -->
+                <!-- 썸네일 사진 불러오는 기능 일단 주석처리 -->
+                <!--
+                <img src="">
+                -->
 
                 <p>${ requestScope.b.boardContent }</p>
 
-                <!-- 나머지 사진 불러오는 기능 작성할 곳-->
+                <!-- 나머지 사진 불러오는 기능 일단 주석처리 -->
+                <!--
+                <img src="">
+                -->
 
             </div>
             <div class="reviewdetail-like" align="center">
                 ❤️<br>
-
-                <!-- 좋아요수 조회 기능 작성할 곳 -->
+                ${requestScope.b.thumb}
 
             </div>
 
