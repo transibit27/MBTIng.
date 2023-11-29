@@ -17,5 +17,11 @@ public interface MemberService {
 	
 	//카카오 Token을 얻은 후, 유저의 정보를 가져올 method
 	HashMap<String, Object> getUserInfo (String access_Token);
+	
+	// 마이페이 회원정보 수정용 method
+	int updateMember(Member m);
+
+	// 내게 매칭을 신청한 대상자 수 확인 용 method
+	int proposerList(String userNo);
 }
 

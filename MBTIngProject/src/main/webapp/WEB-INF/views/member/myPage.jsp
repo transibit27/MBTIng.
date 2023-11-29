@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+  
+    
 <style>
 	.my-outer{
 		width: 100%;
@@ -61,7 +65,7 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
-        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU");
+        background-image: url("${pageContext.request.contextPath}${sessionScope.loginMember.profileImg}");
         background-size: cover;
         background-position: center;
     }
@@ -125,7 +129,9 @@
 	        <div id="profile-header">
 	            <table id="profile-table">
 	                <tr>
-	                    <td colspan="6" style="font-weight: bold; font-size: 18px; width: 100px; height: 50px;">mokoko@gmail.com</td>
+	                    <td colspan="6" style="font-weight: bold; font-size: 18px; width: 100px; height: 50px;">
+	                    	${sessionScope.loginMember.email}
+	                    </td>
 	                </tr>
 	                <tr class="empty-space-h">
 	                    <td rowspan="4" id="profile">
@@ -139,12 +145,12 @@
 	                </tr>
 	                <tr id="profile-stat-value">
 	                    <td></td>
-	                    <td>수락대기</td>
-	                    <td>0</td>
-	                    <td>10</td>
 	                    <td></td>
-	                   
+	                    <td></td>
+	                    <td>${sessionScope.loginMember.matchCoin}</td>
+	                    <td></td>	                   
 	                </tr>
+
 	                <tr id="profile-stat">
 	                    <td></td>
 	                    <td>매칭상태</td>
@@ -160,7 +166,7 @@
 	                    <td></td>
 	                </tr>
 	                <tr>
-	                    <td id="profileName">모코코</td>
+	                    <td id="profileName">${sessionScope.loginMember.userName}</td>
 	                    <td></td>
 	                    <td></td>
 	                    <td></td>
@@ -171,6 +177,49 @@
 	            </table>
 	            <button id="reset-pass" style="float: right;">비밀번호 초기화</button>
 	        </div>
+	        
+            <!-- 상단 회원 상태 표시용 스크립트 -->
+            <script>
+
+            	$(function(){    		
+           	 		/* 매칭 상태 표시용 스크립트 */
+	             	let mStat = "${sessionScope.loginMember.matchStat}"
+	 	                
+	              	switch(mStat){
+	              		case '1' : $("#profile-stat-value").children('td:eq(1)').html("매칭가능")
+	              		break;
+	              		case '2' : $("#profile-stat-value").children('td:eq(1)').html("수락대기")
+	              		break;
+	              		default : $("#profile-stat-value").children('td:eq(1)').html("대화중")
+	              	}
+	             	
+	             	/* 매칭 신청자 수 확인용 펑션 실행 구문 */
+	             	proposer();
+	             	setInterval(proposer,5000);
+	             	
+	             	/* 매칭 신청자 수 확인용 스크립트 */
+	             	function proposer(){
+	             		
+	             		$.ajax({
+	             			url : "proposerList.me",
+	             			type : "get",
+	             			data : {"userNo":${sessionScope.loginMember.userNo}}, 
+	             			success : function(result){
+	             				
+	             				$("#profile-stat-value").children('td:eq(2)').html(result);
+	             				
+	             			},
+	             			error : function(){
+	             				console.log("매칭 신청자 확인용 ajax 통신 실패	")
+	             			}
+	             			
+	             		})
+	             	}
+	             	
+            	})
+
+            </script>
+       
 	
 	        
 	        <div id="menuLine">

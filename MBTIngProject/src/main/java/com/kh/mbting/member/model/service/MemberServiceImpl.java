@@ -156,11 +156,22 @@ public class MemberServiceImpl implements MemberService {
 		        userInfo.put("email", email);
 		       
 		    } catch (IOException e) {
-		        // TODO Auto-generated catch block
 		        e.printStackTrace();
 		    }
 		    
 		    return userInfo;
+	}
+
+	// 마이페이지 - 회원정보 수정용 메소드
+	@Override
+	public int updateMember(Member m) {
+		return memberDao.updateMember(sqlSession, m);
+	}
+
+	// 마이페이지 - 내게 매칭을 신청한 회원의 수 확인용 메소드
+	@Override
+	public int proposerList(String userNo) {
+		return memberDao.proposerList(sqlSession, userNo);
 	}
 }
 

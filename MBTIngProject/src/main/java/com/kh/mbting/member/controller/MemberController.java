@@ -1,6 +1,8 @@
 package com.kh.mbting.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.mbting.common.model.vo.PageInfo;
+import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
 
@@ -41,6 +47,7 @@ public class MemberController {
 						
 			session.setAttribute("alertMsg", "로그인 성공");
 			session.setAttribute("loginMember", loginMember);
+			
 			return "redirect:/";
 						
 		} else {
@@ -120,15 +127,76 @@ public class MemberController {
 	}
 	//b 마이페이지 - 프로필
 	@RequestMapping("myProfile.me")
-	public String myProfile() {
-		
+	public String myProfile(HttpSession session,
+								 Member m) {
+	
 		return "member/myProfile";
 	}
+	
+	//b-1 마이페이지 - 상단상태(매칭 신청자 수 확인용/ajax)
+	@ResponseBody
+	@RequestMapping(value="proposerList.me", produces="text/html; charset=UTF-8")
+	public String ajaxProposer(@RequestParam Map<String, Object> param) {
+		
+		String userNo = (String)param.get("userNo");
+		
+		String proposerNum = String.valueOf(memberService.proposerList(userNo));
+		return proposerNum;
+		
+	}
+	
+	
+	//b-2 마이페이지 - 프로필(수정)
+	@RequestMapping("update.me")
+	public String updateMember(Member m,
+								Model model,
+								HttpSession session){
+		
+		int result = memberService.updateMember(m);
+		
+		if(result > 0) {
+			Member updateMem = memberService.loginMember(m);
+			
+			session.setAttribute("loginMember", updateMem);
+			session.setAttribute("alertMsg", "정보 변경에 성공했습니다.");
+			
+			return "redirect:/myPage.me";
+		} else {
+			
+			model.addAttribute("errorMsg", "회원정보 변경에 실패했습니다.");
+			return "common/errorPage";
+		}
+		
+	}
+	
 	//c 마이페이지 - 내후기
 	@RequestMapping("myReview.me")
 	public String myReview() {
 		
 		return "member/myReview";
 	}
-
+	//c-마이페이지 - 내후기 리스트 수 조회 
+	/*
+	@GetMapping(value="myList.me")
+	public ModelAndView selectList(
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		
+		int listCount = boardService.selectListCount();
+		
+		int pageLimit = 5;
+		int boardLimit = 5;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, 
+						currentPage, pageLimit, boardLimit);
+		
+		 ArrayList<Board> list = boardService.selectList(pi);
+		
+		mv.addObject("list", list)
+		  .addObject("pi", pi)
+		  .setViewName("board/boardListView");
+		  
+		return mv;
+	}
+	*/
 }

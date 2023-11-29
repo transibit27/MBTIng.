@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+  
 <style>
 
 
 	#profile-outer{
 		margin: auto;
+		margin-bottom: 50px;
 		width: 600px;
 	}
 
@@ -85,8 +88,8 @@
 			<h2>프로필 편집</h2>
 		</div>
 	
-		<div id="mypage-form" 
-		action="" method="post">
+		<form id="mypage-form" 
+		action="update.me" method="post">
 		
 			<!--
 				마이페이지에서 보여져야 하는 것들
@@ -97,11 +100,14 @@
 				<tr>
 					<td style="width: 130px; height: 180px;">
 						<div class="profile-img-box">
-							<img class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+							<img class="profile-img" src= "${pageContext.request.contextPath}${sessionScope.loginMember.profileImg}" alt="" >
 						</div> 
 					</td>
+					<!-- 회원 정보 변경 시 DB로 부터 수정할 회원을 지정하기 위해 로그인 유저의 EMAIL 정보 담아 둘 input -->
+					<input type="hidden" name="email" value="${sessionScope.loginMember.email}">
 					<td class="profile-content" style="font-size: 18px">
-						mokoko@gmail.com
+						${sessionScope.loginMember.email}
+						
 						<br>
 						<a href="" style="font-weight: 600; text-decoration: none;">프로필 사진 바꾸기</a>
 					</td>
@@ -112,7 +118,7 @@
 					<td class="profile-title">이름</td>
 					<td class="profile-content">
 						<input type="text" name="userName" required 
-						value="">
+						value="${sessionScope.loginMember.userName}">
 					</td>
 					
 				</tr>
@@ -127,8 +133,8 @@
 				<tr>
 					<td class="profile-title">나이</td>
 					<td class="profile-content">
-						<input type="text" name="phone" 
-						value="">
+						<input type="text" name="age" 
+						value="${sessionScope.loginMember.age}">
 					</td>
 				</tr>
 				<tr>
@@ -141,8 +147,8 @@
 				<tr>
 					<td class="profile-title">성별</td>
 					<td class="profile-content">
-						<input type="email" name="email" 
-						value="">
+						<input type="text" name="gender" 
+						value="${sessionScope.loginMember.gender}">
 					</td>
 				</tr>
 				<tr>
@@ -155,8 +161,8 @@
 				<tr>
 					<td class="profile-title">소개</td>
 					<td class="profile-content">
-						<textarea placeholder="응애">
-							
+						<textarea placeholder="응애" name="introduce">
+							${sessionScope.loginMember.introduce}
 						</textarea>
 					</td>
 					
@@ -174,8 +180,8 @@
 				<tr>
 					<td class="profile-title">휴대폰</td>
 					<td class="profile-content">
-						<input type="text" name="address" placeholder="- 포함해서 입력해주세요"
-						value="">
+						<input type="text" name="phone" placeholder="- 포함해서 입력해주세요"
+						value="${sessionScope.loginMember.phone}">
 					</td>
 				</tr>
 				<tr>
@@ -222,12 +228,12 @@
 				<tr>
 					<td class="profile-title"></td>
 					<td class="profile-content">
-						<button>제출</button>
+						<button type="submit">제출</button>
 					</td>
 				</tr>
 			
 			</table>
-		</div>
+		</form>
 	</div>
 	
     

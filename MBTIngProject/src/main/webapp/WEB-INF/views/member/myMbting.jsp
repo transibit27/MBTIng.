@@ -334,7 +334,7 @@
 	                    <br>
 	                </div>
 	                <div class="shortMenu-button">
-	                    <button>정보 수정</button>
+	                    <button type="button" href="update.me">정보 수정</button>
 	                </div> 
 	            </div>
 	        </div>
