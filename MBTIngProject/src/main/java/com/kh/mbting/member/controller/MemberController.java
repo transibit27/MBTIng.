@@ -36,9 +36,9 @@ public class MemberController {
 
 	//1. 로그인 기능을 위한 method.
 	@PostMapping("/login.me")
-	public String loginMember(Member m, 
-							   Model model,
-							   HttpSession session) {
+	public String loginMember(Member 		m, 
+							  Model 		model,
+							  HttpSession 	session) {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
@@ -50,9 +50,8 @@ public class MemberController {
 			session.setAttribute("loginMember", loginMember);
 			
 			return "redirect:/";
-						
+			
 		} else {
-					
 			 model.addAttribute("errorMsg" , "로그인에 실패했습니다.");
 			 return "common/errorPage";
 		}
