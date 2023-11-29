@@ -44,43 +44,10 @@
             font-size: xx-large;
             font-weight: bold;
         }
-        .tablebestreviewlist {
-            width: 1200px;
-            text-align: center;
-        }
-        .tablebestreviewlist img {
-            width: 200px;
-            height: 150px;
-            border-radius: 10px;
-            background-color: lightgray;
-        }
-        .tablebestreviewlist-title {
-            font-weight: bold;
-            font-size: larger;
-        }
-        .tablebestreviewlist-content {
-            color: gray;
-        }        
+        /* 베스트 후기 스타일 작성할 곳 */
         .reviewlistbutton {
             width: 1200px;
             margin: auto;
-        }
-        .reviewlistbutton button {
-            width: 65px;
-            height: 30px;
-            border: none;
-            border-radius: 5px;
-            background-color: pink;
-        }
-        .reviewlistbutton button:hover {
-            border: 1px solid pink;
-            background-color: white;
-        }
-        .reviewlistbutton select {
-            height: 30px;
-            border: 1px solid pink;
-            border-radius: 5px;
-            background-color: white;
         }
         .reviewlist {
             width: 1200px;
@@ -88,23 +55,8 @@
             padding-top: 20px;
             font-family: 'Single Day', cursive;
         }
-        .tablereviewlist {
-            width: 1200px;
-            text-align: center;
-        }
-        .tablereviewlist img {
-            width: 200px;
-            height: 150px;
-            border-radius: 10px;
-            background-color: lightgray;
-        }
-        .tablereviewlist-title {
-            font-weight: bold;
-            font-size: larger;
-        }
-        .tablereviewlist-content {
-            color: gray;
-        }
+        /* 정렬버튼 스타일 작성할 곳 */
+        /* 후기 리스트 스타일 작성할 곳 */
         .paging-area {
             width: 1200px;
             margin: auto;
@@ -163,19 +115,18 @@
         
         <br>
 
-        <div class="bestreviewlist" align="center">
-        <p class="bestreviewlistbanner">이달의 베스트 후기</p>
+        <div class="bestreviewlist" align="left">
+            <p class="bestreviewlistbanner" align="center">이달의 베스트 후기</p>
 
-            <!-- 베스트 후기글 리스트 기능 작성할 곳 -->
+            <!-- 이달의 베스트 후기 작성할 곳 -->
 
         </div>
 
         <br>
 
         <div class="reviewlistbutton" align="right">
-            <c:if test="${ not empty sessionScope.loginUser }">
-                <button onclick="location.href='enrollForm.';">글작성</button>
-            </c:if>
+            
+            <!-- 매칭종료단계에서 후기 작성 여부를 선택하므로 글 작성 버튼 삭제-->
 
             <!-- 정렬 기능 작성할 곳 -->
 
@@ -185,7 +136,28 @@
 
         <div class="reviewlist" align="center">
 
-            <!-- 베스트 후기글 리스트 기능 작성할 곳 -->
+            <!-- 후기글 리스트 기능 일단 주석 처리 -->
+            <!--
+            <c:forEach var="b" items="${ requestScope.list }">
+                <div class="thumbnail" align="center">
+                    <input type="hidden" class="bno" value="${ b.boardNo }">
+                    <img src="">
+                    <p>${ b.boardTitle }</p>
+                    <p>💑${ b.userId } / ❤️${b.thumb} </p>
+                </div>
+            </c:forEach>
+
+            <script>
+                $(function() {
+                    
+                    $(".thumbnail").click(function() {                        
+                        let bno = $(this).children().eq(0).val();
+                        location.href = "detail.bo?bno=" + bno;
+                    });
+                    
+                });
+            </script>
+            -->
 
         </div>
 

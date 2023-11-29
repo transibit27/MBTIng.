@@ -112,6 +112,104 @@
 		width : 50px;
 		height : 50px;
 		}
+
+    /* 모달 창 스타일*/
+    .modal-content>button{
+        margin-left: auto;
+    }
+
+    .modal-border{
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 5px;
+
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .modal-icon{
+        margin: auto;
+        text-align: center;
+    }
+    .modal-icon img{
+        height: 150px;
+        width: 100%;
+    }
+
+    /* 모달창 내 input(이메일/비번) 입력창 스타일*/
+    .modal-body{
+        text-align: center;
+        padding: 0px;
+        padding-bottom: 10px;
+    }
+
+    .modal-body input{
+        margin: auto;
+        border: 1px solid silver;
+        border-radius: 10px;
+        width: 100%;
+        height: 35px; 
+        font-size: 13px;
+    }
+
+    #userId{
+        margin-bottom: 10px;
+    }
+
+    .modal-body button {
+        margin-top: 15px;
+        width: 100%;
+        height: 35px;
+        background-color: pink;
+        border: 0px;
+        border-radius: 10px;
+    }
+    .modal-body button:hover{
+        background-color: hotpink;
+    }
+
+    .andLine{
+        margin-bottom: 20px;
+        width: 100%;
+        height: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        
+    }
+    .line{ 
+        margin-top: 7px;
+        height: 0px;
+        width: 110px;
+        border: 1px solid silver;
+    }
+    .line-and{
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    .kakao-login{
+        width: 100%;
+    }
+
+    .kakao-login img{
+        width: 30px;
+        height: 30px;
+    }
+
+    #kakao-login-button:hover{
+        cursor: pointer;
+    }
+
+    #find-pwd{
+        margin-top: 10px;
+    }
+
+
+
+
 		
 
     </style>
@@ -190,30 +288,52 @@
     <div class="modal fade" id="loginModal">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                <div class="modal-border" style="border: 1px solid pink; width: 90%; height: 90%;">
+                    
+                    <div class="modal-icon">
+                        <img src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt="mbtingLogo">
+                    </div>
+              
         
-                <form action="login.me" method="post">
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <label for="" class="mr-sm-2">ID : </label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="email"> <br>
-                        <label for="userPwd" class="mr-sm-2">Password : </label>
-                        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="userPwd">
-                    	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me"><img style="display : block; margin : auto;" src="${pageContext.request.contextPath}/resources/images/kakaoLoginSmall.png"></a>
+                    <form action="login.me" method="post">
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <input type="text" placeholder="사용자 이메일" id="userId" name="email"> <br>
+                            <input type="password" placeholder="비밀번호" id="userPwd" name="userPwd">
+                            <button type="submit">로그인</button>
+                        </div>
+
+                        <div class="andLine">
+                            <div class="line"></div>
+                            <div class="line-and" style="width: 60px; text-align: center;"> 또는 </div> 
+                            <div class="line"></div>
+                        </div>
+
+                        <div class="kakao-login">
+                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me'">
+                                <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
+                            </div>
+                            <div id="find-pwd">
+                                <a href=""> 비밀번호를 잊으셨나요?</a>
+                            </div>
+                        </div>
+                    </form>
+                        
+                </div>
+                        
+                <div class="modal-border" style="border: 1px solid pink; width: 90%; height: 90%;">      
+                    
+                    <div>
+                        계정이 없으신가요? <a href="enrollForm.me">가입하기</a>
                     </div>
-                           
-                           
-                           
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">로그인</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-                    </div>
-                </form>
+
+                </div>
+                    
+                
+
             </div>
         </div>
     </div>
