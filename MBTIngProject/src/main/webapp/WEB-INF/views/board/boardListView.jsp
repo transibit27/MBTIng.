@@ -143,7 +143,7 @@
                     <input type="hidden" class="bno" value="${ b.boardNo }">
                     <img src="">
                     <p>${ b.boardTitle }</p>
-                    <p>💑${ b.userId } / ❤️${b.thumb} </p>
+                    <p>💑${ b.mbtiNick } / ❤️${b.thumb} </p>
                 </div>
             </c:forEach>
 

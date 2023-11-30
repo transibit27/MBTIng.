@@ -13,9 +13,16 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous" />
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
       <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
   <style>
+
+    
 
     @font-face {
         font-family: 'EASTARJET-Medium';
@@ -32,6 +39,7 @@
     }
 
     body {
+      margin: 0;
       height: 100vh;
     }
 
@@ -234,13 +242,29 @@
     }
 
     100% {
-      transform: scale(30);
+      transform: scale(25);
       opacity: 0;
     }
   }
 
   .tableImg {
     width: 200px;
+  }
+
+  #up,
+  #down {
+    font-family: 'NPSfontBold';
+    color: rgb(91, 91, 91);
+    padding: 20px;
+    background-color: rgb(245, 245, 245);
+    border: 0;
+    border-radius: 5px;
+    font-size: 20px;
+  }
+
+  #up:hover,
+  #down:hover {
+    color: black;
   }
 
 
@@ -264,9 +288,9 @@
 
     <div class="wrap" style="display: flex; justify-content: center;">
 
-        <article class="question" style="width: 800px;">
+        <article class="question animate__animated animate__fadeIn" style="width: 800px;">
 
-            <div class="progress mt-5">
+            <div class="progress">
                 <div class="progress-bar" role="progressbar"></div>
             </div>
 
@@ -274,14 +298,14 @@
 
             <input id="type" type="hidden" value="EI" />
 
-            <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: column; margin-top: 25px;">
                 <button id="up" type="button" class="mt-5">Primary</button>
                 <button id="down" type="button" class="mt-5">Primary</button>
             </div>
 
         </article>
 
-        <article class="result">
+        <article class="result animate__animated animate__fadeIn">
 
             <h3 id="subTitle" class="subtitle" style="font-family: 'NPSfontBold';">설명</h3>
             <img id="img" alt="item" />
@@ -335,87 +359,94 @@
       var num = 1;
       var q = {
         1: {
-          title: "첫 번째 질문",
+          title: "한가한 주말 오후, 전화벨이 울린다.",
           type: "EI",
-          up: "E 대답",
-          down: "I 대답",
+          up: "(반갑게) 여보세요~ 웬일이야?",
+
+          down: "(망설이다가) 여보세요. 무슨 일이야?",
         },
 
         2: {
-          title: "두 번째 질문",
-          type: "SN",
-          up: "S 대답",
-          down: "N 대답",
+          title: "친구가 소개팅을 주선해 준다고 한다면?",
+          type: "JP",
+          up: "(깊게 생각하지 않고) 당연히 해야지~ 고마워!",
+
+          down: "(개인 일정 확인 후) 스케줄 괜찮아, 할게.",
         },
 
         3: {
-          title: "세 번째 질문",
-          type: "TF",
-          up: "T 대답",
-          down: "F 대답",
+          title: "전화를 끊은 후, 내 머릿속은?",
+          type: "SN",
+          up: "'좋은 사람이었으면 좋겠다~' 하고 만다.",
+
+          down: "어떤 상대가 나올지 궁금해하며 결혼까지 상상한다.",
         },
 
         4: {
-          title: "네 번째 질문",
+          title: "소개팅 만남 코스, 어떻게 하지?",
           type: "JP",
-          up: "J 대답",
-          down: "P 대답",
+          up: "만나는 장소와 음식 등 계획적으로 준비!",
+
+          down: "만났을 때 즉석에서 정하면 되지~",
         },
 
         5: {
-          title: "다섯 번째 질문",
-          type: "EI",
-          up: "E 대답",
-          down: "I 대답",
+          title: "약속한 소개팅 시간, 상대방이 지각이라면?",
+          type: "JP",
+          up: "아니... 약속이 6시인데 왜 안 오시지?",
+
+          down: "저녁시간이라 차가 막히나? 좀 늦으시네.",
         },
 
         6: {
-          title: "여섯 번째 질문",
-          type: "SN",
-          up: "S 대답",
-          down: "N 대답",
+          title: "카페에서 첫 만남, 나의 행동은?",
+          type: "EI",
+          up: "엇?! 저랑 같은 핸드폰이시네요? (술술~ 주절주절)",
+
+          down: "(상대가 먼저 말을 걸 때까지 기다린다.)",
         },
 
         7: {
-          title: "일곱 번째 질문",
-          type: "TF",
-          up: "T 대답",
-          down: "F 대답",
+          title: "맛집에 가서 메뉴를 고를 때, 나의 선택은?",
+          type: "SN",
+          up: "실패할 일이 없는 안전한 선택을 해야지. 평소에 먹어본 익숙한 메뉴",
+          down: "시그니처가 있으면 먹어봐야지! 먹어본 적 없는 시그니처 메뉴",
         },
 
         8: {
-          title: "여덟 번째 질문",
-          type: "JP",
-          up: "J 대답",
-          down: "P 대답",
+          title: "집에서 반대하는 만남, 어떻게 하시겠어요?",
+          type: "TF",
+          up: "힘들겠지만 다시 고민해봐야겠죠.",
+
+          down: "제 마음이 더 중요하죠. 부모님을 설득할 거예요!",
         },
 
         9: {
-          title: "아홉 번째 질문",
-          type: "EI",
-          up: "E 대답",
-          down: "I 대답",
+          title: "평소 주위사람들이 나에게 내리는 평가는?",
+          type: "TF",
+          up: "솔직하고 논리적인 사람",
+          down: "자상하고 섬세한 사람",
         },
 
         10: {
-          title: "열 번째 질문",
-          type: "SN",
-          up: "S 대답",
-          down: "N 대답",
+          title: "소개팅 상대와 간단하게 술을 먹으러 간다. <br>\ 내가 더 선호하는 장소는?",
+          type: "EI",
+          up: "사람 많고 신나는 술집",
+          down: "조용하고 프라이빗한 술집",
         },
 
         11: {
-          title: "열한 번째 질문",
-          type: "TF",
-          up: "T 대답",
-          down: "F 대답",
+          title: "집에 가는 길. 좀비가 나타났을 때 <br>\ 어떻게 할 것인지 물어본다면?",
+          type: "SN",
+          up: "에이, 세상에 좀비가 어딨어요~",
+          down: "저는 좀비가 나타난다면 바로 집으로 달려가서...",
         },
 
         12: {
-          title: "열두 번째 질문",
-          type: "JP",
-          up: "J 대답",
-          down: "P 대답",
+          title: "오늘 만난 소개팅 상대가 마음에 든다면?",
+          type: "TF",
+          up: "(그래도 생각할 시간이 필요해) 제가 또 연락드릴게요.",
+          down: "(과감하게 밀어 붙이겠어!) 이번 주말에 시간 괜찮으세요?",
         },
       };
       
@@ -789,8 +820,6 @@
     </script>
 
     </div>
-
-    
 
   </body>
 </html>
