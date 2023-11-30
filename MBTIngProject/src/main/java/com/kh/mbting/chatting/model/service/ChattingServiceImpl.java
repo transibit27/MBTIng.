@@ -24,4 +24,9 @@ public class ChattingServiceImpl implements ChattingService{
 		return chattingDao.chattingList(sqlSession);
 	}
 
+	@Override
+	public int sendChatting(Chatting c) {
+		return chattingDao.sendChatting(sqlSession, c);
+	}
+
 }

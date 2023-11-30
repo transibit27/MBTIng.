@@ -15,4 +15,12 @@
 		  from chat 
 		 where room_no = 1
 	</select>
+	
+	<insert id="sendChatting" parameterType="chatting">
+		insert into chat values(CNO_SEQ.nextval,
+								#{roomNo}, 
+								#{message},
+								#{userNo} ,
+								default)
+	</insert>
 </mapper>
