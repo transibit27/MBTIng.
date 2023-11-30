@@ -196,11 +196,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectList(sqlSession, pi, userNo);
 	}
 
-	
-}
-
-
-	
 
 		
 	

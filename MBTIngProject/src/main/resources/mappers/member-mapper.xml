@@ -80,7 +80,8 @@
 	<!-- 회원정보 수정용 쿼리문  -->
 	<update id="updateMember" parameterType="member">
 		UPDATE MEMBER
-		   SET INTRODUCE = #{introduce}
+		   SET PROFILE_IMG = #{profileImg}
+		   	 , INTRODUCE = #{introduce}
 		     , PHONE = #{phone}
 		 WHERE EMAIL = #{email}
 		   AND STATUS = 'Y'	
