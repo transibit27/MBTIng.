@@ -37,6 +37,8 @@ public class BoardController {
 		int boardLimit = 12;		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		ArrayList<Board> list = boardService.selectList(pi);
+		mv.addObject("list", list).addObject("pi", pi).setViewName("board/boardListView");
+		return mv;
 	}
 	
 	@GetMapping("enrollForm.bo")
