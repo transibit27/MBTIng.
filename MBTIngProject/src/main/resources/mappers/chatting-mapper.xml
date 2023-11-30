@@ -13,7 +13,7 @@
 	<select id="chattingList" resultMap="chattingResultSet" parameterType="_int">
 		SELECT chat_no, room_no, message, send_time, user_no
 		  from chat 
-		 where room_no = 1
+		 where room_no = #{matchRoomNo}
 	</select>
 	
 	<insert id="sendChatting" parameterType="chatting">
