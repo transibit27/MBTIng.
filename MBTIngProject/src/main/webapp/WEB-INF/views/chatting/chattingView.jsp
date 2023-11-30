@@ -211,7 +211,7 @@
             <div id="chatDiv">
                         <c:forEach var="chat" items="${requestScope.chattingList}" >
 	                         <c:choose>
-			                         <c:when test="${sessionScope.loginMember.userNo eq chat.senderNo}">
+			                         <c:when test="${sessionScope.loginMember.userNo eq chat.userNo}">
 			                            <div class="message Right">
 			                                <p class="text">${chat.message}</p>
 			                            </div>
