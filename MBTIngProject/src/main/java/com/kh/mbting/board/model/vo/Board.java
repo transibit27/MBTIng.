@@ -22,5 +22,10 @@ public class Board {
 	private String status;			//	STATUS	CHAR(1 BYTE)
 	private String userNo;			//	USER_NO	NUMBER
 	private int matchNo;			//	MATCH_NO	NUMBER
-
+	
+	// 다른 테이블에서 참조할것
+	private String mbtiNick;
+	private int thumb;
+	private String originName;
+	private String changeName;
 }

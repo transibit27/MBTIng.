@@ -89,7 +89,7 @@
 
             <br>
 
-            <input type="hidden" id="writer" name="userNo" value="${ sessionScope.loginUser.userId }">
+            <input type="hidden" id="writer" name="userNo" value="${ sessionScope.loginUser.userNo }">
             <div class="writereview-title">
                 제목&nbsp;&nbsp;<input type="text" id="title" name="boardTitle" placeholder="15자 이내로 작성해 주세요." required>
             </div>
