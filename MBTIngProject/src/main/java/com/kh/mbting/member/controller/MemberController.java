@@ -39,6 +39,15 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+	
+	//0. 전체 회원을 불러오기 위한 method 
+	@PostMapping("list.mem")
+	public void selecToptMemberList() {
+		
+		ArrayList<Member> list = memberService.selecToptMemberList();
+		System.out.println(list);
+	}
+	
 	//1. 로그인 기능을 위한 method.
 	@PostMapping("/login.me")
 	public String loginMember(Member 		m, 

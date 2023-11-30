@@ -33,6 +33,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	
+	@Override
+	public ArrayList<Member> selecToptMemberList() {
+		return memberDao.selectTopMemberList(sqlSession);
+	}
+	
+	
 	//login한 회원의 정보를 처리해줄 method
 	@Override
 	public Member loginMember(Member m) {		
@@ -189,10 +196,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.selectList(sqlSession, pi, userNo);
 	}
 
-}
-
-
-	
 
 		
 	
