@@ -13,4 +13,8 @@ public class ChattingDao {
 	public ArrayList<Chatting> chattingList(SqlSession sqlSession) {
 		return (ArrayList)sqlSession.selectList("chattingMapper.chattingList");
 	}
+	
+	public int sendChatting(SqlSession sqlSession, Chatting c) {
+		return sqlSession.insert("chattingMapper.sendChatting", c);
+	}
 }

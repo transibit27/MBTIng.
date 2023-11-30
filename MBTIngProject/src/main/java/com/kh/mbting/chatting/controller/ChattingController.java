@@ -17,11 +17,12 @@ public class ChattingController {
 
 	@Autowired
 	private ChattingServiceImpl chattingService;
+	private ArrayList<Chatting> chattingList;
 	
 	@RequestMapping("chatting.do")
 	public String chatting(Model model) {
 		
-		ArrayList<Chatting> chattingList = new ArrayList<>();
+		chattingList = new ArrayList<>();
 		
 		chattingList = chattingService.chattingList();
 		
@@ -31,4 +32,18 @@ public class ChattingController {
 		return "chatting/chattingView";
 	}
 	
+	@RequestMapping("chatting.me")
+	public String sendChatting(Chatting c , Model model) {
+		
+		
+		int result = chattingService.sendChatting(c);
+		//System.out.println(result);
+		
+		if(result > 0) {
+			return "chatting/chattingView";
+		}else {
+			model.addAttribute("errorMsg", "채팅을 보내는 것에 실패했습니다.");
+			return "common/errorPage";
+		}
+	}
 }

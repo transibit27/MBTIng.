@@ -11,17 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
 <style>
-    @font-face {
-    font-family: 'TheJamsil5Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    }
+    
 
     html, body {
         margin: 0;
         padding: 0;
-        font-family: 'TheJamsil5Bold';
+        
     }
 
     #admin-menubar {
