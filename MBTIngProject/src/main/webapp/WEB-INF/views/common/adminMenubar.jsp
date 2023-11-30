@@ -1,29 +1,60 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>메인페이지</title>
-    <!-- Chart.js CDN 추가 -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Font Awesome CDN 추가 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+   
+    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	  
+	<!-- 부트스트랩때문에 연결함 -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	
+	<!-- Popper JS -->
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+
+	
+
 
 <style>
-    
+    @font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    }
 
     html, body {
         margin: 0;
         padding: 0;
+        font-family: 'TheJamsil5Bold';
         
+    }
+    h2 {
+    	font-size: 20px;
+    }
+    h3 {
+    	font-size: 18px;
     }
 
     #admin-menubar {
-        width: 1580px;
+        width: 200px;
         height: 1600px;
         margin: auto;
         display: flex;
+        position: absolute;
     }
 
     .left-area {
@@ -100,6 +131,21 @@
 </style>
 </head>
 <body>
+
+	<!-- 
+		1회성 알람문구 띄우는 코드 추가 
+		=> script 태그 내에서는 action tag 사용 불가 (EL 은 가능)
+	-->
+	<c:if test="${ not empty sessionScope.alertMsg }">
+		<script>
+			alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
+		</script>
+		
+		<!-- session 의 alertMsg 지우기 -->
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
+
+
     <div class="right-area"> <!-- 오른쪽-->
         <img id="icon2" align="right" src="https://visualpharm.com/assets/225/Male%20User-595b40b85ba036ed117dc5a0.svg" alt="관리자">
         <img id="icon1" align="right" src="https://cdn-icons-png.flaticon.com/512/386/386605.png" alt="우편">
