@@ -69,6 +69,16 @@
 		padding-bottom: 15px;
 		padding-left: 30px;
 	}
+	
+	#change-profile{
+		font-weight: 600; 
+		font-size: 16px;
+		color: blue;
+	}
+	
+	#change-profile:hover{
+		cursor: pointer;
+	}
 
 </style>
 </head>
@@ -80,7 +90,7 @@
 	<script>
 	    let i = document.getElementById("myProfile");
 
-        i.style.cssText = "border-top : 5px solid pink"
+        // i.style.cssText = "border-top : 5px solid pink"
 	    
     </script>
 
@@ -104,27 +114,41 @@
 				<tr>
 					<td style="width: 130px; height: 180px;">
 						<div class="profile-img-box" id="profile-img-box">
-							<img class="profile-img" src= "${pageContext.request.contextPath}${sessionScope.loginMember.profileImg}" alt="" >
+							<img id="preview" class="profile-img" src="${pageContext.request.contextPath}${sessionScope.loginMember.profileImg}" alt="" />
 						</div> 
 					</td>
 					<!-- 회원 정보 변경 시 DB로 부터 수정할 회원을 지정하기 위해 로그인 유저의 EMAIL 정보 담아 둘 input -->
-					<input type="hidden" name="email" value="${sessionScope.loginMember.email}">
+					<input type="hidden" name="email" value="${sessionScope.loginMember.email}" />
 					<td class="profile-content" style="font-size: 18px">
 						${sessionScope.loginMember.email}
 						
 						<br>
-						<a href="" style="font-weight: 600; text-decoration: none;">프로필 사진 바꾸기</a>
+						<div id="change-profile">프로필 사진 바꾸기</div>
 			    
-			         	<input type="file" id="upfile" name="reupfile">
+			         	<input type="file" id="upfile" name="reupfile" style="display: none;">
 			         	
  					</td>
 				</tr>
 				
 				<!-- 프로필 이미지 등록 미리보기용 스크립트 -->
 				<script>
+					$("#change-profile").click(function(){
+							
+							$("#upfile").click();	
+					});
 				
-				$("#upfile").on(""")
-				
+					$("#upfile").on("change", function(event) {
+	
+					    var file = event.target.files[0];
+
+					    var reader = new FileReader(); 
+					    reader.onload = function(e) {
+	
+					        $("#preview").attr("src", e.target.result);
+					    }
+	
+					    reader.readAsDataURL(file);
+					});
 				</script>
 				
 				<tr>
