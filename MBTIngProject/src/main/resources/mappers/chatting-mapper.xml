@@ -6,14 +6,21 @@
  		<result column="CHAT_NO"  			property="chatNo"></result>
 		<result column="ROOM_NO"  			property="roomNo"></result>
 		<result column="MESSAGE"  			property="message"></result>
-		<result column="SENDER_NO"  		property="senderNo"></result>
 		<result column="SEND_TIME"  		property="sendTime"></result>
-		<result column="RECIVER_NO"  		property="reciverNo"></result>
+		<result column="USER_NO"  		property="userNo"></result>
 	</resultMap>
 	
 	<select id="chattingList" resultMap="chattingResultSet" parameterType="_int">
-		SELECT chat_no, room_no, message, sender_no, send_time, reciver_no
+		SELECT chat_no, room_no, message, send_time, user_no
 		  from chat 
-		 where room_no = 1
+		 where room_no = #{matchRoomNo}
 	</select>
+	
+	<insert id="sendChatting" parameterType="chatting">
+		insert into chat values(CNO_SEQ.nextval,
+								#{roomNo}, 
+								#{message},
+								#{userNo} ,
+								default)
+	</insert>
 </mapper>

@@ -170,7 +170,7 @@
 		
 		#content {
 			margin-top: 0px;
-			background-color: rgb(255, 162, 178);
+			background-color: rgb(255, 255, 202);
 		}
 		#content_1 {
 			display : inline-block;
@@ -334,7 +334,7 @@
 <body>
 
 		<!-- 메뉴바 header -->
-		<jsp:include page="common/header.jsp"/>
+		<jsp:include page="/common/header.jsp"/>
 
 		
 

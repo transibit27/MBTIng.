@@ -244,6 +244,7 @@
 	                <li><a href="mbtiTest.mb">연애테스트</a></li>
 	                <li><a href="">고객센터</a></li>
 	            	<li><a href="">신청하기(매칭)</a></li>
+	            	<li><a href="adminMain.ad">관리자</a></li>
 	            </ul>    	
 	        </div>
 	            

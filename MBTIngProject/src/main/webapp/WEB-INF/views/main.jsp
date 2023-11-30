@@ -171,7 +171,7 @@
 		
 		#content {
 			margin-top: 0px;
-			background-color: pink;
+			background-color: green;
 		}
 		#content_1 {
 			display : inline-block;
@@ -376,7 +376,7 @@
 										   </div>
 									   </div>
 								   </div>
-								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do'">채팅하기</button></div>
+								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}'">채팅하기</button></div>
 								</div>
 							</div>
 							   </td>
