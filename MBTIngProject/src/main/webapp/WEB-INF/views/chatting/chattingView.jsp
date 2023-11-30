@@ -226,17 +226,21 @@
              </div>
         </div>
         <div id="chatInput" >
+           <form action="chatting.me" method="post">
             <table>
                 <tr>
                     <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img>></td>
                 </tr>
                 <tr>
                     <td>
-                        <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요"></textarea>
+                        <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message"></textarea>
+                        <input type="hidden" name="roomNo" value="${sessionScope.loginMember.matchRoomNo}">
+                         <input type="hidden" name="userNo" value="${sessionScope.loginMember.userNo}">
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%; ">전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" >전송</button></td>
                 </tr>
             </table>
+           </form>
         </div>
     </div>
          

@@ -31,4 +31,8 @@ public class ChattingController {
 		return "chatting/chattingView";
 	}
 	
+	@RequestMapping("chatting.me")
+	public void sendChatting(Chatting c) {
+		System.out.println(c);
+	}
 }

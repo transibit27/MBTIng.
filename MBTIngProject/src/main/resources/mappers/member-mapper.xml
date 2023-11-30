@@ -19,7 +19,8 @@
  	<result column="MATCH_STAT"  	property="matchStat"></result>
  	<result column="MATCH_COIN"  	property="matchCoin"></result>
  	<result column="STATUS"  		property="status"></result>
- 	<result column="ROOM_NO" 	 	property="number"></result>
+ 	<result column="ROOM_NO" 	 	property="roomNo"></result>
+ 	<result column="MATCH_ROOM_NO" 	 	property="matchRoomNo"></result>
  </resultMap>
  
  <resultMap id="boardResultSet" type="board">
