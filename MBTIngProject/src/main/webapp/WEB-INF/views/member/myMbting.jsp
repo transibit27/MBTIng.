@@ -7,7 +7,8 @@
     <title>Document</title>
 
     <script src="https://kit.fontawesome.com/22698b3d17.js" crossorigin="anonymous"></script>
-
+    
+   
 <style>
 
 	.my-content{
@@ -213,29 +214,102 @@
         margin-bottom: 20px;
     }
 
+    .slick-wrap{
+        margin: auto;
+        border: 1px solid blue;
+        width: 800px;
+        display: flex;
+        justify-content: center;
+        
+    }
+    
+    .profile-img2{
+    	width: 100px;
+    	height: 100px;
+    }
+    .slick2 div{
+        border: 1px solid red;
+        height: 100px;
+        width: 100px;
+        margin: auto;
+    }
+    
+
 </style>
 </head>
 <body>
+
 
 	<div>
 		<jsp:include page="./myPage.jsp"></jsp:include>
 	</div>
 
     <script>
+
+    
 	    let i = document.getElementById("myMbting");
 
         i.style.cssText = "border-top : 5px solid pink"
 	    
     </script>
+    
+    <div class="slick-wrap">
+        <div class="slick2">
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+            <div>
+                <img class="profile-img2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
+            </div>
+         </div>
+    </div>
+	<!-- 신청자 리스트(슬릭 전용 스크립트) -->
+
+
+	<script>
+	    $(document).ready(function(){
+	    	
+            $('.slick2').slick({
+                
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 3,
+                slide: 'div',
+                arrows : true,
+                dots : true,
+                prevArrow: '<button type="button" class="slick-prev">&#8592;</button>',
+                nextArrow: '<button type="button" class="slick-next">&#8594;</button>'
+
+            });
+        })
+	</script>
 
 	<div class="my-content">
 	    <div class="profile-menu-title">
 	        <h5>만남 신청자</h5>
 	    </div>
+	    
 	    <!-- 매칭 신청자 프로필 리스트 -->
 	    <div class="slider">
 	
-	        <!--프로필 카드 전체를 감싸는 div-->
 	        <div class="profile-wrap">
 	            <!-- 프로필 이미지를 담는 div-->
 	            <div class="profile-img-box">
@@ -387,11 +461,6 @@
     
     </div>
 
-    
-
-
-
 </body>
-
 
 </html>
