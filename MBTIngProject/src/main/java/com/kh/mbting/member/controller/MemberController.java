@@ -1,6 +1,10 @@
 package com.kh.mbting.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mbting.board.model.vo.Board;
@@ -147,11 +152,33 @@ public class MemberController {
 	
 	
 	//b-2 마이페이지 - 프로필(수정)
-	@RequestMapping("update.me")
+	@PostMapping("update.me")
 	public String updateMember(Member m,
+							   MultipartFile reupfile,
 								Model model,
 								HttpSession session){
 		
+			
+		// 프로필 이미지 변경
+		if(!reupfile.getOriginalFilename().equals("")) {
+			
+			// case1. 등록 프로필이 있을 경우
+			if(m.getProfileImg() != null) {
+				
+				String realPath = session.getServletContext()
+						.getRealPath(m.getProfileImg());
+				
+				new File(realPath).delete();
+			}
+			
+			// case2. 등록 프로필 이미지가 없을 경우
+			String changeName = saveFile(reupfile, session);
+			
+			// File 메소드에서 변경한 파일 이름으로 포르필 이미지 경로 등록
+			m.setProfileImg("/resources/images/profile/" + changeName);
+			
+		}
+				
 		int result = memberService.updateMember(m);
 		
 		if(result > 0) {
@@ -168,6 +195,9 @@ public class MemberController {
 		}
 		
 	}
+	
+
+	
 	
 	//c 마이페이지 - 내후기
 	@RequestMapping(value="myReview.me")
@@ -198,4 +228,34 @@ public class MemberController {
 	
 		return mv;
 	}
+	
+	
+	// 프로필 이미지 첨부용 메소드
+	public String saveFile(MultipartFile upfile,
+			   HttpSession session) {
+
+		String originName = upfile.getOriginalFilename();
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss")
+											.format(new Date());
+		
+		int ranNum = (int)(Math.random() * 90000 + 10000);
+		
+		String ext = originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime + ranNum + ext;
+		
+		// 업로드 하고자 하는 물리적인 경로 입력
+		String savePath = session.getServletContext()
+			.getRealPath("/resources/images/profile/");
+		
+		
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return changeName;
+		}
 }

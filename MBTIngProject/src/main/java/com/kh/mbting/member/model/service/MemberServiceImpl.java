@@ -188,6 +188,7 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Board> selectList(PageInfo pi, String userNo) {
 		return memberDao.selectList(sqlSession, pi, userNo);
 	}
+
 }
 
 
