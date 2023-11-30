@@ -17,15 +17,65 @@
 		  FROM NOTICE
 		 WHERE STATUS = 'Y'
 	</select>
+	
 	<select id="selectList" resultMap="noticeResultSet">
 		SELECT NOTICE_NO
 		     , NOTICE_TITLE
 		     , NOTICE_NAME
 		     , VIEWS
-		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD HH-mm-ss' ) AS ENROLL_DATE
+		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD' ) AS ENROLL_DATE
 		  FROM NOTICE
 		 WHERE STATUS = 'Y'
 		 ORDER BY NOTICE_NO DESC 
 	</select>
+	
+	<insert id="insertNotice" parameterType="notice">
+		INSERT INTO NOTICE(NOTICE_NO
+		                 , NOTICE_TITLE
+		                 , NOTICE_NAME)
+		           VALUES (NNO_SEQ.NEXTVAL
+		                 , #{noticeTitle}
+		                 , #{noticeName})
+	</insert>
+	
+	<update id="increaseCount" parameterType="_int">
+		UPDATE NOTICE
+		   SET VIEWS = VIEWS + 1
+		 WHERE NOTICE_NO = #{noticeNo}
+		   AND STATUS = 'Y'
+	</update>
+	
+	<select id="selectNotice" parameterType="_int" resultMap="noticeResultSet">
+		SELECT NOTICE_NO
+		     , NOTICE_TITLE
+		     , NOTICE_NAME
+		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD HH:mm:ss') AS "ENROLL_DATE"
+		  FROM NOTICE
+		 WHERE NOTICE_NO = #{noticeNo}
+		   AND STATUS = 'Y'
+	</select>
+	
+	<update id="deleteNotice" parameterType="_int">
+		UPDATE NOTICE
+		   SET STATUS = 'N'
+		 WHERE NOTICE_NO = #{noticeNo}
+	</update>
+	
+	<update id="updateNotice" parameterType="notice">
+		UPDATE NOTICE
+		   SET NOTICE_TITLE = #{noticeTitle}
+		     , NOTICE_NAME = #{noticeName}
+		 WHERE NOTICE_NO = #{noticeNo}
+		   AND STATUS = 'Y'
+	</update>
+	
+	<select id="" parameterType="string">
+	 	select notice_no, notice_title, notice_name
+	 	  from notice 
+	 	where  notice_title like %#{keyword}%
+	 	   or  notice_name  like %#{keyword}%
+	</select>
+	
+	
 
 </mapper>

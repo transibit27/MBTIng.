@@ -181,20 +181,20 @@
       font-family: 'NPSfontBold';
     }
 
-    #memberMatch {
-      width: 300px;
-      height: 40px;
+    .memberMatch {
+      padding: 10px 30px;
       border: 0;
       color: white;
       border-radius: 5px;
       font-family: 'EASTARJET-Medium';
       background-color: #ff7ba7;
-      margin-bottom: 40px;
     }
 
-    #memberMatch:hover {
+    .memberMatch:hover {
       cursor: pointer;
+      text-decoration: none;
       background-color: #ff6498;
+      color: white;
     }
 
     #startbtn {
@@ -305,7 +305,7 @@
 
         </article>
 
-        <article class="result animate__animated animate__fadeIn">
+        <article class="result animate__animated animate__fadeIn" style="margin-bottom: 50px">
 
             <h3 id="subTitle" class="subtitle" style="font-family: 'NPSfontBold';">설명</h3>
             <img id="img" alt="item" />
@@ -340,7 +340,7 @@
                 </table>
             </div>
 
-            <button type="button" id="memberMatch">내 인연 만나러 가기!</button>
+            <a href="mbtiMatch.mb" class="memberMatch">내 인연 만나러 가기!</a>
 
         </article>
 

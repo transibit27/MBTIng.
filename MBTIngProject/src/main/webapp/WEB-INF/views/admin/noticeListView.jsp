@@ -30,6 +30,10 @@
     margin: auto;
     display: block;
 }
+#notice-content {
+	margin-left:250px;
+	margin-top: 150px;
+}
 </style>
 </head>
 <body>
