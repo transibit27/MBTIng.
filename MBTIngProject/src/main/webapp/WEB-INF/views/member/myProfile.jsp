@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
   
 <style>
 
@@ -89,7 +91,9 @@
 		</div>
 	
 		<form id="mypage-form" 
-		action="update.me" method="post">
+		  action="update.me"
+		  method="post"
+		 enctype="multipart/form-data">
 		
 			<!--
 				마이페이지에서 보여져야 하는 것들
@@ -99,7 +103,7 @@
 			<table border="0px" style="table-layout: fixed;">
 				<tr>
 					<td style="width: 130px; height: 180px;">
-						<div class="profile-img-box">
+						<div class="profile-img-box" id="profile-img-box">
 							<img class="profile-img" src= "${pageContext.request.contextPath}${sessionScope.loginMember.profileImg}" alt="" >
 						</div> 
 					</td>
@@ -110,9 +114,18 @@
 						
 						<br>
 						<a href="" style="font-weight: 600; text-decoration: none;">프로필 사진 바꾸기</a>
-					</td>
-					
+			    
+			         	<input type="file" id="upfile" name="reupfile">
+			         	
+ 					</td>
 				</tr>
+				
+				<!-- 프로필 이미지 등록 미리보기용 스크립트 -->
+				<script>
+				
+				$("#upfile").on(""")
+				
+				</script>
 				
 				<tr>
 					<td class="profile-title">이름</td>
