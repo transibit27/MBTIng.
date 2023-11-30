@@ -6,4 +6,6 @@ import com.kh.mbting.chatting.model.vo.Chatting;
 
 public interface ChattingService {
 	ArrayList<Chatting> chattingList();
+	
+	int sendChatting(Chatting c);
 }
