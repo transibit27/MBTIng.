@@ -9,6 +9,9 @@ import com.kh.mbting.member.model.vo.Member;
 
 public interface MemberService {
 
+	//인기 회원을 불러오기 위한 method 
+	ArrayList<Member> selecToptMemberList();
+	
 	//회원 로그인을 처리해줄 method
 	Member loginMember(Member m);
 	

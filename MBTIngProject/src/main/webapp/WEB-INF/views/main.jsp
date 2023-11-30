@@ -376,7 +376,7 @@
 										   </div>
 									   </div>
 								   </div>
-								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do'">채팅하기</button></div>
+								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}'">채팅하기</button></div>
 								</div>
 							</div>
 							   </td>
@@ -530,15 +530,22 @@ MBTIng 덕분에 제 운명을 만났어요....!
 
 		</div>
 
-
-<div id="content_3">
-	<div id="background">
-		<div>
-
-		</div>
-	</div>
-	
-</div?>
+  <script>
+  	$(function() {
+  		
+  		$.ajax({
+  			 url : "list.mem",
+  			type : "post",
+  		 success : function() {
+  			 
+  		 },
+  		 error	 : function() {
+  			 
+  		 }
+  		});
+  		
+  	});
+  </script>
 		
 <!-- swipe 영역 -->
 	<div class="wrap">
@@ -595,6 +602,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		s0.parentNode.insertBefore(s1,s0);
 		})();
 		</script>
+
 
 
 </datagrid>

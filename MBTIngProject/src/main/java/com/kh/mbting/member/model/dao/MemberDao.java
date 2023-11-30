@@ -15,6 +15,10 @@ import com.kh.mbting.member.model.vo.Member;
 @Repository
 public class MemberDao {
 
+	public ArrayList<Member> selectTopMemberList(SqlSession sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectTopMemberList");
+	}
+	
 	public Member loginMember(SqlSession sqlSession , Member m ) {
 	
 		return sqlSession.selectOne("memberMapper.loginMember", m);

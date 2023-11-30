@@ -85,6 +85,28 @@
     페이징바 스타일
     ///////////
     */
+    .paging-area {
+    width: 800px;
+    margin: auto;
+    text-align: center;
+
+	}
+	.paging-area button {
+	    width: 35px;
+	    height: 30px;
+	    border: none;
+	    border-radius: 5px;
+	    background-color: pink;
+	}
+	.paging-area button:hover {
+	    border: 1px solid pink;
+	    background-color: white;
+	}
+	.paging-area button[disabled]:hover {
+	    border: none;
+	    background-color: pink;
+	
+	}
 
 
 </style>
@@ -130,53 +152,44 @@
     </div>
 
 	<!-- 페이징 바 -->
-    <div id="pagingArea">
-	    <ul class="pagination">
+    <div class="paging-area">
 	    
 	   	<c:choose>
 			<c:when test="${ requestScope.pi.currentPage eq 1 }">
-		    	<li class="page-item disabled">
-		    		<a class="page-link" href="#">Previous</a>
-		    	</li>
+		    		<button type="button" style="display: none;" disabled>&lt;</button>	
 		   	</c:when>
 		   	
-		   	<c:otherwise>
-		    	<li class="page-item">
-		    		<a class="page-link" href="myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage - 1 }">Previous</a>
-		    	</li>
+		   	<c:otherwise>    		
+		    		<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage - 1 }'">&lt;</button>
 		   	</c:otherwise>
-	     </c:choose>
+		</c:choose>
 	        
-	     <c:forEach var="p" begin="${ requestScope.pi.startPage }" 
-	     					  end="${ requestScope.pi.endPage }"
-	     					 step="1">
-			<li class="page-item">
-				<a class="page-link" href="myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ p }">${ p }</a>
-			</li>
-	     </c:forEach>
+		<c:forEach var="p" begin="${ requestScope.pi.startPage }" 
+					  		 end="${ requestScope.pi.endPage }"
+					 		step="1">
+
+			<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ p }'" id="pageB-${ p }">${ p }</button>
+	     
+		</c:forEach>
 	        
 	    <c:choose>
 			<c:when test="${ requestScope.pi.currentPage eq requestScope.pi.maxPage }">
-				<li class="page-item disabled">
-					<a class="page-link" href="#">Next</a>
-				</li>
+				<button type="button" style="display: none;" disabled>&gt;</button>
 			</c:when>
 			<c:otherwise>
-				<li class="page-item">
-					<a class="page-link" href="myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage + 1 }">Next</a>
-				</li>
+				<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage + 1 }'">&gt;</button>
 			</c:otherwise>
 	   	</c:choose>
-	    
-	    </ul>
-           
+	         
 	</div>
-
-
-    
-
-    
-
+	
+	<!-- 페이징 처리 과련 스크립트 (현재 페이지 disabled 속성 주기용) -->
+	<script>
+	$(function(){
+		$("#pageB-${ requestScope.pi.currentPage }").attr("disabled",true);
+	})
+	
+	</script>
 
 
 </body>

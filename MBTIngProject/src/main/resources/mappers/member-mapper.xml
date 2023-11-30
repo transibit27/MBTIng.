@@ -35,8 +35,28 @@
  	<result column="MATCH_NO" property="matchNo"></result>
  </resultMap>
  
- 
- 
+	<!-- top 회원 정보를 불러오기 위한 쿼리문 -->
+ 	<select id="selectTopMemberList" resultMap="memberResultSet" >
+		SELECT ROWNUM, A.*
+		FROM (
+		    SELECT profile_img, age, mbti , user_name
+		      FROM (
+		        SELECT M.*, RANK() OVER (ORDER BY COALESCE(matching_count, 0) DESC) AS rnk
+		        FROM MEMBER M
+		        LEFT JOIN (
+		            SELECT RECEIVER_NO, COUNT(*) AS matching_count
+		            FROM MATCHING
+		            GROUP BY RECEIVER_NO
+		        ) C ON M.user_no = C.RECEIVER_NO
+		        WHERE STATUS = 'Y'  
+		          AND MBTI is not null
+		    ) 
+		    WHERE rnk BETWEEN 1 AND 4
+		) A
+		WHERE ROWNUM BETWEEN 1 AND 4;
+ 	</select>
+ 	
+ 	
 	<!-- 로그인용 쿼리문(로그인한 회원정보 담고 있음) -->
 	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
 	  SELECT *
@@ -60,7 +80,8 @@
 	<!-- 회원정보 수정용 쿼리문  -->
 	<update id="updateMember" parameterType="member">
 		UPDATE MEMBER
-		   SET INTRODUCE = #{introduce}
+		   SET PROFILE_IMG = #{profileImg}
+		   	 , INTRODUCE = #{introduce}
 		     , PHONE = #{phone}
 		 WHERE EMAIL = #{email}
 		   AND STATUS = 'Y'	
