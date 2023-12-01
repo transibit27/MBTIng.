@@ -331,6 +331,14 @@
 			#Content1BigText label {
 				color : rgb(255, 0, 221);
 			}
+			
+			.img {
+				width : 200px;
+				height : 200px;
+			}
+			
+		
+		
 </style>	
 </head>
 
@@ -365,68 +373,7 @@
 					
 					<table id="topViewInnerTable">
 					  <tr class="topViewTr">
-						<td style="border : none;">
-							<div class="flip-card">
-								<div class="flip-card-inner">
-								   <div class="gradient-image flip-card-front">
-									   <a><img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize"></a> 
-									   <div class="gradient-overlay ">
-										   <div class="introMem ">
-											   임나, 26 <br> <p>인천 ㆍ 댄서</p>
-										   </div>
-									   </div>
-								   </div>
-								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}'">채팅하기</button></div>
-							   </div>
-							</div>
-						</td>
-							   <td style="border : none;">
-								<div class="flip-card">
-									<div class="flip-card-inner">
-									   <div class="gradient-image flip-card-front">
-									   		<a><img src="https://static.news.zumst.com/images/37/2020/10/24/f6ba714d1b134965a979058503f3be08.jpg"></a> 
-									   <div class="gradient-overlay">
-										   <div class="introMem">
-											   배지지, 26 <br> <p>서울 ㆍ 선생님</p>
-										   </div>
-									   </div>
-								   	   </div>
-								  	   <div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-									</div>
-							</div>
-							   </td>
-							   <td style="border : none;">
-								<div class="flip-card">
-								  <div class="flip-card-inner">
-								    <div class="gradient-image flip-card-front">
-									   <a><img src="https://news.nateimg.co.kr/orgImg/ab/2019/11/22/22291850.jpg"></a> 
-									   <div class="gradient-overlay">
-										   <div class="introMem">
-											   태태, 28 <br> <p>서울 ㆍ 섹소폰 연주자</p>
-										   </div>
-									   </div>
-								   </div>
-								<div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-							   </div>
-							 </div>
-							   </td>
-							   <td style="border : none;">
-								 <div class="flip-card">
-								  <div class="flip-card-inner">
-								   <div class="gradient-image flip-card-front">
-									   <a><img src="https://menu.moneys.co.kr/moneyweek/thumb/2023/04/16/06/2023041611195178197_1.jpg/dims/optimize/">
-									   </a> 
-									   <div class="gradient-overlay">
-										   <div class="introMem">
-											   최최차차, 28 <br> <p>대전 ㆍ 의사</p>
-										   </div>
-									   </div>
-								   </div>
-								  <div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-							   </div>
-							</div>
-							   </td>
-							 </tr>
+					  </tr>
 				  </table>
 				  </div>
 
@@ -539,32 +486,33 @@ MBTIng 덕분에 제 운명을 만났어요....!
   			
   			 let resultStr = "";
   			 
+  			 //console.log(result.length);
   			 
   			 for(let i = 0; i < result.length; i++) {
-  			
-  				let profile = 'result[i].profileImg';
   				
-  				 resultStr += 
-  					 "<td style='border : none;'>" + 
-				 	"<div class='filp-card'>" +
-				 	"<div class='flip-card-inner'>"+
-				 	"<div class='gradient-image flip-card-front'>" +
-				 	"<a>" + '<img src="' + '${pageContext.request.contextPath}' +  profile + '">' + "</a>" + 
-				 	"<div class='gradient-overlay'>" +
-				 	"<div class='introMem'>" +
-				 	  여기 이름 , 나이, "<br>" + "<p>" + 사는곳 ㆍ 직업 + "</p>" +
+  				let profile = result[i].profileImg;
+  				
+  				resultStr += 
+  					
+  					"<td style='border : none;'>" + 
+				 	"<div class='filp-card'>" + 
+				 	 "<div class='flip-card-inner'>"+ 
+				 	
+				 	"<div class='gradient-image flip-card-front'>" + 
+				 	 '<img class="img" src="' + '${pageContext.request.contextPath}' + profile + '">' + "</a>" + 
+				 		"<div class='gradient-overlay'>" + 
+				 			"<div class='introMem'>" + 
+				 	 			 result[i].userName + "," + result[i].age + "," + "<br>" + "<p>" + '사는곳 ㆍ'  +  result[i].mbti + "</p>" + 
+				 			"</div>" + 
+				 		"</div>" + 
 				 	"</div>" +
+				 	"<div class='flip-card-back'>" + "<button onclick='location.href =" + "chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}" + "'>" + "채팅하기" + "</button> </div>" +
+				 		"</div>" +
 				 	"</div>" +
-				 	"</div>"+
-				 	"<div class='flip-card-back'>" + "<button onclick='location.href = '" + "chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}" + "'>채팅하기" + "</button></div>" +
-				 	"</div>" +
-				 	"</div>" +
-				 	"</td>"
-				 
-				 
+				 "</td>";
+	
 				 $(".topViewTr").html(resultStr);
 			 }
-  			 }
   		 },
   		 error	 : function() {
   			 
