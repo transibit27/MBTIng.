@@ -89,7 +89,7 @@
 
             <br>
 
-            <input type="hidden" id="writer" name="userNo" value="${ sessionScope.loginUser.userNo }">
+            <input type="hidden" id="writer" name="userNo" value="${ sessionScope.loginMember.userNo }">
             <div class="writereview-title">
                 제목&nbsp;&nbsp;<input type="text" id="title" name="boardTitle" placeholder="15자 이내로 작성해 주세요." required>
             </div>
@@ -116,7 +116,7 @@
 
             <div class="reviewenroll-button" align="right">
                 <button type="submit">등록하기</button>
-                <button type="reset">등록취소</button>
+                <button onclick="javascript:history.go(-1);">등록취소</button>
             </div>
         </form>
 

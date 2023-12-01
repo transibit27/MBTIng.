@@ -16,9 +16,10 @@
         .outer {
             width: 100%;
             margin: auto;
+            margin-top: 10px;
         }
         .reviewbanner {
-            width: 1200px;
+            width: 100%;
             height: 150px;
             margin: auto;
             background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
@@ -55,7 +56,9 @@
         .reviewdetail-table {
             width: 300px;
             border-bottom: 2px solid pink;
-            font-family: 'Single Day', cursive;
+        }
+        .reviewdetail-table *{
+        	font-family: 'Single Day', cursive;
             font-size:large;
             font-weight: bold;
         }
@@ -120,11 +123,11 @@
                     <td colspan="2" class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
                 </tr>
                 <tr>
-                    <td>💑${ requestScope.b.mbtiNick }</td>
+                    <td>💑${ requestScope.b.userNo }</td>
                     <td>${ requestScope.b.enrollDate }</td>
                 </tr>
                 <tr>
-                    <td colspan="2">${ requestScope.b.views }</td>
+                    <td colspan="2">조회수 : ${ requestScope.b.views }</td>
                 </tr>
             </table>
 
@@ -146,8 +149,8 @@
 
             </div>
             <div class="reviewdetail-like" align="center">
-                ❤️<br>
-                ${requestScope.b.thumb}
+            
+            <!-- 좋아요 관련 기능 일단 주석처리 -->
 
             </div>
 
@@ -155,17 +158,15 @@
 
         </div>
         <div class="reviewdetail-bottom-button" align="right">
-            <c:if test="${ not empty sessionScope.loginUser and sessionScope.loginUser.userNo eq requestScope.b.boardWriter }">
-                <button onclick="postFormSubmit(1);">수정</button>
-                <button onclick="postFormSubmint(2);">삭제</button>
+            <c:if test="${ not empty sessionScope.loginMember and sessionScope.loginMember.userNo eq requestScope.b.userNo }">
+				<button onclick="postFormSubmit(1);">수정</button>
+                <button onclick="postFormSubmit(2);">삭제</button>
                 <form id="postForm" action="" method="post">
-                    <input type="hidden" name="bno" value="${requestScope.b.boardNo }">
-
+                    <input type="hidden" name="bno" value="${ requestScope.b.boardNo }">
                     <!-- 첨부사진 관련 내용 작성할 곳 -->
-
                 </form>
                 <script>
-                    function postForm(num) {
+                    function postFormSubmit(num) {
                         if(num == 1) {
                             $("#postForm").attr("action", "updateForm.bo").submit();
                         } else {
@@ -180,7 +181,7 @@
 
         <div class="move-page" align="center">
 
-            <!-- 이전/다음글 이동 작성할 곳 주석 처리-->
+        	<!-- 이전/다음글 이동 작성할 곳 주석 처리-->
 
         </div>
 

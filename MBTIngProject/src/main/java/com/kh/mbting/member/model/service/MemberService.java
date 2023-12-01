@@ -33,11 +33,21 @@ public interface MemberService {
 	// 내게 매칭을 신청한 대상자 리스트 확인 용 method
 	ArrayList<Member> proposerList(String userNo);
 	
+	// 매칭 신청 수락용 method(신청자의 상태 변환)
+	int proposeAccept(String proposerNo);
+	// 매칭 신청 수락용 method(대상자의 상태 변환)
+	int proposeAccepted(String receiverNo);
+	
+	// 마이페이지 내 상태(하단메뉴) 조회용 method
+	Member myStat(String userNo);
+	
 	// 내 후기 게시글 숫자 확인용 method
 	int selectListCount(String userNo);
 
 	// 내 후기 게시글 조회용 method
 	ArrayList<Board> selectList(PageInfo pi, String userNo);
+
+
 
 	
 }

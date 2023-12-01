@@ -94,6 +94,7 @@
   	   WHERE RECEIVER_NO = #{userNo}
   	     AND MATCH_STAT = 'Y'
 	</select>
+	
 	<!-- 나에게 매칭을 신청한 인원의 리스트 확인용 쿼리문 -->
 	<select id="proposerList" parameterType="string" resultMap="memberResultSet">
 		SELECT *
@@ -104,6 +105,28 @@
 		                      AND MATCH_STAT = 'Y')
 		   AND MATCH_STAT = 1
 	</select>
+	
+	<!-- 나에게 신청된 매칭 수락용 쿼리문(신청자 상태 변화) -->
+	<update id="proposeAccept" parameterType="string">
+		UPDATE MEMBER
+		   SET MATCH_STAT = 3
+		 WHERE USER_NO = #{proposerNo}
+	</update>
+	<!-- 나에게 신청된 매칭 수락용 쿼리문(대상자 상태 변화) -->
+	<update id="proposeAccepted" parameterType="string">
+		UPDATE MEMBER
+		   SET MATCH_STAT = 3
+		 WHERE USER_NO = #{receiverNo}
+	</update>
+	<!-- 마이페이지 하단메뉴(내 상태) 조회용 쿼리문 -->
+	<select id="myStat" parameterType="string" resultMap="memberResultSet">
+	  SELECT *
+	  	FROM MEMBER 
+	   WHERE USER_NO = #{userNo}
+	  	 AND STATUS  = 'Y'
+	</select>
+	
+	
 	
 	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->
 	<select id="selectListCount" resultType="_int">

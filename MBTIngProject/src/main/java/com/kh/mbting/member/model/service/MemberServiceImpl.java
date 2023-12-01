@@ -190,6 +190,23 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.proposerList(sqlSession, userNo);
 	}
 	
+	// 마이페이지 - 매칭 신청 수락용 메소드(신청자 상태 변화)
+	@Override
+	public int proposeAccept(String proposerNo) {
+		return memberDao.proposeAccept(sqlSession, proposerNo);
+	}
+	// 마이페이지 - 매칭 신청 수락용 메소드(대상자 상태 변화)
+	@Override
+	public int proposeAccepted(String receiverNo) {
+		return memberDao.proposeAccepted(sqlSession, receiverNo);
+	}
+	
+	// 마이페이지 - 하단메뉴 (내 상태) 조회용 메소드
+	@Override
+	public Member myStat(String userNo) {
+		return memberDao.myStat(sqlSession, userNo);
+	}
+	
 	// 마이페이지 - 내 후기 게시글 총 갯수 확인용 메소드
 	@Override
 	public int selectListCount(String userNo) {
@@ -201,6 +218,10 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Board> selectList(PageInfo pi, String userNo) {
 		return memberDao.selectList(sqlSession, pi, userNo);
 	}
+
+
+
+
 
 
 
