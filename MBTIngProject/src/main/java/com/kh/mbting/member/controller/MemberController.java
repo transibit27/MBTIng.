@@ -231,9 +231,9 @@ public class MemberController {
 	@RequestMapping (value="myChat.me", produces="text/html; charset=UTF-8")
 	public String myChat(String userNo,
 						HttpSession session) {
-		System.out.println("유저no"+userNo);
+		System.out.println("내 대화 상대 유저no"+userNo);
 		Member me = memberService.myChat(userNo);
-		System.out.println("맴버정보"+me);
+		System.out.println("내 대화 상대 맴버정보"+me);
 		
 		// 대화 상대의 정보를 ProposeMember 에 담음
 		session.setAttribute("ProposeMember", me);
@@ -245,7 +245,7 @@ public class MemberController {
 	
 	
 	//b-6 마이페이지 - 프로필(수정)
-	@ResponseBody
+	
 	@PostMapping("update.me")
 	public String updateMember(Member m,
 							   MultipartFile reupfile,

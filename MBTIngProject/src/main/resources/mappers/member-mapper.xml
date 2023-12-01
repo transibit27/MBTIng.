@@ -93,18 +93,18 @@
 	  SELECT COUNT(*)
         FROM MATCHING
   	   WHERE RECEIVER_NO = #{userNo}
-  	     AND MATCH_STAT = 'Y'
+  	     AND MATCH_STAT = 2
 	</select>
 	
-	<!-- 나에게 매칭을 신청한 인원의 리스트 확인용 쿼리문 -->
+	<!-- 나에게 매칭을 신청한 인원 리스트 확인용 쿼리문 -->
 	<select id="proposerList" parameterType="string" resultMap="memberResultSet">
 		SELECT *
 		  FROM MEMBER
 		 WHERE USER_NO IN ( SELECT PROPOSER_NO
 		                     FROM MATCHING
-		                    WHERE RECEIVER_NO = 1
+		                    WHERE RECEIVER_NO = #{userNo}
 		                      AND MATCH_STAT = '2')
-		   AND MATCH_STAT = 1
+		   AND MATCH_STAT = 2
 	</select>
 	
 	<!-- 나에게 신청된 매칭 수락용 쿼리문(신청자 상태 변화) -->
@@ -149,7 +149,7 @@
 	   SELECT PROPOSER_NO,USER_NAME, PROFILE_IMG, AGE, GENDER, MBTI, MBTI_NICK
 	     FROM MATCHING MC
 	     JOIN MEMBER MB ON MC.PROPOSER_NO = MB.USER_NO
-	    WHERE MC.MATCH_STAT = 'Y'
+	    WHERE MC.MATCH_STAT = '2'
 	      AND MB.MATCH_STAT = '3'
 	      AND MC.RECEIVER_NO = #{userNo}
 	</select>

@@ -66,7 +66,7 @@ public class MemberDao {
 	}
 
 	public Member myChat(SqlSessionTemplate sqlSession, String userNo) {
-		return sqlSession.selectOne("memberMapper.myChat",userNo);
+		return sqlSession.selectOne("memberMapper.myChat", userNo);
 	}
 
 
