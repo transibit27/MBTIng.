@@ -362,14 +362,14 @@
 			<br><br><br><br>
 				
 			<div id="content_2">
-					<tr>
-						<td> <table id="topViewInnerTable">
-							   <td style="border : none;">
-								<div class="flip-card">
-								  <div class="flip-card-inner">
+					
+					<table id="topViewInnerTable">
+					  <tr class="topViewTr">
+						<td style="border : none;">
+							<div class="flip-card">
+								<div class="flip-card-inner">
 								   <div class="gradient-image flip-card-front">
-									   <a><img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize">
-									   </a> 
+									   <a><img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize"></a> 
 									   <div class="gradient-overlay ">
 										   <div class="introMem ">
 											   임나, 26 <br> <p>인천 ㆍ 댄서</p>
@@ -377,9 +377,9 @@
 									   </div>
 								   </div>
 								   <div class="flip-card-back"><button onclick="location.href = 'chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}'">채팅하기</button></div>
-								</div>
+							   </div>
 							</div>
-							   </td>
+						</td>
 							   <td style="border : none;">
 								<div class="flip-card">
 									<div class="flip-card-inner">
@@ -427,8 +427,6 @@
 							</div>
 							   </td>
 							 </tr>
-					   </table></td>
-					</tr>
 				  </table>
 				  </div>
 
@@ -536,8 +534,37 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		$.ajax({
   			 url : "list.mem",
   			type : "post",
-  		 success : function() {
+  		 dataType: "json",
+  		 success : function(result) {
+  			
+  			 let resultStr = "";
   			 
+  			 
+  			 for(let i = 0; i < result.length; i++) {
+  			
+  				let profile = 'result[i].profileImg';
+  				
+  				 resultStr += 
+  					 "<td style='border : none;'>" + 
+				 	"<div class='filp-card'>" +
+				 	"<div class='flip-card-inner'>"+
+				 	"<div class='gradient-image flip-card-front'>" +
+				 	"<a>" + '<img src="' + '${pageContext.request.contextPath}' +  profile + '">' + "</a>" + 
+				 	"<div class='gradient-overlay'>" +
+				 	"<div class='introMem'>" +
+				 	  여기 이름 , 나이, "<br>" + "<p>" + 사는곳 ㆍ 직업 + "</p>" +
+				 	"</div>" +
+				 	"</div>" +
+				 	"</div>"+
+				 	"<div class='flip-card-back'>" + "<button onclick='location.href = '" + "chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}" + "'>채팅하기" + "</button></div>" +
+				 	"</div>" +
+				 	"</div>" +
+				 	"</td>"
+				 
+				 
+				 $(".topViewTr").html(resultStr);
+			 }
+  			 }
   		 },
   		 error	 : function() {
   			 

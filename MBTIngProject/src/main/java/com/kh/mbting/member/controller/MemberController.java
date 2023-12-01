@@ -42,11 +42,13 @@ public class MemberController {
 
 	
 	//0. 전체 회원을 불러오기 위한 method 
+	@ResponseBody
 	@PostMapping("list.mem")
-	public void selecToptMemberList() {
+	public String selecToptMemberList() {
 		
 		ArrayList<Member> list = memberService.selecToptMemberList();
-		System.out.println(list);
+		
+		return new Gson().toJson(list);
 	}
 	
 	//1. 로그인 기능을 위한 method.
