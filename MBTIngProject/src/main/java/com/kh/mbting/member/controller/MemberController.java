@@ -173,7 +173,7 @@ public class MemberController {
 		return new Gson().toJson(list);
 	}
 	
-	//b-3 매칭 신청 수락용 메소드 [ 이곳에 채팅 생성 메소드를 연결 필요 ]
+	//b-3 매칭 신청 수락용 메소드
 	//매칭 신청을 수락하는 순간 자신의 MatchStat=3 으로 UPDATE (accepted) 메소드
 	// proposerNo => 매칭 신청자의 userNo
 	// receiverNo => 매칭 대상자의 userNo
@@ -184,18 +184,19 @@ public class MemberController {
 								 Model model,
 							     HttpSession session) {
 		
+		// result1 : 매칭 신청자의 상태를 mastStat 값 update
 		int result1 = memberService.proposeAccept(proposerNo);
+		// result2 : 매칭 대상자의 상태를 mastStat 값 update
 		int result2 = memberService.proposeAccepted(receiverNo);
+		// result3 : 매칭 테이블의 match 상태를 Y 로 update(1:1 대화 시 조회 가능하도록)
+		int result3 = 0;
 		
 			if(result1>0 && result2>0) {	// 수락 성공 시
 
 				session.setAttribute("alertMsg", "매칭 수락 완료");
 				
 			return "redirect:/myPage.me";
-			
-			// 이 시점에 1:1 대화방 생성해줘야함
-			// 1:1 대화 소켓 생성 시점
-			
+
 			} else {
 				
 				model.addAttribute("errorMsg", "매칭 수락에 실패했습니다. 관리자한테 연락하세요.");
@@ -205,24 +206,45 @@ public class MemberController {
 		
 	}
 	
-	//b-4 내 상태 하단 메뉴 표시용 메소드 (ajax)
-	// 작성 중
+	//b-4 내 상태 하단 메뉴 프로필 상태 표시용 메소드 (ajax)
+	// 수정 중
 	@ResponseBody
-	@RequestMapping (value="myStat.me")
-	public String myStat(String userNo,
+	@RequestMapping (value="myStat.me", produces="text/html; charset=UTF-8")
+	public String myStatProfile(String userNo,
 						HttpSession session) {
 		
-		Member me = memberService.myStat(userNo);
+		Member me = memberService.myStatProfile(userNo);
 		
+		// 테스트용으로 정보 추출
+		String result = me.getEmail();
+		
+		// 갱신된 내 정보를 loginMember에 담음
 		session.setAttribute("loginMember", me);
 		
-		return "redirect:/myPage.me";
+		return result;
 		
 	}
-
+	
+	// b-5 내 대화 상대 정보 표시용 메소드(ajax)
+	// 수정 중
+	@ResponseBody
+	@RequestMapping (value="myChat.me", produces="text/html; charset=UTF-8")
+	public String myChat(String userNo,
+						HttpSession session) {
+		System.out.println("유저no"+userNo);
+		Member me = memberService.myChat(userNo);
+		System.out.println("맴버정보"+me);
+		
+		// 대화 상대의 정보를 ProposeMember 에 담음
+		session.setAttribute("ProposeMember", me);
+		
+		// 테스트용으로 정보 받아옴
+		String result = me.getEmail();
+		return result;
+	}
 	
 	
-	//b-5 마이페이지 - 프로필(수정)
+	//b-6 마이페이지 - 프로필(수정)
 	@ResponseBody
 	@PostMapping("update.me")
 	public String updateMember(Member m,
@@ -268,15 +290,13 @@ public class MemberController {
 		
 	}
 	
-
-	
-	
 	//c 마이페이지 - 내후기
 	@RequestMapping(value="myReview.me")
 	public String myReview() {
 		
 		return "member/myReview";
 	}
+	
 	//c-마이페이지 - 내후기 리스트 수 조회 
 	@GetMapping(value="myList.me")
 	public ModelAndView selectList(
@@ -300,7 +320,6 @@ public class MemberController {
 	
 		return mv;
 	}
-	
 	
 	// d 마이페이지 - 프로필 이미지 첨부용 메소드
 	public String saveFile(MultipartFile upfile,

@@ -201,10 +201,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.proposeAccepted(sqlSession, receiverNo);
 	}
 	
-	// 마이페이지 - 하단메뉴 (내 상태) 조회용 메소드
+	// 마이페이지 - 하단메뉴 (내 상태 - 프로필) 조회용 메소드
 	@Override
-	public Member myStat(String userNo) {
-		return memberDao.myStat(sqlSession, userNo);
+	public Member myStatProfile(String userNo) {
+		return memberDao.myStatProfile(sqlSession, userNo);
 	}
 	
 	// 마이페이지 - 내 후기 게시글 총 갯수 확인용 메소드
@@ -217,6 +217,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<Board> selectList(PageInfo pi, String userNo) {
 		return memberDao.selectList(sqlSession, pi, userNo);
+	}
+
+	// 마이페이지 - 내 대화 상대 조회용 메소드
+	@Override
+	public Member myChat(String userNo) {
+		return memberDao.myChat(sqlSession, userNo);
 	}
 
 

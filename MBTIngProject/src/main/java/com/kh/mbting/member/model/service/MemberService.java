@@ -24,7 +24,7 @@ public interface MemberService {
 	//카카오 Token을 얻은 후, 유저의 정보를 가져올 method
 	HashMap<String, Object> getUserInfo (String access_Token);
 	
-	// 마이페이 회원정보 수정용 method
+	// 마이페이지 - 회원정보 수정용 method
 	int updateMember(Member m);
 
 	// 내게 매칭을 신청한 대상자 수 확인 용 method
@@ -38,8 +38,8 @@ public interface MemberService {
 	// 매칭 신청 수락용 method(대상자의 상태 변환)
 	int proposeAccepted(String receiverNo);
 	
-	// 마이페이지 내 상태(하단메뉴) 조회용 method
-	Member myStat(String userNo);
+	// 마이페이지 하단메뉴(내상태 - 프로필) 조회용 method
+	Member myStatProfile(String userNo);
 	
 	// 내 후기 게시글 숫자 확인용 method
 	int selectListCount(String userNo);
@@ -47,8 +47,8 @@ public interface MemberService {
 	// 내 후기 게시글 조회용 method
 	ArrayList<Board> selectList(PageInfo pi, String userNo);
 
-
-
+	// 마이페이지 - 내 대화 상대 조회요 method
+	Member myChat(String userNo);
 	
 }
 

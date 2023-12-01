@@ -21,6 +21,7 @@
  	<result column="STATUS"  		property="status"></result>
  	<result column="ROOM_NO" 	 	property="roomNo"></result>
  	<result column="MATCH_ROOM_NO" 	 	property="matchRoomNo"></result>
+ 	<result column="PROPOSER_NO"	property="proposerNo"></result>
  </resultMap>
  
  <resultMap id="boardResultSet" type="board">
@@ -102,7 +103,7 @@
 		 WHERE USER_NO IN ( SELECT PROPOSER_NO
 		                     FROM MATCHING
 		                    WHERE RECEIVER_NO = 1
-		                      AND MATCH_STAT = 'Y')
+		                      AND MATCH_STAT = '2')
 		   AND MATCH_STAT = 1
 	</select>
 	
@@ -118,15 +119,13 @@
 		   SET MATCH_STAT = 3
 		 WHERE USER_NO = #{receiverNo}
 	</update>
-	<!-- 마이페이지 하단메뉴(내 상태) 조회용 쿼리문 -->
-	<select id="myStat" parameterType="string" resultMap="memberResultSet">
+	<!-- 마이페이지 하단메뉴(내 상태 - 프로필) 조회용 쿼리문 -->
+	<select id="myStatProfile" parameterType="string" resultMap="memberResultSet">
 	  SELECT *
 	  	FROM MEMBER 
 	   WHERE USER_NO = #{userNo}
 	  	 AND STATUS  = 'Y'
 	</select>
-	
-	
 	
 	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->
 	<select id="selectListCount" resultType="_int">
@@ -143,6 +142,16 @@
 		 WHERE STATUS = 'Y'
            AND USER_NO = #{userNo}
 		 ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 내 대화 상대 정보 조회용 쿼리문 -->
+	<select id="myChat" parameterType="string" resultMap="memberResultSet">
+	   SELECT PROPOSER_NO,USER_NAME, PROFILE_IMG, AGE, GENDER, MBTI, MBTI_NICK
+	     FROM MATCHING MC
+	     JOIN MEMBER MB ON MC.PROPOSER_NO = MB.USER_NO
+	    WHERE MC.MATCH_STAT = 'Y'
+	      AND MB.MATCH_STAT = '3'
+	      AND MC.RECEIVER_NO = #{userNo}
 	</select>
 	
 </mapper>
