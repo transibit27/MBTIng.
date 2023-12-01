@@ -1,9 +1,11 @@
 package com.kh.mbting.notice.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -52,9 +54,29 @@ public class NoticeDao {
 		
 		return sqlSession.update("noticeMapper.updateNotice", n);
 	}
-	
-	public String selectKeyword(SqlSessionTemplate sqlSession, String keyword) {
-		
-		return sqlSession.selectList("noticeMapper.selectKeyword" , keyword);
+	// 검색된 공지사항 개수 조회
+	public int searchListCount(SqlSessionTemplate sqlSession, String keyword) {
+      
+		return sqlSession.selectOne("noticeMapper.searchListCount", keyword);
+    }
+
+	// 검색된 공지사항 리스트 조회
+	public List<Notice> searchList(SqlSessionTemplate sqlSession, String keyword, int currentPage, int pageLimit, int boardLimit) {
+	    int startRow = (currentPage - 1) * boardLimit;
+	    int endRow = startRow + boardLimit;  // endRow 정의
+
+	    Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("keyword", keyword);
+	    parameters.put("startRow", startRow);
+	    parameters.put("endRow", endRow);
+
+	    return sqlSession.selectList("noticeMapper.searchList", parameters);
 	}
+	
+	// 조회수 업데이트 메소드
+    public int updateViews(SqlSessionTemplate sqlSession, int noticeNo) {
+       
+    	return sqlSession.update("noticeMapper.updateViews", noticeNo);
+    }
+
 }

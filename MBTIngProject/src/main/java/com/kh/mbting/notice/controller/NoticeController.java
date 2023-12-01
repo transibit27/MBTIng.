@@ -1,6 +1,7 @@
 package com.kh.mbting.notice.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mbting.common.model.vo.PageInfo;
@@ -25,7 +27,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 
 	
-	/*
+
 	@GetMapping("list.no")
 	public ModelAndView selectList(
 			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
@@ -46,56 +48,39 @@ public class NoticeController {
 		
 		return mv;
 	}
-	*/
 	
+
+	@GetMapping("search.no")
+    public ModelAndView searchNotice(
+            @RequestParam("keyword") String keyword,
+            @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+            ModelAndView mv) {
+        
+        int listCount = noticeService.searchListCount(keyword);
+        
+        int pageLimit = 5;
+        int boardLimit = 10;
+        
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+        
+        List<Notice> searchResult = noticeService.searchList(keyword, pi.getCurrentPage(), pi.getBoardLimit(), pi.getPageLimit());
+        
+        mv.addObject("list", searchResult)
+          .addObject("pi", pi)
+          .setViewName("notice/noticeListView");
+        
+        return mv;
+    }
 	
-	@GetMapping("list.no")
-	public ModelAndView selectList(
-	        @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-	        @RequestParam(value = "keyword", required = false) String keyword,
-	        ModelAndView mv) {
+	@PostMapping("updateViews.no")
+	@ResponseBody
+	public String updateViews(@RequestParam("nno") int nno) {
+	    int result = noticeService.updateViews(nno);
 
-	    int listCount = noticeService.selectListCount();
-	    
-	    int pageLimit = 5;
-		int boardLimit = 10;
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-		
-	    ArrayList<Notice> list = noticeService.selectList(pi);
-
-	    if (keyword != null && !keyword.isEmpty()) {
-	        // 검색어가 있을 경우 검색된 결과 가져오기
-	        listCount = noticeService.searchListCount(keyword);
-	        list = noticeService.searchList(keyword, currentPage, pageLimit, boardLimit);
-	    } else {
-	        // 검색어가 없을 경우 전체 리스트 가져오기
-	        listCount = noticeService.selectListCount();
-	        list = noticeService.selectList(listCount, currentPage, pageLimit, boardLimit);
-	    }
-
-	    
-
-	    mv.addObject("list", list)
-	      .addObject("pi", pi)
-	      .setViewName("notice/noticeListView");
-
-	    return mv;
+	    // 성공 여부에 따라 응답 반환
+	    return result > 0 ? "success" : "fail";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@GetMapping("enrollForm.no")
 	public String enrollForm() {

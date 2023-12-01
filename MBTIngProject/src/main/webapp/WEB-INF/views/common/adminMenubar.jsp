@@ -132,16 +132,13 @@
 </head>
 <body>
 
-	<!-- 
-		1회성 알람문구 띄우는 코드 추가 
-		=> script 태그 내에서는 action tag 사용 불가 (EL 은 가능)
-	-->
+	<!-- 알람문구 출력용 코드 ( session.alertMsg )-->
+	
 	<c:if test="${ not empty sessionScope.alertMsg }">
 		<script>
 			alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
 		</script>
 		
-		<!-- session 의 alertMsg 지우기 -->
 		<c:remove var="alertMsg" scope="session" />
 	</c:if>
 

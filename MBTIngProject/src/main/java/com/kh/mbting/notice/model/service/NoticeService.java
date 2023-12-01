@@ -1,6 +1,7 @@
 package com.kh.mbting.notice.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.notice.model.vo.Notice;
@@ -28,11 +29,11 @@ public interface NoticeService {
 	// 공지사항 수정
 	int updateNotice(Notice n);
 	
-	// 검색된 공지사항 개수 조회
-	int searchListCount(String keyword);
+    int searchListCount(String keyword);
 
-	// 검색된 공지사항 리스트 조회
-	ArrayList<Notice> searchList(String keyword, int currentPage, int pageLimit, int boardLimit);
+    List<Notice> searchList(String keyword, int currentPage, int pageLimit, int boardLimit);
 
-	
+    // 조회수 업데이트 메소드
+    int updateViews(int noticeNo);
+    
 }
