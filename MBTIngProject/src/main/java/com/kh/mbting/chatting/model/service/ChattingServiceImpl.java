@@ -20,8 +20,8 @@ public class ChattingServiceImpl implements ChattingService{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Chatting> chattingList(int matchRoomNo) {
-		return chattingDao.chattingList(sqlSession, matchRoomNo);
+	public ArrayList<Chatting> chattingList(int roomNo) {
+		return chattingDao.chattingList(sqlSession, roomNo);
 	}
 
 	@Override

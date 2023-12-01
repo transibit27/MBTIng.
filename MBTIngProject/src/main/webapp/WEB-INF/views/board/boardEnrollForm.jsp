@@ -119,7 +119,9 @@
                 <button onclick="javascript:history.go(-1);">등록취소</button>
             </div>
         </form>
-
+		
+		<br>
+		
     </div>
 
     <jsp:include page="../common/footer.jsp" />

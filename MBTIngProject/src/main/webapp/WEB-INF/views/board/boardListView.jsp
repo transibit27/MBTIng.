@@ -70,6 +70,17 @@
             width: 1200px;
             margin: auto;
         }
+        .reviewlistbutton button {
+            width: 65px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            background-color: pink;
+        }
+        .reviewlistbutton button:hover {
+            border: 1px solid pink;
+            background-color: white;
+        }
         .reviewlist {
             width: 1200px;
             margin: auto;
