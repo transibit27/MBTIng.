@@ -19,7 +19,7 @@
  	<result column="MATCH_STAT"  	property="matchStat"></result>
  	<result column="MATCH_COIN"  	property="matchCoin"></result>
  	<result column="STATUS"  		property="status"></result>
- 	<result column="ROOM_NO" 	 	property="roomNo"></result>
+ 	<result column="MY_ROOM_NO" 	 	property="myRoomNo"></result>
  	<result column="MATCH_ROOM_NO" 	 	property="matchRoomNo"></result>
  </resultMap>
  
@@ -39,7 +39,7 @@
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
 		FROM (
-		    SELECT profile_img, age, mbti , user_name
+		    SELECT profile_img, age, mbti , user_name, my_room_no
 		      FROM (
 		        SELECT M.*, RANK() OVER (ORDER BY COALESCE(matching_count, 0) DESC) AS rnk
 		        FROM MEMBER M

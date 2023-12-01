@@ -485,12 +485,12 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		 success : function(result) {
   			
   			 let resultStr = "";
-  			 let roomNo    = result.myRoomNo;
-
+  			
   			 
   			 for(let i = 0; i < result.length; i++) {
-  				
-  				let profile = result[i].profileImg;
+  				 
+  				let roomNo    = result[i].myRoomNo;
+  				let profile	  = result[i].profileImg;
   				
   				resultStr += 
   				    "<td style='border: none;'>" + 
@@ -505,7 +505,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				                "</div>" + 
   				            "</div>" +
   				            "<div class='flip-card-back'>" + 
-  				                "<button onclick=\"location.href='chatting.do?RoomNo="  + roomNo + "'\">채팅하기</button>" + 
+  				                "<button onclick=\"location.href='chatting.do?roomNo="  + roomNo + "'\">채팅하기</button>" + 
   				            "</div>" +
   				        "</div>" +
   				    "</div>" +

@@ -25,11 +25,11 @@ public class ChattingController {
 	private ArrayList<Chatting> chattingList;
 	
 	@RequestMapping("chatting.do")
-	public String chatting(Model model, int matchRoomNo) {
+	public String chatting(Model model, int roomNo) {
 		
 		chattingList = new ArrayList<>();
 		
-		chattingList = chattingService.chattingList(matchRoomNo);
+		chattingList = chattingService.chattingList(roomNo);
 		
 		model.addAttribute("chattingList", chattingList);
 		//System.out.println(chattingList);

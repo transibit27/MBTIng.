@@ -10,8 +10,8 @@ import com.kh.mbting.chatting.model.vo.Chatting;
 @Repository
 public class ChattingDao {
 	
-	public ArrayList<Chatting> chattingList(SqlSession sqlSession, int matchRoomNo) {
-		return (ArrayList)sqlSession.selectList("chattingMapper.chattingList", matchRoomNo);
+	public ArrayList<Chatting> chattingList(SqlSession sqlSession, int roomNo) {
+		return (ArrayList)sqlSession.selectList("chattingMapper.chattingList", roomNo);
 	}
 	
 	public int sendChatting(SqlSession sqlSession, Chatting c) {

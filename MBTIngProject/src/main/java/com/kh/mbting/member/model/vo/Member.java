@@ -28,7 +28,7 @@ public class Member {
 	private int matchStat;			//	MATCH_STAT	NUMBER
 	private int matchCoin;			//	MATCH_COIN	NUMBER
 	private String status;			//	STATUS	CHAR(1 BYTE)
-	private int myRoomNo;				//	ROOM_NO	NUMBER
-	private int proposerNum;		// 나에게 매칭을 신청한 사람 숫자를 확인하기 위한 변수
+	private int myRoomNo;			//	ROOM_NO	NUMBER
+	private int proposerNum;		//  나에게 매칭을 신청한 사람 숫자를 확인하기 위한 변수
 	private int matchRoomNo;
 }
