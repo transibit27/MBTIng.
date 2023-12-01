@@ -285,9 +285,10 @@
 
 	<script>
 	    $(document).ready(function(){
-	    	
+	    	myStat();
 	    	proposerList();
          	setInterval(proposerList,5000);
+         	setInterval(myStat,5000);
 	    	
 	    	// 슬릭
             $('.slick2').slick({
@@ -314,22 +315,68 @@
 		    		data : {"userNo":${sessionScope.loginMember.userNo}}, 
 		    		success : function(result){
 		    			
-		    				console.log(result);
+		    			let resultStr="";
+		    			
+		    			for(let i = 0; i < result.length; i++){
+		    				
+		    			let profileImg= "/mbting"+result[i].profileImg;
+		    			
+		    				 resultStr += "<form action='accept.me' method='post'>"
+		    					 		+ "<div class='profile-wrap'>"
+		    							+	"<div class='profile-img-box'>"
+		    								+	"<img class='profile-img' src=" +profileImg+ ">"
+		    							+	"</div>"
+		    							+	"<div class='profile-info>'"
+		    								+ "<div class='profile-name'>"
+		    									+ result[i].userName
+		    								+ "</div>"
+		    							+ 	"<div class='profile-mbti'>"
+		    									+ result[i].mbti
+		    								+ "</div>"
+		    								+ "<button type='submit'>수락</button>"
+		    								+ "<input type='hidden' name='proposerNo' value="+ result[i].userNo + ">"
+		    								+ "<input type='hidden' name='receiverNo' value="+ ${sessionScope.loginMember.userNo} + ">"
+		    							+	"</div>"
+		    							+ "</div>"
+		    							+ "</form>";
+		    			}
+		    			
+		    			// 매칭 신청자 리스트 출력 위치
+		    			$(".slider").html(resultStr);
+		    				
 		    		},
 		    		error : function(){
 		    			
 		    			console.log("매칭 신청자 리스트 조회용 ajax 통신 실패")
 		    		}
 		    		
-		
-		    		
 		    	}) // ajax 끝
-	    		
 	    	}
 	    	
-	    	
+	    	// 하단 메뉴바(내 상태) ajax 펑션
+	    	function myStat(){
+	    		
+	    		$.ajax({
+	    			url : "myStat.me",
+	    			type : "post",
+	    			data : {"userNo":${sessionScope.loginMember.userNo}},
+	    			success : function(result){
+	    				
+	    				console.log(result);
+	    				
+	    				
+	    			
+	    			},
+	    			error : function(){
+	    				console.log("내 상태 표시용 ajax 통신 실패")
+	    			}
+	    			
+	    		}); // ajax 끝
+	    	}
 	    	
         })
+        
+
 	</script>
 
 	<div class="my-content">
@@ -340,74 +387,8 @@
 	    <!-- 매칭 신청자 프로필 리스트 -->
 	    <div class="slider">
 	
-	        <div class="profile-wrap">
-	            <!-- 프로필 이미지를 담는 div-->
-	            <div class="profile-img-box">
-	                <img class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
-	            </div> 
-	
-	            <!-- 프로필 정보를 담는 div-->
-	            <div class="profile-info">
-	                <div class="profile-name">
-	                    아이디
-	                </div> 
-	                <div class="profile-mbti">
-	                    INTP
-	                </div> 
-	                <button>수락</button>
-	            </div>
-	        </div>
-	
-	        <div class="profile-wrap">
-	
-	            <div class="profile-img-box">
-	                <img class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
-	            </div> 
-	    
-	            <div class="profile-info">
-	                <div class="profile-name">
-	                    아이디
-	                </div> 
-	                <div class="profile-mbti">
-	                    INTP
-	                </div> 
-	                <button>수락</button>
-	            </div>
-	        </div>
-	
-	        <div class="profile-wrap">
-	
-	            <div class="profile-img-box">
-	                <img class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
-	            </div> 
-	
-	            <div class="profile-info">
-	                <div class="profile-name">
-	                    아이디
-	                </div> 
-	                <div class="profile-mbti">
-	                    INTP
-	                </div> 
-	                <button>수락</button>
-	            </div>
-	        </div>
-	
-	        <div class="profile-wrap">
-	
-	            <div class="profile-img-box">
-	                <img class="profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" >
-	            </div> 
-	    
-	            <div class="profile-info">
-	                <div class="profile-name">
-	                    아이디
-	                </div> 
-	                <div class="profile-mbti">
-	                    INTP
-	                </div> 
-	                <button>수락</button>
-	            </div>
-	        </div>
+			<!-- 매칭을 신청한 대상자 프로필 카드가 출력되는 부분 -->
+	      
 	    </div>
 	    
 	    <!-- 신청자 프로필 카드 슬라이드 컨트롤러-->

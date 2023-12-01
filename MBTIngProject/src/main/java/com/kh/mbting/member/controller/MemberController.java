@@ -173,8 +173,54 @@ public class MemberController {
 		return new Gson().toJson(list);
 	}
 	
+	//b-3 매칭 신청 수락용 메소드
+	//매칭 신청을 수락하는 순간 자신의 MatchStat=3 으로 UPDATE
+	// 1. 타인의 신창자 list에 노출되지 않음
+	// 2. MatchStat=3 일 경우 추가 신청자를 받지 못하도록
 	
-	//b-3 마이페이지 - 프로필(수정)
+	@RequestMapping	(value="accept.me")
+	public String proposeAccept(@RequestParam String proposerNo,
+								@RequestParam String receiverNo,
+								 Model model,
+							     HttpSession session) {
+		
+		int result1 = memberService.proposeAccept(proposerNo);
+		int result2 = memberService.proposeAccepted(receiverNo);
+		
+			if(result1>0 && result2>0) {	// 수락 성공 시
+
+				session.setAttribute("alertMsg", "매칭 수락 완료");
+				
+			return "redirect:/myPage.me";
+			
+			} else {
+				
+				model.addAttribute("errorMsg", "매칭 수락에 실패했습니다. 관리자한테 연락하세요.");
+				
+				return "common/errorPage";
+			}
+		
+	}
+	
+	//b-4 내 상태 하단 메뉴 표시용 메소드 (ajax)
+	@RequestMapping (value="myStat.me")
+	public String myStat(String userNo,
+						HttpSession session) {
+		
+		System.out.println("잘 받아옴? " +userNo);
+		Member me = memberService.myStat(userNo);
+		System.out.println(me);
+		
+		session.setAttribute("loginMember", me);
+		
+		return "redirect:/myPage.me";
+		
+	}
+
+	
+	
+	//b-5 마이페이지 - 프로필(수정)
+	@ResponseBody
 	@PostMapping("update.me")
 	public String updateMember(Member m,
 							   MultipartFile reupfile,
@@ -253,7 +299,7 @@ public class MemberController {
 	}
 	
 	
-	// 프로필 이미지 첨부용 메소드
+	// d 마이페이지 - 프로필 이미지 첨부용 메소드
 	public String saveFile(MultipartFile upfile,
 			   HttpSession session) {
 

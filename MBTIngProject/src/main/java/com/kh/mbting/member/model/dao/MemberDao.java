@@ -38,6 +38,13 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.proposerCount", userNo);
 	}
 	
+	public int proposeAccept(SqlSessionTemplate sqlSession, String proposerNo) {
+		return sqlSession.update("memberMapper.proposeAccept", proposerNo);
+	}
+	public int proposeAccepted(SqlSessionTemplate sqlSession, String receiverNo) {
+		return sqlSession.update("memberMapper.proposeAccepted", receiverNo);
+	}
+	
 	public ArrayList<Member> proposerList(SqlSessionTemplate sqlSession, String userNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.proposerList", userNo);
 	}
@@ -53,6 +60,12 @@ public class MemberDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", userNo, rowBounds);
 	}
+
+	public Member myStat(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.myStat", userNo);
+	}
+
+
 
 }
 
