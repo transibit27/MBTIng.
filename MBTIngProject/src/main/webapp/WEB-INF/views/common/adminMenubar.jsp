@@ -152,13 +152,13 @@
     <div id="admin-menubar">
 
         <div class="left-area">
-            <h1 id="logo"><a href="">MBTing.</a></h1>
+            <h1 id="logo"><a href="http://localhost:8081/mbting/adminMain.ad">MBTing.</a></h1>
 
             <div id="content-menubar">
                 <table>
                     <tr>
                         <th><i class="fas fa-user menu-icon"></i>
-                            <a href="">회원관리</a>
+                            <a href="list.adme">회원관리</a>
                         </th>
                     </tr>
                     <tr>
