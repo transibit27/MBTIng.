@@ -173,11 +173,11 @@ public class MemberController {
 		return new Gson().toJson(list);
 	}
 	
-	//b-3 매칭 신청 수락용 메소드
-	//매칭 신청을 수락하는 순간 자신의 MatchStat=3 으로 UPDATE
-	// 1. 타인의 신창자 list에 노출되지 않음
-	// 2. MatchStat=3 일 경우 추가 신청자를 받지 못하도록
-	
+	//b-3 매칭 신청 수락용 메소드 [ 이곳에 채팅 생성 메소드를 연결 필요 ]
+	//매칭 신청을 수락하는 순간 자신의 MatchStat=3 으로 UPDATE (accepted) 메소드
+	// proposerNo => 매칭 신청자의 userNo
+	// receiverNo => 매칭 대상자의 userNo
+
 	@RequestMapping	(value="accept.me")
 	public String proposeAccept(@RequestParam String proposerNo,
 								@RequestParam String receiverNo,
@@ -193,6 +193,9 @@ public class MemberController {
 				
 			return "redirect:/myPage.me";
 			
+			// 이 시점에 1:1 대화방 생성해줘야함
+			// 1:1 대화 소켓 생성 시점
+			
 			} else {
 				
 				model.addAttribute("errorMsg", "매칭 수락에 실패했습니다. 관리자한테 연락하세요.");
@@ -203,13 +206,13 @@ public class MemberController {
 	}
 	
 	//b-4 내 상태 하단 메뉴 표시용 메소드 (ajax)
+	// 작성 중
+	@ResponseBody
 	@RequestMapping (value="myStat.me")
 	public String myStat(String userNo,
 						HttpSession session) {
 		
-		System.out.println("잘 받아옴? " +userNo);
 		Member me = memberService.myStat(userNo);
-		System.out.println(me);
 		
 		session.setAttribute("loginMember", me);
 		
