@@ -485,37 +485,37 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		 success : function(result) {
   			
   			 let resultStr = "";
-  			 
-  			 //console.log(result.length);
+  			 let roomNo    = result.myRoomNo;
+
   			 
   			 for(let i = 0; i < result.length; i++) {
   				
   				let profile = result[i].profileImg;
   				
   				resultStr += 
-  					
-  					"<td style='border : none;'>" + 
-				 	"<div class='filp-card'>" + 
-				 	 "<div class='flip-card-inner'>"+ 
-				 	
-				 	"<div class='gradient-image flip-card-front'>" + 
-				 	 '<img class="img" src="' + '${pageContext.request.contextPath}' + profile + '">' + "</a>" + 
-				 		"<div class='gradient-overlay'>" + 
-				 			"<div class='introMem'>" + 
-				 	 			 result[i].userName + "," + result[i].age + "," + "<br>" + "<p>" + '사는곳 ㆍ'  +  result[i].mbti + "</p>" + 
-				 			"</div>" + 
-				 		"</div>" + 
-				 	"</div>" +
-				 	"<div class='flip-card-back'>" + "<button onclick='location.href =" + "chatting.do?matchRoomNo=${sessionScope.loginMember.matchRoomNo}" + "'>" + "채팅하기" + "</button> </div>" +
-				 		"</div>" +
-				 	"</div>" +
-				 "</td>";
-	
+  				    "<td style='border: none;'>" + 
+  				    "<div class='flip-card'>" + 
+  				        "<div class='flip-card-inner'>" + 
+  				            "<div class='gradient-image flip-card-front'>" + 
+  				                "<a><img class='img' src='" + '${pageContext.request.contextPath}' + profile + "'></a>" + 
+  				                "<div class='gradient-overlay'>" + 
+  				                    "<div class='introMem'>" + 
+  				                        result[i].userName + ", " + result[i].age + "<br><p>사는곳 ㆍ " + result[i].mbti + "</p>" + 
+  				                    "</div>" + 
+  				                "</div>" + 
+  				            "</div>" +
+  				            "<div class='flip-card-back'>" + 
+  				                "<button onclick=\"location.href='chatting.do?RoomNo="  + roomNo + "'\">채팅하기</button>" + 
+  				            "</div>" +
+  				        "</div>" +
+  				    "</div>" +
+  				    "</td>";
+				 
 				 $(".topViewTr").html(resultStr);
 			 }
   		 },
   		 error	 : function() {
-  			 
+  			 console.log("top 4명 분석에 실패했습니다.");
   		 }
   		});
   		
