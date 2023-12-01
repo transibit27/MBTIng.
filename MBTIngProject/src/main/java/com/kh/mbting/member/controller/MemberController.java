@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
@@ -41,11 +42,13 @@ public class MemberController {
 
 	
 	//0. 전체 회원을 불러오기 위한 method 
+	@ResponseBody
 	@PostMapping("list.mem")
-	public void selecToptMemberList() {
+	public String selecToptMemberList() {
 		
 		ArrayList<Member> list = memberService.selecToptMemberList();
-		System.out.println(list);
+		
+		return new Gson().toJson(list);
 	}
 	
 	//1. 로그인 기능을 위한 method.

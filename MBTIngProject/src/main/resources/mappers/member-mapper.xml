@@ -53,9 +53,9 @@
 		    ) 
 		    WHERE rnk BETWEEN 1 AND 4
 		) A
-		WHERE ROWNUM BETWEEN 1 AND 4;
+		WHERE ROWNUM BETWEEN 1 AND 4
  	</select>
- 	
+
  	
 	<!-- 로그인용 쿼리문(로그인한 회원정보 담고 있음) -->
 	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
