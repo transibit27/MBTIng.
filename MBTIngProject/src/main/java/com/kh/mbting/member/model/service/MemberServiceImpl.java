@@ -180,10 +180,16 @@ public class MemberServiceImpl implements MemberService {
 
 	// 마이페이지 - 내게 매칭을 신청한 회원의 수 확인용 메소드
 	@Override
-	public int proposerList(String userNo) {
-		return memberDao.proposerList(sqlSession, userNo);
+	public int proposerCount(String userNo) {
+		return memberDao.proposerCount(sqlSession, userNo);
 	}
 
+	// 마이페이지 - 내게 매칭을 신청한 회원 리스트 확인용 메소드
+	@Override
+	public ArrayList<Member> proposerList(String userNo) {
+		return memberDao.proposerList(sqlSession, userNo);
+	}
+	
 	// 마이페이지 - 내 후기 게시글 총 갯수 확인용 메소드
 	@Override
 	public int selectListCount(String userNo) {
@@ -195,6 +201,7 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Board> selectList(PageInfo pi, String userNo) {
 		return memberDao.selectList(sqlSession, pi, userNo);
 	}
+
 
 
 }

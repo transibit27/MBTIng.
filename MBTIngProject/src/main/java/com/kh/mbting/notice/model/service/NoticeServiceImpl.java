@@ -1,6 +1,7 @@
 package com.kh.mbting.notice.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,17 +69,28 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		return noticeDao.updateNotice(sqlSession, n); 
 	}
-	
+	//
+	@Override
+	public int searchListCount(String keyword) {
+       
+		return noticeDao.searchListCount(sqlSession, keyword);
+    }
+
+	@Override
+	public List<Notice> searchList(String keyword, int currentPage, int pageLimit, int boardLimit) {
+       
+		return noticeDao.searchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
+    }
+
+	@Override
+	@Transactional
+	public int updateViews(int noticeNo) {
+
+		return noticeDao.updateViews(sqlSession, noticeNo);
+	}
+
 	
 	
 
-
-	
-	
-	
-	
-	
-	
-	
 	
 }

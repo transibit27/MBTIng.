@@ -88,11 +88,21 @@
 	</update>
 	
 	<!-- 나에게 매칭을 신청한 인원 수 확인용 쿼리문 -->
-	<select id="proposerList" parameterType="string" resultType="_int">
+	<select id="proposerCount" parameterType="string" resultType="_int">
 	  SELECT COUNT(*)
         FROM MATCHING
   	   WHERE RECEIVER_NO = #{userNo}
   	     AND MATCH_STAT = 'Y'
+	</select>
+	<!-- 나에게 매칭을 신청한 인원의 리스트 확인용 쿼리문 -->
+	<select id="proposerList" parameterType="string" resultMap="memberResultSet">
+		SELECT *
+		  FROM MEMBER
+		 WHERE USER_NO IN ( SELECT PROPOSER_NO
+		                     FROM MATCHING
+		                    WHERE RECEIVER_NO = 1
+		                      AND MATCH_STAT = 'Y')
+		   AND MATCH_STAT = 1
 	</select>
 	
 	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->

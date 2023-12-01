@@ -281,12 +281,15 @@
             </div>
          </div>
     </div>
-	<!-- 신청자 리스트(슬릭 전용 스크립트) -->
-
+	<!-- 신청자 리스트 출력용 스크립트 -->
 
 	<script>
 	    $(document).ready(function(){
 	    	
+	    	proposerList();
+         	setInterval(proposerList,5000);
+	    	
+	    	// 슬릭
             $('.slick2').slick({
                 
                 infinite: true,
@@ -299,6 +302,33 @@
                 nextArrow: '<button type="button" class="slick-next">&#8594;</button>'
 
             });
+	    	
+	    	
+	    	// 매칭 신청자 리스트 확인용 ajax
+	    	function proposerList(){
+	    		
+		    	$.ajax({
+		    		
+		    		url : "proposerList.me",
+		    		type : "post",
+		    		data : {"userNo":${sessionScope.loginMember.userNo}}, 
+		    		success : function(result){
+		    			
+		    				console.log(result);
+		    		},
+		    		error : function(){
+		    			
+		    			console.log("매칭 신청자 리스트 조회용 ajax 통신 실패")
+		    		}
+		    		
+		
+		    		
+		    	}) // ajax 끝
+	    		
+	    	}
+	    	
+	    	
+	    	
         })
 	</script>
 
