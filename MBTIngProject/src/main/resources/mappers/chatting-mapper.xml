@@ -11,10 +11,10 @@
 	</resultMap>
 	
 	<select id="chattingList" resultMap="chattingResultSet" parameterType="_int">
-		SELECT chat_no, room_no, message, send_time, user_no
-		  from chat 
-		 where room_no = #{roomNo}
-		    or 
+		 select c.CHAT_NO, c.ROOM_NO, c.MESSAGE, c.USER_NO, c.SEND_TIME
+           from chat c 
+           join chatroom cr on (c.room_no = cr.room_no)
+          where c.room_no = #{room_no}
 	</select>
 	
 	<insert id="sendChatting" parameterType="chatting">

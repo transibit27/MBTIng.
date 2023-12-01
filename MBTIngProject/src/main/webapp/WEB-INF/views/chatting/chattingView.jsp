@@ -235,7 +235,7 @@
                         <input type="hidden" name="roomNo" value="${sessionScope.loginMember.matchRoomNo}">
                          <input type="hidden" name="userNo" value="${sessionScope.loginMember.userNo}">
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="sendChatting();" >전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="send();" >전송</button></td>
                 </tr>
             </table>
         </div>
@@ -275,21 +275,6 @@
 
 	});
 
-	//메시지를 전송하는 함수
-	function send() {
-		let text = $("#text").val();
-		//console.log(text);
-		
-		if(text.trim() !== "") {
-				//입력한 메세지가 있을 경우에만 전송하겠다는 뜻. 
-				//websocket 객체의 send 메소드를 호출
-				
-				socket.send(text); //socket으로 메시지 전송
-				$("#text").val("");//초기화 효과
-			}
-
-	};
-	
 	
 	//연결 종료 시 실행될 함수 
 	function disconnect() {
@@ -297,7 +282,21 @@
         location.href="http://localhost:8081/mbting";
 	};
 	
-	function sendChatting() {
+	
+	//메세지를 전송하는 함수
+	function send() {
+		
+		let text = $("#message").val();
+		//console.log(text);
+		
+		if(text.trim() !== "") {
+				//입력한 메세지가 있을 경우에만 전송하겠다는 뜻. 
+				//websocket 객체의 send 메소드를 호출
+				
+				socket.send(text); //socket으로 메시지 전송
+				$("#message").val("");//초기화 효과
+			}
+		
 		
 		$.ajax({
 			url  	: "chatting.me",
