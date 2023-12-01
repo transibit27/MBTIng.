@@ -285,10 +285,10 @@
 
 	<script>
 	    $(document).ready(function(){
-	    	myStat();
+	    	myStatProfile();
 	    	proposerList();
          	setInterval(proposerList,5000);
-         	setInterval(myStat,5000);
+         	setInterval(myStatProfile,5000);
 	    	
 	    	// 슬릭
             $('.slick2').slick({
@@ -353,8 +353,8 @@
 		    	}) // ajax 끝
 	    	}
 	    	
-	    	// 하단 메뉴바(내 상태) ajax 펑션
-	    	function myStat(){
+	    	// 하단 메뉴바(내 상태) ajax 펑션 => 미완성 myRoomNo 정보는 불러오는 상태
+	    	function myStatProfile(){
 	    		
 	    		$.ajax({
 	    			url : "myStat.me",
@@ -363,12 +363,29 @@
 	    			success : function(result){
 	    				
 	    				console.log(result);
-	    				
-	    				
 	    			
 	    			},
 	    			error : function(){
 	    				console.log("내 상태 표시용 ajax 통신 실패")
+	    			}
+	    			
+	    		}); // ajax 끝
+	    	}
+	    	
+	    	// 하단 메뉴바(내 대화 상대 표시용) ajax 펑션 => 미완성
+	    	function myStatProfile(){
+	    		
+	    		$.ajax({
+	    			url : "myChat.me",
+	    			type : "post",
+	    			data : {"userNo":${sessionScope.loginMember.userNo}},
+	    			success : function(result){
+	    				
+	    				console.log(result);
+	    			
+	    			},
+	    			error : function(){
+	    				console.log("내 대화 상대 표시용 ajax 통신 실패")
 	    			}
 	    			
 	    		}); // ajax 끝

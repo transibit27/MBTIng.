@@ -180,9 +180,19 @@
         <br><br><br>
 
         <div class="move-page" align="center">
+           <table class="move-page-table">
+                <tr onclick="location.href='detail.bo?bno=${ requestScope.b.boardNo - 1 }';">
+                    <td class="move-page-info">
+                        ▲ 이전 후기
+                    </td>
 
-        	<!-- 이전/다음글 이동 작성할 곳 주석 처리-->
-
+                </tr>
+                <tr style="border-top: 1px dotted pink;" onclick="location.href='detail.bo?bno=${ requestScope.b.boardNo + 1}';">
+                    <td class="move-page-info">
+                        ▼ 다음 후기
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <br>

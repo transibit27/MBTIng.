@@ -21,6 +21,7 @@
  	<result column="STATUS"  		property="status"></result>
  	<result column="MY_ROOM_NO" 	 	property="myRoomNo"></result>
  	<result column="MATCH_ROOM_NO" 	 	property="matchRoomNo"></result>
+ 	<result column="PROPOSER_NO"	property="proposerNo"></result>
  </resultMap>
  
  <resultMap id="boardResultSet" type="board">
@@ -55,7 +56,7 @@
 		) A
 		WHERE ROWNUM BETWEEN 1 AND 4
  	</select>
-
+	
  	
 	<!-- 로그인용 쿼리문(로그인한 회원정보 담고 있음) -->
 	<select id="loginMember" resultMap="memberResultSet" parameterType="member">
@@ -92,18 +93,18 @@
 	  SELECT COUNT(*)
         FROM MATCHING
   	   WHERE RECEIVER_NO = #{userNo}
-  	     AND MATCH_STAT = 'Y'
+  	     AND MATCH_STAT = 2
 	</select>
 	
-	<!-- 나에게 매칭을 신청한 인원의 리스트 확인용 쿼리문 -->
+	<!-- 나에게 매칭을 신청한 인원 리스트 확인용 쿼리문 -->
 	<select id="proposerList" parameterType="string" resultMap="memberResultSet">
 		SELECT *
 		  FROM MEMBER
 		 WHERE USER_NO IN ( SELECT PROPOSER_NO
 		                     FROM MATCHING
-		                    WHERE RECEIVER_NO = 1
-		                      AND MATCH_STAT = 'Y')
-		   AND MATCH_STAT = 1
+		                    WHERE RECEIVER_NO = #{userNo}
+		                      AND MATCH_STAT = '2')
+		   AND MATCH_STAT = 2
 	</select>
 	
 	<!-- 나에게 신청된 매칭 수락용 쿼리문(신청자 상태 변화) -->
@@ -118,15 +119,13 @@
 		   SET MATCH_STAT = 3
 		 WHERE USER_NO = #{receiverNo}
 	</update>
-	<!-- 마이페이지 하단메뉴(내 상태) 조회용 쿼리문 -->
-	<select id="myStat" parameterType="string" resultMap="memberResultSet">
+	<!-- 마이페이지 하단메뉴(내 상태 - 프로필) 조회용 쿼리문 -->
+	<select id="myStatProfile" parameterType="string" resultMap="memberResultSet">
 	  SELECT *
 	  	FROM MEMBER 
 	   WHERE USER_NO = #{userNo}
 	  	 AND STATUS  = 'Y'
 	</select>
-	
-	
 	
 	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->
 	<select id="selectListCount" resultType="_int">
@@ -145,4 +144,32 @@
 		 ORDER BY BOARD_NO DESC
 	</select>
 	
+	<!-- 내 대화 상대 정보 조회용 쿼리문 -->
+	<select id="myChat" parameterType="string" resultMap="memberResultSet">
+	   SELECT PROPOSER_NO,USER_NAME, PROFILE_IMG, AGE, GENDER, MBTI, MBTI_NICK
+	     FROM MATCHING MC
+	     JOIN MEMBER MB ON MC.PROPOSER_NO = MB.USER_NO
+	    WHERE MC.MATCH_STAT = '2'
+	      AND MB.MATCH_STAT = '3'
+	      AND MC.RECEIVER_NO = #{userNo}
+	</select>
+	
+	<!-- 관리자페이지 회원 목록 조회 -->
+	<select id="memberSelectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
+	</select>
+	
+	<!-- 관리자페이지 회원 목록 조회 -->
+	<select id="memberSelectList" resultMap="memberResultSet">
+		SELECT USER_NO
+		     , USER_NAME
+		     , EMAIL
+		     , GENDER
+		     , STATUS
+		  FROM MEMBER
+		 ORDER BY USER_NO DESC
+	</select>
+
 </mapper>

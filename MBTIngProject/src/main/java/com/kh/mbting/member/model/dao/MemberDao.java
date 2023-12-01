@@ -61,8 +61,12 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", userNo, rowBounds);
 	}
 
-	public Member myStat(SqlSessionTemplate sqlSession, String userNo) {
-		return sqlSession.selectOne("memberMapper.myStat", userNo);
+	public Member myStatProfile(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.myStatProfile", userNo);
+	}
+
+	public Member myChat(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.myChat", userNo);
 	}
 
 
