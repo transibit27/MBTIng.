@@ -5,6 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+ #notice-table{
+    width: 1000px;
+    margin-left: 100px;
+    text-align: center;
+ }
+ #searchForm{
+    width: 450px;
+    margin: auto;
+    margin-top: 100px;
+ }
+.btn-primary{
+   margin-left: 200px;;
+   width: 100px;
+   margin: auto;
+}
+.btn-danger {
+    margin-left: 10px;
+    width: 100px;
+}
+.checkbox{
+    margin: auto;
+    display: block;
+}
+.content {
+	margin-left: 250px;
+	margin-top: 100px;
+}
+
+</style>
 </head>
 <body>
 
@@ -14,9 +44,10 @@
 		
 		<div class="innerOuter">
 		
-			<a class="btn btn-secondary" style="float:right;" href="list.no">목록으로</a>
+			
 			
 			<table id="contentArea" align="center" class="table">
+			<a class="btn btn-secondary" style="float:right;" href="list.no">목록으로</a>
 				<tr>
 					<th width="100">제목</th>
 					<td colspan="3">${ requestScope.n.noticeTitle }</td>

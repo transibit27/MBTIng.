@@ -5,6 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.content {
+		margin-left: 200px;
+	}
+	.form-control {
+		margin-left: 30px;
+	}
+	#title {
+	margin-bottom: 10px;
+	}
+</style>
 </head>
 <body>
 
@@ -21,7 +32,7 @@
 					</tr>
 					<tr>
 						<th><label for="content">내용</label></th>
-						<td><textarea id="content" class="form-control" rows="10" style="resize:none;" name="noticeContent" required></textarea></td>
+						<td><textarea id="content" class="form-control" cols="90" rows="20" style="resize:none;" name="noticeName" required></textarea></td>
 					</tr>
 				</table>
 				<br>

@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,14 +14,9 @@
 
 <style>
     
-    #content-menubar {
-        width: 200px;
-        height: 700px;
-        margin-top: 30px;
-    }
     #content-center {
         width: 1320px;
-
+		margin-left: 230px;
     }
     #content-center1 {
         width: 1320px;
