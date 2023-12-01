@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.chatting.model.vo.ChatSession;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.member.model.service.MemberService;
@@ -36,18 +37,16 @@ public class MemberController {
 
 	@Autowired	
 	private MemberService memberService; 
-
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
-
+	@Autowired
+	private ChatSession cSession;
 	
 	//0. 전체 회원을 불러오기 위한 method 
 	@ResponseBody
 	@PostMapping("list.mem")
 	public String selecToptMemberList() {
-		
 		ArrayList<Member> list = memberService.selecToptMemberList();
-		
 		return new Gson().toJson(list);
 	}
 	
@@ -59,6 +58,8 @@ public class MemberController {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
+		
+		cSession.addLoginMember(loginMember.getEmail());
 		
 		if(loginMember != null && 
 				bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
@@ -79,6 +80,9 @@ public class MemberController {
 	@RequestMapping("logout.me")
 	public String logoutMember(HttpSession session) {
 		
+		Member m = (Member)session.getAttribute("loginMember");
+		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제.
+        cSession.removeLoginMember(m.getEmail());
 		session.invalidate();
 		
 		return "redirect:/";

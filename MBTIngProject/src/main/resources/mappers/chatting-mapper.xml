@@ -1,27 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="chattingMapper">
-
-	<resultMap id="chattingResultSet" type="chatting">
- 		<result column="CHAT_NO"  			property="chatNo"></result>
-		<result column="ROOM_NO"  			property="roomNo"></result>
-		<result column="MESSAGE"  			property="message"></result>
-		<result column="SEND_TIME"  		property="sendTime"></result>
-		<result column="USER_NO"  		property="userNo"></result>
-	</resultMap>
-	
-	<select id="chattingList" resultMap="chattingResultSet" parameterType="_int">
-		 select c.CHAT_NO, c.ROOM_NO, c.MESSAGE, c.USER_NO, c.SEND_TIME
-           from chat c 
-           join chatroom cr on (c.room_no = cr.room_no)
-          where c.room_no = #{room_no}
-	</select>
-	
-	<insert id="sendChatting" parameterType="chatting">
-		insert into chat values(CNO_SEQ.nextval,
-								#{roomNo}, 
-								#{message},
-								#{userNo} ,
-								default)
-	</insert>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chatMapper">
+ 
+    <resultMap type="ChatRoom" id="chatRoomResultSet">
+        <id property="roomNo" column="ROOM_NO" />
+        <result property="userEmail" column="USER_EMAIL" />
+        <result property="userName" column="USER_NAME" />        
+        <result property="userPic" column="USER_PIC" />
+        <result property="masterEmail" column="MASTER_EMAIL" />
+        <result property="masterName" column="MASTER_NAME" />
+        <result property="masterPic" column="MASTER_PIC" />
+    </resultMap>
+ 
+    <resultMap type="ChatMessage" id="chatMessageResultSet">
+        <id property="messageNo" column="MESSAGE_NO" />
+        <result property="roomNo" column="ROOM_NO" />
+        <result property="message" column="MESSAGE" />
+        <result property="name" column="NAME" />
+        <result property="email" column="EMAIL" />
+        <result property="unReadCount" column="UN_READ_COUNT" />
+    </resultMap>
+    
+    <!-- 신규 채팅방일 때 채팅 방 생성 -->
+    <insert id="createChat" parameterType="ChatRoom">
+        insert into CHATROOM values(SEQ_CHATROOM_NO.NEXTVAL
+        						 , #{userEmail}
+        						 , #{userName}
+        						 , DEFAULT
+        						 , #{masterEmail}
+        						 , #{masterName}
+        						 , #{masterPic})
+    </insert>
+ 
+    <select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM 
+        WHERE ROOM_NO = #{roomNo} 
+    </select>
+    
+    <insert id="insertMessage" parameterType="ChatMessage">
+        <if test="sessionCount == 1">
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, SEQ_CHATMESSAGE_NO.NEXTVAL, #{message}, #{name}, #{email}, DEFAULT)
+        </if>
+        <if test="sessionCount == 2">
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, SEQ_CHATMESSAGE_NO.NEXTVAL, #{message}, #{name}, #{email}, 0)
+        </if>
+    </insert>
+    
+    <select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
+        SELECT * FROM CHATMESSAGE
+        WHERE ROOM_NO = #{roomNo}
+    </select>
+    
+    <select id="searchChatRoom" parameterType="ChatRoom" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM
+        WHERE USER_EMAIL = #{userEmail} AND MASTER_EMAIL = #{masterEmail}
+    </select>
+    
+    <select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM
+        WHERE USER_EMAIL = #{userEmail} OR MASTER_EMAIL = #{userEmail}
+    </select>
+    
+    <select id="selectUnReadCount" parameterType="ChatMessage" resultType="_int">
+        SELECT COUNT(*) FROM CHATMESSAGE
+        WHERE ROOM_NO = #{roomNo} AND EMAIL != #{email} AND UNREAD_COUNT = 1
+    </select>
+    
+    <update id="updateCount" parameterType="ChatMessage">
+        UPDATE CHATMESSAGE
+        SET UNREAD_COUNT = 0
+        WHERE ROOM_NO = #{roomNo} AND EMAIL != #{email} AND UNREAD_COUNT = 1
+    </update>
 </mapper>
