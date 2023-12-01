@@ -178,7 +178,8 @@
             <!-- 상단 회원 상태 표시용 스크립트 -->
             <script>
 
-            	$(function(){    		
+            	$(function(){    	
+            		
            	 		/* 매칭 상태 표시용 스크립트 */
 	             	let mStat = "${sessionScope.loginMember.matchStat}"
 	 	                
@@ -198,7 +199,7 @@
 	             	function proposer(){
 	             		
 	             		$.ajax({
-	             			url : "proposerList.me",
+	             			url : "proposerCount.me",
 	             			type : "get",
 	             			data : {"userNo":${sessionScope.loginMember.userNo}}, 
 	             			success : function(result){
@@ -210,8 +211,8 @@
 	             				console.log("매칭 신청자 확인용 ajax 통신 실패	")
 	             			}
 	             			
-	             		})
-	             	}
+	             		})	// ajax 끝
+	             	} // 펑션 끝
 	             	
             	})
 

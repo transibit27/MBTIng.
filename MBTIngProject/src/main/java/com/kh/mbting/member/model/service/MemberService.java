@@ -28,12 +28,17 @@ public interface MemberService {
 	int updateMember(Member m);
 
 	// 내게 매칭을 신청한 대상자 수 확인 용 method
-	int proposerList(String userNo);
-
+	int proposerCount(String userNo);
+	
+	// 내게 매칭을 신청한 대상자 리스트 확인 용 method
+	ArrayList<Member> proposerList(String userNo);
+	
 	// 내 후기 게시글 숫자 확인용 method
 	int selectListCount(String userNo);
 
 	// 내 후기 게시글 조회용 method
 	ArrayList<Board> selectList(PageInfo pi, String userNo);
+
+	
 }
 

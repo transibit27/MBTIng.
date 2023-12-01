@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
@@ -148,18 +149,30 @@ public class MemberController {
 	
 	//b-1 마이페이지 - 상단상태(매칭 신청자 수 확인용/ajax)
 	@ResponseBody
-	@RequestMapping(value="proposerList.me", produces="text/html; charset=UTF-8")
+	@RequestMapping(value="proposerCount.me", produces="text/html; charset=UTF-8")
 	public String ajaxProposer(@RequestParam Map<String, Object> param) {
 		
 		String userNo = (String)param.get("userNo");
 		
-		String proposerNum = String.valueOf(memberService.proposerList(userNo));
+		String proposerNum = String.valueOf(memberService.proposerCount(userNo));
 		return proposerNum;
 		
 	}
 	
+	//b-2 내게 매칭을 신청한 회원 리스트 조회용 메소드 (ajax)
+	@ResponseBody
+	@RequestMapping(value="proposerList.me", produces="application/json; charset=UTF-8")
+	public String ajaxProposerList(@RequestParam Map<String, Object> param) {
+		
+		String userNo = (String)param.get("userNo");
+		
+		ArrayList<Member> list = memberService.proposerList(userNo);
+				
+		return new Gson().toJson(list);
+	}
 	
-	//b-2 마이페이지 - 프로필(수정)
+	
+	//b-3 마이페이지 - 프로필(수정)
 	@PostMapping("update.me")
 	public String updateMember(Member m,
 							   MultipartFile reupfile,
