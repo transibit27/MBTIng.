@@ -486,7 +486,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   			
   			 let resultStr = "";
   			
-  			 
+  			 console.log(result);
   			 for(let i = 0; i < result.length; i++) {
   				 
   				let roomNo    = result[i].myRoomNo;

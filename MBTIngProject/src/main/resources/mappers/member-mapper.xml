@@ -40,7 +40,7 @@
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
 		FROM (
-		    SELECT profile_img, age, mbti , user_name, my_room_no
+		    SELECT profile_img, age, mbti , user_name
 		      FROM (
 		        SELECT M.*, RANK() OVER (ORDER BY COALESCE(matching_count, 0) DESC) AS rnk
 		        FROM MEMBER M
