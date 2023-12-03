@@ -1,17 +1,9 @@
 package com.kh.mbting.chatting.controller;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mbting.chatting.model.service.ChattingServiceImpl;
 
@@ -22,5 +14,35 @@ public class ChattingController {
 	@Autowired
 	private ChattingServiceImpl chattingService;
 	
+    @ResponseBody
+    @RequestMapping("createChat.do")
+    public String createChat(ChatRoom room, String userName, String userEmail, String masterNickname){
+        
+        
+        room.setUserEmail(userEmail);
+        room.setUserName(userName);
+        room.setMasterEmail(m.getEmail());
+        room.setMasterName(m.getmNickname());
+        room.setMasterPic(m.getmProPicRe());
+ 
+        ChatRoom exist  = cService.searchChatRoom(room);
+        
+        // DB에 방이 없을 때
+        if(exist == null) {
+            System.out.println("방이 없다!!");
+            int result = cService.createChat(room);
+            if(result == 1) {
+                System.out.println("방 만들었다!!");
+                return "new";
+            }else {
+                return "fail";
+            }
+        }
+        // DB에 방이 있을 때
+        else{
+            System.out.println("방이 있다!!");
+            return "exist";
+        }
+    }
 	
 }
