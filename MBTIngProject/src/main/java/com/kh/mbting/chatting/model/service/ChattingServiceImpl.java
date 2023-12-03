@@ -1,12 +1,11 @@
 package com.kh.mbting.chatting.model.service;
 
-import java.util.ArrayList;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.mbting.chatting.model.dao.ChattingDao;
+import com.kh.mbting.chatting.model.vo.ChatRoom;
 
 @Service
 public class ChattingServiceImpl implements ChattingService{
@@ -17,5 +16,14 @@ public class ChattingServiceImpl implements ChattingService{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+	@Override
+	public int createChat(ChatRoom room) {
+		return chattingDao.createChat(room);
+	}
+
+	
+	
+	
 
 }

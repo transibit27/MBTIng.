@@ -22,4 +22,5 @@ public class ChattingController {
 	@Autowired
 	private ChattingServiceImpl chattingService;
 	
+	
 }
