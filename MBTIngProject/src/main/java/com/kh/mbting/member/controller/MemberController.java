@@ -252,7 +252,6 @@ public class MemberController {
 								Model model,
 								HttpSession session){
 		
-			
 		// 프로필 이미지 변경
 		if(!reupfile.getOriginalFilename().equals("")) {
 			
@@ -261,6 +260,7 @@ public class MemberController {
 				
 				String realPath = session.getServletContext()
 						.getRealPath(m.getProfileImg());
+				
 				
 				new File(realPath).delete();
 			}

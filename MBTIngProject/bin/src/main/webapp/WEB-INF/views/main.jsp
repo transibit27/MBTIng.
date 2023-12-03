@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -14,7 +16,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
-
 
 <style>
 	* {
@@ -170,7 +171,7 @@
 		
 		#content {
 			margin-top: 0px;
-			background-color: rgb(255, 255, 202);
+			background-color: pink;
 		}
 		#content_1 {
 			display : inline-block;
@@ -180,7 +181,7 @@
 		#Content1BigText {
 			font-size: 70px;
 			margin-top: 570px;
-			margin-left: 410px;
+			margin-left: 380px;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
@@ -209,13 +210,13 @@
 			height: 450px;
 			width : 600px;
 			top : 100px;
-			left : 410px;
+			left : 380px;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingResult.png") ;
 			background-size: cover;
 			position: absolute;
 			z-index: 1;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
-			filter: blur(3px);
+			/*filter: blur(3px);*/
 		}
 
 		#testImg:hover, #testResultImg:hover{
@@ -232,7 +233,7 @@
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingTest.png") ;
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
-			filter: blur(3px);
+			/*filter: blur(3px);*/
 		}
 
 			/*--------------------------오늘의 엠비팅 -----------------------------*/
@@ -327,6 +328,17 @@
 			transform: rotateY(180deg);
 			}
 
+			#Content1BigText label {
+				color : rgb(255, 0, 221);
+			}
+			
+			.img {
+				width : 200px;
+				height : 200px;
+			}
+			
+		
+		
 </style>	
 </head>
 
@@ -334,17 +346,15 @@
 <body>
 
 		<!-- 메뉴바 header -->
-		<jsp:include page="/common/header.jsp"/>
-
-		
+		<jsp:include page="common/header.jsp"/>
 
 		<div class="wrap">
 			<div id="content">
 				<div id="content_1">
-					<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
+				<!--<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
 											  설문조사를 통한 통계 기반 맞춤형 추천 서비스 <br>
-											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>
-					<div id="Content1BigText">나의 연애 MBTI TEST 하기 <br>
+											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>-->	
+					<div id="Content1BigText">나의 연애 <label>MBTI TEST </label> 하기 <br>
 						<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p> </div>
 						<div id="arrow">
 						<img src="https://cdn-icons-png.flaticon.com/128/60/60934.png"> 
@@ -360,73 +370,10 @@
 			<br><br><br><br>
 				
 			<div id="content_2">
-					<tr>
-						<td> <table id="topViewInnerTable">
-							   <td style="border : none;">
-								<div class="flip-card">
-								  <div class="flip-card-inner">
-								   <div class="gradient-image flip-card-front">
-									   <a><img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize">
-									   </a> 
-									   <div class="gradient-overlay ">
-										   <div class="introMem ">
-											   임나, 26 <br> <p>인천 ㆍ 댄서</p>
-										   </div>
-									   </div>
-								   </div>
-								   <div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-								</div>
-							</div>
-							   </td>
-							   <td style="border : none;">
-								<div class="flip-card">
-									<div class="flip-card-inner">
-									   <div class="gradient-image flip-card-front">
-									   		<a><img src="https://static.news.zumst.com/images/37/2020/10/24/f6ba714d1b134965a979058503f3be08.jpg"></a> 
-									   <div class="gradient-overlay">
-										   <div class="introMem">
-											   배지지, 26 <br> <p>서울 ㆍ 선생님</p>
-										   </div>
-									   </div>
-								   	   </div>
-								  	   <div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-									</div>
-							</div>
-							   </td>
-							   <td style="border : none;">
-								<div class="flip-card">
-								  <div class="flip-card-inner">
-								    <div class="gradient-image flip-card-front">
-									   <a><img src="https://news.nateimg.co.kr/orgImg/ab/2019/11/22/22291850.jpg"></a> 
-									   <div class="gradient-overlay">
-										   <div class="introMem">
-											   태태, 28 <br> <p>서울 ㆍ 섹소폰 연주자</p>
-										   </div>
-									   </div>
-								   </div>
-								<div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-							   </div>
-							 </div>
-							   </td>
-							   <td style="border : none;">
-								 <div class="flip-card">
-								  <div class="flip-card-inner">
-								   <div class="gradient-image flip-card-front">
-									   <a><img src="https://menu.moneys.co.kr/moneyweek/thumb/2023/04/16/06/2023041611195178197_1.jpg/dims/optimize/">
-									   </a> 
-									   <div class="gradient-overlay">
-										   <div class="introMem">
-											   최최차차, 28 <br> <p>대전 ㆍ 의사</p>
-										   </div>
-									   </div>
-								   </div>
-								  <div class="flip-card-back">sdasdasdfdgfhads<br>asdasfasd<br>asdfdgadgfdga<br>asdfsgasfa<br>asdf<br></br></div>
-							   </div>
-							</div>
-							   </td>
-							 </tr>
-					   </table></td>
-					</tr>
+					
+					<table id="topViewInnerTable">
+					  <tr class="topViewTr">
+					  </tr>
 				  </table>
 				  </div>
 
@@ -528,15 +475,52 @@ MBTIng 덕분에 제 운명을 만났어요....!
 
 		</div>
 
-
-<div id="content_3">
-	<div id="background">
-		<div>
-
-		</div>
-	</div>
-	
-</div?>
+  <script>
+  	$(function() {
+  		
+  		$.ajax({
+  			 url : "list.mem",
+  			type : "post",
+  		 dataType: "json",
+  		 success : function(result) {
+  			
+  			 let resultStr = "";
+  			
+  			 console.log(result);
+  			 for(let i = 0; i < result.length; i++) {
+  				 
+  				let roomNo    = result[i].myRoomNo;
+  				let profile	  = result[i].profileImg;
+  				
+  				resultStr += 
+  				    "<td style='border: none;'>" + 
+  				    "<div class='flip-card'>" + 
+  				        "<div class='flip-card-inner'>" + 
+  				            "<div class='gradient-image flip-card-front'>" + 
+  				                "<a><img class='img' src='" + '${pageContext.request.contextPath}' + profile + "'></a>" + 
+  				                "<div class='gradient-overlay'>" + 
+  				                    "<div class='introMem'>" + 
+  				                        result[i].userName + ", " + result[i].age + "<br><p>사는곳 ㆍ " + result[i].mbti + "</p>" + 
+  				                    "</div>" + 
+  				                "</div>" + 
+  				            "</div>" +
+  				            "<div class='flip-card-back'>" + 
+  				                "<button onclick=\"location.href='chatting.do?roomNo="  + roomNo + "'\">채팅하기</button>" + 
+  				            "</div>" +
+  				        "</div>" +
+  				    "</div>" +
+  				    "</td>";
+				 
+				 $(".topViewTr").html(resultStr);
+			 }
+  		 },
+  		 error	 : function() {
+  			 console.log("top 4명 분석에 실패했습니다.");
+  		 }
+  		});
+  		
+  	});
+  </script>
 		
 <!-- swipe 영역 -->
 	<div class="wrap">
@@ -593,6 +577,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		s0.parentNode.insertBefore(s1,s0);
 		})();
 		</script>
+
 
 
 </datagrid>
