@@ -54,7 +54,7 @@
 
 /*---------------------------chatting--------------------------------*/
 
-#chatDiv {
+.chatDiv {
     width: 670px;
     height: 80%;
     border-left: 1px solid #ffffff;
@@ -71,7 +71,7 @@
 .Left {
     text-align: left;
 }
-.text {
+.message {
   display: inline-block;
   max-width: 500px;
   border: 1px solid black;
@@ -87,7 +87,7 @@
   font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-.message {
+.chat {
     width: 100%;
     display: inline-block;
     align-items: flex-end;
@@ -108,6 +108,15 @@
 #chatInput textarea {
     resize: none;
 }
+
+.sender {
+    padding-left:20px ;
+    padding-right:20px ;
+}
+
+li {
+ list-style-type : none;
+ }
 /*-------------------------전송버튼 css---------------------------------*/
 #submitButton {
  align-items: center;
@@ -206,23 +215,28 @@
                     </tr>
                  </table>
             </div>
-
-            <div id="chatDiv">
-                        <c:forEach var="chat" items="${requestScope.chattingList}" >
-	                         <c:choose>
-			                         <c:when test="${sessionScope.loginMember.userNo eq chat.userNo}">
-			                            <div class="message Right">
-			                                <p class="text">${chat.message}</p>
-			                            </div>
-			                     	 </c:when>
-			                     	 <c:otherwise>
-				                     	 <div class="message Left">
-				                                <p class="text">${chat.message}</p>
-				                         </div>
-			                     	 </c:otherwise>
-		                     </c:choose>
-                        </c:forEach>
+			<!-- 
+            <div class="chatDiv">
+            		<div class="sender">
+                      <span></span>
+                    </div>
+			         <div class="chat ">
+			               <p class="message"></p>
+			         </div>
              </div>
+              -->
+	        <div class="chatDiv">
+	        <ul>
+	            <li>
+	                <div class="sender">
+	                    <div></div>
+	                </div>
+	                <div class="chat">
+	                    <p></p>
+	                </div>
+	            </li>
+	        </ul>
+	    	</div>
         </div>
         <div id="chatInput" >
             <table>
@@ -232,16 +246,18 @@
                 <tr>
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
-                        <input type="hidden" name="roomNo" value="${sessionScope.loginMember.matchRoomNo}">
-                         <input type="hidden" name="userNo" value="${sessionScope.loginMember.userNo}">
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="send();" >전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="sendMessage();" >전송</button></td>
                 </tr>
             </table>
         </div>
     </div>
          
   <script>
+  
+    let roomNo = "${requestScope.roomNo}";
+    //console.log(roomNo);
+    
     let socket;
 	//연결 실행 시 실행될 함수
 
@@ -252,7 +268,14 @@
 		
 		//연결 성공 시 실행할 함수 onopen 
 		socket.onopen = function() {
-			console.log("서버와 연결 되었습니다.");
+			 const data = {
+	                    "roomNo" : roomNo,
+	                    "name"   : "${ loginMember.userName }",
+	                    "email"  : "${ loginMember.email }",
+	                  "message"  : "ENTER-CHAT"
+	            };
+	            let jsonData = JSON.stringify(data);
+	             socket.send(jsonData);
 		};
 		
 		//연결 종료 시 실행할 함수 onclose
@@ -268,6 +291,7 @@
 		socket.onmessage = function(e) {
 		
 			let div = $("<div>" + e.data + "</div");
+			
 			console.log(div);
 			
 			$("#message_wrap1").append(div);
@@ -284,35 +308,76 @@
 	
 	
 	//메세지를 전송하는 함수
-	function send() {
+	function sendMessage() {
 		
-		let text = $("#message").val();
-		//console.log(text);
+		let message = $("#message").val();
+		//console.log(message);
 		
-		if(text.trim() !== "") {
+		if(message.trim() !== "") {
 				//입력한 메세지가 있을 경우에만 전송하겠다는 뜻. 
 				//websocket 객체의 send 메소드를 호출
 				
-				socket.send(text); //socket으로 메시지 전송
+				const data = {
+                "roomNo" : roomNo,
+                "name" : "${ sessionScope.loginMember.userName }",
+                "email" : "${ sessionScope.loginMember.email }",
+                "message"   : message 
+            	};
+				//console.log(data);
+				CheckLR(data);
+		
+				let jsonData = JSON.stringify(data);
+        
+       		 	socket.send(jsonData);
+        
 				$("#message").val("");//초기화 효과
 			}
 		
-		
-		$.ajax({
-			url  	: "chatting.me",
-			type 	: "post",
-			data 	: {message : $("#message").val(),
-					   roomNo  : ${sessionScope.loginMember.matchRoomNo} ,
-					   userNo  : ${sessionScope.loginMember.userNo}},
-			success : function() {
-				
-			},
-			error	: function() {
-				console.log("채팅 전송 실패");
-			}
-			
-		});
 	}
+	
+	
+	
+	// * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
+    function CheckLR(data) {
+        // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
+        const LR = (data.email != "${ sessionScope.loginMember.email }") ? "Left" : "Right";
+         // 메세지 추가
+        //console.log(LR);
+        appendMessageTag(LR, data.email, data.message, data.name);
+    }
+	
+    // * 3 메세지 태그 append
+    function appendMessageTag(LR_className, email, message, name) {
+         
+        const chatLi = createMessageTag(LR_className, email, message, name);
+     
+        //console.log(chatLi);
+        $('div.chatDiv').append(chatLi);
+     
+        // 스크롤바 아래 고정
+        $('div.chatDiv').scrollTop($('div.chatDiv').prop('scrollHeight'));
+    }
+    
+ 	// * 4 메세지 태그 생성
+    function createMessageTag(LR_className, email, message, name) {
+     
+ 		//console.log(LR_className +email+message +name);
+         // 형식 가져오기
+         let chatLi = $("div.chatDiv ul li").clone();
+
+         
+         console.log(chatLi);
+         
+         chatLi.find('.chat').addClass(LR_className);              	// left : right 클래스 추가
+         // find() : chatLi의 하위 요소 찾기
+         chatLi.find('.sender div').text(name);      	// 이름 추가
+         chatLi.find('.chat p').text(message); 			// 메세지 추가
+         chatLi.find('.chat p').addClass("message");
+         chatLi.find('.sender div').addClass(LR_className);
+         
+         console.log(chatLi);
+         return chatLi;
+    };
 	</script>   
 
 

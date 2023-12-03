@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ChatRoom {
-    private String roomId;           // 방 번호
+    private String roomNo;           // 방 번호
     private String userEmail;       // 사용자 이메일
     private String userName;       // 사용자 이름
     private String userPic;        // 사용자 사진 

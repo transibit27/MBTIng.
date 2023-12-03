@@ -26,7 +26,7 @@
         insert into CHATROOM values(CNO_SEQ.NEXTVAL,
         						   #{userEmail},
         						   #{userName},
-        						   #{masterPic},
+        						   #{userPic},
         						   #{masterEmail},
         						   #{masterName},
         						   #{masterPic}, 
@@ -39,4 +39,28 @@
           AND MASTER_EMAIL = #{masterEmail}
     </select>
     
+    <select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM
+        WHERE USER_EMAIL = #{userEmail} OR MASTER_EMAIL = #{userEmail}
+    </select>
+    
+    <select id="chatRoom" parameterType="string" resultMap="chatRoomResultSet">
+    	SELECT * FROM CHATROOM 
+    	WHERE USER_EMAIL = #{userEmail} AND MASTER_EMAIL = #{masterEmail}
+    
+    </select>
+    
+    <select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM 
+        WHERE ROOM_NO = #{roomNo} 
+    </select>
+    
+    <insert id="insertMessage" parameterType="ChatMessage">
+        <if test="sessionCount == 1">
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CHNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2)
+        </if>
+        <if test="sessionCount == 2">
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CHNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2)
+        </if>
+    </insert>
 </mapper>
