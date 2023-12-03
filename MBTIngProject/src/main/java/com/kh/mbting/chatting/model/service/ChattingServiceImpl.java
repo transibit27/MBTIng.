@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.mbting.chatting.model.dao.ChattingDao;
-import com.kh.mbting.chatting.model.vo.Chatting;
 
 @Service
 public class ChattingServiceImpl implements ChattingService{
@@ -18,15 +17,5 @@ public class ChattingServiceImpl implements ChattingService{
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
-	@Override
-	public ArrayList<Chatting> chattingList(int roomNo) {
-		return chattingDao.chattingList(sqlSession, roomNo);
-	}
-
-	@Override
-	public int sendChatting(Chatting c) {
-		return chattingDao.sendChatting(sqlSession, c);
-	}
 
 }

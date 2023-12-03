@@ -12,7 +12,6 @@
 	<typeAliases>
 		<typeAlias type="com.kh.mbting.board.model.vo.Board" alias="board"/>	
 		<typeAlias type="com.kh.mbting.member.model.vo.Member" alias="member"/>	
-		<typeAlias type="com.kh.mbting.chatting.model.vo.Chatting" alias="chatting"/>	
 		<typeAlias type="com.kh.mbting.notice.model.vo.Notice" alias="notice"/>	
 	</typeAliases>
 	
