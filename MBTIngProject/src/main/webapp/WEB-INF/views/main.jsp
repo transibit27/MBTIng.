@@ -373,6 +373,7 @@
 					
 					<table id="topViewInnerTable">
 					  <tr class="topViewTr">
+					
 					  </tr>
 				  </table>
 				  </div>
@@ -487,11 +488,13 @@ MBTIng 덕분에 제 운명을 만났어요....!
   			 let resultStr = "";
   			
   			 console.log(result);
+  			 
+  			 let num		  = 1;
+  			 
   			 for(let i = 0; i < result.length; i++) {
   				 
   				let roomNo    = result[i].myRoomNo;
   				let profile	  = result[i].profileImg;
-  				
   				resultStr += 
   				    "<td style='border: none;'>" + 
   				    "<div class='flip-card'>" + 
@@ -505,14 +508,32 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				                "</div>" + 
   				            "</div>" +
   				            "<div class='flip-card-back'>" + 
-  				                "<button onclick=\"location.href='createChat.do'\">채팅하기</button>" + 
+  				                "<button onclick='createChat(" + num + ");'>채팅하기</button>" + 
   				            "</div>" +
   				        "</div>" +
   				    "</div>" +
+  				    "<input type='hidden' id='masterEmail" + num + "' name='masterEmail" + (num) + "' value=''>" +
+  				  	"<input type='hidden' id='masterName" + num + "' name='masterName" + (num) + "' value=''>" +
+  					"<input type='hidden' id='masterPic" + num + "' name='masterPic" + (num++) + "' value=''>" +
   				    "</td>";
-				 
 				 $(".topViewTr").html(resultStr);
 			 }
+  			 
+  			 $("#masterEmail1").val(result[0].email);
+  			 $("#masterEmail2").val(result[1].email);
+  			 $("#masterEmail3").val(result[2].email);
+  			 $("#masterEmail4").val(result[3].email);
+  			 
+  			 $("#masterName1").val(result[0].userName);
+ 			 $("#masterName2").val(result[1].userName);
+ 			 $("#masterName3").val(result[2].userName);
+ 			 $("#masterName4").val(result[3].userName);
+ 			 
+ 			 $("#masterPic1").val(result[0].profileImg);
+ 			 $("#masterPic2").val(result[1].profileImg);
+ 			 $("#masterPic3").val(result[2].profileImg);
+ 			 $("#masterPic4").val(result[3].profileImg);
+ 			 
   		 },
   		 error	 : function() {
   			 console.log("top 4명 분석에 실패했습니다.");
@@ -522,6 +543,31 @@ MBTIng 덕분에 제 운명을 만났어요....!
   	});
   </script>
 		
+  <script>
+  
+  	function createChat(num) {
+  		
+  		console.log(num);
+
+  		$.ajax({
+  			url  : "createChat.do",	
+  			type : "post",
+  			data : {masterEmail : $("#masterEmail" + num).val(),
+  					masterName  : $("#masterName" + num).val(),
+  					masterPic   : $("#masterPic" + num).val()},
+  			success : function(result) {
+  				 console.log(result);
+  			},
+  			error : function() {
+  				console.log("createChat 통신 실패");
+  			}
+  		
+  		});
+  		
+  		
+  		
+  	}
+  </script>
 <!-- swipe 영역 -->
 	<div class="wrap">
 		<div id="content_1">

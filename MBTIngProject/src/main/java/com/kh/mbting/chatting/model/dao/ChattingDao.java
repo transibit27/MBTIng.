@@ -16,4 +16,7 @@ public class ChattingDao {
         return sqlSession.insert("chatMapper.createChat", room);
     }
 
+    public ChatRoom searchChatRoom(ChatRoom room) {
+        return sqlSession.selectOne("chatMapper.searchChatRoom", room);
+    }
 }

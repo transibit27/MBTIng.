@@ -22,6 +22,12 @@ public class ChattingServiceImpl implements ChattingService{
 		return chattingDao.createChat(room);
 	}
 
+	@Override
+	public ChatRoom searchChatRoom(ChatRoom room) {
+		return chattingDao.searchChatRoom(room);
+	}
+
+	
 	
 	
 	

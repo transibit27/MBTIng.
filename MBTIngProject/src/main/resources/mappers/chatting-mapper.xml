@@ -22,14 +22,21 @@
     </resultMap>
     
 
-	<insert id="createChat" parameterType="ChatRoom">
+	<insert id="createChat" parameterType="chatRoom">
         insert into CHATROOM values(CNO_SEQ.NEXTVAL,
         						   #{userEmail},
         						   #{userName},
-        						   #{masterPic}),
+        						   #{masterPic},
         						   #{masterEmail},
         						   #{masterName},
-        						   #{masterPic})
+        						   #{masterPic}, 
+        						   Default)
     </insert>
+    
+    <select id="searchChatRoom" parameterType="chatRoom" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM
+        WHERE USER_EMAIL   = #{userEmail} 
+          AND MASTER_EMAIL = #{masterEmail}
+    </select>
     
 </mapper>
