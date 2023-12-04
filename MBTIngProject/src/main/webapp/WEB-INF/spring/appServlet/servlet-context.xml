@@ -38,7 +38,7 @@
 		</interceptor>
 	</interceptors>
 	
-	<beans:bean class="com.kh.mbting.chatting.server.WebSocketServer"
+	<beans:bean class="com.kh.mbting.chatting.controller.WebSocketHandler"
 				id="chatServer" />
 				
 	<websocket:handlers>
