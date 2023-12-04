@@ -351,22 +351,18 @@
                 </div>
             </div>
 
-            <div id="chatDiv">
-                        <c:forEach var="chat" items="${requestScope.chattingList}" >
-	                         <c:choose>
-			                         <c:when test="${sessionScope.loginMember.userNo eq chat.userNo}">
-			                            <div class="message Right">
-			                                <p class="text">${chat.message}</p>
-			                            </div>
-			                     	 </c:when>
-			                     	 <c:otherwise>
-				                     	 <div class="message Left">
-				                                <p class="text">${chat.message}</p>
-				                         </div>
-			                     	 </c:otherwise>
-		                     </c:choose>
-                        </c:forEach>
-             </div>
+             <div class="chatDiv">
+		        <ul>
+		            <li>
+		                <div class="sender">
+		                    <div></div>
+		                </div>
+		                <div class="chat">
+		                    <p></p>
+		                </div>
+		            </li>
+		        </ul>
+	    	</div>
              
              
              <div id="profileDiv">
@@ -410,6 +406,8 @@
                 </table>
            </div>
         </div>
+      
+        </div>
         <div id="chatInput" >
             <table>
                 <tr>
@@ -418,10 +416,8 @@
                 <tr>
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
-                        <input type="hidden" name="roomNo" value="${sessionScope.loginMember.matchRoomNo}">
-                         <input type="hidden" name="userNo" value="${sessionScope.loginMember.userNo}">
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 97%; " onclick="send();" >전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="sendMessage();" >전송</button></td>
                 </tr>
             </table>
         </div>
