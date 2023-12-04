@@ -316,12 +316,12 @@
                 <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
                     <table>
                         <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김민제</td>
-                            <td id="chatListTime">12:06분</td>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/inyeop.png" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김인엽</td>
+                            <td id="chatListTime">18:14분</td>
                         </tr>
                         <tr >
-                            <td id="chatListText">안녕하세요 ㅎㅎ 이쁘시네요 연락 되실까요 ?</td>
+                            <td id="chatListText">형 뭐해 ? 보고싶다</td>
                         </tr>
                     </table>
                 </div>
