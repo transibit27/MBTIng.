@@ -11,7 +11,7 @@
 	<!-- vo 클래스 추가 시 등록해 주세요! -->
 	<typeAliases>
 		<typeAlias type="com.kh.mbting.board.model.vo.Board" alias="board"/>
-		<typeAlias type="com.kh.mbting.board.model.vo.BoardImg" alias="boardImg"/>
+		<typeAlias type="com.kh.mbting.board.model.vo.BoardImg" alias="boardImg"/> 
 		<typeAlias type="com.kh.mbting.member.model.vo.Member" alias="member"/>	
 		<typeAlias type="com.kh.mbting.notice.model.vo.Notice" alias="notice"/>	
 	</typeAliases>
