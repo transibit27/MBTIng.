@@ -189,11 +189,11 @@
         </div>
 
         <script>
+        	
             $(function() {              
                 topBoardList();
                 setInterval(topBoardList, 300000);            
             });
-            
             function topBoardList() {                
                 $.ajax({
                     url : "topList.bo",
@@ -202,11 +202,12 @@
                         let resultStr = "";
                         for(let i in result) {
                             resultStr += "<td style='width:300px;'>"
-                            		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='https://blog.kakaocdn.net/dn/bgSQVq/btrGuTlFCx0/yi91LDa5v6d9SDPe8NME6k/img.gif' style='width:150px; height:150px'></a>"
+                            		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px'></a>"
                                        +	"<p>" + result[i].boardTitle + "<br>"
                                        +	"💑" + result[i].userNo
                             resultStr += "</p></td>";
-                        }                     
+                            console.log(result[i]);
+                        }                
                         $("#boardList tr").html(resultStr);                        
                     }
                 });	
@@ -227,8 +228,7 @@
         <div class="reviewlist" align="left">
             <c:forEach var="b" items="${ requestScope.list }">
                 <div class="thumbnail" align="center">
-                    <a href="detail.bo?bno=${ b.boardNo }"><img src="https://media.tenor.com/91NRJO-HG0IAAAAi/%EC%9B%80%EC%A7%81%EC%9D%B4%EB%8A%94%EB%A1%9C%EC%95%84%EC%BD%98-%EB%AA%A8%EC%BD%94%EC%BD%94.gif"></a>
-
+                    <a href="detail.bo?bno=${ b.boardNo }"><img src="${pageContext.request.contextPath}/${ b.changeName }"></a>
                     <P>${ b.boardTitle }<br>💑${ b.userNo }</P>
 
                     <!-- 추후에 좋아요 수 조회 기능 추가 예정 -->

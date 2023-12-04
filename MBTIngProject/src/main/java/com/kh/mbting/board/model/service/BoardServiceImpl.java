@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mbting.board.model.dao.BoardDao;
 import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.board.model.vo.BoardImg;
 import com.kh.mbting.common.model.vo.PageInfo;
 
 @Service
@@ -40,6 +41,12 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	@Transactional
+	public int insertBoardImg(BoardImg bi) {
+		return boardDao.insertBoardImg(sqlSession, bi);
+	}
+	
+	@Override
+	@Transactional
 	public int increaseCount(int boardNo) {
 		return boardDao.increaseCount(sqlSession, boardNo);
 	}
@@ -48,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
 	public Board selectBoard(int boardNo) {
 		return boardDao.selectBoard(sqlSession, boardNo);
 	}
-
+	
 	@Override
 	@Transactional
 	public int deleteBoard(int boardNo) {
@@ -65,5 +72,5 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectTopBoardList() {
 		return boardDao.selectTopBoardList(sqlSession);
 	}
-	
+
 }

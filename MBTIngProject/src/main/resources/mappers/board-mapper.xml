@@ -11,6 +11,8 @@
 		<result column="STATUS" property="status"></result>
 		<result column="USER_NO" property="userNo"></result>
 		<result column="MATCH_NO" property="matchNo"></result>
+		<result column="ORIGIN_NAME" property="originName"></result>
+		<result column="CHANGE_NAME" property="changeName"></result>
 	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
@@ -20,24 +22,31 @@
 	</select>
 	
 	<select id="selectList" resultMap="boardResultSet">
-		SELECT BOARD_NO
-		     , BOARD_TITLE
-		     , USER_NO
-		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
-		  FROM BOARD
-         WHERE STATUS = 'Y'
+		SELECT B.BOARD_NO
+		     , B.BOARD_TITLE
+		     , B.USER_NO
+		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "B.ENROLL_DATE"
+			 , BI.ORIGIN_NAME
+			 , BI.CHANGE_NAME
+		  FROM BOARD B, BOARDIMG BI
+         WHERE B.BOARD_NO = BI.BOARD_NO (+)
+		   AND B.STATUS = 'Y'
+		   AND BI.THUMBNAIL = 'Y'
 		 ORDER BY BOARD_NO DESC
 	</select>
 	
 	<select id="selectTopBoardList" resultMap="boardResultSet">
 		SELECT ROWNUM, B.* 
-		  FROM (SELECT BOARD_NO
-		             , BOARD_TITLE
-		             , USER_NO
-		             , VIEWS
-		             , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
-		          FROM BOARD
-		         WHERE STATUS = 'Y'
+		  FROM (SELECT BO.BOARD_NO
+		             , BO.BOARD_TITLE
+		             , BO.USER_NO
+		             , TO_CHAR(BO.ENROLL_DATE, 'YYYY-MM-DD') AS "BO.ENROLL_DATE"
+		             , BI.ORIGIN_NAME
+		             , BI.CHANGE_NAME
+		          FROM BOARD BO, BOARDIMG BI
+		         WHERE BO.BOARD_NO = BI.BOARD_NO (+)
+		           AND BO.STATUS = 'Y'
+		           AND BI.THUMBNAIL = 'Y'
 		         ORDER BY VIEWS DESC) B
 		 WHERE ROWNUM BETWEEN 1 AND 4
 	</select>
@@ -51,6 +60,19 @@
 		                , #{boardTitle}
 		                , #{userNo}
 		                , #{boardContent})
+	</insert>
+	
+	<insert id="insertBoardImg" parameterType="boardImg">
+		INSERT INTO BOARDIMG(IMG_NO
+							 , ORIGIN_NAME
+							 , CHANGE_NAME
+							 , THUMBNAIL
+							 , BOARD_NO)
+						VALUES(BMG_SEQ.NEXTVAL
+							 , #{originName}
+							 , #{changeName}
+							 , #{thumbnail}
+							 , BNO_SEQ.CURRVAL)
 	</insert>
 	
 	<update id="increaseCount" parameterType="_int">
@@ -71,7 +93,7 @@
 		 WHERE BOARD_NO = #{boardNo}
 		   AND STATUS = 'Y'
 	</select>
-	
+
 	<update id="deleteBoard" parameterType="_int">
 		UPDATE BOARD
 		   SET STATUS = 'N'

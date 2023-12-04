@@ -1,12 +1,15 @@
 package com.kh.mbting.board.model.dao;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.board.model.vo.BoardImg;
 import com.kh.mbting.common.model.vo.PageInfo;
 
 @Repository
@@ -27,6 +30,10 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
 
+	public int insertBoardImg(SqlSessionTemplate sqlSession, BoardImg bi) {
+		return sqlSession.insert("boardMapper.insertBoardImg", bi);
+	}
+	
 	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
@@ -34,7 +41,7 @@ public class BoardDao {
 	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
-
+	
 	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}

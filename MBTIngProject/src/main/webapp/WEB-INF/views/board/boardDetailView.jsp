@@ -136,16 +136,12 @@
             <div class="reviewdetail-content">
 
                 <!-- 썸네일 사진 불러오는 기능 일단 주석처리 -->
-                <!--
+                
                 <img src="">
-                -->
-
+                
                 <p>${ requestScope.b.boardContent }</p>
 
-                <!-- 나머지 사진 불러오는 기능 일단 주석처리 -->
-                <!--
                 <img src="">
-                -->
 
             </div>
             <div class="reviewdetail-like" align="center">
@@ -163,7 +159,7 @@
                 <button onclick="postFormSubmit(2);">삭제</button>
                 <form id="postForm" action="" method="post">
                     <input type="hidden" name="bno" value="${ requestScope.b.boardNo }">
-                    <!-- 첨부사진 관련 내용 작성할 곳 -->
+                    <input type="hidden" name="filePath" value="${ requestScope.b.changeName }">
                 </form>
                 <script>
                     function postFormSubmit(num) {

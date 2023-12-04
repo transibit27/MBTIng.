@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.mbting.board.model.service.BoardService;
 import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.board.model.vo.BoardImg;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
 
@@ -48,13 +49,28 @@ public class BoardController {
 	}
 	
 	@PostMapping("insert.bo")
-	public String insertBoard(Board b, HttpSession session, Model model) {
-		int result = boardService.insertBoard(b);		
+	public String insertBoard(Board b, BoardImg bi, MultipartFile[] upfile, HttpSession session, Model model) {
+		int result = boardService.insertBoard(b);
+		for(int i = 0; i <= 3; i++ ) {
+			if(!upfile[i].getOriginalFilename().equals("")) {
+				String thumbnail = "";
+				if(i == 0) {
+					thumbnail = "Y";
+				} else {
+					thumbnail = "N";
+				}
+				String changeName = saveFile(upfile[i], session);
+				bi.setOriginName(upfile[i].getOriginalFilename());
+				bi.setChangeName("resources/uploadFiles/" + changeName);
+				bi.setThumbnail(thumbnail);
+				boardService.insertBoardImg(bi);
+			}
+		}		
 		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 만남후기가 등록되었습니다.");			
-			return "redirect:/list.bo";			
+			session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
+			return "redirect:/list.bo";
 		} else {			
-			model.addAttribute("errorMsg", "만남후기 등록 실패");			
+			model.addAttribute("errorMsg", "게시글 등록 실패");
 			return "common/errorPage";
 		}
 	}
