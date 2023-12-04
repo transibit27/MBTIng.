@@ -13,13 +13,31 @@
 <style>
     
 
-    .profile-menu-title, .ptlist-wrap{
-        width: 800px;
+    .profile-menu-title{
         margin: auto;
-        margin-top: 50px;
+        margin-top: 100px;
         margin-bottom: 50px;
+        height: 100px;
+        width: 1200px;
+        border: 1px solid;
+        border-radius: 10px;
+        background-image:url(https://dudeplace.co/wp-content/uploads/2021/04/1.%E0%B8%8B%E0%B8%B5%E0%B8%A3%E0%B8%B5%E0%B8%AA%E0%B9%8C%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%B5-Please-Dont-Meet-the-Man-%E0%B8%9B%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B9%83%E0%B8%88-%E0%B9%80%E0%B8%AD%E0%B9%84%E0%B8%AD%E0%B8%A7%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B8%A3%E0%B8%B1%E0%B8%81.jpg);
+        background-size: cover;
+        background-position:10% 50%;
+        
+        font-size: 26px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        line-height: 100px;
     }
     
+    .ptlist-wrap{
+        margin: auto;
+        width: 1200px;
+        min-height: 500px;
+    }
+
     /*
     ////////////////////
     내 후기 리스트 관련 스타일
@@ -74,6 +92,7 @@
     -o-border-radius: 5px;
 	overflow: hidden;
     }
+
     .list_thumbimg img {
         width: 100%;
         height: 100%;
@@ -86,8 +105,9 @@
     ///////////
     */
     .paging-area {
-    width: 800px;
+    width: 1000px;
     margin: auto;
+    margin-bottom: 100px;
     text-align: center;
 
 	}
@@ -125,15 +145,15 @@
     </script>
 
     <div class="profile-menu-title">
-        <h5>내 후기</h5>
+        내 후기
     </div>
-
 
     <div class="ptlist-wrap">
         <ul class="ptlist">
         
         	<c:forEach var="b" items="${ requestScope.list }">
 			    <li>                
+                    <input class="bno" type="hidden" value=${b.boardNo}>
 	                <div>
 	                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
 	                    <div>
@@ -150,6 +170,17 @@
            
         </ul>
     </div>
+
+    <!-- 상세 보기 용 스크립트-->
+    <script>
+        $(".ptlist>li").click(function(){
+
+            let bno = $(this).children(".bno").val();
+
+            location.href = "detail.bo?bno=" + bno;
+        })
+    </script>
+
 
 	<!-- 페이징 바 -->
     <div class="paging-area">

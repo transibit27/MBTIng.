@@ -6,9 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
- 	
+
+<!-- 폰트(notosans)-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+  
+
 <style>
+    * {font-family: 'Noto Sans KR', sans-serif;}
+	
 	.my-outer{
 		width: 100%;
         margin: auto;
@@ -22,7 +29,7 @@
     #profile-header{
         margin: auto;
         margin-top: 50px;
-        width: 800px;
+        width: 1200px;
        
         display: flex;
     }
@@ -59,8 +66,8 @@
     }
 
     #profile-img{
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
         background-image: url("${pageContext.request.contextPath}${sessionScope.loginMember.profileImg}");
         background-size: cover;
@@ -72,10 +79,11 @@
         margin: auto;
         margin-top: 20px;
         border: 1px solid pink;
-        width: 800px;
+        width: 1200px;
     }
     #mymenu{
         margin: auto;
+		font-size: 16px;
     }
 
     .emptymenu{
@@ -96,17 +104,17 @@
     /*마이페이지 폰트 스타일*/
     #profileName{
         font-weight: bold;
-        font-size: 15px;
+        font-size: 20px;
     }
 
     #profile-stat-value{
-        font-size: 12px;
+        font-size: 16px;
         text-align: center;
         color: gray;
     }
 
     #profile-stat{
-        font-size: 15px;
+        font-size: 18px;
         text-align: center;
         font-weight: bold;
     }
@@ -172,7 +180,7 @@
 	                </tr>
 	    
 	            </table>
-	            <button id="reset-pass" style="float: right;">비밀번호 초기화</button>
+	        
 	        </div>
 	        
             <!-- 상단 회원 상태 표시용 스크립트 -->
@@ -196,37 +204,34 @@
 	             	setInterval(proposer,5000);
 	             	
 	             	/* 매칭 신청자 수 확인용 스크립트 */
-	             	function proposer(){
-	             		
-	             		$.ajax({
-	             			url : "proposerCount.me",
-	             			type : "get",
-	             			data : {"userNo":${sessionScope.loginMember.userNo}}, 
-	             			success : function(result){
-	             				
-	             				$("#profile-stat-value").children('td:eq(2)').html(result);
-	             				
-	             			},
-	             			error : function(){
-	             				console.log("매칭 신청자 확인용 ajax 통신 실패	")
-	             			}
-	             			
-	             		})	// ajax 끝
-	             	} // 펑션 끝
-	             	
-            	})
+			})
 
-            </script>
+			function proposer(){
+	             		
+				$.ajax({
+					url : "proposerCount.me",
+					type : "get",
+					data : {userNo : ${sessionScope.loginMember.userNo}}, 
+					success : function(result){
+						
+						$("#profile-stat-value").children('td:eq(2)').html(result);
+						
+					},
+					error : function(){
+						console.log("매칭 신청자 확인용 ajax 통신 실패	")
+					}
+					
+				});	// ajax 끝
+			} // 펑션 끝
+			</script>
        
-	
-	        
 	        <div id="menuLine">
 	        </div>
 	        <table id="mymenu">
 	            <tr>
 	                <td class="emptymenu"></td>
 	                <td class="myMenus" id="myInfo">
-	                	내 정보
+	                	내 프로필
 	                </td>
 	                <td class="emptymenu"></td>
 	                <td class="myMenus" id="myMbting">
