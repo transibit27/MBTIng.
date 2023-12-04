@@ -572,7 +572,8 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		  </div>
 		</div>	
 	</div>
-  <script>
+
+    <script>
   	$(function() {
   		
   		$.ajax({
@@ -584,11 +585,13 @@ MBTIng 덕분에 제 운명을 만났어요....!
   			 let resultStr = "";
   			
   			 console.log(result);
+  			 
+  			 let num		  = 1;
+  			 
   			 for(let i = 0; i < result.length; i++) {
   				 
   				let roomNo    = result[i].myRoomNo;
   				let profile	  = result[i].profileImg;
-  				
   				resultStr += 
   				    "<td style='border: none;'>" + 
   				   "<div class='like'><button id='button' onclick='requestMatch(this);' > <span>채팅신청</span></button></div>" +
@@ -603,14 +606,29 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				                "</div>" + 
   				            "</div>" +
   				            "<div class='flip-card-back'>" + 
-  				                "<button onclick=\"location.href='chatting.do'\">채팅하기</button>" + 
+  				                "<button onclick=\"location.href='createChat(num);'\">채팅하기</button>" + 
   				            "</div>" +
   				        "</div>" +
   				    "</div>" +
   				    "</td>";
-				 
 				 $(".topViewTr").html(resultStr);
 			 }
+  			 
+  			 $("#masterEmail1").val(result[0].email);
+  			 $("#masterEmail2").val(result[1].email);
+  			 $("#masterEmail3").val(result[2].email);
+  			 $("#masterEmail4").val(result[3].email);
+  			 
+  			 $("#masterName1").val(result[0].userName);
+ 			 $("#masterName2").val(result[1].userName);
+ 			 $("#masterName3").val(result[2].userName);
+ 			 $("#masterName4").val(result[3].userName);
+ 			 
+ 			 $("#masterPic1").val(result[0].profileImg);
+ 			 $("#masterPic2").val(result[1].profileImg);
+ 			 $("#masterPic3").val(result[2].profileImg);
+ 			 $("#masterPic4").val(result[3].profileImg);
+ 			 
   		 },
   		 error	 : function() {
   			 console.log("top 4명 분석에 실패했습니다.");
@@ -619,15 +637,64 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		
   	});
   </script>
+		
+  <script>
+  
+  	function getRoomList() {
+  		
+  	}
+  		 $.ajax({
+             url:"chatRoomList.do",
+             data:{
+                 userEmail:"${sessionScope.loginMember.email}"
+             },
+             dataType:"json",
+             async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
+             success:function(data){
+            	 
+            	 for(var i in data) {
+            		 //로그인한 상태인 내가 채팅을 건 상태의 채팅 내역이면
+            		 if(data[i].userEmail == "${sessionScope.loginMember.email}"){
+            			 
+            		 }
+            	 }
+             }
+  	});
+  
+  	function createChat(num) {
+  		let masterEmail = $("#masterEmail" + num).val();
+  		let masterName  = $("#masterName" + num).val();
+  		let masterPic	= $("#masterPic" + num).val();
+  		
+  		$.ajax({
+  			url  : "createChat.do",	
+  			type : "post",
+  			data : {masterEmail : masterEmail,
+  					masterName  : masterName,
+  					masterPic   : masterPic},
+  			success : function(roomNo) {
+  				 //console.log(result);
+  				 convertScreen(roomNo);
+  				
+  			},
+  			error : function() {
+  				console.log("createChat 통신 실패");
+  			}
+  		
+  		});
 	
- <script>
- 	function requestMatch(e) {
+  	}
+  	
+  	function convertScreen(roomNo) {
+  		let createRoomNo = roomNo;
+  		window.location = "http://localhost:8081/mbting/convert.ch?roomNo=" + createRoomNo;
+  	}
+  	
+  	function requestMatch(e) {
 		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
 		e.style.backgroundColor = "#f54d3e";
  	}
- 
- </script>
-	
+  </script>
 	
   <script>
  	 window.addEventListener("wheel", function(e){
