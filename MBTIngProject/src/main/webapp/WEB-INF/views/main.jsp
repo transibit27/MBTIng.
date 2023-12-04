@@ -591,7 +591,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				
   				resultStr += 
   				    "<td style='border: none;'>" + 
-  				   "<div class='like'><button id='button' onclick='requestMatch();'> <span>채팅신청</span></button></div>" +
+  				   "<div class='like'><button id='button' onclick='requestMatch(this);' > <span>채팅신청</span></button></div>" +
   				    "<div class='flip-card'>" + 
   				        "<div class='flip-card-inner'>" + 
   				            "<div class='gradient-image flip-card-front'>" + 
@@ -621,8 +621,9 @@ MBTIng 덕분에 제 운명을 만났어요....!
   </script>
 	
  <script>
- 	function requestMatch() {
+ 	function requestMatch(e) {
 		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
+		e.style.backgroundColor = "#f54d3e";
  	}
  
  </script>
