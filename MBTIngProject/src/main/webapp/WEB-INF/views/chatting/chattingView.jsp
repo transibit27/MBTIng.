@@ -15,15 +15,14 @@
     
 <style>
 .wrap {
-    width : 1300px;
+    width : 1500px;
     height : 900px;
     margin: auto;
     border: double 3px rgb(255, 149, 166);
-    border-radius: 20px;
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .wrapPC {
-    width : 1200px;
+    width : 1550px;
     height : 700px;
     display: inline-block;
     display: flex;
@@ -32,12 +31,13 @@
 #profileDiv {
     width: 400px;
     height: 900px;
-    margin-left: 50px;
+    margin-left: 40px;
+    margin-right: 50px;
     background-color: #ffcece;
 }
 
 #profileDiv table {
-    width: 100%;
+    width: 400px;
     height: 100%;
 }
 
@@ -59,10 +59,15 @@
     height: 80%;
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
-
     overflow:auto;
     margin-top: 100px;
     margin-left: 100px;
+}
+
+#chatList {
+    width: 500px;
+    height: 900px;
+    border : 1px solid black;
 }
 
 .Right {
@@ -95,18 +100,74 @@
 }
 
 #chatInput {
-    width: 670px;
+    width: 650px;
     height: 200px;
-    margin-left: 540px;
+    margin-left: 430px;
 }
 
 #chatInput > table {
     width: 100%;
-    height: 90%;;
+    height : 95%;
 }
 
 #chatInput textarea {
     resize: none;
+}
+
+#chatInput td {
+    height : 100%;
+}
+
+.chatList_box {
+    border: 1px solid rgb(165, 165, 165);
+    height : 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+#chatList {
+    overflow : auto;
+    width : 450px;
+    height : 900px;
+}
+
+
+.chatList_box table {
+    width : 100%;
+    height : 80%; 
+}
+
+.chatList_box img {
+    width : 50px;
+    height : 50px;
+    border-radius: 30px;
+}
+
+#chatListText {
+    font-size: 10px;
+    color: gray;
+    vertical-align: top;
+    width :200px;
+}
+
+#chatListName {
+    font-weight: bold;
+    vertical-align: bottom;
+}
+
+#chatListTime {
+    text-align: center;
+    font-size: 10px;
+    color: gray;
+}
+
+#chatListPic {
+    text-align: center;
+    width : 60px;
+    height: 60px;
+    margin-left: 10px;
 }
 /*-------------------------전송버튼 css---------------------------------*/
 #submitButton {
@@ -166,45 +227,128 @@
 <br><br><br><br>
     <div class="wrap">
         <div class="wrapPC">
-            <div id="profileDiv">
-               
-                 <table > 
-                    <tr>
-                        <td colspan="3" style="height: 300px; padding-top: 100px; "><img src="https://thumb.mtstarnews.com/06/2023/03/2023033020282257826_1.jpg/dims/optimize"> </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height: 10px;"><p style="font-size: 60px;">임유나</p></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height: 10px;" ><p style="font-size : 30px;">intj</p></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="height: 10px;"><p>클라이밍 좋아해요 ㅎㅎ 운동! </p></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">유나에 대한 후기 남기기</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                    <tr>
-                        <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
-                        <td><div><button id="submitButton" onclick="">신고하기</button></div></td>
-                        <td> <div><button id="submitButton" onclick="disconnect();">채팅 종료</button></div></td>
-                    </tr>
-                 </table>
+
+            <div id="chatList">
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김제니</td>
+                            <td id="chatListTime">12:06분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">안녕하세요 ㅎㅎ  뭐하세요 ?</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/suzi.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">배수지</td>
+                            <td id="chatListTime">12:12분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">오빠 뭐해요??</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/sana.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김사나</td>
+                            <td id="chatListTime">08:04분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">사나 지금 옷 사러 와써ㅓㅓㅓ 이따 보자 !! ♡</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/ina.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">설인아</td>
+                            <td id="chatListTime">14:15분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">저는 지금 밥 먹고 있어요 ㅋㅋㅋ 밥 드셨어요 오늘?</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/karina.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">유지민</td>
+                            <td id="chatListTime">16:24분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">아니 ㅋㅋㅋ 나 지금 학교 수업 끝나서 집 가고 있어 오빠는?</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);' style="background-color : pink;">
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/winter2.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김민정</td>
+                            <td id="chatListTime">17:24분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">아냐 나 곧 끝나니까 이따가 전화할게 너 할 거 하고있어</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/ning.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">닝닝</td>
+                            <td id="chatListTime">18:09분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">닝닝닝니닝니인닝</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김민제</td>
+                            <td id="chatListTime">12:06분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">안녕하세요 ㅎㅎ 이쁘시네요 연락 되실까요 ?</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김민제</td>
+                            <td id="chatListTime">12:06분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">안녕하세요 ㅎㅎ 이쁘시네요 연락 되실까요 ?</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
+                            <td id="chatListName" style="height: 35px;">김민제</td>
+                            <td id="chatListTime">12:06분</td>
+                        </tr>
+                        <tr >
+                            <td id="chatListText">안녕하세요 ㅎㅎ 이쁘시네요 연락 되실까요 ?</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <div id="chatDiv">
@@ -223,6 +367,48 @@
 		                     </c:choose>
                         </c:forEach>
              </div>
+             
+             
+             <div id="profileDiv">
+               
+                <table > 
+                   <tr>
+                       <td colspan="3" style="height: 300px; padding-top: 100px; "><img src="${pageContext.request.contextPath}/resources/images/profile/winter2.jpg"> </td>
+                   </tr>
+                   <tr>
+                       <td colspan="3" style="height: 10px; "><p style="font-size: 60px;" >김민정</p></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3"></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3" style="height: 10px;" ><p style="font-size : 30px;">intj</p></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3"></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3" style="height: 10px;"><p> 순백의 하얗다 해서 윈터가 별명입니답 </p></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3"></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3"></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3">김민정에 대한 후기 남기기</td>
+                   </tr>
+                   <tr>
+                       <td colspan="3"></td>
+                   </tr>
+                   <tr>
+                       <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
+                       <td><div><button id="submitButton" onclick="">신고하기</button></div></td>
+                       <td> <div><button id="submitButton" onclick="disconnect();">채팅 종료</button></div></td>
+                   </tr>
+                </table>
+           </div>
         </div>
         <div id="chatInput" >
             <table>
@@ -235,12 +421,12 @@
                         <input type="hidden" name="roomNo" value="${sessionScope.loginMember.matchRoomNo}">
                          <input type="hidden" name="userNo" value="${sessionScope.loginMember.userNo}">
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="send();" >전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 97%; " onclick="send();" >전송</button></td>
                 </tr>
             </table>
         </div>
     </div>
-         
+        
   <script>
     let socket;
 	//연결 실행 시 실행될 함수

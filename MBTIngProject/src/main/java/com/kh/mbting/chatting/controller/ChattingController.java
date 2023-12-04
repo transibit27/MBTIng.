@@ -22,4 +22,8 @@ public class ChattingController {
 	@Autowired
 	private ChattingServiceImpl chattingService;
 	
+	@RequestMapping("chatting.do")
+	public String chatDo() {
+		return "chatting/chattingView";
+	}
 }

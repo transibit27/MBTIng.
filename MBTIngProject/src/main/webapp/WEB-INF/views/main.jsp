@@ -548,7 +548,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				                "</div>" + 
   				            "</div>" +
   				            "<div class='flip-card-back'>" + 
-  				                "<button onclick=\"location.href='chatting.do?roomNo="  + roomNo + "'\">채팅하기</button>" + 
+  				                "<button onclick=\"location.href='chatting.do'\">채팅하기</button>" + 
   				            "</div>" +
   				        "</div>" +
   				    "</div>" +
