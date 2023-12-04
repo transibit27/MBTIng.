@@ -14,6 +14,8 @@
 		<typeAlias type="com.kh.mbting.board.model.vo.BoardImg" alias="boardImg"/> 
 		<typeAlias type="com.kh.mbting.member.model.vo.Member" alias="member"/>	
 		<typeAlias type="com.kh.mbting.notice.model.vo.Notice" alias="notice"/>	
+		<typeAlias type="com.kh.mbting.chatting.model.vo.ChatRoom" alias="chatRoom"/>	
+		<typeAlias type="com.kh.mbting.chatting.model.vo.ChatMessage" alias="chatMessage"/>	
 	</typeAliases>
 	
 	<!-- 메퍼 파일 추가 시 등록해 주세요! -->

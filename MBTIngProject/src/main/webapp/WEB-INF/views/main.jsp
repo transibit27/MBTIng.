@@ -666,6 +666,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   	});
   
   	function createChat(num) {
+  		
   		let masterEmail = $("#masterEmail" + num).val();
   		let masterName  = $("#masterName" + num).val();
   		let masterPic	= $("#masterPic" + num).val();

@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="chattingMapper">
+<mapper namespace="chatMapper">
 
+    <resultMap type="ChatRoom" id="chatRoomResultSet">
+        <result property="roomNo" column="ROOM_NO" />
+        <result property="userEmail" column="USER_EMAIL" />
+        <result property="userName" column="USER_NAME" />        
+        <result property="userPic" column="USER_PRO_IMG" />
+        <result property="masterEmail" column="MASTER_EMAIL" />
+        <result property="masterName" column="MASTER_NAME" />
+        <result property="masterPic" column="MASTER_PRO_IMG" />
+    </resultMap>
+ 
+    <resultMap type="ChatMessage" id="chatMessageResultSet">
+        <result property="messageNo" column="MESSAGE_NO" />
+        <result property="roomNo" column="ROOM_NO" />
+        <result property="message" column="MESSAGE_CONTENT" />
+        <result property="name" column="USER_NAME" />
+        <result property="email" column="USER_EMAIL" />
+        <result property="unReadCount" column="UNREAD_COUNT" />
+    </resultMap>
+    
 
+	<insert id="createChat" parameterType="chatRoom">
+        insert into CHATROOM values(CNO_SEQ.NEXTVAL,
+        						   #{userEmail},
+        						   #{userName},
+        						   #{userPic},
+        						   #{masterEmail},
+        						   #{masterName},
+        						   #{masterPic}, 
+        						   Default)
+    </insert>
+    
+    <select id="searchChatRoom" parameterType="chatRoom" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM
+        WHERE USER_EMAIL   = #{userEmail} 
+          AND MASTER_EMAIL = #{masterEmail}
+    </select>
+    
+    <select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM
+        WHERE USER_EMAIL = #{userEmail} OR MASTER_EMAIL = #{userEmail}
+    </select>
+    
+    <select id="chatRoom" parameterType="string" resultMap="chatRoomResultSet">
+    	SELECT * FROM CHATROOM 
+    	WHERE USER_EMAIL = #{userEmail} AND MASTER_EMAIL = #{masterEmail}
+    
+    </select>
+    
+    <select id="selectChatRoom" parameterType="string" resultMap="chatRoomResultSet">
+        SELECT * FROM CHATROOM 
+        WHERE ROOM_NO = #{roomNo} 
+    </select>
+    
+    <insert id="insertMessage" parameterType="ChatMessage">
+        <if test="sessionCount == 1">
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CHNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2)
+        </if>
+        <if test="sessionCount == 2">
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CHNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2)
+        </if>
+    </insert>
 </mapper>
