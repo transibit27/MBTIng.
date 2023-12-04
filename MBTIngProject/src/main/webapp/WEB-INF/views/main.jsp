@@ -20,6 +20,11 @@
 <style>
 	* {
 		  box-sizing: border-box;
+		  
+	}
+	
+	html {
+    	overflow: hidden;
 	}
 	
 	body {
@@ -35,13 +40,22 @@
 			background-size: 10px 10px;
 			
 	}
+	
+	
+html, body {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    
+}
 
 	/*---------------------swiper를 위한 css-------------------------*/
 
 	/* 이미지 영역 사이즈 조절 */
     .swiper {
         width: 100%;
-        height: 1200px;
+		height : 100%;
     }
 
     /* 이미지 사이즈 조절 */
@@ -60,10 +74,10 @@
 /*--------------------------------폴라로이드 사진 -----------------------------*/
 	
 		.polaroid > img {
-		  max-width: 400px;
-		  height: auto;
+		  max-width: 330px;
+		  height: 290PX;
 		}
-		.wrapper {
+		#content_3 {
 		  width: 100%;
 		  padding: 0 2rem;
 		  text-align: center;
@@ -81,7 +95,7 @@
 		}
 
 		.caption > pre {
-			width : 400px;
+			width : 300px;
 			white-space: pre-wrap;
 		}
 		.item {
@@ -102,8 +116,8 @@
 		}
 		.item:nth-of-type(4n+1) .polaroid:before {
 		  transform: rotate(6deg);
-		  height: 20%;
-		  width: 47%;
+		  height: 250px;
+		  width: 300px;
 		  bottom: 30px;
 		  right: 12px;
 		  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
@@ -114,8 +128,8 @@
 		}
 		.item:nth-of-type(4n+2) .polaroid:before {
 		  transform: rotate(-6deg);
-		  height: 20%;
-		  width: 47%;
+		  height: 250px;
+		  width: 300px;
 		  bottom: 30px;
 		  left: 12px;
 		  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.4);
@@ -126,8 +140,8 @@
 		}
 		.item:nth-of-type(4n+4) .polaroid:before {
 		  transform: rotate(4deg);
-		  height: 20%;
-		  width: 47%;
+		  height: 300px;
+		  width: 250px;
 		  bottom: 30px;
 		  right: 12px;
 		  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
@@ -138,8 +152,8 @@
 		}
 		.item:nth-of-type(4n+3) .polaroid:before {
 		  transform: rotate(-4deg);
-		  height: 20%;
-		  width: 47%;
+		  height: 300px;
+		  width: 250px;
 		  bottom: 30px;
 		  left: 12px;
 		  box-shadow: 0 2.1rem 2rem rgba(0,0,0,0.3);
@@ -155,8 +169,8 @@
 		  position: absolute;
 		  z-index: -1;
 		  transform: rotate(0deg);
-		  height: 90%;
-		  width: 90%;
+		  height: 300px;
+		  width: 250px;
 		  bottom: 0%;
 		  right: 5%;
 		  box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
@@ -169,14 +183,27 @@
 			position: relative;
 		}
 		
+		.content {
+			width: 100%;
+		   	height: 100%;		
+		}
+		
 		#content {
 			margin-top: 0px;
-			background-color: pink;
+			width : 100%;
+		}
+		
+		 #content_2 , #content_3 , #content_4 {
+			height : 944px;
+			width : 100%;
 		}
 		#content_1 {
 			display : inline-block;
-			height : 900px;
+			width : 100%;
+			background-color: pink;
+			height : 830px;
 		}
+	
 
 		#Content1BigText {
 			font-size: 70px;
@@ -185,6 +212,17 @@
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
+			height : 30px;
+		}
+		#Content1BigText a {
+			text-decoration : none;
+			color : rgb(255, 142, 161);
+		}
+
+		#Content1BigText a:hover {
+			color : rgb(219, 250, 255);
+			cursor: pointer;
+			font-size : 73px;
 		}
 
 		#Content1SmallText {
@@ -236,11 +274,11 @@
 			/*filter: blur(3px);*/
 		}
 
-			/*--------------------------오늘의 엠비팅 -----------------------------*/
 			#content_2 {
-				height: 700px;
+				display: grid;
+				place-items: center;
 			}
-
+			
 			#topViewInnerTable { width : 100%; height: 400px; }
 
 			#topViewInnerTable td {
@@ -338,7 +376,14 @@
 			}
 			
 		
+		/*------------------------스크롤기능---------------------------------*/
+		.wrap {
+			 scroll-snap-type: mandatory;}
 		
+		.wrap #content {
+			scroll-snap-align: center;
+        display: inline-block;
+		}
 </style>	
 </head>
 
@@ -350,15 +395,16 @@
 
 		<div class="wrap">
 			<div id="content">
-				<div id="content_1">
+				<div id="content_1" class="content">
 				<!--<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
 											  설문조사를 통한 통계 기반 맞춤형 추천 서비스 <br>
 											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>-->	
-					<div id="Content1BigText">나의 연애 <label>MBTI TEST </label> 하기 <br>
+					<div id="Content1BigText">나의 연애 <a href="mbtiTest.mb">MBTI TEST </a> 하기 <br> 
 						<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p> </div>
 						<div id="arrow">
 						<img src="https://cdn-icons-png.flaticon.com/128/60/60934.png"> 
 						</div>
+					</div>
 					<div class="test">
 						<div id="testImg"></div>
 					</div>
@@ -366,18 +412,16 @@
 						<div id="testResultImg"></div>
 					</div>
 				</div>
-			</div>
-			<br><br><br><br>
-				
-			<div id="content_2">
-					
-					<table id="topViewInnerTable">
-					  <tr class="topViewTr">
-					  </tr>
-				  </table>
-				  </div>
 
-		<div class="wrapper">
+				<div id="content_2" class="content">
+					<table id="topViewInnerTable">
+						  <tr class="topViewTr">
+						  </tr>
+					 </table>
+				</div>
+			</div>
+			
+		<div id="content_3" class="content">
 			<h1 style="font-family: 'Sunflower', sans-serif;">인기 게시글</h1>
 		  <div class="item">
 		    <div class="polaroid"><img src="https://image.jtbcplus.kr/data/contents/jam_photo/202101/05/b0266449-6a8b-4a9b-8f7e-b4b250c957c0.jpg">
@@ -472,9 +516,8 @@ MBTIng 덕분에 제 운명을 만났어요....!
 			  </div>
 		    </div>
 		  </div>
-
-		</div>
-
+		</div>	
+	</div>
   <script>
   	$(function() {
   		
@@ -521,17 +564,44 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		
   	});
   </script>
-		
+	
+	
+	
+  <script>
+ 	 window.addEventListener("wheel", function(e){
+	   	 e.preventDefault();
+	},{passive : false});
+  
+ 	 
+ 	var mHtml = $("html");
+ 	var page = 1;
+
+
+ 	mHtml.animate({scrollTop : 0},10);
+ 	
+ 	$(window).on("wheel", function(e) {
+ 	    if(mHtml.is(":animated")) return;
+ 	    if(e.originalEvent.deltaY > 0) {
+ 	        if(page == 4) return;
+ 	        page++;
+ 	    } else if(e.originalEvent.deltaY < 0) {
+ 	        if(page == 1) return;
+ 	        page--;
+ 	    }
+ 	    var posTop =(page-1) * $(window).height();
+ 	    mHtml.animate({scrollTop : posTop});
+ 	})
+ 	
+  </script>
 <!-- swipe 영역 -->
-	<div class="wrap">
-		<div id="content_1">
+		<div id="content_4">
         <!-- Slider main container -->
         <div class="swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main1.png"></div>
-                <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/main2.png"></div>
+                <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/MN1.jpg"></div>
+                <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/MN2.jpg"></div>
             </div>
         
             <!-- paging 바를 위한 스타일 -->
@@ -544,7 +614,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
             <!-- 스크롤바 -->
             <div class="swiper-scrollbar"></div>
         </div>
-   		</div> <!-- content_1 닫는 div -->
+   		</div> <!-- content_4 닫는 div -->
 
 			    <script>
 			        // 슬라이더 동작 정의
