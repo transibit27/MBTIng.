@@ -573,6 +573,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		</div>	
 	</div>
 
+
     <script>
   	$(function() {
   		
@@ -606,10 +607,13 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				                "</div>" + 
   				            "</div>" +
   				            "<div class='flip-card-back'>" + 
-  				                "<button onclick=\"location.href='createChat(num);'\">채팅하기</button>" + 
+  				          		"<button onclick='createChat(" + num + ");'>채팅하기</button>" + 
   				            "</div>" +
   				        "</div>" +
   				    "</div>" +
+  				  	"<input type='hidden' id='masterEmail" + num + "' name='masterEmail" + (num) + "' value=''>" +
+				  	"<input type='hidden' id='masterName" + num + "' name='masterName" + (num) + "' value=''>" +
+					"<input type='hidden' id='masterPic" + num + "' name='masterPic" + (num++) + "' value=''>" +
   				    "</td>";
 				 $(".topViewTr").html(resultStr);
 			 }
