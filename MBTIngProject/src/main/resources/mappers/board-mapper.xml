@@ -15,6 +15,14 @@
 		<result column="CHANGE_NAME" property="changeName"></result>
 	</resultMap>
 	
+	<resultMap id="boardImgResultSet" type="boardImg">
+		<result column="IMG_NO" property="imgNo"></result>
+		<result column="ORIGIN_NAME" property="originName"></result>
+		<result column="CHANGE_NAME" property="changeName"></result>
+		<result column="THUMBNAIL" property="thumbnail"></result>
+		<result column="BOARD_NO" property="boardNo"></result>
+	</resultMap>
+
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM BOARD
@@ -92,6 +100,15 @@
 		  FROM BOARD
 		 WHERE BOARD_NO = #{boardNo}
 		   AND STATUS = 'Y'
+	</select>
+
+	<select id="selectBoardImg" parameterType="_int" resultMap="boardImgResultSet">
+		SELECT IMG_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , THUMBNAIL
+		  FROM BOARDIMG
+		 WHERE BOARD_NO = #{boardNo}
 	</select>
 
 	<update id="deleteBoard" parameterType="_int">

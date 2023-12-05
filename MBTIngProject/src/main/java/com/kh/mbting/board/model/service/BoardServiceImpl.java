@@ -57,6 +57,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	public ArrayList<BoardImg> selectBoardImg(int boardNo) {
+		return boardDao.selectBoardImg(sqlSession, boardNo);
+	}
+
+	@Override
 	@Transactional
 	public int deleteBoard(int boardNo) {
 		return boardDao.deleteBoard(sqlSession, boardNo);
@@ -72,5 +77,7 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectTopBoardList() {
 		return boardDao.selectTopBoardList(sqlSession);
 	}
+
+
 
 }

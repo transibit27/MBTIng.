@@ -81,7 +81,10 @@ public class BoardController {
 		int result = boardService.increaseCount(bno);
 		if(result > 0) {
 			Board b = boardService.selectBoard(bno);
-			mv.addObject("b", b).setViewName("board/boardDetailView");
+			ArrayList<BoardImg> list = boardService.selectBoardImg(bno);			
+			mv.addObject("b", b);
+			mv.addObject("list", list);
+			mv.setViewName("board/boardDetailView");
 		} else {
 			mv.addObject("errorMsg", "만남후기 상세조회 실패").setViewName("common/errorPage");
 		}

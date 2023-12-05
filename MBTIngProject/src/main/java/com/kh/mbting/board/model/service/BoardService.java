@@ -20,6 +20,8 @@ public interface BoardService {
 	
 	Board selectBoard(int boardNo);
 
+	ArrayList<BoardImg> selectBoardImg(int boardNo);
+
 	int deleteBoard(int boardNo);
 	
 	int updateBoard(Board b);

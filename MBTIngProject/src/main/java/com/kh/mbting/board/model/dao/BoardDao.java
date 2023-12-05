@@ -42,6 +42,10 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
 	}
 	
+	public ArrayList<BoardImg> selectBoardImg(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardImg", boardNo);
+	}
+
 	public int deleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
@@ -53,7 +57,5 @@ public class BoardDao {
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectTopBoardList");
 	}
-
-
 
 }

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.ArrayList, com.kh.mbting.board.model.vo.BoardImg" %>
+<% 
+    ArrayList<BoardImg> list = (ArrayList<BoardImg>)request.getAttribute("list");
+    String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,12 +74,15 @@
             font-size: xx-large;
             font-weight: bold;
         }
-        /* 썸네일 이미지 스타일 작성할 곳 */
-        .reviewdetail-content p {
-            height: 500px;        
+        .thumbnail-img {
+            width: 33%;
+        }
+        .reviewdetail-content p {       
             white-space: pre-wrap;
         }
-        /* 나머지 이미지 스타일 작성할 곳 */
+        .content-img {
+            width: 250px;
+        }
         .reviewdetail-like {
             font-family: 'Single Day', cursive;
             font-size: x-large;
@@ -135,14 +143,27 @@
 
             <div class="reviewdetail-content">
 
-                <!-- 썸네일 사진 불러오는 기능 일단 주석처리 -->
-                
-                <img src="">
-                
+                <br>
+
+                <div align="center">
+                    <img src="<%= contextPath %>/<%= list.get(0).getChangeName() %>" class="thumbnail-img">
+                </div>
+
+                <br><br>
+
+                <table align="center">
+                    <tr>
+                    <% for(int i = 1; i < list.size(); i++) { %>
+                        <td>
+                            <img src="<%= contextPath %>/<%= list.get(i).getChangeName() %>" class="content-img">
+                        </td>
+                    <% } %>
+                    </tr>
+                </table>
+
+                <br><br>
+
                 <p>${ requestScope.b.boardContent }</p>
-
-                <img src="">
-
             </div>
             <div class="reviewdetail-like" align="center">
             
