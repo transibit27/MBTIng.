@@ -80,7 +80,7 @@
 .Left {
     text-align: left;
 }
-.chatDiv > p {
+.message {
   display: inline-block;
   max-width: 500px;
   border: 1px solid black;
@@ -96,7 +96,7 @@
   font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
-.message {
+.chat {
     width: 100%;
     display: inline-block;
     align-items: flex-end;
@@ -104,9 +104,9 @@
 }
 
 #chatInput {
-    width: 650px;
+    width: 670px;
     height: 200px;
-    margin-left: 430px;
+    margin-left: 540px;
 }
 
 #chatInput > table {
@@ -149,25 +149,25 @@
     border-radius: 30px;
 }
 
-#chatListText {
+.chatListText {
     font-size: 10px;
     color: gray;
     vertical-align: top;
     width :200px;
 }
 
-#chatListName {
+.chatListName {
     font-weight: bold;
     vertical-align: bottom;
 }
 
-#chatListTime {
+.chatListTime {
     text-align: center;
     font-size: 10px;
     color: gray;
 }
 
-#chatListPic {
+.chatListPic {
     text-align: center;
     width : 60px;
     height: 60px;
@@ -236,120 +236,12 @@
                 <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
                     <table>
                         <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김제니</td>
-                            <td id="chatListTime">12:06분</td>
+                            <td rowspan="2" class="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
+                            <td class="chatListName" style="height: 35px;">김제니</td>
+                            <td class="chatListTime">12:06분</td>
                         </tr>
-                        <tr >
-                            <td id="chatListText">안녕하세요 ㅎㅎ  뭐하세요 ?</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
                         <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/suzi.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">배수지</td>
-                            <td id="chatListTime">12:12분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">오빠 뭐해요??</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/sana.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김사나</td>
-                            <td id="chatListTime">08:04분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">사나 지금 옷 사러 와써ㅓㅓㅓ 이따 보자 !! ♡</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/ina.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">설인아</td>
-                            <td id="chatListTime">14:15분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">저는 지금 밥 먹고 있어요 ㅋㅋㅋ 밥 드셨어요 오늘?</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/karina.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">유지민</td>
-                            <td id="chatListTime">16:24분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">아니 ㅋㅋㅋ 나 지금 학교 수업 끝나서 집 가고 있어 오빠는?</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);' style="background-color : pink;">
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/winter2.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김민정</td>
-                            <td id="chatListTime">17:24분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">아냐 나 곧 끝나니까 이따가 전화할게 너 할 거 하고있어</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/ning.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">닝닝</td>
-                            <td id="chatListTime">18:09분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">닝닝닝니닝니인닝</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/inyeop.png" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김인엽</td>
-                            <td id="chatListTime">18:14분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">형 뭐해 ? 보고싶다</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김민제</td>
-                            <td id="chatListTime">12:06분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">안녕하세요 ㅎㅎ 이쁘시네요 연락 되실까요 ?</td>
-                        </tr>
-                    </table>
-                </div>
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" id="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
-                            <td id="chatListName" style="height: 35px;">김민제</td>
-                            <td id="chatListTime">12:06분</td>
-                        </tr>
-                        <tr >
-                            <td id="chatListText">안녕하세요 ㅎㅎ 이쁘시네요 연락 되실까요 ?</td>
+                            <td class="chatListText">안녕하세요 ㅎㅎ  뭐하세요 ?</td>
                         </tr>
                     </table>
                 </div>
@@ -426,7 +318,69 @@
       </div>
     
         
+        <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
+                    <table>
+                        <tr>
+                            <td rowspan="2" class="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
+                            <td class="chatListName" style="height: 35px;">김제니</td>
+                            <td class="chatListTime">12:06분</td>
+                        </tr>
+                        <tr>
+                            <td class="chatListText">안녕하세요 ㅎㅎ  뭐하세요 ?</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                
+                
   <script>
+    $(function() {
+    	getRoomList();
+    });
+    
+	function getRoomList() {
+  		
+  	}
+  		 $.ajax({
+             url:"chatRoomList.do",
+             data:{
+                 userEmail:"${sessionScope.loginMember.email}"
+             },
+             dataType:"json",
+             async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
+             success:function(data){
+            	 var $div;
+            	 var $img;    
+            	 var $td;
+                 var $name;
+                 var $time;
+                 var $tr;
+                 var $text;
+            	 for(var i in data) {
+            		 
+            		 //로그인한 상태인 내가 채팅을 건 상태의 채팅 내역이면
+            		 if(data[i].userEmail == "${sessionScope.loginMember.email}"){
+            			 $div = $("<div class='chatList_box' onclick='enterRoom(this);'> <table> <tr> <td rowspan='2' class='chatListPic'>").attr("id" , data[i].roomNo).attr("email", data[i].masterEmail);
+            			 $img = $("<img>").attr("src", data[i].masterPic);
+            			 $td  = $("</td>");
+            			 $name = $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].masterName);
+            			 $time = $("<td class='chatListTime'></td>").text("12:06분");
+            			 $tr	= $("</tr> <tr>");
+            			 $text  = $("<td class='chatListText'> </td>").text();
+            			 
+            		 }
+            		 
+            	 }
+            	 
+            	\
+             }
+  	});
+  
+  
+  
+  
+  
+  
   
     let roomNo = "${requestScope.roomNo}";
     //console.log(roomNo);
@@ -435,6 +389,7 @@
 	//연결 실행 시 실행될 함수
 
 	$(function(){
+		
 		let url = "ws://localhost:8081/mbting/chat.do";
 			
 		socket = new WebSocket(url);
