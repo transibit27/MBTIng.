@@ -68,7 +68,7 @@
     margin-left: 100px;
 }
 
-#chatList {
+.chatList {
     width: 500px;
     height: 900px;
     border : 1px solid black;
@@ -232,7 +232,7 @@
     <div class="wrap">
         <div class="wrapPC">
 
-            <div id="chatList">
+            <div class="chatList">
                 <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
                     <table>
                         <tr>
@@ -349,31 +349,59 @@
              dataType:"json",
              async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
              success:function(data){
+            	 
             	 console.log(data);
-            	 /*
+            	 
+            	  $chatWrap = $(".chatList");
+            	 
             	 var $div;
+            	 var $first;
             	 var $img;    
             	 var $td;
                  var $name;
                  var $time;
                  var $tr;
                  var $text;
+                 var $last;
             	 for(var i in data) {
             		 
             		 //로그인한 상태인 내가 채팅을 건 상태의 채팅 내역이면
             		 if(data[i].userEmail == "${sessionScope.loginMember.email}"){
-            			 $div = $("<div class='chatList_box' onclick='enterRoom(this);'> <table> <tr> <td rowspan='2' class='chatListPic'>").attr("id" , data[i].roomNo).attr("email", data[i].masterEmail);
-            			 $img = $("<img>").attr("src", data[i].masterPic);
-            			 $td  = $("</td>");
-            			 $name = $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].masterName);
-            			 $time = $("<td class='chatListTime'></td>").text(data[i].sendTime);
+            			 $div 	= $("<div class='chatList_box' onclick='enterRoom(this);'> ").attr("id" , data[i].roomNo).attr("email", data[i].masterEmail);
+            			 $first = $("<table> <tr> <td rowspan='2' class='chatListPic'>");
+            			 $img 	= $("<img>").attr("src", data[i].masterPic);
+            			 $td  	= $("</td>");
+            			 $name 	= $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].masterName);
+            			 $time 	= $("<td class='chatListTime'></td>").text(data[i].sendTime);
             			 $tr	= $("</tr> <tr>");
             			 $text  = $("<td class='chatListText'> </td>").text(data[i].messageContent);
-            			 
+            			 $last  = $("</tr> </table> </div>");
+            		 }else {
+            			 $div 	= $("<div class='chatList_box' onclick='enterRoom(this);'> <table> <tr> <td rowspan='2' class='chatListPic'>").attr("id" , data[i].roomNo).attr("email", data[i].userEmail);
+            			 $first = $("<table> <tr> <td rowspan='2' class='chatListPic'>");
+            			 $img 	= $("<img>").attr("src", data[i].userPic);
+            			 $td  	= $("</td>");
+            			 $name 	= $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].userName);
+            			 $time 	= $("<td class='chatListTime'></td>").text(data[i].sendTime);
+            			 $tr	= $("</tr> <tr>");
+            			 $text  = $("<td class='chatListText'> </td>").text(data[i].messageContent);
+            			 $last  = $("</tr> </table> </div>");
             		 }
             		 
+            		 $div.append($img);
+            		 $div.append($first);
+            		 $div.append($td);
+            		 $div.append($name);
+            		 $div.append($time);
+            		 $div.append($tr);
+            		 $div.append($text);
+            		 $div.append($last);
+            		 
+            		 $chatWrap.append($div);
+            		
+            		 
             	 }
-            	 */
+            	 
             	
              }
   	});

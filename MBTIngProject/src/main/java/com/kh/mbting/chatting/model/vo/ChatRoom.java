@@ -23,5 +23,5 @@ public class ChatRoom {
     private String masterPic;       // 상대방 사진
     private int    unReadCount;    // 안 읽은 메세지 수
     private String messageContent;  // message 내용
-    private String   sendTime; 		//보낸시간
+    private String sendTime; 		//보낸시간
 }
