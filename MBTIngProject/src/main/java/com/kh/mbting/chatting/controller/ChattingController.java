@@ -81,7 +81,7 @@ public class ChattingController {
     public void createChat(ChatRoom room, ChatMessage message, String userEmail, HttpServletResponse response) throws JsonIOException, IOException{
        
     	List<ChatRoom> cList = cService.chatRoomList(userEmail);
-        
+        //System.out.println(cList);
         for(int i = 0; i < cList.size(); i++) {
             message.setRoomNo(cList.get(i).getRoomNo());
             message.setEmail(userEmail);

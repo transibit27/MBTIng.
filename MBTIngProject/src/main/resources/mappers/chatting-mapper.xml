@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="chatMapper">
 
-    <resultMap type="ChatRoom" id="chatRoomResultSet">
+    <resultMap type="chatRoom" id="chatRoomResultSet">
         <result property="roomNo" column="ROOM_NO" />
         <result property="userEmail" column="USER_EMAIL" />
         <result property="userName" column="USER_NAME" />        
@@ -10,15 +10,19 @@
         <result property="masterEmail" column="MASTER_EMAIL" />
         <result property="masterName" column="MASTER_NAME" />
         <result property="masterPic" column="MASTER_PRO_IMG" />
+        <result property="sendTime" column="SENDTIME" />
+        <result property="messageContent" column="MESSAGE_CONTENT" />
     </resultMap>
  
-    <resultMap type="ChatMessage" id="chatMessageResultSet">
+    <resultMap type="chatMessage" id="chatMessageResultSet">
         <result property="messageNo" column="MESSAGE_NO" />
         <result property="roomNo" column="ROOM_NO" />
-        <result property="message" column="MESSAGE_CONTENT" />
+        <result property="messageContent" column="MESSAGE_CONTENT" />
         <result property="name" column="USER_NAME" />
         <result property="email" column="USER_EMAIL" />
         <result property="unReadCount" column="UNREAD_COUNT" />
+        <result property="sendTime" column="SENDTIME" />
+        
     </resultMap>
     
 
@@ -45,7 +49,7 @@
 			JOIN (
 			    SELECT sendtime, message_content, room_no
 			    FROM (
-			        SELECT  message_content, room_no, to_char(sendtime, 'YYYY-MM-DD HH24:mi') as sendtime
+			        SELECT  message_content, room_no, to_char(sendtime, ' HH24:mi') as sendtime
 			            FROM (
 			                SELECT sendtime, message_content, room_no,
 			                       ROW_NUMBER() OVER (PARTITION BY room_no ORDER BY message_no DESC) as rn
@@ -55,7 +59,6 @@
 			      ORDER BY sendtime DESC )
 			) cm ON cr.room_no = cm.room_no
 			WHERE cr.user_email = #{userEmail} OR cr.master_email = #{userEmail}
-
     </select>
     
     <select id="chatRoom" parameterType="string" resultMap="chatRoomResultSet">

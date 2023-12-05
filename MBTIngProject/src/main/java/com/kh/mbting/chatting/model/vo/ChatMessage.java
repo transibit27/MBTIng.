@@ -16,7 +16,7 @@ import lombok.ToString;
 public class ChatMessage {
        private String roomNo;               // 방 번호
        private String messageNo;           // 메세지 번호
-       private String message;              // 메세지 내용
+       private String messageContent;              // 메세지 내용
        private String name;               // 보낸이 이름
        private String email;               // 보낸이 이메일
        private Date sendTime;				//메시지 보낸 시간

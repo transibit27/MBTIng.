@@ -233,18 +233,7 @@
         <div class="wrapPC">
 
             <div class="chatList">
-                <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" class="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
-                            <td class="chatListName" style="height: 35px;">김제니</td>
-                            <td class="chatListTime">12:06분</td>
-                        </tr>
-                        <tr>
-                            <td class="chatListText">안녕하세요 ㅎㅎ  뭐하세요 ?</td>
-                        </tr>
-                    </table>
-                </div>
+                
             </div>
 
              <div class="chatDiv">
@@ -318,29 +307,17 @@
       </div>
     
         
-        <div class='chatList_box enterRoomList' onclick='enterRoom(this);'>
-                    <table>
-                        <tr>
-                            <td rowspan="2" class="chatListPic"><img src="${pageContext.request.contextPath}/resources/images/profile/jenny.jpg" id="chatListPic"></img></td>
-                            <td class="chatListName" style="height: 35px;">김제니</td>
-                            <td class="chatListTime">12:06분</td>
-                        </tr>
-                        <tr>
-                            <td class="chatListText">안녕하세요 ㅎㅎ  뭐하세요 ?</td>
-                        </tr>
-                    </table>
-                </div>
                 
                 
                 
   <script>
     $(function() {
-    	getRoomList();
+    	getRoomList();	
     });
     
 	function getRoomList() {
   		
-  	}
+  	
   		 $.ajax({
              url:"chatRoomList.do",
              data:{
@@ -351,67 +328,51 @@
              success:function(data){
             	 
             	 console.log(data);
-            	 
-            	  $chatWrap = $(".chatList");
-            	 
-            	 var $div;
-            	 var $first;
-            	 var $img;    
-            	 var $td;
-                 var $name;
-                 var $time;
-                 var $tr;
-                 var $text;
-                 var $last;
-            	 for(var i in data) {
-            		 
-            		 //로그인한 상태인 내가 채팅을 건 상태의 채팅 내역이면
-            		 if(data[i].userEmail == "${sessionScope.loginMember.email}"){
-            			 $div 	= $("<div class='chatList_box' onclick='enterRoom(this);'> ").attr("id" , data[i].roomNo).attr("email", data[i].masterEmail);
-            			 $first = $("<table> <tr> <td rowspan='2' class='chatListPic'>");
-            			 $img 	= $("<img>").attr("src", data[i].masterPic);
-            			 $td  	= $("</td>");
-            			 $name 	= $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].masterName);
-            			 $time 	= $("<td class='chatListTime'></td>").text(data[i].sendTime);
-            			 $tr	= $("</tr> <tr>");
-            			 $text  = $("<td class='chatListText'> </td>").text(data[i].messageContent);
-            			 $last  = $("</tr> </table> </div>");
-            		 }else {
-            			 $div 	= $("<div class='chatList_box' onclick='enterRoom(this);'> <table> <tr> <td rowspan='2' class='chatListPic'>").attr("id" , data[i].roomNo).attr("email", data[i].userEmail);
-            			 $first = $("<table> <tr> <td rowspan='2' class='chatListPic'>");
-            			 $img 	= $("<img>").attr("src", data[i].userPic);
-            			 $td  	= $("</td>");
-            			 $name 	= $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].userName);
-            			 $time 	= $("<td class='chatListTime'></td>").text(data[i].sendTime);
-            			 $tr	= $("</tr> <tr>");
-            			 $text  = $("<td class='chatListText'> </td>").text(data[i].messageContent);
-            			 $last  = $("</tr> </table> </div>");
-            		 }
-            		 
-            		 $div.append($img);
-            		 $div.append($first);
-            		 $div.append($td);
-            		 $div.append($name);
-            		 $div.append($time);
-            		 $div.append($tr);
-            		 $div.append($text);
-            		 $div.append($last);
-            		 
-            		 $chatWrap.append($div);
+            	 //console.log("Image source:", isCurrentUser ? data[i].masterPic : "${pageContext.request.contextPath}" + data[i].userPic);
+            	 $chatWrap = $(".chatList");
+
+            	 for (var i in data) {
+            	     // user가 보낸사람인지, 나인지 확인하는 코드입니다.
+            	     var isCurrentUser = data[i].userEmail === "${sessionScope.loginMember.email}";
+
+            	     // main div를 먼저 생성해주고.
+            	     var $div = $("<div class='chatList_box' onclick='enterRoom(this);'>")
+            	         .attr("id", data[i].roomNo)
+            	         .attr("email", isCurrentUser ? data[i].masterEmail : data[i].userEmail);
+
+            	     // table 구조를 만드는 코드
+            	     var $table = $("<table>");
+
+            	     // 첫 번째 행을 만드는 코드
+            	     var $tr1 = $("<tr>");
+            	     $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", isCurrentUser ? "http://localhost:8081/mbting" + data[i].masterPic : "http://localhost:8081/mbting" + data[i].userPic)));
+            	     $tr1.append($("<td class='chatListName' style='height: 35px;'>").text(isCurrentUser ? data[i].masterName : data[i].userName));
+            	     $tr1.append($("<td class='chatListTime'>").text(data[i].sendTime + "분"));
+
+            	     // 2번째 행을 만드는 코드
+            	     var $tr2 = $("<tr>");
+            	     $tr2.append($("<td class='chatListText'>").text(data[i].messageContent));
+
+            	     // 테이블에 넣어서 먼저 테이블 구조 완성하기
+            	     $table.append($tr1);
+            	     $table.append($tr2);
+
+            	     // main div에 붙여주기
+            	     $div.append($table);
+
+            	     // 그걸 chatWrap에 붙여주기
+            	     $chatWrap.append($div);
             		
             		 
             	 }
             	 
             	
              }
-  	});
-  
-  
-  
-  
-  
-  
-  
+  		});
+    
+	}
+	
+	
     let roomNo = "${requestScope.roomNo}";
     //console.log(roomNo);
     
@@ -456,6 +417,7 @@
 		};
 
 	});
+	
 
 	
 	//연결 종료 시 실행될 함수 
@@ -528,8 +490,8 @@
          
          chatLi.find('.chat').addClass(LR_className);              	// left : right 클래스 추가
          // find() : chatLi의 하위 요소 찾기
-         chatLi.find('.sender div').text(name);      	// 이름 추가
-         chatLi.find('.chat p').text(message); 			// 메세지 추가
+         chatLi.find('.sender div').text(name);      				// 이름 추가
+         chatLi.find('.chat p').text(message); 						// 메세지 추가
          chatLi.find('.chat p').addClass("message");
          chatLi.find('.sender div').addClass(LR_className);
          
