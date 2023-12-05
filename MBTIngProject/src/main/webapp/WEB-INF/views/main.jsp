@@ -700,7 +700,8 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		e.style.backgroundColor = "#f54d3e";
  	}
   </script>
-	
+
+  <!-- mouse wheel을 사용하기 위한 script 코드 입니당. -->
   <script>
  	 window.addEventListener("wheel", function(e){
 	   	 e.preventDefault();

@@ -23,7 +23,7 @@
     
 
 	<insert id="createChat" parameterType="chatRoom">
-        insert into CHATROOM values(CNO_SEQ.NEXTVAL,
+        insert into CHATROOM values(RNO_SEQ.NEXTVAL,
         						   #{userEmail},
         						   #{userName},
         						   #{userPic},
@@ -57,10 +57,10 @@
     
     <insert id="insertMessage" parameterType="ChatMessage">
         <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CHNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2)
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2)
         </if>
         <if test="sessionCount == 2">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CHNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2)
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2)
         </if>
     </insert>
 </mapper>

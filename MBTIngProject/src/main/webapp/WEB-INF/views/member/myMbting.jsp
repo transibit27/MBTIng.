@@ -700,7 +700,7 @@
 	                </div>
 	            
 	                <div class="shortMenu-button">
-	                    <button button type="button" onclick="location.href='채팅링크'">내용 확인</button>
+	                    <button button type="button" onclick="location.href=''">내용 확인</button>
 	                </div> 
 	            </div>
 	        </div>

@@ -20,8 +20,6 @@
  	<result column="MATCH_COIN"  	property="matchCoin"></result>
  	<result column="STATUS"  		property="status"></result>
  	<result column="MY_ROOM_NO" 	 	property="myRoomNo"></result>
- 	<result column="MATCH_ROOM_NO" 	 	property="matchRoomNo"></result>
- 	<result column="PROPOSER_NO"	property="proposerNo"></result>
  </resultMap>
  
  <resultMap id="boardResultSet" type="board">
