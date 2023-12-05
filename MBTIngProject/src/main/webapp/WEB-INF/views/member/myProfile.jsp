@@ -397,7 +397,7 @@
                 </div>
 
                 <div class="final-button">
-                    <button id="final-button1" type="button">비밀번호 초기화</button>
+                    <button id="final-button1" type="button">비밀번호 변경</button>
                     <button id="final-button2" type="submit">적용 </button>
                 </div>  
             </div>
