@@ -258,7 +258,7 @@
 	width: 100%;
 	height: 100%;
     box-sizing: border-box;
-    border: 5px solid hotpink;
+    border: 1px solid silver;
     border-radius: 5px;
 	}
 
@@ -552,7 +552,7 @@
 
 
                 
-                // 하단 메뉴바(내 상태) ajax 펑션 => 미완성 myRoomNo 정보는 불러오는 상태
+                // 하단 메뉴바(내 상태) 펑션 => 미완성 myRoomNo 정보는 불러오는 상태
                 function myStatProfile(){
                     
                     $.ajax({
@@ -721,7 +721,7 @@
 	                    내용
 	                </div>
 	                <div class="shortMenu-button">
-	                    <button id="test" button type="button">확인하기</button>
+	                    <button id="test" type="button" onclick="location.href='myPay.me'">확인하기</button>
 	                </div> 
 	            </div>
 	        </div>
