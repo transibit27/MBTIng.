@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,6 +27,32 @@ public class ChattingController {
 
 	@Autowired
 	private ChattingServiceImpl cService;
+	
+	/**
+     * 해당 채팅방의 채팅 메세지 불러오기
+     * @param roomId
+     * @param model
+     * @param response
+     * @throws JsonIOException
+     * @throws IOException
+     */
+    @RequestMapping(value="{roomNo}.do")
+    public void messageList(@PathVariable String roomNo, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {
+        
+        List<ChatMessage> mList = cService.messageList(roomNo);
+        response.setContentType("application/json; charset=utf-8");
+        //System.out.println(mList);
+        // 안읽은 메세지의 숫자 0으로 바뀌기
+        ChatMessage message = new ChatMessage();
+        message.setEmail(userEmail);
+        message.setRoomNo(roomNo);
+        
+        cService.updateCount(message);
+        
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        gson.toJson(mList,response.getWriter());
+    }
+	
 	
     @ResponseBody
     @RequestMapping("createChat.do")

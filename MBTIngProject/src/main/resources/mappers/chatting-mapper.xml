@@ -80,4 +80,17 @@
         INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2)
         </if>
     </insert>
+    
+     <select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
+        SELECT * FROM CHATMESSAGE
+        WHERE ROOM_NO = #{rooomNo}
+        ORDER BY SENDTIME DESC
+    </select>
+
+    <update id="updateCount" parameterType="ChatMessage">
+        UPDATE CHATMESSAGE
+        SET UN_READ_MESSAGE = 0
+        WHERE ROOM_NO = #{roomNo} AND USER_EMAIL != #{email} AND UN_READ_MESSAGE = 1
+    </update>
+    
 </mapper>

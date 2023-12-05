@@ -50,4 +50,15 @@ public class ChattingServiceImpl implements ChattingService{
 		return chattingDao.insertMessage(chatMessage);
 	}
 
+	@Override
+	public List<ChatMessage> messageList(String roomNo) {
+		return chattingDao.messageList(roomNo);
+	}
+
+	@Override
+	public int updateCount(ChatMessage message) {
+		return chattingDao.updateCount(message);
+	}
+
+	
 }

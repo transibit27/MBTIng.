@@ -49,4 +49,18 @@ public interface ChattingService {
      * @return 
      */
     int insertMessage(ChatMessage chatMessage);
+
+    /**
+     * 메세지 내용 리스트 출력
+     * @param roomId
+     * @return
+     */
+    List<ChatMessage> messageList(String roomNo);
+
+    /**
+     * 읽은 메세지 숫자 0으로 바꾸기
+     * @param message
+     * @return
+     */
+    int updateCount(ChatMessage message);
 }

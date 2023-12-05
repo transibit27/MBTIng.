@@ -372,14 +372,54 @@
     
 	}
 	
+	</script>
 	
-    let roomNo = "${requestScope.roomNo}";
+	<!--  채팅방 관련 -->
+	<script>
+	 let roomNo;
+	 
+	 function enterRoom(obj){
+		// 현재 html에 추가되었던 동적 태그 전부 지우기
+         $('div.chatMiddle:not(.format) ul').html("");
+         // obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
+         roomNo = obj.getAttribute("id");
+         console.log(roomNo);
+          // 해당 채팅 방의 메세지 목록 불러오기
+           $.ajax({
+             url:roomNo + ".do",
+             data:{
+                 userEmail:"${sessionScope.loginMember.email}"
+             },
+             async:false,
+             dataType:"json",
+             success:function(data){
+            	 
+            	 console.log(data);
+                 for(var i = 0; i < data.length; i++){
+                     // 채팅 목록 동적 추가
+                   
+                     CheckLR(data[i]);
+                 }
+             }
+         });
+          // 웹소켓 연결
+          connect();
+          console.log("enterRoom");
+     }
+	</script>
+	
+	
+	<script>
+    let roomNo1 = "${requestScope.roomNo}";
     //console.log(roomNo);
     
     let socket;
 	//연결 실행 시 실행될 함수
 
 	$(function(){
+		
+		function connect() {
+			
 		
 		let url = "ws://localhost:8081/mbting/chat.do";
 			
@@ -388,7 +428,7 @@
 		//연결 성공 시 실행할 함수 onopen 
 		socket.onopen = function() {
 			 const data = {
-	                    "roomNo" : roomNo,
+	                    "roomNo" : roomNo1,
 	                    "name"   : "${ loginMember.userName }",
 	                    "email"  : "${ loginMember.email }",
 	                  "message"  : "ENTER-CHAT"
@@ -415,7 +455,7 @@
 			
 			$("#message_wrap1").append(div);
 		};
-
+		}
 	});
 	
 
@@ -463,7 +503,7 @@
         const LR = (data.email != "${ sessionScope.loginMember.email }") ? "Left" : "Right";
          // 메세지 추가
         //console.log(LR);
-        appendMessageTag(LR, data.email, data.message, data.name);
+        appendMessageTag(LR, data.email, data.messageContent, data.name);
     }
 	
     // * 3 메세지 태그 append
@@ -500,6 +540,19 @@
     };
 	</script>   
 
-
+	
+	
+	
+	
+	<!-- 채팅 ui를 위한 script -->
+	<script>
+	$(".chatList").on("click", ".chatList_box", function() {
+		
+		$(".chatList_box").not(this).css("background-color", "white");
+		
+	    $(this).css("background-color", "pink");
+	});
+		
+	</script>
 </body>
 </html>

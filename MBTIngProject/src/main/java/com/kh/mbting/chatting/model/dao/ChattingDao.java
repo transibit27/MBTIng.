@@ -38,4 +38,13 @@ public class ChattingDao {
     public int insertMessage(ChatMessage chatMessage) {
         return sqlSession.insert("chatMapper.insertMessage", chatMessage);
     }
+    
+    public List<ChatMessage> messageList(String roomNo) {
+        return sqlSession.selectList("chatMapper.messageList", roomNo);
+    }
+    
+    public int updateCount(ChatMessage message) {
+        return sqlSession.update("chatMapper.updateCount", message);
+    };
 }
+
