@@ -23,7 +23,7 @@
 }
 .wrapPC {
     width : 1550px;
-    height : 700px;
+    height : 900px;
     display: inline-block;
     display: flex;
 }
@@ -54,7 +54,11 @@
 
 /*---------------------------chatting--------------------------------*/
 
-#chatDiv {
+ ul , li {
+	list-style: none;
+ }
+ 
+.chatDiv {
     width: 670px;
     height: 80%;
     border-left: 1px solid #ffffff;
@@ -76,7 +80,7 @@
 .Left {
     text-align: left;
 }
-.text {
+.chatDiv > p {
   display: inline-block;
   max-width: 500px;
   border: 1px solid black;
@@ -406,9 +410,7 @@
                 </table>
            </div>
         </div>
-      
-        </div>
-        <div id="chatInput" >
+        <div id="chatInput">
             <table>
                 <tr>
                     <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img>></td>
@@ -421,7 +423,8 @@
                 </tr>
             </table>
         </div>
-    </div>
+      </div>
+    
         
   <script>
   
