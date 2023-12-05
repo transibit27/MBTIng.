@@ -40,8 +40,22 @@
     </select>
     
     <select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
-        SELECT * FROM CHATROOM
-        WHERE USER_EMAIL = #{userEmail} OR MASTER_EMAIL = #{userEmail}
+		SELECT cr.*, cm.sendtime, cm.message_content
+		  FROM chatroom cr
+			JOIN (
+			    SELECT sendtime, message_content, room_no
+			    FROM (
+			        SELECT  message_content, room_no, to_char(sendtime, 'YYYY-MM-DD HH24:mi') as sendtime
+			            FROM (
+			                SELECT sendtime, message_content, room_no,
+			                       ROW_NUMBER() OVER (PARTITION BY room_no ORDER BY message_no DESC) as rn
+			                FROM chatmessage
+			            ) ranked_messages
+			         WHERE rn = 1
+			      ORDER BY sendtime DESC )
+			) cm ON cr.room_no = cm.room_no
+			WHERE cr.user_email = #{userEmail} OR cr.master_email = #{userEmail}
+
     </select>
     
     <select id="chatRoom" parameterType="string" resultMap="chatRoomResultSet">

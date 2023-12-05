@@ -349,6 +349,8 @@
              dataType:"json",
              async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
              success:function(data){
+            	 console.log(data);
+            	 /*
             	 var $div;
             	 var $img;    
             	 var $td;
@@ -364,15 +366,15 @@
             			 $img = $("<img>").attr("src", data[i].masterPic);
             			 $td  = $("</td>");
             			 $name = $("<td class='chatListName' style='height : 35px;'></td>").text(data[i].masterName);
-            			 $time = $("<td class='chatListTime'></td>").text("12:06분");
+            			 $time = $("<td class='chatListTime'></td>").text(data[i].sendTime);
             			 $tr	= $("</tr> <tr>");
-            			 $text  = $("<td class='chatListText'> </td>").text();
+            			 $text  = $("<td class='chatListText'> </td>").text(data[i].messageContent);
             			 
             		 }
             		 
             	 }
-            	 
-            	\
+            	 */
+            	
              }
   	});
   
