@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+
+<mapper namespace="mbtiMapper">
+
+  <update id="updateMbti" parameterType="mbti">
+    UPDATE MEMBER
+       SET MBTI = #{mbti},
+       	   MBTI_NICK = #{mbtiNick},
+           MBTI_MATCH = #{mbtiMatch}
+     WHERE USER_NO = #{userNo}
+  </update>
+
+</mapper>

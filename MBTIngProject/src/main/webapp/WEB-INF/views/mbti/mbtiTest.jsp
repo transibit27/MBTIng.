@@ -17,7 +17,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-
+	  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
   <style>
@@ -70,11 +70,16 @@
         align-items: center;
     }
 
-    .subtitle {
-        font-weight: bolder;
-        text-align: center;
+    .subtitle,
+    .subMbti,
+    .parenthesis {
+        font-family: 'NPSfontBold';
+        font-weight: bold;
         font-size: 50px;
-        margin-bottom: 20px;
+        margin: 0; /* 여백 초기화 */
+        line-height: 1; /* 행 높이를 텍스트 크기에 맞춤 */
+        display: inline-block; /* 텍스트를 블록 요소로 만들어 가운데 정렬 */
+        vertical-align: middle; /* 수직 가운데 정렬 */
     }
 
     .resulttitle {
@@ -267,6 +272,16 @@
     color: black;
   }
 
+  .goodRel,
+  .goodRelMbti,
+  .parenthesis2 {
+    font-size: 20px;
+    margin: 0; /* 여백 초기화 */
+    line-height: 1; /* 행 높이를 텍스트 크기에 맞춤 */
+    display: inline-block; /* 텍스트를 블록 요소로 만들어 가운데 정렬 */
+    vertical-align: middle; /* 수직 가운데 정렬 */
+  }
+
 
 
 </style>
@@ -307,7 +322,13 @@
 
         <article class="result animate__animated animate__fadeIn" style="margin-bottom: 50px">
 
-            <h3 id="subTitle" class="subtitle" style="font-family: 'NPSfontBold';">설명</h3>
+            <div>
+              <p id="subTitle" class="subtitle" style="font-family: 'NPSfontBold';">MBTI</p> &nbsp;
+              <p class="parenthesis">(</p>
+              <p id="subMbti" class="subMbti">MBTI</p>
+              <p class="parenthesis">)</p>      
+            </div>     
+
             <img id="img" alt="item" />
             <h4 class="resulttitle" style="font-family: 'NPSfontBold'; color: #ff7ba7;">연애스타일 특징</h4>
 
@@ -326,8 +347,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <td height="50" class="goodRel" id="goodRel" style="font-size: 20px" name="잘 맞는 MBTI"></td>
-                        <td height="50" class="badRel" id="badRel" style="font-size: 20px" name="안 맞는 MBTI"></td>
+                        <td>
+                          <div>
+                            <p class="goodRel" id="goodRel" style="font-size: 20px" name="잘 맞는 MBTI"></p>
+                            <p class="parenthesis2">(</p>
+                            <p class="goodRelMbti" id="goodRelMbti" style="font-size: 20px" name="잘 맞는 MBTI"></p>
+                            <p class="parenthesis2">)</p>
+                          </div>
+                        </td>
+                        <td>
+                          <p height="50" class="badRel" id="badRel" style="font-size: 20px; margin: 0;" name="안 맞는 MBTI"></p>
+                        </td>
                     </tr>
                     <tr>
                         <td>
@@ -339,9 +369,18 @@
                     </tr>
                 </table>
             </div>
-
-            <a href="mbtiMatch.mb" class="memberMatch">내 인연 만나러 가기!</a>
-
+      <form action="mbtiMatch.mb" method="post">
+				<button type="submit" class="memberMatch" > 내 인연 만나러 가기!</button>
+      </form>
+      
+			<form action="updateMbti.mb" method="get">
+				<button type="submit" class="memberMatch" > 내 mbti 정보에 추가하기!</button>
+				<input type="hidden" name="mbti" value="" id="mbti">
+				<input type="hidden" name="mbtiNick" value="" id="mbtiNick">
+				<input type="hidden" name="mbtiMatch" value="" id="mbtiMatch">
+				<input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }" id="mbti">
+			</form>
+				 
         </article>
 
 
@@ -454,7 +493,8 @@
       var result = {
         ISTJ: {
           item: "청렴결백 논리주의자(ISTJ)",
-          subTitle: "신중한 거북이 ( ISTJ )",
+          subTitle: "신중한 거북이",
+          subMbti: "ISTJ",       
           workexplain:
             "꼼꼼하고 철두철미한 성향에 리액션 버튼이 고장 난 것처럼 감정 표현은 서툴지만, <br> \
             마음속으론 '사랑해~ 고마워~'를 외치는  내적 사랑 가득한 연애봇이에요. <br> \
@@ -463,7 +503,8 @@
             맞춰 줘서 한 번 시작하면 갈등 없이 가장 안정적으로 연애를 하는 스타일이기도 해요. <br> \
             나의 계획성과 꼼꼼함을 존중해주고 인정해주는 사람을 만나면 <br> \
             더없이 행복한 연애가 가능할 거예요.",
-          goodRel: "활기찬 토끼 ( ESFP )",
+          goodRel: "활기찬 토끼",
+          goodRelMbti: "ESFP",
           badRel: "열정적인 말 ( ENFJ )",
           goodRelImg: "./resources/images/ESFP.png",
           badRelImg: "./resources/images/ENFJ.png",
@@ -472,7 +513,8 @@
 
         ISFJ: {
           item: "용감한 수호자(ISFJ)",
-          subTitle: "섬세한 곰 ( ISFJ )",
+          subTitle: "섬세한 곰",
+          subMbti: "ISFJ",       
           workexplain:
             "작은 기념일, 이벤트까지 꼼꼼하게 챙기며 연인의 행복을 확실히 서포트하는 사랑덕후예요. <br> \
             상대를 행복하게 해주는 것이 연애의 의무 중 하나라 생각하기 때문이죠. <br> \
@@ -482,7 +524,8 @@
             감사할 줄 아는 사람을 만나면 오랫동안 사랑 넘치는 연애를 기대해도 좋아요. <br> \
             남의 눈치를 보는 데에 너무 많은 시간을 쓰지 말고 <br> \
             내 감정부터 충실하게 살피고 표현하는 것도 잊지 마세요.",
-          goodRel: "상냥한 사슴 ( INFP )",
+          goodRel: "상냥한 사슴",
+          goodRelMbti: "INFP",
           badRel: "활기찬 토끼 ( ESFP )",
           goodRelImg: "./resources/images/INFP.png",
           badRelImg: "./resources/images/ESFP.png",
@@ -491,7 +534,8 @@
 
         INFJ: {
           item: "선의의 옹호자(INFJ)",
-          subTitle: "따뜻한 고래 ( INFJ )",
+          subTitle: "따뜻한 고래",
+          subMbti: "INFJ",       
           workexplain:
             "좋아하는 사람이 다가오면 속으론 행복해해도 겉으론 차갑게 반응하는 연기파예요. <br> \
             이상형은 확실하지만, 표현이 서툴러서 짝사랑과 속앓이를 가장 많이 하는 스타일이기도 해요. <br> \
@@ -500,7 +544,8 @@
             상대가 내 마음을 전혀 눈치채지 못할 때도 많을 거예요. 남의 눈치를 보는 데에 <br> \
             너무 많은 시간을 쓰지 말고 내 감정을 조금 더 솔직하게 표현해 보세요. <br> \
             그동안 꿈꿔왔던 연애가 시작될 거예요.",
-          goodRel: "날카로운 여우 ( ENTP )",
+          goodRel: "날카로운 여우",
+          goodRelMbti: "ENTP",
           badRel: "강력한 사자 ( ESTJ )",
           goodRelImg: "./resources/images/ENTP.png",
           badRelImg: "./resources/images/ESTJ.png",
@@ -509,7 +554,8 @@
 
         INTJ: {
           item: "용의주도한 전략가(INTJ)",
-          subTitle: "똑똑한 독수리 ( INTJ )",
+          subTitle: "똑똑한 독수리",
+          subMbti: "INTJ",       
           workexplain:
             "호불호 강하고 주관이 뚜렷해서 가치관이나 관심사가 맞지 않으면 관심이 1도 없어요. <br> \
             하지만 전형적인 츤데레 스타일이라 겉보다 속이 훨씬 따뜻해요. 애정표현은 조금 서툴러도 <br> \
@@ -517,7 +563,8 @@
             덕분에 연애 성공률도 높은 편. 아이디어와 상상력이 넘쳐서 남들이 하지 않는 <br> \
             색다른 데이트를 창조하고 즐기는 경우가 많아요. 연애에서도 완벽을 추구하기 때문에 <br> \
             늘 분석하고 탐구하지만 때로는 마음을 따라가는 게 정답일 때도 있다는 걸 잊지 마세요.",
-          goodRel: "ENFP",
+          goodRel: "화려한 앵무새",
+          goodRelMbti: "ENFP",
           badRel: "섬세한 곰 ( ISFJ )",
           goodRelImg: "./resources/images/ENFP.png",
           badRelImg: "./resources/images/ISFJ.png",
@@ -526,7 +573,8 @@
 
         ISTP: {
           item: "만능 재주꾼(ISTP)",
-          subTitle: "재치있는 원숭이 ( ISTP )",
+          subTitle: "재치있는 원숭이",
+          subMbti: "ISTP",       
           workexplain:
             "연애도 인생도 일관성 있게 마이웨이! 서로의 생활을 존중하고 구속하지 않는 <br> \
             자유로운 연애를 좋아해요. 연애할 때에도 반드시 혼자만의 시간이 필요하고 <br> \
@@ -535,7 +583,8 @@
             내 사람이 되었다고 생각하면 박찬호급 투머치토커로 돌변하는 스타일이기도 해요. <br> \
             애정표현이나 스킨십은 다소 소극적인 편이라 좋아하는 사람이 생겨도 티가 잘 안 나요. <br> \
             감정을 먼저 표현하려 조금 더 노력한다면 연애 성공률을 200% 끌어올릴 수 있을 거예요.",
-          goodRel: "강력한 사자 ( ESTJ )",
+          goodRel: "강력한 사자",
+          goodRelMbti: "ESTJ",
           badRel: "상냥한 사슴 ( INFP )",
           goodRelImg: "./resources/images/ESTJ.png",
           badRelImg: "./resources/images/INFP.png",
@@ -544,7 +593,8 @@
 
         ISFP: {
           item: "호기심 많은 예술가(ISFP)",
-          subTitle: "창의적인 고양이 ( ISFP )",
+          subTitle: "창의적인 고양이",
+          subMbti: "ISFP",       
           workexplain:
             "성선설은 나를 보고 나온 말 아닐까? 감정이입 잘하고 선한 성격 덕에 <br> \
             연애에서도 빛과 소금 그 자체인 사람이에요. 공감력 200%로 상대방의 특이 취향까지 <br> \
@@ -552,7 +602,8 @@
             귀찮아서 좋게좋게 넘어갈 때도 있다는 사실! 거절을 잘 못 해서 부탁도 하소연도 잘 들어주지만, <br> \
             상대의 감정만 받아주다 보면 정작 나에게 소홀해질 때도 있을 거예요. <br> \
             내 안에 잠재된 세미관종력을 잘 발휘해서 조금 더 내 감정과 생각을 솔직하게 표현해도 좋아요.",
-          goodRel: "활기찬 토끼 ( ESFP )",
+          goodRel: "활기찬 토끼",
+          goodRelMbti: "ESFP",
           badRel: "열정적인 말 ( ENFJ )",
           goodRelImg: "./resources/images/ESFP.png",
           badRelImg: "./resources/images/ENFJ.png",
@@ -561,7 +612,8 @@
 
         INFP: {
           item: "열정적인 중개자(INFP)",
-          subTitle: "상냥한 사슴 ( INFP )",
+          subTitle: "상냥한 사슴",
+          subMbti: "INFP",
           workexplain:
             "연애 시작과 동시에 앞으로 행복할 일, 싸울 일, 우울할 일을 미리 상상하고 기뻐하고 <br> \
             걱정하는 스타일이에요. 상대의 감정에 잘 공감해 주지만 내 감정은 잘 표현하지 않아서 <br> \
@@ -569,7 +621,8 @@
             점 찍어 뒀던 맛집, 핫플레이스로 데이트 풀코스 계획 완료. 연애를 시작하면 언제 철벽을 쳤는지 <br> \
             기억도 안 날 정도로 애정표현도 스킨십도 적극적으로 하는 편이에요. 나만의 철두철미한 <br> \
             연애 기준 5만 개 중 5천 개 정도만 타협하면 더 빠르게 인연이 다가올지도 몰라요.",
-          goodRel: "뛰어난 늑대 ( ENTJ )",
+          goodRel: "뛰어난 늑대",
+          goodRelMbti: "ENTJ",
           badRel: "창의적인 고양이 ( ISFP )",
           goodRelImg: "./resources/images/ENTJ.png",
           badRelImg: "./resources/images/ISFP.png",
@@ -578,7 +631,8 @@
 
         INTP: {
           item: "논리적인 사색가(INTP)",
-          subTitle: "지혜로운 부엉이 ( INTP )",
+          subTitle: "지혜로운 부엉이",
+          subMbti: "INTP",       
           workexplain:
             "기존의 연애 방식을 거부하고 나만의 연애를 만들어 가는 스타일이에요! <br> \
             늘 새로운 아이디어가 넘치고 나만의 연애를 끊임없이 탐구하기 때문에 유니크하고 특별한 <br> \
@@ -586,7 +640,8 @@
             사고방식, 대화 스타일 등이 나와 잘 맞는지가 더 중요해요. 워낙 직설적이고 논리적인 편이라 <br> \
             의견을 이야기하는 것뿐인데도 의도치 않게 팩폭하고 있는 내 모습을 발견할 수 있을 거예요. <br> \
             조금만 더 상대의 감정을 읽으려 노력한다면 오랫동안 안정적인 연애가 가능할 거예요.",
-          goodRel: "친절한 양 ( ESFJ )",
+          goodRel: "친절한 양",
+          goodRelMbti: "ESFJ",
           badRel: "똑똑한 독수리 ( INTJ )",
           goodRelImg: "./resources/images/ESFJ.png",
           badRelImg: "./resources/images/INTJ.png",
@@ -595,7 +650,8 @@
 
         ESTP: {
           item: "모험을 즐기는 사업가(ESTP)",
-          subTitle: "용감한 호랑이 ( ESTP )",
+          subTitle: "용감한 호랑이",
+          subMbti: "ESTP",       
           workexplain:
             "모르는 사람과도 10분 만에 절친이 되는 핵인싸에게 연애는 식은 죽 먹기죠. <br> \
             이상형을 만나면 어마어마한 애정 폭발력으로 썸부터 연애까지 빠르게 직진하는 스타일이에요. <br> \
@@ -603,7 +659,8 @@
             사랑받는 느낌을 듬뿍 주는 프로 표현러군요! 갈등이 생겨도 피하지 않고 뒤끝도 없어서 <br> \
             쿨한 연애가 가능해요. 얽매이는 걸 싫어하는 자유영혼이기 때문에 지나치게 구속하지 않고 <br> \
             다양한 데이트를 즐기며 취미를 공유할 수 있는 사람을 만나는 걸 추천해요.",
-          goodRel: "섬세한 곰 ( ISFJ )",
+          goodRel: "섬세한 곰",
+          goodRelMbti: "ISFJ",
           badRel: "열정적인 말 ( ENFJ )",
           goodRelImg: "./resources/images/ISFJ.png",
           badRelImg: "./resources/images/ENFJ.png",
@@ -612,7 +669,8 @@
 
         ESFP: {
           item: "자유로운 영혼의 연예인(ESFP)",
-          subTitle: "활기찬 토끼 ( ESFP )",
+          subTitle: "활기찬 토끼",
+          subMbti: "ESFP",       
           workexplain:
             "연애할 때 한없이 다정하고 콩깍지가 단단히 씌어서 매일 연애 1일 차 같은 설렘과 <br> \
             이벤트가 가득할 거예요. 썸 추진력도 5G급이라 연애 성공률은 걱정할 것 없겠네요! <br> \
@@ -621,6 +679,7 @@
             다시 마음이 불타오를 수 있어요. 또 '한 번뿐인 인생, 즐겁게 살자'는 나의 가치관을 <br> \
             응원해주는 사람이라면 오랫동안 즐거운 연애가 가능할 거예요.",
           goodRel: "섬세한 곰 ( ISFJ )",
+          goodRelMbti: "ISFJ",
           badRel: "신중한 거북이 ( ISTJ )",
           goodRelImg: "./resources/images/ISFJ.png",
           badRelImg: "./resources/images/ISTJ.png",
@@ -629,7 +688,8 @@
 
         ENFP: {
           item: "재기발랄한 활동가(ENFP)",
-          subTitle: "화려한 앵무새 ( ENFP )",
+          subTitle: "화려한 앵무새",
+          subMbti: "ENFP",       
           workexplain:
             "개성을 존중하고 자유를 사랑하는 나에게 구속하는 연애란 있을 수 없죠. <br> \
             어떤 옷, 어떤 헤어스타일이든 간섭 제로, 취향 존중. 연인이 갑자기 일을 그만두고 <br> \
@@ -639,6 +699,7 @@
             나의 헌신과 응원에 진심으로 감사할 줄 알고 내 모습을 있는 그대로 <br> \
             존중해줄 수 있는 사람을 만난다면 오랫동안 행복한 연애를 할 수 있을 거예요.",
           goodRel: "똑똑한 독수리 ( INTJ )",
+          goodRelMbti: "INTJ",
           badRel: "용감한 호랑이 ( ESTP )",
           goodRelImg: "./resources/images/INTJ.png",
           badRelImg: "./resources/images/ESTP.png",
@@ -647,7 +708,8 @@
 
         ENTP: {
           item: "논쟁을 즐기는 변론가(ENTP)",
-          subTitle: "날카로운 여우 ( ENTP )",
+          subTitle: "날카로운 여우",
+          subMbti: "ENTP",       
           workexplain:
             "썸 추진력 상위 1%, 좋으면 앞뒤 안 재고 돌진하며 썸도 연애도 빠르게 시작하는 금사빠! <br> \
             말발이 타고나서 격렬한 토론도 좋아해요. 관심 있는 주제로 밤새 떠들 수 있는 상대라면 <br> \
@@ -656,7 +718,8 @@
             다이나믹한 연애를 즐길 수 있어요. 하지만 개인의 시간도 중시해서 모든 시간을 <br> \
             상대와 공유하고 싶진 않을 거예요. 자기 계발을 위한 시간도 필요하다는 걸 <br> \
             연인에게 잘 설명한다면 갈등 없이 연애할 수 있을 거예요.",
-          goodRel: "INFJ",
+          goodRel: "섬세한 곰",
+          goodRelMbti: "IFNJ",
           badRel: "강력한 사자 ( ESTJ )",
           goodRelImg: "./resources/images/INFJ.png",
           badRelImg: "./resources/images/ESTJ.png",
@@ -665,7 +728,8 @@
 
         ESTJ: {
           item: "엄격한 관리자(ESTJ)",
-          subTitle: "강력한 사자 ( ESTJ )",
+          subTitle: "강력한 사자",
+          subMbti: "ESTJ",       
           workexplain:
             "밀당이라곤 일절 모르는 솔직담백 스타일이에요. <br> \
             꼿꼿하고 체계적인 성향 덕분에 마치 21세기를 사는 선비 같아요. 당신의 가식 없고 <br> \
@@ -674,7 +738,8 @@
             열심히 학습하는 노력파이기 때문에 시간이 갈수록 연애 표현력은 점점 좋아질 거예요. <br> \
             다만 명확한 호불호와 냉철한 성향 때문에 의도치 않게 연인에게 상처를 줄 수 있어요. <br> \
             '역지사지'를 마음에 품고 상대의 마음을 헤아려 보는 노력을 해보세요.",
-           goodRel: "창의적인 고양이 ( ISFP )",
+           goodRel: "창의적인 고양이",
+          goodRelMbti: "ISFP",
           badRel: "열정적인 말 ( ENFJ )",
           goodRelImg: "./resources/images/ISFP.png",
           badRelImg: "./resources/images/ENFJ.png",
@@ -683,7 +748,8 @@
 
         ESFJ: {
           item: "사교적인 외교관(ESFJ)",
-          subTitle: "친절한 양 ( ESFJ )",
+          subTitle: "친절한 양",
+          subMbti: "ESFJ",       
           workexplain:
             "상대방의 감정을 잘 읽고 맞춰줘서 연애할 때 갈등이 적어요. 오지랖 넓고 주변을 잘 챙겨서 <br> \
             누구든 당신 곁에서 편안함을 느낄 거에요. 하지만 사실은 호불호가 명확해서 연인의 행동에 <br> \
@@ -692,7 +758,8 @@
              이런 당신의 빛나는 센스 덕에 결혼까지 생각한 연인들이 많았겠어요. <br> \
              하지만 갈등은 피할수록 깊어지는 법. 더 솔직하고 편안한 연애를 위해, <br> \
              어렵더라도 고민을 바로 이야기해 보는 건 어떨까요?",
-          goodRel: "지혜로운 부엉이 ( INTP )",
+          goodRel: "지혜로운 부엉이",
+          goodRelMbti: "INTP",
           badRel: "날카로운 여우 ( ENTP )",
           goodRelImg: "./resources/images/INTP.png",
           badRelImg: "./resources/images/ENTP.png",
@@ -701,7 +768,8 @@
 
         ENFJ: {
           item: "정의로운 사회운동가(ENFJ)",
-          subTitle: "열정적인 말 ( ENFJ )",
+          subTitle: "열정적인 말",
+          subMbti: "ENFJ",       
           workexplain:
             "빠른 눈치로 연인의 감정을 척척 알아맞히고 연애를 위해 시간과 노력을 아끼지 않는 <br> \
             스타일이에요. 장점을 알아보고 응원해 주는 데에 능숙해서 연인에게 든든한 치어리더가 <br> \
@@ -709,7 +777,8 @@
             언제나 파워당당! 하지만 상처받기 싫은 마음에 갈등을 피하고 좋은 말만 계속한다면 <br> \
             문제는 해결되지 않고 깊어질 거예요. 힘들 때 자기 생각과 감정을 솔직하게 표현하는 것도 <br> \
             중요해요. 애정 표현, 썸 추진력은 상위 1%이니 연애 성공률은 걱정할 필요가 없겠네요.",
-          goodRel: "창의적인 고양이 ( ISFP )",
+          goodRel: "창의적인 고양이",
+          goodRelMbti: "ISFP",
           badRel: "재치있는 원숭이 ( ISTP )",
           goodRelImg: "./resources/images/ISFP.png",
           badRelImg: "./resources/images/ISTP.png",
@@ -718,7 +787,8 @@
 
         ENTJ: {
           item: "대담한 통솔자(ENTJ)",
-          subTitle: "뛰어난 늑대 ( ENTJ )",
+          subTitle: "뛰어난 늑대",
+          subMbti: "ENTJ",       
           workexplain:
             "일? 사랑? 아무것도 포기할 수 없어! 야망 가득한 워커홀릭인 데다 <br> \
             사랑도 일처럼 척척 해치우는군요. 불도저 정신으로 썸에서 연애까지 시속 200km로 직진. <br> \
@@ -727,7 +797,8 @@
             남의 눈치를 보지 않고 주도적으로 행동하다 보면 나도 모르는 사이 상대방에게 <br> \
             상처를 줄 수 있어요! 상대의 감정을 조금 더 생각해 주려 노력한다면 <br> \
             오랫동안 안정적인 연애를 할 수 있을 거예요.",
-          goodRel: "상냥한 사슴 ( INFP )",
+          goodRel: "상냥한 사슴",
+          goodRelMbti: "INFP",
           badRel: "활기찬 토끼 ( ESFP )",
           goodRelImg: "./resources/images/INFP.png",
           badRelImg: "./resources/images/ESFP.png",
@@ -760,6 +831,7 @@
           $(".result").show();
           $("#img").show();
           $("#subTitle").show();
+          $("#subMbti").show();
           $("#workexplain").show();
           var mbti = "";
           $("#EI").val() < 2 ? (mbti += "I") : (mbti += "E");
@@ -767,14 +839,22 @@
           $("#TF").val() < 2 ? (mbti += "F") : (mbti += "T");
           $("#JP").val() < 2 ? (mbti += "P") : (mbti += "J");
           console.log(mbti);
+          console.log(result[mbti]["subTitle"]);
           $("#img").attr("src", result[mbti]["img"]);
           $("#goodRelImg").attr("src", result[mbti]["goodRelImg"]);
           $("#badRelImg").attr("src", result[mbti]["badRelImg"]);
           // $("#item").html(result[mbti]["item"]);
           $("#subTitle").html(result[mbti]["subTitle"]);
+          $("#subMbti").html(result[mbti]["subMbti"]);          
           $("#workexplain").html(result[mbti]["workexplain"]);
           $("#goodRel").html(result[mbti]["goodRel"]);
+          $("#goodRelMbti").html(result[mbti]["goodRelMbti"]);
           $("#badRel").html(result[mbti]["badRel"]);
+         
+    	  $("#mbti").val(mbti);
+        $("#mbtiNick").val(result[mbti]["subTitle"]);
+        $("#mbtiMatch").val(result[mbti]["goodRelMbti"]);
+    	  
 
         } else {
           $(".progress-bar").attr(
@@ -789,7 +869,7 @@
         }
       }
     </script>
-
+	
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const splashText = document.querySelector('.splash-text');
