@@ -204,7 +204,9 @@
                     무제한 MBTI 테스트 가능
                 </div>
             </div>
-            <button>결제하기</button>
+            <form method="post" th:action="@{/kakaoPay}">
+			    <button type="submit">결제하기</button>
+			</form>
         </div>
 
     </div>
@@ -217,12 +219,17 @@
 		$("#pay1").click(function(){
 			$.ajax({
 				url:'pay.me',
+				dataType:'json',
+				data:{'email': '${sessionScope.loginMember.email}'},
 				success:function(result){
 					console.log(result);
-					
+					console.log(result.tid);
+						
 				},
 				error:function(result){
 					alert("카카오페이 결제용 ajax 통신 오류")
+					console.log(result);
+					console.log(result.tid)
 				}
 				
 				
@@ -231,6 +238,7 @@
 		});// 버튼 클릭 이벤트	
 		
 	});	// 펑션 끝
+	
 
 </script>
 
