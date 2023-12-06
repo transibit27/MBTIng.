@@ -74,10 +74,10 @@
     
     <insert id="insertMessage" parameterType="ChatMessage">
         <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2 , to_char(sysdate, 'HH24:mi'))
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,2 , to_char(sysdate, 'HH24:mi'))
         </if>
         <if test="sessionCount == 2">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2 , to_char(sysdate, 'HH24:mi'))
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 0, 2 , to_char(sysdate, 'HH24:mi'))
         </if>
     </insert>
     

@@ -77,6 +77,10 @@
 .Right {
     text-align: right;
 }
+
+.Right > .message {
+   background-color : pink;
+}
 .Left {
     text-align: left;
 }
@@ -417,41 +421,50 @@
 		
 		function connect() {
 
-		let url ="ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
+			let url ="ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
+				
+			socket = new WebSocket(url);
 			
-		socket = new WebSocket(url);
-		
-		//연결 성공 시 실행할 함수 onopen 
-		socket.onopen = function() {
-			 const data = {
-	                    "roomNo" : roomNo,
-	                    "name"   : "${ loginMember.userName }",
-	                    "email"  : "${ loginMember.email }",
-	                  "messageContent"  : "ENTER-CHAT"
-	            };
-	            
-			 	let jsonData = JSON.stringify(data);
-	            socket.send(jsonData);
-		};
-		
-		//연결 종료 시 실행할 함수 onclose
-		socket.onclose = function() {
-			console.log("서버와 연결이 종료");
-		};
-		
-		//연결 오류 발생 시 실행할 함수
-		socket.onerror = function() {
-			console.log("서버 오류남");
-		};
-		
-		//메시지 수신 시에 실행되는 함수
-		socket.onmessage = function() {
-			console.log("메시지 수신됨");
-		};
-		
-		
+			//연결 성공 시 실행할 함수 onopen 
+			socket.onopen = function() {
+				 const data = {
+			                    "roomNo" : roomNo,
+			                    "name"   : "${ loginMember.userName }",
+			                    "email"  : "${ loginMember.email }",
+			           "messageContent"  : "ENTER-CHAT"
+		            };
+		            
+				 	let jsonData = JSON.stringify(data);
+		            socket.send(jsonData);
+			};
+			
+			//연결 종료 시 실행할 함수 onclose
+			socket.onclose = function() {
+				console.log("서버와 연결이 종료");
+			};
+			
+			//연결 오류 발생 시 실행할 함수
+			socket.onerror = function() {
+				console.log("서버 오류남");
+			};
+			
+			//메시지 수신 시에 실행되는 함수
+			socket.onmessage = function(evt) {
+				  let receive = evt.data.split(",");
+				  
+				  //console.log(receive);
+				  const data = {
+		                    "name" : receive[0],
+		                    "email" : receive[1],
+		                 "messageContent" : receive[2]
+		            };
+				  
+				  if(data.email != "${ loginUser.email }"){
+		                CheckLR(data);
+		          }
+			};
+			
 		}
-	
 	
 		//연결 종료 시 실행될 함수 
 		function disconnect() {
@@ -471,13 +484,13 @@
 				//websocket 객체의 send 메소드를 호출
 				
 				const data = {
-                "roomNo" : roomNo,
-                "name" : "${ sessionScope.loginMember.userName }",
-                "email" : "${ sessionScope.loginMember.email }",
-                "message"   : message 
+                "roomNo" 		   : roomNo,
+                "name" 			   : "${ sessionScope.loginMember.userName }",
+                "email" 		   : "${ sessionScope.loginMember.email }",
+                "messageContent"   : message 
             	};
 				//console.log(data);
-				CheckLR(data);
+				//CheckLR(data);
 		
 				let jsonData = JSON.stringify(data);
         
@@ -518,8 +531,7 @@
          // 형식 가져오기
          let chatLi = $("div.chatDiv ul li").clone();
 
-         
-         console.log(chatLi);
+         //console.log(chatLi);
          
          chatLi.find('.chat').addClass(LR_className);              	// left : right 클래스 추가
          // find() : chatLi의 하위 요소 찾기
@@ -528,7 +540,7 @@
          chatLi.find('.chat p').addClass("message");
          chatLi.find('.sender div').addClass(LR_className);
          
-         console.log(chatLi);
+         //console.log(chatLi);
          return chatLi;
     };
 	</script>   
