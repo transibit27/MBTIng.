@@ -183,7 +183,7 @@
             <p class="bestreviewlistbanner" align="center">이달의 베스트 후기</p>
             <table id="boardList" align="center">
 				<tr>
-
+				
 				</tr>
 			</table>
         </div>

@@ -58,7 +58,28 @@
             border: 2px solid pink;
             resize: none;
         }
-        /* 사진 변경 스타일 작성할 곳 */
+        .writereview-photo {
+            width: 1200px;
+            text-align: center;
+        }
+        .writereview-photo img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+        }
+        .writereview-photo input {
+            font-size: smaller;
+        }
+        .reviewphoto-table-thumbnail td {
+            border: 2px solid pink;
+            width: 250px;
+            height: 250px;
+        }
+        .reviewphoto-table-photos td {
+            border: 2px dotted pink;
+            width: 250px;
+            height: 250px;                    
+        }
         .reviewupdate-button button {
             width: 90px;
             height: 30px;
@@ -105,11 +126,106 @@
 
             <br>
 
-            <div class="writereview-photo" align="left">
-                
-                <!-- 사진 변경 기능 작성할 곳 -->
+            <div class="writereview-photo" align="left">                
+                <table>
+                    <tr>
+                        <td>
+                            <table class="reviewphoto-table-thumbnail">
+                                <tr>
+                                    <td>
+                                        <img id="thumbImg">
 
+                                        <br><br>
+                                        
+                                        <input type="file" id="file1" multiple name="upfile" onchange="loadImg(this, 1);">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>    
+                            <table class="reviewphoto-table-photos">
+                                <tr>
+                                    <td>
+                                        <img id="contentImg1">
+
+                                        <br><br>
+
+                                        <input type="file" id="file2" multiple name="upfile" onchange="loadImg(this, 2);">
+                                    </td>                                   
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="reviewphoto-table-photos">
+                                <tr>
+                                    <td>
+                                        <img id="contentImg2">
+
+                                        <br><br>
+
+                                        <input type="file" id="file3" multiple name="upfile" onchange="loadImg(this, 3);">
+                                    </td>                                   
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="reviewphoto-table-photos">
+                                <tr>
+                                    <td>
+                                        <img id="contentImg3">
+    
+                                        <br><br>
+
+                                        <input type="file" id="file4" multiple name="upfile" onchange="loadImg(this, 4);">
+                                    </td>                                   
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
             </div>
+
+            <script>
+                $(function() {
+                    $("#thumbImg").click(function() {
+                        $("#file1").click();
+                    });
+
+                    $("#contentImg1").click(function() {
+                        $("#file2").click();
+                    });
+
+                    $("#contentImg2").click(function() {
+                        $("#file3").click();
+                    });
+
+                    $("#contentImg3").click(function() {
+                        $("#file4").click();
+                    });
+                });
+
+                function loadImg(inputFile, num) {
+                    if(inputFile.files.length == 1) {
+                        let reader = new FileReader();
+                        reader.readAsDataURL(inputFile.files[0]);
+                        reader.onload = function(e) {
+                            switch(num) {
+                                case 1 : $("#thumbImg").attr("src", e.target.result); break;
+                                case 2 : $("#contentImg1").attr("src", e.target.result); break;
+                                case 3 : $("#contentImg2").attr("src", e.target.result); break;
+                                case 4 : $("#contentImg3").attr("src", e.target.result); break;
+                            }
+                        };
+                    } else {
+                        switch(num) {
+                            case 1 : $("#thumbImg").attr("src", null); break;
+                            case 2 : $("#contentImg1").attr("src", null); break;
+                            case 3 : $("#contentImg2").attr("src", null); break;
+                            case 4 : $("#contentImg3").attr("src", null); break;
+                        }
+                    }
+                }
+            </script>
 
             <br>
 
