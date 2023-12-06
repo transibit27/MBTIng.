@@ -93,10 +93,13 @@
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
 		SELECT BOARD_NO
 		     , BOARD_TITLE
-		     , USER_NO
+		     , BOARD_CONTENT
 		     , VIEWS
 		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
-		     , BOARD_CONTENT
+		     , TO_CHAR(MODIFY_DATE, 'YYYY-MM-DD') AS "MODIFY_DATE"
+		     , STATUS
+		     , USER_NO
+		     , MATCH_NO
 		  FROM BOARD
 		 WHERE BOARD_NO = #{boardNo}
 		   AND STATUS = 'Y'
@@ -107,6 +110,7 @@
 		     , ORIGIN_NAME
 		     , CHANGE_NAME
 		     , THUMBNAIL
+		     , BOARD_NO
 		  FROM BOARDIMG
 		 WHERE BOARD_NO = #{boardNo}
 	</select>
@@ -117,11 +121,4 @@
 		 WHERE BOARD_NO = #{boardNo}
 	</update>
 	
-	<update id="updateBoard" parameterType="board">
-		UPDATE BOARD
-		   SET BOARD_TITLE = #{boardTitle}
-		     , BOARD_CONTENT = #{boardContent}
-		 WHERE BOARD_NO = #{boardNo}
-		   AND STATUS = 'Y'
-	</update>
 </mapper>

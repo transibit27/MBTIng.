@@ -67,24 +67,21 @@ public class BoardController {
 			}
 		}		
 		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
+			session.setAttribute("alertMsg", "성공적으로 만남후기가 등록되었습니다.");
 			return "redirect:/list.bo";
 		} else {			
-			model.addAttribute("errorMsg", "게시글 등록 실패");
+			model.addAttribute("errorMsg", "만남후기 등록 실패");
 			return "common/errorPage";
 		}
 	}
 	
 	@RequestMapping("detail.bo")
-	public ModelAndView selectBoard(int bno, ModelAndView mv) {
-		
+	public ModelAndView selectBoard(int bno, ModelAndView mv) {	
 		int result = boardService.increaseCount(bno);
 		if(result > 0) {
 			Board b = boardService.selectBoard(bno);
 			ArrayList<BoardImg> list = boardService.selectBoardImg(bno);			
-			mv.addObject("b", b);
-			mv.addObject("list", list);
-			mv.setViewName("board/boardDetailView");
+			mv.addObject("b", b).addObject("list", list).setViewName("board/boardDetailView");
 		} else {
 			mv.addObject("errorMsg", "만남후기 상세조회 실패").setViewName("common/errorPage");
 		}
@@ -104,23 +101,11 @@ public class BoardController {
 		}
 	}
 	
-	@PostMapping("updateForm.bo")
-	public String updateForm(int bno, Model model) {
+	@RequestMapping("updateForm.bo")
+	public ModelAndView updateForm(int bno, ModelAndView mv) {
 		Board b = boardService.selectBoard(bno);
-		model.addAttribute("b", b);
-		return "board/boardUpdateForm";
-	}
-	
-	@PostMapping("update.bo")
-	public String updateBoard(Board b, HttpSession session, Model model) {
-		int result = boardService.updateBoard(b);
-		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 만남후기가 수정되었습니다.");
-			return "redirect:/detail.bo?bno=" + b.getBoardNo();
-		} else {
-			model.addAttribute("errorMsg", "만남후기 수정 실패");
-			return "common/errorPage";
-		}
+		mv.addObject("b", b).setViewName("board/boardUpdateForm");
+		return mv;
 	}
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) {

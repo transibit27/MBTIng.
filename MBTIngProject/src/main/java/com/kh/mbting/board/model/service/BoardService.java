@@ -24,8 +24,6 @@ public interface BoardService {
 
 	int deleteBoard(int boardNo);
 	
-	int updateBoard(Board b);
-	
 	ArrayList<Board> selectTopBoardList();
 	
 }

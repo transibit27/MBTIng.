@@ -66,18 +66,10 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(int boardNo) {
 		return boardDao.deleteBoard(sqlSession, boardNo);
 	}
-
-	@Override
-	@Transactional
-	public int updateBoard(Board b) {
-		return boardDao.updateBoard(sqlSession, b);
-	}
-
+	
 	@Override
 	public ArrayList<Board> selectTopBoardList() {
 		return boardDao.selectTopBoardList(sqlSession);
 	}
-
-
 
 }

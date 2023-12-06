@@ -13,10 +13,10 @@ import lombok.ToString;
 @ToString
 public class BoardImg {
 	
-	private int imgNo; //IMG_NO	NUMBER
-	private String originName; //ORIGIN_NAME	VARCHAR2(100 BYTE)
-	private String changeName;//CHANGE_NAME	VARCHAR2(100 BYTE)
-	private String thumbnail; //THUMBNAIL	CHAR(1 BYTE)
-	private int boardNo; //BOARD_NO	NUMBER
+	private int imgNo;	// IMG_NO	NUMBER
+	private String originName;	// ORIGIN_NAME	VARCHAR2(100 BYTE)
+	private String changeName;	// CHANGE_NAME	VARCHAR2(100 BYTE)
+	private String thumbnail;	// THUMBNAIL	CHAR(1 BYTE)
+	private int boardNo;	// BOARD_NO	NUMBER
 	
 }

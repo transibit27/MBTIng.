@@ -180,7 +180,6 @@
                 <button onclick="postFormSubmit(2);">삭제</button>
                 <form id="postForm" action="" method="post">
                     <input type="hidden" name="bno" value="${ requestScope.b.boardNo }">
-                    <input type="hidden" name="filePath" value="${ requestScope.b.changeName }">
                 </form>
                 <script>
                     function postFormSubmit(num) {
