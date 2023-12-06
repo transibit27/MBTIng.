@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -366,10 +366,11 @@ public class MemberController {
 	}
 	
 	// e-2 마이페이지 - 결제
-	@RequestMapping(value="pay.me", produces="application/json; charset=UTF-8")
+	@RequestMapping(value="pay.me", produces = "text/xml; charset=UTF-8")
 	@ResponseBody
-	public String kakaoPay() throws IOException{
+	public String kakaoPay(@RequestParam(value="email") String email) throws IOException{
 		System.out.println("잘 전달되나?");
+		System.out.println(email);
 		
 		String url="https://kapi.kakao.com/v1/payment/ready";
 				
@@ -392,8 +393,8 @@ public class MemberController {
 		
 		String parameter = "cid=TC0ONETIME&"			// cid
 				+ "partner_order_id=partner_order_id&"	// 가맹점 주문번호
-				+ "partner_user_id=partner_user_id&"	// 가맹점 회원 id
-				+ "item_name=초코파이&"					// 상품명
+				+ "partner_user_id=email&"	// 가맹점 회원 id
+				+ "item_name=MBTIngCoin&"					// 상품명
 				+ "quantity=1&"							// 상품 수량
 				+ "total_amount=1000&"					// 상품 총액
 				+ "tax_free_amount=0&"					// 비과세 금액
@@ -431,19 +432,30 @@ public class MemberController {
 				new InputStreamReader(
 						urlConnection.getInputStream()));
 		
-		System.out.println("잘 받아옴?"+br.readLine());
-		
+		JSONParser parser = new JSONParser();
+
+	
+		// System.out.println("리드라인"+br.readLine());
 		String line;
+		// line = br.readLine();
+		// System.out.println("문자열"+line);		
 		String responseText = "";
 		
+		
 		while((line = br.readLine()) != null) {
-			System.out.println("반복은 함?");
+			System.out.println("여기 왜 안들어올까?");
+			
 			responseText += line;
 		}
 		
-		System.out.println(responseText);
-	
-		return br.readLine();
-
+		br.close();
+		urlConnection.disconnect();
+		
+		System.out.println("이거 왜 안찎힘?"+responseText);
+		
+		// 응답데이터를 ajax 요청했던 곳으로 보내주고자 한다면
+		// 굳이 ArrayList 로 내가 직접 파싱할 필요 없이
+		// JSON 형태를 바로 보내주면 됨!!
+		return responseText;
 	}
 }
