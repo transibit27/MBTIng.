@@ -34,9 +34,13 @@ public class ChattingController {
      * @throws JsonIOException
      * @throws IOException
      */
-    @RequestMapping(value="{roomNo}.do")
-    public void messageList(@PathVariable String roomNo, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {
-        
+	
+
+    @RequestMapping("messageList.do")
+    public void messageList( String roomNo, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {
+       
+    	//System.out.println(roomNo);
+    	
         List<ChatMessage> mList = cService.messageList(roomNo);
         response.setContentType("application/json; charset=utf-8");
         //System.out.println(mList);
@@ -50,8 +54,8 @@ public class ChattingController {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         gson.toJson(mList,response.getWriter());
     }
-	
-	/*
+
+/*
     @ResponseBody
     @RequestMapping("createChat.do")
     public String createChat(ChatRoom room, HttpSession session, String masterName, String masterEmail, String masterPic, HttpServletResponse response)throws JsonIOException, IOException{

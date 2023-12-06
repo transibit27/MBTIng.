@@ -41,7 +41,7 @@ public interface ChattingService {
      * @param roomId
      * @return
      */
-    ChatRoom selectChatRoom(String roomId);
+    ChatRoom selectChatRoom(String roomNo);
     
     /**
      * 채팅 메세지 DB 저장

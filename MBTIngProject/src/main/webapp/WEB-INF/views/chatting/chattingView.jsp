@@ -320,7 +320,7 @@
   	
   		 $.ajax({
              url:"chatRoomList.do",
-             data:{
+             data : {
                  userEmail:"${sessionScope.loginMember.email}"
              },
              dataType:"json",
@@ -328,7 +328,7 @@
              success:function(data){
             	 
             	 console.log(data);
-            	 //console.log("Image source:", isCurrentUser ? data[i].masterPic : "${pageContext.request.contextPath}" + data[i].userPic);
+            	
             	 $chatWrap = $(".chatList");
 
             	 for (var i in data) {
@@ -378,15 +378,19 @@
 	 let roomNo;
 	 
 	 function enterRoom(obj){
+		 
 		// 현재 html에 추가되었던 동적 태그 전부 지우기
          $('div.chatMiddle:not(.format) ul').html("");
+		
          // obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
          roomNo = obj.getAttribute("id");
+         
           //console.log(roomNo);
           // 해당 채팅 방의 메세지 목록 불러오기
            $.ajax({
-             url:roomNo + ".do",
+             url:"messageList.do" ,
              data:{
+            	 roomNo   : roomNo,
                  userEmail:"${sessionScope.loginMember.email}"
              },
              async:false,
@@ -420,14 +424,14 @@
 		//연결 성공 시 실행할 함수 onopen 
 		socket.onopen = function() {
 			 const data = {
-	                    "roomNo" : roomNo1,
+	                    "roomNo" : roomNo,
 	                    "name"   : "${ loginMember.userName }",
 	                    "email"  : "${ loginMember.email }",
-	                  "message"  : "ENTER-CHAT"
+	                  "messageContent"  : "ENTER-CHAT"
 	            };
 	            
 			 	let jsonData = JSON.stringify(data);
-	             socket.send(jsonData);
+	            socket.send(jsonData);
 		};
 		
 		//연결 종료 시 실행할 함수 onclose
@@ -440,27 +444,22 @@
 			console.log("서버 오류남");
 		};
 		
-		socket.onmessage = function(e) {
-		
-			let div = $("<div>" + e.data + "</div");
-			
-			console.log(div);
-			
-			$("#message_wrap1").append(div);
+		//메시지 수신 시에 실행되는 함수
+		socket.onmessage = function() {
+			console.log("메시지 수신됨");
 		};
 		
+		
+		}
+	
+	
 		//연결 종료 시 실행될 함수 
 		function disconnect() {
 			socket.close();
 	        location.href="http://localhost:8081/mbting";
 		};
-	}
 	
 
-	
-	
-	
-	
 	//메세지를 전송하는 함수
 	function sendMessage() {
 		
