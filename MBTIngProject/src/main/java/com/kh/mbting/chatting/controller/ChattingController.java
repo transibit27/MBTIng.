@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -19,7 +18,6 @@ import com.google.gson.JsonIOException;
 import com.kh.mbting.chatting.model.service.ChattingServiceImpl;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
-import com.kh.mbting.member.model.vo.Member;
 
 
 @Controller
@@ -121,7 +119,7 @@ public class ChattingController {
     }
     
     
-    @RequestMapping("convert.ch")
+    @GetMapping("convert.ch")
     public String convertChatting() {
 
     	//model.addAttribute("roomNo", roomNo);
