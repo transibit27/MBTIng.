@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.member.model.vo.Member;
 
 
 public interface ChattingService {
@@ -63,4 +64,11 @@ public interface ChattingService {
      * @return
      */
     int updateCount(ChatMessage message);
+    
+    /**
+     * 마스터 정보 가져오기 
+     * @param email
+     * @return
+     */
+    Member masterInfo(String email);
 }

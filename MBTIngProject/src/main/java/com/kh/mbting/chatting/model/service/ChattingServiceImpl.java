@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.mbting.chatting.model.dao.ChattingDao;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.member.model.vo.Member;
 
 @Service
 public class ChattingServiceImpl implements ChattingService{
@@ -58,6 +59,11 @@ public class ChattingServiceImpl implements ChattingService{
 	@Override
 	public int updateCount(ChatMessage message) {
 		return chattingDao.updateCount(message);
+	}
+
+	@Override
+	public Member masterInfo(String email) {
+		return chattingDao.masterInfo(email);
 	}
 
 	

@@ -22,8 +22,27 @@
         <result property="email" column="USER_EMAIL" />
         <result property="unReadCount" column="UNREAD_COUNT" />
         <result property="sendTime" column="SENDTIME" />
-        
     </resultMap>
+    
+    <resultMap id="memberResultSet" type="member">
+	 	<result column="USER_NO"  		property="userNo"></result>
+	 	<result column="EMAIL"  		property="email"></result>
+	 	<result column="USER_PWD"  		property="userPwd"></result>
+	 	<result column="PROFILE_IMG" 	property="profileImg"></result>
+	 	<result column="USER_NAME"  	property="userName"></result>
+	 	<result column="AGE"  			property="age"></result>
+	 	<result column="GENDER"  		property="gender"></result>
+	 	<result column="PHONE" 		 	property="phone"></result>
+	 	<result column="MBTI"  			property="mbti"></result>
+	 	<result column="MBTI_NICK"  	property="mbtiNick"></result>
+	 	<result column="INTRODUCE"  	property="introduce"></result>
+	 	<result column="ENROLL_DATE"  	property="enrollDate"></result>
+	 	<result column="MODIFY_DATE"  	property="modifyDate"></result>
+	 	<result column="MATCH_STAT"  	property="matchStat"></result>
+	 	<result column="MATCH_COIN"  	property="matchCoin"></result>
+	 	<result column="STATUS"  		property="status"></result>
+	 	<result column="MY_ROOM_NO" 	 	property="myRoomNo"></result>
+ 	</resultMap>
     
 
 	<insert id="createChat" parameterType="chatRoom">
@@ -93,4 +112,9 @@
         WHERE ROOM_NO = #{roomNo} AND USER_EMAIL != #{email} AND UN_READ_MESSAGE = 1
     </update>
     
+    <select id="masterInfo" parameterType="string" resultMap="memberResultSet">
+    	select * 
+    	from member 
+    	where email = #{email}
+    </select>
 </mapper>

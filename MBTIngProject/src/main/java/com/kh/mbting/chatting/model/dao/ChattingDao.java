@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.member.model.vo.Member;
 
 @Repository
 public class ChattingDao {
@@ -45,6 +46,10 @@ public class ChattingDao {
     
     public int updateCount(ChatMessage message) {
         return sqlSession.update("chatMapper.updateCount", message);
-    };
+    }
+    
+    public Member masterInfo(String email) {
+    	return sqlSession.selectOne("chatMapper.masterInfo" , email);
+    }
 }
 

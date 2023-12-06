@@ -252,28 +252,41 @@
 		            </li>
 		        </ul>
 	    	</div>
+	    	
+	    	<div class="chatDiv2" style="display : none">
+		        <ul>
+		            <li>
+		                <div class="sender">
+		                    <div></div>
+		                </div>
+		                <div class="chat">
+		                    <p></p>
+		                </div>
+		            </li>
+		        </ul>
+	    	</div>
              
              
              <div id="profileDiv">
                
                 <table > 
                    <tr>
-                       <td colspan="3" style="height: 300px; padding-top: 100px; "><img src="${pageContext.request.contextPath}/resources/images/profile/winter2.jpg"> </td>
+                       <td colspan="3" style="height: 300px; padding-top: 100px; "><img id="masterImg"> </td>
                    </tr>
                    <tr>
-                       <td colspan="3" style="height: 10px; "><p style="font-size: 60px;" >김민정</p></td>
-                   </tr>
-                   <tr>
-                       <td colspan="3"></td>
-                   </tr>
-                   <tr>
-                       <td colspan="3" style="height: 10px;" ><p style="font-size : 30px;">intj</p></td>
+                       <td colspan="3" style="height: 10px; "><p style="font-size: 60px;" id="masterName"></p></td>
                    </tr>
                    <tr>
                        <td colspan="3"></td>
                    </tr>
                    <tr>
-                       <td colspan="3" style="height: 10px;"><p> 순백의 하얗다 해서 윈터가 별명입니답 </p></td>
+                       <td colspan="3" style="height: 10px;" ><p id="mbti" style="font-size : 30px;"></p></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3"></td>
+                   </tr>
+                   <tr>
+                       <td colspan="3" style="height: 10px;"><p id="intro"></p></td>
                    </tr>
                    <tr>
                        <td colspan="3"></td>
@@ -282,7 +295,7 @@
                        <td colspan="3"></td>
                    </tr>
                    <tr>
-                       <td colspan="3">김민정에 대한 후기 남기기</td>
+                       <td colspan="3">후기 남기기</td>
                    </tr>
                    <tr>
                        <td colspan="3"></td>
@@ -290,7 +303,7 @@
                    <tr>
                        <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
                        <td><div><button id="submitButton" onclick="">신고하기</button></div></td>
-                       <td> <div><button id="submitButton" onclick="disconnect();">채팅 종료</button></div></td>
+                       <td> <div><button id="submitButton" onclick="Home();">나가기</button></div></td>
                    </tr>
                 </table>
            </div>
@@ -311,9 +324,6 @@
       </div>
     
         
-                
-                
-                
   <script>
     $(function() {
     	getRoomList();	
@@ -369,7 +379,7 @@
 
             	 }
             	 
-            	
+            	 
              }
   		});
     
@@ -380,15 +390,22 @@
 	<!--  채팅방 관련 -->
 	<script>
 	 let roomNo;
+	 let check = false; 
+	 
 	 
 	 function enterRoom(obj){
 		 
 		// 현재 html에 추가되었던 동적 태그 전부 지우기
-         $('div.chatMiddle:not(.format) ul').html("");
+         $('div.chatDiv').html("");
 		
          // obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
-         roomNo = obj.getAttribute("id");
-         
+         roomNo 	= obj.getAttribute("id");
+     	 var masterPic	 = obj.querySelector('img').src;
+     	 
+     	 email		= obj.getAttribute("email");
+     	 
+     	 //console.log(masterPic);
+     	
           //console.log(roomNo);
           // 해당 채팅 방의 메세지 목록 불러오기
            $.ajax({
@@ -406,11 +423,34 @@
                      // 채팅 목록 동적 추가
                      CheckLR(data[i]);
                  }
+                 
+                 $.ajax({
+                	url : "master.In",
+                	data : {email : email},
+                	success : function(master) {
+						console.log(master);
+                		$("#masterName").text(master.userName);
+                        $("#masterImg").attr("src" , masterPic);
+                        $("#mbti").text(master.mbti);
+                        $("#intro").text(master.introduce);
+                	},
+                	error : function() {
+                		console.log("클릭한 방의 master 정보 얻어오기 실패");
+                	}
+                 
+                 });
+                 
              }
          });
           // 웹소켓 연결
+          if (check){
+        	  disconnect();
+          }
+        	  
           connect();
           console.log("enterRoom");
+          
+          
      }
 	</script>
 	
@@ -420,7 +460,7 @@
 	//연결 실행 시 실행될 함수
 		
 		function connect() {
-
+			check = true;
 			let url ="ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
 				
 			socket = new WebSocket(url);
@@ -469,7 +509,7 @@
 		//연결 종료 시 실행될 함수 
 		function disconnect() {
 			socket.close();
-	        location.href="http://localhost:8081/mbting";
+	        //location.href="http://localhost:8081/mbting";
 		};
 	
 
@@ -529,7 +569,7 @@
      
  		//console.log(LR_className +email+message +name);
          // 형식 가져오기
-         let chatLi = $("div.chatDiv ul li").clone();
+         let chatLi = $("div.chatDiv2 ul li").clone();
 
          //console.log(chatLi);
          
@@ -557,6 +597,10 @@
 		
 	    $(this).css("background-color", "pink");
 	});
+	
+	function Home() {
+		 location.href="http://localhost:8081/mbting";
+	};
 		
 	</script>
 </body>
