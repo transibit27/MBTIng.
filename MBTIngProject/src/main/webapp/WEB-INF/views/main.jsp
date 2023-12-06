@@ -607,7 +607,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				                "</div>" + 
   				            "</div>" +
   				            "<div class='flip-card-back'>" + 
-  				          		"<button onclick='createChat(" + num + ");'>채팅하기</button>" + 
   				            "</div>" +
   				        "</div>" +
   				    "</div>" +
@@ -643,10 +642,9 @@ MBTIng 덕분에 제 운명을 만났어요....!
   </script>
 		
   <script>
-  
+  /*
   	function getRoomList() {
   		
-  	}
   		 $.ajax({
              url:"chatRoomList.do",
              data:{
@@ -663,8 +661,11 @@ MBTIng 덕분에 제 운명을 만났어요....!
             		 }
             	 }
              }
-  	});
+  		});
   
+  	}
+  	
+  	
   	function createChat(num) {
   		
   		let masterEmail = $("#masterEmail" + num).val();
@@ -695,6 +696,8 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		window.location = "http://localhost:8081/mbting/convert.ch?roomNo=" + createRoomNo;
   	}
   	
+  	
+  	*/
   	function requestMatch(e) {
 		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
 		e.style.backgroundColor = "#f54d3e";

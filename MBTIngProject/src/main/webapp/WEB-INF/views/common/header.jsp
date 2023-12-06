@@ -253,6 +253,7 @@
 	                <li><a href="">고객센터</a></li>
 	            	<li><a href="">신청하기(매칭)</a></li>
 	            	<li><a href="adminMain.ad">관리자</a></li>
+	            	<li><a href="convert.ch">채팅하기</a></li>
 	            </ul>    	
 	        </div>
 	            

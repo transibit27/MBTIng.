@@ -1,9 +1,10 @@
-package com.kh.mbting.chatting.controller;
+package com.kh.mbting.chatting.server;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -15,11 +16,10 @@ import com.kh.mbting.chatting.model.service.ChattingService;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 
-public class WebSocketHandler  extends TextWebSocketHandler {
+public class WebSocketHandler extends TextWebSocketHandler  {
 
 	@Autowired
 	ChattingService cService;
-	 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 	
 	// 채팅방 목록 <방 번호, ArrayList<session> >이 들어간다.
@@ -29,6 +29,11 @@ public class WebSocketHandler  extends TextWebSocketHandler {
     private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
     
     private static int i;
+    
+    
+    
+    
+    
     
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {

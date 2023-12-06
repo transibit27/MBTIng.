@@ -53,12 +53,12 @@ public class ChattingController {
         gson.toJson(mList,response.getWriter());
     }
 	
-	
+	/*
     @ResponseBody
     @RequestMapping("createChat.do")
     public String createChat(ChatRoom room, HttpSession session, String masterName, String masterEmail, String masterPic, HttpServletResponse response)throws JsonIOException, IOException{
 
-    	/*현재 로그인한 유저의 이메일정보와 이름 값*/
+    	/*현재 로그인한 유저의 이메일정보와 이름 값
         Member loginMember =  (Member)session.getAttribute("loginMember");
         String userEmail   = loginMember.getEmail();
         String userName    = loginMember.getUserName();
@@ -102,7 +102,7 @@ public class ChattingController {
         }
     
     }
-    
+    */
     
     @RequestMapping("chatRoomList.do")
     public void createChat(ChatRoom room, ChatMessage message, String userEmail, HttpServletResponse response) throws JsonIOException, IOException{
@@ -122,13 +122,13 @@ public class ChattingController {
     
     
     @RequestMapping("convert.ch")
-    public String convertChatting(Model model, String roomNo) {
+    public String convertChatting() {
 
-    	model.addAttribute("roomNo", roomNo);
+    	//model.addAttribute("roomNo", roomNo);
     	//System.out.println(roomNo);
     	return "chatting/chattingView";
     }
     
-    
+ 
 	
 }

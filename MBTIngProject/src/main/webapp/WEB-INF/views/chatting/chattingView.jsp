@@ -362,8 +362,7 @@
 
             	     // 그걸 chatWrap에 붙여주기
             	     $chatWrap.append($div);
-            		
-            		 
+
             	 }
             	 
             	
@@ -397,7 +396,6 @@
             	 console.log(data);
                  for(var i = 0; i < data.length; i++){
                      // 채팅 목록 동적 추가
-                   
                      CheckLR(data[i]);
                  }
              }
@@ -410,18 +408,15 @@
 	
 	
 	<script>
-    let roomNo1 = "${requestScope.roomNo}";
+ 
     //console.log(roomNo);
     
     let socket;
 	//연결 실행 시 실행될 함수
-
-	$(function(){
 		
 		function connect() {
-			
-		
-		let url = "ws://localhost:8081/mbting/chat.do";
+
+		let url = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
 			
 		socket = new WebSocket(url);
 		
@@ -433,7 +428,8 @@
 	                    "email"  : "${ loginMember.email }",
 	                  "message"  : "ENTER-CHAT"
 	            };
-	            let jsonData = JSON.stringify(data);
+	            
+			 	let jsonData = JSON.stringify(data);
 	             socket.send(jsonData);
 		};
 		
@@ -455,8 +451,7 @@
 			
 			$("#message_wrap1").append(div);
 		};
-		}
-	});
+	}
 	
 
 	

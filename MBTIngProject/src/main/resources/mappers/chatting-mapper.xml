@@ -49,7 +49,7 @@
 			JOIN (
 			    SELECT sendtime, message_content, room_no
 			    FROM (
-			        SELECT  message_content, room_no, to_char(sendtime, ' HH24:mi') as sendtime
+			        SELECT  message_content, room_no, sendtime
 			            FROM (
 			                SELECT sendtime, message_content, room_no,
 			                       ROW_NUMBER() OVER (PARTITION BY room_no ORDER BY message_no DESC) as rn
@@ -74,17 +74,17 @@
     
     <insert id="insertMessage" parameterType="ChatMessage">
         <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2)
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 1 ,2 , to_char(sysdate, 'HH24:mi'))
         </if>
         <if test="sessionCount == 2">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2)
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{message}, #{name}, #{email}, 0, 2 , to_char(sysdate, 'HH24:mi'))
         </if>
     </insert>
     
      <select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
-        SELECT * FROM CHATMESSAGE
-        WHERE ROOM_NO = #{rooomNo}
-        ORDER BY SENDTIME DESC
+         SELECT * FROM CHATMESSAGE
+          WHERE ROOM_NO = #{room_no}
+       ORDER BY message_no 
     </select>
 
     <update id="updateCount" parameterType="ChatMessage">
