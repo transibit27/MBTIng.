@@ -88,8 +88,8 @@
   display: inline-block;
   max-width: 500px;
   border: 1px solid black;
-  height: 60px;
-  line-height: 55px;
+  height: 45px;
+  line-height: 45px;
   padding: 0 1rem;
   margin : 20px;
   border: 2px solid transparent;
@@ -177,6 +177,18 @@
     height: 60px;
     margin-left: 10px;
 }
+
+.time {
+	font-size : 13px;
+	color 	  : gray;
+}
+
+.timeLeft {
+ display : float;
+ margin-left : 20px;
+ border : 1px solid black;
+}
+
 /*-------------------------전송버튼 css---------------------------------*/
 #submitButton {
  align-items: center;
@@ -243,15 +255,16 @@
              <div class="chatDiv">
 		        <ul>
 		            <li>
-		                <div class="sender">
+		                <div class="sender ">
 		                    <div></div>
 		                </div>
-		                <div class="chat">
-		                    <p></p>
+		                <div >
+		                  <p></p> <label></label>
 		                </div>
 		            </li>
 		        </ul>
 	    	</div>
+	    	
 	    	
 	    	<div class="chatDiv2" style="display : none">
 		        <ul>
@@ -260,11 +273,27 @@
 		                    <div></div>
 		                </div>
 		                <div class="chat">
-		                    <p></p>
+		                    <p></p> <label></label>
 		                </div>
 		            </li>
 		        </ul>
 	    	</div>
+	    	
+	    	
+	    	<div class="chatDiv3" style="display : none">
+		        <ul>
+		            <li>
+		                <div class="sender">
+		                    <div></div>
+		                </div>
+		                <div class="chat">
+		              		<label style="align : center"></label><p></p> 
+		                </div>
+		            </li>
+		        </ul>
+	    	</div>
+	    	
+	    	
              
              
              <div id="profileDiv">
@@ -418,7 +447,7 @@
              dataType:"json",
              success:function(data){
             	 
-            	 //console.log(data);
+            	 console.log(data);
                  for(var i = 0; i < data.length; i++){
                      // 채팅 목록 동적 추가
                      CheckLR(data[i]);
@@ -492,11 +521,11 @@
 			socket.onmessage = function(evt) {
 				  let receive = evt.data.split(",");
 				  
-				  //console.log(receive);
+				  console.log(receive);
 				  const data = {
-		                    "name" : receive[0],
+		                     "name" : receive[0],
 		                    "email" : receive[1],
-		                 "messageContent" : receive[2]
+		           "messageContent" : receive[2]
 		            };
 				  
 				  if(data.email != "${ loginUser.email }"){
@@ -549,13 +578,13 @@
         const LR = (data.email != "${ sessionScope.loginMember.email }") ? "Left" : "Right";
          // 메세지 추가
         //console.log(LR);
-        appendMessageTag(LR, data.email, data.messageContent, data.name);
+        appendMessageTag(LR, data.email, data.messageContent, data.name , data.sendTime);
     }
 	
     // * 3 메세지 태그 append
-    function appendMessageTag(LR_className, email, message, name) {
+    function appendMessageTag(LR_className, email, message, name , sendTime) {
          
-        const chatLi = createMessageTag(LR_className, email, message, name);
+        const chatLi = createMessageTag(LR_className, email, message, name , sendTime);
      
         //console.log(chatLi);
         $('div.chatDiv').append(chatLi);
@@ -565,7 +594,7 @@
     }
     
  	// * 4 메세지 태그 생성
-    function createMessageTag(LR_className, email, message, name) {
+    function createMessageTag(LR_className, email, message, name , sendTime) {
      
  		//console.log(LR_className +email+message +name);
          // 형식 가져오기
@@ -579,7 +608,14 @@
          chatLi.find('.chat p').text(message); 						// 메세지 추가
          chatLi.find('.chat p').addClass("message");
          chatLi.find('.sender div').addClass(LR_className);
+         chatLi.find('.chat label').addClass("time");
+         chatLi.find('.chat label').text(sendTime);
          
+         if(LR_className === 'Right') {
+        	 
+        	 
+        	 chatLi.find('.chat label').addClass("timeLeft");
+         }
          //console.log(chatLi);
          return chatLi;
     };

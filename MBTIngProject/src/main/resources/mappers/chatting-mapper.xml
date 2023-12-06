@@ -93,17 +93,17 @@
     
     <insert id="insertMessage" parameterType="ChatMessage">
         <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,2 , to_char(sysdate, 'HH24:mi'))
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,2 , default)
         </if>
         <if test="sessionCount == 2">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 0, 2 , to_char(sysdate, 'HH24:mi'))
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 0, 2 , default)
         </if>
     </insert>
     
      <select id="messageList" parameterType="string" resultMap="chatMessageResultSet">
          SELECT * FROM CHATMESSAGE
           WHERE ROOM_NO = #{room_no}
-       ORDER BY message_no 
+ 	   ORDER BY CAST(message_no AS INT) ASC
     </select>
 
     <update id="updateCount" parameterType="ChatMessage">
