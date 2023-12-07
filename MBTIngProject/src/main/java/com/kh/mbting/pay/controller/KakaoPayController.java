@@ -11,6 +11,7 @@ import java.net.URL;
 
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,7 +51,7 @@ public class KakaoPayController {
 				+ "quantity=1&"							// 상품 수량
 				+ "total_amount=1000&"					// 상품 총액
 				+ "tax_free_amount=0&"					// 비과세 금액
-				+ "approval_url=http://localhost:8081/mbting/myPay.me&"  // 결제 성공시 리다이렉트 URL
+				+ "approval_url=http://localhost:8081/mbting/kakaoPaySuccess&"  // 결제 성공시 리다이렉트 URL
 				+ "cancel_url=http://localhost:8081/mbting/myPay.me&"		// 결제 취소시 리다이렉트 URL
 				+ "fail_url=http://localhost:8081/mbting/myPay.me";		// 결제 실패시 리다이렉트 URL
 		
@@ -109,6 +110,13 @@ public class KakaoPayController {
 		// 굳이 ArrayList 로 내가 직접 파싱할 필요 없이
 		// JSON 형태를 바로 보내주면 됨!!
 		return responseText;
+	}
+	
+	@RequestMapping(value="/kakaoPaySuccess")
+	public String kakoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
+		System.out.println(pg_token);
+		
+		return pg_token;
 	}
 	
 }
