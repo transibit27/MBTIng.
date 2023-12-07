@@ -258,7 +258,7 @@
 		                <div class="sender ">
 		                    <div></div>
 		                </div>
-		                <div >
+		                <div class="chat">
 		                  <p></p> <label></label>
 		                </div>
 		            </li>
@@ -287,7 +287,7 @@
 		                    <div></div>
 		                </div>
 		                <div class="chat">
-		              		<label style="align : center"></label><p></p> 
+		              		<label style="align : right;"></label><p></p> 
 		                </div>
 		            </li>
 		        </ul>
@@ -599,9 +599,19 @@
  		//console.log(LR_className +email+message +name);
          // 형식 가져오기
          let chatLi = $("div.chatDiv2 ul li").clone();
+         let chatLi2 = $("div.chatDiv3 ul li").clone();
 
          //console.log(chatLi);
-         
+          if(LR_className === 'Right') {
+        	  chatLi2.find('.chat').addClass(LR_className);              	// left : right 클래스 추가
+              // find() : chatLi의 하위 요소 찾기
+              chatLi2.find('.sender div').text(name);      				// 이름 추가
+              chatLi2.find('.chat p').text(message); 						// 메세지 추가
+              chatLi2.find('.chat p').addClass("message");
+              chatLi2.find('.sender div').addClass(LR_className);
+              chatLi2.find('.chat label').addClass("time");
+              chatLi2.find('.chat label').text(sendTime);
+         }else {
          chatLi.find('.chat').addClass(LR_className);              	// left : right 클래스 추가
          // find() : chatLi의 하위 요소 찾기
          chatLi.find('.sender div').text(name);      				// 이름 추가
@@ -610,14 +620,11 @@
          chatLi.find('.sender div').addClass(LR_className);
          chatLi.find('.chat label').addClass("time");
          chatLi.find('.chat label').text(sendTime);
-         
-         if(LR_className === 'Right') {
-        	 
-        	 
-        	 chatLi.find('.chat label').addClass("timeLeft");
          }
+        
          //console.log(chatLi);
-         return chatLi;
+         
+         return [chatLi, chatLi2];
     };
 	</script>   
 
