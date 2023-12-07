@@ -51,7 +51,7 @@
 
         <form id="" action="list.adme">
 
-            <button type="button" class="btn btn-primary">정지/해제</button>
+            <button type="button" class="btn btn-primary" onclick="updateSelectedStatus()">저장</button>
 
         <table border="1" id="member-table">
             
@@ -75,12 +75,12 @@
                 
             </thead>
             <tbody id="searchResultBody">
-            	<c:forEach var="a" var="vs" var="str" items="${requestScope.list}">
+            <c:forEach var="a" varStatus="vs" items="${requestScope.list}">
 			    <script>
 			        var abc = 1;
-			        var ${str} = 'switch' + ${abc};
+			        var str_${vs.index + 1} = 'switch' + abc;
 			    </script>
-			
+			    
 			    <tr>
 			        <th><input type="checkbox" class="checkbox"></th>
 			        <th class="amno">${a.userNo}</th>
@@ -90,12 +90,13 @@
 			        <th>${a.gender}</th>
 			        <th>
 			            <form>
-			                <div class="custom-control custom-switch">
-			                    <input type="checkbox" class="custom-control-input" 
-			                           id="${str}" ${a.status == 'Y' ? 'checked' : ''}>
-			                    <label class="custom-control-label" for="${str}"></label>
-			                </div>
-			            </form>
+			    <div class="custom-control custom-switch">
+			        <input type="checkbox" class="custom-control-input" 
+			               id="switch${vs.index + 1}" ${a.status == 'Y' ? 'checked' : ''}>
+			        <label class="custom-control-label" for="switch${vs.index + 1}"></label>
+			    </div>
+			</form>
+			
 			        </th>
 			    </tr>
 			</c:forEach>
@@ -119,10 +120,84 @@
 	            checkbox.checked = isChecked;
 	        });
 	    }
-	</script>
-    
 	
+	    </script>
 	
+	    <!-- 클라이언트 코드 -->
+
+	    <script>
+	        function updateStatus(userNo, index) {
+	            var checkbox = document.getElementById('switch' + index);
+	            var status = checkbox.checked ? 'Y' : '';
+
+	            // AJAX를 사용하여 서버에 상태 업데이트 요청
+	            var xhr = new XMLHttpRequest();
+	            xhr.open('PUT', 'updateStatus.ad' + userNo + '?status=' + status, true);
+	            xhr.onload = function () {
+	                if (xhr.status === 200) {
+	                    // 성공적으로 업데이트된 경우 추가 로직 작성
+	                    console.log('Status updated successfully');
+	                } else {
+	                    console.error('Failed to update status');
+	                }
+	            };
+	            xhr.send();
+
+	            // 폼 전송 방지
+	            return false;
+	        }
+
+	        // 각 체크박스에 이벤트 리스너 등록
+	        document.addEventListener('DOMContentLoaded', function () {
+	            var checkboxes = document.querySelectorAll('.custom-control-input');
+	            checkboxes.forEach(function (checkbox, index) {
+	                checkbox.addEventListener('change', function () {
+	                    updateStatus(${a.userNo}, ${vs.index + 1});
+	                });
+	            });
+	        });
+	    </script>
+
+	
+		<script>
+    // ...
+
+
+
+	// 체크된 회원 저장
+    function updateSelectedStatus() {
+        // 선택된 모든 체크박스 가져오기
+        var checkboxes = document.querySelectorAll('.custom-control-input:checked');
+        var selectedUserNos = [];
+
+        // 선택된 체크박스의 userNo 가져와 배열에 저장
+        checkboxes.forEach(function (checkbox) {
+            var index = checkbox.id.replace('switch', '');
+            selectedUserNos.push(${requestScope.list[index - 1].userNo});
+        });
+
+        // AJAX를 사용하여 서버에 상태 일괄 업데이트 요청
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', 'updateSelectedStatus.ad', true);
+        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // 성공적으로 업데이트된 경우 추가 로직 작성
+                console.log('Selected statuses updated successfully');
+            } else {
+                console.error('Failed to update selected statuses');
+            }
+        };
+
+        // 선택된 회원들의 userNo를 JSON 형태로 변환하여 전송
+        xhr.send(JSON.stringify({ selectedUserNos: selectedUserNos }));
+
+        // 폼 전송 방지
+        return false;
+    }
+
+</script>
+		
     
     
     
