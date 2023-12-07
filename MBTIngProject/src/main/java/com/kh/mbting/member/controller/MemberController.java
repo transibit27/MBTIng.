@@ -1,14 +1,7 @@
 package com.kh.mbting.member.controller;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,8 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.chatting.model.vo.ChatMessage;
+import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
+import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
 
@@ -196,12 +191,52 @@ public class MemberController {
 		int result1 = memberService.proposeAccept(proposerNo);
 		// result2 : 매칭 대상자의 상태를 mastStat 값 update
 		int result2 = memberService.proposeAccepted(receiverNo);
-		// result3 : 매칭 테이블의 match 상태를 Y 로 update(1:1 대화 시 조회 가능하도록)
-		int result3 = 0;
+		
 		
 			if(result1>0 && result2>0) {	// 수락 성공 시
 
 				session.setAttribute("alertMsg", "매칭 수락 완료");
+				
+				// result 3
+				// proposerInfo : 수락 대상자의 회원 정보를 받기
+				Member proposerInfo = memberService.proposerInfo(proposerNo);
+				
+				//System.out.println("수락회원 정보" + proposerInfo);
+				//System.out.println("로그인 회원" + session.getAttribute("loginMember"));
+				Member receiverInfo = (Member)session.getAttribute("loginMember");
+				//System.out.println(receiverInfo);
+				
+				// result4 : 신청 수락 뒤 쳇룸 추가 (회원의 정보를 모두 넘김)
+				// 신청자, 수락자 정보를 ChatRoom VO에 담기
+				ChatRoom cr = new ChatRoom();
+				cr.setUserEmail(receiverInfo.getEmail());
+				cr.setUserName(receiverInfo.getUserName());
+				cr.setUserPic(receiverInfo.getProfileImg());
+				cr.setMasterEmail(proposerInfo.getEmail());
+				cr.setMasterName(proposerInfo.getUserName());
+				cr.setMasterPic(proposerInfo.getProfileImg());
+				//System.out.println("잘 담겼나?"+cr);
+				
+				
+				int result4 = memberService.createChatroom(cr);
+				
+				// result5 : 챗 메세지 생성해야함
+				// 수락한 사람 정보를 CharMessage VO에 담기
+				ChatMessage cm = new ChatMessage();
+				
+				// 매칭 수락 후 첫 출력되는 메시지
+				cm.setMessageContent(receiverInfo.getUserName()+"님이 대화 신청을 수락했습니다.");
+				cm.setName("챗봇");
+				cm.setEmail("chatbot@mbting.com");
+				int result5 = memberService.createChatMessage(cm);
+				
+				
+				// result6 : 매칭 테이블의 matching 상태를 3으로 후기 작성시 조회가 되도록
+				Matching mc = new Matching();
+				mc.setProposerNo(proposerNo);
+				mc.setReceiverNo(receiverNo);
+				
+				int result6 = memberService.matchingStrat(mc);
 				
 			return "redirect:/myPage.me";
 

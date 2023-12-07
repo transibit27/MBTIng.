@@ -34,6 +34,40 @@
  	<result column="MATCH_NO" property="matchNo"></result>
  </resultMap>
  
+<resultMap type="chatRoom" id="chatRoomResultSet">
+    <result property="roomNo" column="ROOM_NO" />
+    <result property="userEmail" column="USER_EMAIL" />
+    <result property="userName" column="USER_NAME" />        
+    <result property="userPic" column="USER_PRO_IMG" />
+    <result property="masterEmail" column="MASTER_EMAIL" />
+    <result property="masterName" column="MASTER_NAME" />
+    <result property="masterPic" column="MASTER_PRO_IMG" />
+    <result property="sendTime" column="SENDTIME" />
+    <result property="messageContent" column="MESSAGE_CONTENT" />
+</resultMap>
+
+	<resultMap type="chatMessage" id="chatMessageResultSet">
+        <result property="messageNo" column="MESSAGE_NO" />
+        <result property="roomNo" column="ROOM_NO" />
+        <result property="messageContent" column="MESSAGE_CONTENT" />
+        <result property="name" column="USER_NAME" />
+        <result property="email" column="USER_EMAIL" />
+        <result property="unReadCount" column="UNREAD_COUNT" />
+        <result property="sendTime" column="SENDTIME" />
+    </resultMap>
+    
+    <resultMap type="matching" id="matchingResultSet">
+    
+    	<result property="matchNo" column="MATCH_NO"/>
+    	<result property="receiverNo" column="RECEIVER_NO"/>
+    	<result property="proposerNo" column="PROPOSER_NO"/>
+    	<result property="matchTime" column="MATCH_TIME"/>
+    	<result property="propStat" column="PROP_STAT"/>
+    	<result property="receStat" column="RECE_STAT"/>
+    	<result property="matchStat" column="MATCH_STAT"/>
+    	
+    </resultMap>
+ 
 	<!-- top 회원 정보를 불러오기 위한 쿼리문 -->
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
@@ -117,6 +151,45 @@
 		   SET MATCH_STAT = 3
 		 WHERE USER_NO = #{receiverNo}
 	</update>
+	<!-- 마이페이지 메칭 수락 뒤 회원정보 추출용 -->
+	<select id="proposerInfo" parameterType="string" resultMap="memberResultSet">
+	  SELECT *
+	  	FROM MEMBER 
+	   WHERE USER_NO	= #{userNO}
+	  	 AND STATUS 	= 'Y'
+	</select>
+	
+	<!-- 마이페이지 메칭 수락 뒤 챗룸 추가용 -->
+	<insert id="createChatroom" parameterType="chatRoom">
+		INSERT INTO CHATROOM (ROOM_NO,USER_EMAIL,USER_NAME,USER_PRO_IMG,MASTER_EMAIL,MASTER_NAME,MASTER_PRO_IMG,UN_READ_MESSAGE)
+           	 VALUES (RNO_SEQ.NEXTVAL,
+           	 		 #{userEmail},
+           	 		 #{userName},
+           	 		 #{userPic},
+           	 		 #{masterEmail},
+           	 		 #{masterName},
+           	 		 #{masterPic},
+           	 		 2)
+  	</insert>
+  	<!-- 마이페이지 메칭 수락 뒤 첫 메시지 생성용 -->
+  	<insert id="createChatMessage" parameterType="chatMessage">
+	  	INSERT INTO CHATMESSAGE (ROOM_NO, MESSAGE_NO, MESSAGE_CONTENT, USER_NAME, USER_EMAIL, UN_READ_MESSAGE, SESSION_COUNT, SENDTIME)
+	     VALUES (RNO_SEQ.CURRVAL,
+	             CNO_SEQ.NEXTVAL,
+	             #{messageContent},
+	             #{name},
+	             #{email},
+	             2,
+	             0,
+	             DEFAULT)
+  	</insert>
+  	<!-- 마이페이지 대화 신청 수락 뒤 매칭 테이블 상태(3/매칭 진행 상태로) 업데이트 용 쿼리문 -->
+  	<update id="matchingStrat" parameterType="matching">
+  		UPDATE MATCHING
+  		   SET MATCH_STAT = 3
+  		 WHERE RECEIVER_NO = #{receiverNo} AND PROPOSER_NO = #{proposerNo}
+  	</update>
+	
 	<!-- 마이페이지 하단메뉴(내 상태 - 프로필) 조회용 쿼리문 -->
 	<select id="myStatProfile" parameterType="string" resultMap="memberResultSet">
 	  SELECT *
@@ -124,6 +197,7 @@
 	   WHERE USER_NO = #{userNo}
 	  	 AND STATUS  = 'Y'
 	</select>
+
 	
 	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->
 	<select id="selectListCount" resultType="_int">
@@ -169,5 +243,7 @@
 		  FROM MEMBER
 		 ORDER BY USER_NO DESC
 	</select>
+	
+	
 
 </mapper>

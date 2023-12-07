@@ -18,7 +18,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.kh.mbting.board.model.vo.Board;
+import com.kh.mbting.chatting.model.vo.ChatMessage;
+import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
+import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.dao.MemberDao;
 import com.kh.mbting.member.model.vo.Member;
 
@@ -200,6 +203,27 @@ public class MemberServiceImpl implements MemberService {
 	public int proposeAccepted(String receiverNo) {
 		return memberDao.proposeAccepted(sqlSession, receiverNo);
 	}
+	// 마이페이지 = 매칭 신청 수락 시 대상자의 회원 정보 추출용 메소드
+	@Override
+	public Member proposerInfo(String proposerNo) {
+		return memberDao.proposerInfo(sqlSession, proposerNo);
+	}
+	// 마이페이지 - 매칭 신청이 수락되었을 때 쳇룸 생성용 method
+	@Override
+	public int createChatroom(ChatRoom cr) {
+		return  memberDao.createChatroom(sqlSession, cr);
+	}
+	// 마이페이지 = 매칭 수락 후 첫 메시지 생성용 method
+	@Override
+	public int createChatMessage(ChatMessage cm) {
+		return memberDao.createChatMessage(sqlSession, cm);
+	}
+	// 1:1 대화 시작 시 매칭 테이블 의 매칭 상태를(3/매칭 진행) 업데이트용 method
+	@Override
+	public int matchingStrat(Matching mc) {
+		return memberDao.matchingStrat(sqlSession, mc);
+	}
+
 	
 	// 마이페이지 - 하단메뉴 (내 상태 - 프로필) 조회용 메소드
 	@Override
@@ -224,6 +248,8 @@ public class MemberServiceImpl implements MemberService {
 	public Member myChat(String userNo) {
 		return memberDao.myChat(sqlSession, userNo);
 	}
+
+
 
 
 
