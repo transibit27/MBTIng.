@@ -1,5 +1,6 @@
 package com.kh.mbting.chatting.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.mbting.chatting.model.vo.ChatMessage;
@@ -71,4 +72,11 @@ public interface ChattingService {
      * @return
      */
     Member masterInfo(String email);
+    
+    
+    /**
+     * 회원 정보 전체를 가져오기
+     * @return
+     */
+    ArrayList<Member> allMemberList();
 }

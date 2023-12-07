@@ -117,4 +117,10 @@
     	from member 
     	where email = #{email}
     </select>
+    
+    <select id="allMemberList" resultMap="memberResultSet">
+    	SELECT * 
+    	  FROM MEMBER
+    	 WHERE STATUS = 'Y'
+    </select>
 </mapper>

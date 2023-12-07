@@ -1,6 +1,7 @@
 package com.kh.mbting.chatting.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -143,6 +144,20 @@ public class ChattingController {
     	 gson.toJson(masterInfo,response.getWriter());
     }
     
- 
+    @RequestMapping("all.me")
+    public String allMember() {
+    	return "chatting/chattingList";
+    }
+    
+    @ResponseBody
+    @RequestMapping("all.memList")
+    public void allMemberList(HttpServletResponse response)throws JsonIOException, IOException {
+    	
+    	ArrayList<Member> list = cService.allMemberList();
+    	response.setContentType("application/json; charset=utf-8");
+     	
+    	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    	gson.toJson(list , response.getWriter());
+    }
 	
 }
