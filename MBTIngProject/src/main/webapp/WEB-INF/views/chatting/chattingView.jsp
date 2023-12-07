@@ -23,7 +23,7 @@
 }
 .wrapPC {
     width : 1550px;
-    height : 900px;
+    height : 700px;
     display: inline-block;
     display: flex;
 }
@@ -110,7 +110,7 @@
 #chatInput {
     width: 670px;
     height: 200px;
-    margin-left: 540px;
+    margin : auto;
 }
 
 #chatInput > table {
@@ -346,7 +346,7 @@
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 90%;" onclick="sendMessage();" >전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 95%; margin-bottom : 5px;>" onclick="sendMessage();" >전송</button></td>
                 </tr>
             </table>
         </div>
