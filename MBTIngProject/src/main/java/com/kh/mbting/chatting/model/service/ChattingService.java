@@ -78,5 +78,5 @@ public interface ChattingService {
      * 회원 정보 전체를 가져오기
      * @return
      */
-    ArrayList<Member> allMemberList();
+    ArrayList<Member> allMemberList(Member loginMember);
 }

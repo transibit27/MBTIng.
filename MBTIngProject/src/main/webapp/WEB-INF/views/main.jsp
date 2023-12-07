@@ -645,6 +645,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   	function requestMatch(e) {
 		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
 		e.style.backgroundColor = "#f54d3e";
+		e.innerText = "수락 대기중";
  	}
   </script>
 

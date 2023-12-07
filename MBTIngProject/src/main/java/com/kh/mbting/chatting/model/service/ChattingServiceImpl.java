@@ -68,8 +68,8 @@ public class ChattingServiceImpl implements ChattingService{
 	}
 
 	@Override
-	public ArrayList<Member> allMemberList() {
-		return chattingDao.allMemberList();
+	public ArrayList<Member> allMemberList(Member loginMember) {
+		return chattingDao.allMemberList(loginMember);
 	}
 
 	

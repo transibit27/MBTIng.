@@ -53,8 +53,8 @@ public class ChattingDao {
     	return sqlSession.selectOne("chatMapper.masterInfo" , email);
     }
     
-    public ArrayList<Member> allMemberList() {
-    	return (ArrayList)sqlSession.selectList("chatMapper.allMemberList");
+    public ArrayList<Member> allMemberList(Member loginMember) {
+    	return (ArrayList)sqlSession.selectList("chatMapper.allMemberList" , loginMember);
     }
 }
 

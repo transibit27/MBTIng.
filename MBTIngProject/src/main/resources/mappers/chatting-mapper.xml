@@ -118,9 +118,10 @@
     	where email = #{email}
     </select>
     
-    <select id="allMemberList" resultMap="memberResultSet">
+    <select id="allMemberList" resultMap="memberResultSet" parameterType="member">
     	SELECT * 
     	  FROM MEMBER
     	 WHERE STATUS = 'Y'
+    	 AND USER_NO != #{userNo}
     </select>
 </mapper>

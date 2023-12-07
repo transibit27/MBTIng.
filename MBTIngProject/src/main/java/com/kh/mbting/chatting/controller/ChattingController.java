@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -151,9 +152,11 @@ public class ChattingController {
     
     @ResponseBody
     @RequestMapping("all.memList")
-    public void allMemberList(HttpServletResponse response)throws JsonIOException, IOException {
+    public void allMemberList(HttpServletResponse response , HttpSession session)throws JsonIOException, IOException {
     	
-    	ArrayList<Member> list = cService.allMemberList();
+    	Member loginMember = (Member)session.getAttribute("loginMember");
+    			
+    	ArrayList<Member> list = cService.allMemberList(loginMember);
     	response.setContentType("application/json; charset=utf-8");
      	
     	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
