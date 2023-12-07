@@ -202,7 +202,7 @@
                         let resultStr = "";
                         for(let i in result) {
                             resultStr += "<td style='width:300px;'>"
-                            		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px'></a>"
+                            		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px; border-radius: 10px;'></a>"
                                        +	"<p>" + result[i].boardTitle + "<br>"
                                        +	"💑" + result[i].mbtiNick
                             resultStr += "</p></td>";
