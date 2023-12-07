@@ -1,6 +1,7 @@
 package com.kh.mbting.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.board.model.vo.BoardImg;
@@ -25,5 +26,9 @@ public interface BoardService {
 	int deleteBoard(int boardNo);
 	
 	ArrayList<Board> selectTopBoardList();
+
+    int selectSearchListCount(HashMap<String, String> map);
+
+    ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi);
 	
 }

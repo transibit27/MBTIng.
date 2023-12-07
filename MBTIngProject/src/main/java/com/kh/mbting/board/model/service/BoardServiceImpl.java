@@ -1,6 +1,7 @@
 package com.kh.mbting.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<Board> selectTopBoardList() {
 		return boardDao.selectTopBoardList(sqlSession);
+	}
+
+	@Override
+	public int selectSearchListCount(HashMap<String, String> map) {
+		return boardDao.selectSearchListCount(sqlSession, map);
+	}
+
+	@Override
+	public ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi) {
+		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
 
 }
