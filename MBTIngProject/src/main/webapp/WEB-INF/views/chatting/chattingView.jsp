@@ -293,10 +293,8 @@
 		        </ul>
 	    	</div>
 	    	
-	    	
-             
-             
-             <div id="profileDiv">
+
+            <div id="profileDiv">
                
                 <table > 
                    <tr>
@@ -370,7 +368,7 @@
              async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
              success:function(data){
             	 
-            	 console.log(data);
+            	 //console.log(data);
             	
             	 $chatWrap = $(".chatList");
 
@@ -416,24 +414,24 @@
 	
 	</script>
 	
+	
 	<!--  채팅방 관련 -->
 	<script>
 	 let roomNo;
 	 let check = false; 
-	 
-	 
+	 var masterPic;
 	 function enterRoom(obj){
 		 
 		// 현재 html에 추가되었던 동적 태그 전부 지우기
          $('div.chatDiv').html("");
 		
          // obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
-         roomNo 	= obj.getAttribute("id");
-     	 var masterPic	 = obj.querySelector('img').src;
+         roomNo 	 = obj.getAttribute("id");
+     	 masterPic	 = obj.querySelector('img').src;
      	 
-     	 email		= obj.getAttribute("email");
+     	 email		 = obj.getAttribute("email");
      	 
-     	 //console.log(masterPic);
+     	  //console.log(masterPic);
      	
           //console.log(roomNo);
           // 해당 채팅 방의 메세지 목록 불러오기
@@ -478,8 +476,7 @@
         	  
           connect();
           console.log("enterRoom");
-          
-          
+
      }
 	</script>
 	
@@ -628,11 +625,38 @@
     };
 	</script>   
 
+	<!-- 방 내용 실시간으로 불러오기  -->
+	<script>
+	$(window).on('load', function(){
+	    // 초기에도 채팅 목록 불러오기
+
+	    var clickedDiv = null;
+
+	    // 클릭한 div 요소의 배경을 pink로 변경
+	    $(".chatList").on('click', '.chatList_box', function() {
+	        // 이전에 클릭한 div의 배경을 원래대로 돌리기
+	        if (clickedDiv !== null) {
+	            clickedDiv.css('background-color', '');
+	        }
+
+	        // 현재 클릭한 div의 배경을 pink로 변경
+	        $(this).css('background-color', 'pink');
+	     
+	        // 클릭한 div 정보 저장
+	        clickedDiv = $(this);
+	    });
+
+	    // 2초에 한번씩 채팅 목록 불러오기
+	    setInterval(function(){
+	        $(".chatList").html("");
+	        // 방 목록 불러오기
+	        getRoomList(); 
+	    }, 1000);
+	});
+	</script>
 	
-	
-	
-	
-	<!-- 채팅 ui를 위한 script -->
+	<script>
+	<!-- 채팅 ui를 위한 script
 	<script>
 	$(".chatList").on("click", ".chatList_box", function() {
 		
@@ -640,7 +664,8 @@
 		
 	    $(this).css("background-color", "pink");
 	});
-	
+	 -->
+	<!-- 나가기 버튼 홈화면으로 돌려줌-->
 	function Home() {
 		 location.href="http://localhost:8081/mbting";
 	};
