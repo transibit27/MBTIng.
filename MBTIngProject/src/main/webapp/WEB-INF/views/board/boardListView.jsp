@@ -202,9 +202,9 @@
                         let resultStr = "";
                         for(let i in result) {
                             resultStr += "<td style='width:300px;'>"
-                            		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px'></a>"
+                            		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px; border-radius: 10px;'></a>"
                                        +	"<p>" + result[i].boardTitle + "<br>"
-                                       +	"💑" + result[i].userNo
+                                       +	"💑" + result[i].mbtiNick
                             resultStr += "</p></td>";
                             console.log(result[i]);
                         }                
@@ -229,7 +229,7 @@
             <c:forEach var="b" items="${ requestScope.list }">
                 <div class="thumbnail" align="center">
                     <a href="detail.bo?bno=${ b.boardNo }"><img src="${pageContext.request.contextPath}/${ b.changeName }"></a>
-                    <P>${ b.boardTitle }<br>💑${ b.userNo }</P>
+                    <P>${ b.boardTitle }<br>💑${ b.mbtiNick }</P>
 
                     <!-- 추후에 좋아요 수 조회 기능 추가 예정 -->
 

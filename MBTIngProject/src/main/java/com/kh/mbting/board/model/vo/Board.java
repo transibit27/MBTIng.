@@ -24,6 +24,7 @@ public class Board {
 	private int matchNo;			//	MATCH_NO	NUMBER
 	
 	// 타 테이블에서 참고해올 것
-	private String originName; // BOARDIMG 테이블의 ORIGIN_NAME	VARCHAR2(100 BYTE)
-	private String changeName; // BOARDIMG 테이블의 CHANGE_NAME VARCHAR2(100 BYTE)
+	private String originName;		//	BOARDIMG 테이블의 ORIGIN_NAME	VARCHAR2(100 BYTE)
+	private String changeName;		//	BOARDIMG 테이블의 CHANGE_NAME VARCHAR2(100 BYTE)
+	private String mbtiNick;		//	MEMBER 테이블의 MBTI_NICK VARCHAR2(30 BYTE)
 }
