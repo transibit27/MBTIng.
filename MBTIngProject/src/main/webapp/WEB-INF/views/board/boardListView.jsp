@@ -243,30 +243,30 @@
             <c:if test="${ requestScope.pi.currentPage ne 1 }">                
                 <c:choose>
                     <c:when test="${ empty requestScope.condition }">
-                        <button onclick="location.href='list.bo?cpage=${ requestScope.pi.currentPage - 1 }';">&lt;</button>   
+                        <button onclick="location.href='list.bo?currentPage=${ requestScope.pi.currentPage - 1 }';">&lt;</button>   
                     </c:when>
                     <c:otherwise>
-                        <button onclick="location.href='search.bo?cpage=${ requestScope.pi.currentPage - 1 }&condition=${requestScope.condition}&keyword=${requestScope.keyword}';">&lt;</button>   
+                        <button onclick="location.href='search.bo?currentPage=${ requestScope.pi.currentPage - 1 }&condition=${requestScope.condition}&keyword=${requestScope.keyword}';">&lt;</button>   
                     </c:otherwise>
                 </c:choose>                
             </c:if>
             <c:forEach var="p" begin="${ requestScope.pi.startPage }" end="${ requestScope.pi.endPage }" step="1">                 
                 <c:choose>
                     <c:when test="${ empty requestScope.condition }">
-                        <button onclick="location.href='list.bo?cpage=${ p }';" class="pageB-${ p }">${ p }</button>
+                        <button onclick="location.href='list.bo?currentPage=${ p }';" class="pageB-${ p }">${ p }</button>
                     </c:when>
                     <c:otherwise>
-                        <button onclick="location.href='search.bo?cpage=${ p }&condition=${ requestScope.condition }&keyword=${ requestScope.keyword }';" class="pageB-${ p }">${ p }</button>
+                        <button onclick="location.href='search.bo?currentPage=${ p }&condition=${ requestScope.condition }&keyword=${ requestScope.keyword }';" class="pageB-${ p }">${ p }</button>
                     </c:otherwise>
                 </c:choose>                
             </c:forEach>            
             <c:if test="${ requestScope.pi.currentPage ne requestScope.pi.maxPage }">                
                 <c:choose>
                     <c:when test="${ empty requestScope.condition }">
-                        <button onclick="location.href='list.bo?cpage=${ requestScope.pi.currentPage + 1 }';">&gt;</button> 
+                        <button onclick="location.href='list.bo?currentPage=${ requestScope.pi.currentPage + 1 }';">&gt;</button> 
                     </c:when>
                     <c:otherwise>
-                        <button onclick="location.href='search.bo?cpage=${ requestScope.pi.currentPage + 1 }&condition=${ requestScope.condition }&keyword=${ requestScope.keyword }';">&gt;</button> 
+                        <button onclick="location.href='search.bo?currentPage=${ requestScope.pi.currentPage + 1 }&condition=${ requestScope.condition }&keyword=${ requestScope.keyword }';">&gt;</button> 
                     </c:otherwise>
                 </c:choose>               
             </c:if>
@@ -295,7 +295,7 @@
         <c:if test="${ !empty requestScope.condition }">
             <script>
                 $(function() {
-                    $("#search-area option[value=${requestScope.condition}]").attr("selected", true);
+                    $(".search-area option[value=${requestScope.condition}]").attr("selected", true);
                 });
             </script>
         </c:if>

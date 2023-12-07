@@ -128,4 +128,29 @@
 		 WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<select id="selectSearchListCount" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		  FROM BOARD B, MEMBER M
+		 WHERE B.USER_NO = M.USER_NO
+		   AND B.STATUS = 'Y'
+		   AND ${condition} LIKE '%' || #{keyword} || '%'
+	</select>
+
+	<select id="selectSearchList" parameterType="hashmap" resultMap="boardResultSet">
+		SELECT B.BOARD_NO
+		     , B.BOARD_TITLE
+		     , B.USER_NO
+		     , M.MBTI_NICK
+		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "B.ENROLL_DATE"
+			 , BI.ORIGIN_NAME
+			 , BI.CHANGE_NAME
+		  FROM BOARD B, BOARDIMG BI, MEMBER M
+         WHERE B.USER_NO = M.USER_NO (+)
+           AND B.BOARD_NO = BI.BOARD_NO (+)
+		   AND B.STATUS = 'Y'
+		   AND BI.THUMBNAIL = 'Y'
+		   AND ${condition} LIKE '%' || #{keyword} || '%'
+		 ORDER BY BOARD_NO DESC
+	</select>
+
 </mapper>

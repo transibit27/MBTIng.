@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -33,7 +34,7 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@GetMapping("list.bo")
-	public  ModelAndView selectList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, ModelAndView mv) {
+	public ModelAndView selectList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, ModelAndView mv) {
 		int listCount = boardService.selectListCount();		
 		int pageLimit = 10;
 		int boardLimit = 12;		
@@ -43,6 +44,21 @@ public class BoardController {
 		return mv;
 	}
 	
+	@GetMapping("search.bo")
+	public ModelAndView searchBoard(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, @RequestParam(value = "condition", defaultValue = "") String condition, @RequestParam(value = "keyword", defaultValue = "") String keyword, ModelAndView mv) {
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		int searchCount = boardService.selectSearchListCount(map);		
+		int pageLimit = 10;
+		int boardLimit = 12;	
+		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, pageLimit, boardLimit);
+		ArrayList<Board> list = boardService.selectSearchList(map, pi);
+		mv.addObject("list", list).addObject("pi", pi).addObject("condition", condition).addObject("keyword", keyword).setViewName("board/boardListView");
+		return mv;
+	}
+
 	@GetMapping("enrollForm.bo")
 	public String enrollForm() {		
 		return "board/boardEnrollForm";
