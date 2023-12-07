@@ -227,7 +227,7 @@ public class MemberController {
 				// 매칭 수락 후 첫 출력되는 메시지
 				cm.setMessageContent(receiverInfo.getUserName()+"님이 대화 신청을 수락했습니다.");
 				cm.setName("챗봇");
-				cm.setEmail("chatbot@mbting.com");
+				cm.setEmail(receiverInfo.getEmail());
 				int result5 = memberService.createChatMessage(cm);
 				
 				

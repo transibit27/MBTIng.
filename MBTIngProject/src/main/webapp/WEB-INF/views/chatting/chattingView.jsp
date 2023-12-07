@@ -59,13 +59,13 @@
  }
  
 .chatDiv {
-    width: 670px;
+    width: 690px;
     height: 80%;
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
     overflow:auto;
     margin-top: 100px;
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 .chatList {
@@ -110,7 +110,7 @@
 #chatInput {
     width: 670px;
     height: 200px;
-    margin : auto;
+    margin-left : 428px;
 }
 
 #chatInput > table {
@@ -330,7 +330,7 @@
                    <tr>
                        <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
                        <td><div><button id="submitButton" onclick="">신고하기</button></div></td>
-                       <td> <div><button id="submitButton" onclick="Home();">나가기</button></div></td>
+                       <td> <div><button id="submitButton" onclick="Home()">나가기</button></div></td>
                    </tr>
                 </table>
            </div>
@@ -338,13 +338,14 @@
         <div id="chatInput">
             <table>
                 <tr>
-                    <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img>></td>
+                    <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img></td>
                 </tr>
                 <tr>
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 95%; margin-bottom : 5px;>" onclick="sendMessage();" >전송</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 95%; margin-bottom : 5px;>" onclick="sendMessage();" >전송
+</button></td>
                 </tr>
             </table>
         </div>
@@ -656,8 +657,7 @@
 	</script>
 	
 	<script>
-	<!-- 채팅 ui를 위한 script
-	<script>
+	
 	$(".chatList").on("click", ".chatList_box", function() {
 		
 		$(".chatList_box").not(this).css("background-color", "white");
