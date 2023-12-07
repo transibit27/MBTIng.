@@ -131,7 +131,7 @@
                     <td colspan="2" class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
                 </tr>
                 <tr>
-                    <td>💑${ requestScope.b.userNo }</td>
+                    <td>💑${ requestScope.b.mbtiNick }</td>
                     <td>${ requestScope.b.enrollDate }</td>
                 </tr>
                 <tr>

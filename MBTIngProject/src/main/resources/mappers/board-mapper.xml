@@ -13,6 +13,7 @@
 		<result column="MATCH_NO" property="matchNo"></result>
 		<result column="ORIGIN_NAME" property="originName"></result>
 		<result column="CHANGE_NAME" property="changeName"></result>
+		<result column="MBTI_NICK" property="mbtiNick"></result>
 	</resultMap>
 	
 	<resultMap id="boardImgResultSet" type="boardImg">
@@ -33,11 +34,13 @@
 		SELECT B.BOARD_NO
 		     , B.BOARD_TITLE
 		     , B.USER_NO
+		     , M.MBTI_NICK
 		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "B.ENROLL_DATE"
 			 , BI.ORIGIN_NAME
 			 , BI.CHANGE_NAME
-		  FROM BOARD B, BOARDIMG BI
+		  FROM BOARD B, BOARDIMG BI, MEMBER M
          WHERE B.BOARD_NO = BI.BOARD_NO (+)
+           AND B.USER_NO = M.USER_NO (+)
 		   AND B.STATUS = 'Y'
 		   AND BI.THUMBNAIL = 'Y'
 		 ORDER BY BOARD_NO DESC
@@ -48,11 +51,13 @@
 		  FROM (SELECT BO.BOARD_NO
 		             , BO.BOARD_TITLE
 		             , BO.USER_NO
+		             , M.MBTI_NICK
 		             , TO_CHAR(BO.ENROLL_DATE, 'YYYY-MM-DD') AS "BO.ENROLL_DATE"
 		             , BI.ORIGIN_NAME
 		             , BI.CHANGE_NAME
-		          FROM BOARD BO, BOARDIMG BI
+		          FROM BOARD BO, BOARDIMG BI, MEMBER M
 		         WHERE BO.BOARD_NO = BI.BOARD_NO (+)
+		           AND BO.USER_NO = M.USER_NO (+)
 		           AND BO.STATUS = 'Y'
 		           AND BI.THUMBNAIL = 'Y'
 		         ORDER BY VIEWS DESC) B
@@ -91,18 +96,20 @@
 	</update>
 	
 	<select id="selectBoard" parameterType="_int" resultMap="boardResultSet">
-		SELECT BOARD_NO
-		     , BOARD_TITLE
-		     , BOARD_CONTENT
-		     , VIEWS
-		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
-		     , TO_CHAR(MODIFY_DATE, 'YYYY-MM-DD') AS "MODIFY_DATE"
-		     , STATUS
-		     , USER_NO
-		     , MATCH_NO
-		  FROM BOARD
-		 WHERE BOARD_NO = #{boardNo}
-		   AND STATUS = 'Y'
+		SELECT B.BOARD_NO
+		     , B.BOARD_TITLE
+		     , B.BOARD_CONTENT
+		     , B.VIEWS
+		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
+		     , TO_CHAR(B.MODIFY_DATE, 'YYYY-MM-DD') AS "MODIFY_DATE"
+		     , B.STATUS
+		     , B.USER_NO
+		     , B.MATCH_NO
+		     , M.MBTI_NICK
+		  FROM BOARD B, MEMBER M
+		 WHERE B.USER_NO = M.USER_NO (+)
+		   AND B.BOARD_NO = #{boardNo}
+		   AND B.STATUS = 'Y'
 	</select>
 
 	<select id="selectBoardImg" parameterType="_int" resultMap="boardImgResultSet">
