@@ -224,6 +224,8 @@
 				success:function(result){
 					console.log(result);
 					console.log(result.tid);
+					var box = result.next_redirect_pc_url
+					window.open(box);
 						
 				},
 				error:function(result){
