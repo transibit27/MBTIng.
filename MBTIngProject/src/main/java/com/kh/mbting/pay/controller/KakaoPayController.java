@@ -10,19 +10,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.mbting.member.model.service.MemberService;
+import com.kh.mbting.pay.model.service.KakaoPayService;
+
 @Controller
 public class KakaoPayController {
+	
+	@Autowired	
+	private KakaoPayService kakaoPayService; 
 
 	@RequestMapping(value="pay.me", produces = "text/xml; charset=UTF-8")
 	@ResponseBody
 	public String kakaoPay(@RequestParam(value="email") String email) throws IOException{
-		System.out.println("잘 전달되나?");
-		System.out.println(email);
 		
 		String url="https://kapi.kakao.com/v1/payment/ready";
 				
@@ -43,15 +48,26 @@ public class KakaoPayController {
 		// 서버에게 전해줄 정보가 있을 경우 DoOutPut(true)를 넣어준다
 		urlConnection.setDoOutput(true);
 		
+		System.out.println("이메일"+email);
+		// 결제 시도 시 결제 테이블 데이터 생성하기
+		int cResult = kakaoPayService.insertPay(email);
+		
+		System.out.println("이메일 담김?"+cResult);
+				
+		// 생성된 결제 테이블로 부터 가맹점 주문번호 받아오기 
+		String partner_order_id = Integer.toString(kakaoPayService.getPartnerOrder(email));
+		
+		System.out.println("오더아이디" + partner_order_id);
+				
 		String parameter = "cid=TC0ONETIME&"			// cid
-				+ "partner_order_id=partner_order_id&"	// 가맹점 주문번호
-				+ "partner_user_id=email&"				// 가맹점 회원 id
+				+ "partner_order_id="+partner_order_id+"&"	// 가맹점 주문번호
+				+ "partner_user_id="+email+"&"				// 가맹점 회원 id
 				+ "item_name=MBTIngCoinx5&"				// 상품명
 				+ "quantity=1&"							// 상품 수량
 				+ "total_amount=1000&"					// 상품 총액
 				+ "tax_free_amount=0&"					// 비과세 금액
 				+ "approval_url=http://localhost:8081/mbting/myPay.me&"  // 결제 성공시 리다이렉트 URL
-				+ "cancel_url=http://localhost:8081/mbting/myPay.me&"		// 결제 취소시 리다이렉트 URL
+				+ "cancel_url=http://localhost:8081/mbting/myPay.me&"	// 결제 취소시 리다이렉트 URL
 				+ "fail_url=http://localhost:8081/mbting/myPay.me";		// 결제 실패시 리다이렉트 URL
 		
 		// 서버에 위의 값을 넘겨 줄 때 필요한 스트림 객체 생성
@@ -74,6 +90,10 @@ public class KakaoPayController {
 		// HTTP 코드에서 정상적인 통신은 200값을 가짐
 		if(result == 200) {		// 성공 시
 			inputStream = urlConnection.getInputStream();
+			//System.out.println("결제 요청/ 바코드 노출 순간 tid 발급 됨");
+			
+			
+			
 		} else {	// 실패 시
 			inputStream = urlConnection.getErrorStream();
 		}
@@ -83,10 +103,7 @@ public class KakaoPayController {
 		= new BufferedReader(
 				new InputStreamReader(
 						urlConnection.getInputStream()));
-		
-		JSONParser parser = new JSONParser();
 
-	
 		// System.out.println("리드라인"+br.readLine());
 		String line;
 		// line = br.readLine();
@@ -95,15 +112,12 @@ public class KakaoPayController {
 		
 		
 		while((line = br.readLine()) != null) {
-			System.out.println("여기 왜 안들어올까?");
 			
 			responseText += line;
 		}
 		
 		br.close();
 		urlConnection.disconnect();
-		
-		System.out.println("이거 왜 안찎힘?"+responseText);
 		
 		// 응답데이터를 ajax 요청했던 곳으로 보내주고자 한다면
 		// 굳이 ArrayList 로 내가 직접 파싱할 필요 없이

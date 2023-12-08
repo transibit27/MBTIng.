@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -191,6 +193,7 @@
                     무제한 MBTI 테스트 가능
                 </div>
             </div>  
+          
             <button type="button">결제하기</button>
         </div>
     
@@ -199,14 +202,13 @@
                 <div class="item_title">MBTICoin x10</div>
                 <div class="item_intro">
                     횟수 제한 없는 매칭 신청 <br>
-                    대화 기회 5회! <br>
+                    대화 기회 10회! <br>
                     부담 있는 가격 <br>
                     무제한 MBTI 테스트 가능
                 </div>
             </div>
-            <form method="post" th:action="@{/kakaoPay}">
-			    <button type="submit">결제하기</button>
-			</form>
+
+			    <button id="mbtiCoin10" type="button">결제하기</button>
         </div>
 
     </div>
@@ -238,6 +240,23 @@
 			});	//ajax 끝
 			
 		});// 버튼 클릭 이벤트	
+		
+		
+		
+		IMP.request_pay({
+		    pg : 'kakaopay',
+		    pay_method : 'card', //생략 가능
+		    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
+		    name : '주문명:결제테스트',
+		    amount : 14000,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456'
+		}, function(rsp) { // callback 로직
+			//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
+		});
 		
 	});	// 펑션 끝
 	
