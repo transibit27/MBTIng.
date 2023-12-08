@@ -9,16 +9,16 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.json.simple.parser.JSONParser;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.pay.model.service.KakaoPayService;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 @Controller
 public class KakaoPayController {
@@ -28,7 +28,7 @@ public class KakaoPayController {
 
 	@RequestMapping(value="pay.me", produces = "text/xml; charset=UTF-8")
 	@ResponseBody
-	public String kakaoPay(@RequestParam(value="email") String email) throws IOException{
+	public String kakaoPay(KakaoPay kp, HttpSession session) throws IOException{
 		
 		String url="https://kapi.kakao.com/v1/payment/ready";
 				
@@ -49,25 +49,28 @@ public class KakaoPayController {
 		// 서버에게 전해줄 정보가 있을 경우 DoOutPut(true)를 넣어준다
 		urlConnection.setDoOutput(true);
 		
-		System.out.println("이메일"+email);
-		// 결제 시도 시 결제 테이블 데이터 생성하기
-		int cResult = kakaoPayService.insertPay(email);
-		
-		System.out.println("이메일 담김?"+cResult);
+		// step1. 결제 시도 시 결제 상품의 정보와 회원 정보를 카카오 톡에 넘기면서 DB에 결제 테이블 생성
+		// 결제 시도 시 결제 테이블 데이터 생성하기 ( 결제 시도 상품의 기본 정보 담기 )
+
+		String partner_order_id = "";
+		// 결제 정보를 db로 넘기는 부분
+		int cResult = kakaoPayService.insertPay(kp);
+		if(cResult > 0 ) { //결제 테이블 생성에 성공했을 경우
+			
+			// 생성된 결제 테이블로 부터 가맹점 주문번호 받아오기 
+			partner_order_id = kakaoPayService.getPartnerOrder(kp.getPartnerUserId());
+			System.out.println("오더아이디" + partner_order_id);
+			// 세션에 가맹점 주문번호 담아 두기 = > 결제 시도시 세션이 생성되므로 자바 스크립트에 없는 값이 입려되는 꼴이 되서 실패한 방법
+		}
 				
-		// 생성된 결제 테이블로 부터 가맹점 주문번호 받아오기 
-		String partner_order_id = Integer.toString(kakaoPayService.getPartnerOrder(email));
-		
-		System.out.println("오더아이디" + partner_order_id);
-				
-		String parameter = "cid=TC0ONETIME&"			// cid
-				+ "partner_order_id="+partner_order_id+"&"	// 가맹점 주문번호
-				+ "partner_user_id="+email+"&"				// 가맹점 회원 id
-				+ "item_name=MBTIngCoinx5&"				// 상품명
-				+ "quantity=1&"							// 상품 수량
-				+ "total_amount=1000&"					// 상품 총액
-				+ "tax_free_amount=0&"					// 비과세 금액
-				+ "approval_url=http://localhost:8081/mbting/kakaoPaySuccess&"  // 결제 성공시 리다이렉트 URL
+		String parameter = "cid=TC0ONETIME&"								// cid
+				+ "partner_order_id="+partner_order_id+"&"					// 가맹점 주문번호
+				+ "partner_user_id="+kp.getPartnerUserId()+"&"				// 가맹점 회원 id
+				+ "item_name="+kp.getItemName()+"&"							// 상품명
+				+ "quantity="+kp.getQuantity()+"&"							// 상품 수량
+				+ "total_amount="+kp.getTotalAmount()+"&"					// 상품 총액
+				+ "tax_free_amount="+kp.getTaxFreeAmount()+"&"					// 비과세 금액
+				+ "approval_url=http://localhost:8081/mbting/kakaoPaySuccess?partner_order_id="+ partner_order_id +"&"  // 결제 성공시 리다이렉트 URL
 				+ "cancel_url=http://localhost:8081/mbting/myPay.me&"		// 결제 취소시 리다이렉트 URL
 				+ "fail_url=http://localhost:8081/mbting/myPay.me";		// 결제 실패시 리다이렉트 URL
 		
@@ -92,8 +95,7 @@ public class KakaoPayController {
 		if(result == 200) {		// 성공 시
 			inputStream = urlConnection.getInputStream();
 			//System.out.println("결제 요청/ 바코드 노출 순간 tid 발급 됨");
-			
-			
+			//Tid 발급 받을 시 해당 주문번호 건에 저장하기 위해 주문번호 session에 저장
 			
 		} else {	// 실패 시
 			inputStream = urlConnection.getErrorStream();
@@ -126,11 +128,32 @@ public class KakaoPayController {
 		return responseText;
 	}
 	
-	@RequestMapping(value="/kakaoPaySuccess")
-	public String kakoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
-		System.out.println(pg_token);
+	@RequestMapping(value="payTry.me")
+	public String kakaoPayTid(KakaoPay kp) {
+		// Tid 값 저장 위해 order_id 값 받아오기(카카오페이 결제 테이블 중 최 상단 컬럼)
+		String partner_order_id = kakaoPayService.getPartnerOrder(kp.getPartnerUserId());
+		kp.setPartnerOrderId(partner_order_id);
+		// tid 값 결제 테이블에 저장
+		int result = kakaoPayService.insertTid(kp);
 		
-		return pg_token;
+		
+		return null;
+	}
+	
+	@RequestMapping(value="/kakaoPaySuccess")
+	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token,
+			@RequestParam("partner_order_id") String partner_order_id,
+			HttpSession session) {
+		
+		KakaoPay kp = new KakaoPay();
+		kp.setPg_token(pg_token);
+		kp.setPartnerOrderId(partner_order_id);
+		
+		System.out.println("kp에 잘 담김? "+kp);
+		
+		int result = kakaoPayService.insertPgToken(kp);
+		
+		return "redirect:/myPay.me";
 	}
 	
 }

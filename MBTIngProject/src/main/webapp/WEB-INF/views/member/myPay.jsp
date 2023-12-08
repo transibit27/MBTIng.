@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -194,7 +192,7 @@
                 </div>
             </div>  
           
-            <button type="button">결제하기</button>
+            <button type="button">5만원 결제하기</button>
         </div>
     
         <div class="pay_item" id="pay2">
@@ -208,7 +206,7 @@
                 </div>
             </div>
 
-			    <button id="mbtiCoin10" type="button">결제하기</button>
+			    <button id="mbtiCoin10" type="button">9만원 결제하기</button>
         </div>
 
     </div>
@@ -218,22 +216,61 @@
 <!-- 카카오페이 결제용 스클비트 -->
 <script>
 	$(function(){
+		
+		function orderList(){
+			$.ajax({
+				url:'orderList.me',
+	            data : {"userNo":${sessionScope.loginMember.userNo}},
+                success : function(result){
+                    
+                    console.log(result);
+                
+                },
+                error : function(){
+                    console.log("내 대화 상대 표시용 ajax 통신 실패")
+                }
+                
+            }); // ajax 끝
+		}
+		
+		
+		
+		
+		
 		$("#pay1").click(function(){
 			$.ajax({
 				url:'pay.me',
 				dataType:'json',
-				data:{'email': '${sessionScope.loginMember.email}'},
+				data:{
+					'partnerUserId': '${sessionScope.loginMember.email}',
+					'itemName': 'MBTIngCoinx5',
+					'quantity': 1,
+					'totalAmount' : 50000,
+					'taxFreeAmount' : 0
+				
+				},
 				success:function(result){
-					console.log(result);
-					console.log(result.tid);
-					var box = result.next_redirect_pc_url
+					var tid = result.tid;
+					var box = result.next_redirect_pc_url;
 					window.open(box);
+					
+					$.ajax({
+						url:'payTry.me',
+						data:{'tid' : tid,
+							  'partnerUserId': '${sessionScope.loginMember.email}'
+							  },
+						success:function(result2){
+							console.log("tid 받기 성공")
+						},
+						error: function(result2){
+							console.log("tid 받기 실패")
+							
+						}
+					})
 						
 				},
 				error:function(result){
 					alert("카카오페이 결제용 ajax 통신 오류")
-					console.log(result);
-					console.log(result.tid)
 				}
 				
 				
@@ -242,22 +279,48 @@
 		});// 버튼 클릭 이벤트	
 		
 		
+		$("#pay2").click(function(){
+			$.ajax({
+				url:'pay.me',
+				dataType:'json',
+				data:{
+					'partnerUserId': '${sessionScope.loginMember.email}',
+					'itemName': 'MBTIngCoinx10',
+					'quantity': 1,
+					'totalAmount' : 90000,
+					'taxFreeAmount' : 0
+				
+				},
+				success:function(result){
+					var tid = result.tid;
+					var box = result.next_redirect_pc_url;
+					window.open(box);
+					
+					$.ajax({
+						url:'payTry.me',
+						data:{'tid' : tid,
+							  'partnerUserId': '${sessionScope.loginMember.email}'
+							  },
+						success:function(result2){
+							console.log("tid 받기 성공")
+						},
+						error: function(result2){
+							console.log("tid 받기 실패")
+							
+						}
+					})
+						
+				},
+				error:function(result){
+					alert("카카오페이 결제용 ajax 통신 오류")
+				}
+				
+				
+			});	//ajax 끝
+			
+		});// 버튼 클릭 이벤트	
 		
-		IMP.request_pay({
-		    pg : 'kakaopay',
-		    pay_method : 'card', //생략 가능
-		    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
-		    name : '주문명:결제테스트',
-		    amount : 14000,
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
-		    buyer_postcode : '123-456'
-		}, function(rsp) { // callback 로직
-			//* ...중략 (README 파일에서 상세 샘플코드를 확인하세요)... *//
-		});
-		
+	
 	});	// 펑션 끝
 	
 

@@ -24,6 +24,7 @@ import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.dao.MemberDao;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -247,6 +248,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member myChat(String userNo) {
 		return memberDao.myChat(sqlSession, userNo);
+	}
+
+	// 마이페이지 - 내 결제 내역 조회용 메소드
+	@Override
+	public ArrayList<KakaoPay> orderList(PageInfo pi, String userNo) {
+		return memberDao.orderList(sqlSession, pi, userNo);
 	}
 
 

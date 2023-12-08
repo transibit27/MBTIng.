@@ -6,12 +6,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 @ToString
 public class KakaoPay {
 	
-	private int partnerOrderId;		//	PARTNER_ORDER_ID	NUMBER
+	private String partnerOrderId;		//	PARTNER_ORDER_ID	NUMBER
 	private String tid;				//	TID	VARCHAR2(20 BYTE)
 	private String cid;				//	CID	VARCHAR2(20 BYTE)
 	private String partnerUserId;	//	PARTNER_USER_ID	NUMBER
@@ -22,5 +22,5 @@ public class KakaoPay {
 	private String refundDate;		//	REFUND_DATE	DATE
 	private int totalAmount;		//	TOTAL_AMOUNT	NUMBER
 	private int	taxFreeAmount;		//	TAX_FREE_AMOUNT	NUMBER
-
+	private String pg_token;
 }

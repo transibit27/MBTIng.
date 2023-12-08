@@ -244,6 +244,7 @@
 		 ORDER BY USER_NO DESC
 	</select>
 	
+
 	
 
 </mapper>

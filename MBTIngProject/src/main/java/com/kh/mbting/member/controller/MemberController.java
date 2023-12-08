@@ -31,6 +31,7 @@ import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 
 
@@ -398,4 +399,32 @@ public class MemberController {
 	public String myPay() {
 		return "member/myPay";
 	}
+	
+	// e-2 마이페이지 - 내 결제 리스트 조회 용 메소드
+	@ResponseBody
+	@RequestMapping(value="orderList.me")
+	public ModelAndView orderList(Member m,
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		
+		// listCOunt 완성해야함
+		int listCount = memberService.selectListCount(m.getUserNo());
+		
+		int pageLimit = 5;
+		int boardLimit = 8;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, 
+						currentPage, pageLimit, boardLimit);
+		
+		// 결제 내역 조회 sql문 작성 중  사망함 
+		ArrayList<KakaoPay> list = memberService.orderList(pi, m.getUserNo());
+		
+		mv.addObject("list", list)
+		  .addObject("pi", pi)
+		  .setViewName("member/myPay");
+	
+		return mv;
+	}
+	
+	
 }
