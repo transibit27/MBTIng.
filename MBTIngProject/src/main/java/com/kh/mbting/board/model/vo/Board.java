@@ -27,4 +27,5 @@ public class Board {
 	private String originName;		//	BOARDIMG 테이블의 ORIGIN_NAME	VARCHAR2(100 BYTE)
 	private String changeName;		//	BOARDIMG 테이블의 CHANGE_NAME VARCHAR2(100 BYTE)
 	private String mbtiNick;		//	MEMBER 테이블의 MBTI_NICK VARCHAR2(30 BYTE)
+	private int thumbCount;			//	THUMB 테이블의 데이터를 BOARD_NO 기준으로 카운트할 변수
 }
