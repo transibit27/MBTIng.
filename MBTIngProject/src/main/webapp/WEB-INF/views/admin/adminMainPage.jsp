@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,7 +127,7 @@
 	<jsp:include page="../common/adminMenubar.jsp" />     
 
     <form id="adminMain.ad" action="" method="get">
-        
+      
     <div id="wrap">
     
     <div id="content-center">
@@ -136,8 +137,10 @@
                 <div class="stat-card">
                     <i class="fas fa-users fa-3x users-icon"></i>
                     <h2>전체 회원수</h2>
-                    <p>1,000,000명</p>
+                    <p id="totalMembers">${ m.userNo }명</p>
                 </div>
+                
+
                 <div class="stat-card">
                     <i class="fas fa-heart fa-3x matching-icon"></i>
                     <h2>전체 커플 매칭수</h2>

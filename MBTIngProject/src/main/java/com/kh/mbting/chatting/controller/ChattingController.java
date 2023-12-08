@@ -1,9 +1,11 @@
 package com.kh.mbting.chatting.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -143,6 +145,22 @@ public class ChattingController {
     	 gson.toJson(masterInfo,response.getWriter());
     }
     
- 
+    @RequestMapping("all.me")
+    public String allMember() {
+    	return "chatting/chattingList";
+    }
+    
+    @ResponseBody
+    @RequestMapping("all.memList")
+    public void allMemberList(HttpServletResponse response , HttpSession session)throws JsonIOException, IOException {
+    	
+    	Member loginMember = (Member)session.getAttribute("loginMember");
+    			
+    	ArrayList<Member> list = cService.allMemberList(loginMember);
+    	response.setContentType("application/json; charset=utf-8");
+     	
+    	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+    	gson.toJson(list , response.getWriter());
+    }
 	
 }

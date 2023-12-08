@@ -1,5 +1,6 @@
 package com.kh.mbting.chatting.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,6 +51,10 @@ public class ChattingDao {
     
     public Member masterInfo(String email) {
     	return sqlSession.selectOne("chatMapper.masterInfo" , email);
+    }
+    
+    public ArrayList<Member> allMemberList(Member loginMember) {
+    	return (ArrayList)sqlSession.selectList("chatMapper.allMemberList" , loginMember);
     }
 }
 

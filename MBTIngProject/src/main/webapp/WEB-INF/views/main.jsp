@@ -640,67 +640,12 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		
   	});
   </script>
-		
-  <script>
-  /*
-  	function getRoomList() {
-  		
-  		 $.ajax({
-             url:"chatRoomList.do",
-             data:{
-                 userEmail:"${sessionScope.loginMember.email}"
-             },
-             dataType:"json",
-             async:false, // async : false를 줌으로써 비동기를 동기로 처리 할 수 있다.
-             success:function(data){
-            	 
-            	 for(var i in data) {
-            		 //로그인한 상태인 내가 채팅을 건 상태의 채팅 내역이면
-            		 if(data[i].userEmail == "${sessionScope.loginMember.email}"){
-            			 
-            		 }
-            	 }
-             }
-  		});
   
-  	}
-  	
-  	
-  	function createChat(num) {
-  		
-  		let masterEmail = $("#masterEmail" + num).val();
-  		let masterName  = $("#masterName" + num).val();
-  		let masterPic	= $("#masterPic" + num).val();
-  		
-  		$.ajax({
-  			url  : "createChat.do",	
-  			type : "post",
-  			data : {masterEmail : masterEmail,
-  					masterName  : masterName,
-  					masterPic   : masterPic},
-  			success : function(roomNo) {
-  				 //console.log(result);
-  				 convertScreen(roomNo);
-  				
-  			},
-  			error : function() {
-  				console.log("createChat 통신 실패");
-  			}
-  		
-  		});
-	
-  	}
-  	
-  	function convertScreen(roomNo) {
-  		let createRoomNo = roomNo;
-  		window.location = "http://localhost:8081/mbting/convert.ch?roomNo=" + createRoomNo;
-  	}
-  	
-  	
-  	*/
+  <script>
   	function requestMatch(e) {
 		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
 		e.style.backgroundColor = "#f54d3e";
+		e.innerText = "수락 대기중";
  	}
   </script>
 

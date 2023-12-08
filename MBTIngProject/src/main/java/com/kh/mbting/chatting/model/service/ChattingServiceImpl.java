@@ -1,5 +1,6 @@
 package com.kh.mbting.chatting.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -64,6 +65,11 @@ public class ChattingServiceImpl implements ChattingService{
 	@Override
 	public Member masterInfo(String email) {
 		return chattingDao.masterInfo(email);
+	}
+
+	@Override
+	public ArrayList<Member> allMemberList(Member loginMember) {
+		return chattingDao.allMemberList(loginMember);
 	}
 
 	
