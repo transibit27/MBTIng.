@@ -71,7 +71,7 @@
 		           AND BO.USER_NO = M.USER_NO (+)
 		           AND BO.STATUS = 'Y'
 		           AND BI.THUMBNAIL = 'Y'
-		         ORDER BY VIEWS DESC) B
+		         ORDER BY THUMB_COUNT DESC) B
 		 WHERE ROWNUM BETWEEN 1 AND 4
 	</select>
 	
