@@ -603,7 +603,7 @@
           if(LR_className === 'Right') {
         	  chatLi2.find('.chat').addClass(LR_className);              	// left : right 클래스 추가
               // find() : chatLi의 하위 요소 찾기
-              chatLi2.find('.sender div').text(name);      				// 이름 추가
+              chatLi2.find('.sender div').text(name);      					// 이름 추가
               chatLi2.find('.chat p').text(message); 						// 메세지 추가
               chatLi2.find('.chat p').addClass("message");
               chatLi2.find('.sender div').addClass(LR_className);

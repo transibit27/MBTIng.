@@ -2,6 +2,7 @@ package com.kh.mbting.chatting.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,10 @@ public class ChattingController {
 
 	@Autowired
 	private ChattingServiceImpl cService;
+	
+	/*검색 값을 담을 hashmap입니당*/
+	@Autowired
+	private HashMap<String, String> map;
 	
 	/**
      * 해당 채팅방의 채팅 메세지 불러오기
@@ -162,5 +167,18 @@ public class ChattingController {
     	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
     	gson.toJson(list , response.getWriter());
     }
+    
+    @RequestMapping("search.li")
+    public void searchMember(String height, String address, String age, String mbti ,String gender) {
+    	//System.out.println(height  + adress +  age + mbti + gender);
+    	
+    	map.put("height", height);
+    	map.put("adress", address);
+    	map.put("age", age);
+    	map.put("mbti", mbti);
+    	map.put("gender", gender);
+    	
+    	cService.
 	
+    	}
 }

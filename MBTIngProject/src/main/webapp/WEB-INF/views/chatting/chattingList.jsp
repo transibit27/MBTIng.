@@ -9,7 +9,15 @@
 <title>Insert title here</title>
 
 <style>
-.wrap {
+.content_1  {
+	border : 2px solid lightgray;
+	width: 1500px;
+	margin: auto;
+	border-radius : 20px;
+}
+
+.content_2 {
+  font-family: 'Gasoek One', sans-serif;
   width: 1500px;
   background: #E8EAEA;
   border-radius: 15px;
@@ -84,12 +92,11 @@
 }
 
 .user:hover {
-  background-color: rgb(241, 245, 248);
+  background-color: white;
   border: 1px solid gray;
   transform: scale(1.05);
   border-radius: 50px;
 }
-
 
 .more:hover {
   background-color: #b3b6b6;
@@ -119,23 +126,6 @@
   transform: scale(0.95) rotateZ(1.7deg);
 
 }
-
-/*------------검색바-------------------*/
-.searchBar input {
-    width : 300px;
-    height: 45px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    padding: 6px;
-    padding-left: 10px;
-  }
-
-.searchBar {
-    text-align: center;
-    border-bottom: 50px;
-    border-right: 0px;
-}
-
 
 /*-------------좋어요 버튼----------------*/
 #button {
@@ -183,15 +173,52 @@
     margin-left: 80px;
 }
 
-/*검색바*/
- #searchButton {
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  height: 45px;
-  border-left: 0px;
-  width : 60px;
-  box-sizing: border-box;
+/*---------------------------------검색바--------------------------------*/
+
+ #searchTable {
+ 	text-align : center;
+ 	margin : auto;
  }
+ 
+ #searchTable button{
+ 	
+ }
+ .select {
+ 	 width : 200px;
+ 	 padding: .8em .5em;
+ 	 border: 1px solid #999;
+ 	 font-family: 'Gasoek One', sans-serif;
+ 	 border-radius: 0px;
+	 appearance: none;
+	 border-radius : 50px;
+	 text-align : center;
+ } 
+ 
+ #genderCheck {
+ 	text-align : center;
+ }
+ 
+ .genderButton {
+ 	border : 0px;
+ 	background-color : transparent;
+ }
+ 
+  .genderButton img {
+  	width : 50px;
+  	height : 50px;
+  }
+
+  #searchButton {
+  	text-align  : center;
+  	margin : 10px;
+  }
+  
+  .borders {
+  	border : 1px solid black;
+  	background-color : pink;
+  	border-radius : 20px;
+  }
+  
 </style>
 </head>
 
@@ -201,17 +228,102 @@
 	<jsp:include page="../common/header.jsp"/>
 		
     <div class="wrap">
+    <br><br><br>
+    	<div class="content_1">
         <p class="title">MBTIng 회원들</p>
-        <div class="searchBar"><p><input type="text" placeholder="원하시는 회원의 정보를 검색해보세요."><button id="searchButton">검색</button></p></div>
-        <div class="user__container">
         
+         <input type="hidden" value=""  name="gender" id="M">
+         <input type="hidden" value=""  name="gender" id="F">
+        <div id="genderCheck">
+        	<button id="Men" class="genderButton " type="button" onclick="Gender(1);">남</button>
+        	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);">여</button>
+        </div>	
+        	<table id="searchTable">
+        		<tr>
+        			<td>키</td>
+        			<td>거주지</td>
+        			<td>나이</td>
+        			<td>MBTI</td>
+        		</tr>
+        		<tr>
+        			<td>
+	        			<select name="height" class="select">
+		    			   <option value="160">160이하</option>
+		    			   <option value="BETWEEN 160 and 165">160~165</option>
+		    			   <option value="BETWEEN 165 and 170">165~170</option>
+		    			   <option value="BETWEEN 170 and 175">170~175</option>
+		    			   <option value="BETWEEN 175 and 180">175~180이상</option>
+		    			   <option value="180">180이상</option>
+	    				</select>
+        			</td>
+        			<td>
+        				<select name="address" class="select">
+		    			   <option value="서울특별시">서울특별시</option>
+		    			   <option value="경기도">경기도</option>
+		    			   <option value="인천광역시">인천광역시</option>
+		    			   <option value="부산">부산</option>
+		    			   <option value="대전광역시">대전광역시</option>
+    					</select>
+        			</td>
+        			<td>
+        				<select name="age" class="select">
+		    			   <option value="BETWEEN 20 and 25">20~25</option>
+		    			   <option value="BETWEEN 25 and 30">25~30</option>
+		    			   <option value="BETWEEN 30 and 35">30~35</option>
+		    			   <option value="BETWEEN 35 and 40">35~40</option>
+		    			   <option value="BETWEEN 40 and 45">40~45</option>
+		    			   <option value="BETWEEN 45 and 50">45~50</option>
+		    			   <option value="50">50대이상</option>
+    					</select>
+        			</td>
+        			<td>
+        				<select name="mbti" class="select">
+		    			   <option value="intj">intj</option>
+		    			   <option value="intp">intp</option>
+		    			   <option value="entp">entp</option>
+    					</select>
+        			</td>
+        		</tr>
+    		</table>
+    		<div id="searchButton"><button type="submit" onclick="searchPerson();"> 검색 </button></div>
+	</div>
+
+	<div class="content_2">
+		<div class="user__container">
+        	
 		</div>
 	</div>
+	
+   </div> 
+   
+   <!-- gender를 처리하기 위한 script -->
+   <script>
+   	function Gender(num) {
+   		if(num == 1) {
+   			$("#M").val(""); 
+   			$("#F").val("F");
+   			$("#Men").addClass("borders");
+   			$("#woMen").removeClass("borders");
+   			
+   		}else {
+   			$("#F").val(""); 
+   			$("#M").val("M");
+   			$("#woMen").addClass("borders");
+   			$("#Men").removeClass("borders");
+   		}	
+   	}        
+   	                       
+   </script>
   
+  
+  <!-- memberList를 불러오기 위한 script -->
   <script>
   
   	$(function() {
-  		
+  		selectAllMemberList();
+  	});
+  	
+  	function selectAllMemberList() {
   		
   		$.ajax({
   			url  : "all.memList" , 
@@ -238,17 +350,18 @@
 						  			 "</div>"
 
 						  $(".user__container").html(resultStr);
-				}
-
-  			
-  				
+  				}
   			},
   			error : function() {
-  				console.log("멤버 전체 조회에 실패했습닏.");	
+  				console.log("멤버 전체 조회에 실패했습니다.");	
   			}
   		});
-  	});
+  	};
   	
+  	function searchPerson() {
+  		
+  		여기다가 function 기술하는 것 부터 시작
+  	}
   </script>
         
   <script>
@@ -258,5 +371,6 @@
 		e.innerText = "수락 대기중";
  	}
   </script>
+  
 </body>
 </html>

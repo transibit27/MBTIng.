@@ -14,13 +14,13 @@ public class ChattingInterceptor extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser") != null) {
+		if(session.getAttribute("loginMember") != null) {
 			
 			return true;
 			
 		} else {
 			
-			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.(interceptor 확인 하세요)");
+			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
 			
 			response.sendRedirect(request.getContextPath());
 			
