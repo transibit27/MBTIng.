@@ -14,6 +14,7 @@
 		<result column="ORIGIN_NAME" property="originName"></result>
 		<result column="CHANGE_NAME" property="changeName"></result>
 		<result column="MBTI_NICK" property="mbtiNick"></result>
+		<result column="THUMB_COUNT" property="thumbCount"></result>
 	</resultMap>
 	
 	<resultMap id="boardImgResultSet" type="boardImg">
@@ -35,9 +36,14 @@
 		     , B.BOARD_TITLE
 		     , B.USER_NO
 		     , M.MBTI_NICK
-		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "B.ENROLL_DATE"
+		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
 			 , BI.ORIGIN_NAME
 			 , BI.CHANGE_NAME
+             , (
+                SELECT COUNT (*)
+                  FROM THUMB
+                 WHERE BOARD_NO = B.BOARD_NO
+             ) AS THUMB_COUNT
 		  FROM BOARD B, BOARDIMG BI, MEMBER M
          WHERE B.BOARD_NO = BI.BOARD_NO (+)
            AND B.USER_NO = M.USER_NO (+)
@@ -52,15 +58,20 @@
 		             , BO.BOARD_TITLE
 		             , BO.USER_NO
 		             , M.MBTI_NICK
-		             , TO_CHAR(BO.ENROLL_DATE, 'YYYY-MM-DD') AS "BO.ENROLL_DATE"
+		             , TO_CHAR(BO.ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
 		             , BI.ORIGIN_NAME
 		             , BI.CHANGE_NAME
+		             , (
+		                SELECT COUNT (*)
+		                  FROM THUMB
+		                 WHERE BOARD_NO = BO.BOARD_NO
+		             ) AS THUMB_COUNT
 		          FROM BOARD BO, BOARDIMG BI, MEMBER M
 		         WHERE BO.BOARD_NO = BI.BOARD_NO (+)
 		           AND BO.USER_NO = M.USER_NO (+)
 		           AND BO.STATUS = 'Y'
 		           AND BI.THUMBNAIL = 'Y'
-		         ORDER BY VIEWS DESC) B
+		         ORDER BY THUMB_COUNT DESC) B
 		 WHERE ROWNUM BETWEEN 1 AND 4
 	</select>
 	
@@ -141,9 +152,14 @@
 		     , B.BOARD_TITLE
 		     , B.USER_NO
 		     , M.MBTI_NICK
-		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "B.ENROLL_DATE"
+		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
 			 , BI.ORIGIN_NAME
 			 , BI.CHANGE_NAME
+			 , (
+                SELECT COUNT (*)
+                  FROM THUMB
+                 WHERE BOARD_NO = B.BOARD_NO
+             ) AS THUMB_COUNT
 		  FROM BOARD B, BOARDIMG BI, MEMBER M
          WHERE B.USER_NO = M.USER_NO (+)
            AND B.BOARD_NO = BI.BOARD_NO (+)

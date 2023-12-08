@@ -9,6 +9,7 @@ import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 public interface MemberService {
 
@@ -60,6 +61,9 @@ public interface MemberService {
 
 	// 마이페이지 - 내 대화 상대 조회용 method
 	Member myChat(String userNo);
+
+	// 마이페이지 - 결제 내역 조회용 method
+	ArrayList<KakaoPay> orderList(PageInfo pi, String userNo);
 
 
 

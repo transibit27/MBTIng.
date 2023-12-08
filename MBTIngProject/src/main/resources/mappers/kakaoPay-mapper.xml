@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="kakaoPayMapper">
+
+ <resultMap id="kakaoPayResultSet" type="KakaoPay">
+ 	<result column="PARTNER_ORDER_ID"  	property="partnerOrderId"></result>
+ 	<result column="TID"  				property="tid"></result>
+ 	<result column="CID"  				property="cid"></result>
+ 	<result column="PARTNER_USER_ID" 	property="partnerUserId"></result>
+ 	<result column="ITEM_NAME"  		property="itemName"></result>
+ 	<result column="PAY_METHOD"  		property="payMethod"></result>
+ 	<result column="QUANTITY"  			property="quantity"></result>
+ 	<result column="ORDER_DATE" 	 	property="orderDate"></result>
+ 	<result column="REFUND_DATE"  		property="refundDate"></result>
+ 	<result column="TOTAL_AMOUNT"  		property="totalAmount"></result>
+ 	<result column="TAX_FREE_AMOUNT"  	property="taxFreeAmount"></result>
+ 	<result column="PG_TOKEN"			property="pg_token"></result>
+ </resultMap>
+ 
+ <insert id="insertPay" parameterType="KakaoPay">
+ 	INSERT INTO KAKAOPAY (PARTNER_ORDER_ID,PARTNER_USER_ID,ITEM_NAME,PAY_METHOD,QUANTITY,TOTAL_AMOUNT,TAX_FREE_AMOUNT)
+ 	 	 VALUES (ORD_SEQ.NEXTVAL,
+ 	 	 		 #{partnerUserId},
+ 	 	 		 #{itemName},
+ 	 	 		 '카카오페이',
+ 	 	 		 #{quantity},
+ 	 	 		 #{totalAmount},
+ 	 	 		 #{taxFreeAmount})
+ </insert>
+ 
+ <select id="getPartnerOrder" parameterType="string" resultType="string">
+ 	SELECT PARTNER_ORDER_ID
+ 	  FROM (
+ 	  	SELECT PARTNER_ORDER_ID
+ 	  	  FROM KAKAOPAY
+ 	 	 WHERE PARTNER_USER_ID = #{email}
+ 	 	 ORDER BY PARTNER_ORDER_ID DESC)
+ 	 WHERE ROWNUM = 1
+ </select>
+ 
+ <update id="insertTid" parameterType="KakaoPay">
+ 	 UPDATE KAKAOPAY
+ 	    SET TID = #{tid}
+ 	 WHERE PARTNER_ORDER_ID = #{partnerOrderId}
+ 	   AND PARTNER_USER_ID = #{partnerUserId}
+ 
+ </update>
+ 
+ <update id="insertPgToken" parameterType="KakaoPay">
+ 	UPDATE KAKAOPAY
+ 	   SET PG_TOKEN = #{pg_token}
+ 	 WHERE PARTNER_ORDER_ID = #{partnerOrderId}
+ </update>
+ 
+ <!--  이거 작성하다가 사망함 -->
+<!-- 내 결제 리스트 조회용 쿼리문 -->
+<select id="orderList" parameterType="string" resultMap="kakaoPayResultSet">
+	
+        SELECT *
+		  FROM KAKAOPAY
+		 WHERE USER_NO = #{userNo}
+		 ORDER BY PARTNER_ORDER_ID DESC
+
+</select>
+	
+
+</mapper>

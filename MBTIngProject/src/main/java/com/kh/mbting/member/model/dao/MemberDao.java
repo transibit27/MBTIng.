@@ -13,6 +13,7 @@ import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 
 @Repository
@@ -88,6 +89,15 @@ public class MemberDao {
 	// 1:1 대화 시작 시 매칭 테이블 의 매칭 상태를(3/매칭 진행) 업데이트용 method
 	public int matchingStrat(SqlSessionTemplate sqlSession, Matching mc) {
 		return sqlSession.update("memberMapper.matchingStrat", mc);
+	}
+
+	public ArrayList<KakaoPay> orderList(SqlSessionTemplate sqlSession, PageInfo pi, String userNo) {
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.orderList", userNo, rowBounds);
 	}
 
 

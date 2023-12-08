@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -191,7 +191,8 @@
                     무제한 MBTI 테스트 가능
                 </div>
             </div>  
-            <button type="button">결제하기</button>
+          
+            <button type="button">5만원 결제하기</button>
         </div>
     
         <div class="pay_item" id="pay2">
@@ -199,14 +200,13 @@
                 <div class="item_title">MBTICoin x10</div>
                 <div class="item_intro">
                     횟수 제한 없는 매칭 신청 <br>
-                    대화 기회 5회! <br>
+                    대화 기회 10회! <br>
                     부담 있는 가격 <br>
                     무제한 MBTI 테스트 가능
                 </div>
             </div>
-            <form method="post" th:action="@{/kakaoPay}">
-			    <button type="submit">결제하기</button>
-			</form>
+
+			    <button id="mbtiCoin10" type="button">9만원 결제하기</button>
         </div>
 
     </div>
@@ -216,22 +216,61 @@
 <!-- 카카오페이 결제용 스클비트 -->
 <script>
 	$(function(){
+		
+		function orderList(){
+			$.ajax({
+				url:'orderList.me',
+	            data : {"userNo":${sessionScope.loginMember.userNo}},
+                success : function(result){
+                    
+                    console.log(result);
+                
+                },
+                error : function(){
+                    console.log("내 대화 상대 표시용 ajax 통신 실패")
+                }
+                
+            }); // ajax 끝
+		}
+		
+		
+		
+		
+		
 		$("#pay1").click(function(){
 			$.ajax({
 				url:'pay.me',
 				dataType:'json',
-				data:{'email': '${sessionScope.loginMember.email}'},
+				data:{
+					'partnerUserId': '${sessionScope.loginMember.email}',
+					'itemName': 'MBTIngCoinx5',
+					'quantity': 1,
+					'totalAmount' : 50000,
+					'taxFreeAmount' : 0
+				
+				},
 				success:function(result){
-					console.log(result);
-					console.log(result.tid);
-					var box = result.next_redirect_pc_url
+					var tid = result.tid;
+					var box = result.next_redirect_pc_url;
 					window.open(box);
+					
+					$.ajax({
+						url:'payTry.me',
+						data:{'tid' : tid,
+							  'partnerUserId': '${sessionScope.loginMember.email}'
+							  },
+						success:function(result2){
+							console.log("tid 받기 성공")
+						},
+						error: function(result2){
+							console.log("tid 받기 실패")
+							
+						}
+					})
 						
 				},
 				error:function(result){
 					alert("카카오페이 결제용 ajax 통신 오류")
-					console.log(result);
-					console.log(result.tid)
 				}
 				
 				
@@ -239,6 +278,49 @@
 			
 		});// 버튼 클릭 이벤트	
 		
+		
+		$("#pay2").click(function(){
+			$.ajax({
+				url:'pay.me',
+				dataType:'json',
+				data:{
+					'partnerUserId': '${sessionScope.loginMember.email}',
+					'itemName': 'MBTIngCoinx10',
+					'quantity': 1,
+					'totalAmount' : 90000,
+					'taxFreeAmount' : 0
+				
+				},
+				success:function(result){
+					var tid = result.tid;
+					var box = result.next_redirect_pc_url;
+					window.open(box);
+					
+					$.ajax({
+						url:'payTry.me',
+						data:{'tid' : tid,
+							  'partnerUserId': '${sessionScope.loginMember.email}'
+							  },
+						success:function(result2){
+							console.log("tid 받기 성공")
+						},
+						error: function(result2){
+							console.log("tid 받기 실패")
+							
+						}
+					})
+						
+				},
+				error:function(result){
+					alert("카카오페이 결제용 ajax 통신 오류")
+				}
+				
+				
+			});	//ajax 끝
+			
+		});// 버튼 클릭 이벤트	
+		
+	
 	});	// 펑션 끝
 	
 
