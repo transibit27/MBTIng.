@@ -246,7 +246,7 @@ public class MemberServiceImpl implements MemberService {
 
 	// 마이페이지 - 내 대화 상대 조회용 메소드
 	@Override
-	public Member myChat(String userNo) {
+	public ArrayList<Member> myChat(String userNo) {
 		return memberDao.myChat(sqlSession, userNo);
 	}
 
@@ -254,6 +254,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<KakaoPay> orderList(PageInfo pi, String userNo) {
 		return memberDao.orderList(sqlSession, pi, userNo);
+	}
+
+	// 회원가입 - 이메일 중복 검사용 메소드
+	@Override
+	public int checkEmail(Member m) {
+		return memberDao.checkEmail(sqlSession, m);
 	}
 
 

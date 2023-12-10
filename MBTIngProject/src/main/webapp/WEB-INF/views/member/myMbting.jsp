@@ -579,8 +579,8 @@
                         type : "post",
                         data : {"userNo":${sessionScope.loginMember.userNo}},
                         success : function(result){
-                            
-                            console.log(result);
+                        	
+                        	$("#myChat").html(result[0].userName+ "님 외 " +result.length+ "명이 <br>대화를 기다리고 있어요!" )
                         
                         },
                         error : function(){
@@ -694,7 +694,7 @@
 	                    대화하기
 	                </div> 
 	
-	                <div class="shortMenu-content">
+	                <div class="shortMenu-content" id="myChat">
 	                    xx 님이 <br>
 	                    대화를 기다리고 있어요!
 	                </div>

@@ -109,6 +109,12 @@
            	 		 #{gender},
            	 		 #{phone})	
 	</insert>
+	<!-- 회원가입 - 이메일 중복 검사용 쿼리문 -->
+	<select id="checkEmail" parameterType="member" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE EMAIL = #{email}	
+	</select>
 	
 	<!-- 회원정보 수정용 쿼리문  -->
 	<update id="updateMember" parameterType="member">
@@ -221,9 +227,10 @@
 	   SELECT PROPOSER_NO,USER_NAME, PROFILE_IMG, AGE, GENDER, MBTI, MBTI_NICK
 	     FROM MATCHING MC
 	     JOIN MEMBER MB ON MC.PROPOSER_NO = MB.USER_NO
-	    WHERE MC.MATCH_STAT = '2'
+	    WHERE MC.MATCH_STAT = '3'
 	      AND MB.MATCH_STAT = '3'
 	      AND MC.RECEIVER_NO = #{userNo}
+	    ORDER BY MATCH_TIME DESC
 	</select>
 	
 	<!-- 관리자페이지 회원 목록 조회 -->

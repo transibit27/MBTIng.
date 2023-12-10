@@ -20,10 +20,6 @@
     * {font-family: 'Noto Sans KR', sans-serif;
     caret-color: transparent;
     }
-
-    
-    div{border: px solid red;
-    }
     
     #profile-outer{
         margin: auto;
@@ -130,6 +126,10 @@
         padding-left: 10px;
     }
 
+    input[type="checkbox"]{
+        margin: 6px;
+    }
+
 	textarea {
         padding-left: 10px;
         background-color: #EBEDEF;
@@ -147,6 +147,7 @@
 		line-height: 20px;
         font-size: 15px;
         font-weight: bold;
+        margin: 10px;
 	}
 
 	.profile-content{
@@ -160,7 +161,7 @@
 	
 	#change-profile{
         width: 100%;
-        height: 40px;
+        height: 40px;   
         border: 2px solid pink;
         border-radius: 5px;
         background-color: pink;
@@ -296,6 +297,14 @@
                     </td>
 
                     <tr>
+                        <td class="profile-title">키</td>
+                    </tr>
+                    <td>
+                        <input class="profile-content" type="text" name="gender" 
+                        value="${sessionScope.loginMember.gender}" disabled>
+                    </td>
+
+                    <tr>
                         <td class="profile-title">가입일</td>
                     </tr>
                     <tr>
@@ -327,7 +336,21 @@
                             <textarea style="caret-color: auto;" placeholder="사용자의 소개 내용을 입력해 주세요." name="introduce">${sessionScope.loginMember.introduce}</textarea>
                         </td>
                     </tr>
-             
+                    
+                    <tr>
+                        <td class="profile-title"> 취미</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label><input type="checkbox" name="hobby" value="">운동</label>
+                            <label><input type="checkbox" name="hobby" value="">여행</label>
+                            <label><input type="checkbox" name="hobby" value="">영화</label>
+                            <label><input type="checkbox" name="hobby" value="">독서</label>
+                            <label><input type="checkbox" name="hobby" value="">게임</label>
+                            <label><input type="checkbox" name="hobby" value="">만남</label>
+                        </td>
+                    </tr>
+                    
                     <tr>
                         <td class="profile-title">MBTI</td>
                     </tr>
@@ -350,6 +373,8 @@
                             <button id="mbti-test" type="button" onclick="location.href=''">내 성향 검사</button>
                         </td>
                     </tr>
+
+        
                     
                     
                

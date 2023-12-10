@@ -120,6 +120,17 @@ public class MemberController {
 		}
 			
 	}
+	
+	//4-1 회원가입에서 이메일 중복체크용 method
+	@ResponseBody
+	@RequestMapping(value = "emailCheck.me", produces = "text/html; charset=UTF-8")
+	public String checkEmail(Member m) {
+		
+		int result = memberService.checkEmail(m);
+		
+		return (result > 0 ) ? "NNNNN" : "NNNNY";
+		
+	}
 
 	//5. 카카오 로그인을 시도했을 경우 실행될 method
 	@GetMapping("/kakaoLog.me")
@@ -272,19 +283,15 @@ public class MemberController {
 	// b-5 내 대화 상대 정보 표시용 메소드(ajax)
 	// 수정 중
 	@ResponseBody
-	@RequestMapping (value="myChat.me", produces="text/html; charset=UTF-8")
+	@RequestMapping (value="myChat.me", produces="application/json; charset=UTF-8")
 	public String myChat(String userNo,
 						HttpSession session) {
 		System.out.println("내 대화 상대 유저no"+userNo);
-		Member me = memberService.myChat(userNo);
-		System.out.println("내 대화 상대 맴버정보"+me);
+		ArrayList<Member> list = memberService.myChat(userNo);
+		System.out.println("내 대화 상대 맴버정보"+list);
 		
-		// 대화 상대의 정보를 ProposeMember 에 담음
-		session.setAttribute("ProposeMember", me);
-		
-		// 테스트용으로 정보 받아옴
-		String result = me.getEmail();
-		return result;
+
+		return new Gson().toJson(list);
 	}
 	
 	

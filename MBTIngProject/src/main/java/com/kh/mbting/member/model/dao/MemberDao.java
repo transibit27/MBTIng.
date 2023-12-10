@@ -69,8 +69,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.myStatProfile", userNo);
 	}
 
-	public Member myChat(SqlSessionTemplate sqlSession, String userNo) {
-		return sqlSession.selectOne("memberMapper.myChat", userNo);
+	public ArrayList<Member> myChat(SqlSessionTemplate sqlSession, String userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.myChat", userNo);
 	}
 
 	public Member proposerInfo(SqlSessionTemplate sqlSession, String proposerNo) {
@@ -98,6 +98,11 @@ public class MemberDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("kakaoPayMapper.orderList", userNo, rowBounds);
+	}
+	
+	// 회원가입 - 이메일 중복 체크용 메소드
+	public int checkEmail(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.checkEmail", m);
 	}
 
 
