@@ -168,5 +168,10 @@
 		   AND ${condition} LIKE '%' || #{keyword} || '%'
 		 ORDER BY BOARD_NO DESC
 	</select>
-
+	
+	<!-- 관리자페이지 전체 후기게시글 수 조회 -->
+	<select id="selectTotalBoard" resultType="_int">
+		SELECT COUNT(*)
+	  	  FROM BOARD
+	</select>
 </mapper>
