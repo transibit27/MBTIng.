@@ -232,8 +232,7 @@
     	<div class="content_1">
         <p class="title">MBTIng 회원들</p>
         
-         <input type="hidden" value=""  name="gender" id="M">
-         <input type="hidden" value=""  name="gender" id="F">
+         <input type="hidden" value="N"  name="gender" id="gender">
         <div id="genderCheck">
         	<button id="Men" class="genderButton " type="button" onclick="Gender(1);">남</button>
         	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);">여</button>
@@ -248,39 +247,68 @@
         		<tr>
         			<td>
 	        			<select name="height" class="select">
-		    			   <option value="160">160이하</option>
-		    			   <option value="BETWEEN 160 and 165">160~165</option>
-		    			   <option value="BETWEEN 165 and 170">165~170</option>
-		    			   <option value="BETWEEN 170 and 175">170~175</option>
-		    			   <option value="BETWEEN 175 and 180">175~180이상</option>
-		    			   <option value="180">180이상</option>
+	        				   <option value="없음">없음</option>
+			    			   <option value="160">160이하</option>
+			    			   <option value="BETWEEN 160 and 165">160~165</option>
+			    			   <option value="BETWEEN 165 and 170">165~170</option>
+			    			   <option value="BETWEEN 170 and 175">170~175</option>
+			    			   <option value="BETWEEN 175 and 180">175~180이상</option>
+			    			   <option value="180">180이상</option>
 	    				</select>
         			</td>
         			<td>
         				<select name="address" class="select">
-		    			   <option value="서울특별시">서울특별시</option>
-		    			   <option value="경기도">경기도</option>
-		    			   <option value="인천광역시">인천광역시</option>
-		    			   <option value="부산">부산</option>
-		    			   <option value="대전광역시">대전광역시</option>
+        						<option value="없음">없음</option>
+		    			   		<option value="서울특별시">서울특별시</option>
+						   		<option value="부산광역시">부산광역시</option>
+						   		<option value="대구광역시">대구광역시</option>
+							    <option value="인천광역시">인천광역시</option>
+							    <option value="광주광역시">광주광역시</option>
+							    <option value="대전광역시">대전광역시</option>
+							    <option value="울산광역시">울산광역시</option>
+							    <option value="세종특별시">세종특별시</option>
+							    <option value="경기도">경기도</option>
+							    <option value="강원도">강원도</option>
+							    <option value="충청북도">충청북도</option>
+							    <option value="충청남도">충청남도</option>
+							    <option value="전라북도">전라북도</option>
+							    <option value="전라남도">전라남도</option>
+							    <option value="경상북도">경상북도</option>
+								<option value="경상남도">경상남도</option>
+								<option id="jeju" value="제주도">제주도</option>
     					</select>
         			</td>
         			<td>
         				<select name="age" class="select">
-		    			   <option value="BETWEEN 20 and 25">20~25</option>
-		    			   <option value="BETWEEN 25 and 30">25~30</option>
-		    			   <option value="BETWEEN 30 and 35">30~35</option>
-		    			   <option value="BETWEEN 35 and 40">35~40</option>
-		    			   <option value="BETWEEN 40 and 45">40~45</option>
-		    			   <option value="BETWEEN 45 and 50">45~50</option>
-		    			   <option value="50">50대이상</option>
+        					   <option value="없음">없음</option>
+			    			   <option value="BETWEEN 20 and 25">20~25</option>
+			    			   <option value="BETWEEN 25 and 30">25~30</option>
+			    			   <option value="BETWEEN 30 and 35">30~35</option>
+			    			   <option value="BETWEEN 35 and 40">35~40</option>
+			    			   <option value="BETWEEN 40 and 45">40~45</option>
+			    			   <option value="BETWEEN 45 and 50">45~50</option>
+			    			   <option value="50">50대이상</option>
     					</select>
         			</td>
         			<td>
         				<select name="mbti" class="select">
-		    			   <option value="intj">intj</option>
-		    			   <option value="intp">intp</option>
-		    			   <option value="entp">entp</option>
+        					   <option value="없음">없음</option>
+			    			   <option value="INTP">INTP</option>
+			    			   <option value="INTJ">INTJ</option>
+			    			   <option value="INFP">INFP</option>
+			    			   <option value="INFJ">INFJ</option>
+			    			   <option value="ISTP">ISTP</option>
+			    			   <option value="ISFP">ISFP</option>
+			    			   <option value="ISTJ">ISTJ</option>
+			    			   <option value="ISFJ">ISFJ</option>
+			    			   <option value="ENTP">ENTP</option>
+			    			   <option value="ENTJ">ENTJ</option>
+			    			   <option value="ESTP">ESTP</option>
+			    			   <option value="ESTJ">ESTJ</option>
+			    			   <option value="ENFP">ENFP</option>
+			    			   <option value="ENFJ">ENFJ</option>
+			    			   <option value="ESFP">ESFP</option>
+			    			   <option value="ESFJ">ESFJ</option>
     					</select>
         			</td>
         		</tr>
@@ -300,14 +328,11 @@
    <script>
    	function Gender(num) {
    		if(num == 1) {
-   			$("#M").val(""); 
-   			$("#F").val("F");
+   			$("#gender").val("M"); 
    			$("#Men").addClass("borders");
    			$("#woMen").removeClass("borders");
-   			
    		}else {
-   			$("#F").val(""); 
-   			$("#M").val("M");
+   			$("#gender").val("F"); 
    			$("#woMen").addClass("borders");
    			$("#Men").removeClass("borders");
    		}	
@@ -331,7 +356,7 @@
   			success : function(mem) {
   				resultStr = "";
   				
-  				console.log(mem);
+  				//console.log(mem);
   				for(let i in mem) {
  				
 					 resultStr +=  "<div class='user'>" +
@@ -356,11 +381,50 @@
   				console.log("멤버 전체 조회에 실패했습니다.");	
   			}
   		});
-  	};
+  	}
   	
+  	<!--사람을 검색한 값을 넘겨주는 function-->
   	function searchPerson() {
   		
-  		여기다가 function 기술하는 것 부터 시작
+  		$.ajax({
+  			url : "search.li" ,
+  			type : "get",
+  			data : {"height" : $('select[name="height"]').val(),
+  					"age" 	 : $('select[name="age"]').val(),
+  					"address": $('select[name="address"]').val(),
+  					"mbti"	 : $('select[name="mbti"]').val(),
+  					"gender" : $('input[name="gender"]').val()
+  			},
+  			success : function(searchMem) {
+  				resultStr = "";
+  				
+  				for(let i in searchMem) {
+  					 //$('.content_2').children().remove();
+  					 
+					 resultStr +=  "<div class='user'>" +
+					 			 	"<div class='image'>" + 
+					 			 		"<div class='cardImage'>" +
+					 			 			"<img src='${pageContext.request.contextPath}" + searchMem[i].profileImg +   "'>" +
+						  				"</div>" +
+						  			"</div>" +
+						  			"<div class='user__content'>" +
+						  			 "<div class='text'>" +
+						  			 "<span class='name'>" + searchMem[i].userName + "</span>" +
+						  			 "<p class='mbti'>" + searchMem[i].mbti + "</p>" +
+						  			 "</div>" +
+						  			 "<div class='like'><button id='button' onclick='requestMatch(this);' ><span>채팅신청</span></button></div>" +
+						  			 "</div>" +
+						  			 "</div>"
+
+						  $(".user__container").html(resultStr);
+  				}
+  			},
+  			error : function() {
+  				console.log("검색 회원 조회에 실패했습니다.");
+  			}
+  			
+  		});
+  		
   	}
   </script>
         

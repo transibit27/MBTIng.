@@ -21,6 +21,7 @@ import com.google.gson.JsonIOException;
 import com.kh.mbting.chatting.model.service.ChattingServiceImpl;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.chatting.model.vo.SearchMember;
 import com.kh.mbting.member.model.vo.Member;
 
 
@@ -168,17 +169,25 @@ public class ChattingController {
     	gson.toJson(list , response.getWriter());
     }
     
+    @ResponseBody
     @RequestMapping("search.li")
-    public void searchMember(String height, String address, String age, String mbti ,String gender) {
-    	//System.out.println(height  + adress +  age + mbti + gender);
+    public void searchMember(String height, String address, String age, String mbti ,String gender , HttpServletResponse response) throws JsonIOException, IOException{
+    //System.out.println(height + address + age + mbti + gender);
+ 
+  
+    	//System.out.println(gender);
+    	SearchMember sm = new SearchMember();
+    	sm.setAge(age);
+    	sm.setAddress(address);
+    	sm.setGender(gender);
+    	sm.setHeight(height);
+    	sm.setMbti(mbti);
     	
-    	map.put("height", height);
-    	map.put("adress", address);
-    	map.put("age", age);
-    	map.put("mbti", mbti);
-    	map.put("gender", gender);
+    	ArrayList<Member> list = cService.searchMember(sm);
     	
-    	cService.
-	
-    	}
+    	response.setContentType("application/json; charset-UTF-8");
+    	new Gson().toJson(list, response.getWriter());
+
+    	
+    }
 }
