@@ -508,6 +508,7 @@
             }
         }
 
+        /*
         // 6. 생년월일 검사
         function checkAge(e){
 
@@ -530,10 +531,34 @@
             finalCheck();
 
             }
+        }*/
+        
+     	// 6. 나이 검사
+     	function checkAge(e){
+
+            // 생년월일 8자
+            let regExp = /^(?:[1-9]|[1-9][0-9]|1[0-4][0-9]|150)$/;
+
+            if(regExp.test(e.value)){
+
+            // 유효한 생년일 경우
+            checkArr[5] = true;
+            $("#age").css("border-color", "gray");
+            $("#checkAge").css("color", "red").text("");
+            finalCheck();
+
+            } else {
+            // 유효하지 않은 생년
+            checkArr[5] = false;
+            $("#age").css("border-color", "red");
+            $("#checkAge").text("나이 정보가 정확한지 확인해주세요.");
+            finalCheck();
+
+            }
         }
         
-         // 7. 성별 체크 검사
-         function checkgender(){
+        // 7. 성별 체크 검사
+        function checkgender(){
 
             checkArr[6] = true;
             finalCheck();

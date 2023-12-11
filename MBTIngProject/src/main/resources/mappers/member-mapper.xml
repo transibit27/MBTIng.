@@ -10,10 +10,13 @@
  	<result column="USER_NAME"  	property="userName"></result>
  	<result column="AGE"  			property="age"></result>
  	<result column="GENDER"  		property="gender"></result>
+ 	<result column="HEIGHT"			property="height"></result>
  	<result column="PHONE" 		 	property="phone"></result>
  	<result column="MBTI"  			property="mbti"></result>
  	<result column="MBTI_NICK"  	property="mbtiNick"></result>
+ 	<result column="MBTI_MATCH"		property="mbtiMatch"></result>
  	<result column="INTRODUCE"  	property="introduce"></result>
+ 	<result column="ADDRESS"		property="address"></result>
  	<result column="ENROLL_DATE"  	property="enrollDate"></result>
  	<result column="MODIFY_DATE"  	property="modifyDate"></result>
  	<result column="MATCH_STAT"  	property="matchStat"></result>
@@ -120,9 +123,15 @@
 		UPDATE MEMBER
 		   SET PROFILE_IMG = #{profileImg}
 		   	 , INTRODUCE = #{introduce}
+		   	 , ADDRESS = #{address}
 		     , PHONE = #{phone}
 		 WHERE EMAIL = #{email}
 		   AND STATUS = 'Y'	
+	</update>
+	<update id="updatePwd" parameterType="member">
+		UPDATE MEMBER
+		   SET USER_PWD = #{userPwd}
+		 WHERE EMAIL = #{email}
 	</update>
 	
 	<!-- 나에게 매칭을 신청한 인원 수 확인용 쿼리문 -->
@@ -250,7 +259,17 @@
 		 ORDER BY USER_NO DESC
 	</select>
 	
-
+	<!-- 매치리스트 추가 -->
+	<insert id="insertMatchRequestList" parameterType="member">
+		INSERT INTO MATCHING
+			 VALUES (MNO_SEQ.NEXTVAL, 
+			 		#{receiverNo}, 
+			 		#{userNo},
+			 		default,
+			 		default,
+			 		default,
+			 		default)
+	</insert>
 	
 
 </mapper>

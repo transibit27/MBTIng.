@@ -1,17 +1,21 @@
 package com.kh.mbting.mbti.model.service;
 
-import org.apache.ibatis.session.SqlSession;
+import java.util.ArrayList;
+
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.mbting.mbti.model.dao.MbtiDao;
 import com.kh.mbting.mbti.model.vo.Mbti;
+import com.kh.mbting.member.model.vo.Member;
 
 @Service
 public class MbtiServiceImpl implements MbtiService {
 
     @Autowired
-    private SqlSession sqlSession;
+
+    private SqlSessionTemplate sqlSession;
     
     @Autowired
     private MbtiDao mbtiDao;
@@ -20,4 +24,34 @@ public class MbtiServiceImpl implements MbtiService {
     public int updateMbti(Mbti mbti) {
         return mbtiDao.updateMbti(sqlSession, mbti);
     }
+
+	@Override
+	public ArrayList<Mbti> selectMatchList(Member loginMember) {
+		return mbtiDao.selectMatchList(sqlSession, loginMember);
+	}
+	
+	@Override
+	public ArrayList<Mbti> selectRandomList(Member loginMember) {
+		return mbtiDao.selectRandomList(sqlSession, loginMember);
+	}
+	
+	@Override
+	public int updateMatchRequestList(Member loginMember) {
+		return mbtiDao.updateMatchRequestList(sqlSession, loginMember);
+	}
+	
+	@Override
+	public int insertMatchRequestList(Member loginMember) {
+		return mbtiDao.insertMatchRequestList(sqlSession, loginMember);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

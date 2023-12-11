@@ -579,8 +579,13 @@
                         type : "post",
                         data : {"userNo":${sessionScope.loginMember.userNo}},
                         success : function(result){
-                        	
-                        	$("#myChat").html(result[0].userName+ "님 외 " +result.length+ "명이 <br>대화를 기다리고 있어요!" )
+
+                        	if(result.length != 0){
+                        		
+	                        	$("#myChat").html(result[0].userName+ "님 외 " +result.length+ "명이 <br>대화를 기다리고 있어요!" )
+                        	} else {
+                        		$("#myChat").html("MBTING 매칭을 통해 대화 상대를 찾아보세요!")
+                        	}
                         
                         },
                         error : function(){

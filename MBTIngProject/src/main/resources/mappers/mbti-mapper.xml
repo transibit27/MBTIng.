@@ -3,12 +3,66 @@
 
 <mapper namespace="mbtiMapper">
 
-  <update id="updateMbti" parameterType="mbti">
-    UPDATE MEMBER
-       SET MBTI = #{mbti},
-       	   MBTI_NICK = #{mbtiNick},
-           MBTI_MATCH = #{mbtiMatch}
-     WHERE USER_NO = #{userNo}
-  </update>
+	<resultMap id="mbtiResultSet" type="mbti">
+	 	<result column="USER_NO"  		property="userNo"></result>
+ 	 	<result column="USER_NAME"  	property="userName"></result>
+ 	 	<result column="INTRODUCE"  	property="introduce"></result>
+	 	<result column="PROFILE_IMG" 	property="profileImg"></result>
+		<result column="MBTI"  			property="mbti"></result>
+	 	<result column="MBTI_NICK"  	property="mbtiNick"></result>
+	 	<result column="MBTI_MATCH"  	property="mbtiMatch"></result>
+	 	<result column="RECEIVER_NO"  	property="receiverNo"></result>
+	 	<result column="PROPOSER_NO"  	property="proposerNo"></result>
+	 	<result column="STATUS"  		property="status"></result>
+	</resultMap>
+
+	<update id="updateMbti" parameterType="mbti">
+	  UPDATE MEMBER
+	     SET MBTI = #{mbti},
+	     	 MBTI_NICK = #{mbtiNick},
+	         MBTI_MATCH = #{mbtiMatch}
+	   WHERE USER_NO = #{userNo}
+	</update>
+	
+	<!-- mbti 매칭 회원 목록 조회 
+	<select id="selectMatchList" resultMap="mbtiResultSet" parameterType="string">
+        SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+          FROM MEMBER
+         WHERE STATUS = 'Y'
+           AND MBTI IN ('ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ')
+           AND MBTI_MATCH IN ('ESFP', 'INFP', 'ENTP', 'ENFP', 'ESTJ', 'ESFP', 'ENTJ',  'ESFJ', 'ISFJ', 'ISFJ', 'INTJ', 'INFJ', 'ISFP', 'INTP', 'ISFP', 'INFP')
+           AND USER_NO != #{memberNo}
+	</select>
+	-->
+	
+	<select id="selectMatchList" resultMap="mbtiResultSet" parameterType="member">
+	 	 SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH ,STATUS 
+          FROM member
+    	 WHERE MBTI = #{mbtiMatch}
+		   AND USER_NO != #{userNo}
+		   AND USER_NO NOT IN (SELECT RECEIVER_NO
+		                         FROM MATCHING
+		                        WHERE PROPOSER_NO = #{userNo})
+	</select>
+	
+	<select id="selectRandomList" resultMap="mbtiResultSet" parameterType="member">
+		SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+		  FROM MEMBER
+		 WHERE MBTI != #{mbtiMatch}
+		   AND USER_NO != #{userNo}
+		   AND USER_NO NOT IN (SELECT RECEIVER_NO
+		                         FROM MATCHING
+		                        WHERE PROPOSER_NO = #{userNo})
+	</select>
+	
+
+	<update id="updateMatchRequestList" parameterType="member">		
+		UPDATE MEMBER
+		   SET MATCH_STAT = '2'
+		 WHERE USER_NO = #{userNo} 
+	</update>
+	
+
+
 
 </mapper>
