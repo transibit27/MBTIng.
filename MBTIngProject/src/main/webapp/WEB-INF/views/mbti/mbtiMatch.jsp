@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
         display: flex;
         align-items: center;
         border-radius: 20px;
-        width: 430px;
+        width: 450px;
         height: 160px;
         margin: 20px 0px;
         padding: 10px;
@@ -53,10 +54,22 @@
     }
     
     #userPfImg {
-        border-radius: 20px;
-        width: 130px;
+        border-radius: 50%;
+        width: 200px;
         height: 130px;
+        object-fit: cover;
+        margin-right: 10px;
+        margin-left: 5px;
+        overflow: hidden; /* 새로운 추가 */
     }
+
+    #userPfImg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
 
     .userInfo {
         display: flex;
@@ -69,13 +82,19 @@
 
     .userName,
     .userIntroduce {
-        height: 20px;
+        margin: 0;
+        padding: 0;
         text-align: center;
     }
 
     .userName {
         font-weight: bold;
         font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .userIntroduce {
+        margin-top: 5px;
     }
 
     .chatRequestBtn {
@@ -84,168 +103,148 @@
         background-color: pink;
         width: 100%;
         margin-top: 10px;
+        cursor: pointer;
+        color: white;
+        padding: 8px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .chatRequestBtn:hover {
+        background-color: #ff66b2;
+    }
+
+    .paging-area button {
+        width: 35px;
+        height: 30px;
+        border: none;
+        border-radius: 5px;
+        background-color: pink;
+    }
+
+    .paging-area button:hover {
+        border: 1px solid pink;
+        background-color: white;
+    }
+
+    .paging-area button[disabled]:hover {
+        border: none;
+        background-color: pink;
     }
 
 </style>
-
-
 </head>
 
 <jsp:include page="../common/header.jsp"/>
 
 <body>
 
-
-
     <div class="wrap">
 
+        <c:if test="${ not empty sessionScope.alertMsg }">
+            <script>
+                alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
+            </script>
+            
+            <!-- session 의 alertMsg 지우기 -->
+            <c:remove var="alertMsg" scope="session" />
+        </c:if>
+        
         <div class="matchList">
-
-
-            <span class="mbtiMatch ">
-
-                <h2 style="font-family: 'KOTRAHOPE'; margin: 30px 0px;">추천하는 운명의 인연</h2>
-
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ENFJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">임유나</p>
-                        <p class="userIntroduce">클라이밍 좋아해요 ㅎㅎ 운동!</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ENFJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">임유나</p>
-                        <p class="userIntroduce">클라이밍 좋아해요 ㅎㅎ 운동!</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ENFJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">임유나</p>
-                        <p class="userIntroduce">클라이밍 좋아해요 ㅎㅎ 운동!</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ENFJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">임유나</p>
-                        <p class="userIntroduce">클라이밍 좋아해요 ㅎㅎ 운동!</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
+            <span class="mbtiMatch">
+                <h2 style="font-family: 'KOTRAHOPE'; margin: 30px 0px;">내 운명의 인연</h2>
+                
+                <c:choose>
+                    <c:when test="${not empty requestScope.matchList}">
+                        <c:forEach var="u" items="${requestScope.matchList}">
+                            <div class="userPf">
+                                <img id="userPfImg" src="${pageContext.request.contextPath}${ u.profileImg }">
+                                <div class="userInfo" id="userInfo" onclick="clickUser(this);">
+                                    <p class="userName">${u.userName} (${u.mbti})</p>
+                                    <p class="userIntroduce">${u.introduce}</p>
+                                    <input type="hidden" class="clickUserNo" name="" value="${u.userNo}">
+                                    <form action="updateMatchRequestList.mb" method="get">
+                                        <button type="submit" class="chatRequestBtn">채팅 요청하기</button>
+                                        <input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }" id="userNo">
+                                        <input type="hidden" name="receiverNo" value="${u.userNo}" id="receiverNo">
+                                    </form>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p>일치하는 회원이 없습니다.</p>
+                    </c:otherwise>
+                </c:choose>
             </span>
-
+            
             <span class="randomMatch">
-
                 <h2 style="font-family: 'KOTRAHOPE'; margin: 30px 0px;">랜덤으로 추천하는 인연</h2>
                 
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/INTJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">김밍제</p>
-                        <p class="userIntroduce">프로그래밍데 운영 중</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ENTJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">오진표</p>
-                        <p class="userIntroduce">안녕하세요~</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ESTJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">김민제</p>
-                        <p class="userIntroduce">안녕하세용가리</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
-                <div class="userPf">
-
-                    <img id="userPfImg" src="./resources/images/ENFJ.png">
-
-                    <div class="userInfo">
-
-                        <p class="userName">밍마씨윋</p>
-                        <p class="userIntroduce">인스타 팔로워 600만 명 인플루언서</p>
-
-                        <button class="chatRequestBtn">채팅 요청하기</button>
-
-                    </div>
-                    
-                </div>
-
+                <c:choose>
+                    <c:when test="${not empty requestScope.randomList}">
+                        <c:forEach var="u" items="${requestScope.randomList}">
+                            <div class="userPf">
+                                <img id="userPfImg" src="${pageContext.request.contextPath}${ u.profileImg }">
+                                <div class="userInfo">
+                                    <p class="userName">${u.userName} (${u.mbti})</p>
+                                    <p class="userIntroduce">${u.introduce}</p>
+                                    <form action="updateMatchRequestList.mb" method="get">
+                                        <button type="submit" class="chatRequestBtn" >채팅 요청하기</button>
+                                        <input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }" id="userNo">
+                                   <input type="hidden" name="receiverNo" value="${u.userNo}" id="receiverNo">
+                                    </form>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <p>회원이 없습니다.</p>
+                    </c:otherwise>
+                </c:choose>
             </span>
-
         </div>
-
-
-
     </div>
-
 </body>
 
 <script>
-
-</script>
+    $(document).ready(function() {
+        // 채팅 요청하기 버튼 클릭 시
+        $(".chatRequestBtn").click(function(e) {
+            e.preventDefault();
+            
+            // 필요한 데이터 수집
+            var form = $(this).closest("form");
+            var formData = form.serialize();
+            
+            // Ajax 요청
+            $.ajax({
+                type: "GET",
+                url: "updateMatchRequestList.mb",
+                data: formData,
+                success: function(response) {
+                    if (response.success) {
+                        // 성공 메시지 표시
+                        alertify.alert('Alert', response.message, function() {
+                            alertify.success('Ok');
+                        });
+    
+                        // TODO: 서버에서 새로운 사용자 목록을 가져와 화면 업데이트
+                        // 예시: location.reload(); 또는 새로운 사용자 목록을 가져와서 동적으로 업데이트
+                    } else {
+                        // 실패 메시지 표시
+                        alertify.alert('Alert', response.message, function() {
+                            alertify.error('Error');
+                        });
+                    }
+                },
+                error: function() {
+                    // 에러 처리
+                    alertify.error('Error occurred while processing the request.');
+                }
+            });
+        });
+    });
+    </script>
 
 </html>
