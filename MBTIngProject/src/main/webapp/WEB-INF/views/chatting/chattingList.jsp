@@ -9,6 +9,11 @@
 <title>Insert title here</title>
 
 <style>
+.wrap {
+
+	width : 1500px;
+	margin: auto;
+}
 .content_1  {
 	border : 2px solid lightgray;
 	width: 1500px;
@@ -180,9 +185,6 @@
  	margin : auto;
  }
  
- #searchTable button{
- 	
- }
  .select {
  	 width : 200px;
  	 padding: .8em .5em;
@@ -219,6 +221,7 @@
   	border-radius : 20px;
   }
   
+
 </style>
 </head>
 
@@ -320,8 +323,12 @@
 		<div class="user__container">
         	
 		</div>
+		<div id="hiddenDiv" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+			  <p>아하하 안녕하세요 저는 카리나 입니다. 아하하 </p>
+			  <button id="hiddenDivCloseBtn">닫기</button>
+		</div>
 	</div>
-	
+
    </div> 
    
    <!-- gender를 처리하기 위한 script -->
@@ -375,6 +382,7 @@
 						  			 "</div>"
 
 						  $(".user__container").html(resultStr);
+						  
   				}
   			},
   			error : function() {
@@ -442,5 +450,35 @@
  	}
   </script>
   
+  <script>
+  $(document).ready(function() {
+	  // 이미지 클릭 시 이벤트 처리
+	  $(".user__container").on("click", ".image img", function() {
+	    // 클릭한 이미지의 인덱스를 가져옴
+	    var index = $(this).index();
+
+	    // 미리 만들어진 div 요소의 ID
+	    var divId = "hiddenDiv";
+
+	    // 모든 이미지의 투명도를 초기화
+	    $(".user__container .image img").css("opacity", "1");
+
+	    // 선택한 이미지의 투명도를 조절
+	    $(this).css("opacity", "0.5");
+
+	    // 미리 만들어진 div 요소를 보이게 함
+	    $("#" + divId).show();
+	  });
+
+	  // div 닫기 버튼 클릭 시 이벤트 처리
+	  $("#hiddenDivCloseBtn").on("click", function() {
+	    // 미리 만들어진 div 요소를 숨김
+	    $("#hiddenDiv").hide();
+
+	    // 모든 이미지의 투명도를 초기화
+	    $(".user__container .image img").css("opacity", "1");
+	  });
+	});
+  </script>
 </body>
 </html>
