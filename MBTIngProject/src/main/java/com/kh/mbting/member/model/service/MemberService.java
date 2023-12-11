@@ -60,11 +60,14 @@ public interface MemberService {
 	// 마이페이지 - 내 대화 상대 조회용 method
 	ArrayList<Member> myChat(String userNo);
 
+	// 마이페이지 - 결제 내역 리스트  수 조회용 method
+	int selectOrderListCount(String email);
 	// 마이페이지 - 결제 내역 조회용 method
-	ArrayList<KakaoPay> orderList(PageInfo pi, String userNo);
+	ArrayList<KakaoPay> orderList(PageInfo pi, String email);
 
 	// 회원가입 - 이메일 중복 검사용 method
 	int checkEmail(Member m);
+
 
 
 

@@ -599,14 +599,14 @@
 
                             // 결제 정보 노출 용
                             if(${sessionScope.loginMember.matchCoin} < 10){
-                                $("#myMatchCoin").html("MBTIng 코인이 ${sessionScope.loginMember.matchCoin}개 밖에 안남았어요! <br> MBTIng 코인을 충전하고 <br> 마음에 드는 상대에게 대화를 신청해보세요!")
+                                $("#myMatchCoin").html("MBTIng 코인이 ${sessionScope.loginMember.matchCoin}개 밖에 안남았어요! <br> MBTIng 코인을 충전하고 <br> 마음에 드는 상대에게 대화를 신청해보세요!");
                             } else {
-                                $("#myMatchCoin").html("MBTIng 코인이 ${sessionScope.loginMember.matchCoin}개 <br> 여유로워 보이지만 <br> 마음에 드는 상대방에 비해 부족한건 아닐까요?")
+                                $("#myMatchCoin").html("MBTIng 코인이 ${sessionScope.loginMember.matchCoin}개 <br> 여유로워 보이지만 <br> 마음에 드는 상대방에 비해 부족한건 아닐까요?");
                             }
         
                         },
                         error : function(){
-                            console.log("내 대화 상대 표시용 ajax 통신 실패")
+                            console.log("내 대화 상대 표시용 ajax 통신 실패");
                         }
                         
                     }); // ajax 끝

@@ -51,14 +51,22 @@
  	   SET PG_TOKEN = #{pg_token}
  	 WHERE PARTNER_ORDER_ID = #{partnerOrderId}
  </update>
- 
- <!--  이거 작성하다가 사망함 -->
+
+<!-- 내 결제 리스트 수 조회용 쿼리문 -->
+<select id="selectOrderListCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+	  	  FROM KAKAOPAY
+	 	 WHERE PARTNER_USER_ID = #{email}
+	 	   AND PG_TOKEN IS NOT NULL
+</select>
+
 <!-- 내 결제 리스트 조회용 쿼리문 -->
 <select id="orderList" parameterType="string" resultMap="kakaoPayResultSet">
 	
         SELECT *
 		  FROM KAKAOPAY
-		 WHERE USER_NO = #{userNo}
+		 WHERE PARTNER_USER_ID = #{email}
+		   AND PG_TOKEN IS NOT NULL
 		 ORDER BY PARTNER_ORDER_ID DESC
 
 </select>

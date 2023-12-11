@@ -248,10 +248,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.myChat(sqlSession, userNo);
 	}
 
+	// 마이페이지 - 내 결제 리스트 수 조회용 메소드
+	@Override
+	public int selectOrderListCount(String email) {
+		return memberDao.selectOrderListCount(sqlSession, email);
+	}
 	// 마이페이지 - 내 결제 내역 조회용 메소드
 	@Override
-	public ArrayList<KakaoPay> orderList(PageInfo pi, String userNo) {
-		return memberDao.orderList(sqlSession, pi, userNo);
+	public ArrayList<KakaoPay> orderList(PageInfo pi, String email) {
+		return memberDao.orderList(sqlSession, pi, email);
 	}
 
 	// 회원가입 - 이메일 중복 검사용 메소드
@@ -259,6 +264,7 @@ public class MemberServiceImpl implements MemberService {
 	public int checkEmail(Member m) {
 		return memberDao.checkEmail(sqlSession, m);
 	}
+
 
 
 

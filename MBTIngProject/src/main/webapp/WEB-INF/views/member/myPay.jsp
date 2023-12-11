@@ -213,18 +213,45 @@
 
 </div>
 
-<!-- 카카오페이 결제용 스클비트 -->
+
 <script>
+	// 결제 리스트 조회용 스크립트
+	
 	$(function(){
+		
+		orderList();
 		
 		function orderList(){
 			$.ajax({
 				url:'orderList.me',
-	            data : {"userNo":${sessionScope.loginMember.userNo}},
+	            data : {"email": "${sessionScope.loginMember.email}"},
                 success : function(result){
-                    
-                    console.log(result);
-                
+                	let resultStr = "";
+                	
+                	for(let i=0; i<result.length; i++){
+                		
+                		// 환불 날짜가 없을 경우 환불하지 않은 상태로 출력
+                		console.log(result[i].refundDate)
+                		let refund = "";
+                		
+                    	if(result[i].refundDate != ""){
+                    		refund = "결제상태"
+                    	} else {
+                    		refund = "환불상태"
+                    	}
+                    	
+                		
+                		resultStr = "<tr>"
+                					+	"<td>"+ result[i].partnerOrderId + "</td>"
+                					+ 	"<td>"+ refund + "</td>"
+                					+	"<td>"+ 상품명
+                					+ 구매자
+                					+ 날짜
+                					+ 문의하기
+                				+	"</tr>";
+                		
+                	}
+                	$("#myOrderList").html(resultStr);
                 },
                 error : function(){
                     console.log("내 대화 상대 표시용 ajax 통신 실패")
@@ -235,7 +262,7 @@
 		
 		
 		
-		
+		// 카카오페이 결제용 스크립트 
 		
 		$("#pay1").click(function(){
 			$.ajax({
@@ -348,7 +375,7 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th scope="col">번호</th>
+                    <th scope="col">주문번호</th>
                     <th scope="col">환불여부</th>
                     <th scope="col">상품명</th>
                     <th scope="col">구매자</th>
@@ -356,7 +383,7 @@
                     <th scope="col">문의</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="myOrderList">
                 <tr class=" ">
                     <td> 6188 </td>
                     <td> 가능 </td>
@@ -394,11 +421,46 @@
 
     </div>
 
-    <!-- 페이지 -->
-    <div class="bd_footer">
-        <div class="paging">
-        </div>	
-    </div>
+	<!-- 페이징 바 -->
+    <div class="paging-area">
+	    
+	   	<c:choose>
+			<c:when test="${ requestScope.pi.currentPage eq 1 }">
+		    		<button type="button" style="display: none;" disabled>&lt;</button>	
+		   	</c:when>
+		   	
+		   	<c:otherwise>    		
+		    		<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage - 1 }'">&lt;</button>
+		   	</c:otherwise>
+		</c:choose>
+	        
+		<c:forEach var="p" begin="${ requestScope.pi.startPage }" 
+					  		 end="${ requestScope.pi.endPage }"
+					 		step="1">
+
+			<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ p }'" id="pageB-${ p }">${ p }</button>
+	     
+		</c:forEach>
+	        
+	    <c:choose>
+			<c:when test="${ requestScope.pi.currentPage ge requestScope.pi.maxPage }">
+				<button type="button" style="display: none;" disabled>&gt;</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage + 1 }'">&gt;</button>
+			</c:otherwise>
+	   	</c:choose>
+	         
+	</div>
+	
+	<!-- 페이징 처리 과련 스크립트 (현재 페이지 disabled 속성 주기용) -->
+	<script>
+	$(function(){
+		$("#pageB-${ requestScope.pi.currentPage }").attr("disabled",true);
+
+	})
+	
+	</script>
 
 </div>
 

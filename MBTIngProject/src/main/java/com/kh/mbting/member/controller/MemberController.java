@@ -424,28 +424,23 @@ public class MemberController {
 	
 	// e-2 마이페이지 - 내 결제 리스트 조회 용 메소드
 	@ResponseBody
-	@RequestMapping(value="orderList.me")
-	public ModelAndView orderList(Member m,
-			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-			ModelAndView mv) {
+	@RequestMapping(value="orderList.me",	 produces="application/json; charset=UTF-8")
+	public String orderList(Member m,
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
 		
-		// listCOunt 완성해야함
-		int listCount = memberService.selectListCount(m.getUserNo());
+		// 전체 결제 리스트 수 조회
+		int listCount = memberService.selectOrderListCount(m.getEmail());
 		
 		int pageLimit = 5;
 		int boardLimit = 8;
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, 
 						currentPage, pageLimit, boardLimit);
-		
-		// 결제 내역 조회 sql문 작성 중  사망함 
-		ArrayList<KakaoPay> list = memberService.orderList(pi, m.getUserNo());
-		
-		mv.addObject("list", list)
-		  .addObject("pi", pi)
-		  .setViewName("member/myPay");
 	
-		return mv;
+		ArrayList<KakaoPay> list = memberService.orderList(pi, m.getEmail());
+		System.out.println("결제내역:"+list);
+	
+		return new Gson().toJson(list);
 	}
 	
 	

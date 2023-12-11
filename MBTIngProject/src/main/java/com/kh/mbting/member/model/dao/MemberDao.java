@@ -24,13 +24,10 @@ public class MemberDao {
 	}
 	
 	public Member loginMember(SqlSession sqlSession , Member m ) {
-	
-		return sqlSession.selectOne("memberMapper.loginMember", m);
-		
+		return sqlSession.selectOne("memberMapper.loginMember", m);	
 	}
 
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
-
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
@@ -90,19 +87,25 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.matchingStrat", mc);
 	}
 
-	public ArrayList<KakaoPay> orderList(SqlSessionTemplate sqlSession, PageInfo pi, String userNo) {
+	// 마이페이지 - 내 결제 리스트 수 조회용 메소드
+	public int selectOrderListCount(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("kakaoPayMapper.selectOrderListCount", email);
+	}
+	// 마이페이지 - 내 결제 리스트 조회용 메소드
+	public ArrayList<KakaoPay> orderList(SqlSessionTemplate sqlSession, PageInfo pi, String email) {
 		int limit = pi.getBoardLimit();
 		int offset = (pi.getCurrentPage() - 1) * limit;
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("kakaoPayMapper.orderList", userNo, rowBounds);
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.orderList", email, rowBounds);
 	}
 	
 	// 회원가입 - 이메일 중복 체크용 메소드
 	public int checkEmail(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.checkEmail", m);
 	}
+
 
 
 
