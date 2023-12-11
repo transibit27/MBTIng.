@@ -51,10 +51,6 @@ public interface MemberService {
 	int createChatMessage(ChatMessage cm);
 	// 1:1 대화 시작 시 매칭 테이블 의 매칭 상태를(3/매칭 진행) 업데이트용 method
 	int matchingStrat(Matching mc);
-	
-	// 마이페이지 하단메뉴(내상태 - 프로필) 조회용 method
-	Member myStatProfile(String userNo);
-	
 	// 내 후기 게시글 숫자 확인용 method
 	int selectListCount(String userNo);
 

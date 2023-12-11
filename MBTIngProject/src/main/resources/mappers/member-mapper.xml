@@ -2,51 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 
- <resultMap id="memberResultSet" type="member">
- 	<result column="USER_NO"  		property="userNo"></result>
- 	<result column="EMAIL"  		property="email"></result>
- 	<result column="USER_PWD"  		property="userPwd"></result>
- 	<result column="PROFILE_IMG" 	property="profileImg"></result>
- 	<result column="USER_NAME"  	property="userName"></result>
- 	<result column="AGE"  			property="age"></result>
- 	<result column="GENDER"  		property="gender"></result>
- 	<result column="HEIGHT"			property="height"></result>
- 	<result column="PHONE" 		 	property="phone"></result>
- 	<result column="MBTI"  			property="mbti"></result>
- 	<result column="MBTI_NICK"  	property="mbtiNick"></result>
- 	<result column="MBTI_MATCH"		property="mbtiMatch"></result>
- 	<result column="INTRODUCE"  	property="introduce"></result>
- 	<result column="ADDRESS"		property="address"></result>
- 	<result column="ENROLL_DATE"  	property="enrollDate"></result>
- 	<result column="MODIFY_DATE"  	property="modifyDate"></result>
- 	<result column="MATCH_STAT"  	property="matchStat"></result>
- 	<result column="MATCH_COIN"  	property="matchCoin"></result>
- 	<result column="STATUS"  		property="status"></result>
- </resultMap>
- 
- <resultMap id="boardResultSet" type="board">
- 	<result column="BOARD_NO" property="boardNo"></result>
- 	<result column="BOARD_TITLE" property="boardTitle"></result>
- 	<result column="BOARD_CONTENT" property="boardContent"></result>
- 	<result column="VIEWS" property="views"></result>
- 	<result column="ENROLL_DATE" property="enrollDate"></result>
- 	<result column="MODIFY_DATE" property="modifyDate"></result>
- 	<result column="STATUS" property="status"></result>
- 	<result column="USER_NO" property="userNo"></result>
- 	<result column="MATCH_NO" property="matchNo"></result>
- </resultMap>
- 
-<resultMap type="chatRoom" id="chatRoomResultSet">
-    <result property="roomNo" column="ROOM_NO" />
-    <result property="userEmail" column="USER_EMAIL" />
-    <result property="userName" column="USER_NAME" />        
-    <result property="userPic" column="USER_PRO_IMG" />
-    <result property="masterEmail" column="MASTER_EMAIL" />
-    <result property="masterName" column="MASTER_NAME" />
-    <result property="masterPic" column="MASTER_PRO_IMG" />
-    <result property="sendTime" column="SENDTIME" />
-    <result property="messageContent" column="MESSAGE_CONTENT" />
-</resultMap>
+	<resultMap id="memberResultSet" type="member">
+		<result column="USER_NO"  		property="userNo"></result>
+		<result column="EMAIL"  		property="email"></result>
+		<result column="USER_PWD"  		property="userPwd"></result>
+		<result column="PROFILE_IMG" 	property="profileImg"></result>
+		<result column="USER_NAME"  	property="userName"></result>
+		<result column="AGE"  			property="age"></result>
+		<result column="GENDER"  		property="gender"></result>
+		<result column="HEIGHT"			property="height"></result>
+		<result column="PHONE" 		 	property="phone"></result>
+		<result column="MBTI"  			property="mbti"></result>
+		<result column="MBTI_NICK"  	property="mbtiNick"></result>
+		<result column="MBTI_MATCH"		property="mbtiMatch"></result>
+		<result column="INTRODUCE"  	property="introduce"></result>
+		<result column="ADDRESS"		property="address"></result>
+		<result column="ENROLL_DATE"  	property="enrollDate"></result>
+		<result column="MODIFY_DATE"  	property="modifyDate"></result>
+		<result column="MATCH_STAT"  	property="matchStat"></result>
+		<result column="MATCH_COIN"  	property="matchCoin"></result>
+		<result column="STATUS"  		property="status"></result>
+	</resultMap>
+	 
+	<resultMap id="boardResultSet" type="board">
+		<result column="BOARD_NO" property="boardNo"></result>
+		<result column="BOARD_TITLE" property="boardTitle"></result>
+		<result column="BOARD_CONTENT" property="boardContent"></result>
+		<result column="VIEWS" property="views"></result>
+		<result column="ENROLL_DATE" property="enrollDate"></result>
+		<result column="MODIFY_DATE" property="modifyDate"></result>
+		<result column="STATUS" property="status"></result>
+		<result column="USER_NO" property="userNo"></result>
+		<result column="MATCH_NO" property="matchNo"></result>
+		<result column="ORIGIN_NAME" property="originName"></result>
+		<result column="CHANGE_NAME" property="changeName"></result>
+		<result column="MBTI_NICK" property="mbtiNick"></result>
+		<result column="THUMB_COUNT" property="thumbCount"></result>
+	</resultMap>
+	 
+	<resultMap type="chatRoom" id="chatRoomResultSet">
+	    <result property="roomNo" column="ROOM_NO" />
+	    <result property="userEmail" column="USER_EMAIL" />
+	    <result property="userName" column="USER_NAME" />        
+	    <result property="userPic" column="USER_PRO_IMG" />
+	    <result property="masterEmail" column="MASTER_EMAIL" />
+	    <result property="masterName" column="MASTER_NAME" />
+	    <result property="masterPic" column="MASTER_PRO_IMG" />
+	    <result property="sendTime" column="SENDTIME" />
+	    <result property="messageContent" column="MESSAGE_CONTENT" />
+	</resultMap>
 
 	<resultMap type="chatMessage" id="chatMessageResultSet">
         <result property="messageNo" column="MESSAGE_NO" />
@@ -203,16 +207,7 @@
   		   SET MATCH_STAT = 3
   		 WHERE RECEIVER_NO = #{receiverNo} AND PROPOSER_NO = #{proposerNo}
   	</update>
-	
-	<!-- 마이페이지 하단메뉴(내 상태 - 프로필) 조회용 쿼리문 -->
-	<select id="myStatProfile" parameterType="string" resultMap="memberResultSet">
-	  SELECT *
-	  	FROM MEMBER 
-	   WHERE USER_NO = #{userNo}
-	  	 AND STATUS  = 'Y'
-	</select>
 
-	
 	<!-- 내 후기 게시글 총 갯수 확인용 쿼리문 -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -222,12 +217,26 @@
 	</select>
 	
 	<!-- 내 후기 게시글 조회용 쿼리문 -->
-	<select id="selectList" resultMap="boardResultSet">
-        SELECT *
-		  FROM BOARD
-		 WHERE STATUS = 'Y'
-           AND USER_NO = #{userNo}
-		 ORDER BY BOARD_NO DESC
+	<select id="selectList" resultMap="boardResultSet" parameterType="member">
+		  SELECT B.BOARD_NO
+			     , B.BOARD_TITLE
+			     , B.USER_NO
+			     , M.MBTI_NICK
+			     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
+				 , BI.ORIGIN_NAME
+				 , BI.CHANGE_NAME
+		            , (
+		               SELECT COUNT (*)
+		                 FROM THUMB
+		                WHERE BOARD_NO = B.BOARD_NO
+		            ) AS THUMB_COUNT
+			  FROM BOARD B, BOARDIMG BI, MEMBER M
+		        WHERE B.BOARD_NO = BI.BOARD_NO (+)
+		          AND B.USER_NO = M.USER_NO (+)
+			   AND B.STATUS = 'Y'
+			   AND BI.THUMBNAIL = 'Y'
+			   AND B.USER_NO = #{userNo}
+			 ORDER BY BOARD_NO DESC
 	</select>
 	
 	<!-- 내 대화 상대 정보 조회용 쿼리문 -->
@@ -270,6 +279,8 @@
 			 		default,
 			 		default)
 	</insert>
+	
+	
 	
 
 </mapper>

@@ -424,7 +424,7 @@
                             value="${sessionScope.loginMember.mbtiNick}" disabled>
                         </td>
                         <td>
-                            <button id="mbti-test" type="button" onclick="location.href=''">내 성향 검사</button>
+                            <button id="mbti-test" type="button" onclick="location.href='mbtiTest.mb'">내 성향 검사</button>
                         </td>
                     </tr>
 
