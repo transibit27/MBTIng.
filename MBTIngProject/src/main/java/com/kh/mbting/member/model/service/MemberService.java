@@ -30,6 +30,8 @@ public interface MemberService {
 	
 	// 마이페이지 - 회원정보 수정용 method
 	int updateMember(Member m);
+	// 마이페이지 - 내 비밀번호 수정용 method
+	int updatePwd(Member m);
 
 	// 내게 매칭을 신청한 대상자 수 확인 용 method
 	int proposerCount(String userNo);
@@ -67,6 +69,7 @@ public interface MemberService {
 
 	// 회원가입 - 이메일 중복 검사용 method
 	int checkEmail(Member m);
+
 
 
 

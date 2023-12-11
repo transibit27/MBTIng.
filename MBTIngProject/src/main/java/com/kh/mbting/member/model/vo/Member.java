@@ -36,4 +36,5 @@ public class Member {
 	private int proposerNum;		//  나에게 매칭을 신청한 사람 숫자를 확인하기 위한 변수
 	private int matchRoomNo;
 	private int proposerNo;			//PROPOSER_NO 나에게 매칭을 신청한 사람의 user_no를 확인하기 위한 변수
+	private String changePwd;		// 비밀번호 변경용 Pwd;
 }

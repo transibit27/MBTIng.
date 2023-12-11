@@ -128,6 +128,11 @@
 		 WHERE EMAIL = #{email}
 		   AND STATUS = 'Y'	
 	</update>
+	<update id="updatePwd" parameterType="member">
+		UPDATE MEMBER
+		   SET USER_PWD = #{userPwd}
+		 WHERE EMAIL = #{email}
+	</update>
 	
 	<!-- 나에게 매칭을 신청한 인원 수 확인용 쿼리문 -->
 	<select id="proposerCount" parameterType="string" resultType="_int">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-  
+
+<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	  
+<!-- 부트스트랩때문에 연결함 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- 알람문구 용 -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
 <style>
     * {font-family: 'Noto Sans KR', sans-serif;
@@ -230,6 +248,15 @@
 </style>
 </head>
 <body>
+	<!-- 알람문구 출력용 코드 ( session.alertMsg )-->
+	
+	<c:if test="${ not empty sessionScope.alertMsg }">
+		<script>
+			alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
+		</script>
+		
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
 
 	<div>
 
@@ -449,7 +476,7 @@
                 </div>
 
                 <div class="final-button">
-                    <button id="final-button1" type="button">비밀번호 변경</button>
+                    <button id="final-button1" type="button" data-toggle="modal" data-target="#changePwd">비밀번호 변경</button>
                     <button id="final-button2" type="submit">적용 </button>
                 </div>  
             </div>
@@ -484,7 +511,46 @@
 
 		</form>
 	</div>
-	
+
+
+    <!-- 필요한 모달창 -->
+	<!-- 비밀번호 변경용 모달창 -->
+	<div class="modal fade" id="changePwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="updatePwd.me" method="post">
+                    <input type="hidden" name="email" value="${sessionScope.loginMember.email}">
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">현재 비밀번호</label>
+                        <input type="password" class="form-control" id="userPwd" name="userPwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">변경할 비밀번호</label>
+                        <input type="password" class="form-control" id="changePwd" name="changePwd">
+                        <div></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">변경 비밀번호 확인</label>
+                        <input type="password" class="form-control" id="checkPwd">
+                        <div></div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="submit" class="btn btn-primary">결정</button>
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     
 </body>
 </html>

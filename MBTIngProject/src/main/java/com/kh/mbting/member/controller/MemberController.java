@@ -329,7 +329,6 @@ public class MemberController {
 		
 		if(result > 0) {
 			Member updateMem = memberService.loginMember(m);
-			System.out.println(m.getAddress());
 			session.setAttribute("loginMember", updateMem);
 			session.setAttribute("alertMsg", "정보 변경에 성공했습니다.");
 			
@@ -341,6 +340,48 @@ public class MemberController {
 		}
 		
 	}
+	
+	//b-7 마이페이지 비밀번호 수정용 method
+	@PostMapping(value="updatePwd.me")
+	public String updatePwd(Member m, Model model, HttpSession session){
+		
+		// step1 비밀번호 변경하기 위해 입력한 비밀번호가 현재 비밀번호와 일치하는가
+		Member loginMember = memberService.loginMember(m);
+		if(loginMember != null && 
+			bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
+						
+			// step2 변경할 비밀번호를 암호화
+			String encPwd = bcryptPasswordEncoder.encode(m.getChangePwd());
+			
+			// step3 변경할 비밀번호로 현재 비밀번호 변경
+			m.setUserPwd(encPwd);
+			int result = memberService.updatePwd(m);
+
+			// step4 비밀번호 변경 결과에 따라 알림 메시지 출력
+			if(result > 0) {
+				Member updateMem = memberService.loginMember(m);
+				session.setAttribute("loginMember", updateMem);
+				session.setAttribute("alertMsg", "비밀번호 변경에 성공했습니다.");
+				return "redirect:/myProfile.me";
+			} else {
+				model.addAttribute("errorMsg", "비밀번호 변경에 실패했습니다.");
+				return "common/errorPage";
+			}
+			
+		} else {
+			 model.addAttribute("errorMsg" , "입력한 비밀번호가 일치하지 않습니다.");
+			 return "common/errorPage";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 	
 	//c 마이페이지 - 내후기
 	@RequestMapping(value="myReview.me")

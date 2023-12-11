@@ -181,6 +181,11 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(Member m) {
 		return memberDao.updateMember(sqlSession, m);
 	}
+	// 마이페이지 내 비밀번호 수정용 method
+	@Override
+	public int updatePwd(Member m) {
+		return memberDao.updatePwd(sqlSession, m);
+	}
 
 	// 마이페이지 - 내게 매칭을 신청한 회원의 수 확인용 메소드
 	@Override
@@ -261,6 +266,7 @@ public class MemberServiceImpl implements MemberService {
 	public int checkEmail(Member m) {
 		return memberDao.checkEmail(sqlSession, m);
 	}
+
 
 
 

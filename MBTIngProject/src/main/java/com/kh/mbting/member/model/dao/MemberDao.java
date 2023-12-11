@@ -37,7 +37,10 @@ public class MemberDao {
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
-
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+	
 	public int proposerCount(SqlSessionTemplate sqlSession, String userNo) {
 		return sqlSession.selectOne("memberMapper.proposerCount", userNo);
 	}
