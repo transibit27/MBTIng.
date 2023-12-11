@@ -74,6 +74,12 @@
     	
     </resultMap>
  
+ 	<resultMap id="monthResultSet" type="month">
+		<result property="month" column="MONTH"/>
+ 		<result property="enrollCount" column="ENROLL_COUNT"/>
+ 		<result property="matchStat" column="MATCH_STAT"/>
+ 	</resultMap>
+ 	
 	<!-- top 회원 정보를 불러오기 위한 쿼리문 -->
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
@@ -250,7 +256,7 @@
 	    ORDER BY MATCH_TIME DESC
 	</select>
 	
-	<!-- 관리자페이지 회원 목록 조회 -->
+	<!-- 관리자페이지 전체회워 조회 -->
 	<select id="memberSelectListCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM MEMBER
@@ -279,8 +285,49 @@
 			 		default,
 			 		default)
 	</insert>
+	<!-- 관리자페이지 전체 회원 수 조회 -->
+	<select id="selectTotalMembers" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
+	</select>
+
+
+	<!-- 전체 커플 수 조회 -->
+	<select id="selectTotalCouple" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MATCHING
+		 WHERE MATCH_STAT = 1
+	</select>
+
+	<!-- 월별 회원 가입 그래프 -->
+	<select id="selectTotalMonthly" resultMap="monthResultSet">
+		WITH Months AS (
+	      SELECT TO_CHAR(LEVEL, 'FM00') AS month
+	      FROM dual
+	      CONNECT BY LEVEL &lt;= 12
+	    )
+	    SELECT m.month,
+	           COUNT(member.enroll_date) AS ENROLL_COUNT
+	    FROM Months m
+	    LEFT JOIN member ON TO_CHAR(member.enroll_date, 'MM') = m.month
+	    GROUP BY m.month
+	    ORDER BY m.month
+	</select>
 	
-	
-	
+	<!-- 커플 매칭 상태 그래프 -->
+	<select id="TotalMatchingSuccess" resultMap="monthResultSet">
+		WITH Months AS (
+		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
+		    FROM dual
+		    CONNECT BY LEVEL &lt;= 12
+		)
+		SELECT m.month,
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 3 THEN MATCHING.MATCH_TIME END) AS MATCH_TIME
+		FROM Months m
+		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
+		GROUP BY m.month
+		ORDER BY m.month
+	</select>
 
 </mapper>

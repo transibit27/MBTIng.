@@ -63,5 +63,10 @@
 
 </select>
 	
+<!-- 관리자페이지 전체 결제 금액 -->
+<select id="selectTotalPay" resultType="_int">
+	SELECT SUM(TOTAL_AMOUNT)
+      FROM KAKAOPAY
+</select>
 
 </mapper>

@@ -19,6 +19,11 @@
 		<typeAlias type="com.kh.mbting.mbti.model.vo.Mbti" alias="mbti"/>
 		<typeAlias type="com.kh.mbting.matching.model.vo.Matching" alias="matching"/>
 		<typeAlias type="com.kh.mbting.pay.vo.KakaoPay" alias="kakaoPay"/>
+<<<<<<< Updated upstream
+		<typeAlias type="com.kh.mbting.chatting.model.vo.SearchMember" alias="searchmember"/>
+=======
+		<typeAlias type="com.kh.mbting.admin.model.vo.Month" alias="month"/>
+>>>>>>> Stashed changes
 	</typeAliases>
 	
 	<!-- 메퍼 파일 추가 시 등록해 주세요! -->

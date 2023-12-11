@@ -124,4 +124,34 @@
     	 WHERE STATUS = 'Y'
     	 AND USER_NO != #{userNo}
     </select>
+    
+    <select id="searchMember" resultMap="memberResultSet" parameterType="searchmember">
+    	 SELECT *
+    FROM MEMBER
+    WHERE STATUS = 'Y'
+    <choose>
+        <when test="height == 160">
+            AND HEIGHT &lt;= ${height} 
+        </when>
+        <when test="height == 180">
+            AND HEIGHT &gt;= ${height}
+        </when>
+        <otherwise>
+            AND HEIGHT = ${height}
+        </otherwise>
+    </choose>
+    <choose>
+    	<when test="age == 50">
+    		AND AGE &gt;= ${age}
+    	</when>
+    	<otherwise>
+    		 AND AGE ${age}
+    	</otherwise>
+    </choose>
+    <if test='gender != "N"'>
+        AND GENDER = #{gender}
+    </if>
+    AND MBTI = #{mbti}
+    AND ADDRESS = #{address}
+    </select>
 </mapper>

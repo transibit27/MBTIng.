@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.chatting.model.vo.SearchMember;
 import com.kh.mbting.member.model.vo.Member;
 
 
@@ -79,4 +80,11 @@ public interface ChattingService {
      * @return
      */
     ArrayList<Member> allMemberList(Member loginMember);
+    
+    /***
+     * 회원 정보 검색하기
+     * @param map
+     * @return
+     */
+    ArrayList<Member> searchMember(SearchMember sm);
 }

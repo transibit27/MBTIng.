@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.chatting.model.vo.SearchMember;
 import com.kh.mbting.member.model.vo.Member;
 
 @Repository
@@ -55,6 +56,10 @@ public class ChattingDao {
     
     public ArrayList<Member> allMemberList(Member loginMember) {
     	return (ArrayList)sqlSession.selectList("chatMapper.allMemberList" , loginMember);
+    }
+    
+    public ArrayList<Member> searchMember(SearchMember sm) {
+    	return (ArrayList)sqlSession.selectList("chatMapper.searchMember" , sm);
     }
 }
 
