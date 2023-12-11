@@ -17,7 +17,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-	  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
       <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
   <style>
@@ -320,6 +320,7 @@
 
         </article>
 
+        <!-- mbti 결과 화면 -->
         <article class="result animate__animated animate__fadeIn" style="margin-bottom: 50px">
 
             <div>
@@ -369,19 +370,58 @@
                     </tr>
                 </table>
             </div>
-      <form action="mbtiMatch.mb" method="post">
-				<button type="submit" class="memberMatch" > 내 인연 만나러 가기!</button>
-      </form>
+
+            <form action="updateMbti.mb" method="get" id="updateMbtiForm">
+              <button type="button" class="memberMatch" id="updateMbti">내 MBTI 정보에 추가하기!</button>
+              <input type="hidden" name="mbti" value="" id="mbti">
+              <input type="hidden" name="mbtiNick" value="" id="mbtiNick">
+              <input type="hidden" name="mbtiMatch" value="" id="mbtiMatch">
+              <input type="hidden" name="userNo" value="${sessionScope.loginMember.userNo}" id="userNo">
+          </form>
+            
+
+          <form action="selectMatchList.mb" method="post" style="display: none;" id="selectMatchForm">
+            <button type="submit" class="memberMatch selectMatchList">내 인연 만나러 가기!</button>
+        </form>
       
-			<form action="updateMbti.mb" method="get">
-				<button type="submit" class="memberMatch" > 내 mbti 정보에 추가하기!</button>
-				<input type="hidden" name="mbti" value="" id="mbti">
-				<input type="hidden" name="mbtiNick" value="" id="mbtiNick">
-				<input type="hidden" name="mbtiMatch" value="" id="mbtiMatch">
-				<input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }" id="mbti">
-			</form>
+
 				 
         </article>
+
+        <script>
+          $(document).ready(function () {
+              $("#updateMbti").click(function () {
+                  var mbti = $("#mbti").val();
+                  var mbtiNick = $("#mbtiNick").val();
+                  var mbtiMatch = $("#mbtiMatch").val();
+                  var userNo = $("#userNo").val();
+          
+                  $.ajax({
+                      url: "updateMbti.mb",
+                      type: "get",
+                      data: {
+                          mbti: mbti,
+                          mbtiNick: mbtiNick,
+                          mbtiMatch: mbtiMatch,
+                          userNo: userNo
+                      },
+                      success: function (response) {
+                          // 서버에서 처리 완료 후 내 인연 만나러 가기 버튼을 보이도록 변경
+                          $("#selectMatchForm").show();
+                          
+                          // 내 MBTI 정보에 추가하기 버튼을 숨기도록 변경
+                          $("#updateMbtiForm").hide();
+          
+                          // alert 창 표시
+                          alert("MBTI 정보가 성공적으로 추가되었습니다.");
+                      },
+                      error: function (xhr, status, error) {
+                          console.error("오류 발생: " + error);
+                      }
+                  });
+              });
+          });
+          </script>
 
 
     <input type="hidden" id="EI" value="0" />
@@ -389,7 +429,7 @@
     <input type="hidden" id="TF" value="0" />
     <input type="hidden" id="JP" value="0" />
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     
@@ -678,7 +718,7 @@
             당신의 무한동력 같은 에너지로 연인과 함께 파티, 스포츠처럼 활동적인 데이트를 즐기다 보면 <br> \
             다시 마음이 불타오를 수 있어요. 또 '한 번뿐인 인생, 즐겁게 살자'는 나의 가치관을 <br> \
             응원해주는 사람이라면 오랫동안 즐거운 연애가 가능할 거예요.",
-          goodRel: "섬세한 곰 ( ISFJ )",
+          goodRel: "섬세한 곰",
           goodRelMbti: "ISFJ",
           badRel: "신중한 거북이 ( ISTJ )",
           goodRelImg: "./resources/images/ISFJ.png",
@@ -698,7 +738,7 @@
             보답을 원하기도 해서 상대가 너무 받기만 하면 혼자 꿍해서 토라질 때도 있을 거예요. <br> \
             나의 헌신과 응원에 진심으로 감사할 줄 알고 내 모습을 있는 그대로 <br> \
             존중해줄 수 있는 사람을 만난다면 오랫동안 행복한 연애를 할 수 있을 거예요.",
-          goodRel: "똑똑한 독수리 ( INTJ )",
+          goodRel: "똑똑한 독수리",
           goodRelMbti: "INTJ",
           badRel: "용감한 호랑이 ( ESTP )",
           goodRelImg: "./resources/images/INTJ.png",
@@ -719,7 +759,7 @@
             상대와 공유하고 싶진 않을 거예요. 자기 계발을 위한 시간도 필요하다는 걸 <br> \
             연인에게 잘 설명한다면 갈등 없이 연애할 수 있을 거예요.",
           goodRel: "섬세한 곰",
-          goodRelMbti: "IFNJ",
+          goodRelMbti: "INFJ",
           badRel: "강력한 사자 ( ESTJ )",
           goodRelImg: "./resources/images/INFJ.png",
           badRelImg: "./resources/images/ESTJ.png",

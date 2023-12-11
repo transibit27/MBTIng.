@@ -254,7 +254,17 @@
 		 ORDER BY USER_NO DESC
 	</select>
 	
-
+	<!-- 매치리스트 추가 -->
+	<insert id="insertMatchRequestList" parameterType="member">
+		INSERT INTO MATCHING
+			 VALUES (MNO_SEQ.NEXTVAL, 
+			 		#{receiverNo}, 
+			 		#{userNo},
+			 		default,
+			 		default,
+			 		default,
+			 		default)
+	</insert>
 	
 
 </mapper>
