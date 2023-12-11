@@ -229,13 +229,6 @@ public class MemberServiceImpl implements MemberService {
 	public int matchingStrat(Matching mc) {
 		return memberDao.matchingStrat(sqlSession, mc);
 	}
-
-	
-	// 마이페이지 - 하단메뉴 (내 상태 - 프로필) 조회용 메소드
-	@Override
-	public Member myStatProfile(String userNo) {
-		return memberDao.myStatProfile(sqlSession, userNo);
-	}
 	
 	// 마이페이지 - 내 후기 게시글 총 갯수 확인용 메소드
 	@Override

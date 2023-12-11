@@ -273,7 +273,7 @@
                     <div class="check" id="passwordCheck2"></div>
                     <input type="tel" id="phone" placeholder="휴대폰 번호 (-없이)" name="phone" required onblur="checkPhone(this)"> <br>
                     <div class="check" id="checkPhone"></div>
-                    <input type="number" id="age" placeholder="생년월일 8자리" name="age" required onblur="checkAge(this)"> 
+                    <input type="number" id="age" placeholder="나이 입력" name="age" required onblur="checkAge(this)"> 
                     <div class="check" id="checkAge"></div>
                     <br>
                     

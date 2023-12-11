@@ -20,6 +20,8 @@
 		<typeAlias type="com.kh.mbting.matching.model.vo.Matching" alias="matching"/>
 		<typeAlias type="com.kh.mbting.pay.vo.KakaoPay" alias="kakaoPay"/>
 		<typeAlias type="com.kh.mbting.chatting.model.vo.SearchMember" alias="searchmember"/>
+		<typeAlias type="com.kh.mbting.admin.model.vo.Month" alias="month"/>
+
 	</typeAliases>
 	
 	<!-- 메퍼 파일 추가 시 등록해 주세요! -->

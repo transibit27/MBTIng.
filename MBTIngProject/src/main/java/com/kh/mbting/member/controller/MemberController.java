@@ -63,7 +63,6 @@ public class MemberController {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
-		System.out.println(loginMember);
 		
 		if(loginMember != null && 
 				bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
@@ -214,10 +213,7 @@ public class MemberController {
 				// proposerInfo : 수락 대상자의 회원 정보를 받기
 				Member proposerInfo = memberService.proposerInfo(proposerNo);
 				
-				//System.out.println("수락회원 정보" + proposerInfo);
-				//System.out.println("로그인 회원" + session.getAttribute("loginMember"));
 				Member receiverInfo = (Member)session.getAttribute("loginMember");
-				//System.out.println(receiverInfo);
 				
 				// result4 : 신청 수락 뒤 쳇룸 추가 (회원의 정보를 모두 넘김)
 				// 신청자, 수락자 정보를 ChatRoom VO에 담기
@@ -228,8 +224,6 @@ public class MemberController {
 				cr.setMasterEmail(proposerInfo.getEmail());
 				cr.setMasterName(proposerInfo.getUserName());
 				cr.setMasterPic(proposerInfo.getProfileImg());
-				//System.out.println("잘 담겼나?"+cr);
-				
 				
 				int result4 = memberService.createChatroom(cr);
 				
@@ -262,35 +256,14 @@ public class MemberController {
 		
 	}
 	
-	//b-4 내 상태 하단 메뉴 프로필 상태 표시용 메소드 (ajax)
-	// 수정 중
-	@ResponseBody
-	@RequestMapping (value="myStat.me", produces="text/html; charset=UTF-8")
-	public String myStatProfile(String userNo,
-						HttpSession session) {
-		
-		Member me = memberService.myStatProfile(userNo);
-		
-		// 테스트용으로 정보 추출
-		String result = me.getEmail();
-		
-		// 갱신된 내 정보를 loginMember에 담음
-		session.setAttribute("loginMember", me);
-		
-		return result;
-		
-	}
 	
 	// b-5 내 대화 상대 정보 표시용 메소드(ajax)
-	// 수정 중
 	@ResponseBody
 	@RequestMapping (value="myChat.me", produces="application/json; charset=UTF-8")
 	public String myChat(String userNo,
 						HttpSession session) {
-		System.out.println("내 대화 상대 유저no"+userNo);
-		ArrayList<Member> list = memberService.myChat(userNo);
-		System.out.println("내 대화 상대 맴버정보"+list);
 		
+		ArrayList<Member> list = memberService.myChat(userNo);
 
 		return new Gson().toJson(list);
 	}
