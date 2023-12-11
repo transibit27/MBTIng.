@@ -83,7 +83,7 @@ public interface ChattingService {
     
     /***
      * 회원 정보 검색하기
-     * @param map
+     * @param sm
      * @return
      */
     ArrayList<Member> searchMember(SearchMember sm);

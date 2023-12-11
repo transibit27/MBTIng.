@@ -248,12 +248,12 @@
         			<td>
 	        			<select name="height" class="select">
 	        				   <option value="없음">없음</option>
-			    			   <option value="160">160이하</option>
-			    			   <option value="BETWEEN 160 and 165">160~165</option>
-			    			   <option value="BETWEEN 165 and 170">165~170</option>
-			    			   <option value="BETWEEN 170 and 175">170~175</option>
-			    			   <option value="BETWEEN 175 and 180">175~180이상</option>
-			    			   <option value="180">180이상</option>
+			    			   <option value="000160">160이하</option>
+			    			   <option value="160165">160~165</option>
+			    			   <option value="165170">165~170</option>
+			    			   <option value="170175">170~175</option>
+			    			   <option value="175180">175~180이상</option>
+			    			   <option value="180250">180이상</option>
 	    				</select>
         			</td>
         			<td>
@@ -281,13 +281,13 @@
         			<td>
         				<select name="age" class="select">
         					   <option value="없음">없음</option>
-			    			   <option value="BETWEEN 20 and 25">20~25</option>
-			    			   <option value="BETWEEN 25 and 30">25~30</option>
-			    			   <option value="BETWEEN 30 and 35">30~35</option>
-			    			   <option value="BETWEEN 35 and 40">35~40</option>
-			    			   <option value="BETWEEN 40 and 45">40~45</option>
-			    			   <option value="BETWEEN 45 and 50">45~50</option>
-			    			   <option value="50">50대이상</option>
+			    			   <option value="2025">20~25</option>
+			    			   <option value="2530">25~30</option>
+			    			   <option value="3035">30~35</option>
+			    			   <option value="3540">35~40</option>
+			    			   <option value="4045">40~45</option>
+			    			   <option value="4550">45~50</option>
+			    			   <option value="5099">50대이상</option>
     					</select>
         			</td>
         			<td>
@@ -396,6 +396,11 @@
   					"gender" : $('input[name="gender"]').val()
   			},
   			success : function(searchMem) {
+  				
+  				if(searchMem == "") {
+  					 $(".user__container").html("<h1 style='margin : auto;'> 일치하는 회원이 없습니다. </h1>");
+  				}else {
+  				
   				resultStr = "";
   				
   				for(let i in searchMem) {
@@ -418,6 +423,7 @@
 
 						  $(".user__container").html(resultStr);
   				}
+  			 }
   			},
   			error : function() {
   				console.log("검색 회원 조회에 실패했습니다.");

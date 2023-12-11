@@ -1,5 +1,6 @@
 package com.kh.mbting.chatting.model.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,10 +10,13 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
+@AllArgsConstructor
 public class SearchMember {
-	private String height;  
+	private int startAge;
+	private int endAge;
+	private int startHeight;
+	private int endHeight;
 	private String address;
-	private String age;
 	private String mbti; 
 	private String gender;
 }

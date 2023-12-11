@@ -130,22 +130,19 @@
     FROM MEMBER
     WHERE STATUS = 'Y'
     <choose>
-        <when test="height == 160">
-            AND HEIGHT &lt;= ${height} 
-        </when>
-        <when test="height == 180">
-            AND HEIGHT &gt;= ${height}
+        <when test="endHeight == 160">
+            AND HEIGHT &lt;= #{endHeight} 
         </when>
         <otherwise>
-            AND HEIGHT = ${height}
+            AND HEIGHT BETWEEN #{startHeight} and #{endHeight}
         </otherwise>
     </choose>
     <choose>
-    	<when test="age == 50">
-    		AND AGE &gt;= ${age}
+    	<when test="startAge == 50">
+    		AND AGE &gt;= #{startAge}
     	</when>
     	<otherwise>
-    		 AND AGE ${age}
+    		 AND AGE BETWEEN #{startAge} and #{endAge}
     	</otherwise>
     </choose>
     <if test='gender != "N"'>
