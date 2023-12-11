@@ -300,8 +300,8 @@
                         <td class="profile-title">키</td>
                     </tr>
                     <td>
-                        <input class="profile-content" type="text" name="gender" 
-                        value="${sessionScope.loginMember.gender}" disabled>
+                        <input class="profile-content" type="text" name="height" 
+                        value="${sessionScope.loginMember.height}" disabled>
                     </td>
 
                     <tr>
@@ -338,18 +338,45 @@
                     </tr>
                     
                     <tr>
-                        <td class="profile-title"> 취미</td>
+                        <td class="profile-title"> 거주지</td>
                     </tr>
                     <tr>
                         <td>
-                            <label><input type="checkbox" name="hobby" value="">운동</label>
-                            <label><input type="checkbox" name="hobby" value="">여행</label>
-                            <label><input type="checkbox" name="hobby" value="">영화</label>
-                            <label><input type="checkbox" name="hobby" value="">독서</label>
-                            <label><input type="checkbox" name="hobby" value="">게임</label>
-                            <label><input type="checkbox" name="hobby" value="">만남</label>
+                            <select name="address" id= "address">
+                            	<option value=null>== 주소선택 ==</option>
+	                            <option value="서울특별시">서울특별시</option>
+							    <option value="부산광역시">부산광역시</option>
+							    <option value="대구광역시">대구광역시</option>
+							    <option value="인천광역시">인천광역시</option>
+							    <option value="광주광역시">광주광역시</option>
+							    <option value="대전광역시">대전광역시</option>
+							    <option value="울산광역시">울산광역시</option>
+							    <option value="세종특별시">세종특별시</option>
+							    <option value="경기도">경기도</option>
+							    <option value="강원도">강원도</option>
+							    <option value="충청북도">충청북도</option>
+							    <option value="충청남도">충청남도</option>
+							    <option value="전라북도">전라북도</option>
+							    <option value="전라남도">전라남도</option>
+							    <option value="경상북도">경상북도</option>
+								<option value="경상남도">경상남도</option>
+								<option id="jeju" value="제주도">제주도</option>
+                            </select>
                         </td>
                     </tr>
+                    <script>
+                    $(function(){
+                    	
+                    // 주소 기본값 설정
+	                    if("${sessionScope.loginMember.address}" != null){
+	                    	console.log($("#address option[value='${sessionScope.loginMember.address}']"))
+	                    	$("#address option[value='${sessionScope.loginMember.address}']").prop("selected", true)
+	                    	
+	                    }
+                    	
+                    })
+                    
+                    </script>
                     
                     <tr>
                         <td class="profile-title">MBTI</td>

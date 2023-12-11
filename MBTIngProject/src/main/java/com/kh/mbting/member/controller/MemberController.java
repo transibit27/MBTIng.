@@ -63,6 +63,7 @@ public class MemberController {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
+		System.out.println(loginMember);
 		
 		if(loginMember != null && 
 				bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
@@ -328,7 +329,7 @@ public class MemberController {
 		
 		if(result > 0) {
 			Member updateMem = memberService.loginMember(m);
-			
+			System.out.println(m.getAddress());
 			session.setAttribute("loginMember", updateMem);
 			session.setAttribute("alertMsg", "정보 변경에 성공했습니다.");
 			
