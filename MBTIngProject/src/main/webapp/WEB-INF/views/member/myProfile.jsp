@@ -524,33 +524,112 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
                 <form action="updatePwd.me" method="post">
-                    <input type="hidden" name="email" value="${sessionScope.loginMember.email}">
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">현재 비밀번호</label>
-                        <input type="password" class="form-control" id="userPwd" name="userPwd">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">변경할 비밀번호</label>
-                        <input type="password" class="form-control" id="changePwd" name="changePwd">
-                        <div></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="col-form-label">변경 비밀번호 확인</label>
-                        <input type="password" class="form-control" id="checkPwd">
-                        <div></div>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                <button type="submit" class="btn btn-primary">결정</button>
-            </div>
+		            <div class="modal-body">
+		                    <input type="hidden" name="email" value="${sessionScope.loginMember.email}">
+		                    <div class="form-group">
+		                        <label for="message-text" class="col-form-label">현재 비밀번호</label>
+		                        <input type="password" class="form-control" id="userPwd" name="userPwd">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="message-text" class="col-form-label">변경할 비밀번호</label>
+		                        <input type="password" class="form-control" id="changePwd" name="changePwd"
+		                        		required onkeyup="checkPwd1(this)">
+		                        <div id="passwordCheck1">
+		                        </div>
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="message-text" class="col-form-label">변경 비밀번호 확인</label>
+		                        <input type="password" class="form-control" id="checkPwd"
+		                        		disabled required onkeyup="checkPwd2(this)">
+		                        <div id="passwordCheck2">
+		                        </div>
+		                    </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		                <button type="submit" class="btn btn-primary" disabled>결정</button>
+		            </div>
                 </form>
             </div>
         </div>
     </div>
+    
+    <script>
+    // 유효성 검사 최종 확인용
+    let checkArr = [false, false]
+    // 최종 확인용 스크립트
+    function finalCheck(){
+        	
+            if(checkArr.every(value => value === true)){
+             // 회원가입 버튼 활성화
+             $(".modal-footer button[type=submit]").attr("disabled", false)
+         } else {
+             // 회원가입 버튼 비활성화
+             $(".modal-footer button[type=submit]").attr("disabled", true)
+         }
+         
+     }
+ 	
+    // 1. 비밀번호 입력 유효성 검사
+    function checkPwd1(e){
 
+        // 사용자 입력 비번
+        let changePwd = e.value;
+
+        // 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자 정규식
+        let regExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,16}$/;
+
+        if(regExp.test(changePwd)) {
+            // 유효한 비번일 경우
+            checkArr[0] = true;
+            $("#changePwd").css("border-color", "gray");
+            $("#passwordCheck1").css("color", "red").text("");
+            $("#checkPwd").val("");
+            $("#checkPwd").attr("disabled", false).css("background-color", "white");
+            finalCheck();
+
+        } else {
+            // 유효하지 않은 비번일 경우
+            checkArr[0] = false;
+            $("#changePwd").css("border-color", "red");
+            $("#passwordCheck1").css("color", "red").text("8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.");
+            $("#checkPwd").val("");
+            $("#checkPwd").attr("disabled", true).css("background-color", "lightgray");
+            finalCheck();
+
+        }
+    }
+
+    // 2. 비밀번호 일치 검사
+    
+    function checkPwd2(e){
+
+        let checkPwd = e.value;
+        let userPwd = document.getElementById("userPwd").value;
+
+        if(userPwd == checkPwd) {
+        // 유효한 검사결과
+        $("#checkPwd").css("border-color", "gray");
+        $("#passwordCheck2").css("color", "red").text("");
+        finalCheck();
+
+        checkArr[1] = true;
+
+        } else {
+            // 유효하지 않은 검사결과
+
+            $("#checkPwd").css("border-color", "red");
+            $("#passwordCheck2").css("color", "red").text("입력한 비밀번호가 일치하지 않습니다.");
+            finalCheck();
+
+            checkArr[1] = false;
+        }
+        
+
+    }
+    
+    </script>
     
 </body>
 </html>
