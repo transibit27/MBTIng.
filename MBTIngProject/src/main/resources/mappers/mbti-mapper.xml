@@ -15,6 +15,28 @@
 	 	<result column="PROPOSER_NO"  	property="proposerNo"></result>
 	 	<result column="STATUS"  		property="status"></result>
 	</resultMap>
+	
+<resultMap id="memberResultSet" type="member">
+ 	<result column="USER_NO"  		property="userNo"></result>
+ 	<result column="EMAIL"  		property="email"></result>
+ 	<result column="USER_PWD"  		property="userPwd"></result>
+ 	<result column="PROFILE_IMG" 	property="profileImg"></result>
+ 	<result column="USER_NAME"  	property="userName"></result>
+ 	<result column="AGE"  			property="age"></result>
+ 	<result column="GENDER"  		property="gender"></result>
+ 	<result column="HEIGHT"			property="height"></result>
+ 	<result column="PHONE" 		 	property="phone"></result>
+ 	<result column="MBTI"  			property="mbti"></result>
+ 	<result column="MBTI_NICK"  	property="mbtiNick"></result>
+ 	<result column="MBTI_MATCH"		property="mbtiMatch"></result>
+ 	<result column="INTRODUCE"  	property="introduce"></result>
+ 	<result column="ADDRESS"		property="address"></result>
+ 	<result column="ENROLL_DATE"  	property="enrollDate"></result>
+ 	<result column="MODIFY_DATE"  	property="modifyDate"></result>
+ 	<result column="MATCH_STAT"  	property="matchStat"></result>
+ 	<result column="MATCH_COIN"  	property="matchCoin"></result>
+ 	<result column="STATUS"  		property="status"></result>
+ </resultMap>
 
 	<update id="updateMbti" parameterType="mbti">
 	  UPDATE MEMBER
@@ -36,23 +58,29 @@
 	-->
 	
 	<select id="selectMatchList" resultMap="mbtiResultSet" parameterType="member">
-	 	 SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH ,STATUS 
-          FROM member
-    	 WHERE MBTI = #{mbtiMatch}
-		   AND USER_NO != #{userNo}
-		   AND USER_NO NOT IN (SELECT RECEIVER_NO
-		                         FROM MATCHING
-		                        WHERE PROPOSER_NO = #{userNo})
+	    SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+	      FROM MEMBER
+	     WHERE MBTI = #{mbtiMatch}
+	       AND USER_NO != #{userNo}
+	       AND (USER_NO NOT IN (SELECT RECEIVER_NO
+		                          FROM MATCHING
+		                          WHERE PROPOSER_NO = #{userNo})
+		     AND USER_NO NOT IN (SELECT PROPOSER_NO
+		                           FROM MATCHING
+		                          WHERE RECEIVER_NO = #{userNo}))
 	</select>
 	
 	<select id="selectRandomList" resultMap="mbtiResultSet" parameterType="member">
-		SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
-		  FROM MEMBER
-		 WHERE MBTI != #{mbtiMatch}
-		   AND USER_NO != #{userNo}
-		   AND USER_NO NOT IN (SELECT RECEIVER_NO
-		                         FROM MATCHING
-		                        WHERE PROPOSER_NO = #{userNo})
+	    SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+	      FROM MEMBER
+	     WHERE MBTI != #{mbtiMatch}
+	       AND USER_NO != #{userNo}
+	       AND (USER_NO NOT IN (SELECT RECEIVER_NO
+		                          FROM MATCHING
+		                          WHERE PROPOSER_NO = #{userNo})
+		     AND USER_NO NOT IN (SELECT PROPOSER_NO
+		                           FROM MATCHING
+		                          WHERE RECEIVER_NO = #{userNo}))
 	</select>
 	
 
@@ -62,7 +90,17 @@
 		 WHERE USER_NO = #{userNo} 
 	</update>
 	
-
+	<select id="updateMember" resultMap="memberResultSet" parameterType="member">
+		SELECT *
+		  FROM MEMBER
+		 WHERE EMAIL = #{email}
+	</select>
+	
+	<update id="updateMemberCoin" parameterType="member">
+        UPDATE MEMBER
+           SET MATCH_COIN = #{matchCoin}
+         WHERE USER_NO = #{userNo}
+	</update>
 
 
 </mapper>

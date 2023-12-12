@@ -193,7 +193,7 @@
            	 		 #{masterEmail},
            	 		 #{masterName},
            	 		 #{masterPic},
-           	 		 2)
+           	 		 default)
   	</insert>
   	<!-- 마이페이지 메칭 수락 뒤 첫 메시지 생성용 -->
   	<insert id="createChatMessage" parameterType="chatMessage">
@@ -256,24 +256,6 @@
 	    ORDER BY MATCH_TIME DESC
 	</select>
 	
-	<!-- 관리자페이지 전체회워 조회 -->
-	<select id="memberSelectListCount" resultType="_int">
-		SELECT COUNT(*)
-		  FROM MEMBER
-		 WHERE STATUS = 'Y'
-	</select>
-	
-	<!-- 관리자페이지 회원 목록 조회 -->
-	<select id="memberSelectList" resultMap="memberResultSet">
-		SELECT USER_NO
-		     , USER_NAME
-		     , EMAIL
-		     , GENDER
-		     , STATUS
-		  FROM MEMBER
-		 ORDER BY USER_NO DESC
-	</select>
-	
 	<!-- 매치리스트 추가 -->
 	<insert id="insertMatchRequestList" parameterType="member">
 		INSERT INTO MATCHING
@@ -285,6 +267,7 @@
 			 		default,
 			 		default)
 	</insert>
+	
 	<!-- 관리자페이지 전체 회원 수 조회 -->
 	<select id="selectTotalMembers" resultType="_int">
 		SELECT COUNT(*)
@@ -315,19 +298,127 @@
 	    ORDER BY m.month
 	</select>
 	
-	<!-- 커플 매칭 상태 그래프 -->
-	<select id="TotalMatchingSuccess" resultMap="monthResultSet">
+	<!-- 커플 매칭 수락(MATCH_STAT = 3) 그래프 -->
+	<select id="totalMatchingSuccess" resultMap="monthResultSet">
 		WITH Months AS (
 		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
 		    FROM dual
 		    CONNECT BY LEVEL &lt;= 12
 		)
 		SELECT m.month,
-		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 3 THEN MATCHING.MATCH_TIME END) AS MATCH_TIME
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 3 THEN MATCHING.MATCH_TIME END) AS MATCH_STAT
 		FROM Months m
 		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
 		GROUP BY m.month
 		ORDER BY m.month
 	</select>
+	
+	<!-- 커플 매칭 거절(MATCH_STAT = 1) 그래프 -->
+	<select id="totalMatchingRefusal" resultMap="monthResultSet">
+		WITH Months AS (
+		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
+		    FROM dual
+		    CONNECT BY LEVEL &lt;= 12
+		)
+		SELECT m.month,
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 1 THEN MATCHING.MATCH_TIME END) AS MATCH_STAT
+		FROM Months m
+		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
+		GROUP BY m.month
+		ORDER BY m.month
+	</select>
+	
+	<!-- 커플 매칭 거절(MATCH_STAT = 2) 그래프 -->
+	<select id="totalMatchingPending" resultMap="monthResultSet">
+		WITH Months AS (
+		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
+		    FROM dual
+		    CONNECT BY LEVEL &lt;= 12
+		)
+		SELECT m.month,
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 2 THEN MATCHING.MATCH_TIME END) AS MATCH_STAT
+		FROM Months m
+		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
+		GROUP BY m.month
+		ORDER BY m.month
+	</select>
+	
+	<!-- MBTI 성향 분포도 -->
+	<select id="totalMbtiCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 GROUP BY MBTI
+		 ORDER BY MBTI 
+	</select>
+	
+	<!-- 남녀성비 원그래프 -->
+	<select id="totalGenderRate" resultType="_int">
+		SELECT COUNT(*) AS GENDER_COUNT
+		  FROM MEMBER
+		 GROUP BY GENDER
+	</select>
+	
+	<!-- 매칭 성공률 원그래프 -->
+	<select id="totalMatchingRate" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MATCHING
+		GROUP BY MATCH_STAT
+	</select>
+	
+	<!-- 관리자페이지 전체회원 조회 -->
+	<select id="memberSelectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 WHERE STATUS = 'Y'
+	</select>
+	
+	<!-- 관리자페이지 회원 목록 조회 -->
+	<select id="memberSelectList" resultMap="memberResultSet">
+		SELECT USER_NO
+		     , USER_NAME
+		     , MBTI
+		     , EMAIL
+		     , GENDER
+		     , STATUS
+		  FROM MEMBER
+		 ORDER BY USER_NO DESC
+	</select>
+	
+	
+	
+	
+	<!-- 검색된 회원 수 조회 -->
+    <select id="memberSearchListCount" parameterType="string" resultType="_int">
+        SELECT COUNT(*)
+          FROM MEMBER
+         WHERE (USER_NAME LIKE '%' || #{keyword} || '%'
+               OR MBTI LIKE '%' || #{keyword} || '%'
+               OR EMAIL LIKE '%' || #{keyword} || '%')
+    </select>
 
+   <!-- 검색된 회원 리스트 조회 -->
+	<select id="memberSearchList" resultMap="memberResultSet" parameterType="map">
+	    SELECT *
+	    FROM (
+	        SELECT
+	            USER_NO,
+	            USER_NAME,
+	            MBTI,
+	            EMAIL,
+	            GENDER,
+	            STATUS,
+	            ROWNUM AS rnum
+	        FROM MEMBER
+	        WHERE (USER_NAME LIKE '%' || #{keyword} || '%'
+	            OR MBTI LIKE '%' || #{keyword} || '%'
+	            OR EMAIL LIKE '%' || #{keyword} || '%')
+	        ORDER BY USER_NO DESC
+	    )
+	    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
+
+	
+	
+	
+	
 </mapper>

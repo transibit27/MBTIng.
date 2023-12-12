@@ -42,19 +42,16 @@
 
         <div class="search">
 
-            <form id="searchForm" action="">
+            <form id="searchForm" action="search.adme" method="get">
                 <div style="display: flex; align-items: center; margin-top: 40px">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchbar" name="">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchbar" name="keyword">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </div>
             </form>
-
-        <form id="" action="list.adme">
-
+		</div>
             <button type="button" class="btn btn-primary" onclick="updateSelectedStatus()">저장</button>
 
         <table border="1" id="member-table">
-            
             <thead>
                 <th><input type="checkbox" class="checkbox" onclick="toggleAllCheckboxes()"></th>
                 <th>순번</th>
@@ -72,10 +69,11 @@
 				    </form>
                 </th>
                 <th>상태</th>
-                
             </thead>
+            
             <tbody id="searchResultBody">
             <c:forEach var="a" varStatus="vs" items="${requestScope.list}">
+			    <!-- 토글 한 회원씩 클릭 가능하게 하는 script -->
 			    <script>
 			        var abc = 1;
 			        var str_${vs.index + 1} = 'switch' + abc;
@@ -89,24 +87,63 @@
 			        <th>${a.email}</th>
 			        <th>${a.gender}</th>
 			        <th>
-			            <form>
-			    <div class="custom-control custom-switch">
-			        <input type="checkbox" class="custom-control-input" 
-			               id="switch${vs.index + 1}" ${a.status == 'Y' ? 'checked' : ''}>
-			        <label class="custom-control-label" for="switch${vs.index + 1}"></label>
-			    </div>
-			</form>
-			
+			    <form>
+				    <div class="custom-control custom-switch">
+				        <input type="checkbox" class="custom-control-input" 
+				               id="switch${vs.index + 1}" ${a.status == 'Y' ? 'checked' : ''}>
+				        <label class="custom-control-label" for="switch${vs.index + 1}"></label>
+				    </div>
+				</form>
 			        </th>
 			    </tr>
 			</c:forEach>
-
             </tbody>
-           
         </table>
-     </div>
-  
-    </form>
+    
+    <div id="pagingArea">
+                <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${ requestScope.pi.currentPage eq 1 }">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Previous</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="list.adme?cpage=${ requestScope.pi.currentPage - 1 }">Previous</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach var="p" begin="${ requestScope.pi.startPage }" end="${ requestScope.pi.endPage }" step="1">
+                        <li class="page-item">
+                            <a class="page-link" href="list.adme?cpage=${ p }">${ p }</a>
+                        </li>
+                    </c:forEach>
+                    <c:choose>
+                        <c:when test="${ requestScope.pi.currentPage eq requestScope.pi.maxPage }">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="list.adme?cpage=${ requestScope.pi.currentPage + 1 }">Next</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <!-- 체크박스 전체 설정/해제 -->
     <script>
@@ -122,7 +159,14 @@
 	    }
 	
 	    </script>
-	
+		
+		
+		
+		
+		
+		
+		
+		<!-- 이 밑에 있는 코드는 다시 수정할 코드들 -->
 	    <!-- 클라이언트 코드 -->
 
 	    <script>
@@ -160,9 +204,6 @@
 
 	
 		<script>
-    // ...
-
-
 
 	// 체크된 회원 저장
     function updateSelectedStatus() {
@@ -205,4 +246,3 @@
 
 </body>
 </html>
-    

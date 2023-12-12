@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 
 <style>
+
 .wrap {
 
 	width : 1500px;
@@ -104,7 +105,7 @@
 }
 
 .more:hover {
-  background-color: #b3b6b6;
+  background-color: white;
   border-radius: 0px 0px 15px 15px;
 }
 

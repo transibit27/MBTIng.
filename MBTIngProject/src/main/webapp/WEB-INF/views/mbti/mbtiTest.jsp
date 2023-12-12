@@ -59,6 +59,7 @@
     }
 
     .questionMain {
+        height: 80px;
         font-size: 30px;
         margin-top: 50px;
         text-align: center;
@@ -313,7 +314,7 @@
 
             <input id="type" type="hidden" value="EI" />
 
-            <div style="display: flex; flex-direction: column; margin-top: 25px;">
+            <div style="display: flex; flex-direction: column; ">
                 <button id="up" type="button" class="mt-5">Primary</button>
                 <button id="down" type="button" class="mt-5">Primary</button>
             </div>
@@ -372,7 +373,7 @@
             </div>
 
             <form action="updateMbti.mb" method="get" id="updateMbtiForm">
-              <button type="button" class="memberMatch" id="updateMbti">내 MBTI 정보에 추가하기!</button>
+              <button type="button" class="memberMatch" id="updateMbti">내 정보에 MBTI 추가하기</button>
               <input type="hidden" name="mbti" value="" id="mbti">
               <input type="hidden" name="mbtiNick" value="" id="mbtiNick">
               <input type="hidden" name="mbtiMatch" value="" id="mbtiMatch">
@@ -381,7 +382,7 @@
             
 
           <form action="selectMatchList.mb" method="post" style="display: none;" id="selectMatchForm">
-            <button type="submit" class="memberMatch selectMatchList">내 인연 만나러 가기!</button>
+            <button type="submit" class="memberMatch selectMatchList">내 인연 만나러 가기</button>
         </form>
       
 
@@ -389,6 +390,7 @@
         </article>
 
         <script>
+          
           $(document).ready(function () {
               $("#updateMbti").click(function () {
                   var mbti = $("#mbti").val();

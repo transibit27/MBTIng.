@@ -348,13 +348,6 @@ public class MemberController {
 			 return "common/errorPage";
 		}
 		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	

@@ -20,7 +20,8 @@
         <result property="messageContent" column="MESSAGE_CONTENT" />
         <result property="name" column="USER_NAME" />
         <result property="email" column="USER_EMAIL" />
-        <result property="unReadCount" column="UNREAD_COUNT" />
+        <result property="unReadMessage" column="UN_READ_MESSAGE" />
+        <result property="sessionCount" column="SESSION_COUNT" />
         <result property="sendTime" column="SENDTIME" />
     </resultMap>
     
@@ -93,7 +94,7 @@
     
     <insert id="insertMessage" parameterType="ChatMessage">
         <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,2 , default)
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,1 , default)
         </if>
         <if test="sessionCount == 2">
         INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 0, 2 , default)
@@ -129,14 +130,17 @@
     	 SELECT *
     FROM MEMBER
     WHERE STATUS = 'Y'
-    <choose>
-        <when test="endHeight == 160">
-            AND HEIGHT &lt;= #{endHeight} 
-        </when>
-        <otherwise>
-            AND HEIGHT BETWEEN #{startHeight} and #{endHeight}
-        </otherwise>
-    </choose>
+    <if test='height != "없음"'>
+	    <choose>
+	        <when test="endHeight == 160">
+	            AND HEIGHT &lt;= #{endHeight} 
+	        </when>
+	        <otherwise>
+	            AND HEIGHT BETWEEN #{startHeight} and #{endHeight}
+	        </otherwise>
+	    </choose>
+	</if>
+	<if test='age != "없음"'>
     <choose>
     	<when test="startAge == 50">
     		AND AGE &gt;= #{startAge}
@@ -145,10 +149,15 @@
     		 AND AGE BETWEEN #{startAge} and #{endAge}
     	</otherwise>
     </choose>
+    </if>
     <if test='gender != "N"'>
         AND GENDER = #{gender}
     </if>
+    <if test='mbti != "없음"'>
     AND MBTI = #{mbti}
+    </if>
+    <if test='address != "없음"'>
     AND ADDRESS = #{address}
+    </if>
     </select>
 </mapper>

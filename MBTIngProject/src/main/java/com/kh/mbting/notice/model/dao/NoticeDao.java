@@ -63,7 +63,7 @@ public class NoticeDao {
 	// 검색된 공지사항 리스트 조회
 	public List<Notice> searchList(SqlSessionTemplate sqlSession, String keyword, int currentPage, int pageLimit, int boardLimit) {
 	    int startRow = (currentPage - 1) * boardLimit;
-	    int endRow = startRow + boardLimit;  // endRow 정의
+	    int endRow = startRow + boardLimit; 
 
 	    Map<String, Object> parameters = new HashMap<>();
 	    parameters.put("keyword", keyword);

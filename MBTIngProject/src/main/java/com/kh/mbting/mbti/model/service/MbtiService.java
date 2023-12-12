@@ -18,8 +18,9 @@ public interface MbtiService {
     
     int insertMatchRequestList(Member loginMember);
 
-    
-    
-    
+	Member updateMember(Member loginMember);
+
+	int updateMemberCoin(Member loginMember);
+
     
 }
