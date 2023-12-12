@@ -34,4 +34,12 @@ public class MbtiDao {
 		return sqlSession.insert("memberMapper.insertMatchRequestList", loginMember);
 	}
 
+	public Member updateMember(SqlSessionTemplate sqlSession, Member loginMember) {
+		return sqlSession.selectOne("mbtiMapper.updateMember", loginMember);
+	}
+
+    public int updateMemberCoin(SqlSessionTemplate sqlSession, Member loginMember) {
+        return sqlSession.update("mbtiMapper.updateMemberCoin", loginMember);
+    }
+
 }

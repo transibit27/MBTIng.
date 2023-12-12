@@ -38,10 +38,12 @@ public class MbtiController {
 	public ResponseEntity<String> updateMbti(HttpSession session, Mbti mbti) {
 
 	    int result = mbtiService.updateMbti(mbti);
+	    
 	    System.out.println(mbti);
 
 	    if(result > 0) {
 	        
+	    		    	
 	        return ResponseEntity.ok("성공적으로 내 mbti를 추가했습니다.");
 	    } else {
 	        session.setAttribute("errorMsg", "내 mbti 추가를 실패했습니다.");
@@ -55,9 +57,13 @@ public class MbtiController {
 		
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
+//		로그인 멤버의 회원번호를 통해서 업데이트된 멤버 정보 뽑기
+		Member updateMember = mbtiService.updateMember(loginMember);
+		session.setAttribute("loginMember", updateMember);
 //		System.out.println(loginMember);
-		ArrayList<Mbti> list = mbtiService.selectMatchList(loginMember);
-		ArrayList<Mbti> list2 = mbtiService.selectRandomList(loginMember);
+		
+		ArrayList<Mbti> list = mbtiService.selectMatchList(updateMember);
+		ArrayList<Mbti> list2 = mbtiService.selectRandomList(updateMember);
 		
 		model.addAttribute("matchList", list);
 		model.addAttribute("randomList", list2);
@@ -76,20 +82,43 @@ public class MbtiController {
 	    Member loginMember = (Member) session.getAttribute("loginMember");
 	    loginMember.setReceiverNo(receiverNo);
 	    
-	    int updateResult = mbtiService.updateMatchRequestList(loginMember);
-	    int insertResult = mbtiService.insertMatchRequestList(loginMember);
+	    // 코인 수 확인
+	    int memberCoin = loginMember.getMatchCoin();
 	    
-	    if (updateResult > 0 && insertResult > 0) {
-	        result.put("success", true);
-	        result.put("message", "채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요.");
+	    if (memberCoin > 0) {
+	        // 코인이 있으면 코인을 하나 줄이고 요청 처리
+	        int originalCoin = memberCoin; // 이전 코인 값 저장
+	        loginMember.setMatchCoin(memberCoin - 1); // 코인 수 감소
+	        int updateCoinResult = mbtiService.updateMemberCoin(loginMember);
+
+	        if (updateCoinResult > 0) {
+	            // 코인 업데이트 성공 시 요청 처리
+	            int updateResult = mbtiService.updateMatchRequestList(loginMember);
+	            int insertResult = mbtiService.insertMatchRequestList(loginMember);
+
+	            if (updateResult > 0 && insertResult > 0) {
+	                result.put("success", true);
+	                result.put("message", "채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요.");
+	                session.setAttribute("loginMember", loginMember); // 세션 업데이트
+	            } else {
+	                // 실패 시 코인 수를 이전 값으로 복원
+	                loginMember.setMatchCoin(originalCoin);
+	                result.put("success", false);
+	                result.put("message", "요청을 실패했습니다. 다시 시도해 주세요.");
+	            }
+	        } else {
+	            result.put("success", false);
+	            result.put("message", "코인 업데이트에 실패했습니다. 다시 시도해 주세요.");
+	        }
 	    } else {
+	        // 코인이 없으면 경고 메시지 표시
 	        result.put("success", false);
-	        result.put("message", "요청을 실패했습니다. 다시 시도해 주세요.");
+	        result.put("message", "코인이 부족합니다. 충전 후 다시 요청해 주세요.");
 	    }
+
 
 	    return result;
 	}
-
 	
 
 }

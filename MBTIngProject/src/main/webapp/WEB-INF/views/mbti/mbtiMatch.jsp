@@ -212,11 +212,11 @@
         // 채팅 요청하기 버튼 클릭 시
         $(".chatRequestBtn").click(function(e) {
             e.preventDefault();
-            
+
             // 필요한 데이터 수집
             var form = $(this).closest("form");
             var formData = form.serialize();
-            
+
             // Ajax 요청
             $.ajax({
                 type: "GET",
@@ -228,16 +228,30 @@
                         alertify.alert('Alert', response.message, function() {
                             alertify.success('Ok');
                         });
-    
-                        // TODO: 서버에서 새로운 사용자 목록을 가져와 화면 업데이트
-                        // 예시: location.reload(); 또는 새로운 사용자 목록을 가져와서 동적으로 업데이트
+
+                        // 채팅 요청하기 버튼 비활성화 및 텍스트 변경
+                        var btn = form.find(".chatRequestBtn");
+                        btn.prop("disabled", true);
+                        btn.css("background-color", "#ccc"); // 회색으로 변경
+                        btn.text("수락 대기 중");
+
+                        // 코인 수 업데이트
+                        var matchCoin = Number('${sessionScope.matchCoin}') - 1;
+                        // 세션의 matchCoin 값을 업데이트하는 코드를 추가해야 합니다.
+                        // 예: sessionScope.matchCoin = matchCoin;
                     } else {
                         // 실패 메시지 표시
                         alertify.alert('Alert', response.message, function() {
                             alertify.error('Error');
                         });
+
+                        // 코인 부족 시 처리
+                        if (response.message.includes("코인 부족")) {
+                            alert("코인이 부족합니다. 코인 충전 후 다시 시도해 주세요.");
+                        }
                     }
                 },
+
                 error: function() {
                     // 에러 처리
                     alertify.error('Error occurred while processing the request.');
@@ -245,6 +259,10 @@
             });
         });
     });
-    </script>
+</script>
+
+
+
+
 
 </html>
