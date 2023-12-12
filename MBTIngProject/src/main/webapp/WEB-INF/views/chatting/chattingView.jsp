@@ -22,7 +22,7 @@
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .wrapPC {
-    width : 1550px;
+    width : 1640px;
     height : 700px;
     display: inline-block;
     display: flex;
@@ -111,7 +111,7 @@
 #chatInput {
     width: 670px;
     height: 200px;
-    margin-left : 428px;
+    margin-left : 500px;
 }
 
 #chatInput > table {
@@ -194,11 +194,10 @@
     width : 80px;
     height : 900px;
     border : 1px solid black;
-    background-color: lightgray;
+    background-color: rgb(255, 218, 218);
 }
 
 #chatInfoTable {
-    border : 1px solid rgb(37, 37, 37);
     width : 100%;
     text-align: center;
 }
@@ -211,13 +210,9 @@
 
 #chatInfoTable tr {
     height : 30px;
-    border: 1px solid black;
 }
 
-#chatInfoTable td {
-    border: 1px solid black;
-}
-
+/*
 #chatAllCount {
     border-radius: 50px;
     border: 1px solid black;
@@ -225,6 +220,12 @@
     height : 50px;
     margin: auto;
     cursor: pointer;
+}
+*/
+
+#chatInfoTable button {
+    background-color: transparent;
+    border: 0px;
 }
 /*-------------------------전송버튼 css---------------------------------*/
 #submitButton {
@@ -293,12 +294,14 @@
                 <table id="chatInfoTable">
                     <tr>
                         <td>
-                            <img src="https://cdn-icons-png.flaticon.com/128/3920/3920375.png">
+                            <button onclick="chatHome();"><img src="https://cdn-icons-png.flaticon.com/128/5448/5448341.png"></button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div id="chatAllCount"></div>
+                            <div id="chatAllCount">
+                                <img src="https://cdn-icons-png.flaticon.com/128/7579/7579707.png">
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -535,11 +538,22 @@
 
           $('#chatInput').removeClass('hidden');
           $('#profileDiv').removeClass('hidden');
-          $('.wrap').css("width" , "1500px");
+          $('.wrap').css("width" , "1600px");
           $('.wrapPc').removeAttr("margin");
+          $('.chatDiv').removeClass('hidden');
      }
 	</script>
 	
+    <script>
+        function chatHome() {
+          $('#chatInput').addClass('hidden');
+          $('#profileDiv').addClass('hidden');
+          $('.wrap').css("width" , "482px");
+          $('.wrapPc').attr("margin" , "auto");
+          $('.chatDiv').addClass('hidden');
+        }
+ 
+    </script>
 	
 	<script>
     let socket;
