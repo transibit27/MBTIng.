@@ -167,7 +167,12 @@
             </div>
             <div class="reviewdetail-like" align="center">
             
-            <!-- 좋아요 관련 기능 일단 주석처리 -->
+            	<!-- 좋아요 기능 작성 영역 -->
+            	<c:if test="${empty sessionScope.loginMember}">
+            		❤️<br>
+            		${ requestScope.b.thumbCount }
+            	</c:if>
+
 
             </div>
 
