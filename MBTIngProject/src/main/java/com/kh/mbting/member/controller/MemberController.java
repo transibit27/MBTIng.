@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
@@ -237,7 +240,6 @@ public class MemberController {
 				cm.setEmail(receiverInfo.getEmail());
 				int result5 = memberService.createChatMessage(cm);
 				
-				
 				// result6 : 매칭 테이블의 matching 상태를 3으로 후기 작성시 조회가 되도록
 				Matching mc = new Matching();
 				mc.setProposerNo(proposerNo);
@@ -425,8 +427,9 @@ public class MemberController {
 	// e-2 마이페이지 - 내 결제 리스트 조회 용 메소드
 	@ResponseBody
 	@RequestMapping(value="orderList.me",	 produces="application/json; charset=UTF-8")
-	public String orderList(Member m,
-			@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
+	public String orderList(Member m, HttpServletRequest request, HttpSession session,
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			@RequestParam(value = "morePage", defaultValue ="0") int morePage) {
 		
 		// 전체 결제 리스트 수 조회
 		int listCount = memberService.selectOrderListCount(m.getEmail());
@@ -434,14 +437,27 @@ public class MemberController {
 		int pageLimit = 5;
 		int boardLimit = 8;
 		
+		if(morePage > 8) {
+			boardLimit = morePage;
+		} else {
+			boardLimit = 8;
+		}
+		
 		PageInfo pi = Pagination.getPageInfo(listCount, 
 						currentPage, pageLimit, boardLimit);
+		
+		request.setAttribute("pi", pi);
+		session.setAttribute("pi", pi);
 	
 		ArrayList<KakaoPay> list = memberService.orderList(pi, m.getEmail());
-		System.out.println("결제내역:"+list);
 	
-		return new Gson().toJson(list);
+		// Gson을 사용하여 list와 pi를 JSON으로 직렬화
+	    Gson gson = new Gson();
+	    JsonObject jsonObject = new JsonObject();
+	    jsonObject.addProperty("pi", gson.toJson(pi));
+	    jsonObject.addProperty("list", gson.toJson(list));
+   
+	    return jsonObject.toString();
 	}
-	
 	
 }

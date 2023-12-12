@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
 <!doctype html>
 <html lang="ko">
@@ -100,7 +101,6 @@
         border-bottom: 1px solid #cccccc;
         font-size: 16px;
         color: #555555;
-        margin-bottom: 100px;
     }
 
     .board_list table {
@@ -145,6 +145,47 @@
         text-align: center;
         line-height: 100px;
     }
+    
+    #myOrderList button{
+    	border-radius: 10px;
+    	width:80px;
+    	height:50px;
+    	font-size: 15px;
+        font-weight: bold;
+    }
+    
+    #myOrderList button:hover{
+    	background-color: white;
+    	color:black;
+    }
+    
+    /*
+    ///////////
+    페이징바 스타일
+    ///////////
+    */
+    .paging-area {
+    width: 1200px;
+    margin: auto;
+    margin-bottom: 100px;
+    text-align: center;
+	}
+	.paging-area button {
+	    width: 1200px;
+	    height: 50px;
+	    border: none;
+	    border-radius: 5px;
+	    background-color: pink;
+	}
+	.paging-area button:hover {
+	    border: 1px solid pink;
+	    background-color: palevioletred;
+	}
+	.paging-area button[disabled]:hover {
+	    border: none;
+	    background-color: pink;
+	
+	}
 
 </style>
 
@@ -215,52 +256,14 @@
 
 
 <script>
-	// 결제 리스트 조회용 스크립트
-	
+
+	sessionStorage.setItem("cpage",1);
+	let cpage = sessionStorage.getItem("cpage");
+
 	$(function(){
-		
+		// 결제 리스트 조회용 함수 호출
+		sessionStorage.setItem("morePage",8);
 		orderList();
-		
-		function orderList(){
-			$.ajax({
-				url:'orderList.me',
-	            data : {"email": "${sessionScope.loginMember.email}"},
-                success : function(result){
-                	let resultStr = "";
-                	
-                	for(let i=0; i<result.length; i++){
-                		
-                		// 환불 날짜가 없을 경우 환불하지 않은 상태로 출력
-                		console.log(result[i].refundDate)
-                		let refund = "";
-                		
-                    	if(result[i].refundDate != ""){
-                    		refund = "결제상태"
-                    	} else {
-                    		refund = "환불상태"
-                    	}
-                    	
-                		
-                		resultStr = "<tr>"
-                					+	"<td>"+ result[i].partnerOrderId + "</td>"
-                					+ 	"<td>"+ refund + "</td>"
-                					+	"<td>"+ 상품명
-                					+ 구매자
-                					+ 날짜
-                					+ 문의하기
-                				+	"</tr>";
-                		
-                	}
-                	$("#myOrderList").html(resultStr);
-                },
-                error : function(){
-                    console.log("내 대화 상대 표시용 ajax 통신 실패")
-                }
-                
-            }); // ajax 끝
-		}
-		
-		
 		
 		// 카카오페이 결제용 스크립트 
 		
@@ -350,7 +353,87 @@
 	
 	});	// 펑션 끝
 	
-
+	function orderList(){
+		$.ajax({
+			url:'orderList.me',
+			type:'GET',
+            data : {
+            	"email": "${sessionScope.loginMember.email}",
+            	"cpage" : cpage,
+            	"morePage": sessionStorage.getItem("morePage")
+            },
+            success : function(result){
+            	
+            	// jsonObject로 리절트한 내용은 문자열이므로 jsp에서도 사용가능하도록 가공해야함
+            	// json 형태로 파싱(키=밸류 값)
+            	const jsonDataPi = result.pi
+            	const jsonObjectPi = JSON.parse(jsonDataPi);
+            	
+                console.log(sessionStorage.getItem("morePage"));
+            	
+            	const jsonData = result.list;
+				const jsonObject = JSON.parse(jsonData);
+				const jsonArray = Object.values(jsonObject);
+				
+            	let resultStr = "";
+            	let pagingStr = "";
+            	
+            	if(result.length !=0 ){
+            		
+                	for(let i=0; i<jsonArray.length; i++){
+    
+                		// 환불 날짜가 없을 경우 환불하지 않은 상태로 출력
+                		let refund = "";
+                		
+                    	if(jsonArray[i].refundDate != ""){
+                    		refund = "결제상태"
+                    	} else {
+                    		refund = "환불상태"
+                    	}
+                		
+                		resultStr += "<tr>"
+                					+	"<td>"+ jsonArray[i].partnerOrderId + "</td>"
+                					+ 	"<td>"+ refund + "</td>"
+                					+	"<td>"+ jsonArray[i].itemName + "</td>"
+                					+   "<td>"+ jsonArray[i].partnerUserId + "</td>"
+                					+	"<td>"+ jsonArray[i].orderDate.substr(0,19) + "</td>"
+                					+	"<td><button>환불 요청</button></td>"
+                				+	"</tr>";
+                	}
+                	
+            	} else {
+            		
+            		resultStr += "<tr>"
+    					+	"<td></td>"
+    					+ 	"<td></td>"
+    					+	"<td>결제 내역이 존재하지 않습니다</td>"
+    					+   "<td></td>"
+    					+	"<td></td>"
+    					+	"<td></td>"
+    				+	"</tr>";
+            	}
+            	
+            	$("#myOrderList").html(resultStr);
+            },
+            error : function(){
+                console.log("내 대화 상대 표시용 ajax 통신 실패")
+            }
+            
+        }); // ajax 끝
+              
+	}
+	
+	// 페이징 처리
+	let i = 8;
+	
+	function moreList(){
+		i += 8;
+		sessionStorage.setItem("morePage", i);
+		
+		console.log(i);
+		orderList();	
+	}
+	
 </script>
 
 
@@ -385,89 +468,19 @@
             </thead>
             <tbody id="myOrderList">
                 <tr class=" ">
-                    <td> 6188 </td>
-                    <td> 가능 </td>
-                    <td> 매칭 코인 5회 </td>
-                    <td> mokoko1@naver.com </td>
-                    <td> 23-12-04 </td>
-                    <td>3</td>            
-                </tr>
-                <tr class=" ">
-                    <td> 6188 </td>
-                    <td> 가능 </td>
-                    <td> 매칭 코인 5회 </td>
-                    <td> mokoko1@naver.com </td>
-                    <td> 23-12-04 </td>
-                    <td>3</td>            
-                </tr>
-                <tr class=" ">
-                    <td> 6188 </td>
-                    <td> 가능 </td>
-                    <td> 매칭 코인 5회 </td>
-                    <td> mokoko1@naver.com </td>
-                    <td> 23-12-04 </td>
-                    <td>3</td>            
-                </tr>
-                <tr class=" ">
-                    <td> 6188 </td>
-                    <td> 가능 </td>
-                    <td> 매칭 코인 5회 </td>
-                    <td> mokoko1@naver.com </td>
-                    <td> 23-12-04 </td>
-                    <td>3</td>            
-                </tr>
+                    <td> 결제 내역이 존재하지 않습니다. </td>
+               	</tr>
             </tbody>
         </table>
 
     </div>
 
-	<!-- 페이징 바 -->
-    <div class="paging-area">
-	    
-	   	<c:choose>
-			<c:when test="${ requestScope.pi.currentPage eq 1 }">
-		    		<button type="button" style="display: none;" disabled>&lt;</button>	
-		   	</c:when>
-		   	
-		   	<c:otherwise>    		
-		    		<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage - 1 }'">&lt;</button>
-		   	</c:otherwise>
-		</c:choose>
-	        
-		<c:forEach var="p" begin="${ requestScope.pi.startPage }" 
-					  		 end="${ requestScope.pi.endPage }"
-					 		step="1">
-
-			<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ p }'" id="pageB-${ p }">${ p }</button>
-	     
-		</c:forEach>
-	        
-	    <c:choose>
-			<c:when test="${ requestScope.pi.currentPage ge requestScope.pi.maxPage }">
-				<button type="button" style="display: none;" disabled>&gt;</button>
-			</c:when>
-			<c:otherwise>
-				<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage + 1 }'">&gt;</button>
-			</c:otherwise>
-	   	</c:choose>
-	         
-	</div>
-	
-	<!-- 페이징 처리 과련 스크립트 (현재 페이지 disabled 속성 주기용) -->
-	<script>
-	$(function(){
-		$("#pageB-${ requestScope.pi.currentPage }").attr("disabled",true);
-
-	})
-	
-	</script>
-
 </div>
 
-
-
-
-
+		<!-- 페이징 바 -->
+    <div class="paging-area">
+	 	<button type="button" onclick="moreList()"><div style="border: 1px solid white"></div></button>
+	</div>
 
 </body>
 </html>

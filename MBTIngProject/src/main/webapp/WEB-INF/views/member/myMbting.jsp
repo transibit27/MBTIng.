@@ -42,7 +42,6 @@
         margin-bottom: 50px;
         height: 100px;
         width: 1200px;
-        border: 1px solid;
         border-radius: 10px;
         background-image:url(https://dudeplace.co/wp-content/uploads/2021/04/1.%E0%B8%8B%E0%B8%B5%E0%B8%A3%E0%B8%B5%E0%B8%AA%E0%B9%8C%E0%B9%80%E0%B8%81%E0%B8%B2%E0%B8%AB%E0%B8%A5%E0%B8%B5-Please-Dont-Meet-the-Man-%E0%B8%9B%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%AB%E0%B8%B1%E0%B8%A7%E0%B9%83%E0%B8%88-%E0%B9%80%E0%B8%AD%E0%B9%84%E0%B8%AD%E0%B8%A7%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B8%A3%E0%B8%B1%E0%B8%81.jpg);
         background-size: cover;
@@ -327,24 +326,40 @@
     /* 프로필 카드 백 스타일 */
     .profile-img-box-b{
         background-color: white;
-        width: 50px;
-        height: 50px;
+        width: 130px;
+        height: 60px;
         /* 아이템을 수평, 수직 가운데 정렬하는 코드 */
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         /* 방향을 row로 바꾸면 한 줄로 나온다! */
         justify-content: center;
         align-items: center;
         box-sizing: border-box;
     }
+
+    .close {
+        display: block;
+        box-sizing: border-box;
+        width:25px;
+        height:25px;
+        text-align:center;
+        margin-left:105px;
+        margin-bottom: 10px;
+    }
+
+    .close:after {
+        content: "\00d7";
+        font-size:15pt;
+    }
     
     .profile-name-b{
         font-weight: bold;
         text-align: left;
+        margin-bottom: 10px;
     }
     .profile-img-b {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
     }
 
@@ -358,7 +373,7 @@
 
     .profile-introduce{
         width: 120px;
-        height: 90px;
+        height: 95px;
         margin-bottom: 10px;
         font-size: 8px;
         text-align: left    ;
@@ -415,7 +430,7 @@
         transform: rotateY(180deg);
     }
     
-
+   
 
 
 
@@ -511,10 +526,22 @@
                                             
                                                         + "<form action='accept.me' method='post'>"
                                                             +"<div class='profile-wrap'>"
-                                                            +	"<div class='profile-img-box-b'>"
-                                                                +	"<img class='profile-img-b' src=" +profileImg+ ">"
-                                                            +	"</div>"
+                                                            +   "<div class='close'></div>"
+                                                       
                                                             +   "<div class='profile-info-b'>"
+                                                                +   "<div class='profile-name-b'>"
+                                                                       + "거주지"
+                                                                   +"</div>"
+                                                                +   "<div>"
+                                                                        + result[i].address 
+                                                                +   "</div>"
+                                                                +   "<div class='profile-name-b'>"
+                                                                       + "키"
+                                                                   +"</div>"
+                                                                +   "<div>"
+                                                                        + result[i].height 
+                                                                +   "</div>"
+                                                                
                                                                  +   "<div class='profile-name-b'>"
                                                                         + "소개"
                                                                     + "</div>"
@@ -564,7 +591,13 @@
                             // 대화 상대 리스트 조회용 
                         	if(result.length != 0){
                         		
-	                        	$("#myChat").html(result[0].userName+ "님 외 " +result.length+ "명이 <br>대화를 기다리고 있어요!" )
+                        		// 대화방 인원수 에 따라 출력되는 문구 구별 (ex. 단둘일 경우 and 다수일 경우)
+                        		if(result.length ==2){
+                        			$("#myChat").html(result[0].userName+ "님이 <br>대화를 기다리고 있어요!" )
+                        		} else {
+		                        	$("#myChat").html(result[0].userName+ "님 외 " +(result.length-3)+ "명이 <br>대화를 기다리고 있어요!" )
+                        		}
+                        		
                         	} else {
                         		$("#myChat").html("MBTING 매칭을 통해 대화 상대를 찾아보세요!")
                         	}
@@ -722,7 +755,7 @@
 	                </div>
 	            
 	                <div class="shortMenu-button">
-	                    <button button type="button" onclick="location.href=''">내용 확인</button>
+	                    <button button type="button" onclick="location.href='convert.ch'">내용 확인</button>
 	                </div> 
 	            </div>
 	        </div>
@@ -750,6 +783,7 @@
 	    </div>
     
     </div>
+    
 
 </body>
 

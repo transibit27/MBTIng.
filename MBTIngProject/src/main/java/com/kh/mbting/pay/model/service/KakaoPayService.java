@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.mbting.member.model.vo.Member;
 import com.kh.mbting.pay.dao.KakaoPayDao;
 import com.kh.mbting.pay.vo.KakaoPay;
 
@@ -31,6 +32,18 @@ public class KakaoPayService {
 	// 카카오페이 결제 성공 후 pg 토큰 저장용 메소드
 	public int insertPgToken(KakaoPay kp) {
 		return kakaoPayDao.insertPgToken(sqlSession, kp);
+	}
+	// 카카오페이 결제 성공(토큰발급) 후 MBTIng 코인x5 발급용 메소드
+	public int insertCoinX5(Member m) {
+		return kakaoPayDao.insertCoinX5(sqlSession, m);
+	}
+	// 카카오페이 결제 성공(토큰발급) 후 MBTIng 코인x5 발급용 메
+	public int insertCoinX10(Member m) {
+		return kakaoPayDao.insertCoinX10(sqlSession, m);
+	}
+	// 카카오페이 결제 성공(토큰발급) 후 결제된 상품 이름 받기
+	public String itemName(String pg_token) {
+		return kakaoPayDao.itemName(sqlSession, pg_token);
 	}
 	
 	

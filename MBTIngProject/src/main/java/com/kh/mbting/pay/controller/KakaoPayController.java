@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.mbting.member.model.service.MemberService;
+import com.kh.mbting.member.model.vo.Member;
 import com.kh.mbting.pay.model.service.KakaoPayService;
 import com.kh.mbting.pay.vo.KakaoPay;
 
@@ -25,6 +27,9 @@ public class KakaoPayController {
 	
 	@Autowired	
 	private KakaoPayService kakaoPayService; 
+	
+	@Autowired	
+	private MemberService memberService; 
 
 	@RequestMapping(value="pay.me", produces = "text/xml; charset=UTF-8")
 	@ResponseBody
@@ -149,9 +154,44 @@ public class KakaoPayController {
 		kp.setPg_token(pg_token);
 		kp.setPartnerOrderId(partner_order_id);
 		
-		System.out.println("kp에 잘 담김? "+kp);
-		
 		int result = kakaoPayService.insertPgToken(kp);
+		
+		
+		// 결제에 성공했을경우 Mbting 코인 추가
+		if(result > 0) {
+			
+			// step1 결제된 아이템 이름 받기 
+			String itemName = kakaoPayService.itemName(pg_token);
+			// step2 코인을 지급할 사용자 아이디 받기
+			Member m = (Member)session.getAttribute("loginMember");
+			System.out.println(m);
+			
+			switch (itemName) {
+			
+			case "MBTIngCoinx5" : 
+				int insertCoinX5 = kakaoPayService.insertCoinX5(m);
+				
+				// 결제 성공시 로그인 세션에 정보 갱신해주기
+				if(insertCoinX5 > 0) {
+					Member updateMem = memberService.loginMember(m);
+					session.setAttribute("loginMember", updateMem);
+				}
+				
+				break;
+			case "MBTIngCoinx10" :
+				int insertCoinX10 = kakaoPayService.insertCoinX10(m);
+				
+				// 결제 성공시 로그인 세션에 정보 갱신해주기
+				if(insertCoinX10 > 0) {
+					Member updateMem = memberService.loginMember(m);
+					session.setAttribute("loginMember", updateMem);
+				}
+				break;
+			}	
+						
+		}
+				
+				
 		
 		return "redirect:/myPay.me";
 	}
