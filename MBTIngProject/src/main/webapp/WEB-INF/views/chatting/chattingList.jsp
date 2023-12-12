@@ -331,6 +331,7 @@
 	</div>
 
    </div> 
+
    
    <!-- gender를 처리하기 위한 script -->
    <script>
@@ -363,7 +364,6 @@
   			type : "get" , 
   			success : function(mem) {
   				resultStr = "";
-  				
   				//console.log(mem);
   				for(let i in mem) {
  				
@@ -378,7 +378,7 @@
 						  			 "<span class='name'>" + mem[i].userName + "</span>" +
 						  			 "<p class='mbti'>" + mem[i].mbti + "</p>" +
 						  			 "</div>" +
-						  			 "<div class='like'><button id='button' onclick='requestMatch(this);' ><span>채팅신청</span></button></div>" +
+						  			 "<div class='like'><button id='button' onclick='requestMatch(this , " + mem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
 
@@ -426,7 +426,7 @@
 						  			 "<span class='name'>" + searchMem[i].userName + "</span>" +
 						  			 "<p class='mbti'>" + searchMem[i].mbti + "</p>" +
 						  			 "</div>" +
-						  			 "<div class='like'><button id='button' onclick='requestMatch(this);' ><span>채팅신청</span></button></div>" +
+						  			"<div class='like'><button id='button' onclick='requestMatch(this , " + searchMem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
 
@@ -444,10 +444,47 @@
   </script>
         
   <script>
-	function requestMatch(e) {
-		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
-		e.style.backgroundColor = "#f54d3e";
-		e.innerText = "수락 대기중";
+	function requestMatch(e , num) {
+		
+		let receiverNo  = num;
+		
+		$.ajax({
+             type: "GET",
+             url: "updateMatchRequestList.mb",
+             data: {"receiverNo" : receiverNo},
+             success: function(response) {
+            	 //console.log("하하 성공");
+                 if (response.success) {
+                     // 성공 메시지 표시
+                     alertify.alert('Alert', response.message, function() {
+                         alertify.success('Ok');
+                     });
+					
+             		e.style.backgroundColor = "#f54d3e";
+            		e.innerText = "수락 대기중";
+
+                     // 코인 수 업데이트
+                     var matchCoin = Number('${sessionScope.matchCoin}') - 1;
+                     // 세션의 matchCoin 값을 업데이트하는 코드를 추가해야 합니다.
+                     // 예: sessionScope.matchCoin = matchCoin;
+                 } else {
+                     // 실패 메시지 표시
+                     alertify.alert('Alert', response.message, function() {
+                         alertify.error('Error');
+                     });
+
+                     // 코인 부족 시 처리
+                     if (response.message.includes("코인 부족")) {
+                         alert("코인이 부족합니다. 코인 충전 후 다시 시도해 주세요.");
+                     }
+                 }
+             },
+
+             error: function() {
+                 // 에러 처리
+                 alertify.error('Error occurred while processing the request.');
+             }
+         });
  	}
   </script>
   

@@ -216,7 +216,8 @@
             // 필요한 데이터 수집
             var form = $(this).closest("form");
             var formData = form.serialize();
-
+		
+            //console.log(formData);
             // Ajax 요청
             $.ajax({
                 type: "GET",
