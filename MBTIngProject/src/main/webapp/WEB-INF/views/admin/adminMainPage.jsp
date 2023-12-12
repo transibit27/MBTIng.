@@ -235,7 +235,7 @@
         labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
         datasets: [{
             label: '월별 매출',
-            data: [5000, 6000, 5500, 7000, 8000, 9500, 9000, 8500, 7500, 8200, 9500, 11000],
+            data: [],
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1
@@ -246,7 +246,7 @@
         labels: ['2019', '2020', '2021', '2022', '2023'], // 년도에 맞게 수정
         datasets: [{
             label: '년별 매출',
-            data: [60000, 75000, 90000, 110000, 130000], // 실제 데이터로 교체
+            data: [],
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
@@ -286,23 +286,23 @@
     const genderRatioData = {
         labels: ['남성', '여성'],
         datasets: [{
-            data: [60, 40], // 실제 데이터로 교체 (예: 60% 남성, 40% 여성)
+            data: [], // 실제 데이터로 교체 (예: 60% 남성, 40% 여성)
             backgroundColor: ['rgba(54, 162, 235, 0.7)', 'rgba(255, 99, 132, 0.7)'],
         }]
     };
 
     const matchingSuccessData = {
-        labels: ['수락', '보류'],
+        labels: ['거절', '보류', '수락'],
         datasets: [{
-            data: [70, 10], // 실제 데이터로 교체
-            backgroundColor: ['rgba(75, 192, 192, 0.7)', 'rgba(255, 205, 86, 0.7)'],
+            data: [], // 실제 데이터로 교체
+            backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(255, 205, 86, 0.7)', 'rgba(75, 192, 192, 0.7)'],
         }]
     };
 
     const premiumAccountData = {
         labels: ['유료계정', '무료계정'],
         datasets: [{
-            data: [30, 70], // 실제 데이터로 교체 (예: 30% 유료계정, 70% 무료계정)
+            data: [], 
             backgroundColor: ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)'],
         }]
     };
@@ -336,14 +336,13 @@
     });
 
 
-<!-- MBTI 성향 분포도 -->
-
+	<!-- MBTI 성향 분포도 -->
     // 가상의 데이터 예시 (실제 데이터로 교체 필요)
     const mbtiDistributionData = {
-        labels: ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'],
+        labels: ['ENFJ', 'ENFP', 'ENTJ', 'ENTP', 'ESFJ', 'ESFP', 'ESTJ', 'ESTP', 'INFJ', 'INFP', 'INTJ', 'INTP', 'ISFJ', 'ISFP', 'ISTJ', 'ISTP'],
         datasets: [{
             label: 'MBTI 성향 분포',
-            data: [10, 8, 15, 12, 5, 7, 20, 18, 6, 4, 22, 16, 9, 7, 14, 11],
+            data: [],
             backgroundColor: 'rgba(75, 192, 192, 0.7)',
             borderWidth: 1,
             borderColor: 'rgba(75, 192, 192, 1)',
@@ -415,14 +414,22 @@
         labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
         datasets: [{
             label: '수락',
-            data: [50, 60, 70, 80, 90, 100, 120, 110, 95, 85, 75, 60],
+            data: [],
             backgroundColor: 'rgba(75, 192, 192, 0.7)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
             fill: false,
-        }, {
+        },{
+            label: '거절',
+            data: [],
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            fill: false,
+        }, 
+        {
             label: '보류',
-            data: [5, 8, 10, 15, 18, 20, 25, 22, 18, 15, 10, 8],
+            data: [],
             backgroundColor: 'rgba(255, 205, 86, 0.7)',
             borderColor: 'rgba(255, 205, 86, 1)',
             borderWidth: 1,
@@ -460,6 +467,16 @@
 	   totalPayCount();
 	   totalBoardCount();
 	   totalMonthlyCount();
+	   totalMatchingSuccessCount();
+	   totalMatchingRefusalCount();
+	   totalMatchingPendingCount();
+	   totalMbtiCount();
+	   totalGenderRate();
+	   totalMatchingRate();
+	   totalPremiumCount();
+	   totalFreeCount();
+	   totalMonthlySalesCount();
+	   totalyearlySalesCount();
   });
   
   function totalMemberCount() {
@@ -552,24 +569,230 @@
 	totalMonthlyCount();
 
 	// 커플 매칭 상태 수락 그래프
-	function TotalMatchingSuccessCount() {
+	function totalMatchingSuccessCount() {
 		
 		$.ajax({
 			url : "selectTotalMatchingSuccess.ad",
 			type : "get",
 			success : function(result) {
-				console.log(result);
-				console.log("잘.. 되나?");
-				console.log("잘 되나?");
+				// console.log(result);
+				
+				const matchingSuccessCounts = result.map(item => item.matchStat);
+				
+				monthlyMatchingData.datasets[0].data = matchingSuccessCounts;
+				
+				monthlyMatchingChart.update();
+				
 			},
 			error : function() {
 				console.log("ajax 통신 실패!!");
 			}
 		});
 	}
+	totalMatchingSuccessCount();
+	
+	// 커플 매칭 상태 거절 그래프
+	function totalMatchingRefusalCount() {
+		
+		$.ajax({
+			url : "selectTotalMatchingRefusal.ad",
+			type : "get",
+			success : function(result) {
+				// console.log(result);
+				
+				const matchingRefusalCounts = result.map(item => item.matchStat);
+				
+				monthlyMatchingData.datasets[1].data = matchingRefusalCounts;
+				
+				monthlyMatchingChart.update();
+				
+			},
+			error : function() {
+				console.log("ajax 통신 실패!!");
+			}
+		});
+	}
+	totalMatchingRefusalCount();
 
-  
- 
+	
+	// 커플 매칭 상태 보류 그래프
+	function totalMatchingPendingCount() {
+		
+		$.ajax({
+			url : "selectTotalMatchingPending.ad",
+			type : "get",
+			success : function(result) {
+				// console.log(result);
+				
+				const matchingPendingCounts = result.map(item => item.matchStat);
+				
+				monthlyMatchingData.datasets[2].data = matchingPendingCounts;
+				
+				monthlyMatchingChart.update();
+				
+			},
+			error : function() {
+				console.log("ajax 통신 실패!!");
+			}
+		});
+	}
+	
+	totalMatchingPendingCount();
+
+	
+	// MBTI 성향 분포도
+	function totalMbtiCount() {
+		
+		$.ajax({
+			url : "totalMbtiCount.ad",
+			type : "get",
+			success : function(result) {
+
+				const mbtiCounts = result;
+				
+				mbtiDistributionData.datasets[0].data = mbtiCounts;
+				
+				mbtiHistogramChart.update();
+
+			},
+			error : function() {
+				console.log("ajax 통신 실패!");
+			}
+		});
+	}
+	
+	totalMbtiCount();
+	
+	// 남녀 성비 원그래프
+	function totalGenderRate() {
+		
+		$.ajax({
+			url : "totalGenderRate.ad",
+			type : "get",
+			success : function(result) {
+
+				const genderRates = result;
+				
+				genderRatioData.datasets[0].data = genderRates;
+				
+				genderRatioChart.update();
+				
+			},
+			error : function() {
+				console.log("ajax 통신 실패!!!");
+			}
+		});
+	}
+	totalGenderRate();
+	
+	// 매칭 성공률 원그래프
+	function totalMatchingRate() {
+		
+		$.ajax({
+			url : "totalMatchingRate.ad",
+			type : "get",
+			success : function(result) {
+
+				const matchingRates = result;
+					
+				matchingSuccessData.datasets[0].data = matchingRates;
+				
+				matchingSuccessChart.update();
+
+			},
+			error : function() {
+				console.log("ajax 통신 실패!");
+			}
+		});
+	}
+	totalMatchingRate();
+	
+	/* 유,무료 계정비율은 1개의 data값에 2개의 ajax 값이 들어가야하는데
+	   위의 ajax로 실행 시 순서를 알 수 없어, 유료, 무료 계정의 값이
+	   서로 변경되어 나타날 때가 있어 아래의 코드로 작성해야 순차적으로 값이 들어감 */
+	
+	// 유료계정비율 원그래프
+	function totalPremiumCount() {
+	    return $.ajax({
+	        url: "totalPremiumCount.ad",
+	        type: "get"
+	    });
+	}
+
+	// 무료계정비율 원그래프
+	function totalFreeCount() {
+	    return $.ajax({
+	        url: "totalFreeCount.ad",
+	        type: "get"
+	    });
+	}
+
+	// 차트 업데이트 함수
+	function updateChart() {
+	    premiumAccountChart.update();
+	}
+
+	// 두 개의 Ajax 호출을 동시에 진행하고 모두 완료된 후에 차트 업데이트
+	$.when(totalPremiumCount(), totalFreeCount()).then(function (resultPremium, resultFree) {
+	    const premiumCounts = resultPremium[0];
+	    const freeCounts = resultFree[0];
+	    
+	    premiumAccountData.datasets[0].data.push(premiumCounts);
+	    premiumAccountData.datasets[0].data.push(freeCounts);
+	    
+	    updateChart();
+	    
+	    console.log(resultFree[0])
+	});
+
+	
+	// 월별 매출 그래프
+	function totalMonthlySalesCount() {
+		   
+		  $.ajax({
+		        url: "totalMonthlySalesCount.ad",
+		        type: "get",
+		        success: function (result) {
+
+		            const monthlySalesCounts = result;
+
+		            // monthlySalesData 객체의 data 배열에 monthlySalesCounts 배열을 할당
+		            monthlySalesData.datasets[0].data = monthlySalesCounts;
+
+		            // monthlySignupChart 차트 업데이트
+		            monthlySalesChart.update();
+		            
+		        },
+		        error: function () {
+		            console.log("실패함ㅋ");
+		        }
+		    });
+		}
+		// 위 함수 호출
+		totalMonthlySalesCount();
+	
+		// 년 별 매출 그래프
+		function totalyearlySalesCount() {
+			
+			$.ajax({
+				url: "totalyearlySalesCount.ad",
+				type : "get",
+				success : function(result) {
+	
+					const yearlySalesCounts = result;
+					
+					yearlySalesData.datasets[0].data = yearlySalesCounts;
+					
+					yearlySalesChart.update();
+				},
+				error : function() {
+					console.log("ajax 통신 실패!");
+				}
+			});
+		}
+		totalyearlySalesCount();
+	
+	
 
 </script>
 

@@ -77,4 +77,56 @@
       FROM KAKAOPAY
 </select>
 
+<!-- 관리자페이지 유료계정비율 원그래프 -->
+<select id="totalPremiumCount" resultType="_int">
+	SELECT SUM(A) AS PREMIUM_COUNT
+	  FROM (SELECT COUNT(*) A 
+	          FROM KAKAOPAY
+	         WHERE PG_TOKEN IS NOT NULL
+	         GROUP BY PARTNER_USER_ID) 
+</select>
+
+<!-- 관리자페이지 무료계정비율 원그래프 -->
+<select id="totalFreeCount" resultType="_int">
+	WITH MemberCount AS (
+  SELECT COUNT(EMAIL) AS M
+  FROM MEMBER
+),
+KakaoPayCount AS (
+  SELECT SUM(A) AS M
+  FROM (
+    SELECT COUNT(*) AS A
+    FROM KAKAOPAY
+    WHERE PG_TOKEN IS NOT NULL
+    GROUP BY PARTNER_USER_ID
+  )
+)
+SELECT MemberCount.M - KakaoPayCount.M AS Result
+FROM MemberCount, KakaoPayCount
+</select>
+
+
+<!-- 관리자페이지 월 별 매출 그래프 -->
+<select id="totalMonthlySalesCount" resultType="_int">
+	WITH Months AS (
+    SELECT TO_CHAR(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), LEVEL - 1), 'MM') AS month
+    FROM dual
+    CONNECT BY LEVEL &lt;= 12
+	)
+	SELECT NVL(SUM(kakaopay.TOTAL_AMOUNT), 0) AS TOTAL_AMOUNT
+	  FROM Months m
+	  LEFT JOIN kakaopay ON TO_CHAR(kakaopay.ORDER_DATE, 'MM') = m.month
+	 WHERE EXTRACT(YEAR FROM kakaopay.ORDER_DATE) = EXTRACT(YEAR FROM SYSDATE)
+	 GROUP BY m.month
+	 ORDER BY m.month
+</select>
+
+<!-- 관리자페이지 년 별 매출 그래프 -->
+<select id="totalyearlySalesCount" resultType="_int">
+	SELECT NVL(SUM(kakaopay.TOTAL_AMOUNT), 0) AS TOTAL_AMOUNT
+	FROM kakaopay
+	WHERE TO_CHAR(kakaopay.ORDER_DATE, 'YYYY') BETWEEN '2019' AND TO_CHAR(SYSDATE, 'YYYY')
+	GROUP BY TO_CHAR(kakaopay.ORDER_DATE, 'YYYY')
+	ORDER BY TO_CHAR(kakaopay.ORDER_DATE, 'YYYY')
+</select>
 </mapper>

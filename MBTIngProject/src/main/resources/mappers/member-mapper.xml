@@ -315,19 +315,75 @@
 	    ORDER BY m.month
 	</select>
 	
-	<!-- 커플 매칭 상태 그래프 -->
-	<select id="TotalMatchingSuccess" resultMap="monthResultSet">
+	<!-- 커플 매칭 수락(MATCH_STAT = 3) 그래프 -->
+	<select id="totalMatchingSuccess" resultMap="monthResultSet">
 		WITH Months AS (
 		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
 		    FROM dual
 		    CONNECT BY LEVEL &lt;= 12
 		)
 		SELECT m.month,
-		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 3 THEN MATCHING.MATCH_TIME END) AS MATCH_TIME
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 3 THEN MATCHING.MATCH_TIME END) AS MATCH_STAT
 		FROM Months m
 		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
 		GROUP BY m.month
 		ORDER BY m.month
 	</select>
-
+	
+	<!-- 커플 매칭 거절(MATCH_STAT = 1) 그래프 -->
+	<select id="totalMatchingRefusal" resultMap="monthResultSet">
+		WITH Months AS (
+		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
+		    FROM dual
+		    CONNECT BY LEVEL &lt;= 12
+		)
+		SELECT m.month,
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 1 THEN MATCHING.MATCH_TIME END) AS MATCH_STAT
+		FROM Months m
+		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
+		GROUP BY m.month
+		ORDER BY m.month
+	</select>
+	
+	<!-- 커플 매칭 거절(MATCH_STAT = 2) 그래프 -->
+	<select id="totalMatchingPending" resultMap="monthResultSet">
+		WITH Months AS (
+		    SELECT TO_CHAR(LEVEL, 'FM00') AS month
+		    FROM dual
+		    CONNECT BY LEVEL &lt;= 12
+		)
+		SELECT m.month,
+		       COUNT(CASE WHEN MATCHING.MATCH_STAT = 2 THEN MATCHING.MATCH_TIME END) AS MATCH_STAT
+		FROM Months m
+		LEFT JOIN MATCHING ON TO_CHAR(MATCHING.MATCH_TIME, 'MM') = m.month
+		GROUP BY m.month
+		ORDER BY m.month
+	</select>
+	
+	<!-- MBTI 성향 분포도 -->
+	<select id="totalMbtiCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MEMBER
+		 GROUP BY MBTI
+		 ORDER BY MBTI 
+	</select>
+	
+	<!-- 남녀성비 원그래프 -->
+	<select id="totalGenderRate" resultType="_int">
+		SELECT COUNT(*) AS GENDER_COUNT
+		  FROM MEMBER
+		 GROUP BY GENDER
+	</select>
+	
+	<!-- 매칭 성공률 원그래프 -->
+	<select id="totalMatchingRate" resultType="_int">
+		SELECT COUNT(*)
+		  FROM MATCHING
+		GROUP BY MATCH_STAT
+	</select>
+	
+	
+	
+	
+	
 </mapper>

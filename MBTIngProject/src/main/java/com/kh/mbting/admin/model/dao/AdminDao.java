@@ -13,6 +13,7 @@ import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 @Repository
 public class AdminDao {
@@ -79,8 +80,62 @@ public class AdminDao {
 	}
 	
 	// 커플 매칭 상태 수락 그래프
-	public ArrayList<Matching> TotalMatchingSuccess(SqlSessionTemplate sqlSession) {
+	public ArrayList<Matching> totalMatchingSuccess(SqlSessionTemplate sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.TotalMatchingSuccess");
+		return (ArrayList)sqlSession.selectList("memberMapper.totalMatchingSuccess");
+	}
+	
+	// 커플 매칭 상태 거절 그래프 totalMatchingRefusal
+	public ArrayList<Matching> totalMatchingRefusal(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.totalMatchingRefusal");
+	}
+	
+	// 커플 매칭 상태 보류 그래프
+	public ArrayList<Matching> totalMatchingPending(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.totalMatchingPending");
+	}
+	
+	// MBTI 성향 분포도
+	public ArrayList<Member> totalMbtiCount(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.totalMbtiCount");
+	}
+	
+	// 남녀성비 원그래프
+	public ArrayList<Member> totalGenderRate(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.totalGenderRate");
+	}
+	
+	// 매칭 성공률 원그래프
+	public ArrayList<Matching> totalMatchingRate(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.totalMatchingRate");
+	}
+	
+	// 유료계정비율 원그래프totalFreeCount
+	public ArrayList<KakaoPay> totalPremiumCount(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalPremiumCount");
+	}
+	
+	// 무료계정비율 원그래프
+	public ArrayList<KakaoPay> totalFreeCount(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalFreeCount");
+	}
+	
+	// 월별매출 그래프
+	public ArrayList<KakaoPay> totalMonthlySalesCount(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalMonthlySalesCount");
+	}
+	
+	// 년별매출 그래프
+	public ArrayList<KakaoPay> totalyearlySalesCount(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalyearlySalesCount");
 	}
 }
