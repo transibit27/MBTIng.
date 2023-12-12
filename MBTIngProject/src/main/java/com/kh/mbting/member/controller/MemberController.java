@@ -257,6 +257,12 @@ public class MemberController {
 			}
 		
 	}
+	// b-4 신청자 거절용 메소드 (ajax)
+	@RequestMapping (value="refusePropose.me")
+	public String refusePropose(@RequestParam String userNo) {
+		
+		return null;
+	}
 	
 	
 	// b-5 내 대화 상대 정보 표시용 메소드(ajax)
