@@ -231,9 +231,6 @@
                 <div class="thumbnail" align="center">
                     <a href="detail.bo?bno=${ b.boardNo }"><img src="${pageContext.request.contextPath}/${ b.changeName }"></a>
                     <P>${ b.boardTitle }<br>💑${ b.mbtiNick }<br>❤️${ b.thumbCount }</P>
-
-                    <!-- 추후에 좋아요 수 조회 기능 추가 예정 -->
-
                 </div>
             </c:forEach>
         </div>
