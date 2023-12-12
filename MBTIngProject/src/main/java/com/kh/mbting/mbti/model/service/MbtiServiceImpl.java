@@ -45,8 +45,15 @@ public class MbtiServiceImpl implements MbtiService {
 		return mbtiDao.insertMatchRequestList(sqlSession, loginMember);
 	}
 	
+	@Override
+	public Member updateMember(Member loginMember) {
+		return mbtiDao.updateMember(sqlSession, loginMember);
+	}
 	
-	
+	@Override
+	public int updateMemberCoin(Member loginMember) {
+		return mbtiDao.updateMemberCoin(sqlSession, loginMember);
+	}
 	
 	
 	
