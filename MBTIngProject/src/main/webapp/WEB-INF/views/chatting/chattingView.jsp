@@ -15,10 +15,10 @@
     
 <style>
 .wrap {
-    width : 1500px;
+    width : 484px;
     height : 900px;
     margin: auto;
-    border: double 3px rgb(255, 149, 166);
+    border: solid 5px lightgray;
     font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .wrapPC {
@@ -26,6 +26,7 @@
     height : 700px;
     display: inline-block;
     display: flex;
+    margin : auto;
 }
 
 #profileDiv {
@@ -69,7 +70,7 @@
 }
 
 .chatList {
-    width: 500px;
+    width: 402px;
     height: 900px;
     border : 1px solid black;
 }
@@ -133,6 +134,7 @@
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
+    width : 400px;
 }
 
 #chatList {
@@ -140,7 +142,6 @@
     width : 450px;
     height : 900px;
 }
-
 
 .chatList_box table {
     width : 100%;
@@ -189,6 +190,42 @@
  border : 1px solid black;
 }
 
+.chatInfo {
+    width : 80px;
+    height : 900px;
+    border : 1px solid black;
+    background-color: lightgray;
+}
+
+#chatInfoTable {
+    border : 1px solid rgb(37, 37, 37);
+    width : 100%;
+    text-align: center;
+}
+
+#chatInfoTable img {
+    width : 80%;
+    height : 80%;
+    cursor: pointer;
+}
+
+#chatInfoTable tr {
+    height : 30px;
+    border: 1px solid black;
+}
+
+#chatInfoTable td {
+    border: 1px solid black;
+}
+
+#chatAllCount {
+    border-radius: 50px;
+    border: 1px solid black;
+    width: 50px;
+    height : 50px;
+    margin: auto;
+    cursor: pointer;
+}
 /*-------------------------전송버튼 css---------------------------------*/
 #submitButton {
  align-items: center;
@@ -240,6 +277,11 @@
         width : 200px;
         height: 200px;
   }
+  
+ /*-------------------맨 처음 화면을 위한 css-------------------------*/
+  .hidden {
+       display: none;
+   }
 </style>
 </head>
 <body>
@@ -247,9 +289,22 @@
 <br><br><br><br>
     <div class="wrap">
         <div class="wrapPC">
-
+            <div class="chatInfo">
+                <table id="chatInfoTable">
+                    <tr>
+                        <td>
+                            <img src="https://cdn-icons-png.flaticon.com/128/3920/3920375.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="chatAllCount"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div class="chatList">
-                
+
             </div>
 
              <div class="chatDiv">
@@ -294,7 +349,7 @@
 	    	</div>
 	    	
 
-            <div id="profileDiv">
+            <div id="profileDiv" class="hidden">
                
                 <table > 
                    <tr>
@@ -335,7 +390,7 @@
                 </table>
            </div>
         </div>
-        <div id="chatInput">
+        <div id="chatInput" class="hidden">
             <table>
                 <tr>
                     <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img></td>
@@ -478,6 +533,10 @@
           connect();
           console.log("enterRoom");
 
+          $('#chatInput').removeClass('hidden');
+          $('#profileDiv').removeClass('hidden');
+          $('.wrap').css("width" , "1500px");
+          $('.wrapPc').removeAttr("margin");
      }
 	</script>
 	
