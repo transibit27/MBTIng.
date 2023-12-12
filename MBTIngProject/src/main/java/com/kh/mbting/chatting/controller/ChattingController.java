@@ -53,6 +53,7 @@ public class ChattingController {
         List<ChatMessage> mList = cService.messageList(roomNo);
         response.setContentType("application/json; charset=utf-8");
         //System.out.println(mList);
+        
         // 안읽은 메세지의 숫자 0으로 바뀌기
         ChatMessage message = new ChatMessage();
         message.setEmail(userEmail);

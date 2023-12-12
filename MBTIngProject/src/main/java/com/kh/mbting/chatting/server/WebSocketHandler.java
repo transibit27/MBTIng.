@@ -41,11 +41,12 @@ public class WebSocketHandler extends TextWebSocketHandler  {
 	    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// 전달받은 메세지
         String msg = message.getPayload();
-        
+        //System.out.println(msg);
         // Json객체 → Java객체
         // 출력값 : [roomId=123, messageId=null, messageContent=asd, name=천동민, email=cheon@gmail.com, unReadCount=0]
-        ChatMessage chatMessage = objectMapper.readValue(msg,ChatMessage.class);
-        //System.out.println(chatMessage);
+        ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
+        
+        //System.out.println("unReadMessage : " + chatMessage.getSendTime());
         
         // 받은 메세지에 담긴 roomNo로 해당 채팅방을 찾아온다.
         ChatRoom chatRoom = cService.selectChatRoom(chatMessage.getRoomNo());
@@ -86,7 +87,7 @@ public class WebSocketHandler extends TextWebSocketHandler  {
         else if(RoomList.get(chatRoom.getRoomNo()) != null && !chatMessage.getMessageContent().equals("ENTER-CHAT") && chatRoom != null) {
             
             // 메세지에 이름, 이메일, 내용을 담는다.
-            TextMessage textMessage = new TextMessage(chatMessage.getName() + "," + chatMessage.getEmail() + "," + chatMessage.getMessageContent());
+            TextMessage textMessage = new TextMessage(chatMessage.getName() + "," + chatMessage.getEmail() + "," + chatMessage.getMessageContent() + "," + chatMessage.getSendTime() );
             
             System.out.println(textMessage);
             // 현재 session 수

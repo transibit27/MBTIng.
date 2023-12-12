@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 
 <style>
+
 .wrap {
 
 	width : 1500px;

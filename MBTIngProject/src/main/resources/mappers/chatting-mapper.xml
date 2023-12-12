@@ -20,7 +20,8 @@
         <result property="messageContent" column="MESSAGE_CONTENT" />
         <result property="name" column="USER_NAME" />
         <result property="email" column="USER_EMAIL" />
-        <result property="unReadCount" column="UNREAD_COUNT" />
+        <result property="unReadMessage" column="UN_READ_MESSAGE" />
+        <result property="sessionCount" column="SESSION_COUNT" />
         <result property="sendTime" column="SENDTIME" />
     </resultMap>
     
@@ -93,7 +94,7 @@
     
     <insert id="insertMessage" parameterType="ChatMessage">
         <if test="sessionCount == 1">
-        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,2 , default)
+        INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 1 ,1 , default)
         </if>
         <if test="sessionCount == 2">
         INSERT INTO CHATMESSAGE VALUES(#{roomNo}, CNO_SEQ.NEXTVAL, #{messageContent}, #{name}, #{email}, 0, 2 , default)
