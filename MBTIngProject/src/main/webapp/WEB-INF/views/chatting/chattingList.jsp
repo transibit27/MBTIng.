@@ -490,6 +490,11 @@
   
   <script>
   $(document).ready(function() {
+	  	personDetail();
+	  	checkProposer(;)
+	});
+  
+  	function personDetail() {
 	  // 이미지 클릭 시 이벤트 처리
 	  $(".user__container").on("click", ".image img", function() {
 	    // 클릭한 이미지의 인덱스를 가져옴
@@ -516,7 +521,22 @@
 	    // 모든 이미지의 투명도를 초기화
 	    $(".user__container .image img").css("opacity", "1");
 	  });
-	});
+	  
+	  }
+  	
+  	  function checkProposer() {
+  		  $.ajax({
+  			 url : "check.pro",
+  			 data : {"userNo" : "${sessionScope.loginMember.userNo}"},
+			 success : function() {
+				 console.log("성공 ㅋ");
+			 }, 
+			 error : function() {
+				 console.log("내가 신청한 회원 정보 불러오기 실패...");
+			 }
+  		  });
+  	  }
+
   </script>
 </body>
 </html>

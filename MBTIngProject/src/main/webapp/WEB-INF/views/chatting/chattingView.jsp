@@ -625,7 +625,7 @@ body {
       //연결 종료 시 실행될 함수 
       function disconnect() {
          socket.close();
-           //location.href="http://localhost:8081/mbting";
+          //location.href="http://localhost:8081/mbting";
       };
    
 

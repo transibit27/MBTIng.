@@ -161,6 +161,10 @@ public class ChattingController {
 
 	    response.setContentType("application/json; charset-UTF-8");
     	new Gson().toJson(list, response.getWriter());
-
+    }
+    
+    @RequestMapping("check.pro")
+    public void checkPerson(String userNo) {
+    	System.out.println(userNo);
     }
 }
