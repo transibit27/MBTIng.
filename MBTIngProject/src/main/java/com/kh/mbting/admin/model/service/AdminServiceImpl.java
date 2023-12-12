@@ -26,37 +26,6 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	@Override
-	public int memberSelectListCount() {
-		
-		return adminDao.memberSelectListCount(sqlSession);
-	}
-
-	@Override
-	public ArrayList<Member> memberSelectList(PageInfo pi) {
-	
-		return adminDao.memberSelectList(sqlSession, pi);
-	}
-
-	// 상태에 따른 토글바 조회용 (보류)
-	@Override
-	public Member getUserByEmail(String email) {
-
-		return adminDao.getUserByEmail(sqlSession, email);
-	}
-	@Override
-	public void updateUserStatus(String email, String newStatus) {
-		adminDao.updateUserStatus(sqlSession, email, newStatus);
-		
-	}
-
-	// 선택된 회원 저장
-	@Override
-	public void updateSelectedUserStatus(List<Integer> selectedUserNos) {
-	    
-		adminDao.updateSelectedUserStatus(sqlSession, selectedUserNos);
-	}
-	
 	// 전체 회원 수 조회
 	@Override
 	@Transactional
@@ -163,6 +132,50 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.totalyearlySalesCount(sqlSession);
 	}
 
+	// 회원관리 전체조회
+	@Override
+	public int memberSelectListCount() {
+		
+		return adminDao.memberSelectListCount(sqlSession);
+	}
+	// 회원관리 전체조회
+	@Override
+	public ArrayList<Member> memberSelectList(PageInfo pi) {
 	
+		return adminDao.memberSelectList(sqlSession, pi);
+	}
+
+	// 상태에 따른 토글바 조회용 (보류)
+	@Override
+	public Member getUserByEmail(String email) {
+
+		return adminDao.getUserByEmail(sqlSession, email);
+	}
+	@Override
+	public void updateUserStatus(String email, String newStatus) {
+		adminDao.updateUserStatus(sqlSession, email, newStatus);
+		
+	}
+
+	// 선택된 회원 저장
+	@Override
+	public void updateSelectedUserStatus(List<Integer> selectedUserNos) {
+	    
+		adminDao.updateSelectedUserStatus(sqlSession, selectedUserNos);
+	}
+
+	// 회원관리 검색 조회용
+	@Override
+	public int memberSearchListCount(String keyword) {
+
+		return adminDao.memberSearchListCount(sqlSession, keyword);
+	}
+	// 회원관리 검색 조회용
+	@Override
+	public List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit) {
+		
+		return adminDao.memberSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
+
+	}
 
 }

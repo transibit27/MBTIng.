@@ -25,6 +25,7 @@ import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Controller
@@ -33,64 +34,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	@RequestMapping("adminMain.ad")
-	public String adminMain() {
-		
-		return "admin/adminMainPage";
-	}
-	
-	@GetMapping("list.adme")
-	public ModelAndView memberSelectList(
-			@RequestParam(value="cpage", defaultValue = "1") int currentPage,
-			ModelAndView mv) {
-		
-		int listCount = adminService.memberSelectListCount();
-		
-		int pageLimit = 5;
-		int boardLimit = 10;
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
-		
-		ArrayList<Member> list = adminService.memberSelectList(pi);
-		
-		mv.addObject("list", list)
-		  .addObject("pi", pi)
-		  .setViewName("admin/adminMemberListView");
-		
-		return mv;
-	}
-	
-	// 상태에 따른 토글바 조회용 (보류)
-	@PostMapping("updateStatus.ad")
-    public ResponseEntity<String> updateStatus(@RequestBody Map<String, String> data) {
-        String email = data.get("userEmail");
-        String newStatus = data.get("newStatus");
-
-        try {
-            adminService.updateUserStatus(email, newStatus);
-            return ResponseEntity.ok("Status updated successfully");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Failed to update status");
-        }
-    }
-	
-	
-	// 선택 된 회원 저장 (확인 필요)
-	@CrossOrigin
-	@PutMapping("updateSelectedStatus.ad")
-	public ResponseEntity<String> updateSelectedStatus(@RequestBody Map<String, List<Integer>> data) {
-	    List<Integer> selectedUserNos = data.get("selectedUserNos");
-
-	    try {
-	        adminService.updateSelectedUserStatus(selectedUserNos);
-	        return ResponseEntity.ok("Selected statuses updated successfully");
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body("Failed to update selected statuses");
-	    }
-	}
-
+	// 전체 회원수 조회
 	@ResponseBody
 	@RequestMapping("selectTotalMembers.ad") 
 	public int totalMemberCount() {
@@ -101,6 +45,7 @@ public class AdminController {
 		return totalMemberCount;
 	}
 	
+	// 전체 커플 매칭수 조회
 	@ResponseBody
 	@RequestMapping("selectTotalCouple.ad")
 	public int totalCoupleCount() {
@@ -110,6 +55,7 @@ public class AdminController {
 		return totalCoupleCount;
 	}
 	
+	// 전체 결제 금액 조회
 	@ResponseBody
 	@RequestMapping("selectTotalPay.ad")
 	public int totalPayCount() {
@@ -119,6 +65,7 @@ public class AdminController {
 		return totalPayCount;
 	}
 	
+	// 전체 후기 게시글 수 조회
 	@ResponseBody
 	@RequestMapping("selectTotalBoard.ad")
 	public int totalBoardCount() {
@@ -241,14 +188,93 @@ public class AdminController {
 	@RequestMapping(value="totalyearlySalesCount.ad", produces="application/json; charset=UTF-8")
 	public String totalyearlySalesCount() {
 		
-		System.out.println("년별 그래프 안 나오니?");
 		ArrayList<KakaoPay> list = adminService.totalyearlySalesCount();
 		
-		System.out.println(list);
 		return new Gson().toJson(list);
 	}
 	
+	@RequestMapping("adminMain.ad")
+	public String adminMain() {
+		
+		return "admin/adminMainPage";
+	}
 	
+	@GetMapping("list.adme")
+	public ModelAndView memberSelectList(
+		@RequestParam(value="cpage", defaultValue = "1") int currentPage,
+		ModelAndView mv) {
+	
+		int listCount = adminService.memberSelectListCount();
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<Member> list = adminService.memberSelectList(pi);
+		
+		mv.addObject("list", list)
+		  .addObject("pi", pi)
+		  .setViewName("admin/adminMemberListView");
+		
+		return mv;
+	}
+	
+	// 회원관리 검색 조회용
+	@GetMapping("search.adme")
+    public ModelAndView adminSearchMember(
+            @RequestParam("keyword") String keyword,
+            @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+            ModelAndView mv) {
+        
+        int listCount = adminService.memberSearchListCount(keyword);
+        
+        int pageLimit = 5;
+        int boardLimit = 10;
+        
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+        
+        List<Member> searchResult = adminService.memberSearchList(keyword, pi.getCurrentPage(), pi.getBoardLimit(), pi.getPageLimit());
+        
+        mv.addObject("list", searchResult)
+          .addObject("pi", pi)
+          .setViewName("admin/adminMemberListView");
+        
+        return mv;
+    }
+	
+	
+	
+	// 상태에 따른 토글바 조회용 (보류)
+	@PostMapping("updateStatus.ad")
+    public ResponseEntity<String> updateStatus(@RequestBody Map<String, String> data) {
+        String email = data.get("userEmail");
+        String newStatus = data.get("newStatus");
+
+        try {
+            adminService.updateUserStatus(email, newStatus);
+            return ResponseEntity.ok("Status updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to update status");
+        }
+    }
+	
+	
+	// 선택 된 회원 저장 (확인 필요)
+	@CrossOrigin
+	@PutMapping("updateSelectedStatus.ad")
+	public ResponseEntity<String> updateSelectedStatus(@RequestBody Map<String, List<Integer>> data) {
+	    List<Integer> selectedUserNos = data.get("selectedUserNos");
+
+	    try {
+	        adminService.updateSelectedUserStatus(selectedUserNos);
+	        return ResponseEntity.ok("Selected statuses updated successfully");
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Failed to update selected statuses");
+	    }
+	}
 	
 	
 	

@@ -7,22 +7,10 @@ import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 public interface AdminService {
-
-	// 
-	int memberSelectListCount();
-	
-	// 회원관리 게시글 리스트 조회
-	ArrayList<Member> memberSelectList(PageInfo pi);
-	
-	// 상태에 따른 토글바 조회용 (보류)
-	Member getUserByEmail(String email);
-    void updateUserStatus(String email, String newStatus);
-
-	// 선택된 회원 저장
-    void updateSelectedUserStatus(List<Integer> selectedUserNos);
 
 	// 전체 회원 조회
     int selectTotalMembers();
@@ -68,4 +56,48 @@ public interface AdminService {
     
     // 년별매출 그래프
     ArrayList<KakaoPay> totalyearlySalesCount();
+    
+    // 
+ 	int memberSelectListCount();
+ 	
+ 	// 회원관리 게시글 리스트 조회
+ 	ArrayList<Member> memberSelectList(PageInfo pi);
+ 	
+ 	// 회원관리 검색 조회용
+ 	int memberSearchListCount(String keyword);
+ 	
+	 // 회원관리 검색 조회용
+    List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	// 상태에 따른 토글바 조회용 (보류)
+ 	Member getUserByEmail(String email);
+     void updateUserStatus(String email, String newStatus);
+
+ 	// 선택된 회원 저장
+     void updateSelectedUserStatus(List<Integer> selectedUserNos);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

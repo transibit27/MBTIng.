@@ -13,44 +13,11 @@ import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Repository
 public class AdminDao {
-	
-	public int memberSelectListCount(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("memberMapper.memberSelectListCount");
-	}
-	
-	public ArrayList<Member> memberSelectList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		
-		int limit = pi.getBoardLimit();
-		int offset = (pi.getCurrentPage() - 1) * limit;
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList", null, rowBounds);
-	}
-	
-	// 상태에 따른 토글바 조회용 (보류)
-	public Member getUserByEmail(SqlSessionTemplate sqlSession, String email) {
-		
-		return sqlSession.selectOne("memberMapper.getUserByEmail", email);
-	}
-	public void updateUserStatus(SqlSessionTemplate sqlSession, String email, String newStatus) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("email", email);
-        parameters.put("newStatus", newStatus);
-
-        sqlSession.update("memberMapper.updateUserStatus", parameters);
-    }
-	
-	// 선택된 회원 저장
-	public void updateSelectedUserStatus(SqlSessionTemplate sqlSession, List<Integer> selectedUserNos) {
-		
-		sqlSession.update("memberMapper.updateSelectedUserStatus");
-	}
 	
 	// 전체 회원 수 조회
 	public int selectTotalMembers(SqlSessionTemplate sqlSession) {
@@ -115,7 +82,7 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.totalMatchingRate");
 	}
 	
-	// 유료계정비율 원그래프totalFreeCount
+	// 유료계정비율 원그래프
 	public ArrayList<KakaoPay> totalPremiumCount(SqlSessionTemplate sqlSession) {
 		
 		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalPremiumCount");
@@ -138,4 +105,89 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalyearlySalesCount");
 	}
+	
+	public int memberSelectListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("memberMapper.memberSelectListCount");
+	}
+	
+	// 회원관리 전체조회
+	public ArrayList<Member> memberSelectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList", null, rowBounds);
+	}
+	
+	// 검색된 회원 수 조회
+	public int memberSearchListCount(SqlSessionTemplate sqlSession, String keyword) {
+      
+		return sqlSession.selectOne("memberMapper.memberSearchListCount", keyword);
+    }
+
+	// 검색된 회원 리스트 조회
+	public List<Member> memberSearchList(SqlSessionTemplate sqlSession, String keyword, int currentPage, int pageLimit, int boardLimit) {
+	    int startRow = (currentPage - 1) * boardLimit;
+	    int endRow = startRow + boardLimit;
+
+	    Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("keyword", keyword);
+	    parameters.put("startRow", startRow);
+	    parameters.put("endRow", endRow);
+
+	    return sqlSession.selectList("memberMapper.memberSearchList", parameters);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	// 상태에 따른 토글바 조회용 (보류)
+	public Member getUserByEmail(SqlSessionTemplate sqlSession, String email) {
+		
+		return sqlSession.selectOne("memberMapper.getUserByEmail", email);
+	}
+	public void updateUserStatus(SqlSessionTemplate sqlSession, String email, String newStatus) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("email", email);
+        parameters.put("newStatus", newStatus);
+
+        sqlSession.update("memberMapper.updateUserStatus", parameters);
+    }
+	
+	// 선택된 회원 저장
+	public void updateSelectedUserStatus(SqlSessionTemplate sqlSession, List<Integer> selectedUserNos) {
+		
+		sqlSession.update("memberMapper.updateSelectedUserStatus");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
