@@ -603,14 +603,17 @@ body {
          socket.onmessage = function(evt) {
         	 
               let receive = evt.data.split(",");
+              let sessionCount = evt.sessionCount;
+            
               
-              console.log(receive);
               const data = {
                            "name" : receive[0],
                           "email" : receive[1],
                  "messageContent" : receive[2],
                  "sendTime" 	  : receive[3]
                   };
+
+              //console.log(sessionCount);
               
               if(data.email != "${ loginUser.email }"){
                       CheckLR(data);
@@ -670,7 +673,7 @@ body {
             unReadCount = 1;
         }
         
-        console.log(unReadCount);
+        //console.log(unReadCount);
          // 메세지 추가
         //console.log(LR);
         appendMessageTag(LR, data.email, data.messageContent, data.name , data.sendTime, unReadCount);

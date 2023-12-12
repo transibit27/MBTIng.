@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -26,8 +25,7 @@ public class WebSocketHandler extends TextWebSocketHandler  {
     private Map<String, ArrayList<WebSocketSession>> RoomList = new ConcurrentHashMap<String, ArrayList<WebSocketSession>>();
     // session, 방 번호가 들어간다.
     private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
-	
-	
+    
     private static int i;
 
     
@@ -54,16 +52,19 @@ public class WebSocketHandler extends TextWebSocketHandler  {
         // 채팅 세션 목록에 채팅방이 존재하지 않고, 처음 들어왔고, DB에서의 채팅방이 있을 때
         // 채팅방 생성
         if(RoomList.get(chatRoom.getRoomNo()) == null && chatMessage.getMessageContent().equals("ENTER-CHAT") && chatRoom != null) {
-            
+        	
             // 채팅방에 들어갈 session들
             ArrayList<WebSocketSession> sessionTwo = new ArrayList<>();
             // session 추가
             sessionTwo.add(session);
+            //제니가 sessionTwo안에 들어감
             // sessionList에 추가
             sessionList.put(session, chatRoom.getRoomNo());
+            //제니 세션과 1번이 sessionList에 들어가고 
             // RoomList에 추가
             RoomList.put(chatRoom.getRoomNo(), sessionTwo);
             // 확인용
+            //RoomList에 1번이랑 제니가 들어감. 
             System.out.println("채팅방 생성");
             
            //System.out.println(sessionTwo);
@@ -77,9 +78,12 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             
             // RoomList에서 해당 방번호를 가진 방이 있는지 확인.
             RoomList.get(chatRoom.getRoomNo()).add(session);
+            //원래는 1번이랑 제니 , 1번이랑 유지민, 2번이랑 김민정 
             // sessionList에 추가
             sessionList.put(session, chatRoom.getRoomNo());
+            //원래는 제니 세션과 1번, 유지민 세션과 1번, 김민정 세션과 2
             // 확인용
+            
             System.out.println("생성된 채팅방으로 입장");
         }
         
@@ -104,7 +108,6 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             // sessionCount == 1 일 때는 unReadCount = 1
             chatMessage.setSessionCount(sessionCount);
             
-            //System.out.println("로아?");
             // DB에 저장한다.
             int a = cService.insertMessage(chatMessage);
             

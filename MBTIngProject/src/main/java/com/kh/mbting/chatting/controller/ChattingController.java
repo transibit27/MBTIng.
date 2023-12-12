@@ -123,19 +123,44 @@ public class ChattingController {
     @RequestMapping("search.li")
     public void searchMember(String height, String address, String age, String mbti ,String gender , HttpServletResponse response) throws JsonIOException, IOException{
     //System.out.println(height + address + age + mbti + gender);
- 
-    	int startAge 	 =  Integer.parseInt(age.substring(0, 2));
-    	int endAge 		 =  Integer.parseInt(age.substring(2, 4));    	
-    	int startHeight  =  Integer.parseInt(height.substring(0, 3));
-    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
+    //System.out.println(height  + age );
+    ArrayList<Member> list = new ArrayList<Member>();
     	
-    	SearchMember sm = new SearchMember(startAge, endAge, startHeight, endHeight, address, mbti, gender);
-    	
-    	ArrayList<Member> list = cService.searchMember(sm);
-    	System.out.println(list);
-    	response.setContentType("application/json; charset-UTF-8");
+    	if(height.equals("없음") && (!age.equals("없음"))) {
+    		//System.out.println("난 지금 키만 없음이야 ");
+    		int startAge 	 =  Integer.parseInt(age.substring(0, 2));
+	    	int endAge 		 =  Integer.parseInt(age.substring(2, 4)); 
+    		SearchMember sm  = new SearchMember(startAge, address, endAge, mbti, gender , height );
+	    	list = cService.searchMember(sm);
+	    	
+    	}else if(age.equals("없음") && (!height.equals("없음")) ) {
+    		System.out.println("난 지금 나이만 없음이야 ");
+    		int startHeight  =  Integer.parseInt(height.substring(0, 3));
+	    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
+	    	System.out.println("start :" + startHeight + "end :" + endHeight);
+	    	SearchMember sm = new SearchMember(startHeight, endHeight, address, mbti, gender , age );
+	    	list = cService.searchMember(sm);
+	    	
+    	}else if(height.equals("없음") && (age.equals("없음"))) {
+    		//System.out.println("난 지금 키 나이 둘 다 없음이야 ");
+    		SearchMember sm = new SearchMember(age, height, address, mbti, gender);
+	    	list = cService.searchMember(sm);	
+	    	
+    
+    	}else {
+    		//System.out.println("난 지금 둘 다 선택했음이야 ㅋ ");
+    		int startAge 	 =  Integer.parseInt(age.substring(0, 2));
+	    	int endAge 		 =  Integer.parseInt(age.substring(2, 4));    	
+	    	int startHeight  =  Integer.parseInt(height.substring(0, 3));
+	    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
+	    	
+	    	SearchMember sm = new SearchMember(startAge, endAge, startHeight, endHeight, address, mbti, gender);
+	    	list = cService.searchMember(sm);
+    	}
+    
+
+	    response.setContentType("application/json; charset-UTF-8");
     	new Gson().toJson(list, response.getWriter());
 
-    	
     }
 }
