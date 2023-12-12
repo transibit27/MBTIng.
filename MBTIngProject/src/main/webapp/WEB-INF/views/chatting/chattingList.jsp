@@ -84,7 +84,7 @@
 }
 
 .user:hover {
-  background-color: rgb(241, 245, 248);
+  background-color: white;
   border: 1px solid gray;
   transform: scale(1.05);
   border-radius: 50px;
@@ -92,7 +92,7 @@
 
 
 .more:hover {
-  background-color: #b3b6b6;
+  background-color: white;
   border-radius: 0px 0px 15px 15px;
 }
 
