@@ -274,15 +274,18 @@
 
     .profile-wrap{
         height: 200px;
-        width: 100%;
+        width: 140px;
         /*
         부모 요소에 display: flex를 추가해주면 자식 요소들의 정렬을 제어 가능해짐
         */
+        
         display: flex;
         flex-direction: column;
         /* coulumn 은 하위 요소를 위에 부터 정렬 */
         align-items: center;
         /*하위 요소들 정렬 위치*/
+        border-radius: 5px;
+        border: 1px solid pink;
     }
 
     .profile-info{
@@ -290,12 +293,12 @@
         height: 90px;
         text-align: center;
         box-sizing: border-box;
-        background-color: white;
+        background-color: seashell;
     }
 
     .profile-info div{
         margin: 5px;
-        height: 20px;
+        height: 22px;
         line-height: 20px;
     }
 
@@ -321,62 +324,68 @@
         width: 100px;
         height: 100px;
         border-radius: 50%;
+        border: 1px solid silver;
+        box-shadow: 5px 5px 5px grey;
     }
 
     /* 프로필 카드 백 스타일 */
-    .profile-img-box-b{
-        background-color: white;
-        width: 130px;
-        height: 60px;
-        /* 아이템을 수평, 수직 가운데 정렬하는 코드 */
+    .profile-wrap-b{
+        height: 200px;
+        width: 140px;
         display: flex;
-        flex-direction: row;
-        /* 방향을 row로 바꾸면 한 줄로 나온다! */
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        text-align: left;
+        border-radius: 5px;
+        border: 1px solid pink;
+    }
+    
+    .profile-info-b{
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        width: 100%;
+        
+        padding: 10px;
+        padding-top: 0px;
         box-sizing: border-box;
+        background-color: white;
     }
 
     .close {
         display: block;
         box-sizing: border-box;
-        width:25px;
-        height:25px;
-        text-align:center;
-        margin-left:105px;
-        margin-bottom: 10px;
+        position: relative;
+        width:20px;
+        height:20px;
+    	    margin-left:120px;
     }
 
     .close:after {
+        position: absolute;
         content: "\00d7";
-        font-size:15pt;
+        line-height: 20px;
+        font-size:10pt;
+    }
+
+    .close:hover{
+        cursor: pointer;
     }
     
     .profile-name-b{
         font-weight: bold;
-        text-align: left;
-        margin-bottom: 10px;
-    }
-    .profile-img-b {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-    }
-
-    .profile-info-b{
-        width: 100%;
-        height: 100px;
-        box-sizing: border-box;
-        background-color: white;
-        padding-bottom: 10px;
     }
 
     .profile-introduce{
         width: 120px;
-        height: 95px;
-        margin-bottom: 10px;
+        margin-top: 5px;
+        margin-bottom: 5px;
         font-size: 8px;
-        text-align: left    ;
+    }
+
+    .introduce{
+        height: 50px;
+        border: none;
+        resize: none;
     }
 
     .swiper-no-swiping {
@@ -384,12 +393,13 @@
     }
 
     #submitB{
+        margin: auto;
         border-radius: 5px;
         border: 1px solid hotpink;
         background-color: pink;
         color: white;
         width: 100px;
-        height: 25px;
+        height: 20px;
         font-weight: bold;
     }
 
@@ -403,6 +413,7 @@
     height: 100%;
     transition: all .5s;
     transform-style: preserve-3d;
+    box-shadow: 10px 50px 50px black;
     }
 
     .swiper-slide:hover .card {
@@ -467,7 +478,7 @@
                 
                 <span class="btn btn_next">다음</span>
             </div>
-    
+   
         </div>
 
         <!-- 신청자 리스트 출력용 스크립트 -->
@@ -509,7 +520,7 @@
                                                                 + "<div class='profile-name'>"
                                                                     + result[i].userName
                                                                 + "</div>"
-                                                            + 	"<div class='profile-mbti'>"
+                                                            + 	  "<div class='profile-mbti'>"
                                                                     + result[i].mbti
                                                                 + "</div>"
                                                                 + "<button id='submitB' type='submit'>수락</button>"
@@ -525,35 +536,35 @@
                                                     + "<div class='card-back'>"
                                             
                                                         + "<form action='accept.me' method='post'>"
-                                                            +"<div class='profile-wrap'>"
-                                                            +   "<div class='close'></div>"
-                                                       
+                                                            +"<div class='profile-wrap-b'>"
+                                                            +   "<div class='close' onclick='refusePropose(this)'>"
+                                                            +       "<input type='hidden' id='proposerNo' name='proposerNo' value="+ result[i].userNo + ">"
+                                                           
+                                                            +   "</div>"
                                                             +   "<div class='profile-info-b'>"
-                                                                +   "<div class='profile-name-b'>"
+                                                                +    "<div class='profile-name-b'>"
                                                                        + "거주지"
-                                                                   +"</div>"
-                                                                +   "<div>"
+                                                                    +"</div>"
+                                                                +    "<div class='profile-introduce'>"
                                                                         + result[i].address 
-                                                                +   "</div>"
-                                                                +   "<div class='profile-name-b'>"
+                                                                +    "</div>"
+                                                                +    "<div class='profile-name-b'>"
                                                                        + "키"
-                                                                   +"</div>"
-                                                                +   "<div>"
-                                                                        + result[i].height 
-                                                                +   "</div>"
-                                                                
-                                                                 +   "<div class='profile-name-b'>"
+                                                                    +"</div>"
+                                                                +     "<div class='profile-introduce'>"
+                                                                    +   result[i].height  +" cm"
+                                                                +     "</div>"
+                                                                +     "<div class='profile-name-b'>"
                                                                         + "소개"
                                                                     + "</div>"
-                                                                    + "<div class='profile-introduce'>"
+                                                                    + " <textarea class='profile-introduce introduce'>"
                                                                         + result[i].introduce
-                                                                    + "</div>"
+                                                                    + "</textarea>"
                                                                 + "<button id='submitB' type='submit'>수락</button>"
-                                                                + "<input type='hidden' name='proposerNo' value="+ result[i].userNo + ">"
                                                                 + "<input type='hidden' name='receiverNo' value='${sessionScope.loginMember.userNo}'>"
                                                             +	"</div>"
-                                                            + "</div>"
-                                                            + "</form>"
+                                                            +"</div>"
+                                                          
                                                         + "</form>"
                                                     
                                                     + "</div>"
@@ -701,10 +712,19 @@
                         });
                     }
 
-                }
-                   
-            })
+                }  
+            });
             
+            // 슬라이드 내 프로필 카드 닫힘 처리
+            function refusePropose(e){
+                console.log(e);
+                var proposerNo = e.querySelector('input[name="proposerNo"]').value;
+
+                console.log(proposerNo)
+
+
+            }
+
         </script>
 
 
