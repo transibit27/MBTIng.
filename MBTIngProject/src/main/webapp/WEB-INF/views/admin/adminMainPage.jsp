@@ -137,26 +137,26 @@
                 <div class="stat-card">
                     <i class="fas fa-users fa-3x users-icon"></i>
                     <h2>전체 회원수</h2>
-                    <p id="totalMembers">${ m.userNo }명</p>
+                    <p id="totalMembers">${totalMemberCount}</p>
                 </div>
                 
 
                 <div class="stat-card">
                     <i class="fas fa-heart fa-3x matching-icon"></i>
                     <h2>전체 커플 매칭수</h2>
-                    <p>500,000커플</p>
+                    <p id="totalCouples">${totalCoupleCount}</p>
                 </div>
             
                 <div class="stat-card">
                     <i class="fas fa-credit-card fa-3x payment-icon"></i>
-                    <h2>유료 결제수</h2>
-                    <p>50,000건</p>
+                    <h2>전체 결제 금액</h2>
+                    <p id="totalPays">${totalPayCount }</p>
                 </div>
             
                 <div class="stat-card">
                     <i class="fas fa-comments fa-3x comments-icon"></i>
                     <h2>전체 후기 게시글수</h2>
-                    <p>10,000건</p>
+                    <p id="totalBoards">${totalBoardCount }</p>
                 </div>
             </div>
         </div>
@@ -173,6 +173,7 @@
                     <h3 align="center" >매칭 상태</h3>
                     <canvas id="monthlyMatchingChart"></canvas>
                 </div>
+                
             </div>
         </div>
         
@@ -227,6 +228,8 @@
 
 <!-- 월/년별 매출 그래프 -->
 <script>
+
+	
     // 가상의 데이터 예시 (실제 데이터로 교체 필요)
     const monthlySalesData = {
         labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -274,11 +277,11 @@
         data: yearlySalesData,
         options: chartOptions
     });
-</script>
 
 
-<!-- 남녀성비 / 매칭성공률 / 유료 계정 비율 원그래프 -->
-<script>
+
+	<!-- 남녀성비 / 매칭성공률 / 유료 계정 비율 원그래프 -->
+
     // 가상의 데이터 예시 (실제 데이터로 교체 필요)
     const genderRatioData = {
         labels: ['남성', '여성'],
@@ -289,10 +292,10 @@
     };
 
     const matchingSuccessData = {
-        labels: ['수락', '거절', '보류'],
+        labels: ['수락', '보류'],
         datasets: [{
-            data: [70, 20, 10], // 실제 데이터로 교체
-            backgroundColor: ['rgba(75, 192, 192, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(255, 205, 86, 0.7)'],
+            data: [70, 10], // 실제 데이터로 교체
+            backgroundColor: ['rgba(75, 192, 192, 0.7)', 'rgba(255, 205, 86, 0.7)'],
         }]
     };
 
@@ -331,10 +334,10 @@
         data: premiumAccountData,
         options: chartOptions2
     });
-</script>
+
 
 <!-- MBTI 성향 분포도 -->
-<script>
+
     // 가상의 데이터 예시 (실제 데이터로 교체 필요)
     const mbtiDistributionData = {
         labels: ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP', 'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'],
@@ -366,24 +369,23 @@
         data: mbtiDistributionData,
         options: chartOptions3,
     });
-</script>
 
 
-<!-- 월별 회원가입 수 -->
-<script>
+
+	<!-- 월별 회원가입 수 -->
     // 가상의 데이터 예시 (실제 데이터로 교체 필요)
     const monthlySignupData = {
-        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        datasets: [{
-            label: '월별 회원가입 수',
-            data: [100, 120, 150, 80, 200, 180, 250, 220, 190, 210, 300, 280],
-            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            fill: false,
-        }]
-    };
-
+	    labels: ['01월', '02월', '03월', '04월', '05월', '06월', '07월', '08월', '09월', '10월', '11월', '12월'],
+	    datasets: [{
+	        label: '월별 회원가입 수',
+	        data: [],  // 초기에는 빈 배열로 설정
+	        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+	        borderColor: 'rgba(75, 192, 192, 1)',
+	        borderWidth: 1,
+	        fill: false,
+	    }]
+	};
+    
     // 차트 설정
     const chartOptions4 = {
         scales: {
@@ -406,8 +408,8 @@
 </script>
 
 
-<!-- 매칭 수락/거절/보류 -->
-<script>
+	<!-- 매칭 수락/거절/보류 -->
+	<script>
     // 가상의 데이터 예시 (실제 데이터로 교체 필요)
     const monthlyMatchingData = {
         labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
@@ -416,13 +418,6 @@
             data: [50, 60, 70, 80, 90, 100, 120, 110, 95, 85, 75, 60],
             backgroundColor: 'rgba(75, 192, 192, 0.7)',
             borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            fill: false,
-        }, {
-            label: '거절',
-            data: [10, 15, 20, 25, 30, 35, 40, 35, 30, 25, 20, 15],
-            backgroundColor: 'rgba(255, 99, 132, 0.7)',
-            borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
             fill: false,
         }, {
@@ -456,7 +451,127 @@
     });
 </script>
 
+<!-- 실시간 정보불러오기 위한 ajax -->
+<script>
 
+  $(function() {
+	   totalMemberCount();
+	   totalCoupleCount();
+	   totalPayCount();
+	   totalBoardCount();
+	   totalMonthlyCount();
+  });
+  
+  function totalMemberCount() {
+	  
+	  $.ajax({
+		  
+		 url : "selectTotalMembers.ad",
+		 type : "get",
+		 success : function(result) {
+			 $("#totalMembers").text(result + "명");
+		 },
+		 error : function() {
+			 console.log("실퍀");
+		 }
+	  
+	  });
+  }
+  
+  function totalCoupleCount() {
+	  
+	  $.ajax({
+		  
+		  url : "selectTotalCouple.ad",
+		  type : "get",
+		  success : function(result) {
+			  $("#totalCouples").text(result + "건");
+		  },
+		  error : function() {
+			  console.log("ajax 통신 실패!");
+		  }
+	  });
+  }
+  
+  function totalPayCount() {
+	  
+	  $.ajax({
+		  
+		  url : "selectTotalPay.ad",
+		  type : "get",
+		  success : function(result) {
+			  $("#totalPays").text(result + "원");
+		  },
+		  error : function() {
+			  console.log("ajax 통신 실패!");
+		  }
+	  });
+  }
+  
+  function totalBoardCount() {
+	  
+	  $.ajax({
+		  url : "selectTotalBoard.ad",
+		  type : "get",
+		  success : function(result) {
+			  $("#totalBoards").text(result + "건");
+		  },
+		  error : function() {
+			  console.log("ajax 통신 실패요~");
+		  }
+	  });
+  }
+  
+  function totalMonthlyCount() {
+	   
+	  $.ajax({
+	        url: "selectTotalMonthly.ad",
+	        type: "get",
+	        success: function (result) {
+	            // console.log(result);
+
+	         	// enrollCount 값만 추출하여 배열에 저장
+	            const enrollCounts = result.map(item => item.enrollCount);
+	            
+	            // monthlySignupData 객체의 data 배열에 enrollCounts 배열을 할당
+	            monthlySignupData.datasets[0].data = enrollCounts;
+
+	            // 변경된 데이터 출력
+	            // console.log(monthlySignupData);
+
+	            // monthlySignupChart 차트 업데이트
+	            monthlySignupChart.update();
+	            
+	        },
+	        error: function () {
+	            console.log("실패함ㅋ");
+	        }
+	    });
+	}
+	// 위 함수 호출
+	totalMonthlyCount();
+
+	// 커플 매칭 상태 수락 그래프
+	function TotalMatchingSuccessCount() {
+		
+		$.ajax({
+			url : "selectTotalMatchingSuccess.ad",
+			type : "get",
+			success : function(result) {
+				console.log(result);
+				console.log("잘.. 되나?");
+				console.log("잘 되나?");
+			},
+			error : function() {
+				console.log("ajax 통신 실패!!");
+			}
+		});
+	}
+
+  
+ 
+
+</script>
 
 </body>
 </html>

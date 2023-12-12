@@ -24,6 +24,7 @@ import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.dao.MemberDao;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -180,6 +181,11 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(Member m) {
 		return memberDao.updateMember(sqlSession, m);
 	}
+	// 마이페이지 내 비밀번호 수정용 method
+	@Override
+	public int updatePwd(Member m) {
+		return memberDao.updatePwd(sqlSession, m);
+	}
 
 	// 마이페이지 - 내게 매칭을 신청한 회원의 수 확인용 메소드
 	@Override
@@ -223,13 +229,6 @@ public class MemberServiceImpl implements MemberService {
 	public int matchingStrat(Matching mc) {
 		return memberDao.matchingStrat(sqlSession, mc);
 	}
-
-	
-	// 마이페이지 - 하단메뉴 (내 상태 - 프로필) 조회용 메소드
-	@Override
-	public Member myStatProfile(String userNo) {
-		return memberDao.myStatProfile(sqlSession, userNo);
-	}
 	
 	// 마이페이지 - 내 후기 게시글 총 갯수 확인용 메소드
 	@Override
@@ -245,9 +244,28 @@ public class MemberServiceImpl implements MemberService {
 
 	// 마이페이지 - 내 대화 상대 조회용 메소드
 	@Override
-	public Member myChat(String userNo) {
+	public ArrayList<Member> myChat(String userNo) {
 		return memberDao.myChat(sqlSession, userNo);
 	}
+
+	// 마이페이지 - 내 결제 리스트 수 조회용 메소드
+	@Override
+	public int selectOrderListCount(String email) {
+		return memberDao.selectOrderListCount(sqlSession, email);
+	}
+	// 마이페이지 - 내 결제 내역 조회용 메소드
+	@Override
+	public ArrayList<KakaoPay> orderList(PageInfo pi, String email) {
+		return memberDao.orderList(sqlSession, pi, email);
+	}
+
+	// 회원가입 - 이메일 중복 검사용 메소드
+	@Override
+	public int checkEmail(Member m) {
+		return memberDao.checkEmail(sqlSession, m);
+	}
+
+
 
 
 

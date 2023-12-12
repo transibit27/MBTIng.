@@ -155,7 +155,7 @@
 			    <li>                
                     <input class="bno" type="hidden" value=${b.boardNo}>
 	                <div>
-	                    <p class="list_thumbimg"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJzWQKAwc2PQhvbHzBljfn1XeZ6RoVkHwVtpN7qziz3410qthreP08tKt0dVG1itRo8Yc&usqp=CAU" alt="" ></p>    
+	                    <p class="list_thumbimg"><img src="${pageContext.request.contextPath}/${b.changeName}"></p>   
 	                    <div>
 	                        <p class="pt_title">${b.boardTitle}
 	                        </p>
@@ -204,7 +204,7 @@
 		</c:forEach>
 	        
 	    <c:choose>
-			<c:when test="${ requestScope.pi.currentPage eq requestScope.pi.maxPage }">
+			<c:when test="${ requestScope.pi.currentPage ge requestScope.pi.maxPage }">
 				<button type="button" style="display: none;" disabled>&gt;</button>
 			</c:when>
 			<c:otherwise>
@@ -218,6 +218,7 @@
 	<script>
 	$(function(){
 		$("#pageB-${ requestScope.pi.currentPage }").attr("disabled",true);
+
 	})
 	
 	</script>

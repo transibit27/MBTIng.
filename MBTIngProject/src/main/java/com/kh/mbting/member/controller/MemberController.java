@@ -31,6 +31,7 @@ import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 
 
@@ -119,6 +120,17 @@ public class MemberController {
 		}
 			
 	}
+	
+	//4-1 회원가입에서 이메일 중복체크용 method
+	@ResponseBody
+	@RequestMapping(value = "emailCheck.me", produces = "text/html; charset=UTF-8")
+	public String checkEmail(Member m) {
+		
+		int result = memberService.checkEmail(m);
+		
+		return (result > 0 ) ? "NNNNN" : "NNNNY";
+		
+	}
 
 	//5. 카카오 로그인을 시도했을 경우 실행될 method
 	@GetMapping("/kakaoLog.me")
@@ -201,10 +213,7 @@ public class MemberController {
 				// proposerInfo : 수락 대상자의 회원 정보를 받기
 				Member proposerInfo = memberService.proposerInfo(proposerNo);
 				
-				//System.out.println("수락회원 정보" + proposerInfo);
-				//System.out.println("로그인 회원" + session.getAttribute("loginMember"));
 				Member receiverInfo = (Member)session.getAttribute("loginMember");
-				//System.out.println(receiverInfo);
 				
 				// result4 : 신청 수락 뒤 쳇룸 추가 (회원의 정보를 모두 넘김)
 				// 신청자, 수락자 정보를 ChatRoom VO에 담기
@@ -215,8 +224,6 @@ public class MemberController {
 				cr.setMasterEmail(proposerInfo.getEmail());
 				cr.setMasterName(proposerInfo.getUserName());
 				cr.setMasterPic(proposerInfo.getProfileImg());
-				//System.out.println("잘 담겼나?"+cr);
-				
 				
 				int result4 = memberService.createChatroom(cr);
 				
@@ -249,41 +256,16 @@ public class MemberController {
 		
 	}
 	
-	//b-4 내 상태 하단 메뉴 프로필 상태 표시용 메소드 (ajax)
-	// 수정 중
-	@ResponseBody
-	@RequestMapping (value="myStat.me", produces="text/html; charset=UTF-8")
-	public String myStatProfile(String userNo,
-						HttpSession session) {
-		
-		Member me = memberService.myStatProfile(userNo);
-		
-		// 테스트용으로 정보 추출
-		String result = me.getEmail();
-		
-		// 갱신된 내 정보를 loginMember에 담음
-		session.setAttribute("loginMember", me);
-		
-		return result;
-		
-	}
 	
 	// b-5 내 대화 상대 정보 표시용 메소드(ajax)
-	// 수정 중
 	@ResponseBody
-	@RequestMapping (value="myChat.me", produces="text/html; charset=UTF-8")
+	@RequestMapping (value="myChat.me", produces="application/json; charset=UTF-8")
 	public String myChat(String userNo,
 						HttpSession session) {
-		System.out.println("내 대화 상대 유저no"+userNo);
-		Member me = memberService.myChat(userNo);
-		System.out.println("내 대화 상대 맴버정보"+me);
 		
-		// 대화 상대의 정보를 ProposeMember 에 담음
-		session.setAttribute("ProposeMember", me);
-		
-		// 테스트용으로 정보 받아옴
-		String result = me.getEmail();
-		return result;
+		ArrayList<Member> list = memberService.myChat(userNo);
+
+		return new Gson().toJson(list);
 	}
 	
 	
@@ -320,7 +302,6 @@ public class MemberController {
 		
 		if(result > 0) {
 			Member updateMem = memberService.loginMember(m);
-			
 			session.setAttribute("loginMember", updateMem);
 			session.setAttribute("alertMsg", "정보 변경에 성공했습니다.");
 			
@@ -332,6 +313,48 @@ public class MemberController {
 		}
 		
 	}
+	
+	//b-7 마이페이지 비밀번호 수정용 method
+	@PostMapping(value="updatePwd.me")
+	public String updatePwd(Member m, Model model, HttpSession session){
+		
+		// step1 비밀번호 변경하기 위해 입력한 비밀번호가 현재 비밀번호와 일치하는가
+		Member loginMember = memberService.loginMember(m);
+		if(loginMember != null && 
+			bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
+						
+			// step2 변경할 비밀번호를 암호화
+			String encPwd = bcryptPasswordEncoder.encode(m.getChangePwd());
+			
+			// step3 변경할 비밀번호로 현재 비밀번호 변경
+			m.setUserPwd(encPwd);
+			int result = memberService.updatePwd(m);
+
+			// step4 비밀번호 변경 결과에 따라 알림 메시지 출력
+			if(result > 0) {
+				Member updateMem = memberService.loginMember(m);
+				session.setAttribute("loginMember", updateMem);
+				session.setAttribute("alertMsg", "비밀번호 변경에 성공했습니다.");
+				return "redirect:/myProfile.me";
+			} else {
+				model.addAttribute("errorMsg", "비밀번호 변경에 실패했습니다.");
+				return "common/errorPage";
+			}
+			
+		} else {
+			 model.addAttribute("errorMsg" , "입력한 비밀번호가 일치하지 않습니다.");
+			 return "common/errorPage";
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 	
 	//c 마이페이지 - 내후기
 	@RequestMapping(value="myReview.me")
@@ -398,4 +421,27 @@ public class MemberController {
 	public String myPay() {
 		return "member/myPay";
 	}
+	
+	// e-2 마이페이지 - 내 결제 리스트 조회 용 메소드
+	@ResponseBody
+	@RequestMapping(value="orderList.me",	 produces="application/json; charset=UTF-8")
+	public String orderList(Member m,
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
+		
+		// 전체 결제 리스트 수 조회
+		int listCount = memberService.selectOrderListCount(m.getEmail());
+		
+		int pageLimit = 5;
+		int boardLimit = 8;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, 
+						currentPage, pageLimit, boardLimit);
+	
+		ArrayList<KakaoPay> list = memberService.orderList(pi, m.getEmail());
+		System.out.println("결제내역:"+list);
+	
+		return new Gson().toJson(list);
+	}
+	
+	
 }

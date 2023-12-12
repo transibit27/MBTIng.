@@ -36,8 +36,14 @@
 			<beans:bean class="com.kh.mbting.common.interceptor.LoginInterceptor"
 						   id="loginInterceptor"></beans:bean>	
 		</interceptor>
+		<!-- 채팅리스트 조회에 대한 인터셉터 -->
+		<interceptor>
+			<mapping path="/all.me"/>
+			<mapping path="/convert.ch"/>
+			<beans:bean class="com.kh.mbting.common.interceptor.ChattingInterceptor"
+						   id="chatInterceptor"></beans:bean>	
+		</interceptor>
 	</interceptors>
-	
 	
 	<!--  websocket 관련 설정 태그 -->
 	<beans:bean class="com.kh.mbting.chatting.server.WebSocketHandler"
@@ -47,7 +53,6 @@
 	<websocket:handlers>
 		<websocket:mapping path="chat.do" handler="chatServer"/>
 	</websocket:handlers>
-	
 	
 	<!-- 
 		<websocket:handshake-interceptors>

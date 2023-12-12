@@ -188,9 +188,13 @@
 
 	.slider .inner {
         overflow: hidden;
+        height: 450px;
         width: 100%;
         margin: 0 auto;
-        padding: 100px 0;}
+        padding: 100px 0;
+        border-radius: 5px;
+        background-color: black;
+    }
 
 	.slide_list > li {
         position: relative;
@@ -454,12 +458,13 @@
         <!-- 신청자 리스트 출력용 스크립트 -->
         <script>
             $(document).ready(function(){
+            	
                 myStatProfile();    // 내 상태 갱신용 펑션
                 proposerList();     // 대화 신청자 리스트 갱신용 펑션
-                slider();           // 대화 신청자 리스트 슬라드 표시요 ㅇ펑션
-                setInterval(myStatProfile,50000);
+                slider();           // 대화 신청자 리스트 슬라이드 표시용 펑션
+                setInterval(myStatProfile, 50000);
                 setInterval(proposerList, 50000);
-        
+
                 // 매칭 신청자 리스트 확인용 ajax
                 function proposerList(){
                     
@@ -467,67 +472,72 @@
                         
                         url : "proposerList.me",
                         type : "post",
-                        data : {"userNo":${sessionScope.loginMember.userNo}}, 
+                        data : {"userNo":"${sessionScope.loginMember.userNo}"}, 
                         success : function(result){
                             
                             let resultStr="";
-                            
-                            for(let i = 0; i < result.length; i++){
                                 
-                            let profileImg= "/mbting"+result[i].profileImg;
-                            
-                                resultStr += "<li class='swiper-slide'>"
-                                            + "<div class='card'>"
-                                                + "<div class='card-front'>"
-                                        
-                                                    + "<form action='accept.me' method='post'>"
-                                                        + "<div class='profile-wrap'>"
-                                                        +	"<div class='profile-img-box'>"
-                                                            +	"<img class='profile-img' src=" +profileImg+ ">"
-                                                        +	"</div>"
-                                                        +	"<div class='profile-info'>"
-                                                            + "<div class='profile-name'>"
-                                                                + result[i].userName
-                                                            + "</div>"
-                                                        + 	"<div class='profile-mbti'>"
-                                                                + result[i].mbti
-                                                            + "</div>"
-                                                            + "<button id='submitB' type='submit'>수락</button>"
-                                                            + "<input type='hidden' name='proposerNo' value="+ result[i].userNo + ">"
-                                                            + "<input type='hidden' name='receiverNo' value="+ ${sessionScope.loginMember.userNo} + ">"
-                                                        +	"</div>"
-                                                        + "</div>"
-                                                        + "</form>"
-                                                    + "</form>"
-                                                
-                                                + "</div>"
-
-                                                + "<div class='card-back'>"
-                                        
-                                                    + "<form action='accept.me' method='post'>"
-                                                        +"<div class='profile-wrap'>"
-                                                        +	"<div class='profile-img-box-b'>"
-                                                            +	"<img class='profile-img-b' src=" +profileImg+ ">"
-                                                        +	"</div>"
-                                                        +   "<div class='profile-info-b'>"
-                                                             +   "<div class='profile-name-b'>"
-                                                                    + "소개"
+                                for(let i = 0; i < result.length; i++){
+                                    
+                                let profileImg= "/mbting"+result[i].profileImg;
+                                
+                                    resultStr += "<li class='swiper-slide'>"
+                                                + "<div class='card'>"
+                                                    + "<div class='card-front'>"
+                                            
+                                                        + "<form action='accept.me' method='post'>"
+                                                            + "<div class='profile-wrap'>"
+                                                            +	"<div class='profile-img-box'>"
+                                                                +	"<img class='profile-img' src=" +profileImg+ ">"
+                                                            +	"</div>"
+                                                            +	"<div class='profile-info'>"
+                                                                + "<div class='profile-name'>"
+                                                                    + result[i].userName
                                                                 + "</div>"
-                                                                + "<div class='profile-introduce'>"
-                                                                    + result[i].introduce
+                                                            + 	"<div class='profile-mbti'>"
+                                                                    + result[i].mbti
                                                                 + "</div>"
-                                                            + "<button id='submitB' type='submit'>수락</button>"
-                                                            + "<input type='hidden' name='proposerNo' value="+ result[i].userNo + ">"
-                                                            + "<input type='hidden' name='receiverNo' value="+ ${sessionScope.loginMember.userNo} + ">"
-                                                        +	"</div>"
-                                                        + "</div>"
+                                                                + "<button id='submitB' type='submit'>수락</button>"
+                                                                + "<input type='hidden' name='proposerNo' value="+ result[i].userNo + ">"
+                                                                + "<input type='hidden' name='receiverNo' value='${sessionScope.loginMember.userNo}'>"
+                                                            +	"</div>"
+                                                            + "</div>"
+                                                            + "</form>"
                                                         + "</form>"
-                                                    + "</form>"
-                                                
+                                                    
+                                                    + "</div>"
+    
+                                                    + "<div class='card-back'>"
+                                            
+                                                        + "<form action='accept.me' method='post'>"
+                                                            +"<div class='profile-wrap'>"
+                                                            +	"<div class='profile-img-box-b'>"
+                                                                +	"<img class='profile-img-b' src=" +profileImg+ ">"
+                                                            +	"</div>"
+                                                            +   "<div class='profile-info-b'>"
+                                                                 +   "<div class='profile-name-b'>"
+                                                                        + "소개"
+                                                                    + "</div>"
+                                                                    + "<div class='profile-introduce'>"
+                                                                        + result[i].introduce
+                                                                    + "</div>"
+                                                                + "<button id='submitB' type='submit'>수락</button>"
+                                                                + "<input type='hidden' name='proposerNo' value="+ result[i].userNo + ">"
+                                                                + "<input type='hidden' name='receiverNo' value='${sessionScope.loginMember.userNo}'>"
+                                                            +	"</div>"
+                                                            + "</div>"
+                                                            + "</form>"
+                                                        + "</form>"
+                                                    
+                                                    + "</div>"
+    
                                                 + "</div>"
+                                }
 
-                                            + "</div>"
-                            }
+                                if(resultStr==""){
+                                    console.log("매칭 신청자 리스트가 없을때 안뜸")
+                                }
+
                             
                             // 매칭 신청자 리스트 출력 위치
                             $(".slide_list").html(resultStr);
@@ -540,51 +550,63 @@
                         
                     }) // ajax 끝
                 }
-
-                $("#test").click(function(){
-                    
-                })
-
-                $(".swiper-slide").click(function(){
-                    alert("잘되나?3")
-                })
+                
+                // 하단 메뉴바(상태 표시용) ajax 펑션
+                function myStatProfile(){
               
-
-
-                
-                // 하단 메뉴바(내 상태) 펑션 => 미완성 myRoomNo 정보는 불러오는 상태
-                function myStatProfile(){
-                    
-                    $.ajax({
-                        url : "myStat.me",
-                        type : "post",
-                        data : {"userNo":${sessionScope.loginMember.userNo}},
-                        success : function(result){
-                            
-                            console.log(result);
-                        
-                        },
-                        error : function(){
-                            console.log("내 상태 표시용 ajax 통신 실패")
-                        }
-                        
-                    }); // ajax 끝
-                }
-                
-                // 하단 메뉴바(내 대화 상대 표시용) ajax 펑션 => 미완성
-                function myStatProfile(){
                     
                     $.ajax({
                         url : "myChat.me",
                         type : "post",
-                        data : {"userNo":${sessionScope.loginMember.userNo}},
+                        data : {"userNo":"${sessionScope.loginMember.userNo}"},
                         success : function(result){
-                            
-                            console.log(result);
-                        
+
+                            // 대화 상대 리스트 조회용 
+                        	if(result.length != 0){
+                        		
+	                        	$("#myChat").html(result[0].userName+ "님 외 " +result.length+ "명이 <br>대화를 기다리고 있어요!" )
+                        	} else {
+                        		$("#myChat").html("MBTING 매칭을 통해 대화 상대를 찾아보세요!")
+                        	}
+
+                            // 프로필 미완성 내용 확인용
+                            if("${sessionScope.loginMember.introduce}" == "" ||
+                                "${sessionScope.loginMember.profileImg}" == "" ||
+                                "${sessionScope.loginMember.phone}" == "" ||
+                                "${sessionScope.loginMember.address}" == "null" ||
+                                "${sessionScope.loginMember.mbti}" == ""
+                                ) {
+                                    
+                                    $("#myProfile"  ).html("프로필에 모든 정보를 작성 하면 매칭 리스트에 표시됩니다. <br>");
+
+                                    if ("${sessionScope.loginMember.introduce}" == "") {
+                                       
+                                        $("#myProfile").html("자기소개를 작성하면 매칭 리스트에 표시됩니다. <br>");
+                                    } else if ("${sessionScope.loginMember.profileImg}" == "") {
+                                     
+                                        $("#myProfile").html("프로필 이미지를 등록하면 매칭 리스트에 표시됩니다. <br>");
+                                    } else if ("${sessionScope.loginMember.phone}" == "") {
+                                       
+                                        $("#myProfile").html("연락처 정보를 등록하면 리스트에 표시됩니다. <br>");
+                                    } else if ("${sessionScope.loginMember.address}" == "null") {
+                                        
+                                        $("#myProfile").html("거주지 정보를 등록하면 리스트에 표시됩니다. <br>");
+                                    } else if ("${sessionScope.loginMEmber.mbti}" == "") {
+
+                                        $("#myProfile").html("연애테스트를 통해 내 성향을 알아보고 <br> 최고의 궁합을 찾아보세요. <br>");
+                                    }
+                            }
+
+                            // 결제 정보 노출 용
+                            if(${sessionScope.loginMember.matchCoin} < 10){
+                                $("#myMatchCoin").html("MBTIng 코인이 ${sessionScope.loginMember.matchCoin}개 밖에 안남았어요! <br> MBTIng 코인을 충전하고 <br> 마음에 드는 상대에게 대화를 신청해보세요!");
+                            } else {
+                                $("#myMatchCoin").html("MBTIng 코인이 ${sessionScope.loginMember.matchCoin}개 <br> 여유로워 보이지만 <br> 마음에 드는 상대방에 비해 부족한건 아닐까요?");
+                            }
+        
                         },
                         error : function(){
-                            console.log("내 대화 상대 표시용 ajax 통신 실패")
+                            console.log("내 대화 상대 표시용 ajax 통신 실패");
                         }
                         
                     }); // ajax 끝
@@ -670,9 +692,9 @@
 	                <div class="shortMenu-title">
 	                    프로필 편집
 	                </div> 
-	                <div class="shortMenu-content">
-	                    사진을 등록하세요 <br>
-	                    내용
+	                <div class="shortMenu-content" id="myProfile">
+	                    멋진 프로필을 작성하고 상대에게 어필해보세요! <br>
+                        잘 작성된 소개는 높은 매칭 성공률을 가집니다. :D
 	                    <br>
 	                </div>
 	                <div class="shortMenu-button">
@@ -694,7 +716,7 @@
 	                    대화하기
 	                </div> 
 	
-	                <div class="shortMenu-content">
+	                <div class="shortMenu-content" id="myChat">
 	                    xx 님이 <br>
 	                    대화를 기다리고 있어요!
 	                </div>
@@ -717,8 +739,8 @@
 	                <div class="shortMenu-title">
 	                    결제 정보
 	                </div> 
-	                <div class="shortMenu-content">
-	                    내용
+	                <div class="shortMenu-content" id="myMatchCoin">
+                       
 	                </div>
 	                <div class="shortMenu-button">
 	                    <button id="test" type="button" onclick="location.href='myPay.me'">확인하기</button>

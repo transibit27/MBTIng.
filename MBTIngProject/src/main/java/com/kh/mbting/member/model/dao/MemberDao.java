@@ -13,6 +13,7 @@ import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.pay.vo.KakaoPay;
 
 
 @Repository
@@ -23,20 +24,20 @@ public class MemberDao {
 	}
 	
 	public Member loginMember(SqlSession sqlSession , Member m ) {
-	
-		return sqlSession.selectOne("memberMapper.loginMember", m);
-		
+		return sqlSession.selectOne("memberMapper.loginMember", m);	
 	}
 
 	public int insertMember(SqlSessionTemplate sqlSession, Member m) {
-
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
 	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
-
+	public int updatePwd(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updatePwd", m);
+	}
+	
 	public int proposerCount(SqlSessionTemplate sqlSession, String userNo) {
 		return sqlSession.selectOne("memberMapper.proposerCount", userNo);
 	}
@@ -64,12 +65,8 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList", userNo, rowBounds);
 	}
 
-	public Member myStatProfile(SqlSessionTemplate sqlSession, String userNo) {
-		return sqlSession.selectOne("memberMapper.myStatProfile", userNo);
-	}
-
-	public Member myChat(SqlSessionTemplate sqlSession, String userNo) {
-		return sqlSession.selectOne("memberMapper.myChat", userNo);
+	public ArrayList<Member> myChat(SqlSessionTemplate sqlSession, String userNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.myChat", userNo);
 	}
 
 	public Member proposerInfo(SqlSessionTemplate sqlSession, String proposerNo) {
@@ -89,6 +86,26 @@ public class MemberDao {
 	public int matchingStrat(SqlSessionTemplate sqlSession, Matching mc) {
 		return sqlSession.update("memberMapper.matchingStrat", mc);
 	}
+
+	// 마이페이지 - 내 결제 리스트 수 조회용 메소드
+	public int selectOrderListCount(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("kakaoPayMapper.selectOrderListCount", email);
+	}
+	// 마이페이지 - 내 결제 리스트 조회용 메소드
+	public ArrayList<KakaoPay> orderList(SqlSessionTemplate sqlSession, PageInfo pi, String email) {
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.orderList", email, rowBounds);
+	}
+	
+	// 회원가입 - 이메일 중복 체크용 메소드
+	public int checkEmail(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.checkEmail", m);
+	}
+
 
 
 

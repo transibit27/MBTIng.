@@ -24,10 +24,10 @@ public class WebSocketHandler extends TextWebSocketHandler  {
 	
 	// 채팅방 목록 <방 번호, ArrayList<session> >이 들어간다.
     private Map<String, ArrayList<WebSocketSession>> RoomList = new ConcurrentHashMap<String, ArrayList<WebSocketSession>>();
-	
     // session, 방 번호가 들어간다.
     private Map<WebSocketSession, String> sessionList = new ConcurrentHashMap<WebSocketSession, String>();
-    
+	
+	
     private static int i;
 
     

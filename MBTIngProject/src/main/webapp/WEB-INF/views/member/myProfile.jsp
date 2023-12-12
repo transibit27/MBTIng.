@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,15 +15,28 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-  
+
+<!-- 부트스트랩에서 제공하고 있는 스타일 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- 부트스트랩에서 제공하고 있는 스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	  
+<!-- 부트스트랩때문에 연결함 -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!-- 알람문구 용 -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
 <style>
     * {font-family: 'Noto Sans KR', sans-serif;
     caret-color: transparent;
-    }
-
-    
-    div{border: px solid red;
     }
     
     #profile-outer{
@@ -130,6 +144,10 @@
         padding-left: 10px;
     }
 
+    input[type="checkbox"]{
+        margin: 6px;
+    }
+
 	textarea {
         padding-left: 10px;
         background-color: #EBEDEF;
@@ -147,6 +165,7 @@
 		line-height: 20px;
         font-size: 15px;
         font-weight: bold;
+        margin: 10px;
 	}
 
 	.profile-content{
@@ -160,7 +179,7 @@
 	
 	#change-profile{
         width: 100%;
-        height: 40px;
+        height: 40px;   
         border: 2px solid pink;
         border-radius: 5px;
         background-color: pink;
@@ -229,6 +248,15 @@
 </style>
 </head>
 <body>
+	<!-- 알람문구 출력용 코드 ( session.alertMsg )-->
+	
+	<c:if test="${ not empty sessionScope.alertMsg }">
+		<script>
+			alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
+		</script>
+		
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
 
 	<div>
 
@@ -296,6 +324,14 @@
                     </td>
 
                     <tr>
+                        <td class="profile-title">키</td>
+                    </tr>
+                    <td>
+                        <input class="profile-content" type="text" name="height" 
+                        value="${sessionScope.loginMember.height}" disabled>
+                    </td>
+
+                    <tr>
                         <td class="profile-title">가입일</td>
                     </tr>
                     <tr>
@@ -327,7 +363,48 @@
                             <textarea style="caret-color: auto;" placeholder="사용자의 소개 내용을 입력해 주세요." name="introduce">${sessionScope.loginMember.introduce}</textarea>
                         </td>
                     </tr>
-             
+                    
+                    <tr>
+                        <td class="profile-title"> 거주지</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="address" id= "address">
+                            	<option value=null>== 주소선택 ==</option>
+	                            <option value="서울특별시">서울특별시</option>
+							    <option value="부산광역시">부산광역시</option>
+							    <option value="대구광역시">대구광역시</option>
+							    <option value="인천광역시">인천광역시</option>
+							    <option value="광주광역시">광주광역시</option>
+							    <option value="대전광역시">대전광역시</option>
+							    <option value="울산광역시">울산광역시</option>
+							    <option value="세종특별시">세종특별시</option>
+							    <option value="경기도">경기도</option>
+							    <option value="강원도">강원도</option>
+							    <option value="충청북도">충청북도</option>
+							    <option value="충청남도">충청남도</option>
+							    <option value="전라북도">전라북도</option>
+							    <option value="전라남도">전라남도</option>
+							    <option value="경상북도">경상북도</option>
+								<option value="경상남도">경상남도</option>
+								<option id="jeju" value="제주도">제주도</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <script>
+                    $(function(){
+                    	
+                    // 주소 기본값 설정
+	                    if("${sessionScope.loginMember.address}" != null){
+	                    	console.log($("#address option[value='${sessionScope.loginMember.address}']"))
+	                    	$("#address option[value='${sessionScope.loginMember.address}']").prop("selected", true)
+	                    	
+	                    }
+                    	
+                    })
+                    
+                    </script>
+                    
                     <tr>
                         <td class="profile-title">MBTI</td>
                     </tr>
@@ -347,9 +424,11 @@
                             value="${sessionScope.loginMember.mbtiNick}" disabled>
                         </td>
                         <td>
-                            <button id="mbti-test" type="button" onclick="location.href=''">내 성향 검사</button>
+                            <button id="mbti-test" type="button" onclick="location.href='mbtiTest.mb'">내 성향 검사</button>
                         </td>
                     </tr>
+
+        
                     
                     
                
@@ -397,7 +476,7 @@
                 </div>
 
                 <div class="final-button">
-                    <button id="final-button1" type="button">비밀번호 변경</button>
+                    <button id="final-button1" type="button" data-toggle="modal" data-target="#changePwd">비밀번호 변경</button>
                     <button id="final-button2" type="submit">적용 </button>
                 </div>  
             </div>
@@ -432,7 +511,125 @@
 
 		</form>
 	</div>
-	
+
+
+    <!-- 필요한 모달창 -->
+	<!-- 비밀번호 변경용 모달창 -->
+	<div class="modal fade" id="changePwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <form action="updatePwd.me" method="post">
+		            <div class="modal-body">
+		                    <input type="hidden" name="email" value="${sessionScope.loginMember.email}">
+		                    <div class="form-group">
+		                        <label for="message-text" class="col-form-label">현재 비밀번호</label>
+		                        <input type="password" class="form-control" id="userPwd" name="userPwd">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="message-text" class="col-form-label">변경할 비밀번호</label>
+		                        <input type="password" class="form-control" id="changePwd" name="changePwd"
+		                        		required onkeyup="checkPwd1(this)">
+		                        <div id="passwordCheck1">
+		                        </div>
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="message-text" class="col-form-label">변경 비밀번호 확인</label>
+		                        <input type="password" class="form-control" id="checkPwd"
+		                        		disabled required onkeyup="checkPwd2(this)">
+		                        <div id="passwordCheck2">
+		                        </div>
+		                    </div>
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		                <button type="submit" class="btn btn-primary" disabled>결정</button>
+		            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // 유효성 검사 최종 확인용
+    let checkArr = [false, false]
+    // 최종 확인용 스크립트
+    function finalCheck(){
+        	
+            if(checkArr.every(value => value === true)){
+             // 회원가입 버튼 활성화
+             $(".modal-footer button[type=submit]").attr("disabled", false)
+         } else {
+             // 회원가입 버튼 비활성화
+             $(".modal-footer button[type=submit]").attr("disabled", true)
+         }
+         
+     }
+ 	
+    // 1. 비밀번호 입력 유효성 검사
+    function checkPwd1(e){
+
+        // 사용자 입력 비번
+        let changePwd = e.value;
+
+        // 비밀번호: 8~16자의 영문 대/소문자, 숫자, 특수문자 정규식
+        let regExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,16}$/;
+
+        if(regExp.test(changePwd)) {
+            // 유효한 비번일 경우
+            checkArr[0] = true;
+            $("#changePwd").css("border-color", "gray");
+            $("#passwordCheck1").css("color", "red").text("");
+            $("#checkPwd").val("");
+            $("#checkPwd").attr("disabled", false).css("background-color", "white");
+            finalCheck();
+
+        } else {
+            // 유효하지 않은 비번일 경우
+            checkArr[0] = false;
+            $("#changePwd").css("border-color", "red");
+            $("#passwordCheck1").css("color", "red").text("8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.");
+            $("#checkPwd").val("");
+            $("#checkPwd").attr("disabled", true).css("background-color", "lightgray");
+            finalCheck();
+
+        }
+    }
+
+    // 2. 비밀번호 일치 검사
+    
+    function checkPwd2(e){
+
+        let checkPwd = e.value;
+        let userPwd = document.getElementById("userPwd").value;
+
+        if(userPwd == checkPwd) {
+        // 유효한 검사결과
+        $("#checkPwd").css("border-color", "gray");
+        $("#passwordCheck2").css("color", "red").text("");
+        finalCheck();
+
+        checkArr[1] = true;
+
+        } else {
+            // 유효하지 않은 검사결과
+
+            $("#checkPwd").css("border-color", "red");
+            $("#passwordCheck2").css("color", "red").text("입력한 비밀번호가 일치하지 않습니다.");
+            finalCheck();
+
+            checkArr[1] = false;
+        }
+        
+
+    }
+    
+    </script>
     
 </body>
 </html>

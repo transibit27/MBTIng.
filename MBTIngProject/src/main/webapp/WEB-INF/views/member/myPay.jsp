@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <!doctype html>
 <html lang="ko">
 <head>
@@ -191,7 +191,8 @@
                     무제한 MBTI 테스트 가능
                 </div>
             </div>  
-            <button type="button">결제하기</button>
+          
+            <button type="button">5만원 결제하기</button>
         </div>
     
         <div class="pay_item" id="pay2">
@@ -199,39 +200,104 @@
                 <div class="item_title">MBTICoin x10</div>
                 <div class="item_intro">
                     횟수 제한 없는 매칭 신청 <br>
-                    대화 기회 5회! <br>
+                    대화 기회 10회! <br>
                     부담 있는 가격 <br>
                     무제한 MBTI 테스트 가능
                 </div>
             </div>
-            <form method="post" th:action="@{/kakaoPay}">
-			    <button type="submit">결제하기</button>
-			</form>
+
+			    <button id="mbtiCoin10" type="button">9만원 결제하기</button>
         </div>
 
     </div>
 
 </div>
 
-<!-- 카카오페이 결제용 스클비트 -->
+
 <script>
+	// 결제 리스트 조회용 스크립트
+	
 	$(function(){
+		
+		orderList();
+		
+		function orderList(){
+			$.ajax({
+				url:'orderList.me',
+	            data : {"email": "${sessionScope.loginMember.email}"},
+                success : function(result){
+                	let resultStr = "";
+                	
+                	for(let i=0; i<result.length; i++){
+                		
+                		// 환불 날짜가 없을 경우 환불하지 않은 상태로 출력
+                		console.log(result[i].refundDate)
+                		let refund = "";
+                		
+                    	if(result[i].refundDate != ""){
+                    		refund = "결제상태"
+                    	} else {
+                    		refund = "환불상태"
+                    	}
+                    	
+                		
+                		resultStr = "<tr>"
+                					+	"<td>"+ result[i].partnerOrderId + "</td>"
+                					+ 	"<td>"+ refund + "</td>"
+                					+	"<td>"+ 상품명
+                					+ 구매자
+                					+ 날짜
+                					+ 문의하기
+                				+	"</tr>";
+                		
+                	}
+                	$("#myOrderList").html(resultStr);
+                },
+                error : function(){
+                    console.log("내 대화 상대 표시용 ajax 통신 실패")
+                }
+                
+            }); // ajax 끝
+		}
+		
+		
+		
+		// 카카오페이 결제용 스크립트 
+		
 		$("#pay1").click(function(){
 			$.ajax({
 				url:'pay.me',
 				dataType:'json',
-				data:{'email': '${sessionScope.loginMember.email}'},
+				data:{
+					'partnerUserId': '${sessionScope.loginMember.email}',
+					'itemName': 'MBTIngCoinx5',
+					'quantity': 1,
+					'totalAmount' : 50000,
+					'taxFreeAmount' : 0
+				
+				},
 				success:function(result){
-					console.log(result);
-					console.log(result.tid);
-					var box = result.next_redirect_pc_url
+					var tid = result.tid;
+					var box = result.next_redirect_pc_url;
 					window.open(box);
+					
+					$.ajax({
+						url:'payTry.me',
+						data:{'tid' : tid,
+							  'partnerUserId': '${sessionScope.loginMember.email}'
+							  },
+						success:function(result2){
+							console.log("tid 받기 성공")
+						},
+						error: function(result2){
+							console.log("tid 받기 실패")
+							
+						}
+					})
 						
 				},
 				error:function(result){
 					alert("카카오페이 결제용 ajax 통신 오류")
-					console.log(result);
-					console.log(result.tid)
 				}
 				
 				
@@ -239,6 +305,49 @@
 			
 		});// 버튼 클릭 이벤트	
 		
+		
+		$("#pay2").click(function(){
+			$.ajax({
+				url:'pay.me',
+				dataType:'json',
+				data:{
+					'partnerUserId': '${sessionScope.loginMember.email}',
+					'itemName': 'MBTIngCoinx10',
+					'quantity': 1,
+					'totalAmount' : 90000,
+					'taxFreeAmount' : 0
+				
+				},
+				success:function(result){
+					var tid = result.tid;
+					var box = result.next_redirect_pc_url;
+					window.open(box);
+					
+					$.ajax({
+						url:'payTry.me',
+						data:{'tid' : tid,
+							  'partnerUserId': '${sessionScope.loginMember.email}'
+							  },
+						success:function(result2){
+							console.log("tid 받기 성공")
+						},
+						error: function(result2){
+							console.log("tid 받기 실패")
+							
+						}
+					})
+						
+				},
+				error:function(result){
+					alert("카카오페이 결제용 ajax 통신 오류")
+				}
+				
+				
+			});	//ajax 끝
+			
+		});// 버튼 클릭 이벤트	
+		
+	
 	});	// 펑션 끝
 	
 
@@ -266,7 +375,7 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th scope="col">번호</th>
+                    <th scope="col">주문번호</th>
                     <th scope="col">환불여부</th>
                     <th scope="col">상품명</th>
                     <th scope="col">구매자</th>
@@ -274,7 +383,7 @@
                     <th scope="col">문의</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="myOrderList">
                 <tr class=" ">
                     <td> 6188 </td>
                     <td> 가능 </td>
@@ -312,11 +421,46 @@
 
     </div>
 
-    <!-- 페이지 -->
-    <div class="bd_footer">
-        <div class="paging">
-        </div>	
-    </div>
+	<!-- 페이징 바 -->
+    <div class="paging-area">
+	    
+	   	<c:choose>
+			<c:when test="${ requestScope.pi.currentPage eq 1 }">
+		    		<button type="button" style="display: none;" disabled>&lt;</button>	
+		   	</c:when>
+		   	
+		   	<c:otherwise>    		
+		    		<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage - 1 }'">&lt;</button>
+		   	</c:otherwise>
+		</c:choose>
+	        
+		<c:forEach var="p" begin="${ requestScope.pi.startPage }" 
+					  		 end="${ requestScope.pi.endPage }"
+					 		step="1">
+
+			<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ p }'" id="pageB-${ p }">${ p }</button>
+	     
+		</c:forEach>
+	        
+	    <c:choose>
+			<c:when test="${ requestScope.pi.currentPage ge requestScope.pi.maxPage }">
+				<button type="button" style="display: none;" disabled>&gt;</button>
+			</c:when>
+			<c:otherwise>
+				<button type="button" onclick="location.href='myList.me?uno=${ sessionScope.loginMember.userNo }&cpage=${ requestScope.pi.currentPage + 1 }'">&gt;</button>
+			</c:otherwise>
+	   	</c:choose>
+	         
+	</div>
+	
+	<!-- 페이징 처리 과련 스크립트 (현재 페이지 disabled 속성 주기용) -->
+	<script>
+	$(function(){
+		$("#pageB-${ requestScope.pi.currentPage }").attr("disabled",true);
+
+	})
+	
+	</script>
 
 </div>
 

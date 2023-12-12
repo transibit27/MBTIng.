@@ -2,6 +2,7 @@ package com.kh.mbting.chatting.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import com.google.gson.JsonIOException;
 import com.kh.mbting.chatting.model.service.ChattingServiceImpl;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.chatting.model.vo.SearchMember;
 import com.kh.mbting.member.model.vo.Member;
 
 
@@ -28,6 +30,10 @@ public class ChattingController {
 
 	@Autowired
 	private ChattingServiceImpl cService;
+	
+	/*검색 값을 담을 hashmap입니당*/
+	@Autowired
+	private HashMap<String, String> map;
 	
 	/**
      * 해당 채팅방의 채팅 메세지 불러오기
@@ -57,57 +63,6 @@ public class ChattingController {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         gson.toJson(mList,response.getWriter());
     }
-
-/*
-    @ResponseBody
-    @RequestMapping("createChat.do")
-    public String createChat(ChatRoom room, HttpSession session, String masterName, String masterEmail, String masterPic, HttpServletResponse response)throws JsonIOException, IOException{
-
-    	/*현재 로그인한 유저의 이메일정보와 이름 값
-        Member loginMember =  (Member)session.getAttribute("loginMember");
-        String userEmail   = loginMember.getEmail();
-        String userName    = loginMember.getUserName();
-        String userPic	   = loginMember.getProfileImg();
-        
-        room.setUserPic(userPic);
-        room.setUserEmail(userEmail);
-        room.setUserName(userName);
-        room.setMasterEmail(masterEmail);
-        room.setMasterName(masterName);
-        room.setMasterPic(masterPic);
- 
-        ChatRoom exist  = cService.searchChatRoom(room);
-        
-        String roomNo = "";
-        
-        // DB에 방이 없을 때
-        if(exist == null) {
-            System.out.println("방이 없다!!");
-            int result = cService.createChat(room);
-            if(result == 1) {
-                System.out.println("방 만들었다!!");
-                
-                ChatRoom RecentRoomInfo = cService.chatRoom(room);
-        		
-                roomNo = RecentRoomInfo.getRoomNo();
-
-                return roomNo;
-                
-            }else {
-                return "fail";
-            }
-        }
-        // DB에 방이 있을 때
-        else{
-            System.out.println("방이 있다!!");
-            ChatRoom RecentRoomInfo = cService.chatRoom(room);
-            roomNo = RecentRoomInfo.getRoomNo();
- 
-            return roomNo;
-        }
-    
-    }
-    */
     
     @RequestMapping("chatRoomList.do")
     public void createChat(ChatRoom room, ChatMessage message, String userEmail, HttpServletResponse response) throws JsonIOException, IOException{
@@ -162,5 +117,24 @@ public class ChattingController {
     	Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
     	gson.toJson(list , response.getWriter());
     }
-	
+    
+    @ResponseBody
+    @RequestMapping("search.li")
+    public void searchMember(String height, String address, String age, String mbti ,String gender , HttpServletResponse response) throws JsonIOException, IOException{
+    //System.out.println(height + address + age + mbti + gender);
+ 
+    	int startAge 	 =  Integer.parseInt(age.substring(0, 2));
+    	int endAge 		 =  Integer.parseInt(age.substring(2, 4));    	
+    	int startHeight  =  Integer.parseInt(height.substring(0, 3));
+    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
+    	
+    	SearchMember sm = new SearchMember(startAge, endAge, startHeight, endHeight, address, mbti, gender);
+    	
+    	ArrayList<Member> list = cService.searchMember(sm);
+    	System.out.println(list);
+    	response.setContentType("application/json; charset-UTF-8");
+    	new Gson().toJson(list, response.getWriter());
+
+    	
+    }
 }

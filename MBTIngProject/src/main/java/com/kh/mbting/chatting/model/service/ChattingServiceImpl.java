@@ -1,6 +1,7 @@
 package com.kh.mbting.chatting.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.kh.mbting.chatting.model.dao.ChattingDao;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
+import com.kh.mbting.chatting.model.vo.SearchMember;
 import com.kh.mbting.member.model.vo.Member;
 
 @Service
@@ -71,6 +73,13 @@ public class ChattingServiceImpl implements ChattingService{
 	public ArrayList<Member> allMemberList(Member loginMember) {
 		return chattingDao.allMemberList(loginMember);
 	}
+
+	@Override
+	public ArrayList<Member> searchMember(SearchMember sm) {
+		return chattingDao.searchMember(sm);
+	}
+
+
 
 	
 }
