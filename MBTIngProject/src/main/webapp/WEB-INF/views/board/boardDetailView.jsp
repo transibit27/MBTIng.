@@ -165,12 +165,20 @@
             
             	<!-- 좋아요 기능 작성 영역 -->
             	<c:if test="${empty sessionScope.loginMember}">
-            		❤️<br>
+            		&nbsp;<img src="resources/images/heart.png"><br>
             		${ requestScope.b.thumbCount }
-            	</c:if>
-
+                </c:if>
+                <c:if test="${not empty sessionScope.loginMember}">
+                    &nbsp;<img src="resources/images/emptyHeart.png"><br>
+            		${ requestScope.b.thumbCount }
+                </c:if>
 
             </div>
+
+            <!-- 좋아요 기능 스크립트 작성 영역 -->
+            <script>
+                
+            </script>
 
             <br>
 

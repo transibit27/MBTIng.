@@ -124,7 +124,7 @@
              ) AS THUMB_COUNT
 		  FROM BOARD B, MEMBER M
 		 WHERE B.USER_NO = M.USER_NO (+)
-		   AND B.BOARD_NO = 1
+		   AND B.BOARD_NO = #{boardNo}
 		   AND B.STATUS = 'Y'
 	</select>
 
