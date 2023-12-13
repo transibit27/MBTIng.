@@ -35,7 +35,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../common/header.jsp" />
+    <jsp:include page="../common/adminMenubar.jsp" />
 
     <div class="content">
         <div class="search">

@@ -35,5 +35,13 @@ public interface NoticeService {
 
     // 조회수 업데이트 메소드
     int updateViews(int noticeNo);
+
+//  회원이 보는 공지사항 리스트
+	ArrayList<Notice> selectListMember(PageInfo pi);
+	
+//	회원이 보는 공지사항 상세 조회
+	Notice selectNoticeMember(int nno);
+
+	List<Notice> searchMember(String keyword, int currentPage, int boardLimit, int pageLimit);
     
 }

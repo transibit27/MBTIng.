@@ -89,6 +89,23 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.updateViews(sqlSession, noticeNo);
 	}
 
+	@Override
+	public ArrayList<Notice> selectListMember(PageInfo pi) {
+		
+		return noticeDao.selectList(sqlSession, pi);
+	}
+
+	@Override
+	public Notice selectNoticeMember(int noticeNo) {
+	    return noticeDao.selectNotice(sqlSession, noticeNo);
+	}
+
+	@Override
+	public List<Notice> searchMember(String keyword, int currentPage, int boardLimit, int pageLimit) {
+		return noticeDao.searchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
+	}
+
+
 	
 	
 
