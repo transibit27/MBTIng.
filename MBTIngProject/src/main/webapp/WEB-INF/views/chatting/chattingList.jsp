@@ -222,8 +222,19 @@
  }
  
   .borders {
-  	background-color : pink;
-  	border-radius : 20px;
+	background-color: #e6f0ff;
+	transition: all .5s ease-in-out;
+  }
+
+  #Men , #woMen{
+	border: 1px solid rgb(255, 255, 255);
+  }
+  #Men:hover {
+	background-color: #e6f0ff;
+	transition: all .5s ease-in-out;
+  }
+  #woMen:hover {
+	background-color: #e6f0ff;
 	transition: all .5s ease-in-out;
   }
 
@@ -255,7 +266,7 @@
   content: '검색'; /* 추가하고자 하는 텍스트를 지정합니다. */
   display: block;
   position: absolute;
-  left: 49%;
+  left: 48%;
   top: 38%; /* 텍스트의 위치를 조절할 수 있습니다. */
   transform: translateX(-50%);
   font-size: 20px; /* 텍스트의 크기를 조절할 수 있습니다. */
@@ -427,6 +438,8 @@
   				
   				checkReceiver();
   		  		checkProposer();
+  		  		checkMatching();
+  		  		
   			},
   			error : function() {
   				console.log("멤버 전체 조회에 실패했습니다.");	
@@ -491,45 +504,101 @@
   <script>
 	function requestMatch(e , num) {
 		
-		let receiverNo  = num;
+		let receiverNo;
 		
-		$.ajax({
-             type: "GET",
-             url: "updateMatchRequestList.mb",
-             data: {"receiverNo" : receiverNo},
-             success: function(response) {
-            	 //console.log("하하 성공");
-                 if (response.success) {
-                     // 성공 메시지 표시
-                     alertify.alert('Alert', response.message, function() {
-                         alertify.success('Ok');
-                     });
+		if(e.innerText == '수락') {
+			
+			receiverNo = ${sessionScope.loginMember.userNo};
+			proposerNo = num;
+			
+			$.ajax({
+	             type: "GET",
+	             url: "accept.me",
+	             data: {"receiverNo" : receiverNo, "proposerNo" : proposerNo},
+	             success: function(response) {
+	            	 console.log("하하 성공");
+	            	 e.style.backgroundColor = "white";
+	            	 e.innerText = "채팅하기";
+	            	 location.href="http://localhost:8081/mbting/convert.ch";
+	             },
+	
+	             error: function() {
+	                 // 에러 처리
+	                 alertify.error('Error occurred while processing the request.');
+	             }
+        });
+			
+		}else if(e.innerText == '수락 대기중'){
+			$.ajax({
+				type : "POST",
+				url  : "cancle.mat",
+				data : {"proposerNo" : ${sessionScope.loginMember.userNo}, "receiverNo" : num },
+				success : function(response) {
 					
-             		e.style.backgroundColor = "#f54d3e";
-            		e.innerText = "수락 대기중";
+					 if (response.success) {
+	                      // 성공 메시지 표시
+	                      alertify.alert('Alert', response.message, function() {
+	                            alertify.success('Ok');
+	                      });
+	                      e.style.backgroundColor = "";
+	                      e.innerText = "채팅신청";
+	                      
+					 }else {
+						  alertify.alert('Alert', response.message, function() {
+	                            alertify.error('Error');
+	                      });
+					 }   
+	                      
 
-                     // 코인 수 업데이트
-                     var matchCoin = Number('${sessionScope.matchCoin}') - 1;
-                     // 세션의 matchCoin 값을 업데이트하는 코드를 추가해야 합니다.
-                     // 예: sessionScope.matchCoin = matchCoin;
-                 } else {
-                     // 실패 메시지 표시
-                     alertify.alert('Alert', response.message, function() {
-                         alertify.error('Error');
-                     });
-
-                     // 코인 부족 시 처리
-                     if (response.message.includes("코인 부족")) {
-                         alert("코인이 부족합니다. 코인 충전 후 다시 시도해 주세요.");
-                     }
-                 }
-             },
-
-             error: function() {
-                 // 에러 처리
-                 alertify.error('Error occurred while processing the request.');
-             }
+				},
+				error : function() {
+					console.log("취소 실패");
+				}
+			});
+			
+		}else if(e.innerText == '채팅하기'){
+			location.href="http://localhost:8081/mbting/convert.ch";
+		}else {
+			
+			receiverNo  = num;
+			$.ajax({
+	             type: "GET",
+	             url: "updateMatchRequestList.mb",
+	             data: {"receiverNo" : receiverNo},
+	             success: function(response) {
+	            	 //console.log("하하 성공");
+	                 if (response.success) {
+	                     // 성공 메시지 표시
+	                     alertify.alert('Alert', response.message, function() {
+	                         alertify.success('Ok');
+	                     });
+						
+	             		e.style.backgroundColor = "#f54d3e";
+	            		e.innerText = "수락 대기중";
+	
+	                     // 코인 수 업데이트
+	                     var matchCoin = Number('${sessionScope.matchCoin}') - 1;
+	                     // 세션의 matchCoin 값을 업데이트하는 코드를 추가해야 합니다.
+	                     // 예: sessionScope.matchCoin = matchCoin;
+	                 } else {
+	                     // 실패 메시지 표시
+	                     alertify.alert('Alert', response.message, function() {
+	                         alertify.error('Error');
+	                     });
+	
+	                     // 코인 부족 시 처리
+	                     if (response.message.includes("코인 부족")) {
+	                         alert("코인이 부족합니다. 코인 충전 후 다시 시도해 주세요.");
+	                     }
+	                 }
+	             },
+	
+	             error: function() {
+	                 // 에러 처리
+	                 alertify.error('Error occurred while processing the request.');
+	             }
          });
+		}
  	}
   </script>
   
@@ -588,8 +657,8 @@
  			 url : "check.rec",
  			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
 			 success : function(receiverNoList) {
-				 console.log("zz");
-				 
+				 //console.log("나한테 신청 온 사람들");
+				 //console.log(receiverNoList);
 				 for(let i in receiverNoList) {
 					 const button = $("#user" + receiverNoList[i].proposerNo).find("button");
 					 button.css("background-color", "#94B9F3");
@@ -600,6 +669,34 @@
 			 }, 
 			 error : function() {
 				 console.log("나한테 요청한 회원 정보 불러오기 실패...");
+			 }
+ 		  });
+  	  }
+  	  
+  		function checkMatching() {
+  		$.ajax({
+ 			 url : "check.mat",
+ 			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+			 success : function(matchingList) {
+				// console.log("매칭리스트" + matchingList[0].receiverNo);
+						 
+				 for(let i in matchingList) {
+					 
+					 let matchPerson = (${sessionScope.loginMember.userNo} == matchingList[i].proposerNo ) ? matchingList[i].receiverNo : matchingList[i].proposerNo;
+					 
+					 //console.log("나랑 매칭된 사람 번호임 :" +  matchPerson);
+					
+					 const button = $("#user" + matchPerson).find("button");
+					
+					 button.css("background-color", "#C5E1DE");
+					 button.css("box-shadow", "0px 0px 5px 3px #AAB59E");
+					 button.text("채팅하기");
+					 
+				 }
+				 
+			 }, 
+			 error : function() {
+				 console.log("함께 매칭된 사람들 요청 실패...");
 			 }
  		  });
   	  }

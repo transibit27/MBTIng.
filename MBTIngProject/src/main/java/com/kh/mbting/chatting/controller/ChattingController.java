@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -185,4 +186,41 @@ public class ChattingController {
         	new Gson().toJson(RecieverNoList, response.getWriter());
     		
     }
+    
+    @ResponseBody
+    @RequestMapping("check.mat")
+    public void checkMatching(int userNo, HttpServletResponse response )throws JsonIOException, IOException {
+    		
+    		ArrayList<Mbti> RecieverNoList = cService.checkMatching(userNo);
+    		 
+    		response.setContentType("application/json; charset-UTF-8");
+        	new Gson().toJson(RecieverNoList, response.getWriter());
+    		
+    }
+    
+    @ResponseBody
+    @RequestMapping("cancle.mat")
+    public Map<String, Object>  cancleMatching(Mbti mbti, HttpServletResponse response)throws JsonIOException, IOException {
+    	
+    		Map<String, Object> allResult = new HashMap<>();
+    	
+    		int result1 = cService.updateMatchStat(mbti);
+    		/*회원 정보 중 match_stat을 1로 업데이트함
+    		 * 그리고 그 결과가 성공으로 result가 0보다 클 경우
+    		 * */
+    		if(result1 > 0) {
+    			int result2 = cService.deleteMatching(mbti);
+    			
+    			if(result2 > 0) {
+    				allResult.put("success", true);
+    				allResult.put("message", "채팅 요청 취소를 완료했습니다.");
+    			}else {
+    				allResult.put("success", false);
+    	            allResult.put("message", "채팅 요청 취소를 실패했습니다.");
+    			}
+    		}
+
+    		return allResult;
+    }
+    
 }

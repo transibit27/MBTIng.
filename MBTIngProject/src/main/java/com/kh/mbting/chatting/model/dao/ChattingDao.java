@@ -70,5 +70,19 @@ public class ChattingDao {
     public ArrayList<Mbti> checkReciever(int userNo) { 
     	return (ArrayList)sqlSession.selectList("chatMapper.checkReciever" , userNo);
     }
+    
+    public ArrayList<Mbti> checkMatching(int userNo) {
+    	return (ArrayList)sqlSession.selectList("chatMapper.checkMatching" , userNo);
+    }
+    
+    public int cancleMatching(Mbti mbti) {
+    	return sqlSession.update("chatMapper.updateMatchStat" , mbti);
+    }
+    
+    public int deleteMatching(Mbti mbti) {
+    	return sqlSession.delete("chatMapper.deleteMatching" , mbti);
+    }
 }
+
+
 

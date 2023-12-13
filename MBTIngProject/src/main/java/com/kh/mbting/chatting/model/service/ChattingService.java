@@ -102,5 +102,29 @@ public interface ChattingService {
      * @return
      */
     ArrayList<Mbti> checkReciever(int userNo);
+    
+    /***
+     * 서로 매칭된 사람 검색하기
+     * @param userNo
+     * @return
+     */
+    ArrayList<Mbti> checkMatching(int userNo);
+    
+    /***
+     * 신청 취소할 경우 회원의 matchStat을 1로 바꿔주기.
+     * @param mbti
+     * @return
+     */
+    int updateMatchStat(Mbti mbti);
+    
+
+    /***
+     * 신청 취소할 경우 matching table에서 삭제해주기
+     * @param mbti
+     * @return
+     */
+    int deleteMatching(Mbti mbti);
+    
+
 
 }

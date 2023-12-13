@@ -178,6 +178,26 @@
     	SELECT PROPOSER_NO
 		  FROM MATCHING
 		 WHERE RECEIVER_NO = #{userNo}
+		   AND MATCH_STAT = 2
     </select>
+    
+    <select id="checkMatching" resultMap="mbtiResultSet" parameterType="_int">
+    	SELECT RECEIVER_NO , PROPOSER_NO 
+    	  FROM MATCHING 
+    	 WHERE MATCH_STAT = 3
+		   AND (PROPOSER_NO = #{userNo} or receiver_no = #{userNo}) 
+    </select>
+    
+    <update id="updateMatchStat" parameterType="_int">
+    	UPDATE MEMBER
+    	SET MATCH_STAT = 1
+    	WHERE USER_NO = #{proposerNo}
+    </update>
+    
+    <delete id="deleteMatching" parameterType="_int"> 
+    	DELETE MATCHING	
+		 WHERE RECEIVER_NO = #{receiverNo}
+		   AND PROPOSER_NO = #{proposerNo}
+    </delete>
     
 </mapper>

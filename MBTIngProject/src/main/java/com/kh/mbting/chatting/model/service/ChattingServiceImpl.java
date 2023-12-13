@@ -88,4 +88,19 @@ public class ChattingServiceImpl implements ChattingService{
 	public ArrayList<Mbti> checkReciever(int userNo) {
 		return chattingDao.checkReciever(userNo);
 	}
+
+	@Override
+	public ArrayList<Mbti> checkMatching(int userNo) {
+		return chattingDao.checkMatching(userNo);
+	}
+
+	@Override
+	public int updateMatchStat(Mbti mbti) {
+		return chattingDao.cancleMatching(mbti);
+	}
+
+	@Override
+	public int deleteMatching(Mbti mbti) {
+		return chattingDao.deleteMatching(mbti);
+	}
 }
