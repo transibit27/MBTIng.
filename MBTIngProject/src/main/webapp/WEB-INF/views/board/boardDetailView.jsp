@@ -103,10 +103,6 @@
             border: 1px solid pink;
             background-color: white;            
         }
-        .move-page {
-            width: 1200px;
-            margin: auto;
-        }
     </style>
 </head>
 <body>
@@ -131,7 +127,7 @@
                     <td colspan="2" class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
                 </tr>
                 <tr>
-                    <td>💑${ requestScope.b.mbtiNick }</td>
+                    <td>💑${ requestScope.b.userName }</td>
                     <td>${ requestScope.b.enrollDate }</td>
                 </tr>
                 <tr>
@@ -196,24 +192,6 @@
                     }
                 </script>
             </c:if>
-        </div>
-
-        <br><br><br>
-
-        <div class="move-page" align="center">
-           <table class="move-page-table">
-                <tr onclick="location.href='detail.bo?bno=${ requestScope.b.boardNo - 1 }';">
-                    <td class="move-page-info">
-                        ▲ 이전 후기
-                    </td>
-
-                </tr>
-                <tr style="border-top: 1px dotted pink;" onclick="location.href='detail.bo?bno=${ requestScope.b.boardNo + 1}';">
-                    <td class="move-page-info">
-                        ▼ 다음 후기
-                    </td>
-                </tr>
-            </table>
         </div>
 
         <br>

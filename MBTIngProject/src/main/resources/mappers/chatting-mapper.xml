@@ -50,6 +50,7 @@
 	 	<result column="RECEIVER_NO"  	property="receiverNo"></result>
 	 	<result column="PROPOSER_NO"  	property="proposerNo"></result>
 	</resultMap>
+
 	
 	<insert id="createChat" parameterType="chatRoom">
         insert into CHATROOM values(RNO_SEQ.NEXTVAL,
@@ -164,6 +165,7 @@
     <if test='address != "없음"'>
     AND ADDRESS = #{address}
     </if>
+    AND USER_NO != #{userNo}
     </select>
       
     <select id="checkProposer" resultMap="mbtiResultSet" parameterType="_int">
