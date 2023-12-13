@@ -11,21 +11,22 @@
 <style>
 
 .wrap {
-
-	width : 1500px;
+	width : 1600px;
 	margin: auto;
 }
+
 .content_1  {
 	border : 2px solid lightgray;
-	width: 1500px;
+	width : 100%;
 	margin: auto;
 	border-radius : 20px;
+	background-color: #BAD1E6;
 }
 
 .content_2 {
   font-family: 'Gasoek One', sans-serif;
-  width: 1500px;
-  background: #E8EAEA;
+  width : 100%;
+  background-color: #f5f9ff;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -35,7 +36,9 @@
 
 .title, .more {
   padding: 10px 15px;
+  text-shadow: 3px 3px 5px white;
 }
+
 
 .user {
   display: flex;
@@ -184,6 +187,9 @@
  #searchTable {
  	text-align : center;
  	margin : auto;
+	text-shadow: 2px 2px  white;
+	font-size: 20px;
+	font-weight: bold;
  }
  
  .select {
@@ -195,8 +201,16 @@
 	 appearance: none;
 	 border-radius : 50px;
 	 text-align : center;
+	 box-shadow: 0px 0px 3px 5px #f5f9ff;
+	 cursor: pointer;
  } 
  
+  .select:hover {
+  	background-color: #e6f0ff;
+	transition: all .5s ease-in-out;
+  }
+ 
+
  #genderCheck {
  	text-align : center;
  }
@@ -204,24 +218,49 @@
  .genderButton {
  	border : 0px;
  	background-color : transparent;
+ 	border-radius : 15px;
  }
  
-  .genderButton img {
-  	width : 50px;
-  	height : 50px;
-  }
-
-  #searchButton {
-  	text-align  : center;
-  	margin : 10px;
-  }
-  
   .borders {
-  	border : 1px solid black;
   	background-color : pink;
   	border-radius : 20px;
+	transition: all .5s ease-in-out;
   }
 
+ #searchButton {
+  display: inline-block;
+  position: relative;
+}
+
+#searchButton button {
+  position: relative;
+  padding: 30px 60px; /* 버튼의 크기 및 간격을 조절할 수 있습니다. */
+  border: none;
+  background-color: transparent; /* 배경색을 투명하게 설정합니다. */
+  cursor: pointer;
+  left : 725px;
+}
+
+#searchButton button::before {
+  content: '\2665'; /* 유니코드로 하트 모양을 나타냅니다. */
+  font-size: 100px; /* 아이콘의 크기를 조절할 수 있습니다. */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* 하트의 색상을 지정합니다. */
+}
+
+#searchButton button::after {
+  content: '검색'; /* 추가하고자 하는 텍스트를 지정합니다. */
+  display: block;
+  position: absolute;
+  left: 49%;
+  top: 38%; /* 텍스트의 위치를 조절할 수 있습니다. */
+  transform: translateX(-50%);
+  font-size: 20px; /* 텍스트의 크기를 조절할 수 있습니다. */
+  color : rgb(160, 160, 160);
+}
 </style>
 </head>
 
@@ -533,7 +572,7 @@
 				 
 				 for(let i in proposerNoList) {
 					 const button = $("#user" + proposerNoList[i].receiverNo).find("button");
-					 button.css("background-color", "#f54d3e");
+					 button.css("background-color", "#FBB9AB");
 					 button.text("수락 대기중");
 				 }
 				 
@@ -553,7 +592,8 @@
 				 
 				 for(let i in receiverNoList) {
 					 const button = $("#user" + receiverNoList[i].proposerNo).find("button");
-					 button.css("background-color", "blue");
+					 button.css("background-color", "#94B9F3");
+					 button.css("box-shadow", "0px 0px 5px 3px #AAB59E");
 					 button.text("수락");
 				 }
 				 
@@ -565,5 +605,6 @@
   	  }
 
   </script>
+
 </body>
 </html>
