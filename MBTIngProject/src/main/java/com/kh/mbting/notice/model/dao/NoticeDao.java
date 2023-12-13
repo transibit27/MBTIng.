@@ -79,4 +79,5 @@ public class NoticeDao {
     	return sqlSession.update("noticeMapper.updateViews", noticeNo);
     }
 
+
 }

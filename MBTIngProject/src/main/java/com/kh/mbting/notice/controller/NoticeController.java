@@ -72,6 +72,28 @@ public class NoticeController {
         return mv;
     }
 	
+	@GetMapping("searchMember.no")
+    public ModelAndView searchMember(
+            @RequestParam("keyword") String keyword,
+            @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+            ModelAndView mv) {
+        
+        int listCount = noticeService.searchListCount(keyword);
+        
+        int pageLimit = 5;
+        int boardLimit = 10;
+        
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+        
+        List<Notice> searchResult = noticeService.searchMember(keyword, pi.getCurrentPage(), pi.getBoardLimit(), pi.getPageLimit());
+        
+        mv.addObject("list", searchResult)
+          .addObject("pi", pi)
+          .setViewName("notice/noticeListViewMember");
+        
+        return mv;
+    }
+	
 	@PostMapping("updateViews.no")
 	@ResponseBody
 	public String updateViews(@RequestParam("nno") int nno) {
@@ -181,6 +203,50 @@ public class NoticeController {
 		}
 	}
 	
+	
+	
+	//////	회원이 보는 공지사항 //////
+	
+	@GetMapping("listMember.no")
+	public ModelAndView selectListMember (
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		
+		int listCount = noticeService.selectListCount();
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<Notice> list = noticeService.selectListMember(pi);
+		
+		mv.addObject("list", list)
+		  .addObject("pi", pi)
+		  .setViewName("notice/noticeListViewMember");
+		
+		return mv;
+	}
+	
+	@RequestMapping("detailMember.no")
+	public ModelAndView selectNoticeMember(int nno, ModelAndView mv) {
+		
+		// 조회수 증가용 서비스 호출
+		int result = noticeService.increaseCount(nno);
+		
+		if(result > 0) { // 성공
+			
+			Notice n = noticeService.selectNoticeMember(nno);
+			
+			mv.addObject("n", n).setViewName("notice/noticeDetailViewMember");
+		
+		} else { // 실패
+			
+			mv.addObject("errorMsg", "공지사항 상세조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
 	
 	
 	
