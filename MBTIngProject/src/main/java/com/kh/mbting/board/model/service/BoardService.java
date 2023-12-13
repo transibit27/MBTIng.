@@ -25,10 +25,12 @@ public interface BoardService {
 
 	int deleteBoard(int boardNo);
 	
+	int updateBoard(Board b);
+
 	ArrayList<Board> selectTopBoardList();
 
     int selectSearchListCount(HashMap<String, String> map);
 
     ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi);
-	
+    
 }

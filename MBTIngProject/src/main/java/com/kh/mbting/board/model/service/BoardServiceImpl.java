@@ -83,4 +83,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
 
+	@Override
+	@Transactional
+	public int updateBoard(Board b) {
+		return boardDao.updateBoard(sqlSession, b);
+	}
+
 }

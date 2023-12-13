@@ -144,6 +144,14 @@
 		 WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<update id="updateBoard" parameterType="board">
+		UPDATE BOARD
+		   SET BOARD_TITLE = #{boardTitle}
+		     , BOARD_CONTENT = #{boardContent}
+		 WHERE BOARD_NO = #{boardNo}
+		   AND STATUS = 'Y'
+	</update>
+
 	<select id="selectSearchListCount" parameterType="hashmap" resultType="_int">
 		SELECT COUNT(*)
 		  FROM BOARD B, MEMBER M
@@ -179,4 +187,5 @@
 		SELECT COUNT(*)
 	  	  FROM BOARD
 	</select>
+	
 </mapper>

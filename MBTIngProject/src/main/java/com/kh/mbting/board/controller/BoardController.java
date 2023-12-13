@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -124,6 +125,18 @@ public class BoardController {
 		return mv;
 	}
 	
+	@PostMapping("update.bo")
+	public String updateBoard(Board b, BoardImg bi, MultipartFile[] reupfile, HttpSession session, Model model) {
+		int result = boardService.updateBoard(b);
+		if(result > 0) {			
+			session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");			
+			return "redirect:/detail.bo?bno=" + b.getBoardNo();			
+		} else {			
+			model.addAttribute("errorMsg", "게시글 수정 실패");		
+			return "common/errorPage";
+		}
+	}
+
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 		String originName = upfile.getOriginalFilename();
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -138,7 +151,7 @@ public class BoardController {
 		}
 		return changeName;
 	}
-		
+	
 	@ResponseBody
 	@RequestMapping(value = "topList.bo", produces = "application/json; charset=UTF-8")
 	public String ajaxTopBoardList() {	
