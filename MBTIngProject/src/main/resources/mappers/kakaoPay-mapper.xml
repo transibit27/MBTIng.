@@ -15,6 +15,7 @@
 		<result column="TOTAL_AMOUNT"  		property="totalAmount"></result>
 		<result column="TAX_FREE_AMOUNT"  	property="taxFreeAmount"></result>
 		<result column="PG_TOKEN"			property="pg_token"></result>
+		<result column="REFUND_REQUEST"		property="refundRequest"></result>
 	</resultMap>
 	
 	<resultMap id="memberResultSet" type="member">
@@ -118,6 +119,13 @@
 	UPDATE MEMBER
 	   SET MATCH_COIN = MATCH_COIN + 10
      WHERE EMAIL = #{email}
+</update>
+
+<!-- 결제 환불 요청용 쿼리문 -->
+<update id="refundRequest" parameterType="KakaoPay">
+	UPDATE KAKAOPAY
+	   SET REFUND_REQUEST = 2
+	 WHERE PARTNER_ORDER_ID = #{partnerOrderId}
 </update>
 
 <!-- 관리자페이지 유료계정비율 원그래프 -->

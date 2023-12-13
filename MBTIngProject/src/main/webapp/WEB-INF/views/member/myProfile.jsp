@@ -494,7 +494,7 @@
                 $("#upfile").on("change", function(event) {
                     console.log($("#upfile").val());
 
-                    var upfile =$("#upfile")
+                    var upfile = $("#upfile")
                    
                     var file = event.target.files[0];
 

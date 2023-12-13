@@ -45,6 +45,10 @@ public class KakaoPayService {
 	public String itemName(String pg_token) {
 		return kakaoPayDao.itemName(sqlSession, pg_token);
 	}
+	// 결제건 환불 요청용 메소드 (관리자에게)
+	public int refundRequest(KakaoPay kp) {
+		return kakaoPayDao.refundRequest(sqlSession, kp);
+	}
 	
 	
 	

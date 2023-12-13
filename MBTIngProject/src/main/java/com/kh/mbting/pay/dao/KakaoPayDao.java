@@ -35,6 +35,10 @@ public class KakaoPayDao {
 		return sqlSession.update("kakaoPayMapper.insertCoinX10", m);
 	}
 
+	public int refundRequest(SqlSessionTemplate sqlSession, KakaoPay kp) {
+		return sqlSession.update("kakaoPayMapper.refundRequest", kp);
+	}
+
 
 
 

@@ -488,8 +488,10 @@
                 myStatProfile();    // 내 상태 갱신용 펑션
                 proposerList();     // 대화 신청자 리스트 갱신용 펑션
                 slider();           // 대화 신청자 리스트 슬라이드 표시용 펑션
+                
                 setInterval(myStatProfile, 50000);
                 setInterval(proposerList, 50000);
+            });
 
                 // 매칭 신청자 리스트 확인용 ajax
                 function proposerList(){
@@ -713,18 +715,32 @@
                     }
 
                 }  
-            });
+            
             
             // 슬라이드 내 프로필 카드 닫힘 처리
             function refusePropose(e){
                 console.log(e);
                 var proposerNo = e.querySelector('input[name="proposerNo"]').value;
 
-                console.log(proposerNo)
-
-
+                console.log(proposerNo);
+                
+               $.ajax({
+	               url : "refusePropose.me",
+	               type : "post",
+	               data : {
+	            	   "proposerNo":proposerNo,
+	            	   "receiverNo":"${sessionScope.loginMember.userNo}"
+	            	   },
+	               success : function(result){
+	            	   console.log(result)
+	            	   alert(result);
+	            	   proposerList();
+	               },
+	               error : function(result){
+	            	   console.log("신청 거절용 ajax 통신 실패")
+	               }
+            	})	// ajax 끝
             }
-
         </script>
 
 
