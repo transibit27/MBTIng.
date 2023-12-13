@@ -2,18 +2,16 @@ package com.kh.mbting.admin.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.mbting.admin.model.service.AdminService;
 import com.kh.mbting.admin.model.vo.Month;
+import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
@@ -169,7 +168,7 @@ public class AdminController {
 	public String totalFreeCount() {
 		
 		ArrayList<KakaoPay> list = adminService.totalFreeCount();
-		System.out.println(list);
+		
 		return new Gson().toJson(list);
 	}
 	
@@ -193,6 +192,8 @@ public class AdminController {
 		return new Gson().toJson(list);
 	}
 	
+	
+	/* 회원 관리 시작!!!!!!!!!!!!!!!!!! */
 	@RequestMapping("adminMain.ad")
 	public String adminMain() {
 		
@@ -244,7 +245,37 @@ public class AdminController {
     }
 	
 	
+	// 회원 상태 업데이트 API
+	@RequestMapping(value = "/update-status", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<String> updateStatus(@RequestParam("selectedUserNos") List<String> selectedUserNos) {
+	    
+		System.out.println(selectedUserNos);
+		// 처리 로직
+	    return ResponseEntity.ok("Update successful");
+	}
+    
+
+    // 선택된 회원 상태 일괄 업데이트 API
+    @PutMapping("/update-status")
+    public ResponseEntity<String> updateSelectedStatus(@RequestParam String status, @RequestBody List<String> selectedUserNos) {
+        
+    	System.out.println(selectedUserNos);
+    	System.out.println(status);
+    	
+    	try {
+            int result = adminService.updateSelectedStatus(status, selectedUserNos);
+            
+            System.out.println(result);
+            
+            return ResponseEntity.ok("Successfully updated " + result + " records.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating records: " + e.getMessage());
+        }
+    }
+    
 	
+	/*
 	// 상태에 따른 토글바 조회용 (보류)
 	@PostMapping("updateStatus.ad")
     public ResponseEntity<String> updateStatus(@RequestBody Map<String, String> data) {
@@ -262,6 +293,7 @@ public class AdminController {
 	
 	
 	// 선택 된 회원 저장 (확인 필요)
+	
 	@CrossOrigin
 	@PutMapping("updateSelectedStatus.ad")
 	public ResponseEntity<String> updateSelectedStatus(@RequestBody Map<String, List<Integer>> data) {
@@ -275,7 +307,53 @@ public class AdminController {
 	                .body("Failed to update selected statuses");
 	    }
 	}
+	*/
 	
-	
+    /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
+    
+    // 매칭후기 게시글 전체 조회
+    @GetMapping("list.adbo")
+	public ModelAndView boardSelectList(
+			@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+			ModelAndView mv) {
+		
+		int listCount = adminService.boardSelectListCount();
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		ArrayList<Board> list = adminService.boardSelectList(pi);
+		
+		mv.addObject("list", list)
+		  .addObject("pi", pi)
+		  .setViewName("admin/adminBoardListView");
+		
+		return mv;
+	}
+    
+    // 매칭후기 검색
+    @GetMapping("search.adbo")
+    public ModelAndView searchBoard(
+            @RequestParam("keyword") String keyword,
+            @RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+            ModelAndView mv) {
+        
+        int listCount = adminService.adminSearchListCount(keyword);
+        
+        int pageLimit = 5;
+        int boardLimit = 10;
+        
+        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+        
+        List<Board> searchResult = adminService.adminSearchList(keyword, pi.getCurrentPage(), pi.getBoardLimit(), pi.getPageLimit());
+        
+        mv.addObject("list", searchResult)
+          .addObject("pi", pi)
+          .setViewName("admin/adminBoardListView");
+        
+        return mv;
+    }
+    
 	
 }

@@ -5,11 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mbting.admin.model.vo.Month;
+import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
@@ -106,6 +108,9 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("kakaoPayMapper.totalyearlySalesCount");
 	}
 	
+	/* 회원 관리 시작!!!!!!!!!!!!!!!!!! */
+	
+	
 	public int memberSelectListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("memberMapper.memberSelectListCount");
@@ -142,21 +147,31 @@ public class AdminDao {
 	}
 	
 	
+	// 단일 사용자 상태 업데이트
+    public int updateStatus(SqlSessionTemplate sqlSession, @Param("status") String status, @Param("userNo") String userNo) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("status", status);
+        parameters.put("userNo", userNo);
+        return sqlSession.update("memberMapper.updateStatus", parameters);
+    }
+
+    
+    // 다중 사용자 상태 업데이트
+    public int updateSelectedStatus(SqlSessionTemplate sqlSession, @Param("status") String status, @Param("selectedUserNos") List<String> selectedUserNos) {
+        return sqlSession.update("memberMapper.updateSelectedStatus", selectedUserNos);
+    }
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    
+    /*
+    // 다중 사용자 상태 업데이트
+    public int updateSelectedStatus(SqlSessionTemplate sqlSession, String status, List<String> selectedUserNos) {
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("status", status);
+        parameters.put("selectedUserNos", selectedUserNos);
+        return sqlSession.update("memberMapper.updateSelectedStatus", parameters);
+    }
+	*/
+
 	
 	// 상태에 따른 토글바 조회용 (보류)
 	public Member getUserByEmail(SqlSessionTemplate sqlSession, String email) {
@@ -178,11 +193,41 @@ public class AdminDao {
 	}
 	
 	
+	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
+	public int boardSelectListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("boardMapper.selectListCount");
+	}
 	
+	// 게시글 전체 조회
+	public ArrayList<Board> boardSelectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.adminSelectList", null, rowBounds);
+	}
 	
-	
-	
-	
+	// 검색된 게시글 개수 조회
+	public int adminSearchListCount(SqlSessionTemplate sqlSession, String keyword) {
+      
+		return sqlSession.selectOne("boardMapper.adminSearchListCount", keyword);
+    }
+
+	// 검색된 게시글 리스트 조회
+	public List<Board> adminSearchList(SqlSessionTemplate sqlSession, String keyword, int currentPage, int pageLimit, int boardLimit) {
+	    int startRow = (currentPage - 1) * boardLimit;
+	    int endRow = startRow + boardLimit; 
+
+	    Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("keyword", keyword);
+	    parameters.put("startRow", startRow);
+	    parameters.put("endRow", endRow);
+
+	    return sqlSession.selectList("boardMapper.adminSearchList", parameters);
+	}
 	
 	
 	

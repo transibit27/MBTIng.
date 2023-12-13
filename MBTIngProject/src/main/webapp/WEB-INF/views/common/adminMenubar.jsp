@@ -173,7 +173,7 @@
                     </tr>
                     <tr>
                         <th><i class="fas fa-comments menu-icon"></i>
-                            <a href="">매칭후기관리</a>
+                            <a href="list.adbo">매칭후기관리</a>
                         </th>
                     </tr>
                     <tr>

@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mbting.admin.model.dao.AdminDao;
 import com.kh.mbting.admin.model.vo.Month;
+import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Service
@@ -132,6 +134,9 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.totalyearlySalesCount(sqlSession);
 	}
 
+	
+	/* 회원관리 관리 시작!!!!!!!!!!!!!!!!!! */
+	
 	// 회원관리 전체조회
 	@Override
 	public int memberSelectListCount() {
@@ -157,13 +162,13 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
-	// 선택된 회원 저장
+	/* 선택된 회원 저장
 	@Override
 	public void updateSelectedUserStatus(List<Integer> selectedUserNos) {
 	    
 		adminDao.updateSelectedUserStatus(sqlSession, selectedUserNos);
 	}
-
+*/
 	// 회원관리 검색 조회용
 	@Override
 	public int memberSearchListCount(String keyword) {
@@ -175,7 +180,47 @@ public class AdminServiceImpl implements AdminService {
 	public List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit) {
 		
 		return adminDao.memberSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
-
 	}
 
+	@Override
+	@Transactional
+    public int updateStatus(String status, String userNo) {
+        return adminDao.updateStatus(sqlSession, status, userNo);
+    }
+
+    
+	@Override
+	public int updateSelectedStatus(String status, List<String> selectedUserNos) {
+	    return adminDao.updateSelectedStatus(sqlSession, status, selectedUserNos);
+	}
+	
+
+	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
+	@Override
+	public int boardSelectListCount() {
+		
+		return adminDao.boardSelectListCount(sqlSession);
+	}
+	
+	// 게시글 전체 조회
+	@Override
+	public ArrayList<Board> boardSelectList(PageInfo pi) {
+		
+		return adminDao.boardSelectList(sqlSession, pi);
+	}
+	// 검색 게시글 개수 조회
+	@Override
+	public int adminSearchListCount(String keyword) {
+       
+		return adminDao.adminSearchListCount(sqlSession, keyword);
+    }
+	// 검색 게시글 조회
+	@Override
+	public List<Board> adminSearchList(String keyword, int currentPage, int pageLimit, int boardLimit) {
+       
+		return adminDao.adminSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
+    }
+	
+	
+	
 }
