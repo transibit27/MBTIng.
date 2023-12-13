@@ -83,4 +83,9 @@ public class ChattingServiceImpl implements ChattingService{
 	public ArrayList<Mbti> checkProposer(int userNo) {
 		return chattingDao.checkProposer(userNo);
 	}
+
+	@Override
+	public ArrayList<Mbti> checkReciever(int userNo) {
+		return chattingDao.checkReciever(userNo);
+	}
 }

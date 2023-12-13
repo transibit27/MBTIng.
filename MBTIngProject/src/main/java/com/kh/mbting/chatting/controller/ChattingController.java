@@ -174,4 +174,15 @@ public class ChattingController {
         	new Gson().toJson(proposerNoList, response.getWriter());
     		
     }
+    
+    @ResponseBody
+    @RequestMapping("check.rec")
+    public void checkReciever(int userNo, HttpServletResponse response )throws JsonIOException, IOException {
+    		
+    		ArrayList<Mbti> RecieverNoList = cService.checkReciever(userNo);
+    		 
+    		response.setContentType("application/json; charset-UTF-8");
+        	new Gson().toJson(RecieverNoList, response.getWriter());
+    		
+    }
 }

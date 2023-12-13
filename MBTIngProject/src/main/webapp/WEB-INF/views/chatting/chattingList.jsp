@@ -353,7 +353,7 @@
   <script>
   
   	$(function() {
-  		checkProposer();
+  		personDetail();
   		selectAllMemberList();
   	});
   	
@@ -385,6 +385,9 @@
 						  $(".user__container").html(resultStr);	
 
   				}
+  				
+  				checkReceiver();
+  		  		checkProposer();
   			},
   			error : function() {
   				console.log("멤버 전체 조회에 실패했습니다.");	
@@ -393,13 +396,7 @@
   	}
   	
   	<!--사람을 검색한 값을 넘겨주는 function-->
-
   	function searchPerson() {
-  		checkProposer();
-  		searchPersonal();
-  	}
-  	
-  	function searchPersonal() {
   		$.ajax({
   			url : "search.li" ,
   			type : "get",
@@ -440,13 +437,13 @@
   				}
   				
   			 }
-  			
+  				checkReceiver();
+  		  		checkProposer();
   			},
   			error : function() {
   				console.log("검색 회원 조회에 실패했습니다.");
   			}
-  		});
-  		checkProposer();
+  		}); 		
   	}
 
 	
@@ -498,11 +495,6 @@
   </script>
   
   <script>
-  $(document).ready(function() {
-	  	personDetail();
-	  	checkProposer();
-	});
-  
   	function personDetail() {
 	  // 이미지 클릭 시 이벤트 처리
 	  $(".user__container").on("click", ".image img", function() {
@@ -540,7 +532,6 @@
 			 success : function(proposerNoList) {
 				 
 				 for(let i in proposerNoList) {
-					
 					 const button = $("#user" + proposerNoList[i].receiverNo).find("button");
 					 button.css("background-color", "#f54d3e");
 					 button.text("수락 대기중");
@@ -551,6 +542,26 @@
 				 console.log("내가 신청한 회원 정보 불러오기 실패...");
 			 }
   		  });
+  	  }
+  	  
+  	  function checkReceiver() {
+  		$.ajax({
+ 			 url : "check.rec",
+ 			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+			 success : function(receiverNoList) {
+				 console.log("zz");
+				 
+				 for(let i in receiverNoList) {
+					 const button = $("#user" + receiverNoList[i].proposerNo).find("button");
+					 button.css("background-color", "blue");
+					 button.text("수락");
+				 }
+				 
+			 }, 
+			 error : function() {
+				 console.log("나한테 요청한 회원 정보 불러오기 실패...");
+			 }
+ 		  });
   	  }
 
   </script>

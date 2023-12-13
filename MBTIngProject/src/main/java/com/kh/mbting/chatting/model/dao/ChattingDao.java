@@ -66,5 +66,9 @@ public class ChattingDao {
     public ArrayList<Mbti> checkProposer(int userNo) {
     	return (ArrayList)sqlSession.selectList("chatMapper.checkProposer" , userNo);
     }
+    
+    public ArrayList<Mbti> checkReciever(int userNo) { 
+    	return (ArrayList)sqlSession.selectList("chatMapper.checkReciever" , userNo);
+    }
 }
 

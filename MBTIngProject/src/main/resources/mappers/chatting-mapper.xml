@@ -173,4 +173,11 @@
 		  FROM MATCHING
 		 WHERE PROPOSER_NO = #{userNo}
     </select>
+    
+     <select id="checkReciever" resultMap="mbtiResultSet" parameterType="_int">
+    	SELECT PROPOSER_NO
+		  FROM MATCHING
+		 WHERE RECEIVER_NO = #{userNo}
+    </select>
+    
 </mapper>

@@ -95,4 +95,12 @@ public interface ChattingService {
      * @return
      */
     ArrayList<Mbti> checkProposer(int userNo);
+    
+    /***
+     * 나한테 신청한 사람들 번호 검색하기
+     * @param userNo
+     * @return
+     */
+    ArrayList<Mbti> checkReciever(int userNo);
+
 }
