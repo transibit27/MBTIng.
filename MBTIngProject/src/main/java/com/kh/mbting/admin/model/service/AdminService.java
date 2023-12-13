@@ -1,9 +1,14 @@
 package com.kh.mbting.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.mbting.admin.model.vo.Month;
+import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
@@ -57,43 +62,45 @@ public interface AdminService {
     // 년별매출 그래프
     ArrayList<KakaoPay> totalyearlySalesCount();
     
-    // 
+    /* 회원 관리 시작!!!!!!!!!!!!!!!!!! */
+    
+    // 회원 리스트 총 개수 조회
  	int memberSelectListCount();
  	
- 	// 회원관리 게시글 리스트 조회
+ 	// 회원 리스트 조회
  	ArrayList<Member> memberSelectList(PageInfo pi);
  	
- 	// 회원관리 검색 조회용
+ 	// 회원 검색 총 개수 조회
  	int memberSearchListCount(String keyword);
  	
-	 // 회원관리 검색 조회용
+	// 회원 검색 조회
     List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
  	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
+    // 회원 상태 업데이트
+    int updateStatus(String status, String userNo);
+
+    // 선택된 회원 상태 일괄 업데이트
+    int updateSelectedStatus(String status, List<String> selectedUserNos);
  	
  	// 상태에 따른 토글바 조회용 (보류)
  	Member getUserByEmail(String email);
      void updateUserStatus(String email, String newStatus);
 
- 	// 선택된 회원 저장
-     void updateSelectedUserStatus(List<Integer> selectedUserNos);
+
+     /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
     
+     // 매칭후기 게시글 총 개수 조회
+ 	int boardSelectListCount();
+
+ 	// 매칭후기 게시글 리스트 조회
+ 	ArrayList<Board> boardSelectList(PageInfo pi);
     
-    
-    
-    
-    
-    
-    
-    
+ 	// 검색 게시글 개수 조회
+ 	int adminSearchListCount(String keyword);
+
+	// 검색된 후기게시글 리스트 조회
+    List<Board> adminSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
+
     
     
     

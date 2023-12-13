@@ -423,9 +423,22 @@
 	    )
 	    WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<!-- updateStatus() 메서드의 SQL 
+	<update id="updateStatus" parameterType="map">
+	    UPDATE MEMBER
+	    SET STATUS = #{status}
+	    WHERE USER_NO = #{userNo}
+	</update>
 
 	
-	
-	
-	
+	updateSelectedStatus() 메서드의 SQL
+	<update id="updateSelectedStatus" parameterType="map">
+	    <foreach collection="selectedUserNos" item="userNo" >
+	        UPDATE MEMBER
+	        SET STATUS = #{status}
+	        WHERE USER_NO = #{userNo}
+	    </foreach>
+	</update>
+	 -->
 </mapper>
