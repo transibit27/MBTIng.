@@ -175,6 +175,13 @@
 		   SET MATCH_STAT = 3
 		 WHERE USER_NO = #{receiverNo}
 	</update>
+	<!-- 나에게 신청된 매칭 거절용 쿼리문 -->
+	<update id="refusePropose" parameterType="matching">
+		UPDATE MATCHING
+		   SET MATCH_STAT = 1
+		 WHERE PROPOSER_NO = #{proposerNo}
+		   AND RECEIVER_NO = #{receiverNo}
+	</update>
 	<!-- 마이페이지 메칭 수락 뒤 회원정보 추출용 -->
 	<select id="proposerInfo" parameterType="string" resultMap="memberResultSet">
 	  SELECT *

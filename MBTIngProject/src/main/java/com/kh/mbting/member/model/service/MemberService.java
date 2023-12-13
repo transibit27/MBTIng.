@@ -49,8 +49,11 @@ public interface MemberService {
 	int createChatroom(ChatRoom cr);
 	// 매칭 신청 수락 후 첫 메세지(쳇봇) 생성용 method
 	int createChatMessage(ChatMessage cm);
-	// 1:1 대화 시작 시 매칭 테이블 의 매칭 상태를(3/매칭 진행) 업데이트용 method
+	// 1:1 대화 시작 시 매칭 테이블의 매칭 상태를(3/매칭 진행) 업데이트용 method
 	int matchingStrat(Matching mc);
+	// 매칭 신정 거절 시 매칭 테이블의 매칭 상태를(1/거절) 업데이트용 method
+	int refusePropose(Matching mc);
+	
 	// 내 후기 게시글 숫자 확인용 method
 	int selectListCount(String userNo);
 

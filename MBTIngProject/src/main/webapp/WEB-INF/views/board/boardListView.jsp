@@ -88,7 +88,6 @@
             display: flex;
             flex-flow: wrap;
         }
-        /* 정렬버튼 스타일 작성할 곳 */
         .thumbnail {
             width : 300px;
         }
@@ -180,7 +179,7 @@
         <br>
 
         <div class="bestreviewlist" align="center">
-            <p class="bestreviewlistbanner" align="center">이달의 베스트 후기</p>
+            <p class="bestreviewlistbanner" align="center">베스트 후기</p>
             <table id="boardList" align="center">
 				<tr>
 				
@@ -204,7 +203,7 @@
                             resultStr += "<td style='width:300px;'>"
                             		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px; border-radius: 10px;'></a>"
                                        +	"<p>" + result[i].boardTitle + "<br>"
-                                       +	"💑" + result[i].mbtiNick + "<br>"
+                                       +	"💑" + result[i].userName + "<br>"
                                        +	"❤️" + result[i].thumbCount
                             resultStr += "</p></td>";
                             console.log(result[i]);
@@ -221,16 +220,12 @@
 	        <c:if test="${ not empty sessionScope.loginMember }" >
 				<button onclick="location.href='enrollForm.bo';">글작성</button>
 			</c:if>
-            <!-- 정렬 기능 작성할 곳 -->
         </div>
-        
-        <br>
-
         <div class="reviewlist" align="left">
             <c:forEach var="b" items="${ requestScope.list }">
                 <div class="thumbnail" align="center">
                     <a href="detail.bo?bno=${ b.boardNo }"><img src="${pageContext.request.contextPath}/${ b.changeName }"></a>
-                    <P>${ b.boardTitle }<br>💑${ b.mbtiNick }<br>❤️${ b.thumbCount }</P>
+                    <P>${ b.boardTitle }<br>💑${ b.userName }<br>❤️${ b.thumbCount }</P>
                 </div>
             </c:forEach>
         </div>

@@ -23,4 +23,5 @@ public class KakaoPay {
 	private int totalAmount;		//	TOTAL_AMOUNT	NUMBER
 	private int	taxFreeAmount;		//	TAX_FREE_AMOUNT	NUMBER
 	private String pg_token;
+	private int refundRequest;	//REFUND_REQUEST (1: 결제 후 대기, 2: 환불 신청 상태, 3: 환불 거절)   
 }

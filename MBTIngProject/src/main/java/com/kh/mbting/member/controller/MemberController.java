@@ -258,10 +258,20 @@ public class MemberController {
 		
 	}
 	// b-4 신청자 거절용 메소드 (ajax)
-	@RequestMapping (value="refusePropose.me")
-	public String refusePropose(@RequestParam String userNo) {
+	@ResponseBody
+	@RequestMapping (value="refusePropose.me", produces="text/html; charset=UTF-8")
+	public String refusePropose(Matching mc) {
+		System.out.println("잘들어오나"+mc);
+		String refuse="";
+		// 선택한 회원의 번호를 넘기고 대상의 신청 거절 (Matching테이블 stat(1/거절) update)
+		int result = memberService.refusePropose(mc);
+		if(result>0) {
+			refuse = "신청 거절 성공";
+		} else {
+			refuse = "신청 거절 실패";
+		}
 		
-		return null;
+		return refuse;
 	}
 	
 	

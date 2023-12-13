@@ -188,12 +188,28 @@ public class KakaoPayController {
 				}
 				break;
 			}	
-						
 		}
-				
-				
 		
 		return "redirect:/myPay.me";
+	}
+	
+	// 환불 요청용 메소드
+	@ResponseBody
+	@RequestMapping(value="refundRequest.me", produces="text/html; charset=UTF-8")
+	public String refundRequest(KakaoPay kp) {
+		System.out.println(kp);
+		int result = kakaoPayService.refundRequest(kp);
+		String message="";
+		System.out.println(result);
+		if(result > 0) {
+			
+			message= "환불 신청 성공";
+		} else {
+			
+			message= "환불 신청 실패";
+		}
+		
+		return message;
 	}
 	
 }

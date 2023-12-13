@@ -54,7 +54,7 @@ public class BoardDao {
 	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
 		return sqlSession.update("boardMapper.updateBoard", b);
 	}
-
+	
 	public ArrayList<Board> selectTopBoardList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectTopBoardList");
 	}

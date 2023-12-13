@@ -214,6 +214,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member proposerInfo(String proposerNo) {
 		return memberDao.proposerInfo(sqlSession, proposerNo);
 	}
+	// 마이페이지 - 매칭 거절용 메소드
+	@Override
+	public int refusePropose(Matching mc) {
+		return memberDao.refusePropose(sqlSession, mc);
+	}
 	// 마이페이지 - 매칭 신청이 수락되었을 때 쳇룸 생성용 method
 	@Override
 	public int createChatroom(ChatRoom cr) {
@@ -264,6 +269,9 @@ public class MemberServiceImpl implements MemberService {
 	public int checkEmail(Member m) {
 		return memberDao.checkEmail(sqlSession, m);
 	}
+
+
+
 
 
 

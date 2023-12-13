@@ -105,6 +105,10 @@ public class MemberDao {
 	public int checkEmail(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.checkEmail", m);
 	}
+	// 마이페이지 - 메칭 거절용 메소드
+	public int refusePropose(SqlSessionTemplate sqlSession, Matching mc) {
+		return sqlSession.update("memberMapper.refusePropose", mc);
+	}
 
 
 

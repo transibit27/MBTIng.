@@ -146,7 +146,7 @@
         line-height: 100px;
     }
     
-    #myOrderList button{
+    #myOrderList .rbuttoned{
     	border-radius: 10px;
     	width:80px;
     	height:50px;
@@ -154,7 +154,7 @@
         font-weight: bold;
     }
     
-    #myOrderList button:hover{
+    #myOrderList .rbutton:hover{
     	background-color: white;
     	color:black;
     }
@@ -260,13 +260,41 @@
 	sessionStorage.setItem("cpage",1);
 	let cpage = sessionStorage.getItem("cpage");
 
+    // 환불 요청 용 스크립트 처리
+    function refundRequest(e){
+        console.log("잘클릭 됨?")
+        // 1. 환불 요청할 상품 번호 변수 생성
+     
+        let orderId = $("#myOrderList").children().children().html()
+
+        $.ajax({
+            url:'refundRequest.me',
+            type:'post',
+            data:{
+                "partnerOrderId" : orderId
+            },
+            success:function(result){
+                alert(result);
+                orderList();
+            },
+            error:function(request,status,error){
+                console.log("환불신청용 ajax 통신 실패")
+                console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        })// ajax 끝
+        
+        
+    }
+
 	$(function(){
+		// 환불요청 상태에 따른 환불 버튼 처리
+		
 		// 결제 리스트 조회용 함수 호출
 		sessionStorage.setItem("morePage",8);
 		orderList();
 		
 		// 카카오페이 결제용 스크립트 
-		
+		// 상품1 정보 선택 시
 		$("#pay1").click(function(){
 			$.ajax({
 				url:'pay.me',
@@ -308,7 +336,7 @@
 			
 		});// 버튼 클릭 이벤트	
 		
-		
+		// 상품2 정보 선택 시
 		$("#pay2").click(function(){
 			$.ajax({
 				url:'pay.me',
@@ -353,6 +381,7 @@
 	
 	});	// 펑션 끝
 	
+    // 결제 리스트 출력용 펑션
 	function orderList(){
 		$.ajax({
 			url:'orderList.me',
@@ -369,7 +398,7 @@
             	const jsonDataPi = result.pi
             	const jsonObjectPi = JSON.parse(jsonDataPi);
             	
-                console.log(sessionStorage.getItem("morePage"));
+                //console.log(sessionStorage.getItem("morePage"));
             	
             	const jsonData = result.list;
 				const jsonObject = JSON.parse(jsonData);
@@ -381,23 +410,34 @@
             	if(result.length !=0 ){
             		
                 	for(let i=0; i<jsonArray.length; i++){
-    
                 		// 환불 날짜가 없을 경우 환불하지 않은 상태로 출력
                 		let refund = "";
+                		let refundButton = "";
                 		
                     	if(jsonArray[i].refundDate != ""){
                     		refund = "결제상태"
                     	} else {
                     		refund = "환불상태"
                     	}
+                    	
+                    	switch(jsonArray[i].refundRequest){
+                    	case 1 : refundButton = "<td><button class='rbutton rbuttoned' onclick='refundRequest(this)'>환불 요청</button></td>";
+                    	break;
+                    	case 2 : refundButton = "<td><button class='rbuttoned' onclick='refundRequest(this)' disabled>검토중</button></td>"
+                    	break;
+                    	case 3 : refundButton = "<td><button class='rbuttoned' onclick='refundRequest(this)' disabled>환불됨</button></td>"
+                    	break;
+                    	case 4 : refundButton = "<td><button class='rbuttoned' onclick='refundRequest(this)' disabled>거절됨</button></td>"
+                    	break;
+                    	}
                 		
                 		resultStr += "<tr>"
-                					+	"<td>"+ jsonArray[i].partnerOrderId + "</td>"
+                					+	"<td id='orderId'>"+ jsonArray[i].partnerOrderId + "</td>"
                 					+ 	"<td>"+ refund + "</td>"
                 					+	"<td>"+ jsonArray[i].itemName + "</td>"
                 					+   "<td>"+ jsonArray[i].partnerUserId + "</td>"
                 					+	"<td>"+ jsonArray[i].orderDate.substr(0,19) + "</td>"
-                					+	"<td><button>환불 요청</button></td>"
+                					+	"<td>"+ refundButton+ "</td>"
                 				+	"</tr>";
                 	}
                 	
