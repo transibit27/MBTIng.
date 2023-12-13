@@ -22,6 +22,7 @@ import com.kh.mbting.chatting.model.service.ChattingServiceImpl;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
+import com.kh.mbting.mbti.model.vo.Mbti;
 import com.kh.mbting.member.model.vo.Member;
 
 
@@ -163,8 +164,14 @@ public class ChattingController {
     	new Gson().toJson(list, response.getWriter());
     }
     
+    @ResponseBody
     @RequestMapping("check.pro")
-    public void checkPerson(String userNo) {
-    	System.out.println(userNo);
+    public void checkProposer(int userNo, HttpServletResponse response )throws JsonIOException, IOException {
+    		
+    		ArrayList<Mbti> proposerNoList = cService.checkProposer(userNo);
+    		 
+    		response.setContentType("application/json; charset-UTF-8");
+        	new Gson().toJson(proposerNoList, response.getWriter());
+    		
     }
 }

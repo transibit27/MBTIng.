@@ -1,7 +1,6 @@
 package com.kh.mbting.chatting.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +11,7 @@ import com.kh.mbting.chatting.model.dao.ChattingDao;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
+import com.kh.mbting.mbti.model.vo.Mbti;
 import com.kh.mbting.member.model.vo.Member;
 
 @Service
@@ -79,7 +79,8 @@ public class ChattingServiceImpl implements ChattingService{
 		return chattingDao.searchMember(sm);
 	}
 
-
-
-	
+	@Override
+	public ArrayList<Mbti> checkProposer(int userNo) {
+		return chattingDao.checkProposer(userNo);
+	}
 }

@@ -221,7 +221,6 @@
   	background-color : pink;
   	border-radius : 20px;
   }
-  
 
 </style>
 </head>
@@ -238,7 +237,7 @@
         
          <input type="hidden" value="N"  name="gender" id="gender">
         <div id="genderCheck">
-        	<button id="Men" class="genderButton " type="button" onclick="Gender(1);">남</button>
+        	<button id="Men"   class="genderButton " type="button" onclick="Gender(1);">남</button>
         	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);">여</button>
         </div>	
         	<table id="searchTable">
@@ -354,6 +353,7 @@
   <script>
   
   	$(function() {
+  		checkProposer();
   		selectAllMemberList();
   	});
   	
@@ -367,7 +367,7 @@
   				//console.log(mem);
   				for(let i in mem) {
  				
-					 resultStr +=  "<div class='user'>" +
+					 resultStr +=  "<div class='user' id='user" + mem[i].userNo + "'>" +
 					 			 	"<div class='image'>" + 
 					 			 		"<div class='cardImage'>" +
 					 			 			"<img src='${pageContext.request.contextPath}" + mem[i].profileImg +   "'>" +
@@ -381,9 +381,8 @@
 						  			 "<div class='like'><button id='button' onclick='requestMatch(this , " + mem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
-
-						  $(".user__container").html(resultStr);
-						  
+						  			 
+						  $(".user__container").html(resultStr);		  
   				}
   			},
   			error : function() {
@@ -429,7 +428,7 @@
 						  			"<div class='like'><button id='button' onclick='requestMatch(this , " + searchMem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
-
+						  			 
 						  $(".user__container").html(resultStr);
   				}
   			 }
@@ -491,7 +490,7 @@
   <script>
   $(document).ready(function() {
 	  	personDetail();
-	  	checkProposer(;)
+	  	checkProposer();
 	});
   
   	function personDetail() {
@@ -527,9 +526,15 @@
   	  function checkProposer() {
   		  $.ajax({
   			 url : "check.pro",
-  			 data : {"userNo" : "${sessionScope.loginMember.userNo}"},
-			 success : function() {
-				 console.log("성공 ㅋ");
+  			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+			 success : function(proposerNoList) {
+				 
+				 for(let i in proposerNoList) {
+					 const button = $("#user" + proposerNoList[i].receiverNo).find("button");
+					 button.css("background-color", "#f54d3e");
+					 button.text("수락 대기중");
+				 }
+				 
 			 }, 
 			 error : function() {
 				 console.log("내가 신청한 회원 정보 불러오기 실패...");

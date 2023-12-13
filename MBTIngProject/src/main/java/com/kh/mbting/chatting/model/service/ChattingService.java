@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
+import com.kh.mbting.mbti.model.vo.Mbti;
 import com.kh.mbting.member.model.vo.Member;
 
 
@@ -87,4 +88,11 @@ public interface ChattingService {
      * @return
      */
     ArrayList<Member> searchMember(SearchMember sm);
+    
+    /***
+     * 내가 신청한 사람들 번호 검색하기
+     * @param userNo
+     * @return
+     */
+    ArrayList<Mbti> checkProposer(int userNo);
 }
