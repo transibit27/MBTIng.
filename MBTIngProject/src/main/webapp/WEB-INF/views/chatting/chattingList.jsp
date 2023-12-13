@@ -382,7 +382,8 @@
 						  			 "</div>" +
 						  			 "</div>"
 						  			 
-						  $(".user__container").html(resultStr);		  
+						  $(".user__container").html(resultStr);	
+
   				}
   			},
   			error : function() {
@@ -392,8 +393,13 @@
   	}
   	
   	<!--사람을 검색한 값을 넘겨주는 function-->
+
   	function searchPerson() {
-  		
+  		checkProposer();
+  		searchPersonal();
+  	}
+  	
+  	function searchPersonal() {
   		$.ajax({
   			url : "search.li" ,
   			type : "get",
@@ -401,7 +407,8 @@
   					"age" 	 : $('select[name="age"]').val(),
   					"address": $('select[name="address"]').val(),
   					"mbti"	 : $('select[name="mbti"]').val(),
-  					"gender" : $('input[name="gender"]').val()
+  					"gender" : $('input[name="gender"]').val(),
+  					"userNo" : ${sessionScope.loginMember.userNo}
   			},
   			success : function(searchMem) {
   				
@@ -413,8 +420,8 @@
   				
   				for(let i in searchMem) {
   					 //$('.content_2').children().remove();
-  					 
-					 resultStr +=  "<div class='user'>" +
+  					 console.log(searchMem);
+					 resultStr +=  "<div class='user' id='user" + searchMem[i].userNo + "'>" +
 					 			 	"<div class='image'>" + 
 					 			 		"<div class='cardImage'>" +
 					 			 			"<img src='${pageContext.request.contextPath}" + searchMem[i].profileImg +   "'>" +
@@ -431,15 +438,18 @@
 						  			 
 						  $(".user__container").html(resultStr);
   				}
+  				
   			 }
+  			
   			},
   			error : function() {
   				console.log("검색 회원 조회에 실패했습니다.");
   			}
-  			
   		});
-  		
+  		checkProposer();
   	}
+
+	
   </script>
         
   <script>
@@ -530,6 +540,7 @@
 			 success : function(proposerNoList) {
 				 
 				 for(let i in proposerNoList) {
+					
 					 const button = $("#user" + proposerNoList[i].receiverNo).find("button");
 					 button.css("background-color", "#f54d3e");
 					 button.text("수락 대기중");

@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SearchMember {
+	private int userNo;
 	private int startAge;
 	private int endAge;
 	private int startHeight;
@@ -21,15 +22,16 @@ public class SearchMember {
 	private String height;
 	
 	/**/
-	public SearchMember(String age, String height, String address, String mbti, String gender) {
+	public SearchMember(String age, String height, String address, String mbti, String gender, int userNo) {
 		this.age = age;
 		this.height = height;
 		this.address = address;
 		this.mbti = mbti;
 		this.gender = gender;
+		this.userNo = userNo;
 	}
 	
-	public SearchMember(int startAge, int endAge, int startHeight, int endHeight, String address, String mbti, String gender) {
+	public SearchMember(int startAge, int endAge, int startHeight, int endHeight, String address, String mbti, String gender, int userNo) {
 		this.startAge = startAge;
 		this.endAge = endAge;
 		this.startHeight = startHeight;
@@ -37,25 +39,28 @@ public class SearchMember {
 		this.address = address;
 		this.mbti = mbti;
 		this.gender = gender;
+		this.userNo = userNo;
 	}
 	
 	/*age와 height 중 height만 없음일 때 */
-	public SearchMember(int startAge, String address, int endAge, String mbti, String gender , String height) {
+	public SearchMember(int startAge, String address, int endAge, String mbti, String gender , String height, int userNo) {
 		this.startAge = startAge;
 		this.address = address;
 		this.endAge = endAge;
 		this.mbti = mbti;
 		this.gender = gender;
 		this.height = height;
+		this.userNo = userNo;
 	}
 	
 	/*age와 height중 age만 없음일 때*/
-	public SearchMember(int startHeight, int endHeight, String address, String mbti, String gender , String age) {
+	public SearchMember(int startHeight, int endHeight, String address, String mbti, String gender , String age, int userNo) {
 		this.startHeight = startHeight;
 		this.endHeight = endHeight;
 		this.address = address;
 		this.mbti = mbti;
 		this.gender = gender;
 		this.age = age;
+		this.userNo = userNo;
 	}
 }
