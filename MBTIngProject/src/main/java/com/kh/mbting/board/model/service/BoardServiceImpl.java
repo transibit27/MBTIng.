@@ -69,6 +69,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
+	@Transactional
+	public int updateBoard(Board b) {
+		return boardDao.updateBoard(sqlSession, b);
+	}
+
+	@Override
 	public ArrayList<Board> selectTopBoardList() {
 		return boardDao.selectTopBoardList(sqlSession);
 	}
@@ -81,12 +87,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi) {
 		return boardDao.selectSearchList(sqlSession, map, pi);
-	}
-
-	@Override
-	@Transactional
-	public int updateBoard(Board b) {
-		return boardDao.updateBoard(sqlSession, b);
 	}
 
 }

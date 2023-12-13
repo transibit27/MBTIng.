@@ -121,12 +121,13 @@ public class BoardController {
 	@RequestMapping("updateForm.bo")
 	public ModelAndView updateForm(int bno, ModelAndView mv) {
 		Board b = boardService.selectBoard(bno);
-		mv.addObject("b", b).setViewName("board/boardUpdateForm");
+		ArrayList<BoardImg> list = boardService.selectBoardImg(bno);
+		mv.addObject("b", b).addObject("list", list).setViewName("board/boardUpdateForm");
 		return mv;
 	}
 	
 	@PostMapping("update.bo")
-	public String updateBoard(Board b, BoardImg bi, MultipartFile[] reupfile, HttpSession session, Model model) {
+	public String updateBoard(Board b, HttpSession session, Model model) {
 		int result = boardService.updateBoard(b);
 		if(result > 0) {			
 			session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");			
