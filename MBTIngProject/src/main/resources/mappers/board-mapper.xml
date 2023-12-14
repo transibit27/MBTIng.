@@ -180,6 +180,34 @@
 		   AND ${condition} LIKE '%' || #{keyword} || '%'
 		 ORDER BY BOARD_NO DESC
 	</select>
+
+	<select id="checkThumb" parameterType="hashmap" resultType="_int">
+		SELECT COUNT (*)
+		  FROM THUMB
+		 WHERE BOARD_NO = #{ boardNo }
+		   AND USER_NO = #{ userNo }
+	</select>
+	
+	<insert id="insertThumb" parameterType="hashmap">
+		INSERT INTO THUMB(BOARD_NO
+		                , USER_NO)
+		           VALUES(#{ boardNo }
+		                , #{ userNo })		
+	</insert>
+	
+	<delete id="deleteThumb" parameterType="hashmap">
+		DELETE
+		  FROM THUMB
+		 WHERE BOARD_NO = #{ boardNo }
+		   AND USER_NO = #{ userNo }
+	</delete>
+	
+	<!-- 관리자 전체 후기게시글 수 조회 -->
+	<select id="selectTotalBoard" resultType="_int">
+		SELECT COUNT(*)
+          FROM BOARD
+         WHERE STATUS = 'Y'
+	</select>
 	
 	<!-- 관리자 전체 조회 -->
 	<select id="adminSelectList" resultMap="boardResultSet">

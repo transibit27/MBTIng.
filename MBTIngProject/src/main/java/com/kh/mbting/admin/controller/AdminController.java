@@ -4,14 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,7 +19,6 @@ import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
-import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Controller
@@ -200,6 +194,7 @@ public class AdminController {
 		return "admin/adminMainPage";
 	}
 	
+	// 전체회원 조회
 	@GetMapping("list.adme")
 	public ModelAndView memberSelectList(
 		@RequestParam(value="cpage", defaultValue = "1") int currentPage,
@@ -215,6 +210,7 @@ public class AdminController {
 		ArrayList<Member> list = adminService.memberSelectList(pi);
 		
 		mv.addObject("list", list)
+		  .addObject("result", new Gson().toJson(list))
 		  .addObject("pi", pi)
 		  .setViewName("admin/adminMemberListView");
 		
@@ -245,23 +241,61 @@ public class AdminController {
     }
 	
 	
+	@RequestMapping("update-status")
+	public void updateMember(@RequestParam("selectedUserNos") List<String> selectedUserNos){
+		
+		Member m = new Member();
+		ArrayList<Member> memNo = new ArrayList<>();
+
+    	for (int i = 0; i <selectedUserNos.size(); i++ ) {   	  
+    		int userNo = Integer.parseInt(selectedUserNos.get(i)); 
+    		m.setUserNo(userNo);
+    		
+    		memNo.add(m);
+    	}
+    	
+    	int result = adminService.updateSelectedStatus(memNo);
+		
+		List<String> statusN = new ArrayList<>();
+		//System.out.println("배열" + selectedUserNos );
+		
+		// int allMember = adminService.selectAllMember();
+		//6이 담김 
+/*
+		for (int i = 1; i <= allMember; i++) {
+		    if (!selectedUserNos.contains(String.valueOf(i))) {
+		        statusN.add(String.valueOf(i));
+		    }
+		}
+		*/
+		
+		
+		System.out.println(result);
+		
+	}
+	/*
+	
 	// 회원 상태 업데이트 API
 	@RequestMapping(value = "/update-status", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> updateStatus(@RequestParam("selectedUserNos") List<String> selectedUserNos) {
 	    
-		System.out.println(selectedUserNos);
+		//System.out.println(selectedUserNos);
 		// 처리 로직
-	    return ResponseEntity.ok("Update successful");
+	    //return ResponseEntity.ok("Update successful");
+		
+		 int result = adminService.updateSelectedStatus(status, selectedUserNos);
 	}
     
-
+*/
+	/*
     // 선택된 회원 상태 일괄 업데이트 API
     @PutMapping("/update-status")
     public ResponseEntity<String> updateSelectedStatus(@RequestParam String status, @RequestBody List<String> selectedUserNos) {
-        
-    	System.out.println(selectedUserNos);
-    	System.out.println(status);
+        System.out.println("야 오냐 ㅠㅠ");
+    	//System.out.println(selectedUserNos);
+    	//System.out.println("status" +status);
+    	//System.out.println("dd");
     	
     	try {
             int result = adminService.updateSelectedStatus(status, selectedUserNos);
@@ -272,10 +306,27 @@ public class AdminController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating records: " + e.getMessage());
         }
+    	
     }
-    
+    */
 	
 	/*
+	 * // 선택 된 회원 저장 (확인 필요)
+	@CrossOrigin
+	@PutMapping("updateSelectedStatus.ad")
+	public ResponseEntity<String> updateSelectedStatus(@RequestBody Map<String, List<Integer>> data) {
+	    List<Integer> selectedUserNos = data.get("selectedUserNos");
+
+	    try {
+	        adminService.updateSelectedUserStatus(selectedUserNos);
+	        return ResponseEntity.ok("Selected statuses updated successfully");
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body("Failed to update selected statuses");
+	    }
+	}
+	 * 
+	 * 
 	// 상태에 따른 토글바 조회용 (보류)
 	@PostMapping("updateStatus.ad")
     public ResponseEntity<String> updateStatus(@RequestBody Map<String, String> data) {
@@ -292,21 +343,7 @@ public class AdminController {
     }
 	
 	
-	// 선택 된 회원 저장 (확인 필요)
 	
-	@CrossOrigin
-	@PutMapping("updateSelectedStatus.ad")
-	public ResponseEntity<String> updateSelectedStatus(@RequestBody Map<String, List<Integer>> data) {
-	    List<Integer> selectedUserNos = data.get("selectedUserNos");
-
-	    try {
-	        adminService.updateSelectedUserStatus(selectedUserNos);
-	        return ResponseEntity.ok("Selected statuses updated successfully");
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body("Failed to update selected statuses");
-	    }
-	}
 	*/
 	
     /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
@@ -355,5 +392,17 @@ public class AdminController {
         return mv;
     }
     
+    
+    
+	}
+    
 	
-}
+    
+    
+    
+    
+    
+    
+    
+    
+

@@ -19,9 +19,10 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
         .outer {
-            width: 100%;
+            width: 1000px;
             margin: auto;
-            margin-top: 10px;
+            margin-top: 100px;
+            margin-left: 300px;
         }
         .reviewbanner {
             width: 100%;
@@ -44,11 +45,14 @@
             margin: auto;
         }
         .reviewdetail-top-button button {
-            width: 65px;
-            height: 30px;
+            width: 120px;
+            height: 50px;
             border: none;
-            border-radius: 5px;
+            border-radius: 7px;
             background-color: pink;
+            font-weight: bold;
+            font-size: 20px;
+            display : inline;
         }
         .reviewdetail-top-button button:hover {
             border: 1px solid pink;
@@ -59,7 +63,7 @@
             margin: auto;
         }
         .reviewdetail-table {
-            width: 400px;
+            width: 300px;
             border-bottom: 2px solid pink;
         }
         .reviewdetail-table *{
@@ -68,7 +72,7 @@
             font-weight: bold;
         }
         .reviewdetail-table td {
-            width: 200px;
+            width: 150px;
         }
         .reviewdetail-table-title {
             font-size: xx-large;
@@ -103,24 +107,37 @@
             border: 1px solid pink;
             background-color: white;            
         }
+        #deleteButton { 
+        	margin-bottom : 9px; 
+        	color: red;
+        	padding : 0px;
+        	
+        }
     </style>
 </head>
 <body>
 
-    <jsp:include page="../common/header.jsp" />
+    <jsp:include page="../common/adminMenubar.jsp" />
 
     <div class="outer">
-        <div class="reviewbanner" align="center">
-            <div class="reviewbanner-text">
-                <p>만남후기</p>
-            </div>
+        
+        <div class="reviewdetail-top-button" align="right">
+        	<form id="postForm" action="delete.adbo">
+            	<input type="hidden" name="bno"
+							value="${ requestScope.b.boardNo }">
+            </form>
+            <button onclick="location.href='list.adbo';">목록</button>
+            
+            <button type="button" class="btn btn-danger" id="deleteButton" onclick="postFormSubmit();">삭제</button>
         </div>
         
-        <br>
-
-        <div class="reviewdetail-top-button" align="right">
-            <button onclick="location.href='list.bo';">목록</button>
-        </div>
+        <script>
+			function postFormSubmit() {
+				$("#postForm").attr("action", "delete.adbo").submit();
+			}
+		</script>
+        
+        
         <div class="reviewdetail-area">
             <table class="reviewdetail-table">
                 <tr>
@@ -131,8 +148,7 @@
                     <td>${ requestScope.b.enrollDate }</td>
                 </tr>
                 <tr>
-                    <td>조회수 : ${ requestScope.b.views }</td>
-                    <td>❤️${ requestScope.b.thumbCount }</td>
+                    <td colspan="2">조회수 : ${ requestScope.b.views }</td>
                 </tr>
             </table>
 
@@ -170,38 +186,17 @@
             		${ requestScope.b.thumbCount }
                 </c:if>
                 <c:if test="${not empty sessionScope.loginMember}">
-                    <c:choose>
-                        <c:when test="${ checkThumb == 1 }">
-                            &nbsp;<img id="checkThumb" src="resources/images/heart.png"><br>
-                            ${ requestScope.b.thumbCount }
-	                        <form id ="thumbForm" action="changeThumb.bo" method="post">
-	                            <input type="hidden" name="boardNo" value="${ requestScope.b.boardNo }">
-	                            <input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }">
-	                            <input type="hidden" name="checkThumb" value="${checkThumb}">
-	                        </form>
-                        </c:when>
-                        <c:otherwise>
-                            &nbsp;<img id="checkThumb" src="resources/images/emptyHeart.png"><br>
-                            ${ requestScope.b.thumbCount }
-	                        <form id ="thumbForm" action="changeThumb.bo" method="post">
-	                            <input type="hidden" name="boardNo" value="${ requestScope.b.boardNo }">
-	                            <input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }">
-	                            <input type="hidden" name="checkThumb" value="${checkThumb}">
-	                        </form>
-                        </c:otherwise>
-                    </c:choose>
+                    &nbsp;<img src="resources/images/emptyHeart.png"><br>
+            		${ requestScope.b.thumbCount }
                 </c:if>
 
             </div>
-            
+
             <!-- 좋아요 기능 스크립트 작성 영역 -->
             <script>
-                $(function() {
-	                $("#checkThumb").click(function() {
-                        $("#thumbForm").submit();
-	                });
-	            });   
+                
             </script>
+
             <br>
 
         </div>
@@ -227,8 +222,6 @@
         <br>
 
     </div>
-
-    <jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>

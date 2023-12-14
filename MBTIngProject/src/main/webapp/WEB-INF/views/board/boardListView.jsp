@@ -206,7 +206,6 @@
                                        +	"💑" + result[i].userName + "<br>"
                                        +	"❤️" + result[i].thumbCount
                             resultStr += "</p></td>";
-                            console.log(result[i]);
                         }                
                         $("#boardList tr").html(resultStr);                        
                     }

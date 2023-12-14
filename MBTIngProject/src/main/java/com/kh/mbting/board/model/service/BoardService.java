@@ -33,4 +33,20 @@ public interface BoardService {
 
     ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi);
     
+    int checkThumb(HashMap<String, Object> map);
+    
+    int insertThumb(HashMap<String, Object> map);
+    
+    int deleteThumb(HashMap<String, Object> map);
+    
+    /* 관리자 페이지 코드 */
+	// 후기게시글 상세조회
+    Board adminSelectBoard(int boardNo);
+
+    // 후기게시글 상세조회 시 이미지 가져오기(?)
+	ArrayList<BoardImg> adminSelectBoardImg(int boardNo);
+	
+	// 후기게시글 삭제
+	int adminDeleteBoard(int boardNo);
+	
 }

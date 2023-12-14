@@ -138,38 +138,22 @@
                             <table class="reviewphoto-table-thumbnail">
                                 <tr>
                                     <td>
-                                        <img id="thumbImg" src="<%= contextPath %>/<%= list.get(0).getChangeName() %>">
+                                        <img src="<%= contextPath %>/<%= list.get(0).getChangeName() %>">
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                        <td>    
-                            <table class="reviewphoto-table-photos">
-                                <tr>
-                                    <td>
-                                        <img id="contentImg1" src="<%= contextPath %>/<%= list.get(1).getChangeName() %>">
-                                    </td>                                   
-                                </tr>
-                            </table>
-                        </td>
-                        <td>
-                            <table class="reviewphoto-table-photos">
-                                <tr>
-                                    <td>
-                                        <img id="contentImg2" src="<%= contextPath %>/<%= list.get(2).getChangeName() %>">
-                                    </td>                                   
-                                </tr>
-                            </table>
-                        </td>
-                        <td>
-                            <table class="reviewphoto-table-photos">
-                                <tr>
-                                    <td>
-                                        <img id="contentImg3" src="<%= contextPath %>/<%= list.get(3).getChangeName() %>">
-                                    </td>                                   
-                                </tr>
-                            </table>
-                        </td>
+                        <% for(int i=1; i < list.size(); i++) { %>
+                            <td>    
+                                <table class="reviewphoto-table-photos">
+                                    <tr>
+                                        <td>
+                                            <img src="<%= contextPath %>/<%= list.get(i).getChangeName() %>">
+                                        </td>                                   
+                                    </tr>
+                                </table>
+                            </td>
+                        <% } %>
                     </tr>
                 </table>
             </div>

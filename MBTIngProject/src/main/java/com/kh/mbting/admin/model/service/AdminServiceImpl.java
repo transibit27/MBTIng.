@@ -15,7 +15,6 @@ import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
-import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Service
@@ -190,8 +189,9 @@ public class AdminServiceImpl implements AdminService {
 
     
 	@Override
-	public int updateSelectedStatus(String status, List<String> selectedUserNos) {
-	    return adminDao.updateSelectedStatus(sqlSession, status, selectedUserNos);
+	public int updateSelectedStatus( ArrayList<Member> memNo) {
+		
+			return adminDao.updateSelectedStatus(sqlSession, memNo );
 	}
 	
 
@@ -220,6 +220,11 @@ public class AdminServiceImpl implements AdminService {
        
 		return adminDao.adminSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
     }
+
+	@Override
+	public int selectAllMember() {
+		return adminDao.selectAllMember(sqlSession);
+	}
 	
 	
 	

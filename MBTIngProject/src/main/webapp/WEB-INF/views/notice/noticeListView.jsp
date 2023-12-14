@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style>
-        #boardList {text-align:center;}
-        #boardList>tbody>tr:hover {cursor:pointer;}
+        #noticeList {text-align:center;}
+        #noticeList>tbody>tr:hover {cursor:pointer;}
 
         #pagingArea {width:fit-content; margin:auto;}
 

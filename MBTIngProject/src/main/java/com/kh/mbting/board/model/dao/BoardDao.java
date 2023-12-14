@@ -70,5 +70,33 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", map, rowBounds);
     }
-        
+   
+    public int checkThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+    	return sqlSession.selectOne("boardMapper.checkThumb", map);
+    }
+    
+    public int insertThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+    	return sqlSession.insert("boardMapper.insertThumb", map);
+    }
+    
+    public int deleteThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+    	return sqlSession.delete("boardMapper.deleteThumb", map);
+    }
+    
+    /* 관리자 페이지 코드 */
+	// 후기게시글 상세조회
+    public Board adminSelectBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+	}
+	
+    // 후기게시글 상세조회 시 이미지 가져오기(?)
+	public ArrayList<BoardImg> adminSelectBoardImg(SqlSessionTemplate sqlSession, int boardNo) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardImg", boardNo);
+	}
+	
+	// 후기게시글 삭제
+	public int adminDeleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.deleteBoard", boardNo);
+	}
+
 }
