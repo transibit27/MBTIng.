@@ -667,7 +667,7 @@ body {
         
         let unReadCount = data.unReadMessage;
         
-        if(unReadCount == 0) {
+        if(unReadCount == 0 || unReadCount == "") {
         	unReadCount = '읽음';
         }else {
             unReadCount = 1;

@@ -66,6 +66,12 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             // 확인용
             //RoomList에 1번이랑 제니가 들어감. 
             System.out.println("채팅방 생성");
+            System.out.println("지금 내가 들어간 채팅방 :  "  + chatMessage.getRoomNo());
+            TextMessage textMessage2 = new TextMessage("읽음,"  + chatMessage.getEmail());
+
+            for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
+                sess.sendMessage(textMessage2);
+            }
             
            //System.out.println(sessionTwo);
            //System.out.println(sessionList);
@@ -76,6 +82,7 @@ public class WebSocketHandler extends TextWebSocketHandler  {
         // 채팅방이 존재 할 때
         else if(RoomList.get(chatRoom.getRoomNo()) != null && chatMessage.getMessageContent().equals("ENTER-CHAT") && chatRoom != null) {
             
+        	System.out.println("난 이미 생성된 방에 들어간 두 번째사람");
             // RoomList에서 해당 방번호를 가진 방이 있는지 확인.
             RoomList.get(chatRoom.getRoomNo()).add(session);
             //원래는 1번이랑 제니 , 1번이랑 유지민, 2번이랑 김민정 
@@ -83,8 +90,14 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             sessionList.put(session, chatRoom.getRoomNo());
             //원래는 제니 세션과 1번, 유지민 세션과 1번, 김민정 세션과 2
             // 확인용
-            
             System.out.println("생성된 채팅방으로 입장");
+            System.out.println("지금 내가 들어간 채팅방 :  "  + chatMessage.getRoomNo());
+            TextMessage textMessage1 = new TextMessage("읽음,"  + chatMessage.getEmail());
+
+            for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
+                sess.sendMessage(textMessage1);
+            }
+            
         }
         
         // 채팅 메세지 입력 시

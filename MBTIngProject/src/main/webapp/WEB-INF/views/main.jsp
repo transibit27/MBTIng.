@@ -619,6 +619,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 				 $(".topViewTr").html(resultStr);
 
 			 }
+
   			
   			checkReceiver();
 		  	checkProposer();
@@ -653,6 +654,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   <script>
   function requestMatch(e , num) {
 		
+	    
 		let receiverNo;
 		
 		if(e.innerText == '수락') {

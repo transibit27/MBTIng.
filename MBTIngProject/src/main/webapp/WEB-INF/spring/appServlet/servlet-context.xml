@@ -41,6 +41,7 @@
 			<mapping path="/all.me"/>
 			<mapping path="/convert.ch"/>
 			<mapping path="/mbtiTest.mb"/>
+			<mapping path="/updateMatchRequestList.mb"/>
 			<beans:bean class="com.kh.mbting.common.interceptor.ChattingInterceptor"
 						   id="chatInterceptor"></beans:bean>	
 		</interceptor>
