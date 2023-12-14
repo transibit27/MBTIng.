@@ -433,14 +433,14 @@
 
 	
 	<!-- updateSelectedStatus() 메서드의 SQL -->
-<update id="updateSelectedStatus" parameterType="java.util.List">
+<!-- <update id="updateSelectedStatus" parameterType="java.util.List">
     UPDATE MEMBER
     SET STATUS = 'Y'
     WHERE USER_NO IN
     <foreach collection="list" item="item" open="(" separator="," close=")">
         #{list[userNo]}
     </foreach>
-</update>
+</update> -->
 	
 	 
 	<select id="selectAllMember" resultType="_int">

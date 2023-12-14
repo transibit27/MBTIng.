@@ -188,7 +188,7 @@ public class BoardController {
 			return "common/errorPage";
 		}
 	}
-=======
+
 	/* 관리자 페이지 코드 */
 	// 후기게시글 상세조회
 	@RequestMapping("detail.adbo")
@@ -224,5 +224,5 @@ public class BoardController {
 	}
 	
 	
->>>>>>> Stashed changes
+
 }
