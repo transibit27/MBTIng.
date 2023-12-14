@@ -33,14 +33,12 @@ public interface BoardService {
 
     ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi);
     
-<<<<<<< Updated upstream
     int checkThumb(HashMap<String, Object> map);
     
     int insertThumb(HashMap<String, Object> map);
     
     int deleteThumb(HashMap<String, Object> map);
     
-=======
     /* 관리자 페이지 코드 */
 	// 후기게시글 상세조회
     Board adminSelectBoard(int boardNo);
@@ -50,5 +48,5 @@ public interface BoardService {
 	
 	// 후기게시글 삭제
 	int adminDeleteBoard(int boardNo);
->>>>>>> Stashed changes
+	
 }

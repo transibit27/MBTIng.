@@ -70,7 +70,6 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", map, rowBounds);
     }
-<<<<<<< Updated upstream
    
     public int checkThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
     	return sqlSession.selectOne("boardMapper.checkThumb", map);
@@ -83,7 +82,6 @@ public class BoardDao {
     public int deleteThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
     	return sqlSession.delete("boardMapper.deleteThumb", map);
     }
-=======
     
     /* 관리자 페이지 코드 */
 	// 후기게시글 상세조회
@@ -100,5 +98,5 @@ public class BoardDao {
 	public int adminDeleteBoard(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
->>>>>>> Stashed changes
+
 }
