@@ -89,4 +89,20 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
 
+	@Override
+	public int checkThumb(HashMap<String, Object> map) {
+		return boardDao.checkThumb(sqlSession, map);
+	}
+
+	@Override
+	public int insertThumb(HashMap<String, Object> map) {
+		return boardDao.insertThumb(sqlSession, map);
+	}
+
+	@Override
+	public int deleteThumb(HashMap<String, Object> map) {
+		return boardDao.deleteThumb(sqlSession, map);
+	}
+	
+	
 }

@@ -33,4 +33,10 @@ public interface BoardService {
 
     ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi);
     
+    int checkThumb(HashMap<String, Object> map);
+    
+    int insertThumb(HashMap<String, Object> map);
+    
+    int deleteThumb(HashMap<String, Object> map);
+    
 }

@@ -169,17 +169,38 @@
             		${ requestScope.b.thumbCount }
                 </c:if>
                 <c:if test="${not empty sessionScope.loginMember}">
-                    &nbsp;<img src="resources/images/emptyHeart.png"><br>
-            		${ requestScope.b.thumbCount }
+                    <c:choose>
+                        <c:when test="${ checkThumb == 1 }">
+                            &nbsp;<img id="checkThumb" src="resources/images/heart.png"><br>
+                            ${ requestScope.b.thumbCount }
+	                        <form id ="thumbForm" action="changeThumb.bo" method="post">
+	                            <input type="hidden" name="boardNo" value="${ requestScope.b.boardNo }">
+	                            <input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }">
+	                            <input type="hidden" name="checkThumb" value="${checkThumb}">
+	                        </form>
+                        </c:when>
+                        <c:otherwise>
+                            &nbsp;<img id="checkThumb" src="resources/images/emptyHeart.png"><br>
+                            ${ requestScope.b.thumbCount }
+	                        <form id ="thumbForm" action="changeThumb.bo" method="post">
+	                            <input type="hidden" name="boardNo" value="${ requestScope.b.boardNo }">
+	                            <input type="hidden" name="userNo" value="${ sessionScope.loginMember.userNo }">
+	                            <input type="hidden" name="checkThumb" value="${checkThumb}">
+	                        </form>
+                        </c:otherwise>
+                    </c:choose>
                 </c:if>
 
             </div>
-
+            
             <!-- 좋아요 기능 스크립트 작성 영역 -->
             <script>
-                
+                $(function() {
+	                $("#checkThumb").click(function() {
+                        $("#thumbForm").submit();
+	                });
+	            });   
             </script>
-
             <br>
 
         </div>

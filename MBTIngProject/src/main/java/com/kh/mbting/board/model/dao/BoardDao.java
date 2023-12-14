@@ -70,5 +70,16 @@ public class BoardDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		return (ArrayList)sqlSession.selectList("boardMapper.selectSearchList", map, rowBounds);
     }
-        
+   
+    public int checkThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+    	return sqlSession.selectOne("boardMapper.checkThumb", map);
+    }
+    
+    public int insertThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+    	return sqlSession.insert("boardMapper.insertThumb", map);
+    }
+    
+    public int deleteThumb(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+    	return sqlSession.delete("boardMapper.deleteThumb", map);
+    }
 }

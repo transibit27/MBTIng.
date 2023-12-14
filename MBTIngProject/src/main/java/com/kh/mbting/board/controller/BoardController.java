@@ -27,6 +27,7 @@ import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.board.model.vo.BoardImg;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.common.template.Pagination;
+import com.kh.mbting.member.model.vo.Member;
 
 @Controller
 public class BoardController {
@@ -93,12 +94,24 @@ public class BoardController {
 	}
 	
 	@RequestMapping("detail.bo")
-	public ModelAndView selectBoard(int bno, ModelAndView mv) {	
+	public ModelAndView selectBoard(int bno, ModelAndView mv, HttpSession session) {
 		int result = boardService.increaseCount(bno);
-		if(result > 0) {
+		Member m = (Member)session.getAttribute("loginMember");
+		if(result > 0) {			
+			if( m != null) {
 			Board b = boardService.selectBoard(bno);
-			ArrayList<BoardImg> list = boardService.selectBoardImg(bno);			
-			mv.addObject("b", b).addObject("list", list).setViewName("board/boardDetailView");
+			ArrayList<BoardImg> list = boardService.selectBoardImg(bno);
+			String uno = m.getUserNo();
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("boardNo", bno);
+			map.put("userNo", uno);
+			int checkThumb = boardService.checkThumb(map);
+			mv.addObject("b", b).addObject("list", list).addObject("checkThumb", checkThumb).setViewName("board/boardDetailView");
+			} else {
+				Board b = boardService.selectBoard(bno);
+				ArrayList<BoardImg> list = boardService.selectBoardImg(bno);;
+				mv.addObject("b", b).addObject("list", list).setViewName("board/boardDetailView");
+			}
 		} else {
 			mv.addObject("errorMsg", "만남후기 상세조회 실패").setViewName("common/errorPage");
 		}
@@ -160,4 +173,18 @@ public class BoardController {
 	return new Gson().toJson(list);
 	}
 	
+	@RequestMapping("changeThumb.bo")
+	public String changeThumb(int boardNo, String userNo, int checkThumb, Model model, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("boardNo", boardNo);
+		map.put("userNo", userNo);
+		int result = (checkThumb == 1) ? boardService.deleteThumb(map): boardService.insertThumb(map);
+		if( result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 좋아요 변경이 반영되었습니다.");	
+			return "redirect:/detail.bo?bno=" + boardNo;
+		} else {
+			model.addAttribute("errorMsg", "좋아요 변경 실패");		
+			return "common/errorPage";
+		}
+	}
 }
