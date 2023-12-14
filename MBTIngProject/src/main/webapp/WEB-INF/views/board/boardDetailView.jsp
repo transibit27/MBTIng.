@@ -59,7 +59,7 @@
             margin: auto;
         }
         .reviewdetail-table {
-            width: 300px;
+            width: 400px;
             border-bottom: 2px solid pink;
         }
         .reviewdetail-table *{
@@ -68,7 +68,7 @@
             font-weight: bold;
         }
         .reviewdetail-table td {
-            width: 150px;
+            width: 200px;
         }
         .reviewdetail-table-title {
             font-size: xx-large;
@@ -131,7 +131,8 @@
                     <td>${ requestScope.b.enrollDate }</td>
                 </tr>
                 <tr>
-                    <td colspan="2">조회수 : ${ requestScope.b.views }</td>
+                    <td>조회수 : ${ requestScope.b.views }</td>
+                    <td>❤️${ requestScope.b.thumbCount }</td>
                 </tr>
             </table>
 

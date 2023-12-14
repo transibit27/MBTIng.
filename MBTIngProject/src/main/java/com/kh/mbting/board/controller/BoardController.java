@@ -180,7 +180,7 @@ public class BoardController {
 		map.put("userNo", userNo);
 		int result = (checkThumb == 1) ? boardService.deleteThumb(map): boardService.insertThumb(map);
 		if( result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 좋아요 변경이 반영되었습니다.");	
+			session.setAttribute("alertMsg", "좋아요 변경 완료");	
 			return "redirect:/detail.bo?bno=" + boardNo;
 		} else {
 			model.addAttribute("errorMsg", "좋아요 변경 실패");		
