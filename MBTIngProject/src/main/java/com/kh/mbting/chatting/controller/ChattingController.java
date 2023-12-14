@@ -136,10 +136,10 @@ public class ChattingController {
 	    	list = cService.searchMember(sm);
 	    	
     	}else if(age.equals("없음") && (!height.equals("없음")) ) {
-    		System.out.println("난 지금 나이만 없음이야 ");
+    		//System.out.println("난 지금 나이만 없음이야 ");
     		int startHeight  =  Integer.parseInt(height.substring(0, 3));
 	    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
-	    	System.out.println("start :" + startHeight + "end :" + endHeight);
+	    	//System.out.println("start :" + startHeight + "end :" + endHeight);
 	    	SearchMember sm = new SearchMember(startHeight, endHeight, address, mbti, gender , age, userNo );
 	    	list = cService.searchMember(sm);
 	    	

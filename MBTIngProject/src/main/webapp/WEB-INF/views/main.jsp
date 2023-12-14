@@ -574,7 +574,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 	</div>
 
 
-    <script>
+  <script>
   	$(function() {
   		
   		$.ajax({
@@ -593,9 +593,10 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				 
   				let roomNo    = result[i].myRoomNo;
   				let profile	  = result[i].profileImg;
+  				//console.log(result[i].userNo);
   				resultStr += 
-  				    "<td style='border: none;'>" + 
-  				   "<div class='like'><button id='button' onclick='requestMatch(this);' > <span>채팅신청</span></button></div>" +
+  				    "<td style='border: none;'>" +
+  				  "<div class='like' id='user" + result[i].userNo + "'><button id='button' onclick='requestMatch(this , " + result[i].userNo + ");' ><span>채팅신청</span></button></div>" +
   				    "<div class='flip-card'>" + 
   				        "<div class='flip-card-inner'>" + 
   				            "<div class='gradient-image flip-card-front'>" + 
@@ -614,9 +615,15 @@ MBTIng 덕분에 제 운명을 만났어요....!
 				  	"<input type='hidden' id='masterName" + num + "' name='masterName" + (num) + "' value=''>" +
 					"<input type='hidden' id='masterPic" + num + "' name='masterPic" + (num++) + "' value=''>" +
   				    "</td>";
+  				    
 				 $(".topViewTr").html(resultStr);
+
 			 }
-  			 
+  			
+  			checkReceiver();
+		  	checkProposer();
+		  	checkMatching();
+		  	
   			 $("#masterEmail1").val(result[0].email);
   			 $("#masterEmail2").val(result[1].email);
   			 $("#masterEmail3").val(result[2].email);
@@ -632,6 +639,8 @@ MBTIng 덕분에 제 운명을 만났어요....!
  			 $("#masterPic3").val(result[2].profileImg);
  			 $("#masterPic4").val(result[3].profileImg);
  			 
+ 			
+		  	
   		 },
   		 error	 : function() {
   			 console.log("top 4명 분석에 실패했습니다.");
@@ -642,12 +651,178 @@ MBTIng 덕분에 제 운명을 만났어요....!
   </script>
   
   <script>
-  	function requestMatch(e) {
-		alert("채팅을 위한 신청을 완료했습니다. 수락을 대기해주세요 ");
-		e.style.backgroundColor = "#f54d3e";
-		e.innerText = "수락 대기중";
- 	}
-  </script>
+  function requestMatch(e , num) {
+		
+		let receiverNo;
+		
+		if(e.innerText == '수락') {
+			
+			receiverNo = ${sessionScope.loginMember.userNo};
+			proposerNo = num;
+			
+			$.ajax({
+	             type: "GET",
+	             url: "accept.me",
+	             data: {"receiverNo" : receiverNo, "proposerNo" : proposerNo},
+	             success: function(response) {
+	            	 console.log("하하 성공");
+	            	 e.style.backgroundColor = "#DDDEA5";
+	            	 e.style.color = "white";
+	            	 e.innerText = "채팅하기";
+	            	 location.href="http://localhost:8081/mbting/convert.ch";
+	             },
+	
+	             error: function() {
+	                 // 에러 처리
+	                 alertify.error('Error occurred while processing the request.');
+	             }
+      });
+			
+		}else if(e.innerText == '수락 대기중'){
+			$.ajax({
+				type : "POST",
+				url  : "cancle.mat",
+				data : {"proposerNo" : ${sessionScope.loginMember.userNo}, "receiverNo" : num },
+				success : function(response) {
+					
+					 if (response.success) {
+	                      // 성공 메시지 표시
+	                      alertify.alert('Alert', response.message, function() {
+	                            alertify.success('Ok');
+	                      });
+	                      e.style.backgroundColor = "";
+	                      e.innerText = "채팅신청";
+	                      
+					 }else {
+						  alertify.alert('Alert', response.message, function() {
+	                            alertify.error('Error');
+	                      });
+					 }   
+	                      
+
+				},
+				error : function() {
+					console.log("취소 실패");
+				}
+			});
+			
+		}else if(e.innerText == '채팅하기'){
+			location.href="http://localhost:8081/mbting/convert.ch";
+		}else {
+			
+			receiverNo  = num;
+			$.ajax({
+	             type: "GET",
+	             url: "updateMatchRequestList.mb",
+	             data: {"receiverNo" : receiverNo},
+	             success: function(response) {
+	            	 //console.log("하하 성공");
+	                 if (response.success) {
+	                     // 성공 메시지 표시
+	                     alertify.alert('Alert', response.message, function() {
+	                         alertify.success('Ok');
+	                     });
+						
+	             		e.style.backgroundColor = "#f54d3e";
+	            		e.innerText = "수락 대기중";
+	
+	                     // 코인 수 업데이트
+	                     var matchCoin = Number('${sessionScope.matchCoin}') - 1;
+	                     // 세션의 matchCoin 값을 업데이트하는 코드를 추가해야 합니다.
+	                     // 예: sessionScope.matchCoin = matchCoin;
+	                 } else {
+	                     // 실패 메시지 표시
+	                     alertify.alert('Alert', response.message, function() {
+	                         alertify.error('Error');
+	                     });
+	
+	                     // 코인 부족 시 처리
+	                     if (response.message.includes("코인 부족")) {
+	                         alert("코인이 부족합니다. 코인 충전 후 다시 시도해 주세요.");
+	                     }
+	                 }
+	             },
+	
+	             error: function() {
+	                 // 에러 처리
+	                 alertify.error('Error occurred while processing the request.');
+	             }
+       });
+		}
+	}
+  
+  
+  function checkProposer() {
+	  
+		  $.ajax({
+			 url : "check.pro",
+			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+		 success : function(proposerNoList) {
+			 
+			 console.log(proposerNoList);
+			 for(let i in proposerNoList) {
+				 const button = $("#user" + proposerNoList[i].receiverNo).find("button");
+				 button.css("background-color", "#f54d3e");
+				 button.text("수락 대기중");
+			 }
+			 
+		 }, 
+		 error : function() {
+			 console.log("내가 신청한 회원 정보 불러오기 실패...");
+		 }
+		  });
+	  }
+	  
+	  function checkReceiver() {
+		$.ajax({
+			 url : "check.rec",
+			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+		 success : function(receiverNoList) {
+			 //console.log("나한테 신청 온 사람들");
+			 //console.log(receiverNoList);
+			 for(let i in receiverNoList) {
+				 const button = $("#user" + receiverNoList[i].proposerNo).find("button");
+				 button.css("background-color", "#94B9F3");
+				 button.css("box-shadow", "0px 0px 5px 3px #AAB59E");
+				 button.text("수락");
+			 }
+			 
+		 }, 
+		 error : function() {
+			 console.log("나한테 요청한 회원 정보 불러오기 실패...");
+		 }
+		  });
+	  }
+	  
+		function checkMatching() {
+		$.ajax({
+			 url : "check.mat",
+			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+		 success : function(matchingList) {
+			// console.log("매칭리스트" + matchingList[0].receiverNo);
+					 
+			 for(let i in matchingList) {
+				 
+				 let matchPerson = (${sessionScope.loginMember.userNo} == matchingList[i].proposerNo ) ? matchingList[i].receiverNo : matchingList[i].proposerNo;
+				 
+				 //console.log("나랑 매칭된 사람 번호임 :" +  matchPerson);
+				
+				 const button = $("#user" + matchPerson).find("button");
+				
+				 button.css("background-color", "#DDDEA5");
+				 button.css("box-shadow", "0px 0px 5px 3px #AAB59E");
+				 button.css("color", "white");
+				 button.text("채팅하기");
+				 
+			 }
+			 
+		 }, 
+		 error : function() {
+			 console.log("함께 매칭된 사람들 요청 실패...");
+		 }
+		  });
+	  }
+</script>
 
   <!-- mouse wheel을 사용하기 위한 script 코드 입니당. -->
   <script>

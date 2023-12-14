@@ -172,6 +172,7 @@
     	SELECT RECEIVER_NO
 		  FROM MATCHING
 		 WHERE PROPOSER_NO = #{userNo}
+		   AND MATCH_STAT = 2
     </select>
     
      <select id="checkReciever" resultMap="mbtiResultSet" parameterType="_int">

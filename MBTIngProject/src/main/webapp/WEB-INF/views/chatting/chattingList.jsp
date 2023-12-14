@@ -460,7 +460,7 @@
   					"userNo" : ${sessionScope.loginMember.userNo}
   			},
   			success : function(searchMem) {
-  				
+  				//console.log(searchMem);
   				if(searchMem == "") {
   					 $(".user__container").html("<h1 style='margin : auto;'> 일치하는 회원이 없습니다. </h1>");
   				}else {
@@ -491,6 +491,7 @@
   			 }
   				checkReceiver();
   		  		checkProposer();
+  		  		checkMatching();
   			},
   			error : function() {
   				console.log("검색 회원 조회에 실패했습니다.");
@@ -517,7 +518,8 @@
 	             data: {"receiverNo" : receiverNo, "proposerNo" : proposerNo},
 	             success: function(response) {
 	            	 console.log("하하 성공");
-	            	 e.style.backgroundColor = "white";
+	            	 e.style.backgroundColor = "#DDDEA5";
+	            	 e.style.color = "white";
 	            	 e.innerText = "채팅하기";
 	            	 location.href="http://localhost:8081/mbting/convert.ch";
 	             },
@@ -641,7 +643,7 @@
 				 
 				 for(let i in proposerNoList) {
 					 const button = $("#user" + proposerNoList[i].receiverNo).find("button");
-					 button.css("background-color", "#FBB9AB");
+					 button.css("background-color", "#f54d3e");
 					 button.text("수락 대기중");
 				 }
 				 
@@ -688,8 +690,9 @@
 					
 					 const button = $("#user" + matchPerson).find("button");
 					
-					 button.css("background-color", "#C5E1DE");
+					 button.css("background-color", "#DDDEA5");
 					 button.css("box-shadow", "0px 0px 5px 3px #AAB59E");
+					 button.css("color", "white");
 					 button.text("채팅하기");
 					 
 				 }
