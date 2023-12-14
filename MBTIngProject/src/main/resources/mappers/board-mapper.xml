@@ -192,9 +192,6 @@
 		 ORDER BY BOARD_NO DESC
 	</select>
 	
-<<<<<<< Updated upstream
-=======
-	
 	<!-- 관리자페이지 검색된 게시글 개수 조회 -->
     <select id="adminSearchListCount" parameterType="string" resultType="_int">
         SELECT COUNT(*)
@@ -223,12 +220,4 @@
 	</select>
 	
 	
-	
-	
-	
-	
-	
-	
-	
->>>>>>> Stashed changes
 </mapper>
