@@ -388,7 +388,7 @@
 		     , GENDER
 		     , STATUS
 		  FROM MEMBER
-		 ORDER BY USER_NO DESC
+		 ORDER BY USER_NO
 	</select>
 	
 	
@@ -424,7 +424,7 @@
 	    WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<!-- updateStatus() 메서드의 SQL 
+	<!-- updateStatus() 메서드의 SQL -->
 	<update id="updateStatus" parameterType="map">
 	    UPDATE MEMBER
 	    SET STATUS = #{status}
@@ -432,13 +432,19 @@
 	</update>
 
 	
-	updateSelectedStatus() 메서드의 SQL
-	<update id="updateSelectedStatus" parameterType="map">
-	    <foreach collection="selectedUserNos" item="userNo" >
-	        UPDATE MEMBER
-	        SET STATUS = #{status}
-	        WHERE USER_NO = #{userNo}
-	    </foreach>
-	</update>
-	 -->
+	<!-- updateSelectedStatus() 메서드의 SQL -->
+<update id="updateSelectedStatus" parameterType="java.util.List">
+    UPDATE MEMBER
+    SET STATUS = 'Y'
+    WHERE USER_NO IN
+    <foreach collection="list" item="item" open="(" separator="," close=")">
+        #{list[userNo]}
+    </foreach>
+</update>
+	
+	 
+	<select id="selectAllMember" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+	</select>
 </mapper>

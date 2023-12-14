@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -15,7 +16,6 @@ import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
-import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Repository
@@ -154,23 +154,11 @@ public class AdminDao {
         parameters.put("userNo", userNo);
         return sqlSession.update("memberMapper.updateStatus", parameters);
     }
-
     
-    // 다중 사용자 상태 업데이트
-    public int updateSelectedStatus(SqlSessionTemplate sqlSession, @Param("status") String status, @Param("selectedUserNos") List<String> selectedUserNos) {
-        return sqlSession.update("memberMapper.updateSelectedStatus", selectedUserNos);
+ // 다중 사용자 상태 업데이트
+    public int updateSelectedStatus(SqlSessionTemplate sqlSession, ArrayList<Member> memNo) {
+         return sqlSession.update("memberMapper.updateSelectedStatus", memNo);
     }
-	
-    
-    /*
-    // 다중 사용자 상태 업데이트
-    public int updateSelectedStatus(SqlSessionTemplate sqlSession, String status, List<String> selectedUserNos) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("status", status);
-        parameters.put("selectedUserNos", selectedUserNos);
-        return sqlSession.update("memberMapper.updateSelectedStatus", parameters);
-    }
-	*/
 
 	
 	// 상태에 따른 토글바 조회용 (보류)
@@ -178,6 +166,7 @@ public class AdminDao {
 		
 		return sqlSession.selectOne("memberMapper.getUserByEmail", email);
 	}
+	
 	public void updateUserStatus(SqlSessionTemplate sqlSession, String email, String newStatus) {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("email", email);
@@ -205,7 +194,7 @@ public class AdminDao {
 		int limit = pi.getBoardLimit();
 		int offset = (pi.getCurrentPage() - 1) * limit;
 		
-		RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset,limit);
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.adminSelectList", null, rowBounds);
 	}
@@ -229,10 +218,10 @@ public class AdminDao {
 	    return sqlSession.selectList("boardMapper.adminSearchList", parameters);
 	}
 	
-	
-	
-	
-	
+	public int selectAllMember(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectAllMember");
+	}
+
 	
 	
 }

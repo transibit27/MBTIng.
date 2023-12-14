@@ -55,11 +55,11 @@
             </div>
         </form>
     </div>
-    <button type="button" class="btn btn-primary" onclick="updateSelectedStatus()">저장</button>
+    <button type="button" class="btn btn-primary" onclick="updateSelectedStatus();">저장</button>
 
     <table border="1" id="member-table">
         <thead>
-        <th><input type="checkbox" class="checkbox" onclick="toggleAllCheckboxes()"></th>
+        <th><input type="checkbox" class="checkbox" onclick="toggleAllCheckboxes();"></th>
         <th>순번</th>
         <th>이름</th>
         <th>MBTI</th>
@@ -146,52 +146,70 @@
     <!-- 체크박스 전체 설정/해제 -->
     <script>
     // 체크박스 전체 설정/해제 및 회원 저장
-    function toggleAllCheckboxes() {
+    function toggleAllCheckboxes() { //전체 회원을 클릭한 상태
         // 체크박스 상태 가져오기
         var isChecked = document.querySelector('.checkbox').checked;
-
+		//isChecked에는 true라는 값이 담김.
+		
+		//console.log("isChecked" + isChecked);
         // 모든 체크박스 상태 변경
+        
         var checkboxes = document.querySelectorAll('.checkbox');
-        checkboxes.forEach(function (checkbox) {
-            checkbox.checked = isChecked;
+        //=> [object HTMLInputElement] => checkbox인 전체 선택의 
+        // 7개 input요소가 담김. 
+        //var checkboxArray = [...checkboxes];
+        //console.log("checkboxArray" + checkboxArray);
+        
+        checkboxes.forEach(
+        		function (checkbox) { //checkboxes 안에 있는 checkbox요소들 
+            		checkbox.checked = isChecked;
+        		    //=> 그 checkbox의 checked 속성을 true 값으로 넣어준다는 뜻. 
         });
 
         // 체크된 회원들의 상태를 서버로 전송
-        updateSelectedStatus();
+        updateSelectedStatus(); 
     }
 
     // 체크된 회원 저장
     function updateSelectedStatus() {
     // 선택된 모든 체크박스 가져오기
     var checkboxes = document.querySelectorAll('.custom-control-input:checked');
+    
+    //=> checkboxes => 이 안에는 오른쪽 토글의 선택된 input 요소들을 가져옴. 4개 체크면 4개의 input을 5개면 5개의 input을 
+    //var checkboxArray = [...checkboxes];
+    //console.log("checkboxArray" + checkboxArray);
     var selectedUserNos = [];
-
+    
+    console.log();
     // 선택된 체크박스의 userNo 가져와 배열에 저장
     checkboxes.forEach(function (checkbox) {
-        var index = checkbox.id.replace('switch', '');
-        selectedUserNos.push(${requestScope.list[index - 1].userNo});
+
+    	var index = checkbox.id.replace('switch', '');
+        
+        let list = JSON.parse('${requestScope.result}'); // 문자열 JSON 을 찐 JSON 으로 변환
+
+        selectedUserNos.push(list[index - 1].userNo);
     });
 
-    // AJAX를 사용하여 서버에 상태 일괄 업데이트 요청
     var xhr = new XMLHttpRequest();
     var url = 'update-status?selectedUserNos=' + selectedUserNos.join(',');
+
     xhr.open('GET', url, true);
     xhr.onload = function () {
         if (xhr.status === 200) {
-            // 성공적으로 업데이트된 경우 추가 로직 작성
-            console.log('Selected statuses updated successfully');
+        	console.success('성공~ ');
         } else {
-            console.error('Failed to update selected statuses');
+            console.error('첫ㅂㄴ째 실패 ㅋㅋ');
         }
     };
 
-    // 선택된 회원들의 userNo를 JSON 형태로 변환하여 전송
+    // 첫 번째 요청 시작
     xhr.send();
 
     // 폼 전송 방지
     return false;
-}
 
+    }
     </script>
 </div>
 

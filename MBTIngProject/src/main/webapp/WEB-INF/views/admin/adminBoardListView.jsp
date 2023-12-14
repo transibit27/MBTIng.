@@ -23,8 +23,14 @@
     display: block;
 }
 #boardList>tbody>tr:hover {cursor:pointer;}
+#boardList {text-align:center;}
 #pagingArea {width:fit-content; margin:auto;}
 
+.enrollSize { width : 150px; }
+#checkSize { width : 30px; }
+#numSize { width : 90px; }
+#viewSize { width : 90px; }
+#writerSize { width : 120px; }
 </style>
 </head>
 <body>
@@ -44,15 +50,14 @@
         </div>
         
         <table border="1" id="boardList" class="table-hover" align="center">
-            
             <thead>
             	<tr>
-	                <th><input type="checkbox" class="checkbox" id="checkbox${b.seq}" name="selectedCheckbox"></th>
-	                <th>순번</th>
+	                <th id="checkSize"><input type="checkbox" class="checkbox" id="checkbox${b.seq}" name="selectedCheckbox"></th>
+	                <th id="numSize">순번</th>
 	                <th>제목</th>
-	                <th>작성자</th>
+	                <th id="writerSize">작성자</th>
+	                <th id="viewSize">조회수</th>
 	                <th>작성일자</th>
-	                <th>조회수</th>
 	          	</tr>
             </thead>
             <tbody id="searchResultBody">
@@ -60,39 +65,24 @@
 		            <tr>
 		                <th><input type="checkbox" class="checkbox"></th>
 		                <th class="bno">${ b.boardNo }</th>
-		                <th>${ b.boardTitle }</th>
-						<th>${ adminService.getUserNameByUserId(b.userNo).userName }</th>         
-						<th>${ b.enrollDate }</th>
+		                <th class="detailView" data-boardNo="${b.boardNo}">${b.boardTitle}</th>
+		                <th class="detailView" data-boardNo="${b.boardNo}">홍길동</th>
 		                <th>${ b.views }</th>
+		                <th class="enrollSize">${ b.enrollDate }</th>
 		            </tr>
             	</c:forEach>
             </tbody>
         </table>
         
         <script>
-			    $(document).ready(function() {
-			        $("#boardList>tbody>tr").click(function() {
-			            let bno = $(this).children(".bno").text();
-			
-			            // AJAX를 이용하여 서버에 조회수 업데이트 요청
-			            $.ajax({
-			                type: "POST",
-			                url: "updateViews.adbo",
-			                data: { "bno": bno },
-			                success: function(response) {
-			                    // 서버에서 성공적으로 응답받으면 상세화면으로 이동
-			                    location.href = "detail.adbo?bno=" + bno;
-			                },
-			                error: function(error) {
-			                    console.error("Error updating views: ", error);
-			                }
-			            });
-			        });
-			    });
-			</script>
-        
-        
-        
+    // JavaScript로 클릭 이벤트 처리
+    document.querySelectorAll('.detailView').forEach(title => {
+        title.addEventListener('click', function() {
+            const boardNo = this.getAttribute('data-boardNo');
+            window.location.href = 'detail.adbo?bno=' + boardNo;
+        });
+    });
+</script>
         
         <div id="pagingArea">
     <ul class="pagination">

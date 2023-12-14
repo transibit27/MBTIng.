@@ -173,6 +173,7 @@ public class BoardController {
 	return new Gson().toJson(list);
 	}
 	
+<<<<<<< Updated upstream
 	@RequestMapping("changeThumb.bo")
 	public String changeThumb(int boardNo, String userNo, int checkThumb, Model model, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<>();
@@ -187,4 +188,41 @@ public class BoardController {
 			return "common/errorPage";
 		}
 	}
+=======
+	/* 관리자 페이지 코드 */
+	// 후기게시글 상세조회
+	@RequestMapping("detail.adbo")
+	public ModelAndView adminSelectBoard(int bno, ModelAndView mv) {	
+		int result = boardService.increaseCount(bno);
+		
+		System.out.println(result);
+		System.out.println(bno);
+		
+		if(result > 0) {
+			Board b = boardService.adminSelectBoard(bno);
+			ArrayList<BoardImg> list = boardService.adminSelectBoardImg(bno);	
+			
+			mv.addObject("b", b).addObject("list", list).setViewName("admin/adminBoardDetailView");
+		} else {
+			mv.addObject("errorMsg", "만남후기 상세조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	// 후기게시글 삭제
+	@RequestMapping("delete.adbo")
+	public String adminDeleteBoard(int bno, Model model, HttpSession session) {
+		
+		int result = boardService.adminDeleteBoard(bno);
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 만남후기가 삭제되었습니다.");
+			return "redirect:/list.adbo";
+		} else {
+			model.addAttribute("alertMsg", "만남후기 삭제 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	
+>>>>>>> Stashed changes
 }

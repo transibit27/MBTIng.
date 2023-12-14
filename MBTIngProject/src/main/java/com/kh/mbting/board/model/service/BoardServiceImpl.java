@@ -88,6 +88,7 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi) {
 		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
+<<<<<<< Updated upstream
 
 	@Override
 	public int checkThumb(HashMap<String, Object> map) {
@@ -105,4 +106,26 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
+=======
+	
+	/* 관리자 페이지 코드 */
+	// 후기게시글 상세조회
+	@Override
+	public Board adminSelectBoard(int boardNo) {
+		return boardDao.adminSelectBoard(sqlSession, boardNo);
+	}
+	
+	// 후기게시글 상세조회 시 이미지 가져오기(?)
+	@Override
+	public ArrayList<BoardImg> adminSelectBoardImg(int boardNo) {
+		return boardDao.adminSelectBoardImg(sqlSession, boardNo);
+	}
+	
+	// 후기게시글 삭제
+	@Override
+	@Transactional
+	public int adminDeleteBoard(int boardNo) {
+		return boardDao.adminDeleteBoard(sqlSession, boardNo);
+	}
+>>>>>>> Stashed changes
 }

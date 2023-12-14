@@ -1,18 +1,13 @@
 package com.kh.mbting.admin.model.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.mybatis.spring.SqlSessionTemplate;
 
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
-import com.kh.mbting.notice.model.vo.Notice;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 public interface AdminService {
@@ -80,11 +75,12 @@ public interface AdminService {
     int updateStatus(String status, String userNo);
 
     // 선택된 회원 상태 일괄 업데이트
-    int updateSelectedStatus(String status, List<String> selectedUserNos);
+    int updateSelectedStatus(ArrayList<Member> memNo);
  	
  	// 상태에 따른 토글바 조회용 (보류)
  	Member getUserByEmail(String email);
-     void updateUserStatus(String email, String newStatus);
+    
+ 	void updateUserStatus(String email, String newStatus);
 
 
      /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
@@ -101,7 +97,7 @@ public interface AdminService {
 	// 검색된 후기게시글 리스트 조회
     List<Board> adminSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
 
-    
+    int selectAllMember();
     
     
     
