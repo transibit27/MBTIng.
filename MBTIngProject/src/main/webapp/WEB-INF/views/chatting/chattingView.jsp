@@ -627,7 +627,7 @@ body {
              url:"messageList.do" ,
              data:{
                 roomNo   : roomNo,
-                 userEmail:"${sessionScope.loginMember.email}"
+                userEmail:"${sessionScope.loginMember.email}"
              },
              async:false,
              dataType:"json",
@@ -724,9 +724,13 @@ body {
          socket.onmessage = function(evt) {
         	  
               let receive = evt.data.split(",");
-              let sessionCount = evt.sessionCount;
             
-              
+              if(receive[0] == "세션 두명임 읽음팡팡") {
+            	  
+            	  console.log(receive[0]);
+            	  
+              }else {
+            	  
               const data = {
                            "name" : receive[0],
                           "email" : receive[1],
@@ -739,11 +743,11 @@ body {
               
               if(data.email != "${ loginUser.email }"){
                       CheckLR(data);
-                }
-         };
-         
-      }
-   
+              }
+            }
+         }
+ 
+    }
       //연결 종료 시 실행될 함수 
       function disconnect() {
          socket.close();

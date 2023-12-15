@@ -56,9 +56,9 @@ public class ChattingController {
         message.setEmail(userEmail);
         message.setRoomNo(roomNo);
         //System.out.println("roomNo :"  + roomNo);
-        int result = cService.updateCount(message);
+        cService.updateCount(message);
         //System.out.println("userEmail :" + userEmail);
-        System.out.println(result);
+        //System.out.println(result);
         
         List<ChatMessage> mList = cService.messageList(roomNo);
         response.setContentType("application/json; charset=utf-8");

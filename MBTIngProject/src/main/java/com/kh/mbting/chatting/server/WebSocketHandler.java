@@ -93,11 +93,16 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             
             if(RoomList.get(roomNum).size() == 2) {
             	 chatMessage.setSessionCount(sessionCount1);
-            	 int result = cService.insertUnReadMessage(chatMessage);
-            	 System.out.println(result + "ㅋㅋㅋㅋㅋ");
+            	 cService.insertUnReadMessage(chatMessage);
+            	 
+            	 TextMessage textMessage = new TextMessage("세션 두명임 읽음팡팡 ," + roomNum );
+            	 
+            	 for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
+                     sess.sendMessage(textMessage);
+                     System.out.println(textMessage);
+                 }
+            	 //System.out.println(result + "ㅋㅋㅋㅋㅋ");
             }
-            
-           
         }
         
         // 채팅 메세지 입력 시
