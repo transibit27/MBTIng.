@@ -87,14 +87,15 @@ public class MemberController {
 	public String logoutMember(HttpSession session) {
 		
 		session.invalidate();
-		
+	
 		return "redirect:/";
 	}
 	
 	
 	//3. 회원가입을 눌렀을 시에 회원가입 폼을 띄워주기 위한 method
 	@RequestMapping("enrollForm.me")
-	public String enrollForm() {
+	public String enrollForm(HttpSession session) {
+		session.removeAttribute("alertMsg");
 		return "member/memberEnrollForm";
 	}
 	
@@ -141,14 +142,30 @@ public class MemberController {
 		
 		String access_Token = memberService.getKakaoAccessToken(code);
 								
-		 HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+		String email = (String)userInfo.get("email");
+		Member member = memberService.kakaoLoginCheck(email);
 		
 		 if (userInfo.get("email") != null) {
 		       
-		 session.setAttribute("access_Token", access_Token);
-		 session.setAttribute("nickname", userInfo.get("nickname"));
-		 session.setAttribute("profile",userInfo.get("profile_image"));
-		 
+			 // 카카오 계정 이메일로 회원가입이 안되어있을 경우 > 회원가입 유도
+			
+			 if(member == null) {	// 가입된 계정이 없을 경우
+				 
+				 session.setAttribute("alertMsg", "카카오 계정으로 가입된 정보가 없습니다.");
+				 session.setAttribute("access_Token", access_Token);
+				 session.setAttribute("nickname", userInfo.get("nickname"));
+				 session.setAttribute("profile",userInfo.get("profile_image"));
+				 session.setAttribute("email", email);
+				 
+			 }
+			 return "member/memberEnrollForm";
+		 } else {
+			 
+			 // 카카오 계정 이메일로 회원가입이 되어있을 경우
+			 Member m = new Member();
+			 m.setEmail(email);
+			 Member loginMember = memberService.loginMember(m);
 		 }
 		return "main";
 	}
@@ -261,7 +278,6 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping (value="refusePropose.me", produces="text/html; charset=UTF-8")
 	public String refusePropose(Matching mc) {
-		System.out.println("잘들어오나"+mc);
 		String refuse="";
 		// 선택한 회원의 번호를 넘기고 대상의 신청 거절 (Matching테이블 stat(1/거절) update)
 		int result = memberService.refusePropose(mc);

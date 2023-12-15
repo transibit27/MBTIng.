@@ -447,4 +447,10 @@
 		SELECT COUNT(*)
 		FROM MEMBER
 	</select>
+	
+	<select id="kakaoLoginCheck" parameterType="string" resultMap="memberResultSet">
+		SELECT *
+		  FROM MEMBER
+		 WHERE EMAIL = #{email}
+	</select>
 </mapper>

@@ -68,17 +68,17 @@
             background-color: rgb(255, 255, 255);
         }
 
-        #header>div {width:100%; margin-bottom:10px;}
-        #header_1 {height:40%;}
+        #header>div {min-width:1200px; margin-bottom:10px;}
+        #header_1 {height:40%; display: flex;}
         #header_2 {height:60%;}
 
         #header_1>div{
             height:100%;
-            float:left;
+           	margin: auto;
         }
-        #header_1_left {width:20%; position:relative;}
-        #header_1_center {width:50%;}
-        #header_1_right {width:30%;}
+        #header_1_left {min-width:200px; position:relative;}
+        #header_1_center {min-width:800px;}
+        #header_1_right {min-width:200px;}
 
         #header_1_left img {height:100px; position:absolute; margin:auto; top:30px; bottom:0px; right:0px; left:0px;}
         #header_1_right {text-align:center; line-height:35px; font-size:12px; text-indent:35px; font-family: 'Sunflower', sans-serif;}
@@ -215,6 +215,11 @@
         margin-top: 10px;
     }
 
+	#findPass{
+	border: none;
+    background-color: white;
+    color: rgb(0,123,255);
+	}
 
     </style>
 </head>
@@ -226,6 +231,11 @@
 	
 	<c:if test="${ not empty sessionScope.alertMsg }">
 		<script>
+	        function findPass(){
+	        	console.log("잘발동?")
+	         
+	
+	        }
 			alertify.alert('Alert', '${ sessionScope.alertMsg }', function(){ alertify.success('Ok'); });
 		</script>
 		
@@ -246,7 +256,6 @@
 	                <li><a href="listMember.no">공지사항</a></li>
 	                <li><a href="list.bo">만남후기</a></li>
 	                <li><a href="mbtiTest.mb">연애테스트</a></li>
-	                <li><a href="">고객센터</a></li>
 	            	<li><a href="all.me">신청하기(매칭)</a></li>
 	            	<li><a href="adminMain.ad">관리자</a></li>
 	            	<li><a href="convert.ch">채팅하기</a></li>
@@ -256,35 +265,37 @@
             <div id="header_1_right">
             
             <c:choose>
-                <c:when test="${empty sessionScope.loginMember and empty sessionScope.nickname}">
+                <c:when test="${empty sessionScope.loginMember and empty sessionScope.access_Token}">
 	                <a href="enrollForm.me">회원가입</a>
 	                <a data-toggle="modal" data-target="#loginModal">로그인</a> <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
                 </c:when>
                	<c:otherwise>
                		<c:choose>
                		
-	               		<c:when test="${not empty sessionScope.loginMember}">
-	               			
+	               		<c:when test="${not empty sessionScope.loginMember and empty sessionScope.access_Token}">
 		               		<label>${sessionScope.loginMember.userName}님 환영합니다</label> &nbsp;&nbsp;
 		                    <a href="myPage.me">마이페이지</a>
 		                    <a href="logout.me">로그아웃</a>
 	               		</c:when>
                		
-               			<c:otherwise>
-               		
-               				<table>
-				                   <tr>
-				                   	<td><label>${sessionScope.nickname}님 환영합니다</label> &nbsp;&nbsp; </td>
-				                 
-					                <td><img id="profile" src="${sessionScope.profile}" ></td>
-					                <td> <a href="myPage.me">마이페이지</a></td>
-					                <td> <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a> </td>
-				               	   </tr>
-			               	</table>
-	               	 	</c:otherwise>
-               	 	</c:choose>
-                </c:otherwise>
-               </c:choose>
+               			<c:when test="${not empty sessionScope.loginMember and not empty sessionScope.access_Token}">
+               				
+		                   	<label>${sessionScope.nickname}님 환영합니다</label> &nbsp;&nbsp;
+		                 
+			                <img id="profile" src="${sessionScope.profile}" >
+			                <a href="myPage.me">마이페이지</a>
+			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a>
+				               	   
+               			</c:when>
+               			
+	               		<c:when test="${empty sessionScope.loginMember and not empty sessionScope.access_Token}">
+			                <a href="enrollForm.me">회원가입</a>
+			                <a data-toggle="modal" data-target="#loginModal">로그인</a> <!-- 모달의 원리 : 이 버튼 클릭시 data-target에 제시되어있는 해당 아이디의 div요소를 띄워줌 -->
+	                	</c:when>
+	               			
+              	 	</c:choose>
+           	 	</c:otherwise>
+           </c:choose>
            </div>
         </div>
     </div>
@@ -323,7 +334,7 @@
                                 <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
                             </div>
                             <div id="find-pwd">
-                                <a href=""> 비밀번호를 잊으셨나요?</a>
+                                <button id="findPass" type="button" onclick="findPass()">비밀번호를 잊으셨나요?</button>
                             </div>
                         </div>
                     </form>
@@ -344,5 +355,15 @@
         </div>
     </div>
      <!--<br clear="both">-->
+     
+    <script type="text/javascript">
+        function findPass(){
+        	console.log("잘발동?")
+         
+
+        }
+    
+    </script>
+ 
 </body>
 </html>

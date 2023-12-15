@@ -71,6 +71,9 @@ public interface MemberService {
 	// 회원가입 - 이메일 중복 검사용 method
 	int checkEmail(Member m);
 
+	// 카카오 로그인시 카카오 계정으로 가입된 이메일 계정이 있는지 확인용 method
+	Member kakaoLoginCheck(String email);
+
 
 
 

@@ -270,6 +270,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.checkEmail(sqlSession, m);
 	}
 
+	// 카카오 로그인 시 카카오 이메일로 회원가입이 되었는지 확인용 메소드
+	@Override
+	public Member kakaoLoginCheck(String email) {
+		return memberDao.kakaoLoginCheck(sqlSession, email);
+	}
+
 
 
 

@@ -110,6 +110,11 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.refusePropose", mc);
 	}
 
+	// 카카오 로그인 시 카카오 이메일로 가입된 계정이 있는지 확인용 메소드
+	public Member kakaoLoginCheck(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.kakaoLoginCheck", email);
+	}
+
 
 
 
