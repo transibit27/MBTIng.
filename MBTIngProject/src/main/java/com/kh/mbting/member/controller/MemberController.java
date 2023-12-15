@@ -4,15 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +38,7 @@ import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.member.model.vo.Verification;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 
@@ -483,6 +488,59 @@ public class MemberController {
 	    jsonObject.addProperty("list", gson.toJson(list));
    
 	    return jsonObject.toString();
+	}
+	
+	// 비밀번호 찾기 이동용 메소드
+	@RequestMapping("findPass.me")
+	public String findPass() {
+		
+		return "common/findPassWord";
+	}
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	// 비밀번호 찾기전 인증 메일 발송용 메소드
+	@ResponseBody
+	@RequestMapping(value="getCertNo.me", produces="text/html; charset=UTF-8")
+	public String getCertNo(Member m, HttpSession session) throws MessagingException{
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		// 인증번호 생성
+		int emailCode = (int)(Math.random() * 900000 + 100000);
+		String email = m.getEmail();
+		Verification v = new Verification();
+		v.setEmail(email);
+		v.setEmailCode(emailCode);
+		
+		// 인증번호 요청 메일 주소와 인증번호를 DB에 저장하기
+		int result = memberService.getCertNo(v);
+		System.out.println("잘 인설트 됐나? "+ result);
+		
+		MimeMessageHelper mimeMessageHelper
+		= new MimeMessageHelper(message, true, "UTF-8");
+		
+		String to = m.getEmail();
+		
+		if( result > 0 ) {	// 인증번호 발송에 성공한 경우
+			
+			mimeMessageHelper.setTo(to);
+			
+			mimeMessageHelper.setSubject("MBTIng 비밀번호 초기화 인증메일입니다.");
+			
+			mimeMessageHelper.setText("이야야야", true);
+			
+			mailSender.send(message);
+			
+			return "인증메일 발송 성공";
+			
+		} else {
+			
+			session.setAttribute("alertMsg", "인증메일 발송에 실패했습니다.");
+		}
+		
+		
+		return "인증메일 발송 실패";
 	}
 	
 }

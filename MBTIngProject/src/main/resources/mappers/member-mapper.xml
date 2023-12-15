@@ -80,6 +80,12 @@
  		<result property="matchStat" column="MATCH_STAT"/>
  	</resultMap>
  	
+ 	<resultMap id="verificationResultSet" type="verification">
+		<result property="email" column="EMAIL"/>
+ 		<result property="emailCode" column="EMAIL_CODE"/>
+ 		<result property="createDate" column="CREATE_DATE"/>
+ 	</resultMap>
+ 	
 	<!-- top 회원 정보를 불러오기 위한 쿼리문 -->
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
@@ -453,4 +459,10 @@
 		  FROM MEMBER
 		 WHERE EMAIL = #{email}
 	</select>
+	
+	<insert id="getCertNo" parameterType="verification">
+		INSERT INTO VERIFICATION (EMAIL, EMAIL_CODE)
+	         VALUES (#{email},
+           	 		 #{emailCode})	
+	</insert>
 </mapper>

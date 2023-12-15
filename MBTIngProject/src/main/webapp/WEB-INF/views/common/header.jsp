@@ -334,7 +334,7 @@
                                 <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
                             </div>
                             <div id="find-pwd">
-                                <button id="findPass" type="button" onclick="findPass()">비밀번호를 잊으셨나요?</button>
+                                <button id="findPass" type="button" onclick="location.href='findPass.me'">비밀번호를 잊으셨나요?</button>
                             </div>
                         </div>
                     </form>
@@ -354,16 +354,6 @@
             </div>
         </div>
     </div>
-     <!--<br clear="both">-->
-     
-    <script type="text/javascript">
-        function findPass(){
-        	console.log("잘발동?")
-         
-
-        }
-    
-    </script>
  
 </body>
 </html>

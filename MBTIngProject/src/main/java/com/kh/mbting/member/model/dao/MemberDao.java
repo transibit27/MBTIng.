@@ -13,6 +13,7 @@ import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.member.model.vo.Verification;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 
@@ -115,6 +116,12 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.kakaoLoginCheck", email);
 	}
 
+	// 인증메일 발송용 메소드
+	public int getCertNo(SqlSessionTemplate sqlSession, Verification v) {
+		return sqlSession.insert("memberMapper.getCertNo", v);
+	}
+	
+	
 
 
 
