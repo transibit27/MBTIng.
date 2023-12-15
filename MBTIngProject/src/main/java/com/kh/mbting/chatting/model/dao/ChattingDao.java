@@ -90,6 +90,10 @@ public class ChattingDao {
     public int countAll(String email) {
     	return sqlSession.selectOne("chatMapper.countAll" , email);
     }
+    
+    public int countRoomAll(String email) {
+    	return sqlSession.selectOne("chatMapper.countRoomAll" , email);
+    }
 }
 
 

@@ -246,6 +246,19 @@ body {
 }
 */
 
+ .countMessage {
+ 	width : 35px;
+ 	height : 35px;
+ 	box-shadow : 0 0.05rem 0.6rem red;
+ 	border-radius : 17px;
+ 	margin : auto;
+ 	background-color : red;
+ 	color : white;
+ 	text-align : center;
+ 	line-height: 37px;
+ 	font-size : 14px;
+ }
+
 #chatInfoTable button {
     background-color: transparent;
     border: 0px;
@@ -582,7 +595,7 @@ body {
                     // 2번째 행을 만드는 코드
                     var $tr2 = $("<tr>");
                     $tr2.append($("<td class='chatListText'>").text(data[i].messageContent));
-
+                    $tr2.append($("<td class='chatListText'>").append($("<div class='countMessage'>")));
                     // 테이블에 넣어서 먼저 테이블 구조 완성하기
                     $table.append($tr1);
                     $table.append($tr2);
@@ -925,6 +938,7 @@ body {
            // 방 목록 불러오기
            getRoomList(); 
            countAll();
+           countRoomAll();
        }, 1000);
        
     }
@@ -936,6 +950,20 @@ body {
 		  	success : function(e) {
 		  		let countAll = document.querySelector(".tooltip");
 		  		countAll.innerText = e;
+		  	},
+		  	error : function() {
+		  		alert("ㅋㅋ;;전체 카톡 수 불러오기 실패 ㅎ.,.,,");
+		  	}
+	   });
+   }
+   
+   function countRoomAll() {
+	   $.ajax({
+		  	url  : "countRoom.all",
+		  	data : {email : "${sessionScope.loginMember.email}"},
+		  	success : function(e) {
+		  		let countRoomAll = document.querySelector(".countMessage");
+		  		countRoomAll.innerText = e;
 		  	},
 		  	error : function() {
 		  		alert("ㅋㅋ;;전체 카톡 수 불러오기 실패 ㅎ.,.,,");

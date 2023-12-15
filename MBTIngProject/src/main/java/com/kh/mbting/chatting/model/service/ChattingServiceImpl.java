@@ -113,4 +113,9 @@ public class ChattingServiceImpl implements ChattingService{
 	public int countAll(String email) {
 		return chattingDao.countAll(email);
 	}
+
+	@Override
+	public int countRoomAll(String email) {
+		return chattingDao.countRoomAll(email);
+	}
 }

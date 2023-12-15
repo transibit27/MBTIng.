@@ -233,4 +233,13 @@ public class ChattingController {
     	return countAll;
     }
     
+    @ResponseBody
+    @RequestMapping("countRoom.all")
+    public int countRoomAll(String email) {
+    	
+    	int countRoomAll = cService.countRoomAll(email);
+    	
+    	return countRoomAll;
+    }
+    
 }

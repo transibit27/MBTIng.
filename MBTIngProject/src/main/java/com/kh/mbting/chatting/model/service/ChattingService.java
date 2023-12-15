@@ -139,4 +139,11 @@ public interface ChattingService {
      * @return
      */
     int countAll(String email);
+    
+    /***
+     * 안 읽은 방 마다의 메시지수 가져오기
+     * @param email
+     * @return
+     */
+    int countRoomAll(String email);
 }

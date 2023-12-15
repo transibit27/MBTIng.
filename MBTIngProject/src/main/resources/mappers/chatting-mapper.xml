@@ -210,4 +210,11 @@
 		  from chatmessage
 		 where un_read_message = 1 and user_email != #{email} 
     </select>
+    
+    <select id="countRoomAll" resultType="_int">
+    	select count(*)
+		  from chatmessage
+		 where un_read_message = 1 and user_email != #{email} 
+    </select>
+    
 </mapper>
