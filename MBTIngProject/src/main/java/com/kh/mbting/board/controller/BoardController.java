@@ -172,20 +172,15 @@ public class BoardController {
 	ArrayList<Board> list = boardService.selectTopBoardList();
 	return new Gson().toJson(list);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "changeThumb.bo", produces = "application/json; charset=UTF-8")
+	public int changeThumb(int boardNo, String userNo, int checkThumb, Model model, HttpSession session) {
 
-	@RequestMapping("changeThumb.bo")
-	public String changeThumb(int boardNo, String userNo, int checkThumb, Model model, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("boardNo", boardNo);
 		map.put("userNo", userNo);
-		int result = (checkThumb == 1) ? boardService.deleteThumb(map): boardService.insertThumb(map);
-		if( result > 0) {
-			session.setAttribute("alertMsg", "좋아요 변경 완료");	
-			return "redirect:/detail.bo?bno=" + boardNo;
-		} else {
-			model.addAttribute("errorMsg", "좋아요 변경 실패");		
-			return "common/errorPage";
-		}
+		return (checkThumb == 1) ? boardService.deleteThumb(map): boardService.insertThumb(map);
 	}
 
 	/* 관리자 페이지 코드 */

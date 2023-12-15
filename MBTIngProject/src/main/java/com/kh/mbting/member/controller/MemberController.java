@@ -4,15 +4,19 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +38,7 @@ import com.kh.mbting.common.template.Pagination;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.service.MemberService;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.member.model.vo.Verification;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 
@@ -87,14 +92,15 @@ public class MemberController {
 	public String logoutMember(HttpSession session) {
 		
 		session.invalidate();
-		
+	
 		return "redirect:/";
 	}
 	
 	
 	//3. 회원가입을 눌렀을 시에 회원가입 폼을 띄워주기 위한 method
 	@RequestMapping("enrollForm.me")
-	public String enrollForm() {
+	public String enrollForm(HttpSession session) {
+		session.removeAttribute("alertMsg");
 		return "member/memberEnrollForm";
 	}
 	
@@ -141,14 +147,30 @@ public class MemberController {
 		
 		String access_Token = memberService.getKakaoAccessToken(code);
 								
-		 HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+		String email = (String)userInfo.get("email");
+		Member member = memberService.kakaoLoginCheck(email);
 		
 		 if (userInfo.get("email") != null) {
 		       
-		 session.setAttribute("access_Token", access_Token);
-		 session.setAttribute("nickname", userInfo.get("nickname"));
-		 session.setAttribute("profile",userInfo.get("profile_image"));
-		 
+			 // 카카오 계정 이메일로 회원가입이 안되어있을 경우 > 회원가입 유도
+			
+			 if(member == null) {	// 가입된 계정이 없을 경우
+				 
+				 session.setAttribute("alertMsg", "카카오 계정으로 가입된 정보가 없습니다.");
+				 session.setAttribute("access_Token", access_Token);
+				 session.setAttribute("nickname", userInfo.get("nickname"));
+				 session.setAttribute("profile",userInfo.get("profile_image"));
+				 session.setAttribute("email", email);
+				 
+			 }
+			 return "member/memberEnrollForm";
+		 } else {
+			 
+			 // 카카오 계정 이메일로 회원가입이 되어있을 경우
+			 Member m = new Member();
+			 m.setEmail(email);
+			 Member loginMember = memberService.loginMember(m);
 		 }
 		return "main";
 	}
@@ -261,7 +283,6 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping (value="refusePropose.me", produces="text/html; charset=UTF-8")
 	public String refusePropose(Matching mc) {
-		System.out.println("잘들어오나"+mc);
 		String refuse="";
 		// 선택한 회원의 번호를 넘기고 대상의 신청 거절 (Matching테이블 stat(1/거절) update)
 		int result = memberService.refusePropose(mc);
@@ -467,6 +488,59 @@ public class MemberController {
 	    jsonObject.addProperty("list", gson.toJson(list));
    
 	    return jsonObject.toString();
+	}
+	
+	// 비밀번호 찾기 이동용 메소드
+	@RequestMapping("findPass.me")
+	public String findPass() {
+		
+		return "common/findPassWord";
+	}
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	// 비밀번호 찾기전 인증 메일 발송용 메소드
+	@ResponseBody
+	@RequestMapping(value="getCertNo.me", produces="text/html; charset=UTF-8")
+	public String getCertNo(Member m, HttpSession session) throws MessagingException{
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		// 인증번호 생성
+		int emailCode = (int)(Math.random() * 900000 + 100000);
+		String email = m.getEmail();
+		Verification v = new Verification();
+		v.setEmail(email);
+		v.setEmailCode(emailCode);
+		
+		// 인증번호 요청 메일 주소와 인증번호를 DB에 저장하기
+		int result = memberService.getCertNo(v);
+		System.out.println("잘 인설트 됐나? "+ result);
+		
+		MimeMessageHelper mimeMessageHelper
+		= new MimeMessageHelper(message, true, "UTF-8");
+		
+		String to = m.getEmail();
+		
+		if( result > 0 ) {	// 인증번호 발송에 성공한 경우
+			
+			mimeMessageHelper.setTo(to);
+			
+			mimeMessageHelper.setSubject("MBTIng 비밀번호 초기화 인증메일입니다.");
+			
+			mimeMessageHelper.setText("이야야야", true);
+			
+			mailSender.send(message);
+			
+			return "인증메일 발송 성공";
+			
+		} else {
+			
+			session.setAttribute("alertMsg", "인증메일 발송에 실패했습니다.");
+		}
+		
+		
+		return "인증메일 발송 실패";
 	}
 	
 }

@@ -512,8 +512,6 @@
 		</form>
 	</div>
 
-
-    <!-- 필요한 모달창 -->
 	<!-- 비밀번호 변경용 모달창 -->
 	<div class="modal fade" id="changePwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

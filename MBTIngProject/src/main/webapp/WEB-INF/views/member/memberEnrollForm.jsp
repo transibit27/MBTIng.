@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% String contextPath = request.getContextPath();%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,17 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- alert창 관련 스타일용 라이브러리 추가  -->
 
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
 
 <style>
@@ -235,6 +246,15 @@
 </style>
 </head>
 <body>
+	<!-- 알람문구 출력용 코드 ( session.alertMsg )-->
+	<c:if test="${ not empty sessionScope.alertMsg }">
+		<script>
+			alertify.alert('Alert', '${sessionScope.alertMsg}', function(){ alertify.success('Ok'); });
+		</script>
+		
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
+
 
     <div class="enroll-outer">
         
@@ -250,9 +270,9 @@
                         나와 잘맞는 만남을 희망한다면 <br>
                         가입하세요.
                     </div>
-                    
-                    <img id="kakao-enroll" src="${pageContext.request.contextPath}/resources/images/kakaoLoginBig.png" alt="kakaoEnroll">
-                    
+                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me">
+                    	<img id="kakao-enroll" src="${pageContext.request.contextPath}/resources/images/kakaoLoginBig.png" alt="kakaoEnroll" >
+                    </a>
                 </div>
                     
                 <div class="andLine">
@@ -305,6 +325,14 @@
     <!-- 회원가입 입력 내용 처리를 위한 스크립트 -->
     <script>
         $(function(){
+        	
+        	// 카카오 계정으로 회원 가입을 시도할 경우
+        	if("${sessionScope.email}" != ""){
+        		console.log("잘들어옴?")
+        		$("#email").val("${sessionScope.email}");
+        		$("#userName").val("${sessionScope.nickname}");
+        		$("#email").attr("disabled", true);
+        	};
             
             $("#M").click(function(){
                 $(this).css("background-color", "skyblue");
