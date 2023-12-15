@@ -52,6 +52,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 
 
    
@@ -59,38 +60,104 @@
     <style>
         div {box-sizing:border-box;}
         
-        
         #header {
-            width:100%;
-            height:100px;
-            padding-top:20px;
-            margin:auto;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+            padding: 20px;
+            margin: auto;
             background-color: rgb(255, 255, 255);
         }
 
-        #header>div {min-width:1200px; margin-bottom:10px;}
-        #header_1 {height:40%; display: flex;}
-        #header_2 {height:60%;}
-
-        #header_1>div{
-            height:100%;
-           	margin: auto;
+        #header>div {
+            width: 100%;
         }
-        #header_1_left {min-width:200px; position:relative;}
-        #header_1_center {min-width:800px;}
-        #header_1_right {min-width:200px;}
 
-        #header_1_left img {height:100px; position:absolute; margin:auto; top:30px; bottom:0px; right:0px; left:0px;}
-        #header_1_right {text-align:center; line-height:35px; font-size:12px; text-indent:35px; font-family: 'Sunflower', sans-serif;}
-        #header_1_right>a {margin:5px;}
-        #header_1_right>a:hover {cursor:pointer; color: pink;}
+        #header_1 {
+            height: 40%;
+            display: flex;
+        }
 
-        #header_1_center>ul {width:100%; height:100%; list-style-type:none; margin:auto; padding:0;}
-        #header_1_center>ul>li {float:left; width:14%; height:100%; line-height:55px; text-align:center;}
-        #header_1_center>ul>li a {text-decoration:none; color:black; font-size:17px; font-weight:900; font-family: 'Sunflower', sans-serif;}
-        #header_1_center>ul>li a:hover {color : pink; font-size:20px;}
+        #header_2 {
+            height: 60%;
+        }
 
-        #header a {text-decoration:none; color:black; }
+        #header_1>div {
+            height: 100%;
+            float: left;
+        }
+
+        #header_1_left {
+            width: 20%;
+            position: relative;
+        }
+
+        #header_1_center {
+            width: 57%;
+        }
+
+        #header_1_right {
+            width: 23%;
+            padding-top: 4px;
+            text-align: center;
+            font-size: 12px;
+            font-family: 'NanumSquare';
+        }
+
+        #header_1_left img {
+            height: 100px;
+            position: absolute;
+            margin: auto;
+            top: 30px;
+            bottom: 0;
+            right: 0;
+            left: 0;
+        }
+
+        #header_1_right>a {
+            margin: 5px;
+
+        }
+
+        #header_1_right>a:hover {
+            cursor: pointer;
+            color: pink;
+        }
+
+        #header_1_center>ul {
+            width: 100%;
+            height: 100%;
+            list-style-type: none;
+            margin: auto;
+            padding: 0;
+        }
+
+        #header_1_center>ul>li {
+            float: left;
+            width: 14%;
+            height: 100%;
+            text-align: center;
+        }
+
+        #header_1_center>ul>li a {
+            text-decoration: none;
+            color: black;
+            font-size: 17px;
+            font-weight: 900;
+            font-family: 'NanumSquareBold';
+            transition: color 0.3s ease, font-size 0.3s ease;
+        }
+
+        #header_1_center>ul>li a:hover {
+            color: pink;
+            font-size: 20px;
+        }
+
+        #header a {
+            text-decoration: none;
+            color: black;
+        }
 
         /* 세부페이지마다 공통적으로 유지할 style */
         .content {
@@ -112,114 +179,128 @@
 		}
 		
 		#loggo {
-		 width : 150px;
-		 height : 300px;
+            width : 150px;
+            height : 300px;
 		}
 		
 		#profile {
-		width : 50px;
-		height : 50px;
+            width : 50px;
+            height : 50px;
 		}
 
-    /* 모달 창 스타일*/
-    .modal-content>button{
-        margin-left: auto;
-    }
+        /* 모달 창 스타일*/
+        .modal-content>button{
+            margin-left: auto;
+        }
 
-    .modal-border{
-        margin: auto;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        padding: 15px;
-        border-radius: 5px;
+        .modal-border{
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
 
-        font-size: 13px;
-        text-align: center;
-    }
+            font-size: 13px;
+            text-align: center;
+        }
 
-    .modal-icon{
-        margin: auto;
-        text-align: center;
-    }
-    .modal-icon img{
-        height: 150px;
-        width: 100%;
-    }
+        .modal-icon{
+            margin: auto;
+            text-align: center;
+        }
+        .modal-icon img{
+            height: 150px;
+            width: 100%;
+        }
 
-    /* 모달창 내 input(이메일/비번) 입력창 스타일*/
-    .modal-body{
-        text-align: center;
-        padding: 0px;
-        padding-bottom: 10px;
-    }
+        /* 모달창 내 input(이메일/비번) 입력창 스타일*/
+        .modal-body{
+            text-align: center;
+            padding: 0px;
+            padding-bottom: 10px;
+        }
 
-    .modal-body input{
-        margin: auto;
-        border: 1px solid silver;
-        border-radius: 10px;
-        width: 100%;
-        height: 35px; 
-        font-size: 13px;
-    }
+        .modal-body input{
+            margin: auto;
+            border: 1px solid silver;
+            border-radius: 10px;
+            width: 100%;
+            height: 35px; 
+            font-size: 13px;
+        }
 
-    #userId{
-        margin-bottom: 10px;
-    }
+        #userId{
+            margin-bottom: 10px;
+        }
 
-    .modal-body button {
-        margin-top: 15px;
-        width: 100%;
-        height: 35px;
-        background-color: pink;
-        border: 0px;
-        border-radius: 10px;
-    }
-    .modal-body button:hover{
-        background-color: hotpink;
-    }
+        .modal-body button {
+            margin-top: 15px;
+            width: 100%;
+            height: 35px;
+            background-color: pink;
+            border: 0px;
+            border-radius: 10px;
+        }
+        .modal-body button:hover{
+            background-color: hotpink;
+        }
 
-    .andLine{
-        margin-bottom: 20px;
-        width: 100%;
-        height: 15px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+        .andLine{
+            margin-bottom: 13px;
+            width: 100%;
+            height: 15px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            
+        }
+        .line{ 
+            margin-top: 7px;
+            height: 0px;
+            width: 110px;
+            border: 1px solid silver;
+        }
+        .line-and{
+            font-size: 12px;
+            line-height: 12px;
+        }
+
+        .kakao-login{
+            width: 100%;
+        }
+
+        .kakao-login img{
+            border: 1px solid rgb(215, 214, 128);
+            border-radius: 10px;
+            width: 30px;
+            height: 30px;
+        }
+
+        #kakao-login-button {
+            background-color: rgb(255, 255, 126);
+            padding: 7px 10px;
+            border-radius: 10px;
+        }
         
-    }
-    .line{ 
-        margin-top: 7px;
-        height: 0px;
-        width: 110px;
-        border: 1px solid silver;
-    }
-    .line-and{
-        font-size: 12px;
-        line-height: 12px;
-    }
+        #kakao-login-button:hover{
+            cursor: pointer;
+            background-color: rgb(245, 245, 122);
+        }
 
-    .kakao-login{
-        width: 100%;
-    }
+        #find-pwd{
+            margin-top: 8px;
+        }
 
-    .kakao-login img{
-        width: 30px;
-        height: 30px;
-    }
+        #findPass {
+            border: 0;
+            background-color: transparent;
+            font-size: 11px;
+        }
 
-    #kakao-login-button:hover{
-        cursor: pointer;
-    }
+        #findPass:hover {
+            color: rgb(68, 68, 68);
+        }
 
-    #find-pwd{
-        margin-top: 10px;
-    }
-
-	#findPass{
-	border: none;
-    background-color: white;
-    color: rgb(0,123,255);
-	}
 
     </style>
 </head>
@@ -256,9 +337,9 @@
 	                <li><a href="listMember.no">공지사항</a></li>
 	                <li><a href="list.bo">만남후기</a></li>
 	                <li><a href="mbtiTest.mb">연애테스트</a></li>
-	            	<li><a href="all.me">신청하기(매칭)</a></li>
-	            	<li><a href="adminMain.ad">관리자</a></li>
+	            	<li><a href="all.me">신청하기</a></li>
 	            	<li><a href="convert.ch">채팅하기</a></li>
+	            	<li><a href="adminMain.ad">관리자</a></li>
 	            </ul>    	
 	        </div>
 	            
@@ -333,9 +414,9 @@
                             <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me'">
                                 <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
                             </div>
-                            <div id="find-pwd">
-                                <button id="findPass" type="button" onclick="findPass()">비밀번호를 잊으셨나요?</button>
-                            </div>
+                        </div>
+                        <div id="find-pwd">
+                            <button id="findPass" type="button" onclick="findPass()">비밀번호를 잊으셨나요?</button>
                         </div>
                     </form>
                         
