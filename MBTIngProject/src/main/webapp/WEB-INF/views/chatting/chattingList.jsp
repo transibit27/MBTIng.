@@ -20,7 +20,7 @@
 	width : 100%;
 	margin: auto;
 	border-radius : 20px;
-	background-color: #BAD1E6;
+	background-color: silver;
 }
 
 .content_2 {

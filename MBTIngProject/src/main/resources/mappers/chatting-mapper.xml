@@ -201,4 +201,7 @@
 		   AND PROPOSER_NO = #{proposerNo}
     </delete>
     
+    <update id="insertUnReadMessage" parameterType="chatMessage">
+    	UPDATE CHATMESSAGE SET SESSION_COUNT = #{sessionCount} WHERE ROOM_NO = #{roomNo} and session_count = 1
+    </update>
 </mapper>

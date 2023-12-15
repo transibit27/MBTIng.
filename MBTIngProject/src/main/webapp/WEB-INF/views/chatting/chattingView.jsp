@@ -26,39 +26,43 @@ body {
 
 .wrap {
     width : 484px;
-    height : 900px;
+    height : 700px;
     margin: auto;
     border: solid 5px lightgray;
     font-family: 'IBM Plex Sans KR', sans-serif;
+    border-radius : 20px;
 }
 .wrapPC {
     width : 1640px;
-    height : 700px;
+    height : 500px;
     display: inline-block;
     display: flex;
     margin : auto;
+    border-radius : 20px;
 }
 
 #profileDiv {
     width: 400px;
-    height: 900px;
+    height: 700px;
     margin-left: 40px;
     margin-right: 50px;
     background-color: #ffcece;
+    border-radius : 16px;
 }
 
 #profileDiv table {
     width: 400px;
-    height: 100%;
+    height: 80%;
 }
 
 #profileDiv table td{
     text-align: center;
+    height : 40%;
 }
 
 #profileDiv img {
-    height: 300px;
-    width : 300px; 
+    height: 250px;
+    width : 250px; 
     border-radius: 200px; 
 }
 
@@ -81,7 +85,7 @@ body {
 
 .chatList {
     width: 402px;
-    height: 900px;
+    height: 700px;
     border : 1px solid black;
 }
 
@@ -99,8 +103,8 @@ body {
   display: inline-block;
   max-width: 500px;
   border: 1px solid black;
-  height: 45px;
-  line-height: 45px;
+  height: 40px;
+  line-height: 43px;
   padding: 0 1rem;
   margin : 20px;
   border: 2px solid transparent;
@@ -145,17 +149,24 @@ body {
     align-items: center;
     background-color: #ffffff;
     width : 400px;
+    border-top-right-radius: 20px;
 }
 
 #chatList {
     overflow : auto;
     width : 450px;
-    height : 900px;
+    height : 800px;
+    border-top-right-radius: 20px;
 }
 
+.chatList {
+	 border-top-right-radius: 20px;
+	 border-bottom-right-radius: 20px;
+}
 .chatList_box table {
     width : 100%;
     height : 80%; 
+    border-top-right-radius: 20px;
 }
 
 .chatList_box img {
@@ -202,9 +213,11 @@ body {
 
 .chatInfo {
     width : 80px;
-    height : 900px;
+    height : 700px;
     border : 1px solid black;
     background-color: rgb(255, 218, 218);
+	border-top-left-radius: 18px;
+    border-bottom-left-radius: 20px;
 }
 
 #chatInfoTable {
@@ -293,12 +306,121 @@ body {
   .hidden {
        display: none;
    }
+   
+   /*----------------------편지봉투-------------------------*/
+
+	 .tooltip-container {
+	  height: 70px;
+	  width: 110px;
+	  border-radius: 5px;
+	  background-color: #fff;
+	  background-image: linear-gradient(
+	    to left bottom,
+	    #f2f5f8,
+	    #ecf1f2,
+	    #e7eceb,
+	    #e3e7e4,
+	    #e1e2de
+	  );
+	  border: 1px solid white;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  cursor: pointer;
+	  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+	  position: relative;
+	  transition: transform 0.3s ease;
+	}
+	
+	.tooltip-container::before {
+	  position: absolute;
+	  content: "";
+	  top: -50%;
+	  clip-path: polygon(50% 0, 0 100%, 100% 100%);
+	  border-radius: 5px;
+	  background-color: fff;
+	  background-image: linear-gradient(
+	    to left bottom,
+	    #f2f5f8,
+	    #e4eaec,
+	    #d8dfde,
+	    #cdd3cf,
+	    #c5c7c1
+	  );
+	  width: 100%;
+	  height: 50%;
+	  transform-style: preserve-3d;
+	  transform: perspective(1000px) rotateX(-150deg) translateY(-110%);
+	  transition: transform 0.3s ease;
+	}
+	
+	.tooltip-container .text {
+	  color: rgb(32, 30, 30);
+	  font-weight: bold;
+	  font-size: 40px;
+	}
+	
+	.tooltip {
+	  position: absolute;
+	  top: -20px;
+	  opacity: 0;
+	  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.05) 1px, white 1px),
+	    linear-gradient(rgba(0, 0, 0, 0.05) 1px, white 1px),
+	    linear-gradient(-90deg, rgba(0, 0, 0, 0.04) 1px, white 1px),
+	    linear-gradient(rgba(0, 0, 0, 0.04) 1px, white 1px),
+	    linear-gradient(white 3px, #f2f2f2 3px, #f2f2f2 78px, white 78px),
+	    linear-gradient(-90deg, #aaa 1px, white 1px),
+	    linear-gradient(-90deg, white 3px, #f2f2f2 3px, #f2f2f2 78px, white 78px),
+	    linear-gradient(#aaa 1px, white 1px), #f2f2f2;
+	  background-size: 4px 4px, 4px 4px, 80px 80px, 80px 80px, 80px 80px, 80px 80px,
+	    80px 80px, 80px 80px;
+	  padding: 5px 10px;
+	  border: 1px solid rgb(206, 204, 204);
+	
+	  height: 70px;
+	  width: 110px;
+	  border-radius: 5px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  transition-duration: 0.2s;
+	  pointer-events: none;
+	  letter-spacing: 0.5px;
+	  font-size: 18px;
+	  font-weight: 600;
+	  text-shadow: 10px salmon;
+	}
+	.tooltip-container:hover {
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+	
+	.tooltip-container:hover::before {
+	  transform: rotateY(0);
+	  background-image: none;
+	  background-color: white;
+	}
+	
+	.tooltip-container:hover .tooltip {
+	  top: -90px;
+	  opacity: 1;
+	  transition-duration: 0.3s;
+	}
+   
 </style>
 </head>
 <body>
 
 <br><br><br><br>
-    <div class="wrap">
+
+
+
+	<div class="tooltip-container">
+	  <span class="tooltip">300</span>
+	  <span class="text">💗</span>
+	</div>
+	
+    <div class="wrap">    
         <div class="wrapPC">
             <div class="chatInfo">
                 <table id="chatInfoTable">
@@ -310,7 +432,7 @@ body {
                     <tr>
                         <td>
                             <div id="chatAllCount">
-                                <img src="https://cdn-icons-png.flaticon.com/128/7579/7579707.png">
+                                
                             </div>
                         </td>
                     </tr>
@@ -366,16 +488,16 @@ body {
                
                 <table > 
                    <tr>
-                       <td colspan="3" style="height: 300px; padding-top: 100px; "><img id="masterImg"> </td>
+                       <td colspan="3" style="height:250px; padding-top: 70px; "><img id="masterImg"> </td>
                    </tr>
                    <tr>
-                       <td colspan="3" style="height: 10px; "><p style="font-size: 60px;" id="masterName"></p></td>
+                       <td colspan="3" style="height: 10px; "><p style="font-size: 60px; margin : 0px;" id="masterName"></p></td>
                    </tr>
                    <tr>
                        <td colspan="3"></td>
                    </tr>
                    <tr>
-                       <td colspan="3" style="height: 10px;" ><p id="mbti" style="font-size : 30px;"></p></td>
+                       <td colspan="3" style="height: 10px;" ><p id="mbti" style="font-size : 25px;"></p></td>
                    </tr>
                    <tr>
                        <td colspan="3"></td>
@@ -426,8 +548,6 @@ body {
     });
     
    function getRoomList() {
-        
-     
          $.ajax({
              url:"chatRoomList.do",
              data : {
@@ -514,6 +634,7 @@ body {
              success:function(data){
                 
                 console.log(data);
+                
                  for(var i = 0; i < data.length; i++){
                      // 채팅 목록 동적 추가
                      CheckLR(data[i]);
@@ -555,8 +676,8 @@ body {
    
     <script>
         function chatHome() {
-        
-          socket.close();
+          disconnect();
+        	
           $('#chatInput').addClass('hidden');
           $('#profileDiv').addClass('hidden');
           $('.wrap').css("width" , "482px");
@@ -601,7 +722,7 @@ body {
          
          //메시지 수신 시에 실행되는 함수
          socket.onmessage = function(evt) {
-        	 
+        	  
               let receive = evt.data.split(",");
               let sessionCount = evt.sessionCount;
             
@@ -610,10 +731,11 @@ body {
                            "name" : receive[0],
                           "email" : receive[1],
                  "messageContent" : receive[2],
-                 "sendTime" 	  : receive[3]
+                 "sendTime" 	  : receive[3],
+                 "sessionCount"	  : receive[4]
                   };
-
-              //console.log(sessionCount);
+					//console.log(data.sessionCount);
+            
               
               if(data.email != "${ loginUser.email }"){
                       CheckLR(data);
@@ -665,9 +787,9 @@ body {
         // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
         const LR = (data.email != "${ sessionScope.loginMember.email }") ? "Left" : "Right";
         
-        let unReadCount = data.unReadMessage;
+        let unReadCount = data.sessionCount
         
-        if(unReadCount == 0 || unReadCount == "") {
+        if(unReadCount == 2 ) {
         	unReadCount = '읽음';
         }else {
             unReadCount = 1;
@@ -753,6 +875,8 @@ body {
            // 방 목록 불러오기
            getRoomList(); 
        }, 1000);
+       
+
    });
    </script>
    

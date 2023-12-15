@@ -125,6 +125,11 @@ public interface ChattingService {
      */
     int deleteMatching(Mbti mbti);
     
-
+    /***
+     * @param roomNum
+     * @param unReadMessage
+     * @return
+     */
+    int insertUnReadMessage( ChatMessage chatMessage );
 
 }

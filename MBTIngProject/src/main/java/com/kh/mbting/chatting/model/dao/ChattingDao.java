@@ -82,6 +82,10 @@ public class ChattingDao {
     public int deleteMatching(Mbti mbti) {
     	return sqlSession.delete("chatMapper.deleteMatching" , mbti);
     }
+    
+    public int insertUnReadMessage(ChatMessage chatMessage) {
+    	return sqlSession.insert("chatMapper.insertUnReadMessage" , chatMessage);
+    }
 }
 
 

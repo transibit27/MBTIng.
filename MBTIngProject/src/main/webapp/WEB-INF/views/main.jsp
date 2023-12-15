@@ -72,9 +72,10 @@
 /*--------------------------------폴라로이드 사진 -----------------------------*/
 	
 		.polaroid > img {
-		  max-width: 330px;
-		  height: 290PX;
+		  max-width: 23em;
+		  height: 20em;
 		}
+		
 		#content_3 {
 		  width: 100%;
 		  padding: 0 2rem;
@@ -865,8 +866,10 @@ MBTIng 덕분에 제 운명을 만났어요....!
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/MN1.jpg"></div>
-                <div class="swiper-slide"><img src="${pageContext.request.contextPath}/resources/images/MN2.jpg"></div>
+                <div class="swiper-slide"><img src="https://i.pinimg.com/564x/08/24/4e/08244ec59ca7b14b27fadf0b427ac138.jpg"></div>
+                <div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
+                <div class="swiper-slide"><img src="https://mblogthumb-phinf.pstatic.net/MjAxNzExMDlfMjYz/MDAxNTEwMTg3MzYyNzE3.G1U_AKRbAn-g--iarsiK9Dr5wK3F2nimVy_YM61R-qYg.aE9ABDeR5rvK2dNqf-euPfOsmT982IzDo6Ny1wnyQiog.JPEG.qwqwjd2002/KakaoTalk_20171106_231729476.jpg?type=w800"></div>
+                <div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
             </div>
         
             <!-- paging 바를 위한 스타일 -->

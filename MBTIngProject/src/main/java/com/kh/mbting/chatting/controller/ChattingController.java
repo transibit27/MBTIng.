@@ -51,18 +51,19 @@ public class ChattingController {
     public void messageList( String roomNo, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {
        
     	//System.out.println(roomNo);
-    	
-        List<ChatMessage> mList = cService.messageList(roomNo);
-        response.setContentType("application/json; charset=utf-8");
-        //System.out.println(mList);
-        
-        // 안읽은 메세지의 숫자 0으로 바뀌기
+    	   // 안읽은 메세지의 숫자 0으로 바뀌기
         ChatMessage message = new ChatMessage();
         message.setEmail(userEmail);
         message.setRoomNo(roomNo);
+        //System.out.println("roomNo :"  + roomNo);
+        int result = cService.updateCount(message);
+        //System.out.println("userEmail :" + userEmail);
+        System.out.println(result);
         
-        cService.updateCount(message);
-        
+        List<ChatMessage> mList = cService.messageList(roomNo);
+        response.setContentType("application/json; charset=utf-8");
+        //System.out.println(mList);
+
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         gson.toJson(mList,response.getWriter());
     }

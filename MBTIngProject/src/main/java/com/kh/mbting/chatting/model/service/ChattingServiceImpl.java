@@ -103,4 +103,9 @@ public class ChattingServiceImpl implements ChattingService{
 	public int deleteMatching(Mbti mbti) {
 		return chattingDao.deleteMatching(mbti);
 	}
+
+	@Override
+	public int insertUnReadMessage(ChatMessage chatMessage) {
+		return chattingDao.insertUnReadMessage(chatMessage);
+	}
 }
