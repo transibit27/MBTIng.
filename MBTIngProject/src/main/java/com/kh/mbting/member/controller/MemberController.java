@@ -2,9 +2,10 @@ package com.kh.mbting.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -528,7 +530,7 @@ public class MemberController {
 			
 			mimeMessageHelper.setSubject("MBTIng 비밀번호 초기화 인증메일입니다.");
 			
-			mimeMessageHelper.setText("이야야야", true);
+			mimeMessageHelper.setText("이야야야"+emailCode, true);
 			
 			mailSender.send(message);
 			
@@ -539,8 +541,78 @@ public class MemberController {
 			session.setAttribute("alertMsg", "인증메일 발송에 실패했습니다.");
 		}
 		
-		
 		return "인증메일 발송 실패";
 	}
+	
+	// 인증코드 확인용 메소드
+	@ResponseBody
+	@RequestMapping(value="checkCertNo.me", produces="text/htlm; charset=UTF-8")
+	public String checkCertNo(Verification v) {
+		
+		Verification emailCode = memberService.checkCertNo(v);
+		// 최종 결과 확인용 메시지
+		String resultMsg = "";
+
+		if( emailCode != null) { // 인증코드를 잘 입력했을 경우
+			// 비밀번호를 초기화할 멤버 객체 만들기
+			Member m = new Member();
+			
+			System.out.println(emailCode);
+			// 인증코스 생성시간 현재시간을 시간형태로 가공하기 위한 객체 생성
+			SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			// 인증코드 생성 시간
+			String createDate = emailCode.getCreateDate();
+			// 시간을 더하는 용도의 객체 생성
+			Calendar cal = Calendar.getInstance();
+			
+			try {
+				// 코드 생성시간과 현재 시간을 같은 형태로 가공
+				// 코드 생성 시간 (+5분)
+				Date codeDate = simpleDate.parse(createDate);
+				cal.setTime(codeDate);
+				cal.add(Calendar.MINUTE, +5);
+				codeDate = cal.getTime();
+				System.out.println(codeDate);
+				// 현재 시간
+				Date now = new Date();
+				simpleDate.format(now);
+				System.out.println(now);
+				
+				
+				// 현재 시간이 5분이 지난 인증번호 생성시간 보다 크지 않을 동안 => 아직 인증번호(현재시간+5분)의 유효시간이 지나지 않았음
+				if(!now.after(codeDate)) {
+					
+					resultMsg = "인증번호의  유효 시간이 만료되었습니다. 새로 인증번호를 요청해주세요.";
+				} else {
+					
+					int ranNum = (int)(Math.random() * 90000 + 10000);
+					m.setEmail(v.getEmail());
+					// 16자리 영문 대소문자 특수문자 포함 임시 비밀번호 생성 후  m에 대입
+					String newPwd = RandomStringUtils.random(16, 33, 125, false, false);
+					m.setUserPwd(newPwd);
+					
+					// 임시비밀번호로 회원 정보 업데이트
+					int result = memberService.newPassWord(m);
+					
+					resultMsg = "인증이 완료되었습니다. 초기화된 비밀번호는 " +newPwd+ " 입니다.";
+				} 
+				
+				// 불필요해진 인증 번호 삭제하기
+				int result = memberService.deleteCertNo(m);
+				
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			
+		} else {	// 인증코드 불일치 시
+				
+			resultMsg = "인증 번호가 일치하지 않거나 존재하지 않는 번호입니다.";
+		}
+		
+		return resultMsg;
+	}
+						
 	
 }

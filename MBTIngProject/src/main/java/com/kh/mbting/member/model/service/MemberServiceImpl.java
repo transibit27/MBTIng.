@@ -283,6 +283,24 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.getCertNo(sqlSession, v);
 	}
 
+	// 인증 번호 확인용 메소드
+	@Override
+	public Verification checkCertNo(Verification v) {
+		return memberDao.checkCertNo(sqlSession, v);
+	}
+
+	// 비밀번호 초기화용 메소드
+	@Override
+	public int newPassWord(Member m) {
+		return memberDao.newPassWord(sqlSession, m);
+	}
+
+	// 인증메일 삭제용 메소드
+	@Override
+	public int deleteCertNo(Member m) {
+		return memberDao.deleteCertNo(sqlSession, m);
+	}
+
 
 
 
