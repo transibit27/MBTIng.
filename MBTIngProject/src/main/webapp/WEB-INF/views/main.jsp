@@ -206,13 +206,13 @@
 		}
 
 		#Content1BigText {
-			font-size: 6.3em;
-			margin-top: 8.2em;
+			font-size: 4.6em;
+			margin-top: 7.4em;
 			margin-left: 5em;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
-			height : 2em;
+			height : 1em;
 		}
 		
 		#Content1BigText a {
@@ -231,16 +231,16 @@
 		}
 
 		#arrow {
-			margin-top : 60em;
-			margin-left: 74em;
+			margin-top : 39em;
+			margin-left: 53em;
 		}
 		
 		#testImg { 
 			border-radius: 30px;
-			height: 47%;
-			width : 32%;
+			height: 46%;
+			width : 33%;
 			top : 6.5em;
-			left : 32em;
+			left : 19%;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingResult.png") ;
 			background-size: cover;
 			position: absolute;
@@ -255,11 +255,11 @@
 		*/
 		#testResultImg {
 			border-radius: 30px;
-			height: 65%;
-			width : 28%;
+			height: 64%;
+			width : 27%;
 			position: absolute;
-			top : 15%;
-			left : 53%;
+			top : 20%;
+			left : 55%;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingTest.png") ;
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
@@ -272,22 +272,22 @@
 			    display: flex;
 				justify-content: center; /* 수평 가운데 정렬 */
 				align-items: center; /* 수직 가운데 정렬 */
-				margin-top : 270px;
-				margin-bottom : 200px;
-				height : 600px;
+				margin-top : 4.5%;
+				margin-bottom : 10%;
+				height : 60%;
 			}
 			
-			#topViewInnerTable { width : 100%; height: 600px; }
+			#topViewInnerTable { width : 100%; height: 60%; }
 
 			#topViewInnerTable td {
 				width : 25%;
-				height : 700px;
+				height : 60%;
 				text-align: center;
 			}
 
 			#topViewInnerTable img {
-				width : 70%;
-				height : 600px;
+				width : 65%;
+				height : 97%;
 				margin: auto;
 				border-radius: 30px;
 			}
@@ -299,27 +299,27 @@
 			}
 			
 			.gradient-overlay {
-			margin-left: 110px;
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 70%;
-			height: 100%;
-			border-radius: 30px;	
-			background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.65));
+				margin-left: 17.8%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 65%;
+				height: 97%;
+				border-radius: 30px;	
+				background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.65));
 			}
 
 			.introMem {
 				text-align: left;
-				margin-top: 280px;
-				font-size: 40px;
+				margin-top: 7em;
+				font-size: 3em;
 				color : rgb(255, 255, 255);
 				font-family: 'Sunflower', sans-serif;
-				padding-left: 25px;
+				padding-left: 0.6em;
 			}
 			
 			.introMem > p {
-				font-size: 24px;
+				font-size: 0.5em;
 				color: lightgray;
 			}
 
@@ -330,27 +330,27 @@
 			}
 
 			#topText {
-				font-size : 50px;
+				font-size : 2.5em;
 				font-family: 'Sunflower', sans-serif;
 				display: flex;
 				justify-content: center; /* 수평 가운데 정렬 */
 				align-items: center; /* 수직 가운데 정렬 */
-				padding-top : 150px;
+				padding-top : 7%;
 			}
 			
 			/*----------------------------------------------------------좋아요 버튼------------------------------------------*/
 			#button {
-			  padding: 8px 40px 8px 30px;
+			  padding: 0.17em 1em 0.17em 1em;
 			  border-radius: 10px;
 			  box-shadow: 0px 0px 5px 7px #e7413373;
 			  color: lightgray;
-			  font-size: 24px;
+			  font-size: 1em;
 			  border: none;
 			  display: flex;
 			  align-items: center;
 			  transition: all .5s ease-in-out;
 			  letter-spacing: 2px;
-			  margin : 30px;
+			  margin : 1em;
 			}
 			
 			#button:hover {
@@ -392,32 +392,34 @@
 			}
 
 			.flip-card-inner {
-			transition: transform 0.6s;
-			transform-style: preserve-3d;
-			transform-origin: center; /* 중심점을 가운데로 설정 */
+				transition: transform 0.6s;
+				transform-style: preserve-3d;
+				transform-origin: center; /* 중심점을 가운데로 설정 */
+				height : 70%;
 			}
 
 			.flip-card-front, .flip-card-back {
-			backface-visibility: hidden;
-			position: absolute;
-			left : 0px;
+				backface-visibility: hidden;
+				position: absolute;
+				height : 30em;
+				left : 0px;
 			}
 
 			.flip-card-back {
-			background-color: white;
-			border: 4px solid #b3a8b6;
-			transform: rotateY(180deg);
-			border-radius: 20px;
-			position: relative;
-			margin-bottom: px;
-			width :70%;
-			height : 600px;
-			left : 0px;
-			margin-left : 90px;
+				background-color: white;
+				border: 4px solid #b3a8b6;
+				transform: rotateY(180deg);
+				border-radius: 20px;
+				position: relative;
+				margin-bottom: px;
+				width :70%;
+				height : 30em;
+				left : 0px;
+				margin-left : 4.6em;
 			}
 
 			.flip-card:hover .flip-card-inner {
-			transform: rotateY(180deg);
+				transform: rotateY(180deg);
 			}
 
 			#Content1BigText label {
@@ -425,8 +427,8 @@
 			}
 			
 			.img {
-				width : 200px;
-				height : 200px;
+				width  : 40%;
+				height : 40%;
 			}
 			
 		
@@ -436,7 +438,7 @@
 		
 		.wrap #content {
 			scroll-snap-align: center;
-        display: inline-block;
+            display: inline-block;
 		}
 </style>	
 </head>
