@@ -633,7 +633,7 @@ body {
              dataType:"json",
              success:function(data){
                 
-                console.log(data);
+                //console.log(data);
                 
                  for(var i = 0; i < data.length; i++){
                      // 채팅 목록 동적 추가
@@ -644,8 +644,8 @@ body {
                    url : "master.In",
                    data : {email : email},
                    success : function(master) {
-                  console.log(master);
-                      $("#masterName").text(master.userName);
+                  //console.log(master);
+                        $("#masterName").text(master.userName);
                         $("#masterImg").attr("src" , masterPic);
                         $("#mbti").text(master.mbti);
                         $("#intro").text(master.introduce);
@@ -656,6 +656,9 @@ body {
                  
                  });
                  
+             }, 
+             error : function() {
+            	 console.log("메시지 리스트 불러오기 실패");
              }
          });
           // 웹소켓 연결
@@ -722,12 +725,49 @@ body {
          
          //메시지 수신 시에 실행되는 함수
          socket.onmessage = function(evt) {
-        	  
+        	 
               let receive = evt.data.split(",");
-            
-              if(receive[0] == "세션 두명임 읽음팡팡") {
+              //console.log(receive[0]);
+              if(receive[0] == "세션 두명임 읽음팡팡 ") {
             	  
-            	  console.log(receive[0]);
+            	  $.ajax({
+                      url:"messageList.do" ,
+                      data:{
+                         roomNo   : receive[1],
+                         userEmail:"${sessionScope.loginMember.email}"
+                      },
+                      async:false,
+                      dataType:"json",
+                      success:function(data){
+                         
+                         //console.log(data);
+                         
+                          for(var i = 0; i < data.length; i++){
+                              // 채팅 목록 동적 추가
+                              CheckLR(data[i]);
+                          }
+                          
+                          $.ajax({
+                            url : "master.In",
+                            data : {email : email},
+                            success : function(master) {
+                           //console.log(master);
+                                 $("#masterName").text(master.userName);
+                                 $("#masterImg").attr("src" , masterPic);
+                                 $("#mbti").text(master.mbti);
+                                 $("#intro").text(master.introduce);
+                            },
+                            error : function() {
+                               console.log("클릭한 방의 master 정보 얻어오기 실패");
+                            }
+                          
+                          });
+                          
+                      }, 
+                      error : function() {
+                     	 console.log("메시지 리스트 불러오기 실패");
+                      }
+                  });
             	  
               }else {
             	  
@@ -738,9 +778,8 @@ body {
                  "sendTime" 	  : receive[3],
                  "sessionCount"	  : receive[4]
                   };
-					//console.log(data.sessionCount);
-            
-              
+					
+   
               if(data.email != "${ loginUser.email }"){
                       CheckLR(data);
               }
