@@ -19,8 +19,7 @@
 
 <style>
 	* {
-		  box-sizing: border-box;
-		  
+		  box-sizing: border-box; 
 	}
 	
 	html {
@@ -41,14 +40,14 @@
 			
 	}
 	
-	
-html, body {
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    
-}
+		
+	html, body {
+	    display: block;
+	    width: 100%;
+	    height: 100%;
+	    margin: 0;
+	    
+	}
 
 	/*---------------------swiper를 위한 css-------------------------*/
 
@@ -181,11 +180,12 @@ html, body {
 		.wrap {
 			width : 100%;
 			position: relative;
+			height : 100%;
 		}
 		
 		.content {
 			width: 100%;
-		   	height: 100%;		
+		
 		}
 		
 		#content {
@@ -193,27 +193,31 @@ html, body {
 			width : 100%;
 		}
 		
-		 #content_2 , #content_3 , #content_4 {
-			height : 944px;
-			width : 100%;
-		}
+
 		#content_1 {
 			display : inline-block;
 			width : 100%;
 			background-color: pink;
-			height : 830px;
+			height: calc(100% - 100px);
 		}
-	
+		
+		#content_2 , #content_3 , #content_4 {
+			position: relative;
+			width : 100%;
+			height : 100%;
+			top: -102px; 
+		}
 
 		#Content1BigText {
-			font-size: 70px;
-			margin-top: 570px;
-			margin-left: 380px;
+			font-size: 100px;
+			margin-top: 850px;
+			margin-left: 500px;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
 			height : 30px;
 		}
+		
 		#Content1BigText a {
 			text-decoration : none;
 			color : rgb(255, 142, 161);
@@ -222,33 +226,34 @@ html, body {
 		#Content1BigText a:hover {
 			color : rgb(219, 250, 255);
 			cursor: pointer;
-			font-size : 73px;
+			font-size : 100px;
 		}
 
 		#Content1SmallText {
-			font-size: 20px;
+			font-size: 30px;
 			font-family: 'Sunflower', sans-serif;
 		}
 
 		#content1TopText {
 			font-size: 20px;
 			font-family: 'Gasoek One', sans-serif;
-			margin-left: 1080px;
+			margin-left: 1200px;
 			margin-top: 100px;
 			position: absolute;
 			z-index: 3;
 		}
 
 		#arrow {
-			margin-top: 630px;
-			margin-left: 830px;
+			margin-top : 950px;
+			margin-left: 1130px;
 		}
+		
 		#testImg { 
 			border-radius: 30px;
-			height: 450px;
-			width : 600px;
+			height: 750px;
+			width : 900px;
 			top : 100px;
-			left : 380px;
+			left : 520px;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingResult.png") ;
 			background-size: cover;
 			position: absolute;
@@ -256,18 +261,18 @@ html, body {
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
 			/*filter: blur(3px);*/
 		}
-
+		/*
 		#testImg:hover, #testResultImg:hover{
 			filter: none;
 		}
-
+		*/
 		#testResultImg {
 			border-radius: 30px;
-			height: 600px;
-			width : 500px;
+			height: 900px;
+			width : 800px;
 			position: absolute;
 			top : 170px;
-			left : 1070px;
+			left : 1500px;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingTest.png") ;
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
@@ -276,23 +281,26 @@ html, body {
 
 		/*-----------------------------Top4 분석----------------------------*/
 		
-		
-			#content_2 {
-				display: grid;
-				place-items: center;
+			#topViewTableDiv {
+			    display: flex;
+				justify-content: center; /* 수평 가운데 정렬 */
+				align-items: center; /* 수직 가운데 정렬 */
+				margin-top : 270px;
+				margin-bottom : 200px;
+				height : 600px;
 			}
 			
-			#topViewInnerTable { width : 100%; height: 400px; }
+			#topViewInnerTable { width : 100%; height: 600px; }
 
 			#topViewInnerTable td {
 				width : 25%;
-				height : 450px;
+				height : 700px;
 				text-align: center;
 			}
 
 			#topViewInnerTable img {
 				width : 70%;
-				height : 450px;
+				height : 600px;
 				margin: auto;
 				border-radius: 30px;
 			}
@@ -304,7 +312,7 @@ html, body {
 			}
 			
 			.gradient-overlay {
-			margin-left: 70px;
+			margin-left: 110px;
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -335,22 +343,27 @@ html, body {
 			}
 
 			#topText {
-				font-size : 30px;
+				font-size : 50px;
 				font-family: 'Sunflower', sans-serif;
+				display: flex;
+				justify-content: center; /* 수평 가운데 정렬 */
+				align-items: center; /* 수직 가운데 정렬 */
+				padding-top : 150px;
 			}
 			
 			/*----------------------------------------------------------좋아요 버튼------------------------------------------*/
 			#button {
-			  padding: 0 20px 0 10px;
+			  padding: 8px 40px 8px 30px;
 			  border-radius: 10px;
 			  box-shadow: 0px 0px 5px 7px #e7413373;
 			  color: lightgray;
-			  font-size: 17px;
+			  font-size: 24px;
 			  border: none;
 			  display: flex;
 			  align-items: center;
 			  transition: all .5s ease-in-out;
 			  letter-spacing: 2px;
+			  margin : 30px;
 			}
 			
 			#button:hover {
@@ -394,7 +407,7 @@ html, body {
 			.flip-card-inner {
 			transition: transform 0.6s;
 			transform-style: preserve-3d;
-			
+			transform-origin: center; /* 중심점을 가운데로 설정 */
 			}
 
 			.flip-card-front, .flip-card-back {
@@ -404,15 +417,16 @@ html, body {
 			}
 
 			.flip-card-back {
-			background-color: #8a808b;
+			background-color: white;
 			border: 4px solid #b3a8b6;
 			transform: rotateY(180deg);
 			border-radius: 20px;
 			position: relative;
 			margin-bottom: px;
 			width :70%;
-			height : 450px;
+			height : 600px;
 			left : 0px;
+			margin-left : 90px;
 			}
 
 			.flip-card:hover .flip-card-inner {
@@ -447,36 +461,39 @@ html, body {
 		<jsp:include page="common/header.jsp"/>
 
 		<div class="wrap">
-			<div id="content">
+
 				<div id="content_1" class="content">
 				<!--<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
 											  설문조사를 통한 통계 기반 맞춤형 추천 서비스 <br>
 											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>-->	
 					<div id="Content1BigText">나의 연애 <a href="mbtiTest.mb">MBTI TEST </a> 하기 <br> 
-						<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p> </div>
-						<div id="arrow">
+						<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p>
+					</div>
+					<div id="arrow">
 						<img src="https://cdn-icons-png.flaticon.com/128/60/60934.png"> 
-						</div>
 					</div>
-					<div class="test">
+				</div>
+				
+				<div class="test">
 						<div id="testImg"></div>
-					</div>
-					<div>
+				</div>
+				<div>
 						<div id="testResultImg"></div>
-					</div>
 				</div>
-
-				<div id="content_2" class="content">
+		</div>
+		
+		<div id="content_2" class="content">
 					<div id="topText"> <label>현재 가장 매칭 신청을 많이 받은 Top 4</label></div>
-					<table id="topViewInnerTable">
-						  <tr class="topViewTr">
-						  </tr>
-					 </table>
-				</div>
-			</div>
+					<div id="topViewTableDiv">
+						<table id="topViewInnerTable">
+							  <tr class="topViewTr">
+							  </tr>
+						 </table>
+					 </div>
+		</div>
 			
 		<div id="content_3" class="content">
-			<h1 style="font-family: 'Sunflower', sans-serif;">인기 게시글</h1>
+			<h1 style="font-family: 'Sunflower', sans-serif">인기 게시글</h1>
 		  <div class="item">
 		    <div class="polaroid"><img src="https://image.jtbcplus.kr/data/contents/jam_photo/202101/05/b0266449-6a8b-4a9b-8f7e-b4b250c957c0.jpg">
 		      <div class="caption">
@@ -571,7 +588,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		    </div>
 		  </div>
 		</div>	
-	</div>
 
 
   <script>
