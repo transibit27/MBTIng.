@@ -71,7 +71,14 @@ public class WebSocketHandler extends TextWebSocketHandler  {
            //System.out.println(sessionTwo);
            //System.out.println(sessionList);
            //System.out.println(RoomList);
-
+            String roomNum = chatMessage.getRoomNo();
+            
+            TextMessage textMessage = new TextMessage("한 명이다 ," + roomNum );
+            
+            for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
+                sess.sendMessage(textMessage);
+                //System.out.println(textMessage);
+            }
         } 
         
         // 채팅방이 존재 할 때
@@ -88,11 +95,17 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             System.out.println("생성된 채팅방으로 입장");
             
             String roomNum = chatMessage.getRoomNo();
-            int sessionCount1 = 2;
+            int sessionCount = 2;
             
-            
+            if(RoomList.get(roomNum).size() == 1) {
+            	 TextMessage textMessage = new TextMessage ("한 명이다 ," + roomNum);
+            	 
+            	 for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
+                     sess.sendMessage(textMessage);
+                 }
+            }
             if(RoomList.get(roomNum).size() == 2) {
-            	 chatMessage.setSessionCount(sessionCount1);
+            	 chatMessage.setSessionCount(sessionCount);
             	 cService.insertUnReadMessage(chatMessage);
             	 
             	 TextMessage textMessage = new TextMessage("세션 두명임 읽음팡팡 ," + roomNum );

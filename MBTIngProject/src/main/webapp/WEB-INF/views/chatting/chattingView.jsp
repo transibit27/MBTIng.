@@ -727,8 +727,10 @@ body {
          socket.onmessage = function(evt) {
         	 
               let receive = evt.data.split(",");
-              //console.log(receive[0]);
-              if(receive[0] == "세션 두명임 읽음팡팡 ") {
+              
+              console.log(receive[0] + receive[1]);
+              
+              if(receive[0] == "세션 두명임 읽음팡팡 " || receive[0] == "한 명이다 ") {
             	  
             	  $.ajax({
                       url:"messageList.do" ,
@@ -740,7 +742,7 @@ body {
                       dataType:"json",
                       success:function(data){
                          
-                         //console.log(data);
+                         console.log(data);
                          
                           for(var i = 0; i < data.length; i++){
                               // 채팅 목록 동적 추가
@@ -829,10 +831,11 @@ body {
     function CheckLR(data) {
         // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
         const LR = (data.email != "${ sessionScope.loginMember.email }") ? "Left" : "Right";
-        
-        let unReadCount = data.sessionCount
-        
-        if(unReadCount == 2 ) {
+       
+        let unReadMessage 	= data.unReadMessage;
+        let unReadCount 	= data.sessionCount
+        let email			= data.email;
+        if(unReadCount == 2 || unReadMessage == 0) {
         	unReadCount = '읽음';
         }else {
             unReadCount = 1;
