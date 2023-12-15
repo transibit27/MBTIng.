@@ -37,7 +37,6 @@
 				rgb(255, 255, 255), rgb(255, 255, 255) 50%, #ffffff 100%
 			);
 			background-size: 10px 10px;
-			
 	}
 	
 		
@@ -185,11 +184,9 @@
 		
 		.content {
 			width: 100%;
-		
 		}
 		
 		#content {
-			margin-top: 0px;
 			width : 100%;
 		}
 		
@@ -205,17 +202,17 @@
 			position: relative;
 			width : 100%;
 			height : 100%;
-			top: -102px; 
+			top: -6.375em; 
 		}
 
 		#Content1BigText {
-			font-size: 100px;
-			margin-top: 850px;
-			margin-left: 500px;
+			font-size: 6.3em;
+			margin-top: 8.2em;
+			margin-left: 5em;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
-			height : 30px;
+			height : 2em;
 		}
 		
 		#Content1BigText a {
@@ -226,34 +223,24 @@
 		#Content1BigText a:hover {
 			color : rgb(219, 250, 255);
 			cursor: pointer;
-			font-size : 100px;
 		}
 
 		#Content1SmallText {
-			font-size: 30px;
+			font-size: 0.31em;
 			font-family: 'Sunflower', sans-serif;
 		}
 
-		#content1TopText {
-			font-size: 20px;
-			font-family: 'Gasoek One', sans-serif;
-			margin-left: 1200px;
-			margin-top: 100px;
-			position: absolute;
-			z-index: 3;
-		}
-
 		#arrow {
-			margin-top : 950px;
-			margin-left: 1130px;
+			margin-top : 60em;
+			margin-left: 74em;
 		}
 		
 		#testImg { 
 			border-radius: 30px;
-			height: 750px;
-			width : 900px;
-			top : 100px;
-			left : 520px;
+			height: 47%;
+			width : 32%;
+			top : 6.5em;
+			left : 32em;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingResult.png") ;
 			background-size: cover;
 			position: absolute;
@@ -268,11 +255,11 @@
 		*/
 		#testResultImg {
 			border-radius: 30px;
-			height: 900px;
-			width : 800px;
+			height: 65%;
+			width : 28%;
 			position: absolute;
-			top : 170px;
-			left : 1500px;
+			top : 15%;
+			left : 53%;
 			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingTest.png") ;
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
