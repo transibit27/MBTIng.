@@ -71,7 +71,7 @@
     .notice-name {
         background-color: #f2f2f2;
         border-radius: 5px;
-        padding: 25px;
+        padding: 25px 40px;
         margin-top: 20px;
     }
     
@@ -110,6 +110,8 @@
 		</div>
         <br><br><br><br>	
 	</div>
+
+	<jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>
