@@ -181,4 +181,56 @@ FROM MemberCount, KakaoPayCount
 	ORDER BY TO_CHAR(kakaopay.ORDER_DATE, 'YYYY')
 </select>
 
+<!-- 관리자페이지 결제관리 게시글 수 조회 -->
+	<select id="adminPaySelectListCount" resultType="_int">
+		SELECT COUNT(*)
+		  FROM KAKAOPAY
+	</select>
+
+	<!-- 관리자페이지 결제관리 게시글 리스트 조회 -->
+	<select id="adminPaySelectList" resultMap="kakaoPayResultSet">
+		SELECT PARTNER_ORDER_ID  <!-- 주문번호 -->
+		     , PARTNER_USER_ID  <!-- 구매자 -->
+		     , ITEM_NAME  <!-- 상품명 -->
+		     , QUANTITY  <!-- 상품수량 -->
+		     , TOTAL_AMOUNT  <!-- 상품총액 -->
+		     , TO_CHAR(ORDER_DATE, 'YYYY-MM-DD HH:mm:ss') AS ORDER_DATE  <!-- 구입일 -->
+		     , REFUND_REQUEST <!-- 환불요청 -->
+		  FROM KAKAOPAY
+		 ORDER BY PARTNER_ORDER_ID
+	</select>
+	
+	<!-- 관리자페이지 환불요청 승인/거절  -->
+	<update id="refundSuccess" parameterType="KakaoPay">
+		UPDATE KAKAOPAY
+		   SET REFUND_REQUEST = #{refundRequest}
+		 WHERE PARTNER_ORDER_ID = #{partnerOrderId}
+	</update>
+	
+	<!-- 검색된 환불 회원 수 조회 -->
+    <select id="paySearchListCount" parameterType="string" resultType="_int">
+        SELECT COUNT(*)
+          FROM KAKAOPAY
+         WHERE (PARTNER_USER_ID LIKE '%' || #{keyword} || '%')
+    </select>
+
+   <!-- 검색된 환불 회원 리스트 조회 -->
+	<select id="paySearchList" resultMap="kakaoPayResultSet" parameterType="map">
+	      SELECT *
+			FROM (
+			    SELECT
+			          PARTNER_ORDER_ID,  <!-- 주문번호 -->
+			          PARTNER_USER_ID,  <!-- 구매자 -->
+			          ITEM_NAME,  <!-- 상품명 -->
+			          QUANTITY,  <!-- 상품수량 -->
+			          TOTAL_AMOUNT,  <!-- 상품총액 -->
+			          TO_CHAR(ORDER_DATE, 'YYYY-MM-DD HH:mm:ss') AS ORDER_DATE,  <!-- 구입일 -->
+			          REFUND_REQUEST,  <!-- 환불요청 -->
+			          ROWNUM AS rnum
+			    FROM KAKAOPAY
+			    WHERE (PARTNER_USER_ID LIKE '%' || #{keyword} || '%')
+			    ORDER BY PARTNER_ORDER_ID DESC
+			)
+			WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
 </mapper>

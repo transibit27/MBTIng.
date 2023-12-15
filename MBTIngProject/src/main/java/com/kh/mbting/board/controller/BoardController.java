@@ -172,7 +172,7 @@ public class BoardController {
 	ArrayList<Board> list = boardService.selectTopBoardList();
 	return new Gson().toJson(list);
 	}
-	
+
 	@RequestMapping("changeThumb.bo")
 	public String changeThumb(int boardNo, String userNo, int checkThumb, Model model, HttpSession session) {
 		HashMap<String, Object> map = new HashMap<>();

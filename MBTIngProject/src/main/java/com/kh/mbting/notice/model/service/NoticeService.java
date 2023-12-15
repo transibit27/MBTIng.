@@ -29,8 +29,10 @@ public interface NoticeService {
 	// 공지사항 수정
 	int updateNotice(Notice n);
 	
+	// 공지사항 게시글 검색 수
     int searchListCount(String keyword);
 
+    // 공지사항 게시글 리스트 검색 
     List<Notice> searchList(String keyword, int currentPage, int pageLimit, int boardLimit);
 
     // 조회수 업데이트 메소드

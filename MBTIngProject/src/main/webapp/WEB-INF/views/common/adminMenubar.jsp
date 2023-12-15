@@ -178,7 +178,7 @@
                     </tr>
                     <tr>
                         <th><i class="fas fa-credit-card menu-icon"></i>
-                            <a href="">결제 관리</a>
+                            <a href="list.adpa">결제 관리</a>
                         </th>
                     </tr>
                     <tr>

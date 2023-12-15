@@ -70,19 +70,16 @@ public interface AdminService {
  	
 	// 회원 검색 조회
     List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
- 	
-    // 회원 상태 업데이트
-    int updateStatus(String status, String userNo);
 
     // 선택된 회원 상태 일괄 업데이트
-    int updateSelectedStatus(ArrayList<Member> memNo);
+    int updateSelectedStatus(ArrayList<String> selectedUserNos);
  	
- 	// 상태에 따른 토글바 조회용 (보류)
- 	Member getUserByEmail(String email);
+    // 선택되지 않은 회원의 상태를 업데이트
+    int updateSelectedStatus2(List<String> statusN);
     
- 	void updateUserStatus(String email, String newStatus);
-
-
+    // 전체회원 수를 가져오는 METHOD
+    int selectAllMember();
+    
      /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
     
      // 매칭후기 게시글 총 개수 조회
@@ -96,11 +93,23 @@ public interface AdminService {
 
 	// 검색된 후기게시글 리스트 조회
     List<Board> adminSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
+    
+    /* 결제 관리 시작!!!!!!!!!!!!!!!!!! */
+    // 결제 게시글 총 개수 조회
+  	int adminPaySelectListCount();
 
-    int selectAllMember();
+  	// 결제 게시글 리스트 조회
+  	ArrayList<KakaoPay> adminPaySelectList(PageInfo pi);
     
-    
-    
-    
-    
+  	// 환불요청 승인 버튼 클릭
+  	int refundSuccess(KakaoPay k);
+  	
+  	// 환불요청 거절 버튼 클릭
+  	int refundRefusal(KakaoPay k);
+  	
+  	// 회원 검색 총 개수 조회
+  	int paySearchListCount(String keyword);
+  	
+  	// 환불 회원 검색 조회
+    List<KakaoPay> paySearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
 }

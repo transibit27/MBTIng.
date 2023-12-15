@@ -432,17 +432,21 @@
 	</update>
 
 	
-	<!-- updateSelectedStatus() 메서드의 SQL -->
-<!-- <update id="updateSelectedStatus" parameterType="java.util.List">
-    UPDATE MEMBER
-    SET STATUS = 'Y'
-    WHERE USER_NO IN
-    <foreach collection="list" item="item" open="(" separator="," close=")">
-        #{list[userNo]}
-    </foreach>
-</update> -->
+	<!-- updateSelectedStatus() 메서드의 SQL Y로 status 변경-->
+	<update id="updateSelectedStatus" parameterType="string">
+	    UPDATE MEMBER
+	   	   SET STATUS = 'Y'
+	   	 WHERE USER_NO = #{memberNo}
+	</update>
 	
-	 
+	<!-- updateSelectedStatus2 => N으로 status 변경 -->
+	 <update id="updateSelectedStatus2" parameterType="string">
+	    UPDATE MEMBER
+	   	   SET STATUS = 'N'
+	   	 WHERE USER_NO = #{memberNo}
+	</update>
+	
+	<!-- 전체 회원 수 가져오는 쿼리문 -->
 	<select id="selectAllMember" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER

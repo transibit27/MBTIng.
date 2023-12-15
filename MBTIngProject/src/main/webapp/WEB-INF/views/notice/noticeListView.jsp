@@ -10,7 +10,7 @@
         #noticeList {text-align:center;}
         #noticeList>tbody>tr:hover {cursor:pointer;}
 
-        #pagingArea {width:fit-content; margin:auto;}
+        #pagingArea {width:fit-content; margin:auto; margin-top : 50px;}
 
         #searchForm {
             width:500px;

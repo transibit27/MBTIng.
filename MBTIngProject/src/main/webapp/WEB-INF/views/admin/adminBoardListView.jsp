@@ -31,6 +31,7 @@
 #numSize { width : 90px; }
 #viewSize { width : 90px; }
 #writerSize { width : 120px; }
+#pagingArea {margin-top : 50px;}
 </style>
 </head>
 <body>
@@ -74,7 +75,7 @@
             </tbody>
         </table>
         
-        <script>
+    <script>
     // JavaScript로 클릭 이벤트 처리
     document.querySelectorAll('.detailView').forEach(title => {
         title.addEventListener('click', function() {
@@ -82,7 +83,7 @@
             window.location.href = 'detail.adbo?bno=' + boardNo;
         });
     });
-</script>
+	</script>
         
         <div id="pagingArea">
     <ul class="pagination">

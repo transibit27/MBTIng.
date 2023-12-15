@@ -31,7 +31,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public int selectTotalMembers() {
-
 		return adminDao.selectTotalMembers(sqlSession);
 	}
 	
@@ -149,18 +148,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.memberSelectList(sqlSession, pi);
 	}
 
-	// 상태에 따른 토글바 조회용 (보류)
-	@Override
-	public Member getUserByEmail(String email) {
-
-		return adminDao.getUserByEmail(sqlSession, email);
-	}
-	@Override
-	public void updateUserStatus(String email, String newStatus) {
-		adminDao.updateUserStatus(sqlSession, email, newStatus);
-		
-	}
-
 	/* 선택된 회원 저장
 	@Override
 	public void updateSelectedUserStatus(List<Integer> selectedUserNos) {
@@ -180,18 +167,16 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminDao.memberSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
 	}
-
-	@Override
-	@Transactional
-    public int updateStatus(String status, String userNo) {
-        return adminDao.updateStatus(sqlSession, status, userNo);
-    }
-
     
 	@Override
-	public int updateSelectedStatus( ArrayList<Member> memNo) {
+	public int updateSelectedStatus( ArrayList<String> memNo) {
 		
 			return adminDao.updateSelectedStatus(sqlSession, memNo );
+	}
+	
+	@Override
+	public int updateSelectedStatus2(List<String> statusN) {
+		return adminDao.updateSelectedStatus2(sqlSession, statusN);
 	}
 	
 
@@ -227,5 +212,46 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	
+	/* 결제 관리 시작!!!!!!!!!!!!!!!!!! */
+	// 결제관리 게시글 개수 조회
+	@Override
+	public int adminPaySelectListCount() {
+		
+		return adminDao.adminPaySelectListCount(sqlSession);
+	}
+	
+	// 결제관리 게시글 전체 조회
+	@Override
+	public ArrayList<KakaoPay> adminPaySelectList(PageInfo pi) {
+		
+		return adminDao.adminPaySelectList(sqlSession, pi);
+	}
+
+	// 환불요청 승인 버튼 클릭
+	@Override
+	@Transactional
+	public int refundSuccess(KakaoPay k) {
+		return adminDao.refundSuccess(sqlSession, k);
+	}
+	
+	// 환불요청 거절 버튼 클릭
+	@Override
+	@Transactional
+	public int refundRefusal(KakaoPay k) {
+		return adminDao.refundSuccess(sqlSession, k);
+	}
+
+	// 환불 회원수 검색 조회용
+	@Override
+	public int paySearchListCount(String keyword) {
+
+		return adminDao.paySearchListCount(sqlSession, keyword);
+	}
+	// 환불 회원 검색 조회용
+	@Override
+	public List<KakaoPay> paySearchList(String keyword, int currentPage, int pageLimit, int boardLimit) {
+		
+		return adminDao.paySearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
+	}
 	
 }
