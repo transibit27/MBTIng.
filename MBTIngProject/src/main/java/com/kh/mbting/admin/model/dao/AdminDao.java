@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
@@ -155,31 +154,41 @@ public class AdminDao {
         return sqlSession.update("memberMapper.updateStatus", parameters);
     }
     
- // 다중 사용자 상태 업데이트
-    public int updateSelectedStatus(SqlSessionTemplate sqlSession, ArrayList<Member> memNo) {
-         return sqlSession.update("memberMapper.updateSelectedStatus", memNo);
+    // 다중 사용자 상태 업데이트
+    public int updateSelectedStatus(SqlSessionTemplate sqlSession, ArrayList<String> memNo) {
+         
+    	System.out.println(memNo);
+    	
+    	int result = 1;
+    	for(int i = 0; i < memNo.size(); i++) {
+    		System.out.println("반복 " + i);
+    		String memberNo = memNo.get(i);
+    		System.out.println(memberNo);
+    		result *= sqlSession.update("memberMapper.updateSelectedStatus", memberNo);
+    		
+    	}
+    	System.out.println("result : " + result);
+    	
+    	// int result = sqlSession.update("memberMapper.updateSelectedStatus", (List)memNo);
+    	
+    	
+    	return result;
     }
 
-	
-	// 상태에 따른 토글바 조회용 (보류)
-	public Member getUserByEmail(SqlSessionTemplate sqlSession, String email) {
+    
+	public int updateSelectedStatus2(SqlSessionTemplate sqlSession, List<String> statusN) {
 		
-		return sqlSession.selectOne("memberMapper.getUserByEmail", email);
+		System.out.println(statusN);
+		
+		int result = 1;
+		for(int i = 0; i < statusN.size(); i++) {
+			String memberNo = statusN.get(i);
+			result *= sqlSession.update("memberMapper.updateSelectedStatus2", memberNo);
+		}
+		return result;
 	}
 	
-	public void updateUserStatus(SqlSessionTemplate sqlSession, String email, String newStatus) {
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("email", email);
-        parameters.put("newStatus", newStatus);
-
-        sqlSession.update("memberMapper.updateUserStatus", parameters);
-    }
 	
-	// 선택된 회원 저장
-	public void updateSelectedUserStatus(SqlSessionTemplate sqlSession, List<Integer> selectedUserNos) {
-		
-		sqlSession.update("memberMapper.updateSelectedUserStatus");
-	}
 	
 	
 	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
@@ -222,6 +231,51 @@ public class AdminDao {
 		return sqlSession.selectOne("memberMapper.selectAllMember");
 	}
 
+	
+	/* 결제 관리 시작!!!!!!!!!!!!!!!!!! */
+	// 결제관리 게시글 총 개수 조회
+	public int adminPaySelectListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("kakaoPayMapper.adminPaySelectListCount");
+	}
+	
+	// 결제관리 게시글 전체 조회
+	public ArrayList<KakaoPay> adminPaySelectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int limit = pi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * limit;
+		
+		RowBounds rowBounds = new RowBounds(offset,limit);
+		
+		return (ArrayList)sqlSession.selectList("kakaoPayMapper.adminPaySelectList", null, rowBounds);
+	}
+	
+	// 환불 요청 승인/거절 
+	public int refundSuccess(SqlSessionTemplate sqlSession, KakaoPay k) {
+		return sqlSession.update("kakaoPayMapper.refundSuccess", k);
+	}
+	
+	// 환불 회원 게시글 수 검색 조회용
+	public int paySearchListCount(SqlSessionTemplate sqlSession, String keyword) {
+      
+		return sqlSession.selectOne("kakaoPayMapper.paySearchListCount", keyword);
+    }
+
+	// 환불 회원 회원 검색 조회용
+	public List<KakaoPay> paySearchList(SqlSessionTemplate sqlSession, String keyword, int currentPage, int pageLimit, int boardLimit) {
+	    int startRow = (currentPage - 1) * boardLimit;
+	    int endRow = startRow + boardLimit; 
+
+	    Map<String, Object> parameters = new HashMap<>();
+	    parameters.put("keyword", keyword);
+	    parameters.put("startRow", startRow);
+	    parameters.put("endRow", endRow);
+
+	    return sqlSession.selectList("kakaoPayMapper.paySearchList", parameters);
+	}
+	
+	
+	
 	
 	
 }

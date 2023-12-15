@@ -176,6 +176,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping(value = "changeThumb.bo", produces = "application/json; charset=UTF-8")
 	public int changeThumb(int boardNo, String userNo, int checkThumb, Model model, HttpSession session) {
+
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("boardNo", boardNo);
 		map.put("userNo", userNo);

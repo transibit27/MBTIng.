@@ -88,6 +88,7 @@ public class BoardServiceImpl implements BoardService {
 	public ArrayList<Board> selectSearchList(HashMap<String, String> map, PageInfo pi) {
 		return boardDao.selectSearchList(sqlSession, map, pi);
 	}
+
 	@Override
 	public int checkThumb(HashMap<String, Object> map) {
 		return boardDao.checkThumb(sqlSession, map);

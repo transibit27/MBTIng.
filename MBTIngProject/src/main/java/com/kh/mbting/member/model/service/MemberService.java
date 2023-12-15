@@ -9,6 +9,7 @@ import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.member.model.vo.Verification;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 public interface MemberService {
@@ -73,6 +74,9 @@ public interface MemberService {
 
 	// 카카오 로그인시 카카오 계정으로 가입된 이메일 계정이 있는지 확인용 method
 	Member kakaoLoginCheck(String email);
+
+	// 인증 메일 발송용 method
+	int getCertNo(Verification v);
 
 
 

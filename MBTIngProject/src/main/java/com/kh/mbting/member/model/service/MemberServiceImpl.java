@@ -24,6 +24,7 @@ import com.kh.mbting.common.model.vo.PageInfo;
 import com.kh.mbting.matching.model.vo.Matching;
 import com.kh.mbting.member.model.dao.MemberDao;
 import com.kh.mbting.member.model.vo.Member;
+import com.kh.mbting.member.model.vo.Verification;
 import com.kh.mbting.pay.vo.KakaoPay;
 
 @Service
@@ -274,6 +275,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member kakaoLoginCheck(String email) {
 		return memberDao.kakaoLoginCheck(sqlSession, email);
+	}
+
+	// 인증 메일 발송용 메소드
+	@Override
+	public int getCertNo(Verification v) {
+		return memberDao.getCertNo(sqlSession, v);
 	}
 
 

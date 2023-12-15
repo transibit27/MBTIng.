@@ -39,6 +39,7 @@
         #pagingArea {
             width: fit-content;
             margin: auto;
+            margin-top : 50px;
         }
     </style>
 </head>
@@ -88,7 +89,7 @@
             <tr>
                 <th><input type="checkbox" class="checkbox"></th>
                 <th class="amno">${a.userNo}</th>
-                <th>${a.userName}</th>
+                <th class="detailView" data-userNo="${a.userNo}">${a.userName}</th>
                 <th>${a.mbti}</th>
                 <th>${a.email}</th>
                 <th>${a.gender}</th>
@@ -105,6 +106,16 @@
         </c:forEach>
         </tbody>
     </table>
+    
+    <script>
+    // JavaScript로 클릭 이벤트 처리
+    document.querySelectorAll('.detailView').forEach(title => {
+        title.addEventListener('click', function() {
+            const boardNo = this.getAttribute('data-userNo');
+            window.location.href = 'detail.adme?amno=' + userNo;
+        });
+    });
+	</script>
 
     <div id="pagingArea">
     <ul class="pagination">
@@ -165,9 +176,12 @@
             		checkbox.checked = isChecked;
         		    //=> 그 checkbox의 checked 속성을 true 값으로 넣어준다는 뜻. 
         });
-
+        
+        var checkboxArray = [...checkboxes];
+        console.log(document.querySelector('checkboxArray').checked);
+        
         // 체크된 회원들의 상태를 서버로 전송
-        updateSelectedStatus(); 
+        //updateSelectedStatus(); 
     }
 
     // 체크된 회원 저장
@@ -208,7 +222,6 @@
 
     // 폼 전송 방지
     return false;
-
     }
     </script>
 </div>
