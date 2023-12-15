@@ -126,10 +126,17 @@ public interface ChattingService {
     int deleteMatching(Mbti mbti);
     
     /***
+     * 안 읽은 메시지의 session을 update해줌
      * @param roomNum
      * @param unReadMessage
      * @return
      */
     int insertUnReadMessage( ChatMessage chatMessage );
 
+    /***
+     * 안 읽은 전체 메시지 수 가져오기
+     * @param email
+     * @return
+     */
+    int countAll(String email);
 }

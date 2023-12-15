@@ -898,7 +898,11 @@ body {
    <script>
    $(window).on('load', function(){
        // 초기에도 채팅 목록 불러오기
-
+	   clickDiv();
+       countAll();
+   });
+   
+   function clickDiv() {
        var clickedDiv = null;
 
        // 클릭한 div 요소의 배경을 pink로 변경
@@ -920,10 +924,24 @@ body {
            $(".chatList").html("");
            // 방 목록 불러오기
            getRoomList(); 
+           countAll();
        }, 1000);
        
+    }
 
-   });
+   function countAll() {
+	   $.ajax({
+		  	url  : "count.all",
+		  	data : {email : "${sessionScope.loginMember.email}"},
+		  	success : function(e) {
+		  		let countAll = document.querySelector(".tooltip");
+		  		countAll.innerText = e;
+		  	},
+		  	error : function() {
+		  		alert("ㅋㅋ;;전체 카톡 수 불러오기 실패 ㅎ.,.,,");
+		  	}
+	   });
+   }
    </script>
    
    <script>

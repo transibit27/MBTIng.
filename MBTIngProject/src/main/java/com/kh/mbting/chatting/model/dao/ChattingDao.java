@@ -86,6 +86,10 @@ public class ChattingDao {
     public int insertUnReadMessage(ChatMessage chatMessage) {
     	return sqlSession.insert("chatMapper.insertUnReadMessage" , chatMessage);
     }
+    
+    public int countAll(String email) {
+    	return sqlSession.selectOne("chatMapper.countAll" , email);
+    }
 }
 
 

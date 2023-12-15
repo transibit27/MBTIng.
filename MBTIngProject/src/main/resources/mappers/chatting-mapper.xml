@@ -204,4 +204,10 @@
     <update id="insertUnReadMessage" parameterType="chatMessage">
     	UPDATE CHATMESSAGE SET SESSION_COUNT = #{sessionCount} WHERE ROOM_NO = #{roomNo} and session_count = 1
     </update>
+    
+    <select id="countAll" resultType="_int">
+    	select count(*)
+		  from chatmessage
+		 where un_read_message = 1 and user_email != #{email} 
+    </select>
 </mapper>

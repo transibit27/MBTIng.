@@ -224,4 +224,13 @@ public class ChattingController {
     		return allResult;
     }
     
+    @ResponseBody
+    @RequestMapping("count.all")
+    public int countAll(String email) {
+    	
+    	int countAll = cService.countAll(email);
+    	
+    	return countAll;
+    }
+    
 }

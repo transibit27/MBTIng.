@@ -108,4 +108,9 @@ public class ChattingServiceImpl implements ChattingService{
 	public int insertUnReadMessage(ChatMessage chatMessage) {
 		return chattingDao.insertUnReadMessage(chatMessage);
 	}
+
+	@Override
+	public int countAll(String email) {
+		return chattingDao.countAll(email);
+	}
 }
