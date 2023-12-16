@@ -80,6 +80,8 @@ public interface AdminService {
     // 전체회원 수를 가져오는 METHOD
     int selectAllMember();
     
+    // 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
+    Member adminMemberDetailView(String userNo);
      /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
     
      // 매칭후기 게시글 총 개수 조회
@@ -112,4 +114,5 @@ public interface AdminService {
   	
   	// 환불 회원 검색 조회
     List<KakaoPay> paySearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
+
 }

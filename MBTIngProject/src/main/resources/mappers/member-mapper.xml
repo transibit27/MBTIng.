@@ -393,6 +393,7 @@
 		     , EMAIL
 		     , GENDER
 		     , STATUS
+		     , ROWNUM AS rnum
 		  FROM MEMBER
 		 ORDER BY USER_NO
 	</select>
@@ -469,4 +470,11 @@
 	         VALUES (#{email},
            	 		 #{emailCode})	
 	</insert>
+	
+	<select id="adminMemberDetailView" parameterType="string" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_NO = #{userNo}
+	</select>
+	
 </mapper>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -397,9 +398,23 @@ public class AdminController {
      }
  	
  	
+ 	@RequestMapping("detail.adme") 
+ 	public String detailMember(@RequestParam("userNo") String userNo ,  @RequestParam("currentPage") String currentPage ,Model model) { 		
+ 		//System.out.println("userNo : 야 오냐 ! " + userNo);
+ 		//System.out.println("화긴확인" + currentPage);
+ 		model.addAttribute("userNo", userNo);
+ 		model.addAttribute("currentPage", currentPage);
+ 		
+ 		return "admin/detailViewMember";	
+ 	}
  	
+ 	@ResponseBody
+ 	@RequestMapping(value="adminMemberDetailView.adme" ,produces="application/json; charset=UTF-8")
+ 	public String adminMemberDetailView(String userNo ) {
+ 		//System.out.println("여기는 오나  ? ?  2번째임" + userNo);
+ 		Member m = adminService.adminMemberDetailView(userNo);
+
+ 		return new Gson().toJson(m);
+ 	}
  	
- 	
-    
-    
-	}
+}

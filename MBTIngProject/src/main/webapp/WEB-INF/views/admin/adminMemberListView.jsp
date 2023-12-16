@@ -111,10 +111,14 @@
     // JavaScript로 클릭 이벤트 처리
     document.querySelectorAll('.detailView').forEach(title => {
         title.addEventListener('click', function() {
-            const boardNo = this.getAttribute('data-userNo');
-            window.location.href = 'detail.adme?amno=' + userNo;
+            const userNo = this.getAttribute('data-userNo');
+            const cpage = ${requestScope.pi.currentPage};
+            
+            window.location.href = 'http://localhost:8081/mbting/detail.adme?userNo=' + userNo + '&currentPage=' + cpage;
+    
         });
-    });
+       });
+    
 	</script>
 
     <div id="pagingArea">
@@ -141,7 +145,7 @@
         <c:choose>
             <c:when test="${requestScope.pi.currentPage eq requestScope.pi.maxPage}">
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link" id="page" href="#">Next</a>
                 </li>
             </c:when>
             <c:otherwise>
