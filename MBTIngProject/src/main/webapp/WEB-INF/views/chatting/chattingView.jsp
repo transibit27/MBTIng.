@@ -245,8 +245,7 @@ body {
     cursor: pointer;
 }
 */
-
- .countMessage {
+ .count {
  	width : 35px;
  	height : 35px;
  	box-shadow : 0 0.05rem 0.6rem red;
@@ -257,7 +256,7 @@ body {
  	text-align : center;
  	line-height: 37px;
  	font-size : 14px;
- }
+ } 
 
 #chatInfoTable button {
     background-color: transparent;
@@ -947,9 +946,9 @@ body {
 	   $.ajax({
 		  	url  : "count.all",
 		  	data : {email : "${sessionScope.loginMember.email}"},
-		  	success : function(e) {
+		  	success : function(countAllUnReadMessage) {
 		  		let countAll = document.querySelector(".tooltip");
-		  		countAll.innerText = e;
+		  		countAll.innerText = countAllUnReadMessage;
 		  	},
 		  	error : function() {
 		  		console.log("전체 카톡 수 불러오기 실패 ㅎ.,.,,");
@@ -961,14 +960,26 @@ body {
 	   $.ajax({
 		  	url  : "countRoom.all",
 		  	data : {email : "${sessionScope.loginMember.email}"},
-		  	success : function(countRoomUnReadMessage) {
+		  	success : function(countRoomUnRead) {
 		  		let countRoomAll = document.querySelector(".countMessage");
-		  		
-		  		for(let i = 0; i < countRoomUnReadMessage.length; i++) {
-		  			const room = countRoomUnReadMessage[i].roomNo;
+
+		  		 $('.chatList_box').each(function(index) {
+			  	        let idValue = $(this).attr('id');
+			  	        //console.log(index);
+
+			  	  });
+		  		 
+		  		for(let i = 0; i < countRoomUnRead.length; i++) {
+		  			room = countRoomUnRead[i].roomNo;
 		  			let	countMessage = $("#" + room).find(".countMessage");
-		  			countMessage.text(countRoomUnReadMessage[i].unReadMessage);
+		  			countMessage.addClass("count");
+		  			countMessage.text(countRoomUnRead[i].unReadMessage);
 		  		}
+		  		
+		  	
+		  		 
+		  		 
+		  		
 		  	},
 		  	error : function() {
 		  		console.log("방 별 카톡 수 불러오기 실패.,.,,");
