@@ -382,7 +382,6 @@
 	<select id="memberSelectListCount" resultType="_int">
 		SELECT COUNT(*)
 		  FROM MEMBER
-		 WHERE STATUS = 'Y'
 	</select>
 	
 	<!-- 관리자페이지 회원 목록 조회 -->

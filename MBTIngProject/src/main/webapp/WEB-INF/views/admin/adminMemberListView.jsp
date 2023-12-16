@@ -114,17 +114,12 @@
     document.querySelectorAll('.detailView').forEach(title => {
         title.addEventListener('click', function() {
             const userNo = this.getAttribute('data-userNo');
-            window.location.href = 'adminMemberDetailView.adme?amno=' + userNo;
+            const cpage = ${requestScope.pi.currentPage};
+            window.location.href = 'http://localhost:8081/mbting/detail.adme?userNo=' + userNo + '&currentPage=' + cpage;
        
         });
     });
 
-            const cpage = ${requestScope.pi.currentPage};
-            
-            window.location.href = 'http://localhost:8081/mbting/detail.adme?userNo=' + userNo + '&currentPage=' + cpage;
-    
-        });
-       });
     
 	</script>
 
