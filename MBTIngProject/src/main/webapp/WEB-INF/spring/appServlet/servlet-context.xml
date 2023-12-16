@@ -31,7 +31,10 @@
 	<interceptors>
 		<interceptor>
 			<!-- 인터셉터를 거쳐갈 주소를 추가해주세요! -->
-			<mapping path=""/>
+			<mapping path="/myPage.me"/>
+			<mapping path="/myProfile.me"/>
+			<mapping path="/myReview.me"/>
+			<mapping path="/myPay.me"/>
 			
 			<beans:bean class="com.kh.mbting.common.interceptor.LoginInterceptor"
 						   id="loginInterceptor"></beans:bean>	
