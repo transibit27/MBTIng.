@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -395,11 +396,15 @@ public class AdminController {
          
          return mv;
      }
- 	
- 	
- 	
- 	
- 	
-    
-    
-	}
+ 
+ 	@GetMapping("/adminMemberDetailView.adme")
+ 	public String adminMemberDetailView(@RequestParam("amno") String userNo, Model model) {
+ 	    // 여기에 필요한 로직을 추가하세요 (예: 사용자 정보 가져오기 등)
+ 	    System.out.println("야 오냐 ㅋㅋ");
+ 	    // Model에 사용자 정보를 추가
+ 	    model.addAttribute("userNo", userNo);
+
+ 	    // adminMemberDetailView.jsp로 포워딩
+ 	    return "admin/adminMemberDetailView";
+ 	}
+}

@@ -41,6 +41,14 @@
             margin: auto;
             margin-top : 50px;
         }
+
+        #mamberPro {
+            width : 145px;
+            height : 145px;
+            border-radius: 100px;
+            border : 1px solid red;
+            margin: auto;
+        }
     </style>
 </head>
 <body>
@@ -78,7 +86,7 @@
         <th>상태</th>
         </thead>
 
-        <tbody id="searchResultBody" >
+        <tbody id="searchResultBody" onclick="memDetail();">
         <c:forEach var="a" varStatus="vs" items="${requestScope.list}">
             <!-- 상태토글 한 회원씩 클릭 가능하게 하는 script -->
             <script>
@@ -87,9 +95,9 @@
             </script>
 
             <tr>
-                <th ><input type="checkbox" class="checkbox"></th>
-                <th class="amno" >${a.userNo}</th>
-                <th class="detailView" data-userNo="${a.userNo}" >${a.userName}</th>
+                <th><input type="checkbox" class="checkbox"></th>
+                <th class="amno">${a.userNo}</th>
+                <th class="detailView" data-userNo="${a.userNo}">${a.userName}</th>
                 <th>${a.mbti}</th>
                 <th>${a.email}</th>
                 <th>${a.gender}</th>
@@ -103,8 +111,6 @@
                     </form>
                 </th>
             </tr>
-            <tr>
-            </tr>
         </c:forEach>
         </tbody>
     </table>
@@ -113,12 +119,10 @@
     // JavaScript로 클릭 이벤트 처리
     document.querySelectorAll('.detailView').forEach(title => {
         title.addEventListener('click', function() {
-            const userNo = this.getAttribute('data-userNo');
-            window.location.href = 'adminMemberDetailView.adme?amno=' + userNo;
-       
+            const boardNo = this.getAttribute('data-userNo');
+            window.location.href = 'detail.adme?amno=' + userNo;
         });
     });
-
 	</script>
 
     <div id="pagingArea">
@@ -227,7 +231,7 @@
     // 폼 전송 방지
     return false;
     }
-    </script>
+    </>
 </div>
 
 </body>
