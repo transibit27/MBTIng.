@@ -10,6 +10,9 @@
 <!-- 아이콘 추가 -->
 <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
+<!-- 글씨체 -->
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+
 </head>
 
 <style>
@@ -53,9 +56,8 @@
         width: 100px;
         font-size: 14px;
         color: black;
-        text-align: center;
         text-decoration: none;
-        padding: 3px 10px;
+        padding: 3px 0px;
         border: 0;
         border-radius: 5px;
         transition: color 0.3s ease; /* 텍스트 색상이 0.3초 동안 서서히 변하도록 설정 */
@@ -69,10 +71,9 @@
     }
 
     .notice-name {
-        background-color: #f2f2f2;
-        border-radius: 5px;
-        padding: 25px 40px;
-        margin-top: 20px;
+        border-top: 0.01rem solid #eee;
+        padding: 25px 0px;
+        font-family: 'NanumGothicBold';
     }
     
 </style>
@@ -81,10 +82,10 @@
 
 	<jsp:include page="../common/header.jsp" />
 	
-    <div class="noticeBanner">
+    <!-- <div class="noticeBanner">
         <h3>공지사항</h3>
         <img src="./resources/images/NoticeBanner.jpg" alt="">
-    </div>
+    </div> -->
 
 	<div class="notice-content">
 		
@@ -95,8 +96,10 @@
 			<table id="contentArea" align="center" class="notice-table">
 			<a class="notice-list" href="listMember.no" style="text-decoration: none;"><i class="fas fa-chevron-left"></i>&nbsp; 목록으로</a>
 				<tr>
-					<th style="font-size: 18px;"> &nbsp;&nbsp;${ requestScope.n.noticeTitle }</th>
-					<td colspan="3" style="float: right; font-size: 14px; margin-right: 10px;">${ requestScope.n.enrollDate }</td>
+					<th style="font-size: 26px; font-family: 'NanumGothicExtraBold'; line-height: 30px;">${ requestScope.n.noticeTitle }</th>
+					<td style="font-size: 14px; color: #666666; font-family: 'NanumGothicBold'; padding: 20px 0px; float: right;">${ requestScope.n.enrollDate }&nbsp;&nbsp;|&nbsp;&nbsp;관리자</td>
+				</tr>
+                <tr>
 				</tr>
 				<tr>
 					<td colspan="4">
