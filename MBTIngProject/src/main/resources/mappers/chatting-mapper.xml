@@ -227,4 +227,20 @@
 	  group by room_no
     </select>
     
+    <select id="getDeleteRoomNo" parameterType="hashmap" resultType="string">
+    	SELECT ROOM_NO 
+    	FROM CHATROOM 
+    	 WHERE ((USER_EMAIL = #{userEmail}) AND (MASTER_EMAIL = #{masterEmail}))
+		 OR ((USER_EMAIL = #{masterEmail}) AND (MASTER_EMAIL = #{userEmail}))
+    </select>
+    
+    <delete id="deleteMessage" parameterType="string">
+         DELETE CHATMESSAGE
+          WHERE ROOM_NO = #{roomNo}
+    </delete>
+    
+    <delete id="deleteChatRoom" parameterType="string">
+    	DELETE CHATROOM 
+    	WHERE ROOM_NO = #{roomNo}
+    </delete>
 </mapper>

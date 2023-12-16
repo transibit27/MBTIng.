@@ -236,11 +236,32 @@ public class ChattingController {
     @ResponseBody
     @RequestMapping(value="countRoom.all" , produces="application/json; charset=UTF-8")
     public String countRoomAll(String email) {
-    	
     	ArrayList<ChatMessage> list  = cService.countRoomAll(email);
-    	
     	return new Gson().toJson(list);
-    	
     }
     
+    @ResponseBody
+    @RequestMapping("delete.mes")
+    public String deleteMessage(String userEmail, String masterEmail) {
+    	System.out.println(userEmail + masterEmail);
+    	HashMap<String , String> map = new HashMap<String, String>();
+    	map.put("userEmail", userEmail);
+    	map.put("masterEmail", masterEmail);
+    	
+    	String roomNo = cService.getDeleteRoomNo(map);
+    	
+    	int result1 = cService.deleteMessage(roomNo);
+    	int result2 = 0;
+    	
+    	if(result1 > 0) {
+    		result2 = cService.deleteChatRoom(roomNo);
+    	}
+    	
+    	if(result2 > 0) {
+    		return "삭제 성공";
+    	}else {
+    		return "삭제 실패";
+    	}
+    }
+     
 }

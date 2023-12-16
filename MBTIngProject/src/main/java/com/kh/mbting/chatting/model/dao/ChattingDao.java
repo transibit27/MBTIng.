@@ -1,6 +1,7 @@
 package com.kh.mbting.chatting.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -94,7 +95,17 @@ public class ChattingDao {
     public ArrayList<ChatMessage> countRoomAll(String email) {
     	return (ArrayList)sqlSession.selectList("chatMapper.countRoomAll" , email);
     }
-}
+    
+    public String getDeleteRoomNo(HashMap<String, String> map) {
+    	return sqlSession.selectOne("chatMapper.getDeleteRoomNo" , map);
+    }
+    public int deleteMessage(String roomNo) {
+    	return sqlSession.delete("chatMapper.deleteMessage" , roomNo);
+    }
+    public int deleteChatRoom(String roomNo) {
+    	return sqlSession.delete("chatMapper.deleteChatRoom" , roomNo);
+    }
+} 
 
 
 

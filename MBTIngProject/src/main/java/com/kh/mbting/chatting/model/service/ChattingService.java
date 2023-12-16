@@ -1,6 +1,7 @@
 package com.kh.mbting.chatting.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.mbting.chatting.model.vo.ChatMessage;
@@ -147,5 +148,24 @@ public interface ChattingService {
      */
     ArrayList<ChatMessage> countRoomAll(String email);
     
+    /***
+     * 삭제할 메시지 방 가져오기
+     * @param map
+     * @return
+     */
+    String getDeleteRoomNo(HashMap<String, String> map);
     
+    /***
+     * 방 나가면 메시지 삭제하기
+     * @param map
+     * @return
+     */
+    int deleteMessage(String roomNo); 
+    
+    /***
+     * 방 나가면 채팅방도 삭제하기
+     * @param roomNo
+     * @return
+     */
+    int deleteChatRoom(String roomNo);
 }

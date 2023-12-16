@@ -1,6 +1,7 @@
 package com.kh.mbting.chatting.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -118,4 +119,22 @@ public class ChattingServiceImpl implements ChattingService{
 	public ArrayList<ChatMessage> countRoomAll(String email) {
 		return chattingDao.countRoomAll(email);
 	}
+
+	@Override
+	public String getDeleteRoomNo(HashMap<String, String> map) {
+		return chattingDao.getDeleteRoomNo(map);
+	}
+	
+	@Override
+	public int deleteMessage(String roomNo) {
+		return chattingDao.deleteMessage(roomNo);
+	}
+
+	@Override
+	public int deleteChatRoom(String roomNo) {
+		return chattingDao.deleteChatRoom(roomNo);
+	}
+	
+	
+	
 }

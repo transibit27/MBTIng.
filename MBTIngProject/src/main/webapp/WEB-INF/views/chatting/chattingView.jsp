@@ -428,7 +428,7 @@ body {
 
 
 	<div class="tooltip-container">
-	  <span class="tooltip">300</span>
+	  <span class="tooltip"></span>
 	  <span class="text">💗</span>
 	</div>
 	
@@ -498,9 +498,10 @@ body {
 
             <div id="profileDiv" class="hidden">
                
-                <table > 
+                <table> 
                    <tr>
                        <td colspan="3" style="height:250px; padding-top: 70px; "><img id="masterImg"> </td>
+                   		<input type="hidden" id="deleteMasterEmail" value="">
                    </tr>
                    <tr>
                        <td colspan="3" style="height: 10px; "><p style="font-size: 60px; margin : 0px;" id="masterName"></p></td>
@@ -531,8 +532,8 @@ body {
                    </tr>
                    <tr>
                        <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
-                       <td><div><button id="submitButton" onclick="">신고하기</button></div></td>
-                       <td> <div><button id="submitButton" onclick="Home()">나가기</button></div></td>
+                       <td><div><button id="submitButton" onclick="deleteMessage(this);">톡방 나가기</button></div></td>
+                       <td><div><button id="submitButton" onclick="Home();">홈으로</button></div></td>
                    </tr>
                 </table>
            </div>
@@ -546,8 +547,7 @@ body {
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 95%; margin-bottom : 5px;>" onclick="sendMessage();" >전송
-</button></td>
+                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 95%; margin-bottom : 5px;>" onclick="sendMessage();" >전송</button></td>
                 </tr>
             </table>
         </div>
@@ -555,10 +555,15 @@ body {
     
         
   <script>
+
+  
     $(function() {
-       getRoomList();   
+       getRoomList(); 
+       countRoomAll();
+       countAll();
     });
     
+  
    function getRoomList() {
          $.ajax({
              url:"chatRoomList.do",
@@ -604,10 +609,7 @@ body {
 
                     // 그걸 chatWrap에 붙여주기
                     $chatWrap.append($div);
-
                 }
-                
-                
              }
         });
     
@@ -770,6 +772,7 @@ body {
                                  $("#masterImg").attr("src" , masterPic);
                                  $("#mbti").text(master.mbti);
                                  $("#intro").text(master.introduce);
+                                 $("#deleteMasterEmail").val(master.email);
                             },
                             error : function() {
                                console.log("클릭한 방의 master 정보 얻어오기 실패");
@@ -791,7 +794,7 @@ body {
                  "messageContent" : receive[2],
                  "sendTime" 	  : receive[3],
                  "sessionCount"	  : receive[4]
-                  };
+              };
 					
    
               if(data.email != "${ loginUser.email }"){
@@ -930,16 +933,6 @@ body {
            // 클릭한 div 정보 저장
            clickedDiv = $(this);
        });
-
-       // 2초에 한번씩 채팅 목록 불러오기
-       setInterval(function(){
-           $(".chatList").html("");
-           // 방 목록 불러오기
-           getRoomList(); 
-           countAll();
-           countRoomAll();
-       }, 1000);
-       
     }
 
    function countAll() {
@@ -965,8 +958,6 @@ body {
 
 		  		 $('.chatList_box').each(function(index) {
 			  	        let idValue = $(this).attr('id');
-			  	        //console.log(index);
-
 			  	  });
 		  		 
 		  		for(let i = 0; i < countRoomUnRead.length; i++) {
@@ -975,11 +966,7 @@ body {
 		  			countMessage.addClass("count");
 		  			countMessage.text(countRoomUnRead[i].unReadMessage);
 		  		}
-		  		
-		  	
-		  		 
-		  		 
-		  		
+
 		  	},
 		  	error : function() {
 		  		console.log("방 별 카톡 수 불러오기 실패.,.,,");
@@ -989,19 +976,54 @@ body {
    </script>
    
    <script>
-   
+   let elementId;
    $(".chatList").on("click", ".chatList_box", function() {
       
       $(".chatList_box").not(this).css("background-color", "white");
-      
-       $(this).css("background-color", "pink");
+      $(this).css("background-color", "pink");
+        
+      elementId = $(this).attr("id");
+      //alert(elementId);
    });
-    -->
+
+	 // 2초에 한번씩 채팅 목록 불러오기
+	 setInterval(function(){
+	      $(".chatList").html("");
+	      // 방 목록 불러오기
+	      countRoomAll();
+	      getRoomList(); 
+	      countAll();
+	      $("#" + elementId).css("background-color", "pink");
+	 }, 1000);
+	  
+	 
    <!-- 나가기 버튼 홈화면으로 돌려줌-->
    function Home() {
        location.href="http://localhost:8081/mbting";
    };
       
+   function deleteMessage(button) {
+	   if(confirm("채팅방 메시지가 모두 사라집니다. 정말로 나가시겠습니까?")){  
+		 
+		 var masterEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
+		 var userEmail = "${sessionScope.loginMember.email}";
+		 
+		 $.ajax({
+			url : "delete.mes",
+			data : {"masterEmail" : masterEmail , "userEmail" : userEmail},
+			success : function() {
+				location.href="http://localhost:8081/mbting/convert.ch"; 
+			},
+			error : function() {
+				console.log("메시지 삭제 실패함 ㅠ ");
+			}
+			
+		 });
+		 
+		}else{
+		    location.href="http://localhost:8081/mbting/convert.ch"; 
+		}
+   };
    </script>
 </body>
 </html>
