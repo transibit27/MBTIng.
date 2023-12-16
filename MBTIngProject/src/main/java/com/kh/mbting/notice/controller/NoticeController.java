@@ -26,7 +26,19 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
+//	이용약관 클릭 시 해당 화면으로 넘어가기 위한 메소드
+	@RequestMapping("terms1.te")
+	public String terms1() {
+		
+		return "common/terms1";
+	}
 	
+//	개인정보처리방침 클릭 시 해당 화면으로 넘어가기 위한 메소드
+	@RequestMapping("terms2.te")
+	public String terms2() {
+		
+		return "common/terms2";
+	}
 
 	@GetMapping("list.no")
 	public ModelAndView selectList(

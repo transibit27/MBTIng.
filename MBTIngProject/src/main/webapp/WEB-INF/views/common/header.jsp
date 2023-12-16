@@ -89,30 +89,25 @@
         }
 
         #header_1_left {
-            width: 20%;
             position: relative;
+            text-align: center;
+        }
+
+        #header_1_left img {
+            height: 80px;
+            margin: auto;
         }
 
         #header_1_center {
-            width: 57%;
+            width: 70%;
         }
 
         #header_1_right {
-            width: 23%;
+            width: 30%;
             padding-top: 4px;
             text-align: center;
             font-size: 12px;
             font-family: 'NanumSquare';
-        }
-
-        #header_1_left img {
-            height: 100px;
-            position: absolute;
-            margin: auto;
-            top: 30px;
-            bottom: 0;
-            right: 0;
-            left: 0;
         }
 
         #header_1_right>a {
@@ -178,11 +173,6 @@
 			height : 30px;
 		}
 		
-		#loggo {
-            width : 150px;
-            height : 300px;
-		}
-		
 		#profile {
             width : 50px;
             height : 50px;
@@ -209,8 +199,8 @@
             text-align: center;
         }
         .modal-icon img{
-            height: 150px;
-            width: 100%;
+            height: 110px;
+            margin-bottom: 20px;
         }
 
         /* 모달창 내 input(이메일/비번) 입력창 스타일*/
@@ -324,12 +314,13 @@
 	</c:if>
 
     <div id="header">
+        <div id="header_1_left" style="height: 100%; width: 30%; display: flex; align-items: center; justify-content: center;">
+            <a href="http://localhost:8081/mbting/">
+               <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
+              </a>
+        </div>
         <div id="header_1">
-            <div id="header_1_left">
-            	<a href="http://localhost:8081/mbting/">
-	               <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
-              	</a>
-            </div>
+            
             <div id="header_1_center">	 
 	             <ul>
 	                <li><a href="http://localhost:8081/mbting/">HOME</a></li>
