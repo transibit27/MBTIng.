@@ -142,14 +142,14 @@
                 </div>
            
                 <div id="hidden" style="display: none;">
-                <form>
+                
                     <div class="find-pwd-check">
                         <div class="find-pwd-content-content"><b>인증번호 입력</b></div>
-                        <input type="password"  name="email" placeholder="인증번호">
+                        <input type="password" id="emailCode" name="emailCode" placeholder="인증번호">
                         
-                        <button type="submit">발송</button>
+                        <button type="button" onclick="checkCertNo()">확인</button>
                     </div>
-                </form>
+                
                 </div>
                 
                 <div class="find-pwd-content-content" style="margin-bottom: 30px;">
@@ -158,11 +158,11 @@
                 </div>
             </div>
             
+	        <div style="margin-top: 40px;">
+	            <a href="http://localhost:8081/mbting/">홈으로 돌아가기</a>
+	        </div>
         </div>  
             
-        <div style="margin-top: 40px;">
-            <a href="http://localhost:8081/mbting/">홈으로 돌아가기</a>
-        </div>
 
     </div>
 
@@ -193,6 +193,27 @@
     
     
             })//ajax 끝
+        }
+        
+        // 인증번호 확인용 ajax
+        function checkCertNo(){
+        	
+        	$.ajax({
+        		url:"checkCertNo.me",
+        		type:"post",
+        		data:{
+        			email:$("#email").val(),
+        			emailCode:$("#emailCode").val()},
+        		success:function(result){
+        			
+        			alert(result);
+        			console.log("통신성공")
+        		},
+        		error:function(result){
+        			console.log("인증번호 확인용 ajax 통신 실패")
+        		}
+        		
+        	})
         }
 
     </script>

@@ -77,6 +77,15 @@ public interface MemberService {
 
 	// 인증 메일 발송용 method
 	int getCertNo(Verification v);
+	
+	// 인증 코드 확인용 method
+	Verification checkCertNo(Verification v);
+
+	// 비밀번호 초기화용 method
+	int newPassWord(Member m);
+
+	// 인증 메일 삭제용 method
+	int deleteCertNo(Member m);
 
 
 

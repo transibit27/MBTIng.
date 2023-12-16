@@ -120,6 +120,21 @@ public class MemberDao {
 	public int getCertNo(SqlSessionTemplate sqlSession, Verification v) {
 		return sqlSession.insert("memberMapper.getCertNo", v);
 	}
+
+	// 인증메일 확인 용 메소드
+	public Verification checkCertNo(SqlSessionTemplate sqlSession, Verification v) {
+		return sqlSession.selectOne("memberMapper.checkCertNo", v);
+	}
+	
+	// 비밀번호 초기화용 메소드
+	public int newPassWord(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.newPassWord", m);
+	}
+	
+	// 인증메일 삭제용 메소드
+	public int deleteCertNo(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.delete("memberMapper.deleteCertNo", m);
+	}
 	
 	
 

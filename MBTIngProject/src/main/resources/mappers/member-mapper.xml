@@ -459,12 +459,14 @@
 		FROM MEMBER
 	</select>
 	
+	<!-- 카카오 로그인 체크용 쿼리문 -->
 	<select id="kakaoLoginCheck" parameterType="string" resultMap="memberResultSet">
 		SELECT *
 		  FROM MEMBER
 		 WHERE EMAIL = #{email}
 	</select>
 	
+	<!-- 인증 메일 저장용 쿼리문 -->
 	<insert id="getCertNo" parameterType="verification">
 		INSERT INTO VERIFICATION (EMAIL, EMAIL_CODE)
 	         VALUES (#{email},
@@ -477,4 +479,24 @@
 		WHERE USER_NO = #{userNo}
 	</select>
 	
+	<!-- 인증 코드 확인용 쿼리문 -->
+	<select id="checkCertNo" parameterType="verification" resultMap="verificationResultSet">
+		SELECT *
+		  FROM VERIFICATION
+		 WHERE EMAIL_CODE = #{emailCode}
+	
+	</select>
+	
+	<!-- 임시 비밀번호 업데이트용 쿼리문 -->
+	<update id="newPassWord" parameterType="member">
+		UPDATE MEMBER
+		   SET USER_PWD = #{userPwd}
+		 WHERE EMAIL = #{email}
+	</update>
+	
+	<!-- 인증메일 삭제용 쿼리문 -->
+	<delete id="deleteCertNo" parameterType="member">
+		DELETE FROM VERIFICATION
+		 WHERE EMAIL = #{email}
+	</delete>
 </mapper>
