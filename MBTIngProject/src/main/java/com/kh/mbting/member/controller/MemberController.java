@@ -83,8 +83,8 @@ public class MemberController {
 			return "redirect:/";
 			
 		} else {
-			 model.addAttribute("errorMsg" , "로그인에 실패했습니다.");
-			 return "common/errorPage";
+			 session.setAttribute("alertMsg" , "없는 메일이거나 비밀번호가 일치하지 않습니다.");
+			 return "redirect:/";
 		}
 	}
 	
