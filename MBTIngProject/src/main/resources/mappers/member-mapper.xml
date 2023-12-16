@@ -393,6 +393,7 @@
 		     , EMAIL
 		     , GENDER
 		     , STATUS
+		     , ROWNUM AS rnum
 		  FROM MEMBER
 		 ORDER BY USER_NO
 	</select>
@@ -472,6 +473,12 @@
            	 		 #{emailCode})	
 	</insert>
 	
+	<select id="adminMemberDetailView" parameterType="string" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE USER_NO = #{userNo}
+	</select>
+	
 	<!-- 인증 코드 확인용 쿼리문 -->
 	<select id="checkCertNo" parameterType="verification" resultMap="verificationResultSet">
 		SELECT *
@@ -486,11 +493,10 @@
 		   SET USER_PWD = #{userPwd}
 		 WHERE EMAIL = #{email}
 	</update>
+	
 	<!-- 인증메일 삭제용 쿼리문 -->
 	<delete id="deleteCertNo" parameterType="member">
 		DELETE FROM VERIFICATION
 		 WHERE EMAIL = #{email}
-	
 	</delete>
-	
 </mapper>

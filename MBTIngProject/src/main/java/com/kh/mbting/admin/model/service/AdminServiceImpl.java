@@ -253,5 +253,10 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminDao.paySearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
 	}
+
+	@Override
+	public Member adminMemberDetailView(String userNo) {
+		return adminDao.adminMemberDetailView(sqlSession, userNo );
+	}
 	
 }

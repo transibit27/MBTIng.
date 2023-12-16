@@ -119,6 +119,13 @@
         });
     });
 
+            const cpage = ${requestScope.pi.currentPage};
+            
+            window.location.href = 'http://localhost:8081/mbting/detail.adme?userNo=' + userNo + '&currentPage=' + cpage;
+    
+        });
+       });
+    
 	</script>
 
     <div id="pagingArea">

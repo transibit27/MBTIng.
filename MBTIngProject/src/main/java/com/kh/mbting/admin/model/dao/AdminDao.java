@@ -274,8 +274,9 @@ public class AdminDao {
 	    return sqlSession.selectList("kakaoPayMapper.paySearchList", parameters);
 	}
 	
-	
-	
+	public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
+	}
 	
 	
 }
