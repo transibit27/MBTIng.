@@ -206,15 +206,25 @@
     </update>
     
     <select id="countAll" resultType="_int">
-    	select count(*)
-		  from chatmessage
-		 where un_read_message = 1 and user_email != #{email} 
+    	select count(un_read_message)
+		 from chatmessage 
+		where room_no IN (
+        	select room_no 
+        	  from chatroom 
+       		 where user_email = #{email} or master_email = #{email}
+        	)  and un_read_message = 1 and user_email != #{email}
     </select>
     
-    <select id="countRoomAll" resultType="_int">
-    	select count(*)
-		  from chatmessage
-		 where un_read_message = 1 and user_email != #{email} 
+    <select id="countRoomAll" resultMap="chatMessageResultSet" parameterType="string" >
+    	select room_no , count(un_read_message) as un_read_message
+	 	  from chatmessage 
+		 where room_no in (
+        	select room_no 
+        	  from chatroom 
+        	 where user_email = #{email} or master_email = #{email}
+        ) and (un_read_message = 1) 
+          and (user_email != #{email})
+	  group by room_no
     </select>
     
 </mapper>

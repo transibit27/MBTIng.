@@ -145,7 +145,7 @@ public interface ChattingService {
      * @param email
      * @return
      */
-    int countRoomAll(String email);
+    ArrayList<ChatMessage> countRoomAll(String email);
     
     
 }

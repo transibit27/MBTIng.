@@ -234,12 +234,13 @@ public class ChattingController {
     }
     
     @ResponseBody
-    @RequestMapping("countRoom.all")
-    public int countRoomAll(String email) {
+    @RequestMapping(value="countRoom.all" , produces="application/json; charset=UTF-8")
+    public String countRoomAll(String email) {
     	
-    	int countRoomAll = cService.countRoomAll(email);
+    	ArrayList<ChatMessage> list  = cService.countRoomAll(email);
     	
-    	return countRoomAll;
+    	return new Gson().toJson(list);
+    	
     }
     
 }

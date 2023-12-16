@@ -115,7 +115,7 @@ public class ChattingServiceImpl implements ChattingService{
 	}
 
 	@Override
-	public int countRoomAll(String email) {
+	public ArrayList<ChatMessage> countRoomAll(String email) {
 		return chattingDao.countRoomAll(email);
 	}
 }

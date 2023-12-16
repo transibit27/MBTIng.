@@ -952,7 +952,7 @@ body {
 		  		countAll.innerText = e;
 		  	},
 		  	error : function() {
-		  		alert("ㅋㅋ;;전체 카톡 수 불러오기 실패 ㅎ.,.,,");
+		  		console.log("전체 카톡 수 불러오기 실패 ㅎ.,.,,");
 		  	}
 	   });
    }
@@ -961,12 +961,17 @@ body {
 	   $.ajax({
 		  	url  : "countRoom.all",
 		  	data : {email : "${sessionScope.loginMember.email}"},
-		  	success : function(e) {
+		  	success : function(countRoomUnReadMessage) {
 		  		let countRoomAll = document.querySelector(".countMessage");
-		  		countRoomAll.innerText = e;
+		  		
+		  		for(let i = 0; i < countRoomUnReadMessage.length; i++) {
+		  			const room = countRoomUnReadMessage[i].roomNo;
+		  			let	countMessage = $("#" + room).find(".countMessage");
+		  			countMessage.text(countRoomUnReadMessage[i].unReadMessage);
+		  		}
 		  	},
 		  	error : function() {
-		  		alert("ㅋㅋ;;전체 카톡 수 불러오기 실패 ㅎ.,.,,");
+		  		console.log("방 별 카톡 수 불러오기 실패.,.,,");
 		  	}
 	   });
    }
