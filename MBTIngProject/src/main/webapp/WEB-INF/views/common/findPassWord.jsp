@@ -114,7 +114,24 @@
         cursor: pointer;
         background-color: plum;
     }
-    
+
+    #timer-box{
+        display: flex;
+        flex-direction: row;
+    }
+    #emailCode{
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        width: 205px;
+        background-color: aliceblue;
+    }
+    #timer{
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        width: 35px;
+        background-color: aliceblue;
+        font-weight: bold;
+    }
 
 </style>
 <body>
@@ -141,13 +158,15 @@
                     <button type="button" onclick="getCertNo()">발송</button>
                 </div>
            
-                <div id="hidden" style="display: none;">
+                <div id="hidden" style="">
                 
                     <div class="find-pwd-check">
                         <div class="find-pwd-content-content"><b>인증번호 입력</b></div>
-                        <input type="password" id="emailCode" name="emailCode" placeholder="인증번호">
-                        
-                        <button type="button" onclick="checkCertNo()">확인</button>
+                            <div id="timer-box">
+                                <input type="password" id="emailCode" name="emailCode" placeholder="인증번호">
+                                <input type="text" id="timer" readonly>
+                                <button type="button" onclick="checkCertNo()">확인</button>  
+                            </div>
                     </div>
                 
                 </div>
@@ -167,12 +186,42 @@
     </div>
 
     <script>
-        $(function(){
+        const Timer=document.getElementById('timer'); //스코어 기록창-분
+        var PlAYTIME = [];
         
-            console.log($("#email").val())
+        function TIMER(){
+            
+            let time= 300000;
+            let min=5;
+            let sec=60;
 
+            Timer.value=min+":"+'00'; 
 
-        });
+            PlAYTIME.push(setInterval(function(){
+                time=time-1000; //1초씩 줄어듦
+                min=time/(60*1000); //초를 분으로 나눠준다.
+
+            if(sec>0){ //sec=60 에서 1씩 빼서 출력해준다.
+                    sec=sec-1;
+                    Timer.value=Math.floor(min)+':'+sec; //실수로 계산되기 때문에 소숫점 아래를 버리고 출력해준다.
+                
+                }
+                if(sec===0){
+                    // 0에서 -1을 하면 -59가 출력된다.
+                    // 그래서 0이 되면 바로 sec을 60으로 돌려주고 value에는 0을 출력하도록 해준다.
+                    sec=60;
+                    Timer.value=Math.floor(min)+':'+'00'
+                }     
+        
+            },1000)); //1초마다 
+        }
+
+        // 시간 초기화용 펑션
+        function stopAllIntervals() {
+        for (var i = 0; i < PlAYTIME.length; i++) {
+            clearInterval(PlAYTIME[i]);
+        }
+}
 
         // 인증번호 발급용 ajax
         function getCertNo(){
@@ -185,6 +234,12 @@
 
                     alert(result);
                     $("#hidden").show();
+                    
+                    stopAllIntervals();
+                    TIMER();
+                    setTimeout(function(){
+                        clearInterval(PlAYTIME[0]);
+                    },300000);
 
                 },
                 error:function(result){

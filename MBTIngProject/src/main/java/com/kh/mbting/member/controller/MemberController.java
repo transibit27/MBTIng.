@@ -523,14 +523,15 @@ public class MemberController {
 		= new MimeMessageHelper(message, true, "UTF-8");
 		
 		String to = m.getEmail();
-		
+		String mimeMessage = "Mbting <br> 인증번호 : " + emailCode;
+				
 		if( result > 0 ) {	// 인증번호 발송에 성공한 경우
 			
 			mimeMessageHelper.setTo(to);
 			
 			mimeMessageHelper.setSubject("MBTIng 비밀번호 초기화 인증메일입니다.");
 			
-			mimeMessageHelper.setText("이야야야"+emailCode, true);
+			mimeMessageHelper.setText(mimeMessage, true);
 			
 			mailSender.send(message);
 			
@@ -578,12 +579,13 @@ public class MemberController {
 				simpleDate.format(now);
 				System.out.println(now);
 				
+				System.out.println(!now.after(codeDate));
+				System.out.println(now.after(codeDate));
+				System.out.println(codeDate.after(now));
+				
 				
 				// 현재 시간이 5분이 지난 인증번호 생성시간 보다 크지 않을 동안 => 아직 인증번호(현재시간+5분)의 유효시간이 지나지 않았음
 				if(!now.after(codeDate)) {
-					
-					resultMsg = "인증번호의  유효 시간이 만료되었습니다. 새로 인증번호를 요청해주세요.";
-				} else {
 					
 					int ranNum = (int)(Math.random() * 90000 + 10000);
 					m.setEmail(v.getEmail());
@@ -595,6 +597,9 @@ public class MemberController {
 					int result = memberService.newPassWord(m);
 					
 					resultMsg = "인증이 완료되었습니다. 초기화된 비밀번호는 " +newPwd+ " 입니다.";
+				} else {
+					
+					resultMsg = "인증번호의  유효 시간이 만료되었습니다. 새로 인증번호를 요청해주세요.";
 				} 
 				
 				// 불필요해진 인증 번호 삭제하기
