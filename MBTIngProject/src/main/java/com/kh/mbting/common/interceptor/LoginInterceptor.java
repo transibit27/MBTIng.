@@ -15,7 +15,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("loginUser") != null) {
+		if(session.getAttribute("loginMember") != null) {
 			
 			return true;
 		} else {

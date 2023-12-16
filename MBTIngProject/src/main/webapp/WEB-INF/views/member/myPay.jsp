@@ -521,6 +521,10 @@
     <div class="paging-area">
 	 	<button type="button" onclick="moreList()"><div style="border: 1px solid white"></div></button>
 	</div>
+	
+    <div>
+		<jsp:include page="../common/footer.jsp"></jsp:include>
+	</div>
 
 </body>
 </html>

@@ -859,8 +859,8 @@ MBTIng 덕분에 제 운명을 만났어요....!
  	})
  	
   </script>
-<!-- swipe 영역 -->
-		<div id="content_4">
+	<!-- swipe 영역 -->
+	<div id="content_4">
         <!-- Slider main container -->
         <div class="swiper">
             <!-- Additional required wrapper -->
@@ -882,7 +882,9 @@ MBTIng 덕분에 제 운명을 만났어요....!
             <!-- 스크롤바 -->
             <div class="swiper-scrollbar"></div>
         </div>
-   		</div> <!-- content_4 닫는 div -->
+	</div> <!-- content_4 닫는 div -->
+   		
+
 
 			    <script>
 			        // 슬라이더 동작 정의
@@ -908,11 +910,11 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 		(function(){
 		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-		s1.async=true;
-		s1.src='https://embed.tawk.to/65475643f2439e1631ebe2d5/1hefahucp';
-		s1.charset='UTF-8';
-		s1.setAttribute('crossorigin','*');
-		s0.parentNode.insertBefore(s1,s0);
+			s1.async=true;
+			s1.src='https://embed.tawk.to/65475643f2439e1631ebe2d5/1hefahucp';
+			s1.charset='UTF-8';
+			s1.setAttribute('crossorigin','*');
+			s0.parentNode.insertBefore(s1,s0);
 		})();
 		</script>
 
