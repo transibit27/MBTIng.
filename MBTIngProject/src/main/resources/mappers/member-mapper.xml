@@ -100,11 +100,20 @@
 		            GROUP BY RECEIVER_NO
 		        ) C ON M.user_no = C.RECEIVER_NO
 		        WHERE STATUS = 'Y'  
-		          AND MBTI is not null
+		          AND MBTI IS NOT NULL
 		    ) 
 		    WHERE rnk BETWEEN 1 AND 4
 		) A
-		WHERE ROWNUM BETWEEN 1 AND 4
+		<choose>
+			<when test="email != null">
+				WHERE ROWNUM BETWEEN 1 AND 4
+				  AND EMAIL NOT IN (SELECT BLOCKMEMEMAIL FROM BLOCKMEMBER WHERE BLOCKPROEMAIL = #{email})
+			</when>
+			<otherwise>
+				WHERE ROWNUM BETWEEN 1 AND 4
+			</otherwise>
+		</choose>
+		
  	</select>
 	
  	

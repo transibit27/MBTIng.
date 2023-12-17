@@ -58,9 +58,19 @@ public class MemberController {
 	//0. 전체 회원을 불러오기 위한 method 
 	@ResponseBody
 	@PostMapping("list.mem")
-	public String selecToptMemberList() {
+	public String selecToptMemberList(HttpSession session) {
+		ArrayList<Member> list = new ArrayList<>();
 		
-		ArrayList<Member> list = memberService.selecToptMemberList();
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		
+		if(loginMember != null) {
+			String email = loginMember.getEmail();
+			list = memberService.selecToptMemberList(email);
+		}else {
+			list = memberService.selecToptMemberList();
+		}
+		
+		
 		
 		return new Gson().toJson(list);
 	}

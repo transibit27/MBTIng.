@@ -20,7 +20,10 @@ import com.kh.mbting.pay.vo.KakaoPay;
 @Repository
 public class MemberDao {
 
-	public ArrayList<Member> selectTopMemberList(SqlSession sqlSession) {
+	public ArrayList<Member> selectTopMemberList(SqlSession sqlSession , String email) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectTopMemberList" , email);
+	}
+	public ArrayList<Member> selectTopMemberList(SqlSession sqlSession ) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectTopMemberList");
 	}
 	
