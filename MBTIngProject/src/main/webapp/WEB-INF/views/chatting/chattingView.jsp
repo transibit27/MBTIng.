@@ -805,8 +805,8 @@ body {
                   });
             	  
               }else {
-            
-            	  chattingGuide(receive[1] , receive[2]);
+            	  let ce = "${sessionScope.loginMember.email}";
+            	  chattingGuide(receive[1] , receive[2] , ce);
             
               const data = {
                            "name" : receive[0],
@@ -1049,11 +1049,12 @@ body {
 		}
    };
    
- 	function chattingGuide(email, msg) {
+ 	function chattingGuide(em, msg, ckEmail) {
+
  		let divId = "hiddenDiv";
- 		let ckEmail = "{sessionScope.loginMember.email}"
  		
- 		if(ckEmail != email && msg.includes("안녕하세요")) {
+ 		//console.log(ckEmail);
+ 		if(ckEmail == em && msg.includes("안녕하세요")) {
  			 $("#" + divId).show();
  		     $("#" + divId).find("p").text("첫 인사를 하고 계시는군요 !! 보통 첫 인사 후에는 상대방 프로필의 취미에 대해서 공감을 하거나 프로필 사진에 대한 칭찬으로 시작하는 게 좋아요! ex) 클라이밍 좋아하세요? tip!! 질문을 너무 자주하거나 질문 후에 설명이 길면 안좋아요 ex) 클라이밍 좋아하세요? 저도 좋아하는데 저는 ~~ ");	
  		}
