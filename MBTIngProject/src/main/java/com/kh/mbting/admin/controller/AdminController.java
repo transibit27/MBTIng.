@@ -309,6 +309,16 @@ public class AdminController {
  		return new Gson().toJson(m);
  	}
 
+ 	// 상세조회 화면 포워딩
+  	@RequestMapping("detail.adme") 
+  	public String detailMember(@RequestParam("userNo") String userNo ,  @RequestParam("currentPage") String currentPage ,Model model) { 		
+  		//System.out.println("userNo : 야 오냐 ! " + userNo);
+  		//System.out.println("화긴확인" + currentPage);
+  		model.addAttribute("userNo", userNo);
+  		model.addAttribute("currentPage", currentPage);
+  		
+  		return "admin/detailViewMember";	
+  	}
 	
     /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
     
@@ -435,17 +445,15 @@ public class AdminController {
          return mv;
      }
  	
- 	// 상세조회 화면 포워딩
- 	@RequestMapping("detail.adme") 
- 	public String detailMember(@RequestParam("userNo") String userNo ,  @RequestParam("currentPage") String currentPage ,Model model) { 		
- 		//System.out.println("userNo : 야 오냐 ! " + userNo);
- 		//System.out.println("화긴확인" + currentPage);
- 		model.addAttribute("userNo", userNo);
- 		model.addAttribute("currentPage", currentPage);
- 		
- 		return "admin/detailViewMember";	
- 	}
  	
+ 	
+	/* 1:1문의 관리!!!!!!!!!!!!!!! */
+ 	// 1:1 문의 페이지 포워딩
+ 	@RequestMapping("list.adse")
+ 	public String adminServiceSelectList() {
+ 		
+ 		return "admin/adminServiceListView";
+ 	}
  	
  	
 }
