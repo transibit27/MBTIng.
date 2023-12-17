@@ -21,6 +21,7 @@
 	margin: auto;
 	border-radius : 20px;
 	background-color: pink;
+	height : 280px;
 }
 
 .content_2 {
@@ -286,8 +287,8 @@
         
          <input type="hidden" value="N"  name="gender" id="gender">
         <div id="genderCheck">
-        	<button id="Men"   class="genderButton " type="button" onclick="Gender(1);">남</button>
-        	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);">여</button>
+        	<button id="Men"   class="genderButton " type="button" onclick="Gender(1);" >남</button>
+        	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);" >여</button>
         </div>	
         	<table id="searchTable">
         		<tr>
