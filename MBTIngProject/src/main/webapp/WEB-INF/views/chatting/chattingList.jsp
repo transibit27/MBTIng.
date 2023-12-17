@@ -16,12 +16,11 @@
 }
 
 .content_1  {
-	border-bottom : 5px solid rgb(174, 174, 246);
+	border-bottom : 5px solid pink;
 	width : 100%;
 	margin: auto;
 	border-radius : 20px;
-	background-color: #f5f9ff;
-	background-image: url("${pageContext.request.contextPath}/resources/images/chatListMain.jpg");
+	background-color: pink;
 }
 
 .content_2 {
@@ -299,7 +298,7 @@
         		</tr>
         		<tr>
         			<td>
-	        			<select name="height" class="select">
+	        			<select name="height" class="select" onchange="searchPerson();">
 	        				   <option value="없음">없음</option>
 			    			   <option value="000160">160이하</option>
 			    			   <option value="160165">160~165</option>
@@ -310,7 +309,7 @@
 	    				</select>
         			</td>
         			<td>
-        				<select name="address" class="select">
+        				<select name="address" class="select" onchange="searchPerson();">
         						<option value="없음">없음</option>
 		    			   		<option value="서울특별시">서울특별시</option>
 						   		<option value="부산광역시">부산광역시</option>
@@ -332,7 +331,7 @@
     					</select>
         			</td>
         			<td>
-        				<select name="age" class="select">
+        				<select name="age" class="select" onchange="searchPerson();">
         					   <option value="없음">없음</option>
 			    			   <option value="2025">20~25</option>
 			    			   <option value="2530">25~30</option>
@@ -344,7 +343,7 @@
     					</select>
         			</td>
         			<td>
-        				<select name="mbti" class="select">
+        				<select name="mbti" class="select" onchange="searchPerson();">
         					   <option value="없음">없음</option>
 			    			   <option value="INTP">INTP</option>
 			    			   <option value="INTJ">INTJ</option>
@@ -366,9 +365,7 @@
         			</td>
         		</tr>
     		</table>
-    		<div id="searchButton"><button type="submit" onclick="searchPerson();"> 검색 </button></div>
 	</div>
-
 	<div class="content_2">
 		<div class="user__container">
         	
