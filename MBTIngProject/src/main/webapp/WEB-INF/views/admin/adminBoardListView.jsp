@@ -7,31 +7,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
- #boardList{
-    width: 1000px;
-    margin-left: 300px;
-    text-align: center;
- }
- #searchForm{
-    width: 450px;
-    margin: auto;
-    margin-top: 100px;
-    margin-bottom: 70px;
- }
-.checkbox{
-    margin: auto;
-    display: block;
-}
-#boardList>tbody>tr:hover {cursor:pointer;}
-#boardList {text-align:center;}
-#pagingArea {width:fit-content; margin:auto;}
+	#boardList {
+	text-align:center;
+	font-size: 15px;  
+	width: 850px;
+	margin-top: 50px;
+	}
+	#boardList>tbody>tr:hover {cursor:pointer;}
+	
+	#pagingArea {width:fit-content; margin:auto; margin-top : 50px;}
+	
+	#searchForm {
+	    width:500px;
+	    margin:auto;
+	}
+	#searchForm>* {
+	    margin:5px;
+	}
+	.select {width:20%;}
+	.text {width:53%;}
+	.searchBtn {width:20%;}
+	
+	.content {
+	    margin-left: 250px;
+	    margin-top: 100px;
+	}
+	.btn-primary, .btn-danger {
+	    width: 50px;
+	    height : 25px;
+	    margin: auto;
+	    font-size: 13px !important;
+	}
 
-.enrollSize { width : 150px; }
-#checkSize { width : 30px; }
-#numSize { width : 90px; }
-#viewSize { width : 90px; }
-#writerSize { width : 120px; }
-#pagingArea {margin-top : 50px;}
 </style>
 </head>
 <body>
@@ -43,14 +50,14 @@
         <div class="search">
 
             <form id="searchForm" action="search.adbo" method="get">
-                <div style="display: flex; align-items: center; margin-top: 40px">
+                <div style="display: flex; align-items: center; margin-top: 60px">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchbar" name="keyword">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </div>
             </form>
         </div>
         
-        <table border="1" id="boardList" class="table-hover" align="center">
+        <table id="boardList" class="table table-hover" align="center">
             <thead>
             	<tr>
 	                <th id="checkSize"><input type="checkbox" class="checkbox" id="checkbox${b.seq}" name="selectedCheckbox"></th>

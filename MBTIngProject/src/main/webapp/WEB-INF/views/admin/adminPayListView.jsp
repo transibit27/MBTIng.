@@ -7,38 +7,38 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
- #boardList{
-    width: 1000px;
-    margin-left: 300px;
-    text-align: center;
- }
- #searchForm{
-    width: 450px;
-    margin: auto;
-    margin-top: 100px;
-    margin-bottom: 70px;
- }
-.checkbox{
-    margin: auto;
-    display: block;
+#payList {
+	text-align:center; 
+	font-size: 13px; 
+	width: 850px;
+	margin-top: 50px;
+	}
+#payList>tbody>tr:hover {cursor:pointer;}
+
+#pagingArea {width:fit-content; margin:auto; margin-top : 50px;}
+
+#searchForm {
+    width:500px;
+    margin:auto;
 }
-#boardList>tbody>tr:hover {cursor:pointer;}
-#boardList {text-align:center;}
-#pagingArea {width:fit-content; margin:auto;}
+#searchForm>* {
+    margin:5px;
+}
+.select {width:20%;}
+.text {width:53%;}
+.searchBtn {width:20%;}
 
-.enrollSize { width : 150px; }
-#checkSize { width : 30px; }
-#size1 { width : 50px; }
-#size2 { width : 200px; }
-#size3 { width : 150px; }
-#size4 { width : 80px; }
-#size5 { width : 90px; }
-#size6 { width : 250px; }
-#size7 { width : 150px; }
-.refundBtn { width : 70px; }
+.content {
+    margin-left: 250px;
+    margin-top: 100px;
+}
+.btn-primary, .btn-danger {
+    width: 50px;
+    height : 25px;
+    margin: auto;
+    font-size: 13px !important;
+}
 
-#payList {text-align:center;}
-#pagingArea {margin-top : 50px;}
 </style>
 </head>
 <body>
@@ -50,14 +50,14 @@
         <div class="search">
 
             <form id="searchForm" action="search.adpa" method="get">
-                <div style="display: flex; align-items: center; margin-top: 40px">
+                <div style="display: flex; align-items: center; margin-top: 60px">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchbar" name="keyword">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </div>
             </form>
         </div>
         
-        <table border="1" id="payList" class="table-hover" align="center">
+        <table id="payList" class="table table-hover" align="center">
             <thead>
             	<tr>
 	                <th id="checkSize"><input type="checkbox" class="checkbox" name="selectedCheckbox"></th>
@@ -80,13 +80,13 @@
 		                <th>${ p.quantity}</th>
 		                <th>${ p.totalAmount}</th>
 		                <th>${ p.orderDate}</th>
-		                <th class="refundStatus">
+		                <th class="refundStatus" style="height:10px;">
                     <c:choose>
                         <c:when test="${p.refundRequest eq 2}">
                             <form>
                                 <div class="yesOrNo">
-                                    <button class="refundBtn" onclick="refundSuccess(${p.partnerOrderId});" >승인</button>
-                                    <button class="refundBtn" onclick="refundRefusal(${p.partnerOrderId});">거절</button>
+                                	<button type="button" class="btn btn-primary refundBtn" onclick="refundSuccess(${p.partnerOrderId});" >승인</button>
+                                	<button type="button" class="btn btn-danger refundBtn" onclick="refundRefusal(${p.partnerOrderId});">거절</button>
                                 </div>
                             </form>
                         </c:when>

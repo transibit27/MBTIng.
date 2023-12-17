@@ -149,10 +149,16 @@
 
 
     <div class="right-area"> <!-- 오른쪽-->
-        <img id="icon2" align="right" src="https://visualpharm.com/assets/225/Male%20User-595b40b85ba036ed117dc5a0.svg" alt="관리자">
+        <a onclick="adminProfile();"><img id="icon2" align="right" src="https://visualpharm.com/assets/225/Male%20User-595b40b85ba036ed117dc5a0.svg" alt="관리자"></a>
         <img id="icon1" align="right" src="https://cdn-icons-png.flaticon.com/512/386/386605.png" alt="우편">
     </div>
-
+	
+	<script>
+	function adminProfile() {
+		alert("야");
+	}
+	</script>
+	
         
     <div id="admin-menubar">
 

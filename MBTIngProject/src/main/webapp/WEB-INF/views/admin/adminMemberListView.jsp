@@ -9,16 +9,17 @@
 
     <style>
         /* 회원관리 스타일 */
-        #member-table {
+        #memberList {
             width: 1000px;
+            font-size: 14px; 
             margin-left: 100px;
             text-align: center;
+            margin: auto;
         }
-
+		
         #searchForm {
             width: 450px;
             margin: auto;
-            margin-top: 100px;
         }
 
         .btn-primary {
@@ -33,7 +34,6 @@
 
         #wrap {
             margin-left: 250px;
-            margin-top: 100px;
         }
 
         #pagingArea {
@@ -41,6 +41,7 @@
             margin: auto;
             margin-top : 50px;
         }
+        #memberList>tbody>tr:hover {cursor:pointer;}
     </style>
 </head>
 <body>
@@ -50,7 +51,7 @@
 
     <div class="search">
         <form id="searchForm" action="search.adme" method="get">
-            <div style="display: flex; align-items: center; margin-top: 40px">
+            <div style="display: flex; align-items: center; margin-top: 60px">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searchbar" name="keyword">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </div>
@@ -58,23 +59,15 @@
     </div>
     <button type="button" class="btn btn-primary" onclick="updateSelectedStatus();">저장</button>
 
-    <table border="1" id="member-table">
+    <table id="memberList"  class="table table-hover" align="center">
         <thead>
         <th><input type="checkbox" class="checkbox" onclick="toggleAllCheckboxes();"></th>
         <th>순번</th>
         <th>이름</th>
         <th>MBTI</th>
         <th>이메일</th>
-        <th>
-            <form action="#">
-                <label for="gen"></label>
-                <select name="gender" id="gen">
-                    <option value="both">성별</option>
-                    <option value="man">남자</option>
-                    <option value="woman">여자</option>
-                </select>
-            </form>
-        </th>
+        <th>성별</th>
+        <th>계정</th>
         <th>상태</th>
         </thead>
 
@@ -89,10 +82,11 @@
             <tr>
                 <th ><input type="checkbox" class="checkbox"></th>
                 <th class="amno" >${a.userNo}</th>
-                <th class="detailView" data-userNo="${a.userNo}" >${a.userName}</th>
-                <th>${a.mbti}</th>
-                <th>${a.email}</th>
-                <th>${a.gender}</th>
+                <th class="detailView" data-userNo="${a.userNo}">${a.userName}</th>
+                <th class="detailView" data-userNo="${a.userNo}">${a.mbti}</th>
+                <th class="detailView" data-userNo="${a.userNo}">${a.email}</th>
+                <th class="detailView" data-userNo="${a.userNo}">${a.gender}</th>
+                <th>프리미엄/일반 계정</th>
                 <th>
                     <form>
                         <div class="custom-control custom-switch">

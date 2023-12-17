@@ -3,6 +3,7 @@ package com.kh.mbting.admin.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.mbting.admin.model.dto.MemPay;
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
@@ -65,6 +66,9 @@ public interface AdminService {
  	// 회원 리스트 조회
  	ArrayList<Member> memberSelectList(PageInfo pi);
  	
+	/*
+	 * ArrayList<MemPay> memberSelectList2(PageInfo pi);
+	 */ 	
  	// 회원 검색 총 개수 조회
  	int memberSearchListCount(String keyword);
  	

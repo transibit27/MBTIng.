@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.kh.mbting.admin.model.dto.MemPay;
 import com.kh.mbting.admin.model.service.AdminService;
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
@@ -195,6 +196,7 @@ public class AdminController {
 		return "admin/adminMainPage";
 	}
 	
+	
 	// 전체회원 조회
 	@GetMapping("list.adme")
 	public ModelAndView memberSelectList(
@@ -209,6 +211,7 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
 		
 		ArrayList<Member> list = adminService.memberSelectList(pi);
+		
 		// System.out.println(list);
 		mv.addObject("list", list)
 		  .addObject("result", new Gson().toJson(list))
@@ -217,6 +220,31 @@ public class AdminController {
 		
 		return mv;
 	}
+	
+	/*
+	// dto
+	@GetMapping("list.adme")
+	public ModelAndView memberSelectList2(
+		@RequestParam(value="cpage", defaultValue = "1") int currentPage,
+		ModelAndView mv) {
+	
+		int listCount = adminService.memberSelectListCount();
+		
+		int pageLimit = 5;
+		int boardLimit = 10;
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageLimit, boardLimit);
+		
+		ArrayList<MemPay> list = adminService.memberSelectList2(pi);
+		// System.out.println(list);
+		mv.addObject("list", list)
+		  .addObject("result", new Gson().toJson(list))
+		  .addObject("pi", pi)
+		  .setViewName("admin/adminMemberListView");
+		
+		return mv;
+	}
+	*/
 	
 	// 회원관리 검색 조회용
 	@GetMapping("search.adme")

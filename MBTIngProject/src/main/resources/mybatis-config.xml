@@ -22,6 +22,7 @@
 		<typeAlias type="com.kh.mbting.chatting.model.vo.SearchMember" alias="searchmember"/>
 		<typeAlias type="com.kh.mbting.admin.model.vo.Month" alias="month"/>
 		<typeAlias type="com.kh.mbting.member.model.vo.Verification" alias="verification"/>
+		<!-- <typeAlias type="com.kh.mbting.admin.model.dto.MemPay" alias="mempay"/> -->
 		
 	</typeAliases>
 	

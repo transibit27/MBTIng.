@@ -233,4 +233,11 @@ FROM MemberCount, KakaoPayCount
 			)
 			WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<select id="memberPayUser" resultMap="kakaoPayResultSet">
+		SELECT PARTNER_USER_ID
+		  FROM MEMBER
+		  LEFT JOIN KAKAOPAY ON (EMAIL = PARTNER_USER_ID)
+		 WHERE ORDER_DATE IS NOT NULL
+	</select>
 </mapper>
