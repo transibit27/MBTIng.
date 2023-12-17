@@ -395,8 +395,19 @@
                     <form action="login.me" method="post">
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <input type="text" placeholder="사용자 이메일" id="userId" name="email"> <br>
+                            <input type="text" placeholder="사용자 이메일" id="userId" name="email" value="${ cookie.saveId.value }"
+                            > <br>
                             <input type="password" placeholder="비밀번호" id="userPwd" name="userPwd">
+                            <c:choose>
+							     <c:when test="${not empty cookie.saveId }">
+									    <input type="checkbox" id="saveId" name="saveId" value="y" checked style="width : 20px; height : 20px; vertical-align: middle;">
+									    <label for="saveId" style="margin-top : 10px;">아이디 저장</label>
+							    </c:when>
+							    <c:otherwise>
+							            <input type="checkbox" id="saveId" name="saveId" value="y" style="width : 20px; height : 20px; vertical-align: middle;">
+									    <label for="saveId" style="margin-top : 10px;">아이디 저장</label>
+							    </c:otherwise>
+							</c:choose>
                             <button type="submit">로그인</button>
                         </div>
 

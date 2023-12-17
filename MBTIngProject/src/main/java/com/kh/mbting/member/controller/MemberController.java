@@ -2,6 +2,7 @@ package com.kh.mbting.member.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -77,16 +80,32 @@ public class MemberController {
 	
 	//1. 로그인 기능을 위한 method.
 	@PostMapping("/login.me")
-	public String loginMember(Member 		m, 
-							  Model 		model,
-							  HttpSession 	session) {
+	public String loginMember(Member 			  m, 
+							  Model 			  model,
+							  HttpSession 		  session,
+							  String 			  saveId,
+							  HttpServletResponse response
+							  ) {
 		
 		//로그인한 회원의 정보를 담아서 service로 요청함
 		Member loginMember = memberService.loginMember(m);
 		
 		if(loginMember != null && 
 				bcryptPasswordEncoder.matches(m.getUserPwd(), loginMember.getUserPwd())){
-						
+					
+			  if(saveId != null && saveId.equals("y")){
+				  Cookie cookie = new Cookie("saveId", m.getEmail());
+				  cookie.setMaxAge(24 * 60 * 60 * 1); //유효기간은 1일로 계산했움.
+				  response.addCookie(cookie);
+			  }else {
+					Cookie cookie = new Cookie("saveId", m.getEmail());
+					cookie.setMaxAge(0);
+					response.addCookie(cookie);
+					//쿠키를 제거하는 메소드가 없기 때문에 
+					//같은 키값의 쿠키 생성 후 만료기간을 0초로 지정했슴
+				}
+
+			  
 			session.setAttribute("alertMsg", "로그인 성공");
 			session.setAttribute("loginMember", loginMember);
 			
