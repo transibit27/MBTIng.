@@ -189,7 +189,7 @@
                     </tr>
                     <tr>
                         <th><i class="fas fa-question-circle menu-icon"></i>
-                            <a href="">1:1문의</a>
+                            <a href="list.adse">1:1문의</a>
                         </th>
                     </tr>
                 </table>
