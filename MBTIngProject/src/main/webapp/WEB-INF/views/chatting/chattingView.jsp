@@ -470,8 +470,8 @@ body {
                     </tr>
                     <tr>
                         <td>
-                            <div id="chatAllCount">
-                                
+                            <div>
+                                <button onclick="blockMembers();"><img src="https://cdn-icons-png.flaticon.com/128/5911/5911092.png"></button>
                             </div>
                         </td>
                     </tr>
@@ -483,6 +483,9 @@ body {
 			</div>
 			
             <div class="chatList">
+				
+            </div>
+            <div class="blockList">
 				
             </div>
 
@@ -564,7 +567,7 @@ body {
                    </tr>
                    <tr>
                        <td><div><button id="submitButton" onclick="blockMember(this);">차단하기</button></div></td>
-                       <td><div><button id="submitButton" onclick="deleteMessage(this);">톡방 나가기</button></div></td>
+                       <td><div><button id="submitButton" onclick="deleteMessage(this);">채팅 종료</button></div></td>
                        <td><div><button id="submitButton" onclick="Home();">홈으로</button></div></td>
                    </tr>
                 </table>
@@ -720,8 +723,8 @@ body {
    
     <script>
         function chatHome() {
+          location.href="http://localhost:8081/mbting/convert.ch"; 
           disconnect();
-        	
           $('#chatInput').addClass('hidden');
           $('#profileDiv').addClass('hidden');
           $('.wrap').css("width" , "482px");
@@ -1005,6 +1008,51 @@ body {
    function Home() {
        location.href="http://localhost:8081/mbting";
    };
+   
+   function blockMembers() {
+	   $.ajax({
+		  url : "list.block" ,
+		  data : {"email" : "${sessionScope.loginMember.email}"},
+		  type : "post" ,
+		  success : function(data) {
+			  
+			  $chatWrap = $(".chatList");
+			  $chatWrap.addClass("hidden");
+			  
+			  $blockWrap = $(".blockList");
+              for (var i in data) {
+
+                  // main div를 먼저 생성해주고.
+                  var $div = $("<div class='chatList_box' onclick='enterRoom(this);'>")
+                      .attr("email", data[i].Email);
+
+                  // table 구조를 만드는 코드
+                  var $table = $("<table>");
+
+                  // 첫 번째 행을 만드는 코드
+                  var $tr1 = $("<tr>");
+                  $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", "http://localhost:8081/mbting" + data[i].profileImg )));
+                  $tr1.append($("<td class='chatListName' style='height: 30px;'>").text(data[i].userName));
+                  $tr1.append($("<td style='height: 30px;'>").append($("<button>").text("차단 해제")));
+                  // 2번째 행을 만드는 코드
+                  var $tr2 = $("<tr>");
+                  
+                  // 테이블에 넣어서 먼저 테이블 구조 완성하기
+                  $table.append($tr1);
+                  $table.append($tr2);
+
+                  // main div에 붙여주기
+                  $div.append($table);
+
+                  // 그걸 chatWrap에 붙여주기
+                  $blockWrap.append($div);
+              }
+		  }, 
+		  error : function() {
+			  console.log("차단 회원 불러오기 실패");
+		  }
+	   });
+   }
       
    function deleteMessage(button) {
 	   if(confirm("상대방과의 매칭이 종료됩니다. 정말로 나가시겠습니까?")){  

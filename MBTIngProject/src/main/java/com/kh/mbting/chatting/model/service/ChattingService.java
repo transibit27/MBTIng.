@@ -183,4 +183,11 @@ public interface ChattingService {
      * @return
      */
     int blockMem(BlockMember bm);
+    
+    /***
+     * 차단한 회원 목록을 불러오는 method
+     * @param email
+     * @return
+     */
+    ArrayList<Member> blockList(String email);
 }

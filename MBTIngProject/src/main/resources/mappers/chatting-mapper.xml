@@ -256,4 +256,12 @@
     <insert id="blockMem" parameterType="string">
     	INSERT INTO BLOCKMEMBER VALUES( BMB_SEQ.NEXTVAL , #{blockMemEmail} , #{blockProEmail})
     </insert>
+    
+    <select id="blockList" parameterType="string" resultMap="memberResultSet">
+    	select * 
+		  from member 
+	 	 where email in (select blockmememail
+		  				   from blockmember
+		 				  where blockproemail = #{email})
+    </select>
 </mapper>

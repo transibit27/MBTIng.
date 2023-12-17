@@ -114,6 +114,10 @@ public class ChattingDao {
     public int blockMem(BlockMember bm) {
     	return sqlSession.insert("chatMapper.blockMem" , bm);
     }
+    
+    public ArrayList<Member> blockList(String email) {
+    	return (ArrayList)sqlSession.selectList("chatMapper.blockList" , email);
+    }
 } 
 
 

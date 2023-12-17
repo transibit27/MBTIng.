@@ -301,5 +301,12 @@ public class ChattingController {
     		return "신고 실패 ㅋ";
     	}
     }
+    
+    @ResponseBody
+    @RequestMapping(value="list.block", produces="application/json; charset=UTF-8")
+    public String blockList(String email) {
+    	ArrayList<Member> m = cService.blockList(email);
+    	return new Gson().toJson(m);
+    }
      
 }
