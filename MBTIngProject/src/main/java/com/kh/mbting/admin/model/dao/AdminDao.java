@@ -10,6 +10,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mbting.admin.model.dto.MemPay;
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
@@ -125,6 +126,23 @@ public class AdminDao {
 		
 		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList", null, rowBounds);
 	}
+	
+	
+	/*
+	 * public ArrayList<MemPay> memberSelectList2(SqlSessionTemplate sqlSession,
+	 * PageInfo pi) {
+	 * 
+	 * int limit = pi.getBoardLimit(); int offset = (pi.getCurrentPage() - 1) *
+	 * limit;
+	 * 
+	 * RowBounds rowBounds = new RowBounds(offset, limit);
+	 * 
+	 * return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList2",
+	 * null, rowBounds); }
+	 */
+	
+	
+	
 	
 	// 검색된 회원 수 조회
 	public int memberSearchListCount(SqlSessionTemplate sqlSession, String keyword) {

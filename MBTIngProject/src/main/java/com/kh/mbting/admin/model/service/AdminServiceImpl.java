@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mbting.admin.model.dao.AdminDao;
+import com.kh.mbting.admin.model.dto.MemPay;
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
@@ -147,6 +148,12 @@ public class AdminServiceImpl implements AdminService {
 	
 		return adminDao.memberSelectList(sqlSession, pi);
 	}
+	
+	/*
+	 * @Override public ArrayList<MemPay> memberSelectList2(PageInfo pi) {
+	 * 
+	 * return adminDao.memberSelectList2(sqlSession, pi); }
+	 */
 
 	/* 선택된 회원 저장
 	@Override
