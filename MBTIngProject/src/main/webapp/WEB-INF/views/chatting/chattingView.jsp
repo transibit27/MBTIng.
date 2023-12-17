@@ -481,6 +481,7 @@ body {
 				  <p></p>
 				  <button id="hiddenDivCloseBtn">닫기</button>
 			</div>
+			
             <div class="chatList">
 				
             </div>
@@ -657,17 +658,13 @@ body {
     function enterRoom(obj){
        
       // 현재 html에 추가되었던 동적 태그 전부 지우기
-         $('div.chatDiv').html("");
-         $('div#hiddenDiv').hide();
+      $('div.chatDiv').html("");
       
          // obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
          roomNo       = obj.getAttribute("id");
          masterPic    = obj.querySelector('img').src;
          email        = obj.getAttribute("email");
-         
-          //console.log(masterPic);
-        
-          //console.log(roomNo);
+
           // 해당 채팅 방의 메세지 목록 불러오기
            $.ajax({
              url:"messageList.do" ,
@@ -678,19 +675,17 @@ body {
              async:false,
              dataType:"json",
              success:function(data){
-                
-                //console.log(data);
-                
+            	 
                  for(var i = 0; i < data.length; i++){
-                     // 채팅 목록 동적 추가
-                     CheckLR(data[i]);
+                     // 채팅 목록 동적 추가 왜 인지 모르겠으나 얘 때문에 2번 붙음
+                     //CheckLR(data[i]);
                  }
                  
                  $.ajax({
                    url : "master.In",
                    data : {email : email},
                    success : function(master) {
-                  //console.log(master);
+ 
                         $("#masterName").text(master.userName);
                         $("#masterImg").attr("src" , masterPic);
                         $("#mbti").text(master.mbti);
@@ -788,8 +783,6 @@ body {
                       dataType:"json",
                       success:function(data){
                          
-                         console.log(data);
-                         
                           for(var i = 0; i < data.length; i++){
                               // 채팅 목록 동적 추가
                               CheckLR(data[i]);
@@ -829,9 +822,7 @@ body {
                  "sendTime" 	  : receive[3],
                  "sessionCount"	  : receive[4]
               };
-  
               CheckLR(data);
-              
             }
          }
  
@@ -1086,13 +1077,6 @@ body {
 			 $("#" + divId).show();
 		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 뭐하느냐에 따라 솔탈이 달립니다..<br> 보통은 여자라면 이쁜 카페를 <br>미리 찾아서 보내주시면 좋아해요! <br> 혹시나 취미에 운동이 많다면 <br> 같은 취미를 하러가자해도 좋고요 <br><br> 남자라면 경기를 보러가자거나 <br>여자가 적극적으로 무언가를 하자는 걸 <br> 좋아할 수 있어요(보통 잘 안그래서) <br>ex) <p style='color : green; margin : 0px;'> 여자 : 익선동, 성수, 을지로, 문래 카페<br>(디저트 맛집 프렌차이즈 x!!!)<br> 특히 여자가 힐 신고 올 경우 <br> 지하철과 가까운 장소를 선정하세요 <br><br>남자 : 모르겠어요 제가 여자라서! </p> <br>tip!!<br> 여자는 예약 잘 하는 남자를 좋아해요 ㄹㅇ ex) <p style='color : red; margin : 0px;'>영화든 , 밥이든 미리 예약해놓으면 <br> 매우매우 좋아할 겁니다. </p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
  		}  		
-	   
-	  	
-	    
-	    
-	    
-	    
-	    
 	    
 	    $("#hiddenDivCloseBtn").on("click", function() {
 	    // 미리 만들어진 div 요소를 숨김
@@ -1109,8 +1093,6 @@ body {
 	      getRoomList(); 
 	      countAll();
 	      $("#" + elementId).css("background-color", "pink");
-	      
-	   
 	 }, 1000);
    </script>
 </body>
