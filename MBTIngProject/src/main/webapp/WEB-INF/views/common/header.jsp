@@ -214,6 +214,7 @@
             margin: auto;
             border: 1px solid silver;
             border-radius: 10px;
+            padding: 5px;
             width: 100%;
             height: 35px; 
             font-size: 13px;
@@ -383,7 +384,7 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
 
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close" style="margin-right: 5px;" data-dismiss="modal">&times;</button>
 
                 <div class="modal-border" style="border: 1px solid pink; width: 90%; height: 90%;">
                     
@@ -400,11 +401,11 @@
                             <input type="password" placeholder="비밀번호" id="userPwd" name="userPwd">
                             <c:choose>
 							     <c:when test="${not empty cookie.saveId }">
-									    <input type="checkbox" id="saveId" name="saveId" value="y" checked style="width : 20px; height : 20px; vertical-align: middle;">
+									    <input type="checkbox" id="saveId" name="saveId" value="y" checked style="width : 15px; height : 15px; vertical-align: middle;">
 									    <label for="saveId" style="margin-top : 10px;">아이디 저장</label>
 							    </c:when>
 							    <c:otherwise>
-							            <input type="checkbox" id="saveId" name="saveId" value="y" style="width : 20px; height : 20px; vertical-align: middle;">
+							            <input type="checkbox" id="saveId" name="saveId" value="y" style="width : 15px; height : 15px; vertical-align: middle;">
 									    <label for="saveId" style="margin-top : 10px;">아이디 저장</label>
 							    </c:otherwise>
 							</c:choose>
