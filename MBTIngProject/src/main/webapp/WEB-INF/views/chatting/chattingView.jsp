@@ -433,7 +433,7 @@ body {
 	  opacity: 1;
 	  transition-duration: 0.3s;
 	}
-   
+/*--------------------------------채팅 가이드를 위한 css--------------------------*/
    #hiddenDiv {
    	  float : center; 
    	  display : none; 
@@ -593,6 +593,7 @@ body {
        getRoomList(); 
        countRoomAll();
        countAll();
+       countAllMove();
     });
     
   
@@ -1058,11 +1059,11 @@ body {
 
  		let divId = "hiddenDiv";
  		
- 		//console.log(ckEmail);
+ 		//console.log(ckEmail);ㅉㅉㅉㅉ
  		var Hello = ["안녕하세요", "안녕히세용", "안녕" , "안녕하십니까" , "안뇽" , "안넝" , "하이" , "ㅎㅇ"];
  		var Food  = ["드실래요?" , "음식좋아하세요" , "먹을래" , "드실까"];
  		var Place = ["어디서볼까요" , "어디서볼래" , "어디서보지" , "어디갈래" , "어디가편해", "어디가편하세요"];
- 		var Doing = ["뭐할래" , "뭐할까" , "뭐하지" , "뭐하고놀까" , "뭐하", "뭐하실래요", "뭐좋아하세요", "뭐하고싶어요" ];
+ 		var Doing = ["뭐할래" , "뭐할까" , "뭐하지" , "뭐하고놀까" , "뭐하실래요", "뭐좋아하세요", "뭐하고싶어요" ];
  		
  		if(ckEmail == em && (Hello.some(hi => msg.includes(hi)))) {
  			 $("#" + divId).show();
