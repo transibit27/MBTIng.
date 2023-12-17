@@ -434,6 +434,20 @@ body {
 	  transition-duration: 0.3s;
 	}
    
+   #hiddenDiv {
+   	  float : center; 
+   	  display : none; 
+   	  position: fixed; 
+   	  top: 50%; 
+   	  left: 50%; 
+   	  transform: translate(-50%, -50%); 
+   	  background-color: white; 
+   	  padding: 20px; 
+   	  border-radius: 10px; 
+   	  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   	  width : 370px;
+   	  text-align : center;
+   	  }
 </style>
 </head>
 <body>
@@ -463,7 +477,7 @@ body {
                     </tr>
                 </table>
             </div>
-            <div id="hiddenDiv" style="float : center; display : none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div id="hiddenDiv">
 				  <p></p>
 				  <button id="hiddenDivCloseBtn">닫기</button>
 			</div>
@@ -1054,11 +1068,24 @@ body {
  		let divId = "hiddenDiv";
  		
  		//console.log(ckEmail);
- 		if(ckEmail == em && msg.includes("안녕하세요")) {
+ 		var Hello = ["안녕하세요", "안녕히세용", "안녕" , "안녕하십니까" , "안뇽" , "안넝" , "하이" , "ㅎㅇ"];
+ 		var Food  = ["드실래요?" , "음식좋아하세요" , "먹을래" , "드실까"];
+ 		var Place = ["어디서볼까요" , "어디서볼래" , "어디서보지" , "어디갈래" , "어디가편해", "어디가편하세요"];
+ 		var Doing = ["뭐할래" , "뭐할까" , "뭐하지" , "뭐하고놀까" , "뭐하", "뭐하실래요", "뭐좋아하세요", "뭐하고싶어요" ];
+ 		
+ 		if(ckEmail == em && (Hello.some(hi => msg.includes(hi)))) {
  			 $("#" + divId).show();
- 		     $("#" + divId).find("p").text("첫 인사를 하고 계시는군요 !! 보통 첫 인사 후에는 상대방 프로필의 취미에 대해서 공감을 하거나 프로필 사진에 대한 칭찬으로 시작하는 게 좋아요! ex) 클라이밍 좋아하세요? tip!! 질문을 너무 자주하거나 질문 후에 설명이 길면 안좋아요 ex) 클라이밍 좋아하세요? 저도 좋아하는데 저는 ~~ ");	
- 		}
- 	   	
+ 		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 첫 인사를 하고 계시는군요 !!<br> 보통 첫 인사 후에는 상대방 프로필의 취미에 대해서 <br> 공감을 하거나 프로필 사진에 대한 칭찬으로 <br> 시작하는 게 좋아요!<br> ex) <p style='color : green; margin : 0px;'>클라이밍 좋아하세요?</p> <br>tip!!<br> 질문을 너무 자주하거나 질문 후에 <br> 설명이 길면 안좋아요 <br> ex) <p style='color : red; margin : 0px;'>클라이밍 좋아하세요? 저도 좋아하는데 저는 ~~</p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+ 		}else if(ckEmail == em && (Food.some(food => msg.includes(food)))) {
+ 			 $("#" + divId).show();
+		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 흠 어떤 밥을 먹으러 갈 지 이야기 중인 것 같아요 맞나요?<br> 보통 첫 만남에서는 조용하고 분위기있는 <br>그리고 먹는 내 모습이 조신한 <br> 일식, 양식을 많이 먹어요. <br> ex) <p style='color : green; margin : 0px;'>파스타, 스시, 덮밥</p> <br>tip!!<br> 입을 크게 벌리거나 냄새베고 <br> 이빨에 끼는 음식은 피해요 <br> ex) <p style='color : red; margin : 0px;'>김치찌개, 햄버거, 고기, 생성구이, 국밥</p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+ 		}else if(ckEmail == em && (Place.some(place => msg.includes(place)))) {
+			 $("#" + divId).show();
+		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 어디서 볼 지는 너무너무 중요해요!<br> 평균적으로 조용하고 분위기를 <br>유지할 수 있는 장소를 많이 가요 ! <br> ex) <p style='color : green; margin : 0px;'> 혜화동, 을지로, 종로(청계천)<br> 익선동, 성수<br> 만약 비가 온 다면 ? <br>실내 데이트!  </p> <br>tip!!<br> 날씨나 서로의 신발을 고려하지 못한 <br> 장소는 피해요 <br> ex) <p style='color : red; margin : 0px;'>더운 여름 등산<br> 힐 신은 여자인데 혜화 낙상공원 <br> 추운 겨울 장시간 밖에서 대기하는 맛집 <br> 비오는 날 사람 붐비는 익선동</p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+ 		}else if(ckEmail == em && (Doing.some(doing => msg.includes(doing)))) {
+			 $("#" + divId).show();
+		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 뭐하느냐에 따라 솔탈이 달립니다..<br> 보통은 여자라면 이쁜 카페를 <br>미리 찾아서 보내주시면 좋아해요! <br> 혹시나 취미에 운동이 많다면 <br> 같은 취미를 하러가자해도 좋고요 <br><br> 남자라면 경기를 보러가자거나 <br>여자가 적극적으로 무언가를 하자는 걸 <br> 좋아할 수 있어요(보통 잘 안그래서) <br>ex) <p style='color : green; margin : 0px;'> 여자 : 익선동, 성수, 을지로, 문래 카페<br>(디저트 맛집 프렌차이즈 x!!!)<br> 특히 여자가 힐 신고 올 경우 <br> 지하철과 가까운 장소를 선정하세요 <br><br>남자 : 모르겠어요 제가 여자라서! </p> <br>tip!!<br> 여자는 예약 잘 하는 남자를 좋아해요 ㄹㅇ ex) <p style='color : red; margin : 0px;'>영화든 , 밥이든 미리 예약해놓으면 <br> 매우매우 좋아할 겁니다. </p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+ 		}  		
 	   
 	  	
 	    
