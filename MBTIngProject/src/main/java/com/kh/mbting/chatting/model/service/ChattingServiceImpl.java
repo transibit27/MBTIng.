@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.mbting.chatting.model.dao.ChattingDao;
+import com.kh.mbting.chatting.model.vo.BlockMember;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
@@ -138,6 +139,11 @@ public class ChattingServiceImpl implements ChattingService{
 	@Override
 	public int deleteMatchFromChat(HashMap<String, String> map) {
 		return chattingDao.deleteMatchFromChat(map);
+	}
+
+	@Override
+	public int blockMem(BlockMember bm) {
+		return chattingDao.blockMem(bm);
 	}
 	
 	

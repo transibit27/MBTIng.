@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.mbting.chatting.model.service.ChattingServiceImpl;
+import com.kh.mbting.chatting.model.vo.BlockMember;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
@@ -280,6 +281,24 @@ public class ChattingController {
             allResult.put("message", "연결 종료에 실패했습니다.");
             
             return allResult;
+    	}
+    }
+    
+    @ResponseBody
+    @RequestMapping("block.mem")
+    public String blockMem(String blockMemEmail, String blockProEmail) {
+    	BlockMember bm = new BlockMember();
+    	
+    	bm.setBlockMemEmail(blockMemEmail);
+    	bm.setBlockProEmail(blockProEmail);
+    	
+    	int result = cService.blockMem(bm);
+    	/*ALERTIFY를 위한 HASHMAP*/
+ 
+    	if(result > 0) {
+    		return "신고 성공";
+    	}else {
+    		return "신고 실패 ㅋ";
     	}
     }
      

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import com.kh.mbting.chatting.model.vo.BlockMember;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
@@ -175,4 +176,11 @@ public interface ChattingService {
      * @return
      */
     int deleteMatchFromChat(HashMap<String, String> map);
+    
+    /***
+     * 회원을 차단하는 table에 insert
+     * @param bm
+     * @return
+     */
+    int blockMem(BlockMember bm);
 }

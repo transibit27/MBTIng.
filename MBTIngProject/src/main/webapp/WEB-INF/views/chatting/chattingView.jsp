@@ -563,7 +563,7 @@ body {
                        <td colspan="3"></td>
                    </tr>
                    <tr>
-                       <td><div><button id="submitButton" onclick="">차단하기</button></div></td>
+                       <td><div><button id="submitButton" onclick="blockMember(this);">차단하기</button></div></td>
                        <td><div><button id="submitButton" onclick="deleteMessage(this);">톡방 나가기</button></div></td>
                        <td><div><button id="submitButton" onclick="Home();">홈으로</button></div></td>
                    </tr>
@@ -645,7 +645,6 @@ body {
                 }
              }
         });
-    
    }
    
    </script>
@@ -833,7 +832,6 @@ body {
          socket.close();
           //location.href="http://localhost:8081/mbting";
       };
-   
 
    //메세지를 전송하는 함수
    function sendMessage() {
@@ -861,11 +859,7 @@ body {
         
             $("#message").val("");//초기화 효과
          }
-      
    }
-   
-   
-   
    // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
     function CheckLR(data) {
         // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
@@ -1002,12 +996,9 @@ body {
    <script>
    let elementId;
    $(".chatList").on("click", ".chatList_box", function() {
-      
       $(".chatList_box").not(this).css("background-color", "white");
       $(this).css("background-color", "pink");
-        
       elementId = $(this).attr("id");
-      //alert(elementId);
    });  
 	
    <!-- 나가기 버튼 홈화면으로 돌려줌-->
@@ -1034,8 +1025,6 @@ body {
 					 alertify.alert('Alert', response.message, function() {
                          alertify.success('Ok');
                      });
-                     
-                     
 				 }else {
 					 alertify.alert('Alert', response.message, function() {
 	                     alertify.success('Error');
@@ -1047,13 +1036,30 @@ body {
 			}
 		 });
 		 
-		 
-		// $(".chatList_box[email='" + masterEmail + "']").hide();
-		 
 		}else{
 		    location.href="http://localhost:8081/mbting/convert.ch"; 
 		}
-   };
+   }
+   
+   function blockMember(button) {
+	     var blockMemEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
+		 var blockProEmail = "${sessionScope.loginMember.email}";
+		 
+		 $.ajax({
+			url  : "block.mem",
+			type : "post" ,
+			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail },
+			success : function(e) {
+
+				location.href="http://localhost:8081/mbting/convert.ch"; 
+				
+			},
+			error : function() {
+				
+				console.log("회원 신고하기 실패");	
+			}
+		 });
+   }
    
  	function chattingGuide(em, msg, ckEmail) {
 
@@ -1083,7 +1089,6 @@ body {
 	    // 미리 만들어진 div 요소를 숨김
 	    $("#hiddenDiv").hide();
 	   });
-	  
 	  }
  	
  	 // 2초에 한번씩 채팅 목록 불러오기

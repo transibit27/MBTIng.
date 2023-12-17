@@ -70,21 +70,24 @@
     </select>
     
     <select id="chatRoomList" parameterType="string" resultMap="chatRoomResultSet">
-		SELECT cr.*, cm.sendtime, cm.message_content
-		  FROM chatroom cr
-			JOIN (
-			    SELECT sendtime, message_content, room_no
-			    FROM (
-			        SELECT  message_content, room_no, sendtime
-			            FROM (
-			                SELECT sendtime, message_content, room_no,
-			                       ROW_NUMBER() OVER (PARTITION BY room_no ORDER BY CAST(message_no AS INT) DESC) as rn
-			                FROM chatmessage
-			            ) ranked_messages
-			         WHERE rn = 1
-			      ORDER BY sendtime DESC )
-			) cm ON cr.room_no = cm.room_no
-			WHERE cr.user_email = #{userEmail} OR cr.master_email = #{userEmail}
+		SELECT A.*
+		  from ( SELECT cr.*, cm.sendtime, cm.message_content
+        		   FROM chatroom cr
+          		   JOIN (
+             			SELECT sendtime, message_content, room_no
+             			  FROM (
+                 			SELECT  message_content, room_no, sendtime
+                     		  FROM (
+                         		SELECT sendtime, message_content, room_no,
+                                ROW_NUMBER() OVER (PARTITION BY room_no ORDER BY CAST(message_no AS INT) DESC) as rn
+                         		  FROM chatmessage
+                     		  ) ranked_messages
+                  		   WHERE rn = 1
+               			ORDER BY sendtime DESC )
+         		   ) cm ON cr.room_no = cm.room_no
+         		WHERE user_email = #{userEmail} OR cr.master_email = #{userEmail}) A
+         where user_email not in(select blockmememail from blockmember where blockproemail = #{userEmail}) and
+         master_email not in(select blockmememail from blockmember where blockproemail = #{userEmail})  
     </select>
     
     <select id="chatRoom" parameterType="string" resultMap="chatRoomResultSet">
@@ -249,4 +252,8 @@
 		 WHERE (PROPOSER_NO = ( select user_no from member where email = #{userEmail}) AND RECEIVER_NO = ( select user_no from member where email = #{masterEmail})) 
 	        OR  (PROPOSER_NO = ( select user_no from member where email = #{masterEmail}) AND RECEIVER_NO = ( select user_no from member where email = #{userEmail}))	
     </delete>
+    
+    <insert id="blockMem" parameterType="string">
+    	INSERT INTO BLOCKMEMBER VALUES( BMB_SEQ.NEXTVAL , #{blockMemEmail} , #{blockProEmail})
+    </insert>
 </mapper>

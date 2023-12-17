@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mbting.chatting.model.vo.BlockMember;
 import com.kh.mbting.chatting.model.vo.ChatMessage;
 import com.kh.mbting.chatting.model.vo.ChatRoom;
 import com.kh.mbting.chatting.model.vo.SearchMember;
@@ -108,6 +109,10 @@ public class ChattingDao {
     
     public int deleteMatchFromChat(HashMap<String, String> map) {
     	return sqlSession.delete("chatMapper.deleteMatchFromChat", map);
+    }
+    
+    public int blockMem(BlockMember bm) {
+    	return sqlSession.insert("chatMapper.blockMem" , bm);
     }
 } 
 
