@@ -330,7 +330,12 @@
 	                <li><a href="mbtiTest.mb">연애테스트</a></li>
 	            	<li><a href="all.me">신청하기</a></li>
 	            	<li><a href="convert.ch">채팅하기</a></li>
-	            	<li><a href="adminMain.ad">관리자</a></li>
+	            	
+	            	<c:choose>
+	            		<c:when test="${sessionScope.loginMember != null && sessionScope.loginMember.email eq 'admin@naver.com'}">
+	            			<li><a href="adminMain.ad">관리자</a></li>
+	            		</c:when>
+	            	</c:choose>
 	            </ul>    	
 	        </div>
 	            

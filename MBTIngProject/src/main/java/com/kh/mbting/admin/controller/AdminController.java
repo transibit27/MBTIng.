@@ -270,6 +270,16 @@ public class AdminController {
 	    }
 	
 	}
+	
+	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
+ 	@ResponseBody
+ 	@RequestMapping(value="adminMemberDetailView.adme" ,produces="application/json; charset=UTF-8")
+ 	public String adminMemberDetailView(String userNo ) {
+ 		//System.out.println("여기는 오나  ? ?  2번째임" + userNo);
+ 		Member m = adminService.adminMemberDetailView(userNo);
+
+ 		return new Gson().toJson(m);
+ 	}
 
 	
     /* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
@@ -397,6 +407,7 @@ public class AdminController {
          return mv;
      }
  	
+ 	// 상세조회 화면 포워딩
  	@RequestMapping("detail.adme") 
  	public String detailMember(@RequestParam("userNo") String userNo ,  @RequestParam("currentPage") String currentPage ,Model model) { 		
  		//System.out.println("userNo : 야 오냐 ! " + userNo);
@@ -407,13 +418,6 @@ public class AdminController {
  		return "admin/detailViewMember";	
  	}
  	
- 	@ResponseBody
- 	@RequestMapping(value="adminMemberDetailView.adme" ,produces="application/json; charset=UTF-8")
- 	public String adminMemberDetailView(String userNo ) {
- 		//System.out.println("여기는 오나  ? ?  2번째임" + userNo);
- 		Member m = adminService.adminMemberDetailView(userNo);
-
- 		return new Gson().toJson(m);
- 	}
+ 	
  	
 }

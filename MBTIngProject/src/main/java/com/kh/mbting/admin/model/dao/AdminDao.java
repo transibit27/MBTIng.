@@ -188,7 +188,10 @@ public class AdminDao {
 		return result;
 	}
 	
-	
+	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
+		public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
+			return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
+		}
 	
 	
 	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
@@ -273,10 +276,7 @@ public class AdminDao {
 
 	    return sqlSession.selectList("kakaoPayMapper.paySearchList", parameters);
 	}
-	
-	public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
-		return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
-	}
+    
 	
 	
 }

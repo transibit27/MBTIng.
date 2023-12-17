@@ -178,6 +178,12 @@ public class AdminServiceImpl implements AdminService {
 	public int updateSelectedStatus2(List<String> statusN) {
 		return adminDao.updateSelectedStatus2(sqlSession, statusN);
 	}
+    
+	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
+	@Override
+	public Member adminMemberDetailView(String userNo) {
+		return adminDao.adminMemberDetailView(sqlSession, userNo );
+	}
 	
 
 	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */
@@ -254,9 +260,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.paySearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
 	}
 
-	@Override
-	public Member adminMemberDetailView(String userNo) {
-		return adminDao.adminMemberDetailView(sqlSession, userNo );
-	}
+	
 	
 }
