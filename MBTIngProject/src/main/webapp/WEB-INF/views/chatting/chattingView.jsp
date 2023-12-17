@@ -6,6 +6,7 @@
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("a hh:mm");
 	String formattedTime = LocalDateTime.now().format(formatter);
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +15,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&family=IBM+Plex+Sans+KR&display=swap" rel="stylesheet">
-       <!-- jQuery library -->
+    <!-- jQuery library -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     
+    <!-- 알람창 관련 -->
+    <!-- JavaScript -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+	 
 <style>
 
 body {
@@ -162,6 +174,8 @@ body {
 .chatList {
 	 border-top-right-radius: 20px;
 	 border-bottom-right-radius: 20px;
+	 overflow : auto;
+	 overflow-x: hidden;
 }
 .chatList_box table {
     width : 100%;
@@ -322,8 +336,8 @@ body {
    /*----------------------편지봉투-------------------------*/
 
 	 .tooltip-container {
-	  height: 70px;
-	  width: 110px;
+	  height: 90px;
+	  width: 160px;
 	  border-radius: 5px;
 	  background-color: #fff;
 	  background-image: linear-gradient(
@@ -342,6 +356,7 @@ body {
 	  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
 	  position: relative;
 	  transition: transform 0.3s ease;
+	  margin : auto;
 	}
 	
 	.tooltip-container::before {
@@ -425,8 +440,6 @@ body {
 
 <br><br><br><br>
 
-
-
 	<div class="tooltip-container">
 	  <span class="tooltip"></span>
 	  <span class="text">💗</span>
@@ -450,8 +463,12 @@ body {
                     </tr>
                 </table>
             </div>
+            <div id="hiddenDiv" style="float : center; display : none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+				  <p></p>
+				  <button id="hiddenDivCloseBtn">닫기</button>
+			</div>
             <div class="chatList">
-
+				
             </div>
 
              <div class="chatDiv">
@@ -627,6 +644,7 @@ body {
        
       // 현재 html에 추가되었던 동적 태그 전부 지우기
          $('div.chatDiv').html("");
+         $('div#hiddenDiv').hide();
       
          // obj(this)로 들어온 태그에서 id에 담긴 방번호 추출
          roomNo       = obj.getAttribute("id");
@@ -787,7 +805,9 @@ body {
                   });
             	  
               }else {
-            	  
+            
+            	  chattingGuide(receive[1] , receive[2]);
+            
               const data = {
                            "name" : receive[0],
                           "email" : receive[1],
@@ -795,11 +815,9 @@ body {
                  "sendTime" 	  : receive[3],
                  "sessionCount"	  : receive[4]
               };
-					
-   
-              if(data.email != "${ loginUser.email }"){
-                      CheckLR(data);
-              }
+  
+              CheckLR(data);
+              
             }
          }
  
@@ -984,46 +1002,88 @@ body {
         
       elementId = $(this).attr("id");
       //alert(elementId);
-   });
-
-	 // 2초에 한번씩 채팅 목록 불러오기
-	 setInterval(function(){
-	      $(".chatList").html("");
-	      // 방 목록 불러오기
-	      countRoomAll();
-	      getRoomList(); 
-	      countAll();
-	      $("#" + elementId).css("background-color", "pink");
-	 }, 1000);
-	  
-	 
+   });  
+	
    <!-- 나가기 버튼 홈화면으로 돌려줌-->
    function Home() {
        location.href="http://localhost:8081/mbting";
    };
       
    function deleteMessage(button) {
-	   if(confirm("채팅방 메시지가 모두 사라집니다. 정말로 나가시겠습니까?")){  
+	   if(confirm("상대방과의 매칭이 종료됩니다. 정말로 나가시겠습니까?")){  
 		 
 		 var masterEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
 		 var userEmail = "${sessionScope.loginMember.email}";
 		 
+		 
 		 $.ajax({
 			url : "delete.mes",
 			data : {"masterEmail" : masterEmail , "userEmail" : userEmail},
-			success : function() {
-				location.href="http://localhost:8081/mbting/convert.ch"; 
+			success : function(response) {
+				//console.log("왜 안옴???");
+				//console.log("오긴 하누,.,.?");
+				 if (response.success) {
+					 location.href="http://localhost:8081/mbting/convert.ch"; 
+					 
+					 alertify.alert('Alert', response.message, function() {
+                         alertify.success('Ok');
+                     });
+                     
+                     
+				 }else {
+					 alertify.alert('Alert', response.message, function() {
+	                     alertify.success('Error');
+	                 });
+				 }
 			},
 			error : function() {
 				console.log("메시지 삭제 실패함 ㅠ ");
 			}
-			
 		 });
+		 
+		 
+		// $(".chatList_box[email='" + masterEmail + "']").hide();
 		 
 		}else{
 		    location.href="http://localhost:8081/mbting/convert.ch"; 
 		}
    };
+   
+ 	function chattingGuide(email, msg) {
+ 		let divId = "hiddenDiv";
+ 		let ckEmail = "{sessionScope.loginMember.email}"
+ 		
+ 		if(ckEmail != email && msg.includes("안녕하세요")) {
+ 			 $("#" + divId).show();
+ 		     $("#" + divId).find("p").text("첫 인사를 하고 계시는군요 !! 보통 첫 인사 후에는 상대방 프로필의 취미에 대해서 공감을 하거나 프로필 사진에 대한 칭찬으로 시작하는 게 좋아요! ex) 클라이밍 좋아하세요? tip!! 질문을 너무 자주하거나 질문 후에 설명이 길면 안좋아요 ex) 클라이밍 좋아하세요? 저도 좋아하는데 저는 ~~ ");	
+ 		}
+ 	   	
+	   
+	  	
+	    
+	    
+	    
+	    
+	    
+	    
+	    $("#hiddenDivCloseBtn").on("click", function() {
+	    // 미리 만들어진 div 요소를 숨김
+	    $("#hiddenDiv").hide();
+	   });
+	  
+	  }
+ 	
+ 	 // 2초에 한번씩 채팅 목록 불러오기
+	 setInterval(function(){
+	       $(".chatList").html("");
+	      // 방 목록 불러오기
+	      countRoomAll();
+	      getRoomList(); 
+	      countAll();
+	      $("#" + elementId).css("background-color", "pink");
+	      
+	   
+	 }, 1000);
    </script>
 </body>
 </html>

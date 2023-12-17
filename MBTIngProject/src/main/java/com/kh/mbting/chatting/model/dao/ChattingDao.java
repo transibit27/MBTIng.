@@ -105,6 +105,10 @@ public class ChattingDao {
     public int deleteChatRoom(String roomNo) {
     	return sqlSession.delete("chatMapper.deleteChatRoom" , roomNo);
     }
+    
+    public int deleteMatchFromChat(HashMap<String, String> map) {
+    	return sqlSession.delete("chatMapper.deleteMatchFromChat", map);
+    }
 } 
 
 

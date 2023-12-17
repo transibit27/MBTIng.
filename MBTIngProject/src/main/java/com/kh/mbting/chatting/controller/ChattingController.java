@@ -242,25 +242,44 @@ public class ChattingController {
     
     @ResponseBody
     @RequestMapping("delete.mes")
-    public String deleteMessage(String userEmail, String masterEmail) {
-    	System.out.println(userEmail + masterEmail);
+    public Map<String, Object> deleteMessage(String userEmail, String masterEmail) {
+    	//System.out.println(userEmail + masterEmail);
     	HashMap<String , String> map = new HashMap<String, String>();
     	map.put("userEmail", userEmail);
     	map.put("masterEmail", masterEmail);
     	
     	String roomNo = cService.getDeleteRoomNo(map);
     	
+    	/*대화내용 삭제하기*/
     	int result1 = cService.deleteMessage(roomNo);
+    	/*대화방 삭제하기*/
     	int result2 = 0;
+    	/*매칭테이블에서 삭제하기*/
+    	int result3 = 0;
+    	
+    	/*ALERTIFY를 위한 HASHMAP*/
+    	Map<String, Object> allResult = new HashMap<>();
     	
     	if(result1 > 0) {
     		result2 = cService.deleteChatRoom(roomNo);
+    		
+    		 if(result2 > 0) {
+    			 result3 = cService.deleteMatchFromChat(map);
+    		 }
     	}
     	
-    	if(result2 > 0) {
-    		return "삭제 성공";
+    	if(result3 > 0) {
+    		//System.out.println("result3 "  + result3);
+    		allResult.put("success", true);
+            allResult.put("message", "연결 종료했습니다. 이용해 주셔서 감사합니다.");
+                      
+            return allResult;
+            
     	}else {
-    		return "삭제 실패";
+    		allResult.put("success", false);
+            allResult.put("message", "연결 종료에 실패했습니다.");
+            
+            return allResult;
     	}
     }
      

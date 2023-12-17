@@ -168,4 +168,11 @@ public interface ChattingService {
      * @return
      */
     int deleteChatRoom(String roomNo);
+    
+    /***
+     * 방 나가면 매칭 상태도 삭제하기 (위에있는 deleteMatching과는 다름. 그건 내가 신청한 사람만 삭제)
+     * @param mbti
+     * @return
+     */
+    int deleteMatchFromChat(HashMap<String, String> map);
 }

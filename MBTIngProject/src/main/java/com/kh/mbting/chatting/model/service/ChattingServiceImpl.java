@@ -134,6 +134,12 @@ public class ChattingServiceImpl implements ChattingService{
 	public int deleteChatRoom(String roomNo) {
 		return chattingDao.deleteChatRoom(roomNo);
 	}
+
+	@Override
+	public int deleteMatchFromChat(HashMap<String, String> map) {
+		return chattingDao.deleteMatchFromChat(map);
+	}
+	
 	
 	
 	

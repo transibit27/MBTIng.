@@ -16,17 +16,17 @@
 }
 
 .content_1  {
-	border : 2px solid lightgray;
+	border-bottom : 5px solid rgb(174, 174, 246);
 	width : 100%;
 	margin: auto;
 	border-radius : 20px;
-	background-color: silver;
+	background-color: #f5f9ff;
+	background-image: url("${pageContext.request.contextPath}/resources/images/chatListMain.jpg");
 }
 
 .content_2 {
   font-family: 'Gasoek One', sans-serif;
   width : 100%;
-  background-color: #f5f9ff;
   border-radius: 15px;
   display: flex;
   flex-direction: column;

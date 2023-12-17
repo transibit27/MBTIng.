@@ -243,4 +243,10 @@
     	DELETE CHATROOM 
     	WHERE ROOM_NO = #{roomNo}
     </delete>
+    
+    <delete id="deleteMatchFromChat" parameterType="hashmap">
+    	DELETE MATCHING 
+		 WHERE (PROPOSER_NO = ( select user_no from member where email = #{userEmail}) AND RECEIVER_NO = ( select user_no from member where email = #{masterEmail})) 
+	        OR  (PROPOSER_NO = ( select user_no from member where email = #{masterEmail}) AND RECEIVER_NO = ( select user_no from member where email = #{userEmail}))	
+    </delete>
 </mapper>
