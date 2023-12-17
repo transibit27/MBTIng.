@@ -42,6 +42,12 @@
             margin-top : 50px;
         }
         #memberList>tbody>tr:hover {cursor:pointer;}
+        #toggleSave {
+        	margin-top : 20px;
+        	margin-bottom : 20px;
+        	margin-left : 80%;
+        	width:100px;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +63,7 @@
             </div>
         </form>
     </div>
-    <button type="button" class="btn btn-primary" onclick="updateSelectedStatus();">저장</button>
+    <button id="toggleSave" type="button" class="btn btn-primary" onclick="updateSelectedStatus();">저장</button>
 
     <table id="memberList"  class="table table-hover" align="center">
         <thead>
