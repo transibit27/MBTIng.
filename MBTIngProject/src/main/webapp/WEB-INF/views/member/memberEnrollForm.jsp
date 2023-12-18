@@ -37,10 +37,12 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 <!-- Semantic UI theme -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 
 
 <style>
-
+	*{font-family: 'NanumSquare';}
+	
     .enroll-outer{
         margin: auto;
         width: 800px;
@@ -309,7 +311,7 @@
                     </div>
 
                     <div style="width: 300px; margin: auto; margin-top: 15px; margin-bottom: 15px;">
-                        매칭 서비스를 이용하기 위해서는 회원 가입 후 MBTI 시물레이션 게임을 진행하셔야 합니다.
+                        회원 가입 후 MBTI 시물레이션 게임을 진행하시면 내 연애스타일을 확인하고 환상의 궁합을 찾아볼수 있습니다.
                     </div>
                                 
                     <button type="submit">가입</button>
