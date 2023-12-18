@@ -99,6 +99,7 @@
         }
 
         #header_1_center {
+            min-width: 1200px;
             width: 70%;
         }
 
@@ -315,7 +316,7 @@
 	</c:if>
 
     <div id="header">
-        <div id="header_1_left" style="height: 100%; width: 30%; display: flex; align-items: center; justify-content: center;">
+        <div id="header_1_left" style="height: 100%; width: 18%; display: flex; align-items: center; justify-content: center;">
             <a href="http://localhost:8081/mbting/">
                <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
               </a>
@@ -325,11 +326,11 @@
             <div id="header_1_center">	 
 	             <ul>
 	                <li><a href="http://localhost:8081/mbting/">HOME</a></li>
-	                <li><a href="introduce.in">INTRODUCE</a></li>
+	                <li><a href="introduce.in">회사소개</a></li>
 	                <li><a href="listMember.no">공지사항</a></li>
 	                <li><a href="list.bo">만남후기</a></li>
 	                <li><a href="mbtiTest.mb">연애테스트</a></li>
-	            	<li><a href="all.me">신청하기</a></li>
+	            	<li><a href="all.me">매칭하기</a></li>
 	            	<li><a href="convert.ch">채팅하기</a></li>
 	            	
 	            	<c:choose>
