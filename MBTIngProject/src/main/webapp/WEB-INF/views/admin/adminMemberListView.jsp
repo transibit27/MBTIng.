@@ -87,7 +87,7 @@
 
             <tr>
                 <th ><input type="checkbox" class="checkbox"></th>
-                <th class="amno" >${a.userNo}</th>
+                <th class="amno" data-userNo="${a.userNo}">${a.userNo}</th>
                 <th class="detailView" data-userNo="${a.userNo}">${a.userName}</th>
                 <th class="detailView" data-userNo="${a.userNo}">${a.mbti}</th>
                 <th class="detailView" data-userNo="${a.userNo}">${a.email}</th>
@@ -103,13 +103,11 @@
 				</c:choose>
                 
                 <th>
-                    <form>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input"
-                                   id="switch${vs.index + 1}" ${a.status == 'Y' ? 'checked' : ''}>
-                            <label class="custom-control-label" for="switch${vs.index + 1}"></label>
-                        </div>
-                    </form>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input toggle" onchange="toggleStatus(switch${a.userNo})"
+                               id="switch${a.userNo}" ${a.status == 'Y' ? 'checked' : ''}>
+                        <label class="custom-control-label" for="switch${a.userNo}"></label>
+                    </div>
                 </th>
             </tr>
             <tr>
@@ -128,8 +126,139 @@
        
         });
     });
-
     
+    function toggleStatus(checkbox) {
+        // 체크박스의 상태 확인
+        const isChecked = checkbox.checked;
+        const checkboxId = checkbox.id;
+        const [, switchString, switchNumber] = checkboxId.match(/^(switch)(\d+)$/);
+        console.log('체크된 체크박스의 아이디: ' + switchNumber);
+		let check = "";	
+        // isChecked 값에 따라 원하는 작업 수행
+        if (isChecked) {
+        	check = "Y";
+            alert('checked');
+        } else {
+        	check = "N";
+            alert('not checked');
+        }
+        $.ajax({
+        	url : "update-status",
+        	method : "get",
+        	data : {
+        		"status" : check,
+        		"userNo" : switchNumber
+        	},
+        	success : function(result) {
+        		console.log(result);
+     			console.log("성공공공");
+     		},
+     		error : function() {
+     			console.log("실패패패");
+     		}
+        	
+        })
+    }
+       /*  // 체크박스의 상태 확인
+        const isChecked = checkbox.checked;
+
+        // 체크된 회원의 userNo 가져오기
+        const userNo = checkbox.getAttribute('data-userNo');
+
+        // AJAX를 사용하여 서버로 데이터 전송
+        const xhr = new XMLHttpRequest();
+        const url = 'update-status?userNo=' + userNo + '&isChecked=' + isChecked;
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log('서버 응답 성공');
+            } else {
+                console.error('서버 응답 실패');
+            }
+        };
+        xhr.send();
+
+        // 폼 전송 방지
+        return false;
+    } */
+    
+    
+    
+    /*
+    function toggleStatus(checkbox) {
+    	
+    	 // 체크박스의 상태 확인
+        const isChecked = checkbox.checked;
+		
+     	// 체크된 회원의 userNo 가져오기
+        const userNo = checkbox.getAttribute('data-userNo');
+    	 
+     	$.ajax({
+     		url = 'update-status?userNo=' + userNo + '&isChecked=' + isChecked;
+     		type : "get",
+     		data : {"userNo", userNo},
+     		success : function() {
+     			console.log("성공공공");
+     		},
+     		error : function() {
+     			console.log("실패패패");
+     		}
+     		
+     	});
+     	
+        // isChecked 값에 따라 원하는 작업 수행
+        if (isChecked) {
+            alert('checked');
+        } else {
+            alert('not checked');
+        }
+		
+    }
+    function toggleStatus(checkbox) {
+        // 체크박스의 상태 확인
+        const isChecked = checkbox.checked;
+
+        // 체크된 회원의 userNo 가져오기
+        const userNo = checkbox.getAttribute('data-userNo');
+
+        // AJAX를 사용하여 서버로 데이터 전송
+        const xhr = new XMLHttpRequest();
+        const url = 'update-status?userNo=' + userNo + '&isChecked=' + isChecked;
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                console.log('서버 응답 성공');
+            } else {
+                console.error('서버 응답 실패');
+            }
+        };
+        xhr.send();
+
+        // 폼 전송 방지
+        return false;
+    }
+	*/
+    
+    	
+    	/* 
+    	var toggle = document.getElmentByName('toggle').value;
+    	console.log(toggle); */
+    	
+    	/* $.ajax({
+    		url : "toggleStatus.adme",
+    		type : "get",
+    		data : "",
+    		function success() {
+    			
+    			let value = document.getElementsByClassName('toggle').value;
+
+    	    	console.log(value);
+    		},
+    		function error() {
+    			console.log("실패");
+    		}
+    	}); */
+    	
 	</script>
 
     <div id="pagingArea">
@@ -198,46 +327,9 @@
         // 체크된 회원들의 상태를 서버로 전송
         //updateSelectedStatus(); 
     }
-
-    // 체크된 회원 저장
-    function updateSelectedStatus() {
-    // 선택된 모든 체크박스 가져오기
-    var checkboxes = document.querySelectorAll('.custom-control-input:checked');
     
-    //=> checkboxes => 이 안에는 오른쪽 토글의 선택된 input 요소들을 가져옴. 4개 체크면 4개의 input을 5개면 5개의 input을 
-    //var checkboxArray = [...checkboxes];
-    //console.log("checkboxArray" + checkboxArray);
-    var selectedUserNos = [];
     
-    console.log();
-    // 선택된 체크박스의 userNo 가져와 배열에 저장
-    checkboxes.forEach(function (checkbox) {
 
-    	var index = checkbox.id.replace('switch', '');
-        
-        let list = JSON.parse('${requestScope.result}'); // 문자열 JSON 을 찐 JSON 으로 변환
-
-        selectedUserNos.push(list[index - 1].userNo);
-    });
-
-    var xhr = new XMLHttpRequest();
-    var url = 'update-status?selectedUserNos=' + selectedUserNos.join(',');
-
-    xhr.open('GET', url, true);
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-        	console.success('성공~ ');
-        } else {
-            console.error('첫ㅂㄴ째 실패 ㅋㅋ');
-        }
-    };
-
-    // 첫 번째 요청 시작
-    xhr.send();
-
-    // 폼 전송 방지
-    return false;
-    }
     </script>
 </div>
 
