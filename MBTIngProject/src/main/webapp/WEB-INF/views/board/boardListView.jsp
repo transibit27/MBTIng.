@@ -6,49 +6,45 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Single+Day&display=swap" rel="stylesheet">
     <style>
-        body * {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
         .outer {
             width: 100%;
             margin: auto;
-            margin-top: 10px;
         }
-        .reviewbanner {
+        .reviewBanner {
+            position: relative; 
             width: 100%;
             height: 150px;
-            margin: auto;
-            background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-            background-position: center center;
-            background-size: cover;
+            overflow: hidden; 
         }
-        .reviewbanner-text {
-            width: 1200px;
-            height: 150px;
-            text-align: center;
-            line-height: 150px;
-            color: white;
-            font-size: xx-large;
+
+        .reviewBanner h3 {
+            position: absolute;
+            font-size: 30px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: white; 
+            z-index: 1; 
+        }
+        .reviewBanner img {
+            width: 100%;
+            height: 100%; 
+            object-fit: cover; 
         }
         .bestreviewlist {
             width: 1200px;
             margin: auto;
             border: 2px dotted pink;
             border-radius: 10px;
-            font-family: 'Single Day', cursive;
         }
         .bestreviewlist * {
-        	font-family: 'Single Day', cursive;
         	font-size: large;
             font-weight: bold;
             text-align: center;
         }
         .bestreviewlistbanner {
-        	font-family: 'Noto Sans KR', sans-serif;
             font-size: x-large;
             font-weight: bold;
         }
@@ -62,7 +58,6 @@
             border-radius: 10px;        
         }
         #boardlist * {
-			font-family: 'Single Day', cursive;
             font-size: large;
             font-weight: bold;        
         }
@@ -97,7 +92,6 @@
             border-radius: 10px;
         }
         .thumbnail p {
-            font-family: 'Single Day', cursive;
             font-size: large;
             font-weight: bold;
         }
@@ -170,9 +164,9 @@
     <jsp:include page="../common/header.jsp" />
 
     <div class="outer">
-        <div class="reviewbanner" align="center">
-            <div class="reviewbanner-text">
-                <p>만남후기</p>
+        <div class="reviewBanner">
+            <h3>만남후기</h3>
+            <img src="./resources/images/NoticeBanner.jpg">
             </div>
         </div>
         
@@ -293,6 +287,7 @@
         </c:if>
     </div>
 
+    <br>
     <br>
 
     <jsp:include page="../common/footer.jsp" />
