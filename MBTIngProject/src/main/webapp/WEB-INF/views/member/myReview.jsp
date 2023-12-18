@@ -11,7 +11,7 @@
 
   
 <style>
-    *{font-family: 'NanumSquareBold';}
+    *{font-family: 'NanumSquare';}
 
     .profile-menu-title{
         margin: auto;
