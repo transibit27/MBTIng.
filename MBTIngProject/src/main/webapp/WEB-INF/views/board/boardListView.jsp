@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기</title>
-
+    
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
     <style>
@@ -20,7 +20,6 @@
             height: 150px;
             overflow: hidden; 
         }
-
         .reviewBanner h3 {
             position: absolute;
             font-size: 30px;
@@ -131,7 +130,7 @@
             border: 1px solid pink;
         }
         .search-area button {
-            width: 45px;
+            width: 50px;
             height: 30px;
             border: none;
             border-radius: 5px;
