@@ -325,7 +325,7 @@
             <div id="header_1_center">	 
 	             <ul>
 	                <li><a href="http://localhost:8081/mbting/">HOME</a></li>
-	                <li><a href="">INTRODUCE</a></li>
+	                <li><a href="introduce.in">INTRODUCE</a></li>
 	                <li><a href="listMember.no">공지사항</a></li>
 	                <li><a href="list.bo">만남후기</a></li>
 	                <li><a href="mbtiTest.mb">연애테스트</a></li>

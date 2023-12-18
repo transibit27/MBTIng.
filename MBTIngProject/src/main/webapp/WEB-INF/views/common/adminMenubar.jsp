@@ -109,7 +109,7 @@
 
         
     .right-area {
-        width: 1580px;
+        width: 100%;
         align-content: right;
         background-color: #FCD19E;
         height: 100px;
