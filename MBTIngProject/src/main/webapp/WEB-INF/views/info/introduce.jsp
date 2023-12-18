@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>회사소개</title>
 
+<script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
+
+
 <style>
 
 	.introBanner {
@@ -35,12 +41,13 @@
 
 	.subTop {
 		position: relative;
-		width: 1280px;
-		height: 290px;
-		margin: 0 auto;
+		width: 100%;
+		height: 200px;
+		margin: auto;
 		z-index: -1;
-		padding-top: 115px;
 		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	
 	.subTopImg img {
@@ -94,14 +101,14 @@
 	}
 	.subimg_wrap {
 		width: 100%;
-		height: 388px;
+		height: 500px;
 		background-size: cover;
 		margin-bottom: 20px;
+		display: flex;
 	}
 
 	.subTopBox {
 		padding-top: 20px;
-		padding-left: 300px;
 	}
 	.comtle {
 		font-family: 'Chosunilbo_myungjo';
@@ -125,7 +132,7 @@
 	}
 
 	.intro_wrap {
-		padding: 50px 0 65px;
+		padding: 100px 0 100px;
 	}
 	.introlist {
 		display: flex;
@@ -138,11 +145,13 @@
 		display: table-cell;
 		vertical-align: middle;
 		position: relative;
+		display: flex;
+		align-items: center;
 		width: 628px;
 		height: 180px;
 		background-color: #fff;
-		padding: 35px 40px;
-		margin-bottom: 20px;
+		padding: 25px 40px;
+		margin-bottom: 30px;
 		border-radius: 10px;
 		box-shadow: 2px 2px 4px 2px rgb(0 0 0 / 10%);
 		-webkit-border-radius: 10px;
@@ -192,31 +201,33 @@
 		background-size: contain;
 	}
 
-	.introlist > li > p {
+	.introlist > li > .introtleDiv > p {
 		font-family: 'Noto Sans KR';
 		font-size: 15px;
 		color: #4a4a4a;
 		line-height: 1.4;
 		margin-bottom: 5px;
-		margin-left: 140px;
+		margin-left: 40px;
 		word-break: keep-all;
 		letter-spacing: -1px;
 	}
-	.introlist > li > p.introtle {
+	.introlist > li > .introtleDiv > p.introtle {
 		font-family: 'Noto Sans KR';
 		font-size: 21px;
 		color: #000000;
 		line-height: 1.5;
 		font-weight: bold;
-		margin-left: 140px;
+		margin-left: 40px;
 		margin-bottom: 15px;
 		word-break: keep-all;
 		letter-spacing: -1px;
+		font-family: 'NanumSquareRound';
 
 	}
 	p .jointestlink {
 		color: #fc7c8c;
 		font-weight: bold;
+		font-family: 'NanumSquareRound';
 	}
 
 	p .jointestlink::after {
@@ -228,6 +239,12 @@
 		background-size: 100%;
 		content: "";
 	}
+
+	p .jointestlink:hover {
+		text-decoration: none;
+		color: #ff6476;
+	}
+
 	.intro_subbox {
 		display: flex;
 		margin-left: 140px;
@@ -246,6 +263,77 @@
 		margin-bottom: 6px;
 	}
 
+	.iconDiv {
+		margin-left: 20px;
+	}
+
+	.subimg_wrap,
+	.company_wrap,
+	.enrollText,
+	.intro_content {
+		opacity: 0;
+		transform: translateY(-50px);
+		transition: opacity 1s ease, transform 1s ease;
+	}
+
+	.subimg_wrap.appear,
+	.company_wrap.appear,
+	.enrollText.appear,
+	.intro_content.appear {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.intro_bg {
+		height: 700px;
+		position: relative;
+	}
+
+	.intro_content {
+		position: relative;
+		padding: 0 0 0 100px;
+		margin-top: 30px;
+	}
+	.intro_content::after {
+		position: absolute;
+		content: '';
+		display: block;
+		width: 396px;
+		height: 548px;
+		bottom: 0;
+		right: 10%;
+	}
+	.hellostyle {
+		font-size: 34px;
+		color: #000;
+		font-weight: 500;
+		margin-bottom: 30px;
+	}
+
+	.hellotxt {
+		padding: 15px 0 10px;
+		font-family: 'NanumSquare';
+		font-weight: 400;
+		font-size: 17px;
+		color: #000;
+		line-height: 1.7;
+		word-break: keep-all;
+	}
+	.ceo {
+		font-family: 'NanumSquare';
+		padding-top: 50px;
+		font-size: 18px;
+		color: #000;
+		font-weight: bold;
+	}
+	.ceo2 {
+		font-family: 'NanumSquare';
+		padding-bottom: 30px;
+		font-size: 27px;
+		color: #000;
+		font-weight: bold;
+	}
+
 </style>
 
 </head>
@@ -259,21 +347,13 @@
 			<h3>회사소개</h3>
 			<img src="./resources/images/NoticeBanner.jpg" alt="">
 		</div>
-		<div class="subpgNav">
-			<ul>
-				<li><a href="" class="on">직장인소개팅은?</a></li>
-				<li><a href="" class="">인사말</a></li>
-			</ul>
-		</div>
 	</div>
 
 	<div class="subimg_wrap">
-		
-
 		<div class="subTop">
 			<div class="subTopBox">
-				<p class="comtle">직장인소개팅은?</p>
-				<p class="comtxt">매니저가 만남장소에서 소개하여<br><b>신뢰할 수 있는 소개팅</b></p>
+				<p class="comtle" style="font-family: 'NanumSquareExtraBold';">MBTIng?</p>
+				<p class="comtxt" style="font-family: 'NanumSquareBold';">MBTI 검사를 통한<br><b>나와 잘맞는 사람과의 소개팅</b></p>
 			</div>
 			<div class="subTopImg">
 				<img src="./resources/images/pg1_bg.png" alt="">
@@ -282,62 +362,148 @@
 	</div>
 
 	<div class="company_wrap">
-		<div class="body_wrap intro_wrap">
+		<div class="body_wrap intro_wrap" >
 
 			<ul class="introlist">
 				<li class="intro1">
-					<p class="introtle">설레이는 만남을 위한 선별된 회원가입(무료가입)</p>
-					<p><a href="/page/jointest.php" class="jointestlink">가입 가능여부 테스트</a></p>
-				</li>
-				<li class="intro2">
-					<p class="introtle">확실한 신원검증 ➡ 신뢰할 수 있는 만남</p>
-					<p>본인인증,직업인증 (모든회원)<br>혼인관계인증 (40세 이상 or 돌싱)</p>
-				</li> 
-				<li class="intro3">
-					<p class="introtle">안전한 서버 관리로 개인정보 보호</p>
-					<p>다중 웹사이트 보안 시스템 적용</p>
-				</li>
-				<li class="intro4">
-					<p class="introtle">무분별한 내 프로필 노출 방지</p>
-					<p>가입 후에도 회원 프로필은 동의없이 이성에게 공개되지 않음<br>(회원이 신청시에만 선별적 공개)</p>
+					<div class="iconDiv">
+						<i class="fas fa-edit" style="font-size: 50px; color: #ffb0bc;"></i>
+					</div>
+					<div class="introtleDiv">
+						<p class="introtle">설레이는 만남을 위한 선별된 회원가입</p>
+						<p><a href="enrollForm.me" class="jointestlink">회원가입 &nbsp;<i class="fas fa-angle-right"></i></a></p>
+					</div>
 				</li>
 				<li class="intro5">
-					<p class="introtle">무료 회원가입<br>다회권 이용 또는 1회씩 결제</p>
-					<p>무료 회원가입 후 합리적인 다회 매칭권 이용 또는 1회 비용 결제도 가능</p>
-				</li>
-				<li class="intro6">
-					<p class="introtle">정해진 일정으로 매칭결과 확인</p>
-					<p>신청 후 계속 기다리는 것이 아닌 정해진 일정으로 매칭결과 확인</p>
-					<div class="intro_subbox">
-						<p class="subtle pink">매칭결과 확인</p>
-						<div>
-							<p class="subtxt">- 만남일 기준 2일전까지(매니저소개)</p>   
-							<p class="subtxt">- 신청 후 최대 4일 소요(개별만남)</p>  
-						</div>
+					<div class="iconDiv">
+						<i class="fas fa-coins" style="font-size: 50px; color: #ffb0bc;"></i>
+					</div>
+					<div class="introtleDiv">
+						<p class="introtle">무료 회원가입 다회권 이용</p>
+						<p>3회 무료 매칭 후 합리적인 다회 매칭권 이용 또는 추가 결제 가능</p>
 					</div>
 				</li>
 				<li class="intro7">
-					<p class="introtle">전문 매니저에 의한 특화된 매칭시스템</p>
-					<p>내가 설정한 옵션을 만족하고 나를 좋아하는 이성과의 만남 </p>
-					<p><span class="pink">특허 출원번호, 10-2019-0114076</span></p>
-				</li>
-				<li class="intro8">
-					<p class="introtle">단계별 피드백 제공으로 커플성사율 향상</p>
-					<p>- 신청 후 매니저 피드백(수정/보완 필요시)</p>
-					<p>- 매칭 후 상대취소 피드백(상대 등록시)</p>
-					<p>- 만남 후 상대 피드백(상호 등록시)</p>
+					<div class="iconDiv">
+						<i class="fas fa-hand-holding-heart" style="font-size: 50px; color: #ffb0bc;"></i>
+					</div>
+					<div class="introtleDiv">
+						<p class="introtle">MBTI 검사를 통한 매칭시스템</p>
+						<p>
+							<a href="mbtiTest.mb" class="jointestlink">MBTI 테스트 &nbsp;<i class="fas fa-angle-right"></i></a>
+							<p style="font-size: 12px; color: gray;">(회원가입 후 이용 가능)</p>
+						</p>
+					</div>
 				</li>
 				<li class="intro9">
-					<p class="introtle">진중한 만남을 위한 회원관리 정책</p>
-					<p>비매너에 대한 원스트라이크 아웃 시행</p>
-				</li>
-				<li class="intro10">
-					<p class="introtle">믿고 이용하는 직장인 소개팅</p>
-					<p>소개팅 만족도 87%</p>
+					<div class="iconDiv">
+						<i class="fas fa-users-slash" style="font-size: 50px; color: #ffb0bc;"></i>
+					</div>
+					<div class="introtleDiv">
+						<p class="introtle">진중한 만남을 위한 회원관리 정책</p>
+						<p>비매너에 대한 원스트라이크 아웃 시행</p>
+					</div>
 				</li>
 			</ul>
 		</div>
 	</div>
+
+	<div class="enrollText" style="padding: 100px;">
+		<h1 align="center" 
+			style="
+			font-family: 'NanumSquareExtraBold'; 
+			font-size: 80px;
+			color: #ff889a;
+			">지금 가입해보세요!</h1>
+	</div>
+
+	<div class="intro_bg" style="position: relative;">
+		
+        <div class="intro_content body_wrap" style="position: relative;">
+
+			
+			<img src="./resources/images/mj_bg.png" style="width: 100%; height: 700px; position: absolute; top: 0; left: 0; z-index: -1; border-top: 1px solid lightgray;">
+
+			<div class="info" style="display: flex; align-items: center; height: 600px;">
+				<div class="info-text" style="height: 600px; margin-top: 60px;">
+					<p class="hellostyle" style="font-family: 'NanumSquareExtraBold';">안녕하세요.</p>
+
+					<p class="hellotxt">
+						바쁜 사회생활 속 이성을 만날 기회가 줄어들고 소개팅이 생기기만을 기다리는 많은 사람들을 보았습니다. 
+					</p>
+					<p class="hellotxt">
+						주위에서 결혼정보업체, 소개팅앱, 단체미팅 등 주선 서비스를 접할 수 있지만<br>대부분 높은 비용, 신뢰성 부족, 이익 창출만을 목적으로 하는 등 아쉬운 부분이 많았습니다. 
+					</p>    
+					<p class="hellotxt">
+						이러한 부분을 개선하고 아름다운 남녀에게 더 많은 만남의 기회를 제공하고자 시작되어<br> 이제는 6년차가 되었습니다. 
+					</p>
+					
+					<p class="hellotxt">
+						신뢰를 바탕으로 더 좋은 서비스를 제공할 수 있도록 항상 노력하겠습니다.
+					</p>
+					<p class="hellotxt">감사합니다.</p>         
+					
+					
+					<p class="ceo">MBTIng 대표</p>
+					<p class="ceo2">정윤석 기준서 김선아 김민중 김민제 정현두</p>
+				</div>
+
+				<div class="info-img">
+					<img src="./resources/images/mj_img.png" style="width: 250px; border-radius: 50%;">
+					<img src="./resources/images/hd_img.png" style="width: 250px; border-radius: 50%;">
+				</div>
+			</div>
+        </div>
+    </div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+		var subimgWrap = document.querySelector(".subimg_wrap");
+		var companyWrap = document.querySelector(".company_wrap");
+		var enrollText = document.querySelector(".enrollText");
+		var introContent = document.querySelector(".intro_content");
+		
+		// 요소가 뷰포트 내에 있는지 확인하는 함수
+		function isInViewport(element) {
+			var rect = element.getBoundingClientRect();
+			return (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+			);
+		}
+
+		// 스크롤 이벤트를 처리하는 함수
+		function handleScroll() {
+			if (isInViewport(subimgWrap)) {
+			subimgWrap.classList.add("appear");
+			}
+
+			if (isInViewport(companyWrap)) {
+			companyWrap.classList.add("appear");
+			}
+
+			if (isInViewport(enrollText)) {
+			enrollText.classList.add("appear");
+			}
+
+			if (isInViewport(introContent)) {
+				introContent.classList.add("appear");
+			}
+		}
+
+		// 스크롤 이벤트 리스너를 추가
+		window.addEventListener("scroll", handleScroll);
+
+		// 초기 확인을 트리거
+		handleScroll();
+		});
+
+	</script>
+		
+		
+		
 
 	<jsp:include page="../common/footer.jsp" />
 
