@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <!-- 부트스트랩에서 제공하고 있는 스타일 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
@@ -35,7 +35,7 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 
 <style>
-    * {font-family: 'Noto Sans KR', sans-serif;
+    * {font-family: 'NanumSquare';
     caret-color: transparent;
     }
     
@@ -466,7 +466,7 @@
 
                         <div>
                             <button id="change-profile" type="button">프로필 이미지 변경</button>
-                            <input type="file" id="upfile" name="reupfile" style="display: none;">
+                            <input type="file" id="upfile" name="reupfile" style="display: none;" accept="image/*, .gif">
                             <input type="hidden" id="oldfile" name="profileImg" style="display: none;" value="${sessionScope.loginMember.profileImg}">
                         </div>
                     </div>

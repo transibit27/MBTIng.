@@ -92,7 +92,16 @@
                 <th class="detailView" data-userNo="${a.userNo}">${a.mbti}</th>
                 <th class="detailView" data-userNo="${a.userNo}">${a.email}</th>
                 <th class="detailView" data-userNo="${a.userNo}">${a.gender}</th>
-                <th>프리미엄/일반 계정</th>
+                
+                <c:choose>
+				    <c:when test="${not empty a.orderDate}">
+				        <th>프리미엄</th>
+				    </c:when>
+				    <c:otherwise>
+				        <th>일반</th>
+				    </c:otherwise>
+				</c:choose>
+                
                 <th>
                     <form>
                         <div class="custom-control custom-switch">

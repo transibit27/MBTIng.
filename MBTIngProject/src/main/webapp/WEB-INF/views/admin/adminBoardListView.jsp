@@ -74,7 +74,7 @@
 		                <th><input type="checkbox" class="checkbox"></th>
 		                <th class="bno">${ b.boardNo }</th>
 		                <th class="detailView" data-boardNo="${b.boardNo}">${b.boardTitle}</th>
-		                <th class="detailView" data-boardNo="${b.boardNo}">홍길동</th>
+		                <th class="detailView" data-boardNo="${b.boardNo}">${b.userName }</th>
 		                <th>${ b.views }</th>
 		                <th class="enrollSize">${ b.enrollDate }</th>
 		            </tr>

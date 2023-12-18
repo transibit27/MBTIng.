@@ -883,9 +883,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
             <div class="swiper-scrollbar"></div>
         </div>
 	</div> <!-- content_4 닫는 div -->
-   		
-
-
 			    <script>
 			        // 슬라이더 동작 정의
 			        const swiper = new Swiper('.swiper', {
@@ -905,18 +902,20 @@ MBTIng 덕분에 제 운명을 만났어요....!
 			        }); 
 			    </script>
 
-	<!-- 채팅 api -->
-		<script type="text/javascript">
+		<!-- 채팅 api -->
+		<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
 		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 		(function(){
 		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-			s1.async=true;
-			s1.src='https://embed.tawk.to/65475643f2439e1631ebe2d5/1hefahucp';
-			s1.charset='UTF-8';
-			s1.setAttribute('crossorigin','*');
-			s0.parentNode.insertBefore(s1,s0);
+		s1.async=true;
+		s1.src='https://embed.tawk.to/656413b31db16644c554f30c/1hg7eptem';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
 		})();
-		</script>
+	</script>
+	<!--End of Tawk.to Script-->
 
 
 

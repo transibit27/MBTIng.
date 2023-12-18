@@ -11,6 +11,9 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기 수정</title>
+
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+    
     <style>
         .outer {
             width: 100%;
@@ -116,7 +119,7 @@
 
             <input type="hidden" name="boardNo" value="${ requestScope.b.boardNo }">
             <div class="writereview-title">
-                제목&nbsp;&nbsp;<input type="text" id="title" name="boardTitle" value="${ requestScope.b.boardTitle }" required>
+                제목&nbsp;&nbsp;<input type="text" id="title" name="boardTitle" value="${ requestScope.b.boardTitle }" maxlength="15" required>
             </div>
 
             <br>
@@ -125,7 +128,7 @@
                 내용
                 <br>
 
-                <textarea id="content" name="boardContent" required>${ requestScope.b.boardContent }</textarea>
+                <textarea id="content" name="boardContent" maxlength="1300" required>${ requestScope.b.boardContent }</textarea>
             </div>
 
             <br>
@@ -165,7 +168,7 @@
             </div>
         </form>
 
-        <br>
+        <br><br>
 
     </div>
 

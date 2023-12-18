@@ -6,6 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기 작성</title>
+
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
     <style>
         .outer {
             width: 100%;
@@ -235,7 +238,7 @@
             </div>
         </form>
 		
-		<br>
+		<br><br>
 		
     </div>
 

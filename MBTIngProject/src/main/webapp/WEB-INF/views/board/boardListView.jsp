@@ -6,6 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기</title>
+    
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
     <style>
         .outer {
             width: 100%;
@@ -17,7 +20,6 @@
             height: 150px;
             overflow: hidden; 
         }
-
         .reviewBanner h3 {
             position: absolute;
             font-size: 30px;
@@ -128,7 +130,7 @@
             border: 1px solid pink;
         }
         .search-area button {
-            width: 45px;
+            width: 50px;
             height: 30px;
             border: none;
             border-radius: 5px;
@@ -197,8 +199,8 @@
                             resultStr += "<td style='width:300px;'>"
                             		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px; border-radius: 10px;'></a>"
                                        +	"<p>" + result[i].boardTitle + "<br>"
-                                       +	"💑" + result[i].userName + "<br>"
-                                       +	"❤️" + result[i].thumbCount
+                                       +	"<i class='fas fa-user'></i>&nbsp;" + result[i].userName + "<br>"
+                                       +	"<i class='fas fa-heart'></i>&nbsp;" + result[i].thumbCount
                             resultStr += "</p></td>";
                         }                
                         $("#boardList tr").html(resultStr);                        
@@ -218,7 +220,7 @@
             <c:forEach var="b" items="${ requestScope.list }">
                 <div class="thumbnail" align="center">
                     <a href="detail.bo?bno=${ b.boardNo }"><img src="${pageContext.request.contextPath}/${ b.changeName }"></a>
-                    <P>${ b.boardTitle }<br>💑${ b.userName }<br>❤️${ b.thumbCount }</P>
+                    <P>${ b.boardTitle }<br><i class="fas fa-user"></i>&nbsp;${ b.userName }<br><i class="fas fa-heart"></i>&nbsp;${ b.thumbCount }</P>
                 </div>
             </c:forEach>
         </div>
