@@ -75,7 +75,7 @@ public interface AdminService {
 	// 회원 검색 조회
     List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
 
-    // 선택된 회원 상태 일괄 업데이트
+    // 선택된      회원의 상태를 업데이트
     int updateSelectedStatus(ArrayList<String> selectedUserNos);
  	
     // 선택되지 않은 회원의 상태를 업데이트

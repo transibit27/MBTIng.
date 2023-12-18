@@ -185,6 +185,11 @@ public class AdminServiceImpl implements AdminService {
 	public int updateSelectedStatus2(List<String> statusN) {
 		return adminDao.updateSelectedStatus2(sqlSession, statusN);
 	}
+	
+	@Override
+	public int selectAllMember() {
+		return adminDao.selectAllMember(sqlSession);
+	}
     
 	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
 	@Override
@@ -219,12 +224,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.adminSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
     }
 
-	@Override
-	public int selectAllMember() {
-		return adminDao.selectAllMember(sqlSession);
-	}
-	
-	
 	/* 결제 관리 시작!!!!!!!!!!!!!!!!!! */
 	// 결제관리 게시글 개수 조회
 	@Override

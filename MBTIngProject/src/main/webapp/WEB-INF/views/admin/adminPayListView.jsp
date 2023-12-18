@@ -37,7 +37,9 @@
     height : 25px;
     margin: auto;
     font-size: 13px !important;
+    line-height:13px !important;
 }
+
 
 </style>
 </head>
@@ -109,8 +111,10 @@
             				data : { partnerOrderId : partnerOrderId }, 
             				success : function(result) {
             					
-            					console.log("성공 안되니?")
-            					console.log(partnerOrderId);
+            					console.log("성공 안되니?");
+            					
+            					$(".apno:contains("+partnerOrderId+")").parent().children().eq(7).html("");
+            					
             				},
             				error : function() {
             					console.log("실패");
@@ -126,6 +130,7 @@
             				data : { partnerOrderId : partnerOrderId },
             				success : function() {
             					console.log("성공");
+            					$(".apno:contains("+partnerOrderId+")").parent().children().eq(7).html("");
             				},
             				error : function() {
             					console.log("실패");
