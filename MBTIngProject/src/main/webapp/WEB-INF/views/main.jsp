@@ -883,9 +883,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
             <div class="swiper-scrollbar"></div>
         </div>
 	</div> <!-- content_4 닫는 div -->
-   		
-
-
 			    <script>
 			        // 슬라이더 동작 정의
 			        const swiper = new Swiper('.swiper', {
