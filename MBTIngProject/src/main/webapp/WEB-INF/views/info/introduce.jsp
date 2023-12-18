@@ -424,7 +424,7 @@
 			
 			<img src="./resources/images/mj_bg.png" style="width: 100%; height: 700px; position: absolute; top: 0; left: 0; z-index: -1; border-top: 1px solid lightgray;">
 
-			<div class="info" style="display: flex; align-items: center; height: 600px;">
+			<div class="info" style="display: flex; align-items: center; height: 600px; justify-content: space-between;">
 				<div class="info-text" style="height: 600px; margin-top: 60px;">
 					<p class="hellostyle" style="font-family: 'NanumSquareExtraBold';">안녕하세요.</p>
 
@@ -448,7 +448,7 @@
 					<p class="ceo2">정윤석 기준서 김선아 김민중 김민제 정현두</p>
 				</div>
 
-				<div class="info-img">
+				<div class="info-img" style="margin-right: 30px;">
 					<img src="./resources/images/mj_img.png" style="width: 250px; border-radius: 50%;">
 					<img src="./resources/images/hd_img.png" style="width: 250px; border-radius: 50%;">
 				</div>
