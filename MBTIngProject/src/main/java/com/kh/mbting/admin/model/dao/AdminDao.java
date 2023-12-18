@@ -124,7 +124,7 @@ public class AdminDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList2", null, rowBounds);
 	}
 	
 	
@@ -172,7 +172,7 @@ public class AdminDao {
         return sqlSession.update("memberMapper.updateStatus", parameters);
     }
     
-    // 다중 사용자 상태 업데이트
+    // 선택된 회원의 상태 업데이트
     public int updateSelectedStatus(SqlSessionTemplate sqlSession, ArrayList<String> memNo) {
          
     	System.out.println(memNo);
@@ -187,13 +187,10 @@ public class AdminDao {
     	}
     	System.out.println("result : " + result);
     	
-    	// int result = sqlSession.update("memberMapper.updateSelectedStatus", (List)memNo);
-    	
-    	
     	return result;
     }
 
-    
+    // 선택되지 않은 회원의 상태 업데이트
 	public int updateSelectedStatus2(SqlSessionTemplate sqlSession, List<String> statusN) {
 		
 		System.out.println(statusN);
@@ -207,9 +204,9 @@ public class AdminDao {
 	}
 	
 	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
-		public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
-			return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
-		}
+	public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
+	}
 	
 	
 	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */

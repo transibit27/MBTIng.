@@ -13,11 +13,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 <style>
-    * {font-family: 'Noto Sans KR', sans-serif;}
+    * {font-family: 'NanumSquare';}
     
     #bo_list{
         margin: auto;
@@ -437,7 +438,7 @@
                 					+	"<td>"+ jsonArray[i].itemName + "</td>"
                 					+   "<td>"+ jsonArray[i].partnerUserId + "</td>"
                 					+	"<td>"+ jsonArray[i].orderDate.substr(0,19) + "</td>"
-                					+	"<td>"+ refundButton+ "</td>"
+                					+	refundButton
                 				+	"</tr>";
                 	}
                 	

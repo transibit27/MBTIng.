@@ -158,7 +158,7 @@
                     <button type="button" onclick="getCertNo()">발송</button>
                 </div>
            
-                <div id="hidden" style="">
+                <div id="hidden" style="display: none;">
                 
                     <div class="find-pwd-check">
                         <div class="find-pwd-content-content"><b>인증번호 입력</b></div>

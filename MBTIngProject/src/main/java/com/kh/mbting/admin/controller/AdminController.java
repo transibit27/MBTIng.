@@ -280,9 +280,9 @@ public class AdminController {
     	
 		List<String> statusN = new ArrayList<>();
 
-	    if(result1 > 0 ) {
-	    	int allMember = adminService.selectAllMember();
-		    System.out.println("allMember : " + allMember);
+	    if(result1 > 0 ) { // 내가 선택한 회원의 스텟을 Y로 바꾸는 것이 성공했을 때
+	    	int allMember = adminService.selectAllMember(); // 전체 회원을 조회함( 전체회원의 숫자 확인)
+		    // System.out.println("allMember : " + allMember);
 		    //6이 담김 
 		    
 	    	for (int i = 1; i <= allMember; i++) {
@@ -292,11 +292,9 @@ public class AdminController {
 			    System.out.println("statusN :" + statusN);
 			}
 	    	
-	    	int result2 = adminService.updateSelectedStatus2(statusN);
-	    	System.out.println("result2 : " +  result2);	    
-	    	
+	    	int result2 = adminService.updateSelectedStatus2(statusN);	// status가 N인 회원의 번호들을 다시 스테이터스 N으로 업데이트 함!
+	    	//System.out.println("result2 : " +  result2);	    
 	    }
-	
 	}
 	
 	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
@@ -449,10 +447,11 @@ public class AdminController {
  	
 	/* 1:1문의 관리!!!!!!!!!!!!!!! */
  	// 1:1 문의 페이지 포워딩
+ 	@ResponseBody
  	@RequestMapping("list.adse")
  	public String adminServiceSelectList() {
  		
- 		return "admin/adminServiceListView";
+ 		return "https://dashboard.tawk.to/#/chat";
  	}
  	
  	
