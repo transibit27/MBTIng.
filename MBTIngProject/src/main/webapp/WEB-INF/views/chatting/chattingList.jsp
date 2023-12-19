@@ -74,10 +74,13 @@
 }
 
 .title {
-  font-weight: 900;
-  font-size: 1.3em;
-  margin-bottom: 50px;
+  font-weight: bold; /* 더 깔끔한 글자 두께로 변경 */
+  font-size: 1.5em; /* 조금 크게 변경 */
+  margin-bottom: 30px; /* 마진 조정 */
   text-align: center;
+  color: #333; /* 어두운 글자색으로 변경 */
+  letter-spacing: 1px; /* 글자 사이 간격 설정 */
+  transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
 }
 
 .name {
@@ -235,8 +238,9 @@
 }
 
 .select:hover {
-  background-color: #e6f0ff;
-  transform: scale(1.02); /* Added a subtle scale transform on hover */
+    background-color: #ffcccc;  /* Red shade for hover background */
+  transform: scale(1.05); /* Slightly increased scale on hover for a subtle effect */
+  box-shadow: 0px 0px 15px rgba(255, 77, 77, 0.3); /* Enhanced box shadow on hover for depth */
 }
  
 
@@ -255,24 +259,37 @@
 	transition: all .5s ease-in-out;
   }
 
-  #Men , #woMen{
-	  padding: 8px 16px;
-	  font-size: 14px;
-	  color: black;
-	  background-color: white;
+	#Men {
+	  width: 100px;
+	  height: 40px;
 	  border: none;
-	  border-radius: 6px;
+	  background-color: #87CEEB; /* 하늘색 배경 */
+	  color: #fff; /* 흰색 텍스트 */
+	  border-radius: 20px; /* 둥근 테두리 */
 	  cursor: pointer;
-	  transition: background-color 0.3s ease-in-out;
-  }
-  #Men:hover {
-	background-color: skyblue;
-	transition: all .5s ease-in-out;
-  }
-  #woMen:hover {
-	background-color: pink;
-	transition: all .5s ease-in-out;
-  }
+	  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+	}
+	
+	#Men:hover {
+	  background-color: #add8e6; /* 연한 하늘색으로 변경 */
+	  transform: scale(1.05); /* 약간 크기 확대 효과 */
+	}
+	
+	#woMen {
+	  width: 100px;
+	  height: 40px;
+	  border: none;
+	  background-color: #FFCCCC; /* 연한 분홍색 배경 */
+	  color: #fff; /* 흰색 텍스트 */
+	  border-radius: 20px; /* 둥근 테두리 */
+	  cursor: pointer;
+	  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+	}
+	
+	#woMen:hover {
+	  background-color: #ffb3b3; /* 더 연한 분홍색으로 변경 */
+	  transform: scale(1.05); /* 약간 크기 확대 효과 */
+	}
 
  #searchButton {
   display: inline-block;
