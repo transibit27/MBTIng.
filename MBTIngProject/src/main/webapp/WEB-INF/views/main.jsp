@@ -248,28 +248,26 @@
 			margin-left: 53em;
 		}
 		
-		#testImg { 
+		#testImg img { 
 			border-radius: 30px;
 			height: 46%;
 			width: 33%;
 			top: 3em;
 			left: 44em;
-			background-image: url(/mbting/resources/images/mbtingTest.png);
-			background-size: cover;
+			object-fit: cover;
 			position: absolute;
 			z-index: 1;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
 		}
 
-		#testResultImg {
+		#testResultImg img {
 			border-radius: 30px;
 			height: 64%;
 			width: 27%;
+			object-fit: cover;
 			position: absolute;
 			top: 9em;
 			left: 79em;
-			background-image: url(/mbting/resources/images/mbtingResult.png);
-			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
 		}
 
@@ -479,10 +477,14 @@
 						<div class="swiper-slide">
 							<div id="content_1" class="content">
 								<div>
-									<div id="testImg"></div>
+									<div id="testImg">
+										<img src="<%=request.getContextPath()%>/resources/images/mbtingTest.png">
+									</div>
 								</div>
 								<div class="test">
-									<div id="testResultImg"></div>
+									<div id="testResultImg">
+										<img src="<%=request.getContextPath()%>/resources/images/mbtingResult.png">
+									</div>
 								</div>
 								<div id="Content1BigText">나의 연애</div>
 								<div id="Content1BigText2">
