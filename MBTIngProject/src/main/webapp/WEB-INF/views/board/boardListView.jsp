@@ -9,6 +9,8 @@
     
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+
     <style>
         .outer {
             width: 100%;
@@ -19,6 +21,9 @@
             width: 100%;
             height: 150px;
             overflow: hidden; 
+        }
+        .reviewBanner * {
+            font-family: 'NanumSquare';
         }
         .reviewBanner h3 {
             position: absolute;
@@ -40,6 +45,7 @@
             margin: auto;
             border: 2px dotted pink;
             border-radius: 10px;
+            font-family: 'NanumSquare';
         }
         .bestreviewlist * {
         	font-size: large;
@@ -84,6 +90,7 @@
             padding-top: 20px;
             display: flex;
             flex-flow: wrap;
+            font-family: 'NanumSquare';
         }
         .thumbnail {
             width : 300px;
