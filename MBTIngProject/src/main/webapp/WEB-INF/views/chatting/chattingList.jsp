@@ -5,26 +5,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 <style>
 
 .wrap {
-	width : 1600px;
+	width : 1200px;
 	margin: auto;
+	font-family: 'NanumSquareBold';
 }
 
 .content_1  {
-	border-bottom : 5px solid pink;
 	width : 100%;
 	margin: auto;
 	border-radius : 20px;
-	background-color: pink;
 	height : 280px;
+	background-color : rgb(255,210,210) 
 }
 
+#div {
+    margin: 0 !important;
+    width: 100%;
+    border: 1px solid black;
+}
 .content_2 {
+  padding-top : 20px;
   font-family: 'Gasoek One', sans-serif;
   width : 100%;
   border-radius: 15px;
@@ -47,6 +54,8 @@
   justify-content: space-between;
   padding: 10px 15px;
   height : 200px;
+  border-bottom : 1px solid lightgray;
+  padding : 20px;
 }
 
 .user__content {
@@ -116,11 +125,20 @@
   background-color: #2c3136;
 }
 
+.introMe {
+	/*border : 1px solid black;*/
+	width : 550px;
+	height : 130px;
+	padding-top : 45px;
+}
 /*----------프로필 사진 card 스타일-----------------*/
 
+.image {
+	margin-top : 35px;
+}
 .cardImage img {
-    width : 200px;
-    height : 200px; 
+    width : 160px;
+    height : 160px; 
     border-radius: 100px;
     border: 2px solid lightgray;
 }
@@ -132,7 +150,7 @@
 }
 
 .cardImage img:active {
-  transform: scale(0.95) rotateZ(1.7deg);
+ 	 transform: scale(0.95) rotateZ(1.7deg);
 
 }
 
@@ -187,22 +205,24 @@
  #searchTable {
  	text-align : center;
  	margin : auto;
-	text-shadow: 2px 2px  white;
-	font-size: 20px;
+	/*text-shadow: 2px 2px  white;*/
+	font-size: 16px;
 	font-weight: bold;
  }
  
  .select {
- 	 width : 200px;
+ 	 width : 150px;
  	 padding: .8em .5em;
- 	 border: 1px solid #999;
+ 	 border : none;
  	 font-family: 'Gasoek One', sans-serif;
  	 border-radius: 0px;
 	 appearance: none;
 	 border-radius : 50px;
 	 text-align : center;
-	 box-shadow: 0px 0px 3px 5px #f5f9ff;
+	 box-shadow: 0px 0px 3px 5px white;
 	 cursor: pointer;
+	 height : 50px;
+	 margin : 10px;
  } 
  
   .select:hover {
@@ -218,23 +238,24 @@
  .genderButton {
  	border : 0px;
  	background-color : transparent;
- 	border-radius : 15px;
+ 	border-radius : 5px;
  }
  
   .borders {
-	background-color: #e6f0ff;
+	/*background-color: white;*/
 	transition: all .5s ease-in-out;
   }
 
   #Men , #woMen{
 	border: 1px solid rgb(255, 255, 255);
+	background-color: white;
   }
   #Men:hover {
-	background-color: #e6f0ff;
+	background-color: skyblue;
 	transition: all .5s ease-in-out;
   }
   #woMen:hover {
-	background-color: #e6f0ff;
+	background-color: pink;
 	transition: all .5s ease-in-out;
   }
 
@@ -367,7 +388,11 @@
         		</tr>
     		</table>
 	</div>
-	<div class="content_2">
+    
+    <div id="div"></div>
+    
+
+	<div class="content_2">	
 		<div class="user__container">
         	
 		</div>
@@ -414,7 +439,7 @@
   			type : "get" , 
   			success : function(mem) {
   				resultStr = "";
-  				//console.log(mem);
+  				console.log(mem);
   				for(let i in mem) {
  				
 					 resultStr +=  "<div class='user' id='user" + mem[i].userNo + "'>" +
@@ -425,9 +450,9 @@
 						  			"</div>" +
 						  			"<div class='user__content'>" +
 						  			 "<div class='text'>" +
-						  			 "<span class='name'>" + mem[i].userName + "</span>" +
-						  			 "<p class='mbti'>" + mem[i].mbti + "</p>" +
+						  			 "<span class='name'>" + mem[i].userName + "<p class='mbti'>" + mem[i].mbti + "</p></span>" +
 						  			 "</div>" +
+						  			 "<div class='introMe'>" + mem[i].address + "에 사는 " + mem[i].age + "살 이에요" + "</div>" +
 						  			 "<div class='like'><button id='button' onclick='requestMatch(this , " + mem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
