@@ -36,6 +36,19 @@ body {
 	height : 100%;
 }
 
+body {
+    overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
+    scrollbar-width: thin; /* 스크롤바의 너비를 조절 */
+}
+
+/* WebKit(Chrome, Safari) 브라우저에 대한 스크롤바 스타일 */
+body::-webkit-scrollbar {
+    width: 6px; /* 스크롤바의 너비를 조절 */
+}
+body::-webkit-scrollbar-thumb {
+    background-color: transparent; /* 스크롤바 색상을 투명하게 설정하여 보이지 않게 함 */
+}
+
 .wrap {
     width : 484px;
     height: 670px;
@@ -58,7 +71,7 @@ body {
     height: 670px;
     margin-left: 40px;
     margin-right: 50px;
-    background-color: #ffcece;
+    background-color: rgb(248, 244, 244);
     border-radius : 16px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); 
 }
@@ -92,10 +105,10 @@ body {
     height: 80%;
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
-    overflow:auto;
+   
+   
     margin-top: 100px;
     margin-left: 50px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); 
 }
 
 .chatList {
@@ -173,7 +186,7 @@ body {
 }
 
 #chatList {
-    overflow : auto;
+    
     width : 450px;
     height : 800px;
     border-top-right-radius: 20px;
@@ -182,7 +195,7 @@ body {
 .chatList {
 	 border-top-right-radius: 20px;
 	 border-bottom-right-radius: 20px;
-	 overflow : auto;
+	
 	 overflow-x: hidden;
 }
 
@@ -1016,6 +1029,12 @@ body {
 	     
 	      $blockWrap = $(".blockList");
 		  $blockWrap.html = "";
+		  $('chatList').removeClass('hidden');
+          $('#chatInput').addClass('hidden');
+          $('#profileDiv').addClass('hidden');
+          $('.wrap').css("width" , "482px");
+          $('.wrapPc').attr("margin" , "auto");
+          $('.chatDiv').addClass('hidden');
 		  
 	   $.ajax({
 		  url : "list.block" ,
@@ -1044,7 +1063,13 @@ body {
                   var $tr1 = $("<tr>");
                   $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", "http://localhost:8081/mbting" + data[i].profileImg )));
                   $tr1.append($("<td class='chatListName' style='height: 30px;'>").text(data[i].userName));
-                  $tr1.append($("<td style='height: 30px;'>").append($("<button>").text("차단 해제")));
+             
+                  var $button = $("<button>").text("차단 해제").on("click", unblock);
+                  // td 엘리먼트를 생성하고 버튼을 추가
+                  var $td = $("<td style='height: 30px;'>").append($button);
+				  // tr1에 td를 추가
+                  $tr1.append($td);
+                  
                   // 2번째 행을 만드는 코드
                   var $tr2 = $("<tr>");
                   
@@ -1143,11 +1168,15 @@ body {
  		}  		
 	    
 	    $("#hiddenDivCloseBtn").on("click", function() {
-	    // 미리 만들어진 div 요소를 숨김
+	    // 미리 만들어진 div 요ㄴ소를 숨김
 	    $("#hiddenDiv").hide();
 	   });
 	  }
  	
+     function unblock() {
+    	 alert("아직 안함 ㅎㅎ");
+     }
+     
  	 // 2초에 한번씩 채팅 목록 불러오기
 	 setInterval(function(){
 	       $(".chatList").html("");
@@ -1157,6 +1186,8 @@ body {
 	      countAll();
 	      $("#" + elementId).css("background-color", "pink");
 	 }, 1000);
+ 	 
+ 	 
    </script>
 </body>
 </html>
