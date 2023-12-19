@@ -387,10 +387,12 @@
    			$("#gender").val("M"); 
    			$("#Men").addClass("borders");
    			$("#woMen").removeClass("borders");
+   			searchPerson();
    		}else {
    			$("#gender").val("F"); 
    			$("#woMen").addClass("borders");
    			$("#Men").removeClass("borders");
+   			searchPerson()
    		}	
    	}        
    	                       
