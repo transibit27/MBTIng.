@@ -17,9 +17,6 @@
     <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     
     <style>
-        * {
-            font-family: 'NanumSquare';
-        }
         .outer {
             width: 100%;
             margin: auto;
@@ -29,6 +26,9 @@
             width: 100%;
             height: 150px;
             overflow: hidden; 
+        }
+        .reviewBanner * {
+            font-family: 'NanumSquare';
         }
         .reviewBanner h3 {
             position: absolute;
@@ -58,6 +58,7 @@
             width: 250px;
             border: none;
             border-bottom: 2px solid pink;
+            font-family: 'NanumSquare';
         }
         .writereview-content {
             font-size: large;
