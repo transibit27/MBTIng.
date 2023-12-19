@@ -193,7 +193,9 @@
         margin: 0 auto;
         padding: 100px 0;
         border-radius: 5px;
-        background-color: black;
+        background-color: white;
+        
+        
     }
 
 	.slide_list > li {
@@ -287,6 +289,8 @@
         /*하위 요소들 정렬 위치*/
         border-radius: 5px;
         border: 1px solid pink;
+        justify-content: center;
+
     }
 
     .profile-info{
@@ -322,11 +326,12 @@
     }
 
     .profile-img {
-        width: 100px;
-        height: 100px;
+        width: 95px;
+        height: 95px;
         border-radius: 50%;
         border: 1px solid silver;
-        box-shadow: 5px 5px 5px grey;
+        box-shadow: 5px 5px 5px darkgrey;
+        object-fit: cover;
     }
 
     /* 프로필 카드 백 스타일 */
@@ -396,7 +401,7 @@
     #submitB{
         margin: auto;
         border-radius: 5px;
-        border: 1px solid hotpink;
+        border: 0px solid hotpink;
         background-color: pink;
         color: white;
         width: 100px;
@@ -414,7 +419,7 @@
     height: 100%;
     transition: all .5s;
     transform-style: preserve-3d;
-    box-shadow: 10px 50px 50px black;
+    box-shadow: 5px 10px 10px grey;
     }
 
     .swiper-slide:hover .card {
