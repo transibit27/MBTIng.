@@ -567,9 +567,8 @@
 						  			"<div class='user__content'>" +
 						  			 "<div class='text'>" +
 						  			 "<span class='name'>" + searchMem[i].userName + "</span>" +
-						  			 "<p class='mbti'>" + searchMem[i].mbti + "</p>" + "<p class='address'>" + searchMem[i].address + "</p>" +
+						  			 "<div class='mbti'>" + searchMem[i].mbti + "</div>" + "<div class='address'>" + searchMem[i].address + "</div>" + "<div class='match'>" + "❤️ " + searchMem[i].matchingCount + "명이 매칭 신청" + "</div>" +
 						  			 "</div>" +
-						  			 "❤️" +
 						  			 "<div class='introMe'>" + searchMem[i].introduce + "</div>" +
 						  			"<div class='like'><button id='button' onclick='requestMatch(this , " + searchMem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +

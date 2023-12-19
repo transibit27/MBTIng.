@@ -143,6 +143,7 @@
 		          AND MBTI IS NOT NULL
 		    ) A
      where USER_NO != #{userNo}
+         AND USER_NO != 0
     	 AND EMAIL NOT IN (
       SELECT BLOCKMEMEMAIL 
         FROM BLOCKMEMBER 
@@ -151,8 +152,18 @@
     
     <select id="searchMember" resultMap="memberResultSet" parameterType="searchmember">
     	 SELECT *
-    FROM MEMBER
-    WHERE STATUS = 'Y'
+    	   FROM (
+		        SELECT M.* , COALESCE(matching_count, 0) AS matching_count
+		        FROM MEMBER M
+		        LEFT JOIN (
+		            SELECT RECEIVER_NO, COALESCE(COUNT(*), 0) AS matching_count
+		            FROM MATCHING
+		            GROUP BY RECEIVER_NO
+		        ) C ON M.user_no = C.RECEIVER_NO
+		        WHERE STATUS = 'Y'  
+		          AND MBTI IS NOT NULL
+		    ) A
+    	WHERE STATUS = 'Y'
     <if test='height != "없음"'>
 	    <choose>
 	        <when test="endHeight == 160">
