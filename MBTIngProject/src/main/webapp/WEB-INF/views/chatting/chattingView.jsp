@@ -797,7 +797,7 @@ body {
                          
                           for(var i = 0; i < data.length; i++){
                               // 채팅 목록 동적 추가
-                            
+                              //$('.chatDiv').text("");
                               CheckLR(data[i]);
                           }
                           
