@@ -34,16 +34,13 @@
 body {
 	width : 100%;
 	height : 100%;
-}
-
-body {
-    overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
+	overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
     scrollbar-width: thin; /* 스크롤바의 너비를 조절 */
 }
 
 /* WebKit(Chrome, Safari) 브라우저에 대한 스크롤바 스타일 */
 body::-webkit-scrollbar {
-    width: 6px; /* 스크롤바의 너비를 조절 */
+    width: 3px; /* 스크롤바의 너비를 조절 */
 }
 body::-webkit-scrollbar-thumb {
     background-color: transparent; /* 스크롤바 색상을 투명하게 설정하여 보이지 않게 함 */
@@ -105,12 +102,27 @@ body::-webkit-scrollbar-thumb {
     height: 80%;
     border-left: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
-   
-   
     margin-top: 100px;
     margin-left: 50px;
+    overflow-y: scroll; /* 세로 스크롤바를 항상 표시 */
+    scrollbar-width: thin; /* 스크롤바의 너비를 조절 */
 }
 
+.chatDiv::-webkit-scrollbar {
+    width: 3px; /* 스크롤바의 너비를 조절 */
+}
+.chatDiv::-webkit-scrollbar-thumb {
+    background-color: transparent; /* 스크롤바 색상을 투명하게 설정하여 보이지 않게 함 */
+}
+
+
+.chatList::-webkit-scrollbar {
+    width: 0px;  /* 스크롤바의 너비를 조절 */
+}
+
+.chatList::-webkit-scrollbar-thumb {
+    background-color: transparent;  /* 스크롤바 색상을 투명하게 설정하여 보이지 않게 함 */
+}
 .chatList {
     width: 402px;
     height: 670px;
@@ -874,11 +886,12 @@ body::-webkit-scrollbar-thumb {
    }
    
    document.getElementById('message').addEventListener('keypress', function (e) {
-       if (e.key === 'Enter' || e.key === ' ') {
+       if (e.key === 'Enter') {
        	sendMessage();
            e.preventDefault(); // 폼 전송 방지
        }
    });
+   
    // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
     function CheckLR(data) {
         // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
@@ -1062,11 +1075,11 @@ body::-webkit-scrollbar-thumb {
                   // 첫 번째 행을 만드는 코드
                   var $tr1 = $("<tr>");
                   $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", "http://localhost:8081/mbting" + data[i].profileImg )));
-                  $tr1.append($("<td class='chatListName' style='height: 30px;'>").text(data[i].userName));
+                  $tr1.append($("<td  rowspan='2' style='height: 30px;'>").text(data[i].userName));
              
-                  var $button = $("<button>").text("차단 해제").on("click", unblock);
+                  var $button = $("<button>").text("차단 해제").on("click", unblock).attr("id", "submitButton").css("background-color", "lightgray");
                   // td 엘리먼트를 생성하고 버튼을 추가
-                  var $td = $("<td style='height: 30px;'>").append($button);
+                  var $td = $("<td  rowspan='2' style='height: 30px;'>").append($button);
 				  // tr1에 td를 추가
                   $tr1.append($td);
                   
