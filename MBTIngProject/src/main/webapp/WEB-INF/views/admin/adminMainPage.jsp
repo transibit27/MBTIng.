@@ -517,7 +517,8 @@
 		  url : "selectTotalPay.ad",
 		  type : "get",
 		  success : function(result) {
-			  $("#totalPays").text(result + "원");
+			  const formattedResult = Number(result).toLocaleString();
+			  $("#totalPays").text(formattedResult + "원");
 		  },
 		  error : function() {
 			  console.log("ajax 통신 실패!");
