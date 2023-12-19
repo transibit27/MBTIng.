@@ -23,9 +23,9 @@
 		  box-sizing: border-box; 
 	}
 	
-	html {
+	/* html {
     	overflow: hidden;
-	}
+	} */
 	
 	body {
 	  padding: 0px;
@@ -179,7 +179,6 @@
 		/*-------------------------------MBTI Test 추천 Style--------------------------*/
 		.wrap {
 			width : 100%;
-			position: relative;
 			height : 100%;
 		}
 		
@@ -192,28 +191,33 @@
 		}
 		
 
-		#content_1 {
+		#content_4 {
 			display : inline-block;
 			width : 100%;
-			background-color: pink;
-			height: calc(100% - 100px);
+			height: calc(85% - 100px);
 		}
 		
-		#content_2 , #content_3 , #content_4 {
+		#content_2 , #content_3 {
 			position: relative;
 			width : 100%;
 			height : 100%;
 			top: -6.375em; 
 		}
 
+		#content_1 {
+			position: relative;
+			width : 100%;
+			height : 100%;
+			background-color: pink;
+		}
 		#Content1BigText {
 			font-size: 4.6em;
-			margin-top: 7.4em;
-			margin-left: 5em;
+			margin-top: 6em;
+			margin-left: 1em;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
-			height : 1em;
+			height: 1em;
 		}
 		
 		#Content1BigText a {
@@ -222,7 +226,7 @@
 		}
 
 		#Content1BigText a:hover {
-			color : rgb(219, 250, 255);
+			color : rgb(196, 246, 253);
 			cursor: pointer;
 		}
 
@@ -239,32 +243,26 @@
 		#testImg { 
 			border-radius: 30px;
 			height: 46%;
-			width : 33%;
-			top : 6.5em;
-			left : 19%;
-			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingResult.png") ;
+			width: 33%;
+			top: 3em;
+			left: 52em;
+			background-image: url(/mbting/resources/images/mbtingResult.png);
 			background-size: cover;
 			position: absolute;
 			z-index: 1;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
-			/*filter: blur(3px);*/
 		}
-		/*
-		#testImg:hover, #testResultImg:hover{
-			filter: none;
-		}
-		*/
+
 		#testResultImg {
 			border-radius: 30px;
 			height: 64%;
-			width : 27%;
+			width: 27%;
 			position: absolute;
-			top : 20%;
-			left : 55%;
-			background-image: url("${pageContext.request.contextPath}/resources/images/mbtingTest.png") ;
+			top: 9em;
+			left: 81em;
+			background-image: url(/mbting/resources/images/mbtingTest.png);
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
-			/*filter: blur(3px);*/
 		}
 
 		/*-----------------------------Top4 분석----------------------------*/
@@ -429,11 +427,7 @@
 			#Content1BigText label {
 				color : rgb(255, 0, 221);
 			}
-			
-			.img {
-				width  : 40%;
-				height : 40%;
-			}
+		
 			
 		
 		/*------------------------스크롤기능---------------------------------*/
@@ -455,25 +449,63 @@
 
 		<div class="wrap">
 
-				<div id="content_1" class="content">
-				<!--<div id="content1TopText">사람마다 각기 가지고 있는 연애 스타일을 <br>
-											  설문조사를 통한 통계 기반 맞춤형 추천 서비스 <br>
-											  연애는 첫단추가 중요하다 ! 처음부터 딱 맞는 상대방 찾기 </div>-->	
-					<div id="Content1BigText">나의 연애 <a href="mbtiTest.mb">MBTI TEST </a> 하기 <br> 
-						<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p>
+			<div id="content_4">
+				<!-- Slider main container -->
+				<div class="swiper">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+						<!-- Slides -->
+						<div class="swiper-slide">
+							<div id="content_1" class="content">
+								<div>
+									<div id="testImg"></div>
+								</div>
+								<div class="test">
+									<div id="testResultImg"></div>
+								</div>
+								<div id="Content1BigText">나의 연애 <a href="mbtiTest.mb">MBTI TEST </a> 하기 <br> 
+									<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
+						<div class="swiper-slide"><img src="https://mblogthumb-phinf.pstatic.net/MjAxNzExMDlfMjYz/MDAxNTEwMTg3MzYyNzE3.G1U_AKRbAn-g--iarsiK9Dr5wK3F2nimVy_YM61R-qYg.aE9ABDeR5rvK2dNqf-euPfOsmT982IzDo6Ny1wnyQiog.JPEG.qwqwjd2002/KakaoTalk_20171106_231729476.jpg?type=w800"></div>
+						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
 					</div>
-					<div id="arrow">
-						<img src="https://cdn-icons-png.flaticon.com/128/60/60934.png"> 
-					</div>
-				</div>
 				
-				<div class="test">
-						<div id="testImg"></div>
+					<!-- paging 바를 위한 스타일 -->
+					<div class="swiper-pagination"></div>
+				
+					<!-- 네비게이션 버튼 -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+			
 				</div>
-				<div>
-						<div id="testResultImg"></div>
-				</div>
-		</div>
+			</div> <!-- content_4 닫는 div -->
+						<script>
+							// 슬라이더 동작 정의
+							const swiper = new Swiper('.swiper', {
+								autoplay : {
+									delay : 3000 // 3초마다 이미지 변경
+								},
+								loop : true, 		//반복 재생 여부
+								slidesPerView : 1,  // 이전, 이후 사진 미리보기 갯수
+								pagination: { 		// 페이징 버튼 클릭 시 이미지 이동 가능
+									el: '.swiper-pagination',
+									clickable: true
+								},
+								navigation: { 		// 화살표 버튼 클릭 시 이미지 이동 가능
+									prevEl: '.swiper-button-prev',
+									nextEl: '.swiper-button-next'
+								}
+							}); 
+						</script>
+
+		
+
+
+			
+			
 		
 		<div id="content_2" class="content">
 					<div id="topText"> <label>현재 가장 매칭 신청을 많이 받은 Top 4</label></div>
@@ -549,6 +581,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		  </div>
 		</div>	
 
+	</div>
 
   <script>
   	$(function() {
@@ -803,7 +836,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 </script>
 
   <!-- mouse wheel을 사용하기 위한 script 코드 입니당. -->
-  <script>
+  <!-- <script>
  	 window.addEventListener("wheel", function(e){
 	   	 e.preventDefault();
 	},{passive : false});
@@ -826,51 +859,11 @@ MBTIng 덕분에 제 운명을 만났어요....!
  	    }
  	    var posTop =(page-1) * $(window).height();
  	    mHtml.animate({scrollTop : posTop});
- 	})
+ 	}) -->
  	
   </script>
 	<!-- swipe 영역 -->
-	<div id="content_4">
-        <!-- Slider main container -->
-        <div class="swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide"><img src="https://i.pinimg.com/564x/08/24/4e/08244ec59ca7b14b27fadf0b427ac138.jpg"></div>
-                <div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
-                <div class="swiper-slide"><img src="https://mblogthumb-phinf.pstatic.net/MjAxNzExMDlfMjYz/MDAxNTEwMTg3MzYyNzE3.G1U_AKRbAn-g--iarsiK9Dr5wK3F2nimVy_YM61R-qYg.aE9ABDeR5rvK2dNqf-euPfOsmT982IzDo6Ny1wnyQiog.JPEG.qwqwjd2002/KakaoTalk_20171106_231729476.jpg?type=w800"></div>
-                <div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
-            </div>
-        
-            <!-- paging 바를 위한 스타일 -->
-            <div class="swiper-pagination"></div>
-        
-            <!-- 네비게이션 버튼 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        
-            <!-- 스크롤바 -->
-            <div class="swiper-scrollbar"></div>
-        </div>
-	</div> <!-- content_4 닫는 div -->
-			    <script>
-			        // 슬라이더 동작 정의
-			        const swiper = new Swiper('.swiper', {
-			            autoplay : {
-			                delay : 3000 // 3초마다 이미지 변경
-			            },
-			            loop : true, 		//반복 재생 여부
-			            slidesPerView : 1,  // 이전, 이후 사진 미리보기 갯수
-			            pagination: { 		// 페이징 버튼 클릭 시 이미지 이동 가능
-			                el: '.swiper-pagination',
-			                clickable: true
-			            },
-			            navigation: { 		// 화살표 버튼 클릭 시 이미지 이동 가능
-			                prevEl: '.swiper-button-prev',
-			                nextEl: '.swiper-button-next'
-			            }
-			        }); 
-			    </script>
+	
 
 		<!-- 채팅 api -->
 		<!--Start of Tawk.to Script-->
