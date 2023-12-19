@@ -177,6 +177,7 @@
         width: 1200px;
         margin: auto;
         margin-bottom: 80px; 
+        
     }
     
 	.slider {
@@ -477,8 +478,7 @@
     
             <div class="slider">
                 <div class="inner">
-                    <ul class="swiper-wrapper slide_list">
-     
+                    <ul class="swiper-wrapper slide_list"></ul>
                 </div>
                 <span class="btn btn_prev"></span>
                 

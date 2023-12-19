@@ -133,6 +133,7 @@
     	  FROM MEMBER
     	 WHERE STATUS = 'Y'
     	 AND USER_NO != #{userNo}
+    	 AND USER_NO != 0
     </select>
     
     <select id="searchMember" resultMap="memberResultSet" parameterType="searchmember">
@@ -169,6 +170,7 @@
     AND ADDRESS = #{address}
     </if>
     AND USER_NO != #{userNo}
+    AND USER_NO != 0
     </select>
       
     <select id="checkProposer" resultMap="mbtiResultSet" parameterType="_int">
