@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">  
 <style>
-    * {font-family: 'NanumSquareExtraBold';}
+    * {font-family: 'NanumSquare';}
 	
 	.my-outer{
 		width: 100%;
