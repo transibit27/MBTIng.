@@ -9,7 +9,12 @@
 
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+
     <style>
+        * {
+            font-family: 'NanumSquare';
+        }
         .outer {
             width: 100%;
             margin: auto;
