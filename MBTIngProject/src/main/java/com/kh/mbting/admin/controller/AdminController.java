@@ -287,17 +287,17 @@ public class AdminController {
 	 * System.out.println("result1" + result1); }
 	 */
 
-	
+	// 회원관리 상태 변경 및 저장
 	  @ResponseBody
 	  @RequestMapping("update-status") 
 	  public String updateStatus(@RequestParam("userNo") String userNo, @RequestParam("status") String status) {
-		  
-		  
-		  int result = adminService.updateStatus(userNo, status);
-		  if(result > 0) {
-			  return "YYY";
-		  } else {
-			  return  "NNN";  
+	  
+	  
+	  int result = adminService.updateStatus(userNo, status);
+	  if(result > 0) {
+		  return "YYY";
+	  } else {
+		  return  "NNN";  
 		  }
 		  	  
 	  }

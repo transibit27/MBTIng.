@@ -84,7 +84,7 @@ public interface AdminService {
 	 * // 전체회원 수를 가져오는 METHOD int selectAllMember();
 	 */
     
-	
+    // 회원관리 상태 변경 및 저장
 	int updateStatus(String userNo, String status);
 	     
     

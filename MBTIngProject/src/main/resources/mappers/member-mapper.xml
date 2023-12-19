@@ -477,7 +477,7 @@
 		FROM MEMBER
 	</select>
 	-->
-	
+	<!-- 회원관리 상태 변경 및 저장 -->
 	<update id="updateStatus" parameterType="hashmap">
 	    UPDATE MEMBER
 	    SET STATUS = #{status}

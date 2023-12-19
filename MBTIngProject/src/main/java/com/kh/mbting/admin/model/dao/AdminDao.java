@@ -197,6 +197,7 @@ public class AdminDao {
 	 * sqlSession.update("memberMapper.updateSelectedStatus2", memberNo); } return
 	 * result; }
 	 */
+    // 	회원관리 상태 변경 및 저장
     public int updateStatus(SqlSessionTemplate sqlSession, Map<String, Object> map) {
     	return sqlSession.update("memberMapper.updateStatus", map);
     }

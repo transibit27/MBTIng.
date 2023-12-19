@@ -137,10 +137,10 @@
         // isChecked 값에 따라 원하는 작업 수행
         if (isChecked) {
         	check = "Y";
-            alert('checked');
+            alert('정상');
         } else {
         	check = "N";
-            alert('not checked');
+            alert('회원 정지 완료');
         }
         $.ajax({
         	url : "update-status",

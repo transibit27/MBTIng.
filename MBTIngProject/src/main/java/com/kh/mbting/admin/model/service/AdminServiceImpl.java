@@ -188,7 +188,7 @@ public class AdminServiceImpl implements AdminService {
 	 * adminDao.selectAllMember(sqlSession); }
 	 */
 	
-	
+	 // 회원관리 상태 변경 및 저장
 	 @Override
 	 public int updateStatus(String userNo, String status) {
 		 Map<String, Object> paramMap = new HashMap<>(); 
