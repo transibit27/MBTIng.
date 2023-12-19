@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>내 인연 찾기</title>
 
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+
+
 <style>
 
     @font-face {
@@ -29,7 +32,9 @@
         display: flex;
         justify-content: center;
         height: auto;
+        width: 1400px;
         margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     .mbtiMatch,
@@ -39,15 +44,16 @@
         align-items: center;
         border-radius: 10px;
         width: 500px;
-        margin: 0px 30px;
+        margin: auto;
+        margin: 0px 150px;
     }
 
     .userPf {
         display: flex;
         align-items: center;
         border-radius: 20px;
-        width: 450px;
-        height: 160px;
+        width: 700px;
+        height: 300px;
         margin: 20px 0px;
         padding: 10px;
         background-color: rgb(244, 244, 244);   
@@ -55,12 +61,12 @@
     
     #userPfImg {
         border-radius: 50%;
-        width: 200px;
-        height: 130px;
+        width: 420px;
+        height: 250px;
         object-fit: cover;
         margin-right: 10px;
-        margin-left: 5px;
-        overflow: hidden; /* 새로운 추가 */
+        margin-left: 10px;
+        overflow: hidden;
     }
 
     #userPfImg img {
@@ -75,33 +81,31 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         width: 100%;
         padding: 20px;
     }
 
-    .userName,
-    .userIntroduce {
+    .userName {
         margin: 0;
         padding: 0;
-        text-align: center;
-    }
-
-    .userName {
         font-weight: bold;
         font-size: 18px;
         margin-bottom: 5px;
+        text-align: start;
     }
 
     .userIntroduce {
         margin-top: 5px;
+        text-align: start;
+        margin-left: 15px;
     }
 
     .chatRequestBtn {
         border: 0;
         border-radius: 10px;
         background-color: pink;
-        width: 100%;
+        width: 300px;
         margin-top: 10px;
         cursor: pointer;
         color: white;
@@ -114,23 +118,6 @@
         background-color: #ff66b2;
     }
 
-    .paging-area button {
-        width: 35px;
-        height: 30px;
-        border: none;
-        border-radius: 5px;
-        background-color: pink;
-    }
-
-    .paging-area button:hover {
-        border: 1px solid pink;
-        background-color: white;
-    }
-
-    .paging-area button[disabled]:hover {
-        border: none;
-        background-color: pink;
-    }
 
 </style>
 </head>
@@ -152,7 +139,7 @@
         
         <div class="matchList">
             <span class="mbtiMatch">
-                <h2 style="font-family: 'KOTRAHOPE'; margin: 30px 0px;">내 운명의 인연</h2>
+                <h2 style="font-family: 'NanumSquareBold'; margin: 30px 0px;">내 운명의 인연</h2>
                 
                 <c:choose>
                     <c:when test="${not empty requestScope.matchList}">
@@ -179,7 +166,7 @@
             </span>
             
             <span class="randomMatch">
-                <h2 style="font-family: 'KOTRAHOPE'; margin: 30px 0px;">랜덤으로 추천하는 인연</h2>
+                <h2 style="font-family: 'NanumSquareBold'; margin: 30px 0px;">랜덤으로 추천하는 인연</h2>
                 
                 <c:choose>
                     <c:when test="${not empty requestScope.randomList}">
@@ -205,6 +192,9 @@
             </span>
         </div>
     </div>
+
+	<jsp:include page="../common/footer.jsp" />
+
 </body>
 
 <script>

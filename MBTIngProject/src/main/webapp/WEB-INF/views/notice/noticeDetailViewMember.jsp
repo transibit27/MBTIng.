@@ -87,7 +87,7 @@
         <img src="./resources/images/NoticeBanner.jpg" alt="">
     </div> -->
 
-	<div class="notice-content">
+	<div class="notice-content" style="height: 50rem;">
 		
 		<div class="notice-innerOuter">
 		

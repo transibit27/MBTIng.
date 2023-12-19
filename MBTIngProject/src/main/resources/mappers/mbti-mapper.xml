@@ -58,29 +58,49 @@
 	-->
 	
 	<select id="selectMatchList" resultMap="mbtiResultSet" parameterType="member">
-	    SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
-	      FROM MEMBER
-	     WHERE MBTI = #{mbtiMatch}
-	       AND USER_NO != #{userNo}
-	       AND (USER_NO NOT IN (SELECT RECEIVER_NO
-		                          FROM MATCHING
-		                          WHERE PROPOSER_NO = #{userNo})
-		     AND USER_NO NOT IN (SELECT PROPOSER_NO
-		                           FROM MATCHING
-		                          WHERE RECEIVER_NO = #{userNo}))
+		SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+		FROM (
+		    SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+		    FROM MEMBER
+		    WHERE MBTI = #{mbtiMatch}
+		      AND USER_NO != #{userNo}
+		      AND USER_NO != 0
+		      AND GENDER != #{gender}
+		      AND USER_NO NOT IN (
+		          SELECT RECEIVER_NO
+		          FROM MATCHING
+		          WHERE PROPOSER_NO = #{userNo}
+		          UNION
+		          SELECT PROPOSER_NO
+		          FROM MATCHING
+		          WHERE RECEIVER_NO = #{userNo}
+		      )
+		    ORDER BY DBMS_RANDOM.VALUE
+		)
+		WHERE ROWNUM &lt;= 5
 	</select>
 	
 	<select id="selectRandomList" resultMap="mbtiResultSet" parameterType="member">
-	    SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
-	      FROM MEMBER
-	     WHERE MBTI != #{mbtiMatch}
-	       AND USER_NO != #{userNo}
-	       AND (USER_NO NOT IN (SELECT RECEIVER_NO
-		                          FROM MATCHING
-		                          WHERE PROPOSER_NO = #{userNo})
-		     AND USER_NO NOT IN (SELECT PROPOSER_NO
-		                           FROM MATCHING
-		                          WHERE RECEIVER_NO = #{userNo}))
+		SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+		FROM (
+		    SELECT USER_NO, USER_NAME, INTRODUCE, PROFILE_IMG, MBTI, MBTI_MATCH, STATUS
+		    FROM MEMBER
+		    WHERE MBTI != #{mbtiMatch}
+		      AND USER_NO != #{userNo}
+		      AND USER_NO != 0
+		      AND GENDER != #{gender}
+		      AND USER_NO NOT IN (
+		          SELECT RECEIVER_NO
+		          FROM MATCHING
+		          WHERE PROPOSER_NO = #{userNo}
+		          UNION
+		          SELECT PROPOSER_NO
+		          FROM MATCHING
+		          WHERE RECEIVER_NO = #{userNo}
+		      )
+		    ORDER BY DBMS_RANDOM.VALUE
+		)
+		WHERE ROWNUM &lt;= 5
 	</select>
 	
 
