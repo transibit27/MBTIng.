@@ -512,7 +512,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
+						<div class="swiper-slide">
+							
+						</div>
 						<div class="swiper-slide"><img src="https://mblogthumb-phinf.pstatic.net/MjAxNzExMDlfMjYz/MDAxNTEwMTg3MzYyNzE3.G1U_AKRbAn-g--iarsiK9Dr5wK3F2nimVy_YM61R-qYg.aE9ABDeR5rvK2dNqf-euPfOsmT982IzDo6Ny1wnyQiog.JPEG.qwqwjd2002/KakaoTalk_20171106_231729476.jpg?type=w800"></div>
 						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
 					</div>

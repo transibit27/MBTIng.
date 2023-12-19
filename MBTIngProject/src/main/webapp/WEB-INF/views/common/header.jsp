@@ -107,6 +107,7 @@
             display: flex;
             justify-content: center;
             width: 30%;
+            min-width: 300px;
             text-align: center;
             font-size: 12px;
             font-family: 'NanumSquare';
