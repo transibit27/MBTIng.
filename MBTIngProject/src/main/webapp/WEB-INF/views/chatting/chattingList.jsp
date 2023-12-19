@@ -20,15 +20,18 @@
 .content_1  {
 	width : 100%;
 	margin: auto;
-	border-radius : 20px;
-	height : 280px;
-	background-color : rgb(255,210,210) 
+  	background-color: rgb(255,215,215);
+  	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  	border-radius: 8px;
+  	padding: 20px;
+  	margin: 20px 0;
+ 	transition: transform 0.3s ease-in-out;
 }
 
 #div {
     margin: 0 !important;
     width: 100%;
-    border: 1px solid black;
+    border: 1px solid lightgray;
 }
 .content_2 {
   padding-top : 20px;
@@ -126,7 +129,7 @@
 }
 
 .introMe {
-	/*border : 1px solid black;*/
+	/*border : 1px solid lightgray;*/
 	width : 550px;
 	height : 130px;
 	padding-top : 45px;
@@ -156,11 +159,11 @@
 
 /*-------------좋어요 버튼----------------*/
 #button {
-    padding: 0 20px 0 10px;
+    padding: 0 15px 0 15px;
     border-radius: 10px;
     box-shadow: 0px 0px 5px 7px #e7413373;
-    color: lightgray;
-    font-size: 17px;
+    color: gray;
+    font-size: 14px;
     border: none;
     display: flex;
     align-items: center;
@@ -247,8 +250,14 @@
   }
 
   #Men , #woMen{
-	border: 1px solid rgb(255, 255, 255);
-	background-color: white;
+	  padding: 8px 16px;
+	  font-size: 14px;
+	  color: black;
+	  background-color: white;
+	  border: none;
+	  border-radius: 6px;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease-in-out;
   }
   #Men:hover {
 	background-color: skyblue;
@@ -544,7 +553,7 @@
 	             success: function(response) {
 	            	 console.log("하하 성공");
 	            	 e.style.backgroundColor = "#DDDEA5";
-	            	 e.style.color = "white";
+	            	 e.style.color = "gray";
 	            	 e.innerText = "채팅하기";
 	            	 location.href="http://localhost:8081/mbting/convert.ch";
 	             },
