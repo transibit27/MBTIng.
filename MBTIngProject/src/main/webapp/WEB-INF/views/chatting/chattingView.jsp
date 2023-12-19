@@ -38,9 +38,9 @@ body {
 
 .wrap {
     width : 484px;
-    height : 700px;
+    height: 670px;
     margin: auto;
-    border: solid 5px lightgray;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); 
     font-family: 'IBM Plex Sans KR', sans-serif;
     border-radius : 20px;
 }
@@ -55,16 +55,17 @@ body {
 
 #profileDiv {
     width: 400px;
-    height: 700px;
+    height: 670px;
     margin-left: 40px;
     margin-right: 50px;
     background-color: #ffcece;
     border-radius : 16px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); 
 }
 
 #profileDiv table {
     width: 400px;
-    height: 80%;
+    height: 650px;
 }
 
 #profileDiv table td{
@@ -73,9 +74,10 @@ body {
 }
 
 #profileDiv img {
-    height: 250px;
-    width : 250px; 
-    border-radius: 200px; 
+    height: 270px;
+    width : 270px; 
+    border-radius: 20px; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); 
 }
 
 
@@ -93,11 +95,12 @@ body {
     overflow:auto;
     margin-top: 100px;
     margin-left: 50px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); 
 }
 
 .chatList {
     width: 402px;
-    height: 700px;
+    height: 670px;
     border : 1px solid black;
 }
 
@@ -118,7 +121,7 @@ body {
   height: 40px;
   line-height: 43px;
   padding: 0 1rem;
-  margin : 20px;
+  margin : 8px;
   border: 2px solid transparent;
   border-radius: 8px;
   background-color: rgb(207, 207, 207);
@@ -135,9 +138,11 @@ body {
 }
 
 #chatInput {
-    width: 670px;
-    height: 200px;
-    margin-left : 500px;
+    width: 620px;
+    height: 120px;
+    margin-left : 490px;
+    margin-top : 25px;
+    box-sizing: border-box;  
 }
 
 #chatInput > table {
@@ -147,10 +152,13 @@ body {
 
 #chatInput textarea {
     resize: none;
+    padding : 15px;
+    background-color: rgb(248, 244, 244);
 }
 
 #chatInput td {
     height : 100%;
+    padding : 20px;
 }
 
 .chatList_box {
@@ -177,6 +185,7 @@ body {
 	 overflow : auto;
 	 overflow-x: hidden;
 }
+
 .chatList_box table {
     width : 100%;
     height : 80%; 
@@ -227,7 +236,7 @@ body {
 
 .chatInfo {
     width : 80px;
-    height : 700px;
+    height: 670px;
     border : 1px solid black;
     background-color: rgb(255, 218, 218);
 	border-top-left-radius: 18px;
@@ -249,16 +258,7 @@ body {
     height : 30px;
 }
 
-/*
-#chatAllCount {
-    border-radius: 50px;
-    border: 1px solid black;
-    width: 50px;
-    height : 50px;
-    margin: auto;
-    cursor: pointer;
-}
-*/
+
  .count {
  	width : 35px;
  	height : 35px;
@@ -535,7 +535,7 @@ body {
                
                 <table> 
                    <tr>
-                       <td colspan="3" style="height:250px; padding-top: 70px; "><img id="masterImg"> </td>
+                       <td colspan="3" style="height:250px; padding-top: 30px; "><img id="masterImg"> </td>
                    		<input type="hidden" id="deleteMasterEmail" value="">
                    </tr>
                    <tr>
@@ -545,44 +545,29 @@ body {
                        <td colspan="3"></td>
                    </tr>
                    <tr>
-                       <td colspan="3" style="height: 10px;" ><p id="mbti" style="font-size : 25px;"></p></td>
+                       <td colspan="3" style="height: 10px;" ><p id="mbti" style="font-size : 25px; margin : 0px;"></p></td>
                    </tr>
                    <tr>
                        <td colspan="3"></td>
                    </tr>
                    <tr>
-                       <td colspan="3" style="height: 10px;"><p id="intro"></p></td>
+                       <td colspan="3" style="height: 10px;"><p id="intro" style="padding : 25px; margin : 0px;"></p></td>
                    </tr>
                    <tr>
-                       <td colspan="3"></td>
-                   </tr>
-                   <tr>
-                       <td colspan="3"></td>
-                   </tr>
-                   <tr>
-                       <td colspan="3">후기 남기기</td>
-                   </tr>
-                   <tr>
-                       <td colspan="3"></td>
-                   </tr>
-                   <tr>
-                       <td><div><button id="submitButton" onclick="blockMember(this);">차단하기</button></div></td>
-                       <td><div><button id="submitButton" onclick="deleteMessage(this);">채팅 종료</button></div></td>
-                       <td><div><button id="submitButton" onclick="Home();">홈으로</button></div></td>
+                       <td><div><button id="submitButton" onclick="blockMember(this);" style="background-color : rgb(255, 232, 232)">차단하기</button></div></td>
+                       <td><div><button id="submitButton" onclick="deleteMessage(this);" style="background-color : rgb(255, 232, 232)">채팅 종료</button></div></td>
+                       <td><div><button id="submitButton" onclick="Home();" style="background-color : rgb(255, 229, 229)">홈으로</button></div></td>
                    </tr>
                 </table>
            </div>
         </div>
         <div id="chatInput" class="hidden">
             <table>
-                <tr>
-                    <td colspan="2" style="height: 30px;"><img style="width : 40px; height: 30px;"  src="https://cdn-icons-png.flaticon.com/128/6350/6350285.png"></img></td>
-                </tr>
                 <tr> 
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
                     </td>
-                    <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 95%; margin-bottom : 5px;>" onclick="sendMessage();" >전송</button></td>
+                    <!-- <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 100%; margin-bottom : 5px; margin-left : 30px;>" onclick="sendMessage();" >전송</button></td> -->
                 </tr>
             </table>
         </div>
@@ -874,6 +859,13 @@ body {
             $("#message").val("");//초기화 효과
          }
    }
+   
+   document.getElementById('message').addEventListener('keypress', function (e) {
+       if (e.key === 'Enter' || e.key === ' ') {
+       	sendMessage();
+           e.preventDefault(); // 폼 전송 방지
+       }
+   });
    // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
     function CheckLR(data) {
         // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽

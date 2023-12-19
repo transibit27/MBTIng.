@@ -606,9 +606,9 @@
 	             url: "accept.me",
 	             data: {"receiverNo" : receiverNo, "proposerNo" : proposerNo},
 	             success: function(response) {
-	            	 console.log("하하 성공");
+	            	 //console.log("하하 성공");
 	            	 e.style.backgroundColor = "#DDDEA5";
-	            	 e.style.color = "gray";
+	            	 e.style.color = "white";
 	            	 e.innerText = "채팅하기";
 	            	 location.href="http://localhost:8081/mbting/convert.ch";
 	             },
