@@ -10,16 +10,17 @@
     <style>
         /* 회원관리 스타일 */
         #memberList {
-            width: 1000px;
+            width: 900px;
             font-size: 14px; 
-            margin-left: 100px;
+            margin-left: 75px;
             text-align: center;
             margin: auto;
         }
 		
         #searchForm {
-            width: 450px;
-            margin: auto;
+            width:500px;
+    		margin:auto;
+            
         }
 
         .btn-primary {
@@ -33,7 +34,7 @@
         }
 
         #wrap {
-            margin-left: 250px;
+            margin-left: 70px;
         }
 
         #pagingArea {
@@ -45,7 +46,7 @@
         #toggleSave {
         	margin-top : 20px;
         	margin-bottom : 20px;
-        	margin-left : 80%;
+        	margin-left : 73%;
         	width:100px;
         }
     </style>
