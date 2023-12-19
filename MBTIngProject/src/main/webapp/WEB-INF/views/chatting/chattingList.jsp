@@ -20,7 +20,7 @@
 .content_1 {
   width: 100%;
   margin: auto;
-  background-color: #ffe4e4; 
+  background-color: #fff1f1; 
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
   border-radius: 10px; 
   padding: 30px;
@@ -84,12 +84,24 @@
 }
 
 .name {
-  font-weight: 800;
+   font-weight: 900;
+   font-size : 20px;
 }
 
 .mbti {
-  font-size: .9em;
+  font-size: 15px;
   color: #64696e;
+  border-radius : 8px;
+  margin-top : 10px;
+  padding : 5px;
+  width : 48px;
+  background-color: rgb(242, 242, 242);
+ }
+
+.text {
+ height : 150px;
+ width : 200px;
+ padding : 3px;
 }
 
 .image {
@@ -107,7 +119,21 @@
   padding: 8px 15px;
   font-weight: 700;
 }
+.address {
+  font-size: 15px;
+  color: #64696e;
+  border-radius : 8px;
+  margin-top : 10px;
+  padding : 5px;
+  width : 98px;
+  background-color: rgb(242, 242, 242);
+  margin-bottom : 10px;
+}
 
+.match {
+ color : gray;
+ font-size : 14px;
+}
 .more {
   display: block;
   text-decoration: none;
@@ -133,9 +159,10 @@
 
 .introMe {
 	/*border : 1px solid lightgray;*/
-	width : 550px;
+	width : 450px;
 	height : 130px;
 	padding-top : 45px;
+	color : gray;
 }
 /*----------프로필 사진 card 스타일-----------------*/
 
@@ -145,8 +172,9 @@
 .cardImage img {
     width : 160px;
     height : 160px; 
-    border-radius: 100px;
+    border-radius: 10px;
     border: 2px solid lightgray;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
 }
 
 
@@ -229,6 +257,7 @@
   height: 50px;
   margin: 10px;
   transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+  color : gray;
 }
 
 /* Added focus effect for better user experience */
@@ -261,34 +290,38 @@
 
 	#Men {
 	  width: 100px;
-	  height: 40px;
+	  height: 100px;
 	  border: none;
-	  background-color: #87CEEB; /* 하늘색 배경 */
-	  color: #fff; /* 흰색 텍스트 */
+	  background-color: rgb(255, 253, 253); /* 하늘색 배경 */
+	  color: lightgray; /* 흰색 텍스트 */
 	  border-radius: 20px; /* 둥근 테두리 */
 	  cursor: pointer;
 	  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+	  margin-bottom : 15px;
 	}
 	
 	#Men:hover {
 	  background-color: #add8e6; /* 연한 하늘색으로 변경 */
 	  transform: scale(1.05); /* 약간 크기 확대 효과 */
+	  color : white;
 	}
 	
 	#woMen {
 	  width: 100px;
-	  height: 40px;
+	  height:100px;
 	  border: none;
-	  background-color: #FFCCCC; /* 연한 분홍색 배경 */
-	  color: #fff; /* 흰색 텍스트 */
+	  background-color: rgb(255, 253, 253); /* 연한 분홍색 배경 */
+	  color: lightgray; /* 흰색 텍스트 */
 	  border-radius: 20px; /* 둥근 테두리 */
 	  cursor: pointer;
 	  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+	  margin-bottom : 15px;
 	}
 	
 	#woMen:hover {
 	  background-color: #ffb3b3; /* 더 연한 분홍색으로 변경 */
 	  transform: scale(1.05); /* 약간 크기 확대 효과 */
+	  color : white;
 	}
 
  #searchButton {
@@ -335,14 +368,13 @@
 		
     <div class="wrap">
     <br><br><br>
-    	<div class="content_1">
-        <p class="title">MBTIng 회원들</p>
-        
-         <input type="hidden" value="N"  name="gender" id="gender">
+    
+          <input type="hidden" value="N"  name="gender" id="gender">
         <div id="genderCheck">
-        	<button id="Men"   class="genderButton " type="button" onclick="Gender(1);" >남</button>
-        	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);" >여</button>
+        	<button id="Men"   class="genderButton " type="button" onclick="Gender(1);" ><img style="height : 40px;"src="https://cdn-icons-png.flaticon.com/128/3741/3741578.png"> 남자 </button>
+        	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);" ><img style="height : 40px;"src="https://cdn-icons-png.flaticon.com/128/3741/3741708.png"> 여자</button>
         </div>	
+    	<div class="content_1">
         	<table id="searchTable">
         		<tr>
         			<td>키</td>
@@ -420,6 +452,7 @@
         		</tr>
     		</table>
 	</div>
+
     
     <div id="div"></div>
     
@@ -478,7 +511,8 @@
 						  			"</div>" +
 						  			"<div class='user__content'>" +
 						  			 "<div class='text'>" +
-						  			 "<span class='name'>" + mem[i].userName + "<p class='mbti'>" + mem[i].mbti + "</p></span>" +
+						  			 "<span class='name'>" + mem[i].userName + "</span>" +
+						  			 "<div class='mbti'>" + mem[i].mbti + "</div>" + "<div class='address'>" + mem[i].address + "</div>" + "<div class='match'>" + "❤️ " + mem[i].matchingCount + "명이 매칭 신청" + "</div>" +
 						  			 "</div>" +
 						  			 "<div class='introMe'>" + mem[i].introduce + "</div>" +
 						  			 "<div class='like'><button id='button' onclick='requestMatch(this , " + mem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
@@ -533,8 +567,9 @@
 						  			"<div class='user__content'>" +
 						  			 "<div class='text'>" +
 						  			 "<span class='name'>" + searchMem[i].userName + "</span>" +
-						  			 "<p class='mbti'>" + searchMem[i].mbti + "</p>" +
+						  			 "<p class='mbti'>" + searchMem[i].mbti + "</p>" + "<p class='address'>" + searchMem[i].address + "</p>" +
 						  			 "</div>" +
+						  			 "❤️" +
 						  			 "<div class='introMe'>" + searchMem[i].introduce + "</div>" +
 						  			"<div class='like'><button id='button' onclick='requestMatch(this , " + searchMem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +

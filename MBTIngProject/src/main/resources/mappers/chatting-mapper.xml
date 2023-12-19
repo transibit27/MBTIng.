@@ -42,7 +42,8 @@
 	 	<result column="MATCH_STAT"  	property="matchStat"></result>
 	 	<result column="MATCH_COIN"  	property="matchCoin"></result>
 	 	<result column="STATUS"  		property="status"></result>
-	 	<result column="MY_ROOM_NO" 	 	property="myRoomNo"></result>
+	 	<result column="MY_ROOM_NO" 	property="myRoomNo"></result>
+	 	<result column="MATCHING_COUNT" property="matchingCount"></result>
  	</resultMap>
     
 	<resultMap id="mbtiResultSet" type="mbti">
@@ -129,11 +130,19 @@
     </select>
     
     <select id="allMemberList" resultMap="memberResultSet" parameterType="member">
-    	SELECT * 
-    	  FROM MEMBER
-    	 WHERE STATUS = 'Y'
-    	 AND USER_NO != #{userNo}
-    	 AND USER_NO != 0
+    	SELECT profile_img, age, mbti , user_name , mbti_nick , email , user_no ,matching_count , address, introduce
+		      FROM (
+		        SELECT M.* , COALESCE(matching_count, 0) AS matching_count
+		        FROM MEMBER M
+		        LEFT JOIN (
+		            SELECT RECEIVER_NO, COALESCE(COUNT(*), 0) AS matching_count
+		            FROM MATCHING
+		            GROUP BY RECEIVER_NO
+		        ) C ON M.user_no = C.RECEIVER_NO
+		        WHERE STATUS = 'Y'  
+		          AND MBTI IS NOT NULL
+		    ) A
+     where USER_NO != #{userNo}
     	 AND EMAIL NOT IN (
       SELECT BLOCKMEMEMAIL 
         FROM BLOCKMEMBER 

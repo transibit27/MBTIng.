@@ -40,4 +40,5 @@ public class Member {
 	private String receiverNo;
 	private String partnerUserId;   // 관리자 회원관리 목록을 위한 KakaoPay에 있는 변수
 	private String orderDate;		// 관리자 회원관리 목록을 위한 KakaoPay에 있는 변수
+	private String matchingCount;   //회원의 매칭 횟수 (검색에서 쓰임)
 }
