@@ -6,49 +6,47 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Single+Day&display=swap" rel="stylesheet">
+    
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
     <style>
-        body * {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
         .outer {
             width: 100%;
             margin: auto;
-            margin-top: 10px;
         }
-        .reviewbanner {
+        .reviewBanner {
+            position: relative; 
             width: 100%;
             height: 150px;
-            margin: auto;
-            background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-            background-position: center center;
-            background-size: cover;
+            overflow: hidden; 
         }
-        .reviewbanner-text {
-            width: 1200px;
-            height: 150px;
-            text-align: center;
-            line-height: 150px;
-            color: white;
-            font-size: xx-large;
+        .reviewBanner h3 {
+            position: absolute;
+            font-size: 30px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: white; 
+            z-index: 1; 
+        }
+        .reviewBanner img {
+            width: 100%;
+            height: 100%; 
+            object-fit: cover; 
         }
         .bestreviewlist {
             width: 1200px;
             margin: auto;
             border: 2px dotted pink;
             border-radius: 10px;
-            font-family: 'Single Day', cursive;
         }
         .bestreviewlist * {
-        	font-family: 'Single Day', cursive;
         	font-size: large;
             font-weight: bold;
             text-align: center;
         }
         .bestreviewlistbanner {
-        	font-family: 'Noto Sans KR', sans-serif;
             font-size: x-large;
             font-weight: bold;
         }
@@ -62,7 +60,6 @@
             border-radius: 10px;        
         }
         #boardlist * {
-			font-family: 'Single Day', cursive;
             font-size: large;
             font-weight: bold;        
         }
@@ -97,7 +94,6 @@
             border-radius: 10px;
         }
         .thumbnail p {
-            font-family: 'Single Day', cursive;
             font-size: large;
             font-weight: bold;
         }
@@ -134,7 +130,7 @@
             border: 1px solid pink;
         }
         .search-area button {
-            width: 45px;
+            width: 50px;
             height: 30px;
             border: none;
             border-radius: 5px;
@@ -170,9 +166,9 @@
     <jsp:include page="../common/header.jsp" />
 
     <div class="outer">
-        <div class="reviewbanner" align="center">
-            <div class="reviewbanner-text">
-                <p>만남후기</p>
+        <div class="reviewBanner">
+            <h3>만남후기</h3>
+            <img src="./resources/images/NoticeBanner.jpg">
             </div>
         </div>
         
@@ -203,8 +199,8 @@
                             resultStr += "<td style='width:300px;'>"
                             		   +	"<a href='detail.bo?bno=" + result[i].boardNo + "'><img src='${pageContext.request.contextPath}/" + result[i].changeName + "' style='width:150px; height:150px; border-radius: 10px;'></a>"
                                        +	"<p>" + result[i].boardTitle + "<br>"
-                                       +	"💑" + result[i].userName + "<br>"
-                                       +	"❤️" + result[i].thumbCount
+                                       +	"<i class='fas fa-user'></i>&nbsp;" + result[i].userName + "<br>"
+                                       +	"<i class='fas fa-heart'></i>&nbsp;" + result[i].thumbCount
                             resultStr += "</p></td>";
                         }                
                         $("#boardList tr").html(resultStr);                        
@@ -224,7 +220,7 @@
             <c:forEach var="b" items="${ requestScope.list }">
                 <div class="thumbnail" align="center">
                     <a href="detail.bo?bno=${ b.boardNo }"><img src="${pageContext.request.contextPath}/${ b.changeName }"></a>
-                    <P>${ b.boardTitle }<br>💑${ b.userName }<br>❤️${ b.thumbCount }</P>
+                    <P>${ b.boardTitle }<br><i class="fas fa-user"></i>&nbsp;${ b.userName }<br><i class="fas fa-heart"></i>&nbsp;${ b.thumbCount }</P>
                 </div>
             </c:forEach>
         </div>
@@ -293,6 +289,7 @@
         </c:if>
     </div>
 
+    <br>
     <br>
 
     <jsp:include page="../common/footer.jsp" />

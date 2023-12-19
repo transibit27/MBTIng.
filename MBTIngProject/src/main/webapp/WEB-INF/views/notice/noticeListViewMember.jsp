@@ -20,27 +20,27 @@
     }
 
     .noticeBanner {
-        position: relative; /* 부모 요소를 상대 위치로 설정 */
+        position: relative; 
         width: 100%;
         height: 150px;
-        overflow: hidden; /* 오버플로우를 숨기기 위해 추가 */
+        overflow: hidden; 
     }
 
     .noticeBanner h3 {
-        position: absolute; /* 절대 위치로 설정 */
+        position: absolute;
         font-size: 30px;
         font-weight: bold;
-        top: 50%; /* 부모 요소의 중앙에 배치하기 위해 50%로 설정 */
-        left: 50%; /* 부모 요소의 중앙에 배치하기 위해 50%로 설정 */
-        transform: translate(-50%, -50%); /* 세로 및 가로 중앙에 정렬 */
-        color: white; /* 텍스트 색상을 보이게 하기 위해 추가 */
-        z-index: 1; /* 텍스트가 이미지 위에 오도록 설정 */
+        top: 50%;
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+        color: white; 
+        z-index: 1; 
     }
 
     .noticeBanner img {
         width: 100%;
-        height: 100%; /* 이미지의 높이를 100%로 설정하여 부모 요소에 맞게 조정 */
-        object-fit: cover; /* 이미지를 확장하여 부모 요소를 완전히 채우도록 설정 */
+        height: 100%; 
+        object-fit: cover; 
     }
 
     .searchForm {
@@ -55,7 +55,7 @@
         background-color: transparent;
         border: 0;
         padding: 0;
-        margin-left: -30px; /* 아이콘이 input 안에 들어가도록 위치 조절 */
+        margin-left: -30px; 
     }
 
     .searchInput {
@@ -69,13 +69,13 @@
 
     .noticeTable {
         width: 1200px;
-        border-top: 2px solid pink; /* 유지 */
-        border-bottom: 1px solid lightgray; /* 유지 */
+        border-top: 2px solid pink; 
+        border-bottom: 1px solid lightgray; 
     }
 
     .noticeTable th, .noticeTable td {
         padding: 15px 20px;
-        border-bottom: 1px solid lightgray; /* 가로 선 추가 */
+        border-bottom: 1px solid lightgray; 
     }
 
     .noticeTitle {
@@ -83,11 +83,11 @@
     }
 
     .noticeTable tbody .noticeTitle {
-        transition: color 0.3s ease; /* 텍스트 색상이 0.3초 동안 서서히 변하도록 설정 */
+        transition: color 0.3s ease; 
     }
 
     .noticeTable tbody .noticeTitle:hover {
-        color: rgb(253, 179, 191); /* 호버 시 텍스트 색상 변경 */
+        color: rgb(253, 179, 191); 
         cursor: pointer;
     }
 

@@ -124,7 +124,7 @@ public class AdminDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("memberMapper.memberSelectList2", null, rowBounds);
 	}
 	
 	
@@ -172,44 +172,39 @@ public class AdminDao {
         return sqlSession.update("memberMapper.updateStatus", parameters);
     }
     
-    // 다중 사용자 상태 업데이트
-    public int updateSelectedStatus(SqlSessionTemplate sqlSession, ArrayList<String> memNo) {
-         
-    	System.out.println(memNo);
-    	
-    	int result = 1;
-    	for(int i = 0; i < memNo.size(); i++) {
-    		System.out.println("반복 " + i);
-    		String memberNo = memNo.get(i);
-    		System.out.println(memberNo);
-    		result *= sqlSession.update("memberMapper.updateSelectedStatus", memberNo);
-    		
-    	}
-    	System.out.println("result : " + result);
-    	
-    	// int result = sqlSession.update("memberMapper.updateSelectedStatus", (List)memNo);
-    	
-    	
-    	return result;
+	/*
+	 * // 선택된 회원의 상태 업데이트 public int updateSelectedStatus(SqlSessionTemplate
+	 * sqlSession, ArrayList<String> memNo) {
+	 * 
+	 * System.out.println(memNo);
+	 * 
+	 * int result = 1; for(int i = 0; i < memNo.size(); i++) {
+	 * System.out.println("반복 " + i); String memberNo = memNo.get(i);
+	 * System.out.println(memberNo); result *=
+	 * sqlSession.update("memberMapper.updateSelectedStatus", memberNo);
+	 * 
+	 * } System.out.println("result : " + result);
+	 * 
+	 * return result; }
+	 * 
+	 * // 선택되지 않은 회원의 상태 업데이트 public int updateSelectedStatus2(SqlSessionTemplate
+	 * sqlSession, List<String> statusN) {
+	 * 
+	 * System.out.println(statusN);
+	 * 
+	 * int result = 1; for(int i = 0; i < statusN.size(); i++) { String memberNo =
+	 * statusN.get(i); result *=
+	 * sqlSession.update("memberMapper.updateSelectedStatus2", memberNo); } return
+	 * result; }
+	 */
+    // 	회원관리 상태 변경 및 저장
+    public int updateStatus(SqlSessionTemplate sqlSession, Map<String, Object> map) {
+    	return sqlSession.update("memberMapper.updateStatus", map);
     }
-
-    
-	public int updateSelectedStatus2(SqlSessionTemplate sqlSession, List<String> statusN) {
-		
-		System.out.println(statusN);
-		
-		int result = 1;
-		for(int i = 0; i < statusN.size(); i++) {
-			String memberNo = statusN.get(i);
-			result *= sqlSession.update("memberMapper.updateSelectedStatus2", memberNo);
-		}
-		return result;
-	}
-	
 	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
-		public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
-			return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
-		}
+	public Member adminMemberDetailView(SqlSessionTemplate sqlSession, String userNo) {
+		return sqlSession.selectOne("memberMapper.adminMemberDetailView" , userNo);
+	}
 	
 	
 	/* 매칭후기 관리 시작!!!!!!!!!!!!!!!!!! */

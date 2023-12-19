@@ -100,6 +100,12 @@
         left: 20px;
         font-size: 18px;
     }
+    #logoIcon { 
+    	width : 180px;
+    	height :80px;
+    	margin-top : 10px;
+    }
+    #logoIcon:hover {cursor:pointer;}
 
     /* 메뉴바 색상 */
     #content-menubar th:nth-child(1), #content-menubar a {
@@ -109,7 +115,7 @@
 
         
     .right-area {
-        width: 1580px;
+        width: 100%;
         align-content: right;
         background-color: #FCD19E;
         height: 100px;
@@ -133,6 +139,7 @@
         margin-top: 30px;
     }
     
+    
 </style>
 </head>
 <body>
@@ -148,14 +155,14 @@
 	</c:if>
 
 
-    <div class="right-area"> <!-- 오른쪽-->
-        <a onclick="adminProfile();"><img id="icon2" align="right" src="https://visualpharm.com/assets/225/Male%20User-595b40b85ba036ed117dc5a0.svg" alt="관리자"></a>
-        <img id="icon1" align="right" src="https://cdn-icons-png.flaticon.com/512/386/386605.png" alt="우편">
+    <div class="right-area"> 
+        <a onclick="mainLogo();"><img id="logoIcon" align="left" 
+        	src="${pageContext.request.contextPath}/resources/images/mbtingLoggo.png" alt="로고"></a>
     </div>
 	
 	<script>
-	function adminProfile() {
-		alert("야");
+	function mainLogo() {
+		 window.location.href = 'http://localhost:8081/mbting';
 	}
 	</script>
 	
@@ -189,7 +196,7 @@
                     </tr>
                     <tr>
                         <th><i class="fas fa-question-circle menu-icon"></i>
-                            <a href="list.adse">1:1문의</a>
+                            <a href="https://dashboard.tawk.to/#/chat">1:1문의</a>
                         </th>
                     </tr>
                 </table>

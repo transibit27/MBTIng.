@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 
 <!--연애 MBTI TEST 하기 글씨체-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,8 +30,7 @@
 	body {
 	  padding: 0px;
       margin: 0px;
-      font-family: 'Sunflower', sans-serif;
-	  font-family: "Indie Flower";
+      font-family: 'NanumSquareBold';
 			line-height: 1.618em;
 			background-color: rgb(255, 255, 255);
 			background-image: repeating-radial-gradient(circle, 
@@ -94,12 +94,12 @@
 		}
 
 		.caption > pre {
-			width : 300px;
+			width : auto;
+			padding: 10px;
 			white-space: pre-wrap;
 		}
 		.item {
 		  display: inline-block;
-		  margin-top: 2rem;
 		  filter: brightness(100%);
 		}
 
@@ -228,7 +228,7 @@
 
 		#Content1SmallText {
 			font-size: 0.31em;
-			font-family: 'Sunflower', sans-serif;
+			font-family: 'NanumSquareBold';
 		}
 
 		#arrow {
@@ -300,6 +300,9 @@
 			}
 			
 			.gradient-overlay {
+				display: flex; 
+				flex-direction: column; 
+				justify-content: flex-end; 
 				margin-left: 17.8%;
 				position: absolute;
 				top: 0;
@@ -312,11 +315,11 @@
 
 			.introMem {
 				text-align: left;
-				margin-top: 7em;
-				font-size: 3em;
+				font-size: 30px;
 				color : rgb(255, 255, 255);
-				font-family: 'Sunflower', sans-serif;
-				padding-left: 0.6em;
+				font-family: 'NanumSquareBold';
+				padding: 10px;
+				padding-left: 20px;
 			}
 			
 			.introMem > p {
@@ -327,12 +330,12 @@
 			#topView {
 				text-align: center;
 				font-size: 30px;
-				font-family: 'Sunflower', sans-serif;
+				font-family: 'NanumSquareBold';
 			}
 
 			#topText {
 				font-size : 2.5em;
-				font-family: 'Sunflower', sans-serif;
+				font-family: 'NanumSquareBold';
 				display: flex;
 				justify-content: center; /* 수평 가운데 정렬 */
 				align-items: center; /* 수직 가운데 정렬 */
@@ -483,7 +486,7 @@
 		</div>
 			
 		<div id="content_3" class="content">
-			<h1 style="font-family: 'Sunflower', sans-serif">인기 게시글</h1>
+			<h1 style="font-family: 'NanumSquareBold'; padding-top: 50px;">인기 게시글</h1>
 		  <div class="item">
 		    <div class="polaroid"><img src="https://image.jtbcplus.kr/data/contents/jam_photo/202101/05/b0266449-6a8b-4a9b-8f7e-b4b250c957c0.jpg">
 		      <div class="caption">
@@ -524,39 +527,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
 예쁜 건 둘째치고 성격, 가치관이 잘 맞았음 했는데
 딱 찾아주시니 너무 신기하고 내년에는 결혼까지
 생각하고 있습니다. :)</pre></div>
-		    </div>
-		  </div>
-		
-		  <div class="item">
-		    <div class="polaroid"><img src="https://img.insight.co.kr/static/2023/08/13/700/img_20230813105620_284dl6l1.webp">
-		      <div class="caption">
-				<pre>❣️2022/09/28~
-사실 소개팅 어플이라는 게 믿음이 
-잘 가지 않아서 걱정이 많았는데,
-그런 걱정이 무색하게 남자친구랑 너무 
-잘 만나고 있어요 !! 미리 mbti 검사를 하고 
-매칭해준 덕인지 성격도 잘 맞고 싸우지도 않아요.
-남자친구는 연애를 많이 안해봐서 
-저랑 연락하기 힘들었다는데 채팅에서 
-가이드도 해주니까 저랑 연락이 잘 됐다고ㅎㅎ 
-좋은 인연 만들어주셔서 감사합니다 :)</pre>
-			  </div>
-		    </div>
-		  </div>
-		  
-		  <div class="item">
-		    <div class="polaroid"><img src="https://cphoto.asiae.co.kr/listimglink/1/201212070644023645158A_1.jpg">
-		      <div class="caption">
-				<pre>❣️2022/09/28~
-별 기대 없이 시작했는데 이렇게 오래가는 
-여자친구를 만나게 될 줄 몰랐어요 !! 
-사실.. 성격 좋은 사람은 만날 수 
-있을 거라 생각했는데 외적으로도 
-너무 이쁜 여자친구라 이런 여자친구를 제가 
-만날 수 있게 됐다는 게 너무 감사하더라구요. 
-서로 이쁘게 사랑하면서 잘 만나겠습니다 ㅎㅎ
-</pre>				
-			  </div>
 		    </div>
 		  </div>
 
@@ -883,9 +853,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
             <div class="swiper-scrollbar"></div>
         </div>
 	</div> <!-- content_4 닫는 div -->
-   		
-
-
 			    <script>
 			        // 슬라이더 동작 정의
 			        const swiper = new Swiper('.swiper', {
@@ -905,18 +872,20 @@ MBTIng 덕분에 제 운명을 만났어요....!
 			        }); 
 			    </script>
 
-	<!-- 채팅 api -->
-		<script type="text/javascript">
+		<!-- 채팅 api -->
+		<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
 		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 		(function(){
 		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-			s1.async=true;
-			s1.src='https://embed.tawk.to/65475643f2439e1631ebe2d5/1hefahucp';
-			s1.charset='UTF-8';
-			s1.setAttribute('crossorigin','*');
-			s0.parentNode.insertBefore(s1,s0);
+		s1.async=true;
+		s1.src='https://embed.tawk.to/656413b31db16644c554f30c/1hg7eptem';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
 		})();
-		</script>
+	</script>
+	<!--End of Tawk.to Script-->
 
 
 

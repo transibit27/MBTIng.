@@ -197,7 +197,7 @@ FROM MemberCount, KakaoPayCount
 		     , TO_CHAR(ORDER_DATE, 'YYYY-MM-DD HH:mm:ss') AS ORDER_DATE  <!-- 구입일 -->
 		     , REFUND_REQUEST <!-- 환불요청 -->
 		  FROM KAKAOPAY
-		 ORDER BY PARTNER_ORDER_ID
+		 ORDER BY PARTNER_ORDER_ID DESC
 	</select>
 	
 	<!-- 관리자페이지 환불요청 승인/거절  -->

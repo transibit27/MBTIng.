@@ -1,7 +1,9 @@
 package com.kh.mbting.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.mbting.admin.model.dao.AdminDao;
-import com.kh.mbting.admin.model.dto.MemPay;
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
@@ -175,16 +176,30 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.memberSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
 	}
     
-	@Override
-	public int updateSelectedStatus( ArrayList<String> memNo) {
-		
-			return adminDao.updateSelectedStatus(sqlSession, memNo );
-	}
+	/*
+	 * @Override public int updateSelectedStatus( ArrayList<String> memNo) {
+	 * 
+	 * return adminDao.updateSelectedStatus(sqlSession, memNo ); }
+	 * 
+	 * @Override public int updateSelectedStatus2(List<String> statusN) { return
+	 * adminDao.updateSelectedStatus2(sqlSession, statusN); }
+	 * 
+	 * @Override public int selectAllMember() { return
+	 * adminDao.selectAllMember(sqlSession); }
+	 */
 	
-	@Override
-	public int updateSelectedStatus2(List<String> statusN) {
-		return adminDao.updateSelectedStatus2(sqlSession, statusN);
-	}
+	 // 회원관리 상태 변경 및 저장
+	 @Override
+	 public int updateStatus(String userNo, String status) {
+		 Map<String, Object> paramMap = new HashMap<>(); 
+		 paramMap.put("userNo",userNo); 
+		 paramMap.put("status", status);
+		 
+		 return adminDao.updateStatus(sqlSession, paramMap); 
+	 }
+	 
+
+	
     
 	// 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
 	@Override
@@ -219,12 +234,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.adminSearchList(sqlSession, keyword, currentPage, pageLimit, boardLimit);
     }
 
-	@Override
-	public int selectAllMember() {
-		return adminDao.selectAllMember(sqlSession);
-	}
-	
-	
 	/* 결제 관리 시작!!!!!!!!!!!!!!!!!! */
 	// 결제관리 게시글 개수 조회
 	@Override

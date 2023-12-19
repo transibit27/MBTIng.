@@ -11,33 +11,35 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Single+Day&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
     <style>
-        body * {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
         .outer {
             width: 100%;
             margin: auto;
             margin-top: 10px;
         }
-        .reviewbanner {
+        .reviewBanner {
+            position: relative; 
             width: 100%;
             height: 150px;
-            margin: auto;
-            background-image:url(https://images.unsplash.com/photo-1480623826718-27e89ac63a4f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-            background-position: center center;
-            background-size: cover;
+            overflow: hidden; 
         }
-        .reviewbanner-text {
-            width: 1200px;
-            height: 150px;
-            text-align: center;
-            line-height: 150px;
-            color: white;
-            font-size: xx-large;
+        .reviewBanner h3 {
+            position: absolute;
+            font-size: 30px;
+            font-weight: bold;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            color: white; 
+            z-index: 1; 
+        }
+        .reviewBanner img {
+            width: 100%;
+            height: 100%; 
+            object-fit: cover; 
         }
         .reviewdetail-top-button {
             width: 1200px;
@@ -58,24 +60,42 @@
             width: 1200px;
             margin: auto;
         }
+        /*
         .reviewdetail-table {
             width: 400px;
-            border-bottom: 2px solid pink;
         }
         .reviewdetail-table *{
-        	font-family: 'Single Day', cursive;
             font-size:large;
-            font-weight: bold;
         }
         .reviewdetail-table td {
             width: 200px;
+            padding-bottom: 10px;
         }
         .reviewdetail-table-title {
             font-size: xx-large;
             font-weight: bold;
         }
+        */
+        .reviewdetail-table {
+            width: 1200px;
+        }
+        .reviewdetail-table *{
+            font-size:large;
+        }
+        .reviewdetail-table-title {
+            font-size: xx-large;
+            font-weight: bold;
+        }
+        .table-underline {
+            width: 1200px;
+            margin-top: 10px;
+            border: 1px solid pink;
+        }
         .thumbnail-img {
             width: 33%;
+        }
+        .reviewdetail-content {
+            margin-bottom: 40px;
         }
         .reviewdetail-content p {       
             white-space: pre-wrap;
@@ -83,10 +103,19 @@
         .content-img {
             width: 250px;
         }
+        .heart-border {
+            width : 100px;
+            height: 100px;
+            padding-top: 15px;
+            border: 1px solid lightgray;
+            border-radius: 50px;
+        }
         .reviewdetail-like {
-            font-family: 'Single Day', cursive;
             font-size: x-large;
             font-weight: bold;
+        }
+        #checkThumb:hover{
+            cursor:pointer;
         }
         .reviewdetail-bottom-button {
             width: 1200px;
@@ -110,9 +139,9 @@
     <jsp:include page="../common/header.jsp" />
 
     <div class="outer">
-        <div class="reviewbanner" align="center">
-            <div class="reviewbanner-text">
-                <p>만남후기</p>
+        <div class="reviewBanner">
+            <h3>만남후기</h3>
+            <img src="./resources/images/NoticeBanner.jpg">
             </div>
         </div>
         
@@ -121,20 +150,39 @@
         <div class="reviewdetail-top-button" align="right">
             <button onclick="location.href='list.bo';">목록</button>
         </div>
+
+        <br>
+        
         <div class="reviewdetail-area">
+            <!--
+                <table class="reviewdetail-table">
+                    <tr>
+                        <td colspan="2" class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-user"></i>&nbsp;${ requestScope.b.userName }</td>
+                        <td>${ requestScope.b.enrollDate }</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-eye"></i>&nbsp${ requestScope.b.views }</td>
+                        <td><i class="fas fa-heart"></i>&nbsp;${ requestScope.b.thumbCount }</td>
+                    </tr>
+                </table>
+            -->
             <table class="reviewdetail-table">
                 <tr>
-                    <td colspan="2" class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
-                </tr>
-                <tr>
-                    <td>💑${ requestScope.b.userName }</td>
-                    <td>${ requestScope.b.enrollDate }</td>
-                </tr>
-                <tr>
-                    <td>조회수 : ${ requestScope.b.views }</td>
-                    <td>❤️${ requestScope.b.thumbCount }</td>
+                    <td class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
+                    <td align="right">
+                        ${ requestScope.b.enrollDate }
+                        <br>
+                        <i class="fas fa-user"></i>&nbsp;${ requestScope.b.userName }&nbsp;
+                        <i class="fas fa-eye"></i>&nbsp;${ requestScope.b.views }&nbsp;
+                        <i class="fas fa-heart"></i>&nbsp;${ requestScope.b.thumbCount }
+                    </td>
                 </tr>
             </table>
+
+            <div class="table-underline"></div>
 
             <br>
 
@@ -145,9 +193,6 @@
                 <div align="center">
                     <img src="<%= contextPath %>/<%= list.get(0).getChangeName() %>" class="thumbnail-img">
                 </div>
-
-                <br><br>
-
                 <table align="center">
                     <tr>
                     <% for(int i = 1; i < list.size(); i++) { %>
@@ -158,24 +203,34 @@
                     </tr>
                 </table>
 
-                <br><br>
+                <br>
 
-                <p>${ requestScope.b.boardContent }</p>
+                <p style="padding: 20px;">${ requestScope.b.boardContent }</p>
             </div>
             <div class="reviewdetail-like" align="center">
             	<c:if test="${empty sessionScope.loginMember}">
-            		&nbsp;<img src="resources/images/heart.png"><br>
-            		${ requestScope.b.thumbCount }
+            		<div class="heart-border">
+                        <i class="fas fa-heart fa-lg"></i><br>
+            		    ${ requestScope.b.thumbCount }
+                    </div>
                 </c:if>
                 <c:if test="${not empty sessionScope.loginMember}">
                     <c:choose>
                         <c:when test="${ checkThumb == 1 }">
-                            &nbsp;<img id="checkThumb" src="resources/images/heart.png"><br>
-                            ${ requestScope.b.thumbCount }
+                            <div class="heart-border">
+                                <div id="checkThumb">
+                                    <i class="fas fa-heart fa-lg"></i><br>
+                                    ${ requestScope.b.thumbCount }
+                                </div>
+                            </div>
                         </c:when>
                         <c:otherwise>
-                            &nbsp;<img id="checkThumb" src="resources/images/emptyHeart.png"><br>
-                            ${ requestScope.b.thumbCount }
+                            <div class="heart-border">
+                                <div id="checkThumb">
+                                <i class="far fa-heart fa-lg"></i><br>
+                                ${ requestScope.b.thumbCount }
+                                </div>
+                            </div>
                         </c:otherwise>
                     </c:choose>
                 </c:if>
@@ -221,7 +276,7 @@
             </c:if>
         </div>
 
-        <br>
+        <br><br>
 
     </div>
 

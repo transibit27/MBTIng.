@@ -35,6 +35,13 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
+//	소개하기 페이지로 이동
+	@RequestMapping("introduce.in")
+	public String introduce() {
+		
+		return "info/introduce";
+	}
+	
 	@GetMapping("list.bo")
 	public ModelAndView selectList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, ModelAndView mv) {
 		int listCount = boardService.selectListCount();		

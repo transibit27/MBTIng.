@@ -593,6 +593,7 @@ body {
 
   
     $(function() {
+    	//connect();
        getRoomList(); 
        countRoomAll();
        countAll();
@@ -681,7 +682,7 @@ body {
             	 
                  for(var i = 0; i < data.length; i++){
                      // 채팅 목록 동적 추가 왜 인지 모르겠으나 얘 때문에 2번 붙음
-                     //CheckLR(data[i]);
+                     CheckLR(data[i]);
                  }
                  
                  $.ajax({
@@ -723,8 +724,16 @@ body {
    
     <script>
         function chatHome() {
-          location.href="http://localhost:8081/mbting/convert.ch"; 
+          //location.href="http://localhost:8081/mbting/convert.ch"; 
+         if(socket != null) {
           disconnect();
+         }
+          $chatWrap = $(".chatList");
+          $blockWrap = $(".blockList");
+          $blockWrap.addClass('hidden');
+          $chatWrap.removeClass('hidden');
+          
+          $('chatList').removeClass('hidden');
           $('#chatInput').addClass('hidden');
           $('#profileDiv').addClass('hidden');
           $('.wrap').css("width" , "482px");
@@ -743,7 +752,7 @@ body {
          let url ="ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
             
          socket = new WebSocket(url);
-         
+         console.log(socket);
          //연결 성공 시 실행할 함수 onopen 
          socket.onopen = function() {
              const data = {
@@ -772,7 +781,7 @@ body {
         	 
               let receive = evt.data.split(",");
               
-              console.log(receive[0] + receive[1]);
+              //console.log(receive[0] + receive[1]);
               
               if(receive[0] == "세션 두명임 읽음팡팡 " || receive[0] == "한 명이다 ") {
             	  
@@ -788,6 +797,7 @@ body {
                          
                           for(var i = 0; i < data.length; i++){
                               // 채팅 목록 동적 추가
+                              //$('.chatDiv').text("");
                               CheckLR(data[i]);
                           }
                           
@@ -825,6 +835,7 @@ body {
                  "sendTime" 	  : receive[3],
                  "sessionCount"	  : receive[4]
               };
+              
               CheckLR(data);
             }
          }
@@ -832,7 +843,7 @@ body {
     }
       //연결 종료 시 실행될 함수 
       function disconnect() {
-         socket.close();
+          socket.close();
           //location.href="http://localhost:8081/mbting";
       };
 
@@ -1010,16 +1021,22 @@ body {
    };
    
    function blockMembers() {
+	     
+	      $blockWrap = $(".blockList");
+		  $blockWrap.html = "";
+		  
 	   $.ajax({
 		  url : "list.block" ,
 		  data : {"email" : "${sessionScope.loginMember.email}"},
 		  type : "post" ,
 		  success : function(data) {
+
+			  
+			  $blockWrap.removeClass('hidden');
 			  
 			  $chatWrap = $(".chatList");
 			  $chatWrap.addClass("hidden");
 			  
-			  $blockWrap = $(".blockList");
               for (var i in data) {
 
                   // main div를 먼저 생성해주고.
@@ -1045,6 +1062,7 @@ body {
                   $div.append($table);
 
                   // 그걸 chatWrap에 붙여주기
+                  $blockWrap.text("");
                   $blockWrap.append($div);
               }
 		  }, 
@@ -1065,8 +1083,6 @@ body {
 			url : "delete.mes",
 			data : {"masterEmail" : masterEmail , "userEmail" : userEmail},
 			success : function(response) {
-				//console.log("왜 안옴???");
-				//console.log("오긴 하누,.,.?");
 				 if (response.success) {
 					 location.href="http://localhost:8081/mbting/convert.ch"; 
 					 

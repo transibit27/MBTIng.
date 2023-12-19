@@ -87,35 +87,6 @@
  	</resultMap>
  	
  	
- 	
- 	<!-- <resultMap id="memberResultSet2" type="mempay">
-		<result column="USER_NO"  		property="userNo"></result>
-		<result column="EMAIL"  		property="email"></result>
-		<result column="USER_PWD"  		property="userPwd"></result>
-		<result column="PROFILE_IMG" 	property="profileImg"></result>
-		<result column="USER_NAME"  	property="userName"></result>
-		<result column="AGE"  			property="age"></result>
-		<result column="GENDER"  		property="gender"></result>
-		<result column="HEIGHT"			property="height"></result>
-		<result column="PHONE" 		 	property="phone"></result>
-		<result column="MBTI"  			property="mbti"></result>
-		<result column="MBTI_NICK"  	property="mbtiNick"></result>
-		<result column="MBTI_MATCH"		property="mbtiMatch"></result>
-		<result column="INTRODUCE"  	property="introduce"></result>
-		<result column="ADDRESS"		property="address"></result>
-		<result column="ENROLL_DATE"  	property="enrollDate"></result>
-		<result column="MODIFY_DATE"  	property="modifyDate"></result>
-		<result column="MATCH_STAT"  	property="matchStat"></result>
-		<result column="MATCH_COIN"  	property="matchCoin"></result>
-		<result column="STATUS"  		property="status"></result>
-		<result column="PARTNER_USER_ID" property="partnerUserId"></result>
-	</resultMap> -->
- 	
- 	
- 	
- 	
- 	
- 	
 	<!-- top 회원 정보를 불러오기 위한 쿼리문 -->
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
@@ -436,17 +407,20 @@
 		 ORDER BY USER_NO
 	</select>
 	
-	<!-- <select id="memberSelectList2" resultMap="memberResultSet2">
-		SELECT USER_NO
-		     , USER_NAME
-		     , MBTI
-		     , EMAIL
-		     , GENDER
-		     , STATUS
+	<select id="memberSelectList2" resultMap="memberResultSet">
+		SELECT M.USER_NO
+		     , M.USER_NAME
+		     , M.MBTI
+		     , M.EMAIL
+		     , M.GENDER
+		     , M.STATUS
+		     , K.PARTNER_USER_ID AS partnerUserId
+		     , K.ORDER_DATE AS orderDate
 		     , ROWNUM AS rnum
-		  FROM MEMBER
+		  FROM MEMBER M
+		  LEFT JOIN KAKAOPAY K ON (M.EMAIL = K.PARTNER_USER_ID)
 		 ORDER BY USER_NO
-	</select> -->
+	</select> 
 	
 	
 	
@@ -481,33 +455,34 @@
 	    WHERE rnum BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<!-- updateStatus() 메서드의 SQL -->
-	<update id="updateStatus" parameterType="map">
-	    UPDATE MEMBER
-	    SET STATUS = #{status}
-	    WHERE USER_NO = #{userNo}
-	</update>
 
 	
-	<!-- updateSelectedStatus() 메서드의 SQL Y로 status 변경-->
+	<!-- updateSelectedStatus() 메서드의 SQL Y로 status 변경
 	<update id="updateSelectedStatus" parameterType="string">
 	    UPDATE MEMBER
 	   	   SET STATUS = 'Y'
 	   	 WHERE USER_NO = #{memberNo}
 	</update>
 	
-	<!-- updateSelectedStatus2 => N으로 status 변경 -->
+	updateSelectedStatus2 => N으로 status 변경 
 	 <update id="updateSelectedStatus2" parameterType="string">
 	    UPDATE MEMBER
 	   	   SET STATUS = 'N'
 	   	 WHERE USER_NO = #{memberNo}
 	</update>
 	
-	<!-- 전체 회원 수 가져오는 쿼리문 -->
+	<전체 회원 수 가져오는 쿼리문 
 	<select id="selectAllMember" resultType="_int">
 		SELECT COUNT(*)
 		FROM MEMBER
 	</select>
+	-->
+	<!-- 회원관리 상태 변경 및 저장 -->
+	<update id="updateStatus" parameterType="hashmap">
+	    UPDATE MEMBER
+	    SET STATUS = #{status}
+	    WHERE USER_NO = #{userNo}
+	</update> 
 	
 	<!-- 카카오 로그인 체크용 쿼리문 -->
 	<select id="kakaoLoginCheck" parameterType="string" resultMap="memberResultSet">

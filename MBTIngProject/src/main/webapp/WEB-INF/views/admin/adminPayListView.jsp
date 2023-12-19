@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,9 @@
     height : 25px;
     margin: auto;
     font-size: 13px !important;
+    line-height:13px !important;
 }
+
 
 </style>
 </head>
@@ -78,7 +81,9 @@
 		                <th>${p.partnerUserId}</th>
 		                <th>${p.itemName} </th>
 		                <th>${ p.quantity}</th>
-		                <th>${ p.totalAmount}</th>
+		                <th>
+						    <fmt:formatNumber value="${p.totalAmount}" pattern="#,###"/>
+						</th>
 		                <th>${ p.orderDate}</th>
 		                <th class="refundStatus" style="height:10px;">
                     <c:choose>
@@ -109,8 +114,10 @@
             				data : { partnerOrderId : partnerOrderId }, 
             				success : function(result) {
             					
-            					console.log("성공 안되니?")
-            					console.log(partnerOrderId);
+            					console.log("성공 안되니?");
+            					
+            					$(".apno:contains("+partnerOrderId+")").parent().children().eq(7).html("");
+            					
             				},
             				error : function() {
             					console.log("실패");
@@ -126,6 +133,7 @@
             				data : { partnerOrderId : partnerOrderId },
             				success : function() {
             					console.log("성공");
+            					$(".apno:contains("+partnerOrderId+")").parent().children().eq(7).html("");
             				},
             				error : function() {
             					console.log("실패");

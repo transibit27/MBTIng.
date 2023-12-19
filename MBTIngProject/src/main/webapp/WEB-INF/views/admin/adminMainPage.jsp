@@ -16,11 +16,11 @@
 <style>
     
     #content-center {
-        width: 1320px;
+        width: 100%;
 		margin-left: 230px;
     }
     #content-center1 {
-        width: 1320px;
+        width: 100%;
         height: 300px;
         margin: auto;
         display: flex;
@@ -29,17 +29,17 @@
 
     }
     #content-center2 {
-        width: 1320px;
+        width: 100%;
         height: 500px;
         margin-top: 30px;
     }
     #content-center3 {
-        width: 1320px;
+        width: 100%;
         height: 500px;
 
     }
     #content-center4 {
-        width: 1320px;
+        width: 100%;
         height: 500px;
         margin: auto;
         margin-top: 100px;
@@ -517,7 +517,8 @@
 		  url : "selectTotalPay.ad",
 		  type : "get",
 		  success : function(result) {
-			  $("#totalPays").text(result + "원");
+			  const formattedResult = Number(result).toLocaleString();
+			  $("#totalPays").text(formattedResult + "원");
 		  },
 		  error : function() {
 			  console.log("ajax 통신 실패!");
