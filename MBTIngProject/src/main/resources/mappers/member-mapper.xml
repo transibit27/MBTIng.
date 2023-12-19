@@ -103,15 +103,16 @@
 		        WHERE STATUS = 'Y'  
 		          AND MBTI IS NOT NULL
 		    ) 
-		    WHERE rnk BETWEEN 1 AND 4
 		) A
 		<choose>
 			<when test="email != null">
 				WHERE ROWNUM BETWEEN 1 AND 4
 				  AND EMAIL NOT IN (SELECT BLOCKMEMEMAIL FROM BLOCKMEMBER WHERE BLOCKPROEMAIL = #{email})
+				  AND USER_NO != 0
 			</when>
 			<otherwise>
 				WHERE ROWNUM BETWEEN 1 AND 4
+				AND USER_NO != 0
 			</otherwise>
 		</choose>
 		

@@ -448,7 +448,7 @@
   			type : "get" , 
   			success : function(mem) {
   				resultStr = "";
-  				console.log(mem);
+  				//console.log(mem);
   				for(let i in mem) {
  				
 					 resultStr +=  "<div class='user' id='user" + mem[i].userNo + "'>" +
@@ -491,7 +491,8 @@
   					"address": $('select[name="address"]').val(),
   					"mbti"	 : $('select[name="mbti"]').val(),
   					"gender" : $('input[name="gender"]').val(),
-  					"userNo" : ${sessionScope.loginMember.userNo}
+  					"userNo" : ${sessionScope.loginMember.userNo},
+  					"email"  : "${sessionScope.loginMember.email}"
   			},
   			success : function(searchMem) {
   				//console.log(searchMem);

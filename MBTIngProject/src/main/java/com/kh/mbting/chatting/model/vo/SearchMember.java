@@ -20,18 +20,20 @@ public class SearchMember {
 	private String gender;
 	private String age;
 	private String height;
+	private String email;
 	
 	/**/
-	public SearchMember(String age, String height, String address, String mbti, String gender, int userNo) {
+	public SearchMember(String age, String height, String address, String mbti, String gender, int userNo, String email) {
 		this.age = age;
 		this.height = height;
 		this.address = address;
 		this.mbti = mbti;
 		this.gender = gender;
 		this.userNo = userNo;
+		this.email = email;
 	}
 	
-	public SearchMember(int startAge, int endAge, int startHeight, int endHeight, String address, String mbti, String gender, int userNo) {
+	public SearchMember(int startAge, int endAge, int startHeight, int endHeight, String address, String mbti, String gender, int userNo , String email) {
 		this.startAge = startAge;
 		this.endAge = endAge;
 		this.startHeight = startHeight;
@@ -40,10 +42,11 @@ public class SearchMember {
 		this.mbti = mbti;
 		this.gender = gender;
 		this.userNo = userNo;
+		this.email = email;
 	}
 	
 	/*age와 height 중 height만 없음일 때 */
-	public SearchMember(int startAge, String address, int endAge, String mbti, String gender , String height, int userNo) {
+	public SearchMember(int startAge, String address, int endAge, String mbti, String gender , String height, int userNo, String email) {
 		this.startAge = startAge;
 		this.address = address;
 		this.endAge = endAge;
@@ -51,10 +54,11 @@ public class SearchMember {
 		this.gender = gender;
 		this.height = height;
 		this.userNo = userNo;
+		this.email = email;
 	}
 	
 	/*age와 height중 age만 없음일 때*/
-	public SearchMember(int startHeight, int endHeight, String address, String mbti, String gender , String age, int userNo) {
+	public SearchMember(int startHeight, int endHeight, String address, String mbti, String gender , String age, int userNo, String email) {
 		this.startHeight = startHeight;
 		this.endHeight = endHeight;
 		this.address = address;
@@ -62,5 +66,6 @@ public class SearchMember {
 		this.gender = gender;
 		this.age = age;
 		this.userNo = userNo;
+		this.email = email;
 	}
 }

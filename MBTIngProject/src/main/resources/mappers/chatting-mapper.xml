@@ -134,6 +134,10 @@
     	 WHERE STATUS = 'Y'
     	 AND USER_NO != #{userNo}
     	 AND USER_NO != 0
+    	 AND EMAIL NOT IN (
+      SELECT BLOCKMEMEMAIL 
+        FROM BLOCKMEMBER 
+       WHERE BLOCKPROEMAIL = #{email})
     </select>
     
     <select id="searchMember" resultMap="memberResultSet" parameterType="searchmember">
@@ -171,6 +175,10 @@
     </if>
     AND USER_NO != #{userNo}
     AND USER_NO != 0
+    AND EMAIL NOT IN (
+      SELECT BLOCKMEMEMAIL 
+        FROM BLOCKMEMBER 
+       WHERE BLOCKPROEMAIL = #{email})
     </select>
       
     <select id="checkProposer" resultMap="mbtiResultSet" parameterType="_int">

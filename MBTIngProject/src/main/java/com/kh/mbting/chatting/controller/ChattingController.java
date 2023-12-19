@@ -125,16 +125,16 @@ public class ChattingController {
     
     @ResponseBody
     @RequestMapping("search.li")
-    public void searchMember(String height, String address, String age, String mbti ,String gender , int userNo, HttpServletResponse response) throws JsonIOException, IOException{
+    public void searchMember(String height, String address, String age, String mbti ,String gender , int userNo, String email, HttpServletResponse response) throws JsonIOException, IOException{
     //System.out.println(height + address + age + mbti + gender);
     //System.out.println(height  + age );
     ArrayList<Member> list = new ArrayList<Member>();
-    	
+  System.out.println(email);
     	if(height.equals("없음") && (!age.equals("없음"))) {
     		//System.out.println("난 지금 키만 없음이야 ");
     		int startAge 	 =  Integer.parseInt(age.substring(0, 2));
 	    	int endAge 		 =  Integer.parseInt(age.substring(2, 4)); 
-    		SearchMember sm  = new SearchMember(startAge, address, endAge, mbti, gender , height, userNo );
+    		SearchMember sm  = new SearchMember(startAge, address, endAge, mbti, gender , height, userNo , email);
 	    	list = cService.searchMember(sm);
 	    	
     	}else if(age.equals("없음") && (!height.equals("없음")) ) {
@@ -142,12 +142,12 @@ public class ChattingController {
     		int startHeight  =  Integer.parseInt(height.substring(0, 3));
 	    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
 	    	//System.out.println("start :" + startHeight + "end :" + endHeight);
-	    	SearchMember sm = new SearchMember(startHeight, endHeight, address, mbti, gender , age, userNo );
+	    	SearchMember sm = new SearchMember(startHeight, endHeight, address, mbti, gender , age, userNo, email );
 	    	list = cService.searchMember(sm);
 	    	
     	}else if(height.equals("없음") && (age.equals("없음"))) {
     		//System.out.println("난 지금 키 나이 둘 다 없음이야 ");
-    		SearchMember sm = new SearchMember(age, height, address, mbti, gender, userNo);
+    		SearchMember sm = new SearchMember(age, height, address, mbti, gender, userNo, email);
 	    	list = cService.searchMember(sm);	
 	    	
     
@@ -158,7 +158,7 @@ public class ChattingController {
 	    	int startHeight  =  Integer.parseInt(height.substring(0, 3));
 	    	int endHeight 	 =  Integer.parseInt(height.substring(3, 6));
 	    	
-	    	SearchMember sm = new SearchMember(startAge, endAge, startHeight, endHeight, address, mbti, gender, userNo);
+	    	SearchMember sm = new SearchMember(startAge, endAge, startHeight, endHeight, address, mbti, gender, userNo, email);
 	    	list = cService.searchMember(sm);
     	}
     
@@ -306,6 +306,7 @@ public class ChattingController {
     @RequestMapping(value="list.block", produces="application/json; charset=UTF-8")
     public String blockList(String email) {
     	ArrayList<Member> m = cService.blockList(email);
+    	//System.out.println(m);
     	return new Gson().toJson(m);
     }
      

@@ -661,7 +661,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
   			 
   			 let num		  = 1;
   			 
-  			 for(let i = 0; i < result.length; i++) {
+  			 for(let i = 0; i < 4; i++) {
   				 
   				let roomNo    = result[i].myRoomNo;
   				let profile	  = result[i].profileImg;

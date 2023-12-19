@@ -1030,12 +1030,14 @@ body {
 		  data : {"email" : "${sessionScope.loginMember.email}"},
 		  type : "post" ,
 		  success : function(data) {
-
+			//console.log(data);
 			  
 			  $blockWrap.removeClass('hidden');
 			  
 			  $chatWrap = $(".chatList");
 			  $chatWrap.addClass("hidden");
+			  
+			  $blockWrap.text("");
 			  
               for (var i in data) {
 
@@ -1062,7 +1064,6 @@ body {
                   $div.append($table);
 
                   // 그걸 chatWrap에 붙여주기
-                  $blockWrap.text("");
                   $blockWrap.append($div);
               }
 		  }, 
