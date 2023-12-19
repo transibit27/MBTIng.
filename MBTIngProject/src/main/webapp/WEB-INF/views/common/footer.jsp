@@ -92,7 +92,7 @@
             <div class="terms" style="color: white;">
                 <a href="terms1.te">이용약관</a> &nbsp; | &nbsp;
                 <a href="terms2.te">개인정보처리방침</a> &nbsp; | &nbsp;
-                <a href="">회사소개</a>
+                <a href="introduce.in">회사소개</a>
             </div>
         </div>
 
