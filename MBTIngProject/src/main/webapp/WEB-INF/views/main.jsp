@@ -18,6 +18,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gasoek+One&display=swap" rel="stylesheet">
 
+<script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
 <style>
 	* {
 		  box-sizing: border-box; 
@@ -82,6 +84,20 @@
 		  text-align: center;
 		  background-color: rgb(255, 226, 189);
 		}
+
+		#content_3>h1>a {
+			font-family: 'NanumSquareBold'; 
+			padding-top: 50px; display: flex; 
+			align-items: center; 
+			justify-content: center;
+			color: black;
+		}
+
+		#content_3>h1>a:hover {
+			text-decoration: none;
+			color: rgb(255, 161, 161);
+		}
+
 		.polaroid {
 		  background: #fff;
 		  padding: 1rem;
@@ -250,8 +266,8 @@
 		
 		#testImg img { 
 			border-radius: 30px;
-			height: 46%;
-			width: 33%;
+			height: 320px;
+			width: 620px;
 			top: 3em;
 			left: 44em;
 			object-fit: cover;
@@ -262,8 +278,8 @@
 
 		#testResultImg img {
 			border-radius: 30px;
-			height: 64%;
-			width: 27%;
+			height: 450px;
+			width: 520px;
 			object-fit: cover;
 			position: absolute;
 			top: 9em;
@@ -346,12 +362,15 @@
 				padding-top: 5%;
 			}
 
-			.content2Login {
+			.content2Login>a {
 				font-family: 'NanumSquare';
 				color: black;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 
-			.content2Login:hover {
+			.content2Login>a:hover {
 				cursor: pointer;
 				font-family: 'NanumSquare';
 				color: rgb(255, 161, 161);
@@ -478,12 +497,12 @@
 							<div id="content_1" class="content">
 								<div>
 									<div id="testImg">
-										<img src="<%=request.getContextPath()%>/resources/images/mbtingTest.png">
+										<img src="<%=request.getContextPath()%>/resources/images/mbtingTest1.png">
 									</div>
 								</div>
 								<div class="test">
 									<div id="testResultImg">
-										<img src="<%=request.getContextPath()%>/resources/images/mbtingResult.png">
+										<img src="<%=request.getContextPath()%>/resources/images/mbtingResult1.png">
 									</div>
 								</div>
 								<div id="Content1BigText">나의 연애</div>
@@ -493,7 +512,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
+						<div class="swiper-slide">
+							
+						</div>
 						<div class="swiper-slide"><img src="https://mblogthumb-phinf.pstatic.net/MjAxNzExMDlfMjYz/MDAxNTEwMTg3MzYyNzE3.G1U_AKRbAn-g--iarsiK9Dr5wK3F2nimVy_YM61R-qYg.aE9ABDeR5rvK2dNqf-euPfOsmT982IzDo6Ny1wnyQiog.JPEG.qwqwjd2002/KakaoTalk_20171106_231729476.jpg?type=w800"></div>
 						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
 					</div>
@@ -536,9 +557,15 @@
 					<div id="topText">
 						<label>매칭 신청을 가장 많이 받은 회원 Top 4!</label>
 					</div>
-						<c:if test="${sessionScope.loginMember == null}" >
-							<h3 align="center"><a data-toggle="modal" data-target="#loginModal" class="content2Login">로그인하고 매칭 신청하기</a></h3>
-						</c:if>
+					<c:choose>
+						<c:when test="${sessionScope.loginMember != null}">
+							<h3 align="center" class="content2Login"><a href="all.me">매칭 신청하러 가기&nbsp;&nbsp;<i class="fas fa-angle-right"></i></a></h3>
+						</c:when>
+						<c:otherwise>
+							<h3 align="center" class="content2Login"><a data-toggle="modal" data-target="#loginModal" class="content2Login">로그인하고 매칭 신청하기&nbsp;&nbsp;<i class="fas fa-angle-right"></i></a></h3>
+						</c:otherwise>
+					</c:choose>
+						
 					<div id="topViewTableDiv">
 						<table id="topViewInnerTable">
 							  <tr class="topViewTr">
@@ -548,7 +575,9 @@
 		</div>
 			
 		<div id="content_3" class="content">
-			<h1 style="font-family: 'NanumSquareBold'; padding-top: 50px;">인기 게시글</h1>
+			<h1 style="display: flex; align-content: center; justify-content: center; align-items: center;">
+				<a href="list.bo">만남 후기 인기 게시글&nbsp;&nbsp;<i class="fas fa-chevron-right"></i></a>
+			</h1>
 		  <div class="item">
 		    <div class="polaroid"><img src="https://image.jtbcplus.kr/data/contents/jam_photo/202101/05/b0266449-6a8b-4a9b-8f7e-b4b250c957c0.jpg">
 		      <div class="caption">

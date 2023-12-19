@@ -14,6 +14,8 @@
 
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
 
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+
     <style>
         .outer {
             width: 100%;
@@ -25,6 +27,9 @@
             width: 100%;
             height: 150px;
             overflow: hidden; 
+        }
+        .reviewBanner * {
+            font-family: 'NanumSquare';
         }
         .reviewBanner h3 {
             position: absolute;
@@ -60,22 +65,6 @@
             width: 1200px;
             margin: auto;
         }
-        /*
-        .reviewdetail-table {
-            width: 400px;
-        }
-        .reviewdetail-table *{
-            font-size:large;
-        }
-        .reviewdetail-table td {
-            width: 200px;
-            padding-bottom: 10px;
-        }
-        .reviewdetail-table-title {
-            font-size: xx-large;
-            font-weight: bold;
-        }
-        */
         .reviewdetail-table {
             width: 1200px;
         }
@@ -85,6 +74,7 @@
         .reviewdetail-table-title {
             font-size: xx-large;
             font-weight: bold;
+            font-family: 'NanumSquare';
         }
         .table-underline {
             width: 1200px;
@@ -154,21 +144,6 @@
         <br>
         
         <div class="reviewdetail-area">
-            <!--
-                <table class="reviewdetail-table">
-                    <tr>
-                        <td colspan="2" class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-user"></i>&nbsp;${ requestScope.b.userName }</td>
-                        <td>${ requestScope.b.enrollDate }</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-eye"></i>&nbsp${ requestScope.b.views }</td>
-                        <td><i class="fas fa-heart"></i>&nbsp;${ requestScope.b.thumbCount }</td>
-                    </tr>
-                </table>
-            -->
             <table class="reviewdetail-table">
                 <tr>
                     <td class="reviewdetail-table-title">${ requestScope.b.boardTitle }</td>

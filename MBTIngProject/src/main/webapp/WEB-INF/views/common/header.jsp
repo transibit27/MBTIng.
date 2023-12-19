@@ -104,8 +104,10 @@
         }
 
         #header_1_right {
+            display: flex;
+            justify-content: center;
             width: 30%;
-            padding-top: 4px;
+            min-width: 300px;
             text-align: center;
             font-size: 12px;
             font-family: 'NanumSquare';
@@ -116,12 +118,17 @@
 
         }
 
+        #header_1_right>.afterLogin>a:hover {
+            cursor: pointer;
+            color: pink;
+        }
+
         #header_1_right>a:hover {
             cursor: pointer;
             color: pink;
         }
 
-        #header_1_center>ul {
+        #header_1_center>div>ul {
             width: 100%;
             height: 100%;
             list-style-type: none;
@@ -129,14 +136,14 @@
             padding: 0;
         }
 
-        #header_1_center>ul>li {
+        #header_1_center>div>ul>li {
             float: left;
             width: 14%;
             height: 100%;
             text-align: center;
         }
 
-        #header_1_center>ul>li a {
+        #header_1_center>div>ul>li a {
             text-decoration: none;
             color: black;
             font-size: 17px;
@@ -145,7 +152,7 @@
             transition: color 0.3s ease, font-size 0.3s ease;
         }
 
-        #header_1_center>ul>li a:hover {
+        #header_1_center>div>ul>li a:hover {
             color: pink;
             font-size: 20px;
         }
@@ -153,6 +160,11 @@
         #header a {
             text-decoration: none;
             color: black;
+        }
+
+        #header a:hover {
+            text-decoration: none;
+            color: pink;
         }
 
         /* 세부페이지마다 공통적으로 유지할 style */
@@ -324,21 +336,23 @@
         <div id="header_1">
             
             <div id="header_1_center">	 
-	             <ul>
-	                <li><a href="http://localhost:8081/mbting/">HOME</a></li>
-	                <li><a href="introduce.in">회사소개</a></li>
-	                <li><a href="listMember.no">공지사항</a></li>
-	                <li><a href="list.bo">만남후기</a></li>
-	                <li><a href="mbtiTest.mb">연애테스트</a></li>
-	            	<li><a href="all.me">매칭하기</a></li>
-	            	<li><a href="convert.ch">채팅하기</a></li>
-	            	
-	            	<c:choose>
-	            		<c:when test="${sessionScope.loginMember != null && sessionScope.loginMember.email eq 'admin@naver.com'}">
-	            			<li><a href="adminMain.ad">관리자</a></li>
-	            		</c:when>
-	            	</c:choose>
-	            </ul>    	
+                <div>
+                    <ul>
+                        <li><a href="http://localhost:8081/mbting/">HOME</a></li>
+                        <li><a href="introduce.in">회사소개</a></li>
+                        <li><a href="listMember.no">공지사항</a></li>
+                        <li><a href="list.bo">만남후기</a></li>
+                        <li><a href="mbtiTest.mb">연애테스트</a></li>
+                        <li><a href="all.me">매칭하기</a></li>
+                        <li><a href="convert.ch">채팅하기</a></li>
+                        
+                        <c:choose>
+                            <c:when test="${sessionScope.loginMember != null && sessionScope.loginMember.email eq 'admin@naver.com'}">
+                                <li><a href="adminMain.ad">관리자</a></li>
+                            </c:when>
+                        </c:choose>
+                    </ul>    
+                </div>	
 	        </div>
 	            
             <div id="header_1_right">
@@ -352,9 +366,14 @@
                		<c:choose>
                		
 	               		<c:when test="${not empty sessionScope.loginMember and empty sessionScope.access_Token}">
-		               		<label>${sessionScope.loginMember.userName}님 환영합니다</label> &nbsp;&nbsp;
-		                    <a href="myPage.me">마이페이지</a>
-		                    <a href="logout.me">로그아웃</a>
+                            <div style="display: flex; flex-direction: column; justify-content: center;">  
+                                <div>
+                                    <label style="font-size: 15px;">${sessionScope.loginMember.userName}님 환영합니다</label> &nbsp;&nbsp;
+                                </div>  
+                                <div class="afterLogin">
+                                    <a href="myPage.me">마이페이지</a>&nbsp;&nbsp;&nbsp;<a href="logout.me">로그아웃</a>
+                                </div>
+                            </div>
 	               		</c:when>
                		
                			<c:when test="${not empty sessionScope.loginMember and not empty sessionScope.access_Token}">

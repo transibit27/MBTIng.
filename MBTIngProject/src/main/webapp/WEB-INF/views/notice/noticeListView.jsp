@@ -7,7 +7,12 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style>
-        #noticeList {text-align:center; margin: auto;}
+        #noticeList {
+        	width: 900px;
+        	text-align:center; 
+        	margin: auto;
+        	
+        }
         #noticeList>tbody>tr:hover {cursor:pointer;}
 
         #pagingArea {width:fit-content; margin:auto; margin-top : 50px;}
@@ -24,13 +29,17 @@
         .searchBtn {width:20%;}
 
         .content {
-            margin-left: 250px;
-            margin-top: 100px;
+            margin-left: 55px;
+            margin-top: 70px;
         }
         .btn-primary, .btn-danger {
             width: 100px;
             margin-bottom: 30px;
             float: right;
+        }
+        .btn-danger { margin-left : 10px; }
+        #testttt {
+        	width : 1080px;
         }
     </style>
 </head>
@@ -47,8 +56,10 @@
             </form>
         </div>
         <div class="innerOuter" style="padding:1% 8%;">
+        	<div id="testttt">
             <button type="button" class="btn btn-danger">삭제</button>
             <button type="button" class="btn btn-primary" onclick="location.href='enrollForm.no'">등록</button>
+            </div>
             <table id="noticeList" class="table table-hover" align="center">
                 <thead>
                     <tr>

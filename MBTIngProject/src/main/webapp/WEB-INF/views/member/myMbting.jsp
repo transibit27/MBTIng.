@@ -480,9 +480,9 @@
                     <ul class="swiper-wrapper slide_list">
      
                 </div>
-                <span class="btn btn_prev">이전</span>
+                <span class="btn btn_prev"></span>
                 
-                <span class="btn btn_next">다음</span>
+                <span class="btn btn_next"></span>
             </div>
    
         </div>

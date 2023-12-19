@@ -448,8 +448,8 @@
 					<p class="ceo2">정윤석 기준서 김선아 김민중 김민제 정현두</p>
 				</div>
 
-				<div class="info-img" style="margin-right: 30px;">
-					<img src="./resources/images/mj_img.png" style="width: 250px; border-radius: 50%;">
+				<div class="info-img" style="margin-right: 60px;">
+					<img src="./resources/images/mj_img.png" style="width: 250px; border-radius: 50%; margin-right: 30px;">
 					<img src="./resources/images/hd_img.png" style="width: 250px; border-radius: 50%;">
 				</div>
 			</div>

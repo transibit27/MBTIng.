@@ -13,6 +13,8 @@
     <title>MBTIng - 만남후기 수정</title>
 
     <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
     
     <style>
         .outer {
@@ -24,6 +26,9 @@
             width: 100%;
             height: 150px;
             overflow: hidden; 
+        }
+        .reviewBanner * {
+            font-family: 'NanumSquare';
         }
         .reviewBanner h3 {
             position: absolute;
@@ -53,6 +58,7 @@
             width: 250px;
             border: none;
             border-bottom: 2px solid pink;
+            font-family: 'NanumSquare';
         }
         .writereview-content {
             font-size: large;

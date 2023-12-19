@@ -318,7 +318,7 @@ public class MemberController {
 		// 선택한 회원의 번호를 넘기고 대상의 신청 거절 (Matching테이블 stat(1/거절) update)
 		int result = memberService.refusePropose(mc);
 		if(result>0) {
-			refuse = "신청 거절 성공";
+			refuse = "대화 신청을 거절했습니다.";
 		} else {
 			refuse = "신청 거절 실패";
 		}
