@@ -484,6 +484,8 @@ body::-webkit-scrollbar-thumb {
 	  <span class="text">💗</span>
 	</div>
 	
+	
+
     <div class="wrap">    
         <div class="wrapPC">
             <div class="chatInfo">
@@ -1200,7 +1202,18 @@ body::-webkit-scrollbar-thumb {
 	      $("#" + elementId).css("background-color", "pink");
 	 }, 1000);
  	 
- 	 
+	 $(document).ready(function () {
+		    // text 클래스를 가진 span의 텍스트가 변경될 때마다 hover 효과를 주기
+		    $('.tooltip').on('DOMSubtreeModified', function () {
+		        var $tooltipContainer = $(this).closest('.tooltip-container');
+		        $tooltipContainer.addClass('hover-effect');
+				console.log("악");
+		        // 일정 시간 후에 hover 효과를 해제
+		        setTimeout(function () {
+		            $tooltipContainer.removeClass('hover-effect');
+		        }, 1000); // 1초 후에 hover 효과 해제 (원하는 시간으로 조절 가능)
+		    });
+		});
    </script>
 </body>
 </html>
