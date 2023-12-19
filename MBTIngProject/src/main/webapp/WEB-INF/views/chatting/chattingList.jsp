@@ -17,15 +17,15 @@
 	font-family: 'NanumSquareBold';
 }
 
-.content_1  {
-	width : 100%;
-	margin: auto;
-  	background-color: rgb(255,215,215);
-  	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  	border-radius: 8px;
-  	padding: 20px;
-  	margin: 20px 0;
- 	transition: transform 0.3s ease-in-out;
+.content_1 {
+  width: 100%;
+  margin: auto;
+  background-color: #ffe4e4; 
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+  border-radius: 10px; 
+  padding: 30px;
+  margin: 20px 0;
+  transition: transform 0.3s ease-in-out;
 }
 
 #div {
@@ -213,25 +213,31 @@
 	font-weight: bold;
  }
  
- .select {
- 	 width : 150px;
- 	 padding: .8em .5em;
- 	 border : none;
- 	 font-family: 'Gasoek One', sans-serif;
- 	 border-radius: 0px;
-	 appearance: none;
-	 border-radius : 50px;
-	 text-align : center;
-	 box-shadow: 0px 0px 3px 5px white;
-	 cursor: pointer;
-	 height : 50px;
-	 margin : 10px;
- } 
- 
-  .select:hover {
-  	background-color: #e6f0ff;
-	transition: all .5s ease-in-out;
-  }
+.select {
+  width: 150px;
+  padding: 0.8em 0.5em;
+  border: none;
+  font-family: 'Gasoek One', sans-serif;
+  border-radius: 25px; /* Adjusted border radius for a smoother appearance */
+  appearance: none;
+  text-align: center;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1); /* Improved box shadow for a subtle effect */
+  cursor: pointer;
+  height: 50px;
+  margin: 10px;
+  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Added focus effect for better user experience */
+.select:focus {
+  outline: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.select:hover {
+  background-color: #e6f0ff;
+  transform: scale(1.02); /* Added a subtle scale transform on hover */
+}
  
 
  #genderCheck {
@@ -405,10 +411,6 @@
 		<div class="user__container">
         	
 		</div>
-		<div id="hiddenDiv" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-			  <p>아하하 안녕하세요 저는 카리나 입니다. 아하하 </p>
-			  <button id="hiddenDivCloseBtn">닫기</button>
-		</div>
 	</div>
 
    </div> 
@@ -461,7 +463,7 @@
 						  			 "<div class='text'>" +
 						  			 "<span class='name'>" + mem[i].userName + "<p class='mbti'>" + mem[i].mbti + "</p></span>" +
 						  			 "</div>" +
-						  			 "<div class='introMe'>" + mem[i].address + "에 사는 " + mem[i].age + "살 이에요" + "</div>" +
+						  			 "<div class='introMe'>" + mem[i].introduce + "</div>" +
 						  			 "<div class='like'><button id='button' onclick='requestMatch(this , " + mem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
@@ -516,6 +518,7 @@
 						  			 "<span class='name'>" + searchMem[i].userName + "</span>" +
 						  			 "<p class='mbti'>" + searchMem[i].mbti + "</p>" +
 						  			 "</div>" +
+						  			 "<div class='introMe'>" + searchMem[i].introduce + "</div>" +
 						  			"<div class='like'><button id='button' onclick='requestMatch(this , " + searchMem[i].userNo + ");' ><span>채팅신청</span></button></div>" +
 						  			 "</div>" +
 						  			 "</div>"
