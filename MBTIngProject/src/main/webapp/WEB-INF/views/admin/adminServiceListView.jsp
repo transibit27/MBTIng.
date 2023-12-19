@@ -10,7 +10,9 @@
 
 	<jsp:include page="../common/adminMenubar.jsp" />
 	
-	<h1>하이</h1>
+	
+	
+	
 	
 </body>
 </html>

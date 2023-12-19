@@ -2,8 +2,8 @@ package com.kh.mbting.admin.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import com.kh.mbting.admin.model.dto.MemPay;
 import com.kh.mbting.admin.model.vo.Month;
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.common.model.vo.PageInfo;
@@ -75,14 +75,18 @@ public interface AdminService {
 	// 회원 검색 조회
     List<Member> memberSearchList(String keyword, int currentPage, int pageLimit, int boardLimit);
 
-    // 선택된 회원 상태 일괄 업데이트
-    int updateSelectedStatus(ArrayList<String> selectedUserNos);
- 	
-    // 선택되지 않은 회원의 상태를 업데이트
-    int updateSelectedStatus2(List<String> statusN);
+	/*
+	 * // 선택된 회원의 상태를 업데이트 int updateSelectedStatus(ArrayList<String>
+	 * selectedUserNos);
+	 * 
+	 * // 선택되지 않은 회원의 상태를 업데이트 int updateSelectedStatus2(List<String> statusN);
+	 * 
+	 * // 전체회원 수를 가져오는 METHOD int selectAllMember();
+	 */
     
-    // 전체회원 수를 가져오는 METHOD
-    int selectAllMember();
+    // 회원관리 상태 변경 및 저장
+	int updateStatus(String userNo, String status);
+	     
     
     // 회원 관리에서 클릭한 회원의 상세조회를 위한 정보 가져오기
     Member adminMemberDetailView(String userNo);

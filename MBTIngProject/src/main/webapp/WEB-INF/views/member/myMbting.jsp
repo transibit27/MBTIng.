@@ -14,12 +14,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 
 <!-- 아이콘-->
 <script src="https://kit.fontawesome.com/22698b3d17.js" crossorigin="anonymous"></script>
 
 <style>
-    * {font-family: 'Noto Sans KR', sans-serif;
+    	*{font-family: 'NanumSquare';
     caret-color: transparent;
     }
 

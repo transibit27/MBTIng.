@@ -16,9 +16,7 @@
 		width: 1000px;
 
 	}
-    
-    
-    
+	
     .profile-intro{
         margin-top: 100px;
         height: 100px;
@@ -36,7 +34,6 @@
         text-align: center;
         line-height: 100px;
     }
-    
     
     #mypage-form{
         display: flex;
@@ -215,7 +212,12 @@
         cursor: pointer;
     }
 
-
+	.btn {
+		margin-top : 10px;
+		margin-bottom : 30px;
+	}
+	#btnWrap {
+	}
 </style>
 </head>
 <body>
@@ -236,7 +238,7 @@
         <div class="profile-intro">
             사용자 프로필
         </div>
-		<div><button onclick="adminMemberList();">목록으로</button></div>
+		<div id="btnWrap"><button type="button" class="btn btn-primary" onclick="adminMemberList();">목록으로</button></div>
 		
 		<script>
 		function adminMemberList() {

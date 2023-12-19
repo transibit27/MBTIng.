@@ -211,13 +211,15 @@
 	
 	<!-- 관리자 전체 조회 -->
 	<select id="adminSelectList" resultMap="boardResultSet">
-		SELECT BOARD_NO
-		     , BOARD_TITLE
-		     , TO_CHAR(ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
-		     , VIEWS
-		  FROM BOARD
-		 WHERE STATUS = 'Y'
-		 ORDER BY BOARD_NO DESC
+		SELECT B.BOARD_NO
+		     , B.BOARD_TITLE
+		     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
+		     , B.VIEWS
+		     , M.USER_NAME
+		  FROM BOARD B
+		  LEFT JOIN MEMBER M ON B.USER_NO = M.USER_NO
+		 WHERE B.STATUS = 'Y'
+		 ORDER BY B.BOARD_NO DESC
 	</select>
 	
 	<!-- 관리자페이지 검색된 게시글 개수 조회 -->

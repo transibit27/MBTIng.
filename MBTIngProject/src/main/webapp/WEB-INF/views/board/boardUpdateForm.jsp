@@ -11,6 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <title>MBTIng - 만남후기 수정</title>
+
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
     
     <style>
         .outer {
