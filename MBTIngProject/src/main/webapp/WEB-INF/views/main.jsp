@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MBTIng</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,10 +198,8 @@
 		}
 		
 		#content_2 , #content_3 {
-			position: relative;
 			width : 100%;
 			height : 100%;
-			top: -6.375em; 
 		}
 
 		#content_1 {
@@ -212,20 +210,30 @@
 		}
 		#Content1BigText {
 			font-size: 4.6em;
-			margin-top: 6em;
-			margin-left: 1em;
+			margin-top: 4.8em;
+			margin-left: 1.5em;
+			font-family: 'Gasoek One', sans-serif;
+			position: absolute;
+			z-index: 2;
+			height: 1em;
+		}
+
+		#Content1BigText2 {
+			font-size: 4.6em;
+			margin-top: 5.9em;
+			margin-left: 1.5em;
 			font-family: 'Gasoek One', sans-serif;
 			position: absolute;
 			z-index: 2;
 			height: 1em;
 		}
 		
-		#Content1BigText a {
+		#Content1BigText2 a {
 			text-decoration : none;
 			color : rgb(255, 142, 161);
 		}
 
-		#Content1BigText a:hover {
+		#Content1BigText2 a:hover {
 			color : rgb(196, 246, 253);
 			cursor: pointer;
 		}
@@ -245,8 +253,8 @@
 			height: 46%;
 			width: 33%;
 			top: 3em;
-			left: 52em;
-			background-image: url(/mbting/resources/images/mbtingResult.png);
+			left: 44em;
+			background-image: url(/mbting/resources/images/mbtingTest.png);
 			background-size: cover;
 			position: absolute;
 			z-index: 1;
@@ -259,8 +267,8 @@
 			width: 27%;
 			position: absolute;
 			top: 9em;
-			left: 81em;
-			background-image: url(/mbting/resources/images/mbtingTest.png);
+			left: 79em;
+			background-image: url(/mbting/resources/images/mbtingResult.png);
 			background-size: cover;
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
 		}
@@ -337,7 +345,20 @@
 				display: flex;
 				justify-content: center; /* 수평 가운데 정렬 */
 				align-items: center; /* 수직 가운데 정렬 */
-				padding-top : 7%;
+				padding-top: 5%;
+			}
+
+			.content2Login {
+				font-family: 'NanumSquare';
+				color: black;
+			}
+
+			.content2Login:hover {
+				cursor: pointer;
+				font-family: 'NanumSquare';
+				color: rgb(255, 161, 161);
+				text-decoration: none;
+				
 			}
 			
 			/*----------------------------------------------------------좋아요 버튼------------------------------------------*/
@@ -463,7 +484,9 @@
 								<div class="test">
 									<div id="testResultImg"></div>
 								</div>
-								<div id="Content1BigText">나의 연애 <a href="mbtiTest.mb">MBTI TEST </a> 하기 <br> 
+								<div id="Content1BigText">나의 연애</div>
+								<div id="Content1BigText2">
+									<a href="mbtiTest.mb">MBTI TEST </a> 하기 <br> 
 									<p id="Content1SmallText">나의 MBTI를 기반으로 소개팅 받고싶은 상대방을 <br> 선택할 수 있어요. Test 하기를 원한다면? </p>
 								</div>
 							</div>
@@ -508,7 +531,12 @@
 			
 		
 		<div id="content_2" class="content">
-					<div id="topText"> <label>현재 가장 매칭 신청을 많이 받은 Top 4</label></div>
+					<div id="topText">
+						<label>매칭 신청을 가장 많이 받은 회원 Top 4!</label>
+					</div>
+						<c:if test="${sessionScope.loginMember == null}" >
+							<h3 align="center"><a data-toggle="modal" data-target="#loginModal" class="content2Login">로그인하고 매칭 신청하기</a></h3>
+						</c:if>
 					<div id="topViewTableDiv">
 						<table id="topViewInnerTable">
 							  <tr class="topViewTr">
@@ -580,6 +608,9 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		    </div>
 		  </div>
 		</div>	
+
+	<jsp:include page="common/footer.jsp"/>
+
 
 	</div>
 
@@ -879,10 +910,6 @@ MBTIng 덕분에 제 운명을 만났어요....!
 		})();
 	</script>
 	<!--End of Tawk.to Script-->
-
-
-
-</datagrid>
 
 </body>
 </html>
