@@ -198,7 +198,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 #chatList {
-    
     width : 450px;
     height : 800px;
     border-top-right-radius: 20px;
@@ -223,10 +222,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .chatListText {
-    font-size: 10px;
+    font-size: 12px;
     color: gray;
     vertical-align: top;
-    width :200px;
+    width :220px;
 }
 
 .chatListName {
@@ -284,16 +283,16 @@ body::-webkit-scrollbar-thumb {
 
 
  .count {
- 	width : 35px;
- 	height : 35px;
+ 	width : 25px;
+ 	height : 25px;
  	box-shadow : 0 0.05rem 0.6rem red;
  	border-radius : 17px;
  	margin : auto;
  	background-color : red;
  	color : white;
  	text-align : center;
- 	line-height: 37px;
- 	font-size : 14px;
+ 	line-height: 25px;
+ 	font-size : 12px;
  } 
 
 #chatInfoTable button {
@@ -475,7 +474,7 @@ body::-webkit-scrollbar-thumb {
 </style>
 </head>
 <body>
-
+<jsp:include page="../common/header.jsp"/>
 	<div class="tooltip-container">
 	  <span class="tooltip"></span>
 	  <span class="text">💗</span>
@@ -703,6 +702,7 @@ body::-webkit-scrollbar-thumb {
                         $("#mbti").text(master.mbti);
                         $("#intro").text(master.introduce);
                         $("#deleteMasterEmail").val(master.email);
+                        
                    },
                    error : function() {
                       console.log("클릭한 방의 master 정보 얻어오기 실패");
@@ -792,7 +792,7 @@ body::-webkit-scrollbar-thumb {
               
               //console.log(receive[0] + receive[1]);
               
-              if((receive[0] == "세션 두명임 읽음팡팡 " || receive[0] == "한 명이다 " ) && (receive[2] != "${sessionScope.loginMember.email}" )) {
+              if((receive[0] == "세션 두명임 읽음팡팡 " && (receive[2] != "${sessionScope.loginMember.email}" )) || (receive[0] == "한 명이다 " && (receive[2] != "${sessionScope.loginMember.email}" ))) {
             	  $.ajax({
                       url:"messageList.do" ,
                       data:{
@@ -803,7 +803,7 @@ body::-webkit-scrollbar-thumb {
                       dataType:"json",
                       success:function(data){
                     	  
-                    	 // $('.chatDiv li').html("");
+                    	  //$('.chatDiv li').html("");
                           for(var i = 0; i < data.length; i++){
                               // 채팅 목록 동적 추가
                               CheckLR(data[i]);
@@ -1001,6 +1001,7 @@ body::-webkit-scrollbar-thumb {
 		  	error : function() {
 		  		console.log("방 별 카톡 수 불러오기 실패.,.,,");
 		  	}
+		  	
 	   });
    }
    </script>
@@ -1142,8 +1143,9 @@ body::-webkit-scrollbar-thumb {
  		
  		//console.log(ckEmail);ㅉㅉㅉㅉ
  		var Hello = ["안녕하세요", "안녕히세용", "안녕" , "안녕하십니까" , "안뇽" , "안넝" , "하이" , "ㅎㅇ"];
- 		var Food  = ["드실래요?" , "음식좋아하세요" , "먹을래" , "드실까"];
- 		var Place = ["어디서볼까요" , "어디서볼래" , "어디서보지" , "어디갈래" , "어디가편해", "어디가편하세요"];
+ 		var Food  = ["드실래요?" , "음식좋아하세요" , "먹을래" , "드실까" , "좋아하는 음식 있으세요?"];
+ 		
+ 		var Place = ["어디서볼까요" , "어디서볼래" , "어디서보지" , "어디갈래" , "어디가편해", "어디가 편하세요"];
  		var Doing = ["뭐할래" , "뭐할까" , "뭐하지" , "뭐하고놀까" , "뭐하실래요", "뭐좋아하세요", "뭐하고싶어요" ];
  		
  		if(ckEmail == em && (Hello.some(hi => msg.includes(hi)))) {

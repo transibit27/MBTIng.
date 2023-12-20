@@ -851,7 +851,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 			});
 			
 		}else if(e.innerText == '채팅하기'){
-			location.href="http://localhost:8081/mbting/convert.ch";
+			location.href="http://${pageContext.request.contextPath}/convert.ch";
 		}else {
 			
 			receiverNo  = num;
