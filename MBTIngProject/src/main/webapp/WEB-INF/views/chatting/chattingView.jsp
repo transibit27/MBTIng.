@@ -476,16 +476,13 @@ body::-webkit-scrollbar-thumb {
 </style>
 </head>
 <body>
-
-<br><br><br><br>
-
+<jsp:include page="../common/header.jsp"/>
 	<div class="tooltip-container">
 	  <span class="tooltip"></span>
 	  <span class="text">💗</span>
 	</div>
 	
-	
-
+		<br>
     <div class="wrap">    
         <div class="wrapPC">
             <div class="chatInfo">
@@ -1117,7 +1114,7 @@ body::-webkit-scrollbar-thumb {
 			data : {"masterEmail" : masterEmail , "userEmail" : userEmail},
 			success : function(response) {
 				 if (response.success) {
-					 location.href="http://localhost:8081/mbting/convert.ch"; 
+					 location.href="${pageContext.request.contextPath}/convert.ch"; 
 					 
 					 alertify.alert('Alert', response.message, function() {
                          alertify.success('Ok');
@@ -1134,7 +1131,7 @@ body::-webkit-scrollbar-thumb {
 		 });
 		 
 		}else{
-		    location.href="http://localhost:8081/mbting/convert.ch"; 
+		    location.href="${pageContext.request.contextPath}/convert.ch"; 
 		}
    }
    
@@ -1148,7 +1145,7 @@ body::-webkit-scrollbar-thumb {
 			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail },
 			success : function(e) {
 
-				location.href="http://localhost:8081/mbting/convert.ch"; 
+				location.href="${pageContext.request.contextPath}/convert.ch"; 
 				
 			},
 			error : function() {
