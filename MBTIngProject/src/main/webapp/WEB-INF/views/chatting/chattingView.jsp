@@ -207,7 +207,6 @@ body::-webkit-scrollbar-thumb {
 .chatList {
 	 border-top-right-radius: 20px;
 	 border-bottom-right-radius: 20px;
-	
 	 overflow-x: hidden;
 }
 

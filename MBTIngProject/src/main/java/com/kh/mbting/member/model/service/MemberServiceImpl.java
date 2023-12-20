@@ -88,7 +88,7 @@ public class MemberServiceImpl implements MemberService {
 	            StringBuilder sb = new StringBuilder();
 	            sb.append("grant_type=authorization_code");
 	            sb.append("&client_id=670371a54748d4645ec474b68405a19c"); //본인이 발급받은 REST_API를 넣어주면 됨. 
-	            sb.append("&redirect_uri=http://localhost:8081/mbting/kakaoLog.me"); //본인이 설정한 주소를 넣어주면 됨. 
+	            sb.append("&redirect_uri=http://192.168.40.37:8081/mbting/kakaoLog.me"); //본인이 설정한 주소를 넣어주면 됨. 
 	            sb.append("&code=" + code); //get방식으로 받아온 code임.
 	            bw.write(sb.toString());
 	            bw.flush();
