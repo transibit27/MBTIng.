@@ -78,7 +78,7 @@
 		}
 		
 		#content_3 {
-		  width: 100%;
+		  width: 1600px;
 		  padding: 0 2rem;
 		  text-align: center;
 		  background-color: rgb(255, 226, 189);
@@ -313,9 +313,13 @@
 			}
 
 			.gradient-image {
-			position: relative;
-			display: inline-block;
-			width : 100%;	
+				position: relative;
+				display: inline-block;
+				width : 100%;	
+			}
+
+			.gradient-image img {
+				object-fit: cover;
 			}
 			
 			.gradient-overlay {
@@ -667,9 +671,13 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				let profile	  = result[i].profileImg;
   				//console.log(result[i].userNo);
   				resultStr += 
-  				    "<td style='border: none;'>" +
-  				  "<div class='like' id='user" + result[i].userNo + "'><button id='button' onclick='requestMatch(this , " + result[i].userNo + ");' ><span>채팅신청</span></button></div>" +
-  				    "<div class='flip-card'>" + 
+  				    "<td style='border: none;'>";
+  				    
+  				    if(result[i].userNo != ${sessionScope.loginMember.userNo}) {
+  				    	resultStr += "<div class='like' id='user" + result[i].userNo + "'><button id='button' onclick='requestMatch(this , " + result[i].userNo + ");' ><span>채팅신청</span></button></div>";
+  				    }
+  				    
+  				  resultStr += "<div class='flip-card'>" + 
   				        "<div class='flip-card-inner'>" + 
   				            "<div class='gradient-image flip-card-front'>" + 
   				                "<a><img class='img' src='" + '${pageContext.request.contextPath}' + profile + "'></a>" + 
@@ -743,7 +751,7 @@ MBTIng 덕분에 제 운명을 만났어요....!
 	            	 e.style.backgroundColor = "#DDDEA5";
 	            	 e.style.color = "white";
 	            	 e.innerText = "채팅하기";
-	            	 location.href="http://localhost:8081/mbting/convert.ch";
+	            	 location.href="${pageContext.request.contextPath}/convert.ch";
 	             },
 	
 	             error: function() {

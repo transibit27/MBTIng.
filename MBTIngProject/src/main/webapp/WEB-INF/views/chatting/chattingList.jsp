@@ -11,6 +11,7 @@
 
 <style>
 
+
 .wrap {
 	width : 1200px;
 	margin: auto;
@@ -609,7 +610,7 @@
 	            	 e.style.backgroundColor = "#DDDEA5";
 	            	 e.style.color = "white";
 	            	 e.innerText = "채팅하기";
-	            	 location.href="http://localhost:8081/mbting/convert.ch";
+	            	 location.href="${pageContext.request.contextPath}/convert.ch";
 	             },
 	
 	             error: function() {
@@ -647,7 +648,7 @@
 			});
 			
 		}else if(e.innerText == '채팅하기'){
-			location.href="http://localhost:8081/mbting/convert.ch";
+			location.href="${pageContext.request.contextPath}/convert.ch";
 		}else {
 			
 			receiverNo  = num;
