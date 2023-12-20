@@ -176,6 +176,8 @@
     border-radius: 10px;
     border: 2px solid lightgray;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); 
+	object-fit: cover;
+
 }
 
 
@@ -282,6 +284,7 @@
  	border : 0px;
  	background-color : transparent;
  	border-radius : 5px;
+	margin: 0px 10px;
  }
  
   .borders {
@@ -291,10 +294,8 @@
 
 	#Men {
 	  width: 100px;
-	  height: 100px;
+	  height: 80px;
 	  border: none;
-	  background-color: rgb(255, 253, 253); /* 하늘색 배경 */
-	  color: lightgray; /* 흰색 텍스트 */
 	  border-radius: 20px; /* 둥근 테두리 */
 	  cursor: pointer;
 	  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
@@ -309,10 +310,8 @@
 	
 	#woMen {
 	  width: 100px;
-	  height:100px;
+	  height:80px;
 	  border: none;
-	  background-color: rgb(255, 253, 253); /* 연한 분홍색 배경 */
-	  color: lightgray; /* 흰색 텍스트 */
 	  border-radius: 20px; /* 둥근 테두리 */
 	  cursor: pointer;
 	  transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
@@ -368,14 +367,17 @@
 	<jsp:include page="../common/header.jsp"/>
 		
     <div class="wrap">
-    <br><br><br>
+    <br>
     
-          <input type="hidden" value="N"  name="gender" id="gender">
-        <div id="genderCheck">
-        	<button id="Men"   class="genderButton " type="button" onclick="Gender(1);" ><img style="height : 40px;"src="https://cdn-icons-png.flaticon.com/128/3741/3741578.png"> 남자 </button>
-        	<button id="woMen" class="genderButton " type="button" onclick="Gender(2);" ><img style="height : 40px;"src="https://cdn-icons-png.flaticon.com/128/3741/3741708.png"> 여자</button>
-        </div>	
+	
     	<div class="content_1">
+
+			<input type="hidden" value="N"  name="gender" id="gender">
+			<div id="genderCheck">
+				<button id="Men"   class="genderButton " type="button" onclick="Gender(1);" ><img style="height : 40px;"src="https://cdn-icons-png.flaticon.com/128/3741/3741578.png"> 남자 </button>
+				<button id="woMen" class="genderButton " type="button" onclick="Gender(2);" ><img style="height : 40px;"src="https://cdn-icons-png.flaticon.com/128/3741/3741708.png"> 여자</button>
+			</div>
+			<br>
         	<table id="searchTable">
         		<tr>
         			<td>키</td>
@@ -490,7 +492,7 @@
   <script>
   
   	$(function() {
-  		personDetail();
+  		// personDetail();
   		selectAllMemberList();
   	});
   	
@@ -694,35 +696,6 @@
   </script>
   
   <script>
-  	function personDetail() {
-	  // 이미지 클릭 시 이벤트 처리
-	  $(".user__container").on("click", ".image img", function() {
-	    // 클릭한 이미지의 인덱스를 가져옴
-	    var index = $(this).index();
-
-	    // 미리 만들어진 div 요소의 ID
-	    var divId = "hiddenDiv";
-
-	    // 모든 이미지의 투명도를 초기화
-	    $(".user__container .image img").css("opacity", "1");
-
-	    // 선택한 이미지의 투명도를 조절
-	    $(this).css("opacity", "0.5");
-
-	    // 미리 만들어진 div 요소를 보이게 함
-	    $("#" + divId).show();
-	  });
-
-	  // div 닫기 버튼 클릭 시 이벤트 처리
-	  $("#hiddenDivCloseBtn").on("click", function() {
-	    // 미리 만들어진 div 요소를 숨김
-	    $("#hiddenDiv").hide();
-
-	    // 모든 이미지의 투명도를 초기화
-	    $(".user__container .image img").css("opacity", "1");
-	  });
-	  
-	  }
   	
   	  function checkProposer() {
   		  $.ajax({
