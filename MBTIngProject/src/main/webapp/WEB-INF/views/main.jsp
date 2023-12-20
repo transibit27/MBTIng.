@@ -427,7 +427,8 @@
 				font-size: 60px;
 			}
 
-			.mainBanner2>h1>a:hover {
+			.mainBanner2>h1>a:hover,
+			.mainBanner3>h1>a:hover {
 				color: rgb(255, 92, 92);
 			}
 			

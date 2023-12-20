@@ -7,7 +7,7 @@
 <head>
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매칭하기</title>
 
 <style>
 
