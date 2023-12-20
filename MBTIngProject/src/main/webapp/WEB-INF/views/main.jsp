@@ -78,7 +78,7 @@
 		}
 		
 		#content_3 {
-		  width: 100%;
+		  width: 1600px;
 		  padding: 0 2rem;
 		  text-align: center;
 		  background-color: rgb(255, 226, 189);
@@ -313,9 +313,13 @@
 			}
 
 			.gradient-image {
-			position: relative;
-			display: inline-block;
-			width : 100%;	
+				position: relative;
+				display: inline-block;
+				width : 100%;	
+			}
+
+			.gradient-image img {
+				object-fit: cover;
 			}
 			
 			.gradient-overlay {
