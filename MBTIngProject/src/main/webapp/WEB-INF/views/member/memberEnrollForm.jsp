@@ -340,7 +340,8 @@
         		$("#email").val("${sessionScope.email}");
         		$("#userName").val("${sessionScope.nickname}");
         		$("#email").attr("disabled", true);
-        		checkArr[0] = true;
+                checkArr[0] = true;
+        		checkArr[1] = true;
         	};
             
             $("#M").click(function(){
