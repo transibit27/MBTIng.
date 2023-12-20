@@ -207,7 +207,6 @@ body::-webkit-scrollbar-thumb {
 .chatList {
 	 border-top-right-radius: 20px;
 	 border-bottom-right-radius: 20px;
-	
 	 overflow-x: hidden;
 }
 
@@ -476,16 +475,13 @@ body::-webkit-scrollbar-thumb {
 </style>
 </head>
 <body>
-
-<br><br><br><br>
-
+<jsp:include page="../common/header.jsp"/>
 	<div class="tooltip-container">
 	  <span class="tooltip"></span>
 	  <span class="text">💗</span>
 	</div>
 	
-	
-
+		<br>
     <div class="wrap">    
         <div class="wrapPC">
             <div class="chatInfo">
@@ -641,7 +637,7 @@ body::-webkit-scrollbar-thumb {
 
                     // 첫 번째 행을 만드는 코드
                     var $tr1 = $("<tr>");
-                    $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", isCurrentUser ? "http://localhost:8081/mbting" + data[i].masterPic : "http://localhost:8081/mbting" + data[i].userPic)));
+                    $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", isCurrentUser ? "${pageContext.request.contextPath}/" + data[i].masterPic : "${pageContext.request.contextPath}/" + data[i].userPic)));
                     $tr1.append($("<td class='chatListName' style='height: 35px;'>").text(isCurrentUser ? data[i].masterName : data[i].userName));
                     $tr1.append($("<td class='chatListTime'>").text(data[i].sendTime + "분"));
 
@@ -1037,7 +1033,7 @@ body::-webkit-scrollbar-thumb {
 	
    <!-- 나가기 버튼 홈화면으로 돌려줌-->
    function Home() {
-       location.href="http://localhost:8081/mbting";
+       location.href="${pageContext.request.contextPath}/";
    };
    
    function blockMembers() {
@@ -1076,7 +1072,7 @@ body::-webkit-scrollbar-thumb {
 
                   // 첫 번째 행을 만드는 코드
                   var $tr1 = $("<tr>");
-                  $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", "http://localhost:8081/mbting" + data[i].profileImg )));
+                  $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", "${pageContext.request.contextPath}/" + data[i].profileImg )));
                   $tr1.append($("<td  rowspan='2' style='height: 30px;'>").text(data[i].userName));
              
                   var $button = $("<button>").text("차단 해제").on("click", unblock).attr("id", "submitButton").css("background-color", "lightgray");
@@ -1117,7 +1113,7 @@ body::-webkit-scrollbar-thumb {
 			data : {"masterEmail" : masterEmail , "userEmail" : userEmail},
 			success : function(response) {
 				 if (response.success) {
-					 location.href="http://localhost:8081/mbting/convert.ch"; 
+					 location.href="${pageContext.request.contextPath}/convert.ch"; 
 					 
 					 alertify.alert('Alert', response.message, function() {
                          alertify.success('Ok');
@@ -1134,7 +1130,7 @@ body::-webkit-scrollbar-thumb {
 		 });
 		 
 		}else{
-		    location.href="http://localhost:8081/mbting/convert.ch"; 
+		    location.href="${pageContext.request.contextPath}/convert.ch"; 
 		}
    }
    
@@ -1148,7 +1144,7 @@ body::-webkit-scrollbar-thumb {
 			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail },
 			success : function(e) {
 
-				location.href="http://localhost:8081/mbting/convert.ch"; 
+				location.href="${pageContext.request.contextPath}/convert.ch"; 
 				
 			},
 			error : function() {

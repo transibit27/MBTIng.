@@ -255,6 +255,7 @@
 			     , TO_CHAR(B.ENROLL_DATE, 'YYYY-MM-DD') AS "ENROLL_DATE"
 				 , BI.ORIGIN_NAME
 				 , BI.CHANGE_NAME
+				 , B.VIEWS
 		            , (
 		               SELECT COUNT (*)
 		                 FROM THUMB

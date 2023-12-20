@@ -160,7 +160,7 @@
 	                        <p class="pt_title">${b.boardTitle}
 	                        </p>
 	                        <p class="pt_info">
-	                            ${b.userNo}
+	                            ${sessionScope.loginMember.userName}
 	                        </p>                                                     
 	                    </div>
 	                    <p class="b_info"><span><b>${b.views}</b>명 읽음</span></p>

@@ -22,6 +22,8 @@
     width:500px;
     margin:auto;
 }
+
+
 #searchForm>* {
     margin:5px;
 }

@@ -329,7 +329,7 @@
 
     <div id="header">
         <div id="header_1_left" style="height: 100%; width: 18%; display: flex; align-items: center; justify-content: center;">
-            <a href="http://localhost:8081/mbting/">
+            <a href="${pageContext.request.contextPath}/">
                <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
               </a>
         </div>
@@ -338,7 +338,7 @@
             <div id="header_1_center">	 
                 <div>
                     <ul>
-                        <li><a href="http://localhost:8081/mbting/">HOME</a></li>
+                        <li><a href="${pageContext.request.contextPath}/">HOME</a></li>
                         <li><a href="introduce.in">회사소개</a></li>
                         <li><a href="listMember.no">공지사항</a></li>
                         <li><a href="list.bo">만남후기</a></li>
@@ -382,7 +382,7 @@
 		                 
 			                <img id="profile" src="${sessionScope.profile}" >
 			                <a href="myPage.me">마이페이지</a>
-			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://localhost:8081/mbting/logout.me">로그아웃</a>
+			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://${pageContext.request.contextPath}/logout.me">로그아웃</a>
 				               	   
                			</c:when>
                			
@@ -439,7 +439,7 @@
                         </div>
 
                         <div class="kakao-login">
-                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me'">
+                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://192.168.40.37:8081/mbting/kakaoLog.me'">
                                 <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
                             </div>
 
