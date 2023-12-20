@@ -288,7 +288,7 @@ public class ChattingController {
     @RequestMapping("block.mem")
     public String blockMem(String blockMemEmail, String blockProEmail) {
     	BlockMember bm = new BlockMember();
-    	
+    	System.out.println("ssss" + blockMemEmail);
     	bm.setBlockMemEmail(blockMemEmail);
     	bm.setBlockProEmail(blockProEmail);
     	

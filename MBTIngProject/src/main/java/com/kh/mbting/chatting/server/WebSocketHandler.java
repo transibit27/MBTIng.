@@ -72,9 +72,8 @@ public class WebSocketHandler extends TextWebSocketHandler  {
            //System.out.println(sessionList);
            //System.out.println(RoomList);
             String roomNum = chatMessage.getRoomNo();
-            
-            TextMessage textMessage = new TextMessage("한 명이다 ," + roomNum );
-            
+            TextMessage textMessage = new TextMessage("한 명이다 ," + roomNum + chatMessage.getEmail());
+            System.out.println("한 명이다");
             for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
                 sess.sendMessage(textMessage);
                 //System.out.println(textMessage);
@@ -98,8 +97,8 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             int sessionCount = 2;
             
             if(RoomList.get(roomNum).size() == 1) {
-            	 TextMessage textMessage = new TextMessage ("한 명이다 ," + roomNum);
-            	 
+            	 TextMessage textMessage = new TextMessage ("한 명이다 ," + roomNum + chatMessage.getEmail());
+            	 System.out.println("한 명이다");
             	 for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
                      sess.sendMessage(textMessage);
                  }
@@ -109,10 +108,10 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             	 cService.insertUnReadMessage(chatMessage);
             	 
             	 TextMessage textMessage = new TextMessage("세션 두명임 읽음팡팡 ," + roomNum );
-            	 
+            	 System.out.println("두 명이다");
             	 for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
                      sess.sendMessage(textMessage);
-                     System.out.println(textMessage);
+                     //System.out.println(textMessage);
                  }
             	 //System.out.println(result + "ㅋㅋㅋㅋㅋ");
             }
