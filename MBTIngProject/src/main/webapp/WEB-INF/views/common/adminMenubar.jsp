@@ -162,7 +162,7 @@
 	
 	<script>
 	function mainLogo() {
-		 window.location.href = 'http://localhost:8081/mbting';
+		 window.location.href = '${pageContext.request.contextPath}/';
 	}
 	</script>
 	
@@ -170,7 +170,7 @@
     <div id="admin-menubar">
 
         <div class="left-area">
-            <h1 id="logo"><a href="http://localhost:8081/mbting/adminMain.ad">MBTing.</a></h1>
+            <h1 id="logo"><a href="${pageContext.request.contextPath}/adminMain.ad">MBTing.</a></h1>
 
             <div id="content-menubar">
                 <table>
