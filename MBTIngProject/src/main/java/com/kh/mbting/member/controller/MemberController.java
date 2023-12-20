@@ -177,7 +177,7 @@ public class MemberController {
 	public String kakaoCallback(@RequestParam String code,HttpSession session ) {
 		
 		String access_Token = memberService.getKakaoAccessToken(code);
-								
+								//System.out.println("야 안옴?");
 		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
 		String email = (String)userInfo.get("email");
 		Member member = memberService.kakaoLoginCheck(email);

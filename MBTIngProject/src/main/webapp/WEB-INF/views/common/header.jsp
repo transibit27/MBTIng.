@@ -439,7 +439,7 @@
                         </div>
 
                         <div class="kakao-login">
-                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://${pageContext.request.contextPath}/kakaoLog.me'">
+                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=${pageContext.request.contextPath}/kakaoLog.me'">
                                 <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
                             </div>
 
