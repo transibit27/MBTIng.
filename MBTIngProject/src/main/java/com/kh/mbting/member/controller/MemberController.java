@@ -143,7 +143,7 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(m.getUserPwd());
 		
 		m.setUserPwd(encPwd);
-		
+		System.out.println("회원가입" + m);
 		int result = memberService.insertMember(m);
 		
 		if(result>0) {
@@ -620,7 +620,10 @@ public class MemberController {
 					m.setEmail(v.getEmail());
 					// 16자리 영문 대소문자 특수문자 포함 임시 비밀번호 생성 후  m에 대입
 					String newPwd = RandomStringUtils.random(16, 33, 125, false, false);
-					m.setUserPwd(newPwd);
+					// step2 변경할 비밀번호를 암호화
+					String encPwd = bcryptPasswordEncoder.encode(newPwd);
+					System.out.println(encPwd);
+					m.setUserPwd(encPwd);
 					
 					// 임시비밀번호로 회원 정보 업데이트
 					int result = memberService.newPassWord(m);
