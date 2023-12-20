@@ -12,6 +12,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap" rel="stylesheet">
 <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square.css" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-gothic.css" rel="stylesheet">
+<link href="https://hangeul.pstatic.net/hangeul_static/css/NanumBarunGothicYetHangul.css" rel="stylesheet">
 
 <!--연애 MBTI TEST 하기 글씨체-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -380,6 +382,54 @@
 				text-decoration: none;
 				
 			}
+
+			.mainBanner2 img {
+				width: 100%;
+				position: relative;
+				z-index: 1;
+			}
+
+			.mainBanner2>h1 {
+				font-family: 'NanumBarunGothicYetHangul';
+				font-weight: bold;
+				position: absolute;
+				z-index: 2;
+				top: 200px;
+				left: 200px;
+			}
+
+			.mainBanner3>h1,
+			.mainBanner3>h4 {
+				width: 100%	;
+				top: 180px;
+				right: 280px;
+				text-align: end;
+				font-family: 'NanumBarunGothicYetHangul';
+				font-weight: bold;
+				position: absolute;
+				z-index: 2;
+			}
+
+			.mainBanner3>h4 {
+				width: 100%	;
+				top: 180px;
+				right: 300px;
+				text-align: end;
+				font-family: 'NanumBarunGothicYetHangul';
+				position: absolute;
+				z-index: 2;
+			}
+
+			.mainBanner2>h1>a,
+			.mainBanner3>h1>a {
+				color: rgb(254, 111, 111);
+				text-decoration: none;
+				font-size: 60px;
+			}
+
+			.mainBanner2>h1>a:hover {
+				color: rgb(255, 92, 92);
+			}
 			
 			/*----------------------------------------------------------좋아요 버튼------------------------------------------*/
 			#button {
@@ -516,12 +566,24 @@
 							</div>
 						</div>
 						<div class="swiper-slide">
-							
+							<div class="mainBanner2">
+								<h1>
+									<a href="list.bo">검증된 후기</a>로<br> 
+									<h1 style="margin-top: 90px;">신뢰할 수 있는 소개팅</h1>
+								</h1>
+								<img src="<%=request.getContextPath()%>/resources/images/MN6.jpg">
+							</div>
 						</div>
 						<div class="swiper-slide">
-							<img src="<%=request.getContextPath()%>/resources/images/mainImg.png">
+							<div class="mainBanner3">
+								<h1>
+									MBTIng에서 나와 잘맞는 <br>
+									<h1 style="margin-top: 60px;"><a href="all.me">인연을 찾아보세요!</a></h1>
+									<h4 style="margin-top: 140px; font-size: 18px; color: gray;">(로그인 후 이용 가능)</h3>
+								</h1>
+								<img src="<%=request.getContextPath()%>/resources/images/MN7.jpg">
+							</div>
 						</div>
-						<div class="swiper-slide"><img src="https://d2v80xjmx68n4w.cloudfront.net/gigs/A0zqe1658202164.jpg"></div>
 					</div>
 				
 					<!-- paging 바를 위한 스타일 -->
