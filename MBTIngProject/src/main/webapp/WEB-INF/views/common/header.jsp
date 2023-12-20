@@ -329,7 +329,7 @@
 
     <div id="header">
         <div id="header_1_left" style="height: 100%; width: 18%; display: flex; align-items: center; justify-content: center;">
-            <a href="http://localhost:8081/mbting/">
+            <a href="${pageContext.request.contextPath}/">
                <img id="loggo" src="${pageContext.request.contextPath}/resources/images/mbtingLoggo2.png" alt=""> 
               </a>
         </div>

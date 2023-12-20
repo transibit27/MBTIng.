@@ -673,34 +673,33 @@ MBTIng 덕분에 제 운명을 만났어요....!
   				resultStr += 
   				    "<td style='border: none;'>";
   				    
-  				    if(result[i].userNo != ${sessionScope.loginMember.userNo}) {
+  				    if(result[i].userNo != "${sessionScope.loginMember.userNo}") {
   				    	resultStr += "<div class='like' id='user" + result[i].userNo + "'><button id='button' onclick='requestMatch(this , " + result[i].userNo + ");' ><span>채팅신청</span></button></div>";
   				    }
   				    
-  				  resultStr += "<div class='flip-card'>" + 
-  				        "<div class='flip-card-inner'>" + 
-  				            "<div class='gradient-image flip-card-front'>" + 
-  				                "<a><img class='img' src='" + '${pageContext.request.contextPath}' + profile + "'></a>" + 
-  				                "<div class='gradient-overlay'>" + 
-  				                    "<div class='introMem'>" + 
-  				                        result[i].userName + ", " + result[i].age + "<br><p>" + result[i].mbtiNick + "ㆍ " + result[i].mbti + "</p>" + 
-  				                    "</div>" + 
-  				                "</div>" + 
-  				            "</div>" +
-  				            "<div class='flip-card-back'>" + 
-  				            "</div>" +
-  				        "</div>" +
-  				    "</div>" +
-  				  	"<input type='hidden' id='masterEmail" + num + "' name='masterEmail" + (num) + "' value=''>" +
-				  	"<input type='hidden' id='masterName" + num + "' name='masterName" + (num) + "' value=''>" +
-					"<input type='hidden' id='masterPic" + num + "' name='masterPic" + (num++) + "' value=''>" +
-  				    "</td>";
-  				    
-				 $(".topViewTr").html(resultStr);
+	  				  resultStr += "<div class='flip-card'>" + 
+	  				        "<div class='flip-card-inner'>" + 
+	  				            "<div class='gradient-image flip-card-front'>" + 
+	  				                "<a><img class='img' src='" + '${pageContext.request.contextPath}' + profile + "'></a>" + 
+	  				                "<div class='gradient-overlay'>" + 
+	  				                    "<div class='introMem'>" + 
+	  				                        result[i].userName + ", " + result[i].age + "<br><p>" + result[i].mbtiNick + "ㆍ " + result[i].mbti + "</p>" + 
+	  				                    "</div>" + 
+	  				                "</div>" + 
+	  				            "</div>" +
+	  				            "<div class='flip-card-back'>" + 
+	  				            "</div>" +
+	  				        "</div>" +
+	  				    "</div>" +
+	  				  	"<input type='hidden' id='masterEmail" + num + "' name='masterEmail" + (num) + "' value=''>" +
+					  	"<input type='hidden' id='masterName" + num + "' name='masterName" + (num) + "' value=''>" +
+						"<input type='hidden' id='masterPic" + num + "' name='masterPic" + (num++) + "' value=''>" +
+	  				    "</td>";
+	  				    
+					 $(".topViewTr").html(resultStr);
+	
+				 }
 
-			 }
-
-  			
   			checkReceiver();
 		  	checkProposer();
 		  	checkMatching();

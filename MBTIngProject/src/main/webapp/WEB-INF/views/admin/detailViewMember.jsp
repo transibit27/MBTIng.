@@ -243,7 +243,7 @@
 		<script>
 		function adminMemberList() {
 			var currentPage = ${requestScope.currentPage};
-			location.href="http://localhost:8081/mbting/list.adme?cpage=" + currentPage;
+			location.href="${pageContext.request.contextPath}/list.adme?cpage=" + currentPage;
 		}
 		</script>
 		<form id="mypage-form" 

@@ -123,7 +123,7 @@
         title.addEventListener('click', function() {
             const userNo = this.getAttribute('data-userNo');
             const cpage = ${requestScope.pi.currentPage};
-            window.location.href = 'http://localhost:8081/mbting/detail.adme?userNo=' + userNo + '&currentPage=' + cpage;
+            window.location.href = '${pageContext.request.contextPath}/detail.adme?userNo=' + userNo + '&currentPage=' + cpage;
        
         });
     });
