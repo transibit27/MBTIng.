@@ -337,11 +337,8 @@
         	// 카카오 계정으로 회원 가입을 시도할 경우
         	if("${sessionScope.email}" != ""){
         		console.log("잘들어옴?")
-        		$("#email").val("${sessionScope.email}");
-        		$("#userName").val("${sessionScope.nickname}");
-        		$("#email").attr("disabled", true);
-                checkArr[0] = true;
-        		checkArr[1] = true;
+        		$("#email").val("${sessionScope.email}");   
+        		
         	};
             
             $("#M").click(function(){
