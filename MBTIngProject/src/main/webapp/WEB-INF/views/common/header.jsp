@@ -382,7 +382,7 @@
 		                 
 			                <img id="profile" src="${sessionScope.profile}" >
 			                <a href="myPage.me">마이페이지</a>
-			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://${pageContext.request.contextPath}/logout.me">로그아웃</a>
+			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://192.168.40.37:8081/mbting/logout.me">로그아웃</a>
 				               	   
                			</c:when>
                			

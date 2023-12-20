@@ -475,7 +475,7 @@ body::-webkit-scrollbar-thumb {
 </style>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"/>
+
 	<div class="tooltip-container">
 	  <span class="tooltip"></span>
 	  <span class="text">💗</span>
@@ -523,7 +523,7 @@ body::-webkit-scrollbar-thumb {
                       </div>
                   </li>
               </ul>
-          </div>
+           </div>
           
           
           <div class="chatDiv2" style="display : none">
@@ -590,7 +590,7 @@ body::-webkit-scrollbar-thumb {
                     <td>
                         <textarea style="width: 100%; height: 90%;" placeholder="메시지를 입력해주세요" name="message" id="message"></textarea>
                     </td>
-                    <!-- <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 100%; margin-bottom : 5px; margin-left : 30px;>" onclick="sendMessage();" >전송</button></td> -->
+                     <td style="width: 15%;"><button id="submitButton" style="width: 100%; height: 100%; margin-bottom : 5px; margin-left : 30px;>" onclick="sendMessage();" >전송</button></td> 
                 </tr>
             </table>
         </div>
@@ -702,6 +702,7 @@ body::-webkit-scrollbar-thumb {
                         $("#masterImg").attr("src" , masterPic);
                         $("#mbti").text(master.mbti);
                         $("#intro").text(master.introduce);
+                        $("#deleteMasterEmail").val(master.email);
                    },
                    error : function() {
                       console.log("클릭한 방의 master 정보 얻어오기 실패");
@@ -791,8 +792,7 @@ body::-webkit-scrollbar-thumb {
               
               //console.log(receive[0] + receive[1]);
               
-              if(receive[0] == "세션 두명임 읽음팡팡 " || receive[0] == "한 명이다 ") {
-            	  
+              if((receive[0] == "세션 두명임 읽음팡팡 " || receive[0] == "한 명이다 " ) && (receive[2] != "${sessionScope.loginMember.email}" )) {
             	  $.ajax({
                       url:"messageList.do" ,
                       data:{
@@ -802,37 +802,19 @@ body::-webkit-scrollbar-thumb {
                       async:false,
                       dataType:"json",
                       success:function(data){
-                         
+                    	  
+                    	 // $('.chatDiv li').html("");
                           for(var i = 0; i < data.length; i++){
                               // 채팅 목록 동적 추가
-                              //$('.chatDiv').text("");
                               CheckLR(data[i]);
                           }
-                          
-                          $.ajax({
-                            url : "master.In",
-                            data : {email : email},
-                            success : function(master) {
-                           //console.log(master);
-                                 $("#masterName").text(master.userName);
-                                 $("#masterImg").attr("src" , masterPic);
-                                 $("#mbti").text(master.mbti);
-                                 $("#intro").text(master.introduce);
-                                 $("#deleteMasterEmail").val(master.email);
-                            },
-                            error : function() {
-                               console.log("클릭한 방의 master 정보 얻어오기 실패");
-                            }
-                          
-                          });
-                          
                       }, 
                       error : function() {
                      	 console.log("메시지 리스트 불러오기 실패");
                       }
-                  });
-            	  
+                  });  
               }else {
+            	  
             	  let ce = "${sessionScope.loginMember.email}";
             	  chattingGuide(receive[1] , receive[2] , ce);
             
@@ -1052,7 +1034,7 @@ body::-webkit-scrollbar-thumb {
 		  data : {"email" : "${sessionScope.loginMember.email}"},
 		  type : "post" ,
 		  success : function(data) {
-			//console.log(data);
+			console.log(data);
 			  
 			  $blockWrap.removeClass('hidden');
 			  
@@ -1137,7 +1119,7 @@ body::-webkit-scrollbar-thumb {
    function blockMember(button) {
 	     var blockMemEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
 		 var blockProEmail = "${sessionScope.loginMember.email}";
-		 
+		 console.log("a" +blockMemEmail);
 		 $.ajax({
 			url  : "block.mem",
 			type : "post" ,
@@ -1198,18 +1180,7 @@ body::-webkit-scrollbar-thumb {
 	      $("#" + elementId).css("background-color", "pink");
 	 }, 1000);
  	 
-	 $(document).ready(function () {
-		    // text 클래스를 가진 span의 텍스트가 변경될 때마다 hover 효과를 주기
-		    $('.tooltip').on('DOMSubtreeModified', function () {
-		        var $tooltipContainer = $(this).closest('.tooltip-container');
-		        $tooltipContainer.addClass('hover-effect');
-				console.log("악");
-		        // 일정 시간 후에 hover 효과를 해제
-		        setTimeout(function () {
-		            $tooltipContainer.removeClass('hover-effect');
-		        }, 1000); // 1초 후에 hover 효과 해제 (원하는 시간으로 조절 가능)
-		    });
-		});
+
    </script>
 </body>
 </html>
