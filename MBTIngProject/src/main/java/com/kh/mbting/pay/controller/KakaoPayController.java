@@ -75,9 +75,9 @@ public class KakaoPayController {
 				+ "quantity="+kp.getQuantity()+"&"							// 상품 수량
 				+ "total_amount="+kp.getTotalAmount()+"&"					// 상품 총액
 				+ "tax_free_amount="+kp.getTaxFreeAmount()+"&"					// 비과세 금액
-				+ "approval_url=http://localhost:8081/mbting/kakaoPaySuccess?partner_order_id="+ partner_order_id +"&"  // 결제 성공시 리다이렉트 URL
-				+ "cancel_url=http://localhost:8081/mbting/myPay.me&"		// 결제 취소시 리다이렉트 URL
-				+ "fail_url=http://localhost:8081/mbting/myPay.me";		// 결제 실패시 리다이렉트 URL
+				+ "approval_url=http://192.168.40.37:8081/mbting/kakaoPaySuccess?partner_order_id="+ partner_order_id +"&"  // 결제 성공시 리다이렉트 URL
+				+ "cancel_url=http://192.168.40.37:8081/mbting/myPay.me&"		// 결제 취소시 리다이렉트 URL
+				+ "fail_url=http://192.168.40.37:8081/mbting/myPay.me";		// 결제 실패시 리다이렉트 URL
 		
 		// 서버에 위의 값을 넘겨 줄 때 필요한 스트림 객체 생성
 		OutputStream outputStream = urlConnection.getOutputStream();
