@@ -278,7 +278,7 @@
                         나와 잘맞는 사람을 만나고 싶다면 <br>
                         지금 가입하세요!
                     </div>
-                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://localhost:8081/mbting/kakaoLog.me">
+                    <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://192.168.40.37:8081/mbting/kakaoLog.me">
                     	<img id="kakao-enroll" src="${pageContext.request.contextPath}/resources/images/kakaoLoginBig.png" alt="kakaoEnroll" >
                     </a>
                 </div>

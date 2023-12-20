@@ -442,7 +442,7 @@ public class MemberController {
 						currentPage, pageLimit, boardLimit);
 		
 		ArrayList<Board> list = memberService.selectList(pi, userNo);
-		
+				
 		mv.addObject("list", list)
 		  .addObject("pi", pi)
 		  .setViewName("member/myReview");
