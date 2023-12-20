@@ -46,7 +46,7 @@
         #toggleSave {
         	margin-top : 20px;
         	margin-bottom : 20px;
-        	margin-left : 73%;
+        	margin-left : 69%;
         	width:100px;
         }
     </style>
