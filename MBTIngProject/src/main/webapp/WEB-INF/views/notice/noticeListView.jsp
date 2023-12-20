@@ -35,11 +35,11 @@
         .btn-primary, .btn-danger {
             width: 100px;
             margin-bottom: 30px;
-            float : right;
+            
         }
         .btn-danger { margin-left : 10px; }
         #testttt {
-        	width : 1100px;
+        	margin-left : 1010px;
         }
     </style>
 </head>
@@ -57,8 +57,8 @@
         </div>
         <div class="innerOuter" style="padding:1% 8%;">
         	<div id="testttt">
-            <button type="button" class="btn btn-danger">삭제</button>
             <button type="button" class="btn btn-primary" onclick="location.href='enrollForm.no'">등록</button>
+            <button type="button" class="btn btn-danger">삭제</button>
             </div>
             <table id="noticeList" class="table table-hover" align="center">
                 <thead>
