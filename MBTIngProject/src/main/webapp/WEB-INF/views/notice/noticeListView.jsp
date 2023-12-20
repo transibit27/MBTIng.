@@ -35,11 +35,11 @@
         .btn-primary, .btn-danger {
             width: 100px;
             margin-bottom: 30px;
-            float: right;
+            float : right;
         }
         .btn-danger { margin-left : 10px; }
         #testttt {
-        	width : 1080px;
+        	width : 1100px;
         }
     </style>
 </head>

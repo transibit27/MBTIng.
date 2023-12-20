@@ -728,6 +728,7 @@
 	    });
 	}
 
+	
 	// 차트 업데이트 함수
 	function updateChart() {
 	    premiumAccountChart.update();
