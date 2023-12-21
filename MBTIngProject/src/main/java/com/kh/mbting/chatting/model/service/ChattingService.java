@@ -190,4 +190,11 @@ public interface ChattingService {
      * @return
      */
     ArrayList<Member> blockList(String email);
+    
+    /***
+     * 차단한 회원을 해제하는 method
+     * @param bm
+     * @return
+     */
+    int unBlockMem(BlockMember bm);
 }

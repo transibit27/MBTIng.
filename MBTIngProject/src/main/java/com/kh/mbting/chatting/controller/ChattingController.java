@@ -288,7 +288,7 @@ public class ChattingController {
     @RequestMapping("block.mem")
     public String blockMem(String blockMemEmail, String blockProEmail) {
     	BlockMember bm = new BlockMember();
-    	System.out.println("ssss" + blockMemEmail);
+    	//System.out.println("ssss" + blockMemEmail);
     	bm.setBlockMemEmail(blockMemEmail);
     	bm.setBlockProEmail(blockProEmail);
     	
@@ -308,6 +308,24 @@ public class ChattingController {
     	ArrayList<Member> m = cService.blockList(email);
     	//System.out.println(m);
     	return new Gson().toJson(m);
+    }
+    
+    @RequestMapping("unblock.mem")
+    public String unBlockMem(String blockMemEmail, String blockProEmail) {
+    	System.out.println("혹시.,오나");
+    	BlockMember bm = new BlockMember();
+    	//System.out.println("ssss" + blockMemEmail);
+    	bm.setBlockMemEmail(blockMemEmail);
+    	bm.setBlockProEmail(blockProEmail);
+    	
+    	int result = cService.unBlockMem(bm);
+    	
+    	if(result > 0) {
+    		return "차단 해제 성공";
+    	}else {
+    		return "차단 해제 실패";
+    	}
+    	
     }
      
 }

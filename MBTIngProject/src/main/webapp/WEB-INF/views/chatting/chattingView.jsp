@@ -1047,8 +1047,8 @@ body::-webkit-scrollbar-thumb {
               for (var i in data) {
 
                   // main div를 먼저 생성해주고.
-                  var $div = $("<div class='chatList_box' onclick='enterRoom(this);'>")
-                      .attr("email", data[i].Email);
+                  var $div = $("<div class='chatList_box'>")
+                      .attr("email", data[i].email);
 
                   // table 구조를 만드는 코드
                   var $table = $("<table>");
@@ -1058,7 +1058,7 @@ body::-webkit-scrollbar-thumb {
                   $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", "${pageContext.request.contextPath}/" + data[i].profileImg )));
                   $tr1.append($("<td  rowspan='2' style='height: 30px;'>").text(data[i].userName));
              
-                  var $button = $("<button>").text("차단 해제").on("click", unblock).attr("id", "submitButton").css("background-color", "lightgray");
+                  var $button = $("<button>").text("차단 해제").on("click", function() { unblock(this); }).attr("id", "submitButton").css("background-color", "lightgray");
                   // td 엘리먼트를 생성하고 버튼을 추가
                   var $td = $("<td  rowspan='2' style='height: 30px;'>").append($button);
 				  // tr1에 td를 추가
@@ -1120,7 +1120,8 @@ body::-webkit-scrollbar-thumb {
    function blockMember(button) {
 	     var blockMemEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
 		 var blockProEmail = "${sessionScope.loginMember.email}";
-		 console.log("a" +blockMemEmail);
+		 
+		 //console.log("a" +blockMemEmail);
 		 $.ajax({
 			url  : "block.mem",
 			type : "post" ,
@@ -1168,8 +1169,38 @@ body::-webkit-scrollbar-thumb {
 	   });
 	  }
  	
-     function unblock() {
-    	 alert("아직 안함 ㅎㅎ");
+     function unblock(button) {
+    	    var $div = $(button).closest('.chatList_box');
+    		var blockMemEmail = $div.attr("email");
+		 	var blockProEmail = "${sessionScope.loginMember.email}";
+		 //console.log("차단해제를 위한 정보" + blockMemEmail + blockProEmail);
+		 	
+		 $.ajax({
+			url  : "unblock.mem",
+			type : "post" ,
+			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail },
+			success : function(e) {
+
+				console.log(e);
+			},
+			error : function(e) {
+				
+				console.log(e);
+			}
+		 });
+		 
+		 /*
+		 $.ajax({
+					url : "unblock.mem",
+					type : "post",
+					data : {"blockMemEmail" : blockMemEmail , "blockProEmail" , blockProEmail},
+					success : function() {
+						console.log("차단 해제 성공");
+					},
+					error : function() {
+						console.log("차단 해제 실패");
+					}
+				 });*/
      }
      
  	 // 2초에 한번씩 채팅 목록 불러오기

@@ -294,4 +294,8 @@
 		  				   from blockmember
 		 				  where blockproemail = #{email})
     </select>
+    
+    <delete id="unBlockMem" parameterType="string">
+    		DELETE BLOCKMEMBER WHERE BLOCKMEMEMAIL = #{blockMemEmail} AND BLOCKPROEMAIL = #{blockProEmail}
+    </delete>
 </mapper>

@@ -150,6 +150,11 @@ public class ChattingServiceImpl implements ChattingService{
 	public ArrayList<Member> blockList(String email) {
 		return chattingDao.blockList(email);
 	}
+
+	@Override
+	public int unBlockMem(BlockMember bm) {
+		return chattingDao.unBlockMem(bm);
+	}
 	
 	
 	
