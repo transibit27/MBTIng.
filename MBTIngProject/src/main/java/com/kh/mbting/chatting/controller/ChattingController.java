@@ -37,6 +37,8 @@ public class ChattingController {
 	/*검색 값을 담을 hashmap입니당*/
 	@Autowired
 	private HashMap<String, String> map;
+	@Autowired
+	private Map<String, Object> allResult;
 	
 	/**
      * 해당 채팅방의 채팅 메세지 불러오기
@@ -129,7 +131,7 @@ public class ChattingController {
     //System.out.println(height + address + age + mbti + gender);
     //System.out.println(height  + age );
     ArrayList<Member> list = new ArrayList<Member>();
-  System.out.println(email);
+  //System.out.println(email);
     	if(height.equals("없음") && (!age.equals("없음"))) {
     		//System.out.println("난 지금 키만 없음이야 ");
     		int startAge 	 =  Integer.parseInt(age.substring(0, 2));
@@ -286,19 +288,25 @@ public class ChattingController {
     
     @ResponseBody
     @RequestMapping("block.mem")
-    public String blockMem(String blockMemEmail, String blockProEmail) {
+    public Map<String, Object> blockMem(String blockMemEmail, String blockProEmail) {
     	BlockMember bm = new BlockMember();
     	//System.out.println("ssss" + blockMemEmail);
     	bm.setBlockMemEmail(blockMemEmail);
     	bm.setBlockProEmail(blockProEmail);
     	
     	int result = cService.blockMem(bm);
-    	/*ALERTIFY를 위한 HASHMAP*/
- 
+    	Map<String, Object> allResult = new HashMap<>();
+    	
     	if(result > 0) {
-    		return "신고 성공";
+    		allResult.put("success", true);
+            allResult.put("message", "차단 완료했습니다.");
+                      
+            return allResult;
     	}else {
-    		return "신고 실패 ㅋ";
+    		allResult.put("success", false);
+            allResult.put("message", "차단 실패했습니다.");
+                      
+            return allResult;
     	}
     }
     
@@ -310,8 +318,9 @@ public class ChattingController {
     	return new Gson().toJson(m);
     }
     
+    @ResponseBody
     @RequestMapping("unblock.mem")
-    public String unBlockMem(String blockMemEmail, String blockProEmail) {
+    public Map<String, Object>  unBlockMem(String blockMemEmail, String blockProEmail) {
     	System.out.println("혹시.,오나");
     	BlockMember bm = new BlockMember();
     	//System.out.println("ssss" + blockMemEmail);
@@ -319,11 +328,18 @@ public class ChattingController {
     	bm.setBlockProEmail(blockProEmail);
     	
     	int result = cService.unBlockMem(bm);
+    	Map<String, Object> allResult = new HashMap<>();
     	
     	if(result > 0) {
-    		return "차단 해제 성공";
+    		allResult.put("success", true);
+            allResult.put("message", "차단 해제 완료했습니다.");
+                      
+            return allResult;
     	}else {
-    		return "차단 해제 실패";
+    		allResult.put("success", false);
+            allResult.put("message", "차단 해제에 실패했습니다.");
+                      
+            return allResult;
     	}
     	
     }

@@ -761,7 +761,7 @@ body::-webkit-scrollbar-thumb {
          let url ="ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
             
          socket = new WebSocket(url);
-         console.log(socket);
+         //console.log(socket);
          //연결 성공 시 실행할 함수 onopen 
          socket.onopen = function() {
              const data = {
@@ -1096,11 +1096,13 @@ body::-webkit-scrollbar-thumb {
 			data : {"masterEmail" : masterEmail , "userEmail" : userEmail},
 			success : function(response) {
 				 if (response.success) {
-					 location.href="${pageContext.request.contextPath}/convert.ch"; 
-					 
 					 alertify.alert('Alert', response.message, function() {
                          alertify.success('Ok');
                      });
+					 setTimeout(function () {
+				            location.href = "${pageContext.request.contextPath}/convert.ch";
+				     }, 1000);
+					 
 				 }else {
 					 alertify.alert('Alert', response.message, function() {
 	                     alertify.success('Error');
@@ -1120,22 +1122,31 @@ body::-webkit-scrollbar-thumb {
    function blockMember(button) {
 	     var blockMemEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
 		 var blockProEmail = "${sessionScope.loginMember.email}";
-		 
-		 //console.log("a" +blockMemEmail);
+
 		 $.ajax({
 			url  : "block.mem",
 			type : "post" ,
 			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail },
-			success : function(e) {
-
-				location.href="${pageContext.request.contextPath}/convert.ch"; 
+			success : function(response) {
 				
+				if (response.success) {
+					 alertify.alert('Alert', response.message, function() {
+                        alertify.success('Ok');
+                    });
+					 setTimeout(function () {
+				            location.href = "${pageContext.request.contextPath}/convert.ch";
+				     }, 1000);
+					 
+				 }else {
+					 alertify.alert('Alert', response.message, function() {
+	                     alertify.success('Error');
+	                 });
+				 }	
 			},
 			error : function() {
-				
 				console.log("회원 신고하기 실패");	
 			}
-		 });
+		 }); 
    }
    
  	function chattingGuide(em, msg, ckEmail) {
@@ -1177,20 +1188,34 @@ body::-webkit-scrollbar-thumb {
 		 	
 		 $.ajax({
 			url  : "unblock.mem",
-			type : "post" ,
-			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail },
-			success : function(e) {
-
-				console.log(e);
+			type : "post",
+			data : {"blockMemEmail" : blockMemEmail ,"blockProEmail" : blockProEmail},
+			success : function(response) {
+				if(response.success) { 
+					
+					alertify.alert('Alert', response.message, function() {
+                         alertify.success('Ok');
+                     });
+					
+					setTimeout(function () {
+			            location.href = "${pageContext.request.contextPath}/convert.ch";
+			        }, 1000);
+					
+				}else {
+					alertify.alert('Alert', response.message, function() {
+	                     alertify.success('Error');
+	                 });
+				}
+				
+				
 			},
 			error : function(e) {
-				
 				console.log(e);
 			}
 		 });
 		 
-		 /*
-		 $.ajax({
+		/*
+		$.ajax({
 					url : "unblock.mem",
 					type : "post",
 					data : {"blockMemEmail" : blockMemEmail , "blockProEmail" , blockProEmail},
@@ -1200,9 +1225,9 @@ body::-webkit-scrollbar-thumb {
 					error : function() {
 						console.log("차단 해제 실패");
 					}
-				 });*/
+		});
+		*/
      }
-     
  	 // 2초에 한번씩 채팅 목록 불러오기
 	 setInterval(function(){
 	       $(".chatList").html("");
@@ -1213,7 +1238,9 @@ body::-webkit-scrollbar-thumb {
 	      $("#" + elementId).css("background-color", "pink");
 	 }, 1000);
  	 
-
+ 	 
+ 	 
+ 	 
    </script>
 </body>
 </html>
