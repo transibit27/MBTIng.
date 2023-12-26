@@ -113,7 +113,6 @@ public class WebSocketHandler extends TextWebSocketHandler  {
                      sess.sendMessage(textMessage);
                      //System.out.println(textMessage);
                  }
-            	 //System.out.println(result + "ㅋㅋㅋㅋㅋ");
             }
         }
         

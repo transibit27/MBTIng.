@@ -18,6 +18,14 @@
 	font-family: 'NanumSquareBold';
 }
 
+body::-webkit-scrollbar {
+    width: 0px;  /* 스크롤바의 너비를 조절 */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent;  /* 스크롤바 색상을 투명하게 설정하여 보이지 않게 함 */
+}
+
 .content_1 {
   width: 100%;
   margin: auto;
@@ -700,7 +708,7 @@
   	  function checkProposer() {
   		  $.ajax({
   			 url : "check.pro",
-  			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
+  			 data : {"userNo" : ${sessionScope.loginMember.userNo}zz},
 			 success : function(proposerNoList) {
 				 
 				 for(let i in proposerNoList) {

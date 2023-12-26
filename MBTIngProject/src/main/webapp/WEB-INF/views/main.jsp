@@ -437,7 +437,7 @@
 			  padding: 0.17em 1em 0.17em 1em;
 			  border-radius: 10px;
 			  box-shadow: 0px 0px 5px 7px #e7413373;
-			  color: lightgray;
+			  color: gray;
 			  font-size: 1em;
 			  border: none;
 			  display: flex;

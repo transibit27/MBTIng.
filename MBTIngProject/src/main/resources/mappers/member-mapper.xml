@@ -91,7 +91,7 @@
  	<select id="selectTopMemberList" resultMap="memberResultSet" >
 		SELECT ROWNUM, A.*
 		FROM (
-		    SELECT profile_img, age, mbti , user_name , mbti_nick , email , user_no 
+		    SELECT profile_img, age, mbti , user_name , mbti_nick , email , user_no ,rnk
 		      FROM (
 		        SELECT M.*, RANK() OVER (ORDER BY COALESCE(matching_count, 0) DESC) AS rnk
 		        FROM MEMBER M
@@ -103,6 +103,7 @@
 		        WHERE STATUS = 'Y'  
 		          AND MBTI IS NOT NULL
 		    ) 
+            order by rnk 
 		) A
 		<choose>
 			<when test="email != null">

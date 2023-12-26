@@ -47,7 +47,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .wrap {
-    width : 484px;
+    width : 474px;
     height: 670px;
     margin: auto;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); 
@@ -123,11 +123,6 @@ body::-webkit-scrollbar-thumb {
 .chatList::-webkit-scrollbar-thumb {
     background-color: transparent;  /* 스크롤바 색상을 투명하게 설정하여 보이지 않게 함 */
 }
-.chatList {
-    width: 402px;
-    height: 670px;
-    border : 1px solid black;
-}
 
 .Right {
     text-align: right;
@@ -144,7 +139,7 @@ body::-webkit-scrollbar-thumb {
   max-width: 500px;
   border: 1px solid black;
   height: 40px;
-  line-height: 43px;
+  line-height: 40px;
   padding: 0 1rem;
   margin : 8px;
   border: 2px solid transparent;
@@ -188,31 +183,38 @@ body::-webkit-scrollbar-thumb {
 
 .chatList_box {
     border: 1px solid rgb(165, 165, 165);
-    height : 110px;
+    height : 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    width : 400px;
+    width : 403px;
     border-top-right-radius: 20px;
 }
 
 #chatList {
-    width : 450px;
+    width : 440px;
     height : 800px;
     border-top-right-radius: 20px;
 }
 
 .chatList {
-	 border-top-right-radius: 20px;
-	 border-bottom-right-radius: 20px;
-	 overflow-x: hidden;
+    width: 394px;
+    height: 670px;
+    border : 1px solid black;
+    border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	overflow-x: hidden;
 }
 
 .chatList_box table {
-    width : 100%;
-    height : 80%; 
+    /*width  : 100%;*/
+    height : 90%; 
     border-top-right-radius: 20px;
+}
+
+.chatList_box table td {
+	height : 50%;
 }
 
 .chatList_box img {
@@ -225,7 +227,8 @@ body::-webkit-scrollbar-thumb {
     font-size: 12px;
     color: gray;
     vertical-align: top;
-    width :220px;
+    width :260px;
+    margin : 8px;
 }
 
 .chatListName {
@@ -248,7 +251,8 @@ body::-webkit-scrollbar-thumb {
 
 .time {
    font-size : 13px;
-   color      : gray;
+   color     : gray;
+   margin : 8px;
 }
 
 .timeLeft {
@@ -402,6 +406,7 @@ body::-webkit-scrollbar-thumb {
 	  transform-style: preserve-3d;
 	  transform: perspective(1000px) rotateX(-150deg) translateY(-110%);
 	  transition: transform 0.3s ease;
+	  padding-left : 20px;
 	}
 	
 	.tooltip-container .text {
@@ -410,7 +415,7 @@ body::-webkit-scrollbar-thumb {
 	  font-size: 40px;
 	}
 	
-	.tooltip {
+	.unReMeCo {
 	  position: absolute;
 	  top: -20px;
 	  opacity: 0;
@@ -426,7 +431,6 @@ body::-webkit-scrollbar-thumb {
 	    80px 80px, 80px 80px;
 	  padding: 5px 10px;
 	  border: 1px solid rgb(206, 204, 204);
-	
 	  height: 70px;
 	  width: 110px;
 	  border-radius: 5px;
@@ -439,6 +443,7 @@ body::-webkit-scrollbar-thumb {
 	  font-size: 18px;
 	  font-weight: 600;
 	  text-shadow: 10px salmon;
+	  text-align : center;
 	}
 	.tooltip-container:hover {
 	  border-top-left-radius: 0;
@@ -451,7 +456,7 @@ body::-webkit-scrollbar-thumb {
 	  background-color: white;
 	}
 	
-	.tooltip-container:hover .tooltip {
+	.tooltip-container:hover .unReMeCo {
 	  top: -90px;
 	  opacity: 1;
 	  transition-duration: 0.3s;
@@ -461,7 +466,7 @@ body::-webkit-scrollbar-thumb {
    	  float : center; 
    	  display : none; 
    	  position: fixed; 
-   	  top: 50%; 
+   	  top: 30%; 
    	  left: 50%; 
    	  transform: translate(-50%, -50%); 
    	  background-color: white; 
@@ -476,7 +481,7 @@ body::-webkit-scrollbar-thumb {
 <body>
 <jsp:include page="../common/header.jsp"/>
 	<div class="tooltip-container">
-	  <span class="tooltip"></span>
+	  <span class="unReMeCo"></span>
 	  <span class="text">💗</span>
 	</div>
 	
@@ -511,10 +516,10 @@ body::-webkit-scrollbar-thumb {
 				
             </div>
 
-             <div class="chatDiv">
+             <div class="chatDiv" >
               <ul>
                   <li>
-                      <div class="sender ">
+                      <div class="sender">
                           <div></div>
                       </div>
                       <div class="chat">
@@ -537,8 +542,7 @@ body::-webkit-scrollbar-thumb {
                   </li>
               </ul>
           </div>
-          
-          
+
           <div class="chatDiv3" style="display : none">
               <ul>
                   <li>
@@ -551,10 +555,8 @@ body::-webkit-scrollbar-thumb {
                   </li>
               </ul>
           </div>
-          
 
-            <div id="profileDiv" class="hidden">
-               
+          <div id="profileDiv" class="hidden">
                 <table> 
                    <tr>
                        <td colspan="3" style="height:250px; padding-top: 30px; "><img id="masterImg"> </td>
@@ -595,10 +597,7 @@ body::-webkit-scrollbar-thumb {
         </div>
       </div>
     
-        
   <script>
-
-  
     $(function() {
     	//connect();
        getRoomList(); 
@@ -607,7 +606,6 @@ body::-webkit-scrollbar-thumb {
        countAllMove();
     });
     
-  
    function getRoomList() {
          $.ajax({
              url:"chatRoomList.do",
@@ -636,14 +634,14 @@ body::-webkit-scrollbar-thumb {
 
                     // 첫 번째 행을 만드는 코드
                     var $tr1 = $("<tr>");
-                    $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", isCurrentUser ? "${pageContext.request.contextPath}/" + data[i].masterPic : "${pageContext.request.contextPath}/" + data[i].userPic)));
+                    $tr1.append($("<td rowspan='2' class='chatListPic'>").append($("<img>").attr("src", isCurrentUser ? "${pageContext.request.contextPath}" + data[i].masterPic : "${pageContext.request.contextPath}" + data[i].userPic)));
                     $tr1.append($("<td class='chatListName' style='height: 35px;'>").text(isCurrentUser ? data[i].masterName : data[i].userName));
                     $tr1.append($("<td class='chatListTime'>").text(data[i].sendTime + "분"));
 
                     // 2번째 행을 만드는 코드
                     var $tr2 = $("<tr>");
-                    $tr2.append($("<td class='chatListText'>").text(data[i].messageContent));
-                    $tr2.append($("<td class='chatListText'>").append($("<div class='countMessage'>")));
+                    $tr2.append($("<td style='width : 295px;' class='chatListText'>").text(data[i].messageContent));
+                    $tr2.append($("<td style='width : 180px;' class='chatListText countBox'>").append($("<div class='countMessage'>")));
                     // 테이블에 넣어서 먼저 테이블 구조 완성하기
                     $table.append($tr1);
                     $table.append($tr2);
@@ -659,7 +657,6 @@ body::-webkit-scrollbar-thumb {
    }
    
    </script>
-   
    
    <!--  채팅방 관련 -->
    <script>
@@ -678,7 +675,7 @@ body::-webkit-scrollbar-thumb {
 
           // 해당 채팅 방의 메세지 목록 불러오기
            $.ajax({
-             url:"messageList.do" ,
+             url:"messageList.do",
              data:{
                 roomNo   : roomNo,
                 userEmail:"${sessionScope.loginMember.email}"
@@ -686,7 +683,6 @@ body::-webkit-scrollbar-thumb {
              async:false,
              dataType:"json",
              success:function(data){
-            	 
                  for(var i = 0; i < data.length; i++){
                      // 채팅 목록 동적 추가 왜 인지 모르겠으나 얘 때문에 2번 붙음
                      CheckLR(data[i]);
@@ -696,7 +692,6 @@ body::-webkit-scrollbar-thumb {
                    url : "master.In",
                    data : {email : email},
                    success : function(master) {
- 
                         $("#masterName").text(master.userName);
                         $("#masterImg").attr("src" , masterPic);
                         $("#mbti").text(master.mbti);
@@ -707,9 +702,7 @@ body::-webkit-scrollbar-thumb {
                    error : function() {
                       console.log("클릭한 방의 master 정보 얻어오기 실패");
                    }
-                 
-                 });
-                 
+                 }); 
              }, 
              error : function() {
             	 console.log("메시지 리스트 불러오기 실패");
@@ -741,15 +734,13 @@ body::-webkit-scrollbar-thumb {
           $blockWrap = $(".blockList");
           $blockWrap.addClass('hidden');
           $chatWrap.removeClass('hidden');
-          
           $('chatList').removeClass('hidden');
           $('#chatInput').addClass('hidden');
           $('#profileDiv').addClass('hidden');
-          $('.wrap').css("width" , "482px");
+          $('.wrap').css("width" , "474px");
           $('.wrapPc').attr("margin" , "auto");
           $('.chatDiv').addClass('hidden');
         }
- 
     </script>
    
    <script>
@@ -757,13 +748,14 @@ body::-webkit-scrollbar-thumb {
    //연결 실행 시 실행될 함수
       
       function connect() {
-         check = true;
+         check 	 = true;
          let url ="ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat.do";
             
          socket = new WebSocket(url);
          //console.log(socket);
          //연결 성공 시 실행할 함수 onopen 
          socket.onopen = function() {
+        	 
              const data = {
                              "roomNo" : roomNo,
                              "name"   : "${ loginMember.userName }",
@@ -773,6 +765,7 @@ body::-webkit-scrollbar-thumb {
                   
                 let jsonData = JSON.stringify(data);
                   socket.send(jsonData);
+                  
          };
          
          //연결 종료 시 실행할 함수 onclose
@@ -817,7 +810,7 @@ body::-webkit-scrollbar-thumb {
             	  
             	  let ce = "${sessionScope.loginMember.email}";
             	  chattingGuide(receive[1] , receive[2] , ce);
-            
+            	  
               const data = {
                            "name" : receive[0],
                           "email" : receive[1],
@@ -846,7 +839,6 @@ body::-webkit-scrollbar-thumb {
             //입력한 메세지가 있을 경우에만 전송하겠다는 뜻. 
             //websocket 객체의 send 메소드를 호출
      		
-			
             const data = {
                 "roomNo"           : roomNo,
                 "name"             : "${ sessionScope.loginMember.userName }",
@@ -863,6 +855,7 @@ body::-webkit-scrollbar-thumb {
         
             $("#message").val("");//초기화 효과
          }
+      
    }
    
    document.getElementById('message').addEventListener('keypress', function (e) {
@@ -875,11 +868,12 @@ body::-webkit-scrollbar-thumb {
    // * 2-1 추가 된 것이 내가 보낸 것인지, 상대방이 보낸 것인지 확인하기
     function CheckLR(data) {
         // email이 loginSession의 email과 다르면 왼쪽, 같으면 오른쪽
-        const LR = (data.email != "${ sessionScope.loginMember.email }") ? "Left" : "Right";
+        const LR = (data.email != "${sessionScope.loginMember.email }") ? "Left" : "Right";
        
         let unReadMessage 	= data.unReadMessage;
         let unReadCount 	= data.sessionCount
         let email			= data.email;
+        
         if(unReadCount == 2 || unReadMessage == 0) {
         	unReadCount = '읽음';
         }else {
@@ -887,54 +881,61 @@ body::-webkit-scrollbar-thumb {
         }
         
         //console.log(unReadCount);
-         // 메세지 추가
+        // 메세지 추가
         //console.log(LR);
+        
         appendMessageTag(LR, data.email, data.messageContent, data.name , data.sendTime, unReadCount);
+        
     }
    
     // * 3 메세지 태그 append
     function appendMessageTag(LR_className, email, message, name , sendTime , unReadCount) {
-         
-        const chatLi = createMessageTag(LR_className, email, message, name , sendTime , unReadCount);
-     
+         console.log("lr :" +  message);
+        if(message != "") {
+        	const chatLi = createMessageTag(LR_className, email, message, name , sendTime , unReadCount);    
+        	 $('div.chatDiv').append(chatLi);
+             
+             // 스크롤바 아래 고정
+             $('div.chatDiv').scrollTop($('div.chatDiv').prop('scrollHeight'));
+        }else {
+        	console.log("lr없음");
+        }
+        
         //console.log(chatLi);
-        $('div.chatDiv').append(chatLi);
-     
-        // 스크롤바 아래 고정
-        $('div.chatDiv').scrollTop($('div.chatDiv').prop('scrollHeight'));
+
     }
     
     // * 4 메세지 태그 생성
     function createMessageTag(LR_className, email, message, name , sendTime , unReadCount) {
-     
-       //console.log(LR_className +email+message +name);
+         //console.log(LR_className +email+message +name);
          // 형식 가져오기
-         let chatLi = $("div.chatDiv2 ul li").clone();
+         let chatLi  = $("div.chatDiv2 ul li").clone();
          let chatLi2 = $("div.chatDiv3 ul li").clone();
 
          //console.log(chatLi);
           if(LR_className === 'Right') {
+        	 //$(".chatDiv2 li").css("display" , "none");
              chatLi2.find('.chat').addClass(LR_className);                 // left : right 클래스 추가
-              // find() : chatLi의 하위 요소 찾기
+              // find() : chatLi의 하위 요소 찾기   	    
               chatLi2.find('.sender div').text(name);                     // 이름 추가
               chatLi2.find('.chat p').text(message);                   // 메세지 추가
               chatLi2.find('.chat p').addClass("message");
               chatLi2.find('.sender div').addClass(LR_className);
               chatLi2.find('.chat label').addClass("time");
               chatLi2.find('.chat label').text(unReadCount + sendTime);
+                  
          }else {
-         chatLi.find('.chat').addClass(LR_className);                 // left : right 클래스 추가
-         // find() : chatLi의 하위 요소 찾기
-         chatLi.find('.sender div').text(name);                  // 이름 추가
-         chatLi.find('.chat p').text(message);                   // 메세지 추가
-         chatLi.find('.chat p').addClass("message");
-         chatLi.find('.sender div').addClass(LR_className);
-         chatLi.find('.chat label').addClass("time");
-         chatLi.find('.chat label').text(sendTime);
+	         chatLi.find('.chat').addClass(LR_className);                 // left : right 클래스 추가
+	         // find() : chatLi의 하위 요소 찾기
+	         //$(".chatDiv3 li").css("display" , "none"); 
+	         chatLi.find('.sender div').text(name);                  // 이름 추가
+	         chatLi.find('.chat p').text(message);                   // 메세지 추가
+	         chatLi.find('.chat p').addClass("message");
+	         chatLi.find('.sender div').addClass(LR_className);
+	         chatLi.find('.chat label').addClass("time");
+	         chatLi.find('.chat label').text(sendTime);
          }
-        
-         //console.log(chatLi);
-         
+          
          return [chatLi, chatLi2];
     };
    </script>   
@@ -956,7 +957,6 @@ body::-webkit-scrollbar-thumb {
            if (clickedDiv !== null) {
                clickedDiv.css('background-color', '');
            }
-
            // 현재 클릭한 div의 배경을 pink로 변경
            $(this).css('background-color', 'pink');
         
@@ -970,7 +970,7 @@ body::-webkit-scrollbar-thumb {
 		  	url  : "count.all",
 		  	data : {email : "${sessionScope.loginMember.email}"},
 		  	success : function(countAllUnReadMessage) {
-		  		let countAll = document.querySelector(".tooltip");
+		  		let countAll = document.querySelector(".unReMeCo");
 		  		countAll.innerText = countAllUnReadMessage;
 		  	},
 		  	error : function() {
@@ -1020,7 +1020,6 @@ body::-webkit-scrollbar-thumb {
    };
    
    function blockMembers() {
-	     
 	      $blockWrap = $(".blockList");
 		  $blockWrap.html = "";
 		  $('chatList').removeClass('hidden');
@@ -1089,7 +1088,6 @@ body::-webkit-scrollbar-thumb {
 		 
 		 var masterEmail = $(button).closest('table').find("input[type='hidden'][id='deleteMasterEmail']").val();
 		 var userEmail = "${sessionScope.loginMember.email}";
-		 
 		 
 		 $.ajax({
 			url : "delete.mes",
@@ -1162,16 +1160,16 @@ body::-webkit-scrollbar-thumb {
  		
  		if(ckEmail == em && (Hello.some(hi => msg.includes(hi)))) {
  			 $("#" + divId).show();
- 		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 첫 인사를 하고 계시는군요 !!<br> 보통 첫 인사 후에는 상대방 프로필의 취미에 대해서 <br> 공감을 하거나 프로필 사진에 대한 칭찬으로 <br> 시작하는 게 좋아요!<br> ex) <p style='color : green; margin : 0px;'>클라이밍 좋아하세요?</p> <br>tip!!<br> 질문을 너무 자주하거나 질문 후에 <br> 설명이 길면 안좋아요 <br> ex) <p style='color : red; margin : 0px;'>클라이밍 좋아하세요? 저도 좋아하는데 저는 ~~</p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+ 		     $("#" + divId).find("p").html("&nbsp;┍━━━━━━»•» 🌸 «•«━━━━━━┑  &nbsp;&nbsp; 첫 인사를 하고 계시는군요 !!<br> 보통 첫 인사 후에는 상대방 프로필의 취미에 대해서 <br> 공감을 하거나 프로필 사진에 대한 칭찬으로 <br> 시작하는 게 좋아요!<br> ex) <p style='color : green; margin : 0px;'>클라이밍 좋아하세요?</p> <br>tip!!<br> 질문을 너무 자주하거나 질문 후에 <br> 설명이 길면 안좋아요 <br> ex) <p style='color : red; margin : 0px;'>클라이밍 좋아하세요? 저도 좋아하는데 저는 ~~</p> ┕━━━━━━»•» 🌸 «•«━━━━━┙");	
  		}else if(ckEmail == em && (Food.some(food => msg.includes(food)))) {
  			 $("#" + divId).show();
-		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 흠 어떤 밥을 먹으러 갈 지 이야기 중인 것 같아요 맞나요?<br> 보통 첫 만남에서는 조용하고 분위기있는 <br>그리고 먹는 내 모습이 조신한 <br> 일식, 양식을 많이 먹어요. <br> ex) <p style='color : green; margin : 0px;'>파스타, 스시, 덮밥</p> <br>tip!!<br> 입을 크게 벌리거나 냄새베고 <br> 이빨에 끼는 음식은 피해요 <br> ex) <p style='color : red; margin : 0px;'>김치찌개, 햄버거, 고기, 생성구이, 국밥</p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+		     $("#" + divId).find("p").html("&nbsp;┍━━━━━━»•» 🌸 «•«━━━━━━┑ &nbsp;&nbsp; 흠 어떤 밥을 먹으러 갈 지 이야기 중인 것 같아요 맞나요?<br> 보통 첫 만남에서는 조용하고 분위기있는 <br>그리고 먹는 내 모습이 조신한 <br> 일식, 양식을 많이 먹어요. <br> ex) <p style='color : green; margin : 0px;'>파스타, 스시, 덮밥</p> <br>tip!!<br> 입을 크게 벌리거나 냄새베고 <br> 이빨에 끼는 음식은 피해요 <br> ex) <p style='color : red; margin : 0px;'>김치찌개, 햄버거, 고기, 생성구이, 국밥</p> ┕━━━━━━»•» 🌸 «•«━━━━━━┙");	
  		}else if(ckEmail == em && (Place.some(place => msg.includes(place)))) {
 			 $("#" + divId).show();
-		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 어디서 볼 지는 너무너무 중요해요!<br> 평균적으로 조용하고 분위기를 <br>유지할 수 있는 장소를 많이 가요 ! <br> ex) <p style='color : green; margin : 0px;'> 혜화동, 을지로, 종로(청계천)<br> 익선동, 성수<br> 만약 비가 온 다면 ? <br>실내 데이트!  </p> <br>tip!!<br> 날씨나 서로의 신발을 고려하지 못한 <br> 장소는 피해요 <br> ex) <p style='color : red; margin : 0px;'>더운 여름 등산<br> 힐 신은 여자인데 혜화 낙상공원 <br> 추운 겨울 장시간 밖에서 대기하는 맛집 <br> 비오는 날 사람 붐비는 익선동</p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+		     $("#" + divId).find("p").html("&nbsp;┍━━━━━━»•» 🌸 «•«━━━━━━┑ &nbsp;&nbsp; 어디서 볼 지는 너무너무 중요해요!<br> 평균적으로 조용하고 분위기를 <br>유지할 수 있는 장소를 많이 가요 ! <br> ex) <p style='color : green; margin : 0px;'> 혜화동, 을지로, 종로(청계천)<br> 익선동, 성수<br> 만약 비가 온 다면 ? <br>실내 데이트!  </p> <br>tip!!<br> 날씨나 서로의 신발을 고려하지 못한 <br> 장소는 피해요 <br> ex) <p style='color : red; margin : 0px;'>더운 여름 등산<br> 힐 신은 여자인데 혜화 낙상공원 <br> 추운 겨울 장시간 밖에서 대기하는 맛집 <br> 비오는 날 사람 붐비는 익선동</p> ┕━━━━━━»•» 🌸 «•«━━━━━━┙");	
  		}else if(ckEmail == em && (Doing.some(doing => msg.includes(doing)))) {
 			 $("#" + divId).show();
-		     $("#" + divId).find("p").html("┍━━━━━━━━»•» 🌸 «•«━━━━━━━━┑ 뭐하느냐에 따라 솔탈이 달립니다..<br> 보통은 여자라면 이쁜 카페를 <br>미리 찾아서 보내주시면 좋아해요! <br> 혹시나 취미에 운동이 많다면 <br> 같은 취미를 하러가자해도 좋고요 <br><br> 남자라면 경기를 보러가자거나 <br>여자가 적극적으로 무언가를 하자는 걸 <br> 좋아할 수 있어요(보통 잘 안그래서) <br>ex) <p style='color : green; margin : 0px;'> 여자 : 익선동, 성수, 을지로, 문래 카페<br>(디저트 맛집 프렌차이즈 x!!!)<br> 특히 여자가 힐 신고 올 경우 <br> 지하철과 가까운 장소를 선정하세요 <br><br>남자 : 모르겠어요 제가 여자라서! </p> <br>tip!!<br> 여자는 예약 잘 하는 남자를 좋아해요 ㄹㅇ ex) <p style='color : red; margin : 0px;'>영화든 , 밥이든 미리 예약해놓으면 <br> 매우매우 좋아할 겁니다. </p> ┕━━━━━━━━»•» 🌸 «•«━━━━━━━━┙");	
+		     $("#" + divId).find("p").html("&nbsp;┍━━━━━━»•» 🌸 «•«━━━━━━┑ &nbsp;&nbsp; 뭐하느냐에 따라 솔탈이 달립니다..<br> 보통은 여자라면 이쁜 카페를 <br>미리 찾아서 보내주시면 좋아해요! <br> 혹시나 취미에 운동이 많다면 <br> 같은 취미를 하러가자해도 좋고요 <br><br> 남자라면 경기를 보러가자거나 <br>여자가 적극적으로 무언가를 하자는 걸 <br> 좋아할 수 있어요(보통 잘 안그래서) <br>ex) <p style='color : green; margin : 0px;'> 여자 : 익선동, 성수, 을지로, 문래 카페<br>(디저트 맛집 프렌차이즈 x!!!)<br> 특히 여자가 힐 신고 올 경우 <br> 지하철과 가까운 장소를 선정하세요 <br><br>남자 : 모르겠어요 제가 여자라서! </p> <br>tip!!<br> 여자는 예약 잘 하는 남자를 좋아해요 ㄹㅇ ex) <p style='color : red; margin : 0px;'>영화든 , 밥이든 미리 예약해놓으면 <br> 매우매우 좋아할 겁니다. </p> ┕━━━━━━»•» 🌸 «•«━━━━━━┙");	
  		}  		
 	    
 	    $("#hiddenDivCloseBtn").on("click", function() {
@@ -1195,7 +1193,7 @@ body::-webkit-scrollbar-thumb {
 					
 					alertify.alert('Alert', response.message, function() {
                          alertify.success('Ok');
-                     });
+                    });
 					
 					setTimeout(function () {
 			            location.href = "${pageContext.request.contextPath}/convert.ch";
@@ -1204,9 +1202,8 @@ body::-webkit-scrollbar-thumb {
 				}else {
 					alertify.alert('Alert', response.message, function() {
 	                     alertify.success('Error');
-	                 });
+	                });
 				}
-				
 				
 			},
 			error : function(e) {
@@ -1227,6 +1224,7 @@ body::-webkit-scrollbar-thumb {
 					}
 		});
 		*/
+		
      }
  	 // 2초에 한번씩 채팅 목록 불러오기
 	 setInterval(function(){
@@ -1236,11 +1234,9 @@ body::-webkit-scrollbar-thumb {
 	      getRoomList(); 
 	      countAll();
 	      $("#" + elementId).css("background-color", "pink");
+          $('.countBox').css("width", "230px");
 	 }, 1000);
- 	 
- 	 
- 	 
- 	 
+
    </script>
 </body>
 </html>

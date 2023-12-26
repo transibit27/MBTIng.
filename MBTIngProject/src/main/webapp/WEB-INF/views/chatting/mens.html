@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매출 계획 그래프</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div id="plot"></div>
+
+<script>
+  // 매출 데이터
+  const years = [2024, 2025, 2026];
+  const revenues = [161595500, 274552800, 823658400];
+
+  // 그래프 레이아웃
+  const layout = {
+    title: '매출 계획 그래프',
+    xaxis: { title: '연도' },
+    yaxis: { title: '매출 (원)' },
+  };
+
+  // 그래프 데이터
+  const data = [{
+    type: 'bar',
+    x: years,
+    y: revenues,
+    marker: {
+      color: 'blue',
+    },
+  }];
+
+  // 그래프 플로팅
+  Plotly.newPlot('plot', data, layout);
+</script>
+
+</body>
+</html>
