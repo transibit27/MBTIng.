@@ -1,5 +1,5 @@
 # 01_MBTIng_Workspace
-
+<img src="https://github.com/mingMy-00/01_MBTIng_Workspace/assets/149574203/4827bed2-49ee-4c98-8ed8-6d86a95bf11e" width="200" height="200" />
 <h3>MBTIng는 MBTI 검사 기반으로 인연을 매칭해주는 소개팅 사이트입니다. </h3>
 <br/>
 
