@@ -12,3 +12,6 @@
 
  ✔️ 사이트 내에서 자체로 MBTI test를 진행할 수 있습니다. 
 </pre>
+
+<br/>
+![Socket채팅(채팅 가이드)](https://github.com/mingMy-00/01_MBTIng_Workspace/assets/149574203/1fa32a6b-1a0d-4d6a-9ea8-e7f6e1279084)
