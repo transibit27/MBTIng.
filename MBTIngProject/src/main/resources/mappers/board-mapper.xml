@@ -32,7 +32,7 @@
 		  	  FROM BOARD
 		  	  JOIN BOARDIMG USING (BOARD_NO) 
 		  ORDER BY VIEWS DESC)
-		WHERE ROWNUM &lt; 6	
+		WHERE ROWNUM &lt; 5
 	</select> 
 
 	<select id="selectListCount" resultType="_int">

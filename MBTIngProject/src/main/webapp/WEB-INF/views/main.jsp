@@ -75,14 +75,15 @@
 /*--------------------------------폴라로이드 사진 -----------------------------*/
 	
 		.polaroid > img {
-		  max-width: 23em;
+		  width: 19em;
 		  height: 20em;
 		}
 		
 		.polaroid {
 		  max-width: 30em;
-		  height: 45em;
+		  height: 42em;
 		}
+		
 		#content_3 {
 		  width: 1600px;
 		  padding: 0 2rem;
