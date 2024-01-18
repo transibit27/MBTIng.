@@ -109,7 +109,7 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             	 cService.insertUnReadMessage(chatMessage);
             	 
             	 //방번호와 함께 세션 두명임을 알리며 socket으로 메시지를 보냄. 
-            	 TextMessage textMessage = new TextMessage("세션 두명임 읽음팡팡 ," + roomNum );
+            	 TextMessage textMessage = new TextMessage("세션 두명임 읽음," + roomNum );
             	 System.out.println("두 명이다");
             	 
             	 for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {

@@ -756,17 +756,16 @@ body::-webkit-scrollbar-thumb {
          //연결 성공 시 실행할 함수 onopen 
          socket.onopen = function() {
         	 
-             const data = {
-                             "roomNo" : roomNo,
-                             "name"   : "${ loginMember.userName }",
-                             "email"  : "${ loginMember.email }",
-                    "messageContent"  : "ENTER-CHAT"
-                  };
-                  
-                  let jsonData = JSON.stringify(data);
-                  socket.send(jsonData);
-                  
-         };
+		    const data = {
+		        "roomNo"		: roomNo,
+		        "name"			: "${ loginMember.userName }",
+		        "email"			: "${ loginMember.email }",
+		        "messageContent": "ENTER-CHAT"
+		    };
+		    
+		    let jsonData = JSON.stringify(data);
+		    socket.send(jsonData);
+		};
          
          //연결 종료 시 실행할 함수 onclose
          socket.onclose = function() {
@@ -784,8 +783,8 @@ body::-webkit-scrollbar-thumb {
               let receive = evt.data.split(",");
               
               //console.log(receive[0] + receive[1]);
-              //만약 세션도 두명이고 이미 들어와있던 나 말고, 새로 들어온 사람의 email이 나와 다를때만 ! 
-              if((receive[0] == "세션 두명임 읽음팡팡 " && (receive[2] != "${sessionScope.loginMember.email}" )) || (receive[0] == "한 명이다 " && (receive[2] != "${sessionScope.loginMember.email}" ))) {
+              //만약 세션도 두명이고 이미 들어와있던 나 제외, 새로 들어온 사람의 email이 나와 다를때만 실행 
+              if((receive[0] == "세션 두명임 읽음" && (receive[2] != "${sessionScope.loginMember.email}" )) || (receive[0] == "한 명이다 " && (receive[2] != "${sessionScope.loginMember.email}" ))) {
             	  $.ajax({
                       url:"messageList.do" ,
                       data:{
