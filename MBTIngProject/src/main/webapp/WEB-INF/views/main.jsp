@@ -79,6 +79,10 @@
 		  height: 20em;
 		}
 		
+		.polaroid {
+		  max-width: 30em;
+		  height: 45em;
+		}
 		#content_3 {
 		  width: 1600px;
 		  padding: 0 2rem;
@@ -288,6 +292,13 @@
 			box-shadow: 0 1rem 3rem rgba(0,0,0,0.2);
 		}
 
+		.caption .textDiv {
+			resize : none;
+			width  : 17em;
+			height : 18em;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 		/*-----------------------------Top4 분석----------------------------*/
 		
 			#topViewTableDiv {
@@ -639,66 +650,8 @@
 			<h1 style="display: flex; align-content: center; justify-content: center; align-items: center;">
 				<a href="list.bo">만남 후기 인기 게시글&nbsp;&nbsp;<i class="fas fa-chevron-right"></i></a>
 			</h1>
-		  <div class="item">
-		    <div class="polaroid"><img src="https://image.jtbcplus.kr/data/contents/jam_photo/202101/05/b0266449-6a8b-4a9b-8f7e-b4b250c957c0.jpg">
-		      <div class="caption">
-				<pre>❣️ 2023/03/22~
-MBTIng에서 만나 3개월째, 예쁜 연애 중입니다.
-연애는 하고 싶은데 29살 정도 되니 
-만날 곳도 없고 고민이 많았어요....
-매니저님이 진짜 꼼꼼하게 상담해주시고
-케어해주시는 게 느껴져서 너무 좋았어요.
-MBTIng 아니였음 저희 오빠 같은 사람, 
-만나기 힘들었을 것 같아요.
-덕분에 하루하루 사랑 받으면서 지내고 있어요ㅎㅎ</pre></div>
-		    </div>
-		  </div>
-		
-		  <div class="item">
-		    <div class="polaroid"><img src="https://img.mbn.co.kr/filewww/news/other/2020/05/26/200306052020.png">
-		      <div class="caption">
-				<pre>❣️ 2023/05/07~
-MBTIng 덕분에 제 운명을 만났어요....!
-취직해서 자취를 시작했는데
-텅 빈 집에 혼자 있으려니 외롭...
-아플 때 죽과 달달구리 들고 찾아오는 남친, 
-진짜 이런 게 연애하는 기분이구나 느껴요
-매일이 설레고 행복해요</pre>
-			 </div>
-		   </div>
-		 </div>
-		
-		  <div class="item">
-		    <div class="polaroid"><img src="https://i.pinimg.com/736x/65/72/0f/65720fcf50c6acb8d0f06dc3678c930d.jpg">
-		      <div class="caption">
-				<pre>❣️2023/01/14~
-일도 자리 잡아 경제적인 능력도 되고
-외모도 훈훈하다는 소리 좀 들었습니다...ㅎ
-다들 여자친구 안 만나냐, 연애는 왜 안하냐 하는데
-아무 여자나 만나고 싶진 않더라구요.
-예쁜 건 둘째치고 성격, 가치관이 잘 맞았음 했는데
-딱 찾아주시니 너무 신기하고 내년에는 결혼까지
-생각하고 있습니다. :)</pre></div>
-		    </div>
-		  </div>
-
-		  <div class="item">
-		    <div class="polaroid"><img src="${pageContext.request.contextPath}/resources/images/jsPhoto.jpg">
-		      <div class="caption">
-				<pre>❣️2023/09/25~
-저희는 같은 직업끼리 만났어요 ! 
-둘다 개발자로 일을 하고 있는데
-이런 공통사까지 맞는 상대라니
-너무 좋네요 ㅎㅎ 제 여자친구가 
-저보다 4살 연하인데 저랑 성격도 
-잘 맞고 외적으로도 제 이상형이라 
-만나면 코드 얘기도 하고 
-같이 놀러가기도 하는 그런 행복한
-연애중입니다 !! 서나야 사랑해 ~~ 
-</pre>				
-			  </div>
-		    </div>
-		  </div>
+		 	<div class="topBoardDiv">
+		 	</div>
 		</div>	
 
 	<jsp:include page="common/footer.jsp"/>
@@ -797,7 +750,22 @@ MBTIng 덕분에 제 운명을 만났어요....!
   	  			type : "post",
   	  		 dataType: "json",
   	  		 success : function(result) {
-  	  			console.log("인기 게시글 불러오기 성공");
+  	  			console.log(result);
+  	  			let str = "";
+  	  			
+  	  			for(let i = 0; i < result.length; i++) {
+  	  				
+	  	  			str +=
+	  	  		    '<div class="item">' +
+	  	  		    '<div class="polaroid"><img src="' + "${pageContext.request.contextPath}/" + result[i].changeName + '">' +
+	  	  		    '<div class="caption">' +
+	  	  		    '<div class="textDiv">' + result[i].boardContent + '</div>' +
+	  	  		    '</div>' +
+	  	  		    '</div>' +
+	  	  		    '</div>';
+	 
+	  	  		 $(".topBoardDiv").html(str);
+  	  			}
   	  		 }, 
   	  		 error : function() {
   	  			 console.log("인기게시글 불러오기 실패");

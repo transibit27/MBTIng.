@@ -11,7 +11,7 @@ import com.kh.mbting.common.model.vo.PageInfo;
 
 public interface BoardService {
 	
-	ArrayList<Board> selectTopBoardList();
+	ArrayList<Board> selectMainTopBoardList();
 	
 	int selectListCount();
 	

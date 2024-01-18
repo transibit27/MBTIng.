@@ -22,7 +22,7 @@ public class Board {
 	private String status;			//	STATUS	CHAR(1 BYTE)
 	private String userNo;			//	USER_NO	NUMBER
 	private int matchNo;			//	MATCH_NO	NUMBER
-	
+
 	// 타 테이블에서 참고해올 것
 	private String originName;		//	BOARDIMG 테이블의 ORIGIN_NAME	VARCHAR2(100 BYTE)
 	private String changeName;		//	BOARDIMG 테이블의 CHANGE_NAME VARCHAR2(100 BYTE)

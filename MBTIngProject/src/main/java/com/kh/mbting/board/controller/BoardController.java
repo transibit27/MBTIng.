@@ -41,8 +41,7 @@ public class BoardController {
 		
 		return "info/introduce";
 	}
-	
-	
+
 	@ResponseBody
 	@PostMapping("topBoard.mem")
 	public String selectMainTopBoardList(HttpSession session) {
@@ -50,7 +49,8 @@ public class BoardController {
 		ArrayList<Board> list = new ArrayList<>();
 		
 		list = boardService.selectMainTopBoardList();
-	
+	System.out.println(list);
+		return new Gson().toJson(list);
 	}
 	
 	

@@ -25,13 +25,15 @@
 		<result column="BOARD_NO" property="boardNo"></result>
 	</resultMap>
 
-
-	<select id="selectTopBoardList" resultMap="boardResultSet">
-	
-	
-	
-	
-	</select>
+	<select id="selectMainTopBoardList" resultMap="boardResultSet">
+		SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CHANGE_NAME 
+		  FROM (
+		  	SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT, CHANGE_NAME, USER_NO
+		  	  FROM BOARD
+		  	  JOIN BOARDIMG USING (BOARD_NO) 
+		  ORDER BY VIEWS DESC)
+		WHERE ROWNUM &lt; 6	
+	</select> 
 
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)

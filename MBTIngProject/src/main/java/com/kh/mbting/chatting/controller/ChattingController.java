@@ -48,7 +48,6 @@ public class ChattingController {
      * @throws JsonIOException
      * @throws IOException
      */
-	
 
     @RequestMapping("messageList.do")
     public void messageList( String roomNo, String userEmail, Model model, HttpServletResponse response) throws JsonIOException, IOException {

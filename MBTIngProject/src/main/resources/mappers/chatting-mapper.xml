@@ -299,23 +299,4 @@
     		DELETE BLOCKMEMBER WHERE BLOCKMEMEMAIL = #{blockMemEmail} AND BLOCKPROEMAIL = #{blockProEmail}
     </delete>
     
-    <!-- 
-    <select id="topBoardView" resultMap="board" parameterType="string" >
-    	SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT , CHANGE_NAME
-		  FROM (
-			SELECT BOARD_NO, BOARD_TITLE, BOARD_CONTENT , CHANGE_NAME , USER_NO
-			  FROM BOARD 
-			  JOIN BOARDIMG USING (BOARD_NO)
-		  ORDER BY VIEWS DESC)
-		     WHERE ROWNUM &lt; 6
-               AND USER_NO NOT IN (
-                   SELECT USER_NO 
-                   FROM MEMBER 
-                   WHERE EMAIL IN (
-                        SELECT BLOCKMEMEMAIL 
-                          FROM BLOCKMEMBER 
-                         WHERE BLOCKPROEMAIL = #{userEmail}
-                  ))
-    </select>
-     -->
 </mapper>

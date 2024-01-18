@@ -27,9 +27,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public ArrayList<Board> selectMainTopBoardList() {
-		return boardDao.selectTopBoardList(sqlSession);
+		return boardDao.selectMainTopBoardList(sqlSession);
 	}
-	
 	
 	@Override
 	public int selectListCount() {
