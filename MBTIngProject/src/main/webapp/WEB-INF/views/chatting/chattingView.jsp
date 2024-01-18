@@ -763,7 +763,7 @@ body::-webkit-scrollbar-thumb {
                     "messageContent"  : "ENTER-CHAT"
                   };
                   
-                let jsonData = JSON.stringify(data);
+                  let jsonData = JSON.stringify(data);
                   socket.send(jsonData);
                   
          };
@@ -784,7 +784,7 @@ body::-webkit-scrollbar-thumb {
               let receive = evt.data.split(",");
               
               //console.log(receive[0] + receive[1]);
-              
+              //만약 세션도 두명이고 이미 들어와있던 나 말고, 새로 들어온 사람의 email이 나와 다를때만 ! 
               if((receive[0] == "세션 두명임 읽음팡팡 " && (receive[2] != "${sessionScope.loginMember.email}" )) || (receive[0] == "한 명이다 " && (receive[2] != "${sessionScope.loginMember.email}" ))) {
             	  $.ajax({
                       url:"messageList.do" ,
@@ -874,7 +874,7 @@ body::-webkit-scrollbar-thumb {
         let unReadCount 	= data.sessionCount
         let email			= data.email;
         
-        if(unReadCount == 2 || unReadMessage == 0) {
+        if(unReadCount == 2 || unReadMessage == 0) {z
         	unReadCount = '읽음';
         }else {
             unReadCount = 1;

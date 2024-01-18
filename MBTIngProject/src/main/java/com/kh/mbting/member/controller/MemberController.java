@@ -73,8 +73,6 @@ public class MemberController {
 			list = memberService.selecToptMemberList();
 		}
 		
-		
-		
 		return new Gson().toJson(list);
 	}
 	

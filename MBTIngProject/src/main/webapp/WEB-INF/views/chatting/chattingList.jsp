@@ -509,8 +509,9 @@ body::-webkit-scrollbar-thumb {
   		$.ajax({
   			url  : "all.memList" , 
   			type : "get" , 
+  			async : false,
   			success : function(mem) {
-  				resultStr = "";
+  				let resultStr = "";
   				//console.log(mem);
   				for(let i in mem) {
  				
@@ -708,7 +709,7 @@ body::-webkit-scrollbar-thumb {
   	  function checkProposer() {
   		  $.ajax({
   			 url : "check.pro",
-  			 data : {"userNo" : ${sessionScope.loginMember.userNo}zz},
+  			 data : {"userNo" : ${sessionScope.loginMember.userNo}},
 			 success : function(proposerNoList) {
 				 
 				 for(let i in proposerNoList) {

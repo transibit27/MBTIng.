@@ -345,7 +345,6 @@
                         <li><a href="mbtiTest.mb">연애테스트</a></li>
                         <li><a href="all.me">매칭하기</a></li>
                         <li><a href="convert.ch">채팅하기</a></li>
-                        
                         <c:choose>
                             <c:when test="${sessionScope.loginMember != null && sessionScope.loginMember.email eq 'admin@naver.com'}">
                                 <li><a href="adminMain.ad">관리자</a></li>
@@ -382,7 +381,7 @@
 		                 
 			                <img id="profile" src="${sessionScope.profile}" >
 			                <a href="myPage.me">마이페이지</a>
-			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=http://192.168.40.37:8081/mbting/logout.me">로그아웃</a>
+			                <a href="https://kauth.kakao.com/oauth/logout?client_id=670371a54748d4645ec474b68405a19c&logout_redirect_uri=${pageContext.request.contextPath}/logout.me">로그아웃</a>
 				               	   
                			</c:when>
                			
@@ -439,7 +438,7 @@
                         </div>
 
                         <div class="kakao-login">
-                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=http://192.168.40.37:8081/mbting/kakaoLog.me'">
+                            <div id="kakao-login-button" onclick="location.href='https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=670371a54748d4645ec474b68405a19c&redirect_uri=${pageContext.request.contextPath}/kakaoLog.me'">
                                 <img src="${pageContext.request.contextPath}/resources/images/kakaominilogo.png"> kakao로 로그인
                             </div>
 

@@ -17,6 +17,7 @@ public interface MemberService {
 	//인기 회원을 불러오기 위한 method 
 	ArrayList<Member> selecToptMemberList(String email);
 	ArrayList<Member> selecToptMemberList();
+	
 	//회원 로그인을 처리해줄 method
 	Member loginMember(Member m);
 	
@@ -87,6 +88,7 @@ public interface MemberService {
 	// 인증 메일 삭제용 method
 	int deleteCertNo(Member m);
 
+	
 
 
 

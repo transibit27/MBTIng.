@@ -105,10 +105,13 @@ public class WebSocketHandler extends TextWebSocketHandler  {
             }
             if(RoomList.get(roomNum).size() == 2) {
             	 chatMessage.setSessionCount(sessionCount);
+            	 //메시지 모두를 읽음 처리 하는 구문
             	 cService.insertUnReadMessage(chatMessage);
             	 
+            	 //방번호와 함께 세션 두명임을 알리며 socket으로 메시지를 보냄. 
             	 TextMessage textMessage = new TextMessage("세션 두명임 읽음팡팡 ," + roomNum );
             	 System.out.println("두 명이다");
+            	 
             	 for(WebSocketSession sess : RoomList.get(chatRoom.getRoomNo())) {
                      sess.sendMessage(textMessage);
                      //System.out.println(textMessage);

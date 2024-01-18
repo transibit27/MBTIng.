@@ -27,6 +27,10 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectTopMemberList");
 	}
 	
+	public ArrayList<Member> selectTopBoardList(SqlSession sqlSession) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectTopBoardList");
+	}
+	
 	public Member loginMember(SqlSession sqlSession , Member m ) {
 		return sqlSession.selectOne("memberMapper.loginMember", m);	
 	}

@@ -16,6 +16,10 @@ import com.kh.mbting.common.model.vo.PageInfo;
 @Repository
 public class BoardDao {
 
+	public ArrayList<Board> selectMainTopBoardList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectMainTopBoardList");
+	}
+	
 	public int selectListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("boardMapper.selectListCount");
 	}

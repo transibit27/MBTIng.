@@ -42,6 +42,18 @@ public class BoardController {
 		return "info/introduce";
 	}
 	
+	
+	@ResponseBody
+	@PostMapping("topBoard.mem")
+	public String selectMainTopBoardList(HttpSession session) {
+		
+		ArrayList<Board> list = new ArrayList<>();
+		
+		list = boardService.selectMainTopBoardList();
+	
+	}
+	
+	
 	@GetMapping("list.bo")
 	public ModelAndView selectList(@RequestParam(value = "currentPage", defaultValue = "1") int currentPage, ModelAndView mv) {
 		int listCount = boardService.selectListCount();		

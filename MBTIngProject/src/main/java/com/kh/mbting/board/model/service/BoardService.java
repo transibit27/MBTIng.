@@ -3,11 +3,15 @@ package com.kh.mbting.board.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.mbting.board.model.vo.Board;
 import com.kh.mbting.board.model.vo.BoardImg;
 import com.kh.mbting.common.model.vo.PageInfo;
 
 public interface BoardService {
+	
+	ArrayList<Board> selectTopBoardList();
 	
 	int selectListCount();
 	
@@ -27,7 +31,7 @@ public interface BoardService {
 	
 	int updateBoard(Board b);
 
-	ArrayList<Board> selectTopBoardList();
+	ArrayList<Board> selectMainTopBoardList();
 
     int selectSearchListCount(HashMap<String, String> map);
 

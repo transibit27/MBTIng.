@@ -1,5 +1,5 @@
 package com.kh.mbting.chatting.controller;
-
+import java.math.BigInteger;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,7 +174,6 @@ public class ChattingController {
     public void checkProposer(int userNo, HttpServletResponse response )throws JsonIOException, IOException {
     		
     		ArrayList<Mbti> proposerNoList = cService.checkProposer(userNo);
-    		 
     		response.setContentType("application/json; charset-UTF-8");
         	new Gson().toJson(proposerNoList, response.getWriter());
     		

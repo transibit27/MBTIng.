@@ -535,12 +535,10 @@
 
 
 <body>
-
 		<!-- 메뉴바 header -->
 		<jsp:include page="common/header.jsp"/>
 
 		<div class="wrap">
-
 			<div id="content_4">
 				<!-- Slider main container -->
 				<div class="swiper">
@@ -615,12 +613,7 @@
 							}); 
 						</script>
 
-		
 
-
-			
-			
-		
 		<div id="content_2" class="content">
 					<div id="topText">
 						<label>매칭 신청을 가장 많이 받은 회원 Top 4!</label>
@@ -714,7 +707,13 @@ MBTIng 덕분에 제 운명을 만났어요....!
 	</div>
 
   <script>
-  	$(function() {
+
+  $(function() {
+	  listMem();
+	  topBoard();
+  });
+  
+  	function listMem() {
   		
   		$.ajax({
   			 url : "list.mem",
@@ -790,7 +789,22 @@ MBTIng 덕분에 제 운명을 만났어요....!
   		 }
   		});
   		
-  	});
+  	}
+  	
+  	function topBoard() {
+  			$.ajax({
+  	  			 url : "topBoard.mem",
+  	  			type : "post",
+  	  		 dataType: "json",
+  	  		 success : function(result) {
+  	  			console.log("인기 게시글 불러오기 성공");
+  	  		 }, 
+  	  		 error : function() {
+  	  			 console.log("인기게시글 불러오기 실패");
+  	  		 }
+  		});
+  	}
+  	
   </script>
   
   <script>

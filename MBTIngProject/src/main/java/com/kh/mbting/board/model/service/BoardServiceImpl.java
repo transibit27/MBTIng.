@@ -3,6 +3,7 @@ package com.kh.mbting.board.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,12 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	@Override
+	public ArrayList<Board> selectMainTopBoardList() {
+		return boardDao.selectTopBoardList(sqlSession);
+	}
+	
 	
 	@Override
 	public int selectListCount() {
@@ -123,5 +130,7 @@ public class BoardServiceImpl implements BoardService {
 	public int adminDeleteBoard(int boardNo) {
 		return boardDao.adminDeleteBoard(sqlSession, boardNo);
 	}
+
+
 
 }
