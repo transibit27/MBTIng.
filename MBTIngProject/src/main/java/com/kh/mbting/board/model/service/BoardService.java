@@ -31,7 +31,7 @@ public interface BoardService {
 	
 	int updateBoard(Board b);
 
-	ArrayList<Board> selectMainTopBoardList();
+	ArrayList<Board> selectTopBoardList();
 
     int selectSearchListCount(HashMap<String, String> map);
 
