@@ -1,4 +1,4 @@
-# 01_MBTIng_Workspace
+# MBTIng.
 <p align="center">MBTI 검사 기반 소개팅 사이트 </p>
 
 <p align="center"><img align="center" width="500" alt="image" src="https://github.com/mingMy-00/01_MBTIng_Workspace/assets/149574203/a0db0242-9877-463f-933b-77cc49f6a6c6" border-radius="20px"></p>
@@ -6,16 +6,5 @@
 <br/>
 
 <pre>
- ✔️ 타 소개팅 사이트와 달리 실시간 채팅 중 채팅 내용을 가이드 해주는 기능을 통해서 
-     능숙하게 대화를 이어 나가지 못하는 사람들에게 도움을 줍니다. 
-
- ✔️ 실제 소개팅이라면 채팅 수락을 하고 싶지 않을 사용자를 위해서 ‘채팅 신청, 수락’ 
-     기능을 만듭니다.
-
- ✔️ 사이트 내에서 자체로 MBTI test를 진행할 수 있습니다. 
+최근의 트렌드인 ‘MBTI’라는 소재를 통해 성격이 맞는 이용자를 연결해 주고,<br>안전을 위해 상호 동의 후에 소개팅 진행이 가능하게 하여 이용자가 만족하고 안심할 수 있습니다.
 </pre>
-
-<br/>
-<h2>채팅 가이드 예시 ⬇️</h2>
-<img src="https://github.com/mingMy-00/01_MBTIng_Workspace/assets/149574203/1fa32a6b-1a0d-4d6a-9ea8-e7f6e1279084">
-
